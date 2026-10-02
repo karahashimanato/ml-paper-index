@@ -31,7 +31,7 @@ _StrDateLoader.yaml_implicit_resolvers = {
 
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 CITATION = re.compile(r"\[((?:arxiv|doi|exp)-[^\]#\s]+)#([cr][0-9]+)\]")
-NUMBER = re.compile(r"[0-9]+(?:\.[0-9]+)?(?:e-?[0-9]+)?")
+NUMBER = re.compile(r"[0-9]*\.?[0-9]+(?:e-?[0-9]+)?")
 
 
 def load_yaml(path: Path):

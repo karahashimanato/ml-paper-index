@@ -56,7 +56,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 
 | テーマ | 状態 |
 |---|---|
-| 表データの分類・回帰(GBDT vs 深層学習) | パイロット: 論文カード3本、記事 [articles/tasks/tabular-gbdt-vs-deep-learning.md](articles/tasks/tabular-gbdt-vs-deep-learning.md) |
+| 表データの分類・回帰(GBDT vs 深層学習 vs 基盤モデル) | パイロット: 論文カード6本(2021〜2025)、記事 [articles/tasks/tabular-gbdt-vs-deep-learning.md](articles/tasks/tabular-gbdt-vs-deep-learning.md) |
 
 生成物の入口: [generated/index.md](generated/index.md)
 
@@ -64,5 +64,5 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 
 - 実験カードの照合(指定コミットのファイルに値が存在するか)
 - 新着論文の候補検出(GitHub Actions の cron、AI不使用)
-- パイロットの2巡目: TabPFN、TabZilla(McElfresh et al. 2023)、TabArena のカード化
+- パイロットの3巡目候補: TabPFNv2 の原論文、TabM・RealMLP など TabArena 上位モデルの原論文
 - 静的サイト化(GitHub Pages)

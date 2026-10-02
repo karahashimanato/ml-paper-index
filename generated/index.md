@@ -6,22 +6,26 @@
 
 ### tasks
 
-- **tabular-classification**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md)
-- **tabular-regression**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md)
+- **tabular-classification**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **tabular-regression**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 
 ### method_families
 
-- **gradient-boosted-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md)
-- **random-forests**: [arxiv-2207.08815](papers/arxiv-2207.08815.md)
-- **tabular-mlp**: [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md)
-- **tabular-attention**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md)
-- **differentiable-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md)
+- **gradient-boosted-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **random-forests**: [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **tabular-mlp**: [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **tabular-attention**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md)
+- **differentiable-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md)
 - **tabular-cnn**: [arxiv-2106.03253](papers/arxiv-2106.03253.md)
-- **heterogeneous-ensembles**: [arxiv-2106.03253](papers/arxiv-2106.03253.md)
+- **tabular-foundation-model**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **heterogeneous-ensembles**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **automl-systems**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **linear-models**: [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 
 ### paradigms
 
-- **supervised**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md)
+- **supervised**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **in-context-learning**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 
 ## 比較条件
 
@@ -66,3 +70,10 @@
 | `grinsztajn2022-medium-num-reg` | public | tabular-regression | Grinsztajn et al. medium-sized benchmark, numerical features, regression (19 datasets) | arxiv-2207.08815 | 1 |
 | `grinsztajn2022-medium-cat-clf` | public | tabular-classification | Grinsztajn et al. medium-sized benchmark, numerical + categorical features, classification (7 datasets) | arxiv-2207.08815 | 1 |
 | `grinsztajn2022-medium-cat-reg` | public | tabular-regression | Grinsztajn et al. medium-sized benchmark, numerical + categorical features, regression (14 datasets) | arxiv-2207.08815 | 1 |
+| `tabarena-v0-1` | public | tabular-classification | TabArena-v0.1: 51 curated IID datasets (classification and regression) | arxiv-2506.16791 | 3 |
+| `tabarena-v0-1-tabpfnv2-subset` | public | tabular-classification | TabArena-v0.1 datasets within TabPFNv2 constraints (33 datasets: <=10K training samples, <=500 features) | arxiv-2506.16791 | 1 |
+| `tabarena-v0-1-tabicl-subset` | public | tabular-classification | TabArena-v0.1 classification datasets within TabICL constraints (36 datasets: <=100K samples, <=500 features) | arxiv-2506.16791 | 0 |
+| `hollmann2023-cc18-small-numerical` | paper-private | tabular-classification | 18 OpenML-CC18 datasets with <=2,000 samples, <=100 numerical features, no missing values, <=10 classes | arxiv-2207.01848 | 48 |
+| `mcelfresh2023-98-datasets` | paper-private | tabular-classification | 98 of the 176 OpenML classification datasets (excluding those where many algorithms hit memory/time limits) | arxiv-2305.02997 | 96 |
+| `mcelfresh2023-57-small-datasets` | paper-private | tabular-classification | 57 smallest datasets (<= 1250 instances) of the 176 OpenML classification datasets | arxiv-2305.02997 | 95 |
+| `tabzilla-suite` | public | tabular-classification | TabZilla Benchmark Suite: 36 'hard' OpenML classification datasets (Section 3, Table 4) | arxiv-2305.02997 | 0 |

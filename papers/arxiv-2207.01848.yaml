@@ -1,0 +1,555 @@
+id: arxiv-2207.01848
+title: 'TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second'
+authors:
+- Noah Hollmann
+- Samuel Müller
+- Katharina Eggensperger
+- Frank Hutter
+year: 2023
+venue: ICLR 2023
+links:
+  arxiv: https://arxiv.org/abs/2207.01848
+  code: https://github.com/automl/TabPFN
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 97796b6e6b134b200555a7ebbacea2f6daecb9ab309279ba50d915d5ac5c9df6
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - automl-systems
+  paradigms:
+  - in-context-learning
+proposes:
+- TabPFN
+claims:
+- id: c1
+  statement: On the 18 small numerical OpenML-CC18 datasets, TabPFN clearly outperformed boosted trees and was on par with AutoML systems, with up to 230x speedup.
+  location: Abstract
+  page: 1
+  quote: we show that our method clearly outperforms boosted trees and performs on par with complex state-of-the-art AutoML systems with up to 230× speedup.
+- id: c2
+  statement: 'TabPFN targets small tasks: up to 1,000 training examples, 100 purely numerical features without missing values, and 10 classes.'
+  location: Section 1
+  page: 2
+  quote: tasks (≤1 000 training examples, ≤100 purely numerical features without missing values and ≤10 classes)
+- id: c3
+  statement: TabPFN is pre-trained once, offline, on synthetic datasets (12-layer Transformer, 20 hours on 8 GPUs); the same model is used for all evaluations.
+  location: Section 3
+  page: 3
+  quote: we trained a 12-layer Transformer for 18 000 batches of 512 synthetically generated datasets each, which required a total of 20 hours on one machine with 8 GPUs (Nvidia RTX 2080 Ti).
+- id: c4
+  statement: 'TabPFN predicts by in-context learning: training examples are given as input and no parameters are updated on the new dataset.'
+  location: Abstract
+  page: 1
+  quote: TabPFN performs in-context learning (ICL), it learns to make predictions using sequences of labeled examples (x, f(x)) given in the input, without requiring further parameter updates.
+- id: c5
+  statement: The synthetic-data prior is based on structural causal models with a preference for simple structures (mixed with a BNN prior).
+  location: Abstract
+  page: 1
+  quote: 'This prior incorporates ideas from causal reasoning: It entails a large space of structural causal models with a preference for simple structures.'
+- id: c6
+  statement: No method, including TabPFN, was best on all individual datasets; TabPFN lost even to default baselines on some.
+  location: Section 5.2
+  page: 9
+  quote: no classification method, including TabPFN, performs best on all individual datasets.
+- id: c7
+  statement: TabPFN is weaker when categorical features or missing values are present.
+  location: Section 5.2
+  page: 9
+  quote: Generally, TabPFN is less strong when categorical features or missing values are present.
+- id: c8
+  statement: 'Evaluation: 5 repetitions per dataset, each with its own seed and a 50/50 train/test split shared by all methods.'
+  location: Section 5.2
+  page: 8
+  quote: each with a different random seed and train- and test split (50% train and 50% test samples; all methods used the same split given a seed).
+- id: c9
+  statement: 'Test datasets: all OpenML-CC18 datasets with up to 2,000 samples (1,000 for training), 100 features and 10 classes (30 datasets; 18 purely numerical without missing values).'
+  location: Section 5.2
+  page: 7
+  quote: As test datasets, we used all datasets from the curated open-source OpenML-CC18 benchmark suite (Bischl et al., 2021) that contain up to 2 000 samples (1 000 for the training split), 100 features
+    and 10 classes.
+- id: c10
+  statement: Averaging TabPFN and AutoGluon predictions strongly outperformed all other methods in Table 1; TabPFN's errors are relatively uncorrelated with the baselines'.
+  location: Section 5.2
+  page: 9
+  quote: averaging the predictions of TabPFN and AutoGluon; this strongly outperforms all other methods.
+- id: c11
+  statement: On the small datasets of the OpenML-AutoML Benchmark, using official baseline results, TabPFN outperformed all baselines in mean cross-entropy, accuracy and the OpenML metric.
+  location: Section 5.2
+  page: 9
+  quote: TabPFN outperformed all baselines in terms of mean cross-entropy, accuracy and the OpenML Metric
+- id: c12
+  statement: 'Limitation: the Transformer architecture only scales to small datasets.'
+  location: Section 6
+  page: 10
+  quote: the underlying Transformer architecture only scales to small datasets
+- id: c13
+  statement: TabPFN generalized to training-set sizes larger than those seen during prior-fitting.
+  location: Section 5.2
+  page: 9
+  quote: Surprisingly, our models generalize beyond sample sizes seen during training
+- id: c14
+  statement: Baselines were tuned by random search with 5-fold cross-validation until a time budget was exhausted.
+  location: Section 5.2
+  page: 7
+  quote: we used 5-fold cross-validation to evaluate randomly drawn hyperparameter configurations until a given budget was exhausted
+- id: c15
+  statement: On all 30 test datasets (including categorical/missing), aggregate results were still strong but weaker than on purely numerical data.
+  location: Section 5.2
+  page: 7
+  quote: still show strong aggregate performance for TabPFN, albeit not as strong as for the purely numerical case
+- id: c16
+  statement: TabPFN needs no hyperparameter tuning.
+  location: Abstract
+  page: 1
+  quote: needs no hyperparameter tuning and is competitive with state-of-the-art classification methods
+- id: c17
+  statement: Results are aggregated across datasets as average ROC AUC (OVO for multiclass), ranks and wins with 95% confidence intervals.
+  location: Section 5.2
+  page: 8
+  quote: we report the ROC AUC (one-vs-one (OVO) for multi-class classification) average, ranks and wins including the 95% confidence interval
+results:
+- id: r1
+  benchmark: hollmann2023-cc18-small-numerical
+  method: LightGBM
+  metric: mean-rank-roc-auc-ovo
+  value: 6.9722
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r2
+  benchmark: hollmann2023-cc18-small-numerical
+  method: CatBoost
+  metric: mean-rank-roc-auc-ovo
+  value: 4.9444
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r3
+  benchmark: hollmann2023-cc18-small-numerical
+  method: XGBoost
+  metric: mean-rank-roc-auc-ovo
+  value: 6.1944
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r4
+  benchmark: hollmann2023-cc18-small-numerical
+  method: Auto-sklearn 2.0
+  metric: mean-rank-roc-auc-ovo
+  value: 4.4722
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r5
+  benchmark: hollmann2023-cc18-small-numerical
+  method: AutoGluon
+  metric: mean-rank-roc-auc-ovo
+  value: 4.0
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r6
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN (no ensembling)
+  metric: mean-rank-roc-auc-ovo
+  value: 3.8056
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r7
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN
+  metric: mean-rank-roc-auc-ovo
+  value: 2.9444
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r8
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN + AutoGluon
+  metric: mean-rank-roc-auc-ovo
+  value: 2.6667
+  location: Table 1
+  page: 8
+  quote: M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667
+- id: r9
+  benchmark: hollmann2023-cc18-small-numerical
+  method: LightGBM
+  metric: mean-rank-accuracy
+  value: 6.8889
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r10
+  benchmark: hollmann2023-cc18-small-numerical
+  method: CatBoost
+  metric: mean-rank-accuracy
+  value: 4.9722
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r11
+  benchmark: hollmann2023-cc18-small-numerical
+  method: XGBoost
+  metric: mean-rank-accuracy
+  value: 6.0556
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r12
+  benchmark: hollmann2023-cc18-small-numerical
+  method: Auto-sklearn 2.0
+  metric: mean-rank-accuracy
+  value: 5.1667
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r13
+  benchmark: hollmann2023-cc18-small-numerical
+  method: AutoGluon
+  metric: mean-rank-accuracy
+  value: 3.8889
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r14
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN (no ensembling)
+  metric: mean-rank-accuracy
+  value: 3.8889
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r15
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN
+  metric: mean-rank-accuracy
+  value: 2.8889
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r16
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN + AutoGluon
+  metric: mean-rank-accuracy
+  value: 2.25
+  location: Table 1
+  page: 8
+  quote: Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25
+- id: r17
+  benchmark: hollmann2023-cc18-small-numerical
+  method: LightGBM
+  metric: mean-rank-cross-entropy
+  value: 5.7778
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r18
+  benchmark: hollmann2023-cc18-small-numerical
+  method: CatBoost
+  metric: mean-rank-cross-entropy
+  value: 5.4444
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r19
+  benchmark: hollmann2023-cc18-small-numerical
+  method: XGBoost
+  metric: mean-rank-cross-entropy
+  value: 6.0
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r20
+  benchmark: hollmann2023-cc18-small-numerical
+  method: Auto-sklearn 2.0
+  metric: mean-rank-cross-entropy
+  value: 6.4167
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r21
+  benchmark: hollmann2023-cc18-small-numerical
+  method: AutoGluon
+  metric: mean-rank-cross-entropy
+  value: 3.1111
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r22
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN (no ensembling)
+  metric: mean-rank-cross-entropy
+  value: 4.1389
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r23
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN
+  metric: mean-rank-cross-entropy
+  value: 3.0278
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r24
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN + AutoGluon
+  metric: mean-rank-cross-entropy
+  value: 2.0833
+  location: Table 1
+  page: 8
+  quote: Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833
+- id: r25
+  benchmark: hollmann2023-cc18-small-numerical
+  method: LightGBM
+  metric: mean-roc-auc-ovo
+  value: 0.92
+  std: 0.013
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r26
+  benchmark: hollmann2023-cc18-small-numerical
+  method: CatBoost
+  metric: mean-roc-auc-ovo
+  value: 0.924
+  std: 0.011
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r27
+  benchmark: hollmann2023-cc18-small-numerical
+  method: XGBoost
+  metric: mean-roc-auc-ovo
+  value: 0.924
+  std: 0.01
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r28
+  benchmark: hollmann2023-cc18-small-numerical
+  method: Auto-sklearn 2.0
+  metric: mean-roc-auc-ovo
+  value: 0.929
+  std: 0.0096
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r29
+  benchmark: hollmann2023-cc18-small-numerical
+  method: AutoGluon
+  metric: mean-roc-auc-ovo
+  value: 0.93
+  std: 0.0091
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r30
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN (no ensembling)
+  metric: mean-roc-auc-ovo
+  value: 0.932
+  std: 0.0088
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r31
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN
+  metric: mean-roc-auc-ovo
+  value: 0.934
+  std: 0.0086
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r32
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN + AutoGluon
+  metric: mean-roc-auc-ovo
+  value: 0.934
+  std: 0.0084
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084
+- id: r33
+  benchmark: hollmann2023-cc18-small-numerical
+  method: LightGBM
+  metric: mean-accuracy
+  value: 0.862
+  std: 0.012
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r34
+  benchmark: hollmann2023-cc18-small-numerical
+  method: CatBoost
+  metric: mean-accuracy
+  value: 0.864
+  std: 0.011
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r35
+  benchmark: hollmann2023-cc18-small-numerical
+  method: XGBoost
+  metric: mean-accuracy
+  value: 0.866
+  std: 0.011
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r36
+  benchmark: hollmann2023-cc18-small-numerical
+  method: Auto-sklearn 2.0
+  metric: mean-accuracy
+  value: 0.87
+  std: 0.014
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r37
+  benchmark: hollmann2023-cc18-small-numerical
+  method: AutoGluon
+  metric: mean-accuracy
+  value: 0.881
+  std: 0.01
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r38
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN (no ensembling)
+  metric: mean-accuracy
+  value: 0.873
+  std: 0.0095
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r39
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN
+  metric: mean-accuracy
+  value: 0.879
+  std: 0.0089
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r40
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN + AutoGluon
+  metric: mean-accuracy
+  value: 0.886
+  std: 0.0094
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094
+- id: r41
+  benchmark: hollmann2023-cc18-small-numerical
+  method: LightGBM
+  metric: mean-cross-entropy
+  value: 0.75
+  std: 0.039
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+- id: r42
+  benchmark: hollmann2023-cc18-small-numerical
+  method: CatBoost
+  metric: mean-cross-entropy
+  value: 0.747
+  std: 0.029
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+- id: r43
+  benchmark: hollmann2023-cc18-small-numerical
+  method: XGBoost
+  metric: mean-cross-entropy
+  value: 0.759
+  std: 0.04
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+- id: r44
+  benchmark: hollmann2023-cc18-small-numerical
+  method: Auto-sklearn 2.0
+  metric: mean-cross-entropy
+  value: 0.813
+  std: 0.073
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+- id: r45
+  benchmark: hollmann2023-cc18-small-numerical
+  method: AutoGluon
+  metric: mean-cross-entropy
+  value: 0.714
+  std: 0.014
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+- id: r46
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN (no ensembling)
+  metric: mean-cross-entropy
+  value: 0.727
+  std: 0.021
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+- id: r47
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN
+  metric: mean-cross-entropy
+  value: 0.716
+  std: 0.019
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+- id: r48
+  benchmark: hollmann2023-cc18-small-numerical
+  method: TabPFN + AutoGluon
+  metric: mean-cross-entropy
+  value: 0.711
+  std: 0.014
+  note: ± is the standard deviation (Table 1 caption).
+  location: Table 1
+  page: 8
+  quote: Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Table 1 lists methods as columns; values were extracted mechanically row by row and mapped to methods by column position. The 'Mean time' row (mixed CPU/GPU) was not recorded. Baselines had a 60-minute
+    budget per split; TabPFN is not tuned. Results are aggregates over 18 datasets x 5 splits; per-dataset results (Appendix) were not recorded. This is the 2023 TabPFN (v1); later TabPFN versions are different
+    models.

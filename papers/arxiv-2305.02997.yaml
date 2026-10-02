@@ -1,0 +1,1679 @@
+id: arxiv-2305.02997
+title: When Do Neural Nets Outperform Boosted Trees on Tabular Data?
+authors:
+- Duncan McElfresh
+- Sujay Khandagale
+- Jonathan Valverde
+- Vishak Prasad C
+- Benjamin Feuer
+- Chinmay Hegde
+- Ganesh Ramakrishnan
+- Micah Goldblum
+- Colin White
+year: 2023
+venue: NeurIPS 2023 Datasets and Benchmarks Track
+links:
+  arxiv: https://arxiv.org/abs/2305.02997
+  code: https://github.com/naszilla/tabzilla
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b2c765b3bc4b0cc628a98151197be250cfb2aa1515d1a3fbc0c6c2aea527930a
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  - tabular-mlp
+  - tabular-attention
+  - differentiable-trees
+  - tabular-foundation-model
+  - random-forests
+  - linear-models
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- TabZilla Benchmark Suite (36 hard OpenML classification datasets)
+claims:
+- id: c1
+  statement: 'The ''NN vs. GBDT'' debate is overemphasized: for many datasets the GBDT-NN difference is negligible or light GBDT tuning matters more than the choice.'
+  location: Abstract
+  page: 1
+  quote: we find that the 'NN vs. GBDT' debate is overemphasized
+- id: c2
+  statement: Light hyperparameter tuning of a GBDT is often more important than choosing between NNs and GBDTs.
+  location: Abstract
+  page: 1
+  quote: light hyperparameter tuning on a GBDT is more important than choosing between NNs and GBDTs
+- id: c3
+  statement: TabPFN outperformed all other algorithms on average, even when only a random 3000-sample subset of the training data was used.
+  location: Abstract
+  page: 1
+  quote: we find that it outperforms all other algorithms on average, even when randomly sampling 3000 training datapoints.
+- id: c4
+  statement: GBDTs handle skewed or heavy-tailed feature distributions and other dataset irregularities much better than NNs.
+  location: Abstract
+  page: 1
+  quote: GBDTs are much better than NNs at handling skewed or heavy-tailed feature distributions and other forms of dataset irregularities.
+- id: c5
+  statement: For about one-third of datasets, light tuning (30 random-search iterations) of CatBoost improved performance more than choosing between the best default GBDT and NN.
+  location: Section 2.1
+  page: 7
+  quote: Surprisingly, light hyperparameter tuning yields a greater performance improvement than GBDT-vs-NN selection for about one-third of all datasets.
+- id: c6
+  statement: GBDTs performed comparatively better than NNs and baselines on larger datasets.
+  location: Section 2.2
+  page: 8
+  quote: Throughout our metafeature analyses, we find that GBDTs perform comparatively better than NNs and baselines with larger datasets.
+- id: c7
+  statement: 'Authors'' recommendation: try simple baselines first, then lightly tune CatBoost.'
+  location: Section 2.2
+  page: 9
+  quote: first try simple baselines, and then conduct light hyperparameter tuning on CatBoost.
+- id: c8
+  statement: Each dataset uses the ten train/test folds provided by OpenML (comparable with other works using the same folds).
+  location: Section 2
+  page: 4
+  quote: For each dataset, we use the ten train/test folds provided by OpenML
+- id: c9
+  statement: Each algorithm was evaluated with at most 30 hyperparameter sets (default + 29 random via Optuna), up to 10 hours per algorithm and split.
+  location: Section 2
+  page: 4
+  quote: we train and evaluate the algorithm with at most 30 hyperparameter sets (one default set and 29 random sets, using Optuna [3]).
+- id: c10
+  statement: The 98-dataset comparison excludes datasets on which many algorithms hit memory or time limits.
+  location: Section 2.1
+  page: 5
+  quote: while excluding datasets which ran into memory or timeout issues on a nontrivial number of algorithms
+- id: c11
+  statement: On the 57 smallest datasets (<=1250 instances), TabPFN had the best average performance and the fastest training time.
+  location: Section 2.1
+  page: 5
+  quote: Now, we find that TabPFN achieves the best average performance of all algorithms, while also having the fastest training time.
+- id: c12
+  statement: The text states CatBoost's average rank is 5.06 (Table 1 shows a mean rank of 5.50 for CatBoost; the paper is inconsistent).
+  location: Section 2.1
+  page: 5
+  quote: The fact that the best out of all algorithms, CatBoost, only achieved an average rank of 5.06
+- id: c13
+  statement: The text says Figure 3 uses accuracy and Table 1 log loss, but the Figure 3 caption says log loss and the Table 1 caption says accuracy (inconsistent).
+  location: Section 2.1
+  page: 6
+  quote: Note that the slight differences between Figure 3 and Table 1 is that the former uses accuracy, while the latter uses log loss.
+- id: c14
+  statement: By log-loss rank with Wilcoxon signed-rank tests (Holm-Bonferroni), TabPFN outperformed all other algorithms across the 98 datasets with statistical significance.
+  location: Section 2.1, Figure 3
+  page: 6
+  quote: We find that TabPFN outperforms all other algorithms on average across 98 datasets, and this result is statistically significant.
+- id: c15
+  statement: TabPFN was run on larger datasets by randomly subsampling 3000 training samples (TabPFN*).
+  location: Section 2
+  page: 3
+  quote: In order to run on datasets of size larger than 3000, we simply take a random sample of size 3000 from the full training dataset.
+- id: c16
+  statement: Dataset sizes range from 32 to 1,025,009 (vs. 3,000-10,000 or 50,000 in Grinsztajn et al.).
+  location: Section 1
+  page: 3
+  quote: in contrast to our dataset sizes which range from 32 to 1 025 009
+- id: c17
+  statement: TabPFN was excluded from the GBDT-vs-NN family analyses because it works differently from other NNs.
+  location: Section 2.1 footnote
+  page: 7
+  quote: we exclude it from our analysis in this section and the next section when discussing 'GBDTs vs. NNs.'
+- id: c18
+  statement: The TabZilla Benchmark Suite consists of the 36 'hardest' of the 176 datasets.
+  location: Section 3
+  page: 9
+  quote: a collection of the 36 'hardest' of the 176 datasets we studied in Section 2.
+- id: c19
+  statement: All 176 datasets are classification datasets from OpenML.
+  location: Section 2
+  page: 4
+  quote: We run the algorithms on 176 classification datasets from OpenML
+- id: c20
+  statement: 'Across datasets, accuracy is aggregated with the average distance to the minimum (ADTM): per-dataset 0-1 scaling after selecting the best hyperparameters.'
+  location: Section 2
+  page: 5
+  quote: we use the average distance to the minimum (ADTM) metric, which consists of 0-1 scaling
+- id: c21
+  statement: The study compares 19 algorithms on 176 datasets.
+  location: Abstract
+  page: 1
+  quote: comparing 19 algorithms across 176 datasets
+results:
+- id: r1
+  benchmark: mcelfresh2023-98-datasets
+  method: CatBoost
+  metric: mean-rank
+  value: 5.5
+  location: Table 1
+  page: 4
+  quote: CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08
+- id: r2
+  benchmark: mcelfresh2023-98-datasets
+  method: CatBoost
+  metric: mean-normalized-accuracy
+  value: 0.87
+  location: Table 1
+  page: 4
+  quote: CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08
+- id: r3
+  benchmark: mcelfresh2023-98-datasets
+  method: CatBoost
+  metric: median-normalized-accuracy
+  value: 0.93
+  location: Table 1
+  page: 4
+  quote: CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08
+- id: r4
+  benchmark: mcelfresh2023-98-datasets
+  method: CatBoost
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.3
+  location: Table 1
+  page: 4
+  quote: CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08
+- id: r5
+  benchmark: mcelfresh2023-98-datasets
+  method: CatBoost
+  metric: mean-train-time-per-1000
+  value: 21.7
+  location: Table 1
+  page: 4
+  quote: CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08
+- id: r6
+  benchmark: mcelfresh2023-98-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-rank
+  value: 5.89
+  location: Table 1
+  page: 4
+  quote: TabPFN∗ PFN 1 18 5.89 5 0.83 0.92 0.27 0.19 0.25 0.01
+- id: r7
+  benchmark: mcelfresh2023-98-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-normalized-accuracy
+  value: 0.83
+  location: Table 1
+  page: 4
+  quote: TabPFN∗ PFN 1 18 5.89 5 0.83 0.92 0.27 0.19 0.25 0.01
+- id: r8
+  benchmark: mcelfresh2023-98-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: median-normalized-accuracy
+  value: 0.92
+  location: Table 1
+  page: 4
+  quote: TabPFN∗ PFN 1 18 5.89 5 0.83 0.92 0.27 0.19 0.25 0.01
+- id: r9
+  benchmark: mcelfresh2023-98-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.27
+  location: Table 1
+  page: 4
+  quote: TabPFN∗ PFN 1 18 5.89 5 0.83 0.92 0.27 0.19 0.25 0.01
+- id: r10
+  benchmark: mcelfresh2023-98-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-train-time-per-1000
+  value: 0.25
+  location: Table 1
+  page: 4
+  quote: TabPFN∗ PFN 1 18 5.89 5 0.83 0.92 0.27 0.19 0.25 0.01
+- id: r11
+  benchmark: mcelfresh2023-98-datasets
+  method: XGBoost
+  metric: mean-rank
+  value: 6.87
+  location: Table 1
+  page: 4
+  quote: XGBoost GBDT 1 17 6.87 6 0.81 0.89 0.33 0.22 0.81 0.37
+- id: r12
+  benchmark: mcelfresh2023-98-datasets
+  method: XGBoost
+  metric: mean-normalized-accuracy
+  value: 0.81
+  location: Table 1
+  page: 4
+  quote: XGBoost GBDT 1 17 6.87 6 0.81 0.89 0.33 0.22 0.81 0.37
+- id: r13
+  benchmark: mcelfresh2023-98-datasets
+  method: XGBoost
+  metric: median-normalized-accuracy
+  value: 0.89
+  location: Table 1
+  page: 4
+  quote: XGBoost GBDT 1 17 6.87 6 0.81 0.89 0.33 0.22 0.81 0.37
+- id: r14
+  benchmark: mcelfresh2023-98-datasets
+  method: XGBoost
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.33
+  location: Table 1
+  page: 4
+  quote: XGBoost GBDT 1 17 6.87 6 0.81 0.89 0.33 0.22 0.81 0.37
+- id: r15
+  benchmark: mcelfresh2023-98-datasets
+  method: XGBoost
+  metric: mean-train-time-per-1000
+  value: 0.81
+  location: Table 1
+  page: 4
+  quote: XGBoost GBDT 1 17 6.87 6 0.81 0.89 0.33 0.22 0.81 0.37
+- id: r16
+  benchmark: mcelfresh2023-98-datasets
+  method: ResNet
+  metric: mean-rank
+  value: 7.65
+  location: Table 1
+  page: 4
+  quote: ResNet NN 1 19 7.65 8 0.75 0.83 0.30 0.21 16.01 9.34
+- id: r17
+  benchmark: mcelfresh2023-98-datasets
+  method: ResNet
+  metric: mean-normalized-accuracy
+  value: 0.75
+  location: Table 1
+  page: 4
+  quote: ResNet NN 1 19 7.65 8 0.75 0.83 0.30 0.21 16.01 9.34
+- id: r18
+  benchmark: mcelfresh2023-98-datasets
+  method: ResNet
+  metric: median-normalized-accuracy
+  value: 0.83
+  location: Table 1
+  page: 4
+  quote: ResNet NN 1 19 7.65 8 0.75 0.83 0.30 0.21 16.01 9.34
+- id: r19
+  benchmark: mcelfresh2023-98-datasets
+  method: ResNet
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.3
+  location: Table 1
+  page: 4
+  quote: ResNet NN 1 19 7.65 8 0.75 0.83 0.30 0.21 16.01 9.34
+- id: r20
+  benchmark: mcelfresh2023-98-datasets
+  method: ResNet
+  metric: mean-train-time-per-1000
+  value: 16.01
+  location: Table 1
+  page: 4
+  quote: ResNet NN 1 19 7.65 8 0.75 0.83 0.30 0.21 16.01 9.34
+- id: r21
+  benchmark: mcelfresh2023-98-datasets
+  method: SAINT
+  metric: mean-rank
+  value: 7.9
+  location: Table 1
+  page: 4
+  quote: SAINT NN 1 19 7.90 7 0.73 0.86 0.31 0.24 169.54 146.16
+- id: r22
+  benchmark: mcelfresh2023-98-datasets
+  method: SAINT
+  metric: mean-normalized-accuracy
+  value: 0.73
+  location: Table 1
+  page: 4
+  quote: SAINT NN 1 19 7.90 7 0.73 0.86 0.31 0.24 169.54 146.16
+- id: r23
+  benchmark: mcelfresh2023-98-datasets
+  method: SAINT
+  metric: median-normalized-accuracy
+  value: 0.86
+  location: Table 1
+  page: 4
+  quote: SAINT NN 1 19 7.90 7 0.73 0.86 0.31 0.24 169.54 146.16
+- id: r24
+  benchmark: mcelfresh2023-98-datasets
+  method: SAINT
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.31
+  location: Table 1
+  page: 4
+  quote: SAINT NN 1 19 7.90 7 0.73 0.86 0.31 0.24 169.54 146.16
+- id: r25
+  benchmark: mcelfresh2023-98-datasets
+  method: SAINT
+  metric: mean-train-time-per-1000
+  value: 169.54
+  location: Table 1
+  page: 4
+  quote: SAINT NN 1 19 7.90 7 0.73 0.86 0.31 0.24 169.54 146.16
+- id: r26
+  benchmark: mcelfresh2023-98-datasets
+  method: NODE
+  metric: mean-rank
+  value: 7.9
+  location: Table 1
+  page: 4
+  quote: NODE NN 1 19 7.90 7 0.74 0.81 0.26 0.20 138.36 117.04
+- id: r27
+  benchmark: mcelfresh2023-98-datasets
+  method: NODE
+  metric: mean-normalized-accuracy
+  value: 0.74
+  location: Table 1
+  page: 4
+  quote: NODE NN 1 19 7.90 7 0.74 0.81 0.26 0.20 138.36 117.04
+- id: r28
+  benchmark: mcelfresh2023-98-datasets
+  method: NODE
+  metric: median-normalized-accuracy
+  value: 0.81
+  location: Table 1
+  page: 4
+  quote: NODE NN 1 19 7.90 7 0.74 0.81 0.26 0.20 138.36 117.04
+- id: r29
+  benchmark: mcelfresh2023-98-datasets
+  method: NODE
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.26
+  location: Table 1
+  page: 4
+  quote: NODE NN 1 19 7.90 7 0.74 0.81 0.26 0.20 138.36 117.04
+- id: r30
+  benchmark: mcelfresh2023-98-datasets
+  method: NODE
+  metric: mean-train-time-per-1000
+  value: 138.36
+  location: Table 1
+  page: 4
+  quote: NODE NN 1 19 7.90 7 0.74 0.81 0.26 0.20 138.36 117.04
+- id: r31
+  benchmark: mcelfresh2023-98-datasets
+  method: FTTransformer
+  metric: mean-rank
+  value: 8.14
+  location: Table 1
+  page: 4
+  quote: FTTransformer NN 1 18 8.14 8 0.76 0.80 0.31 0.21 27.67 18.40
+- id: r32
+  benchmark: mcelfresh2023-98-datasets
+  method: FTTransformer
+  metric: mean-normalized-accuracy
+  value: 0.76
+  location: Table 1
+  page: 4
+  quote: FTTransformer NN 1 18 8.14 8 0.76 0.80 0.31 0.21 27.67 18.40
+- id: r33
+  benchmark: mcelfresh2023-98-datasets
+  method: FTTransformer
+  metric: median-normalized-accuracy
+  value: 0.8
+  location: Table 1
+  page: 4
+  quote: FTTransformer NN 1 18 8.14 8 0.76 0.80 0.31 0.21 27.67 18.40
+- id: r34
+  benchmark: mcelfresh2023-98-datasets
+  method: FTTransformer
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.31
+  location: Table 1
+  page: 4
+  quote: FTTransformer NN 1 18 8.14 8 0.76 0.80 0.31 0.21 27.67 18.40
+- id: r35
+  benchmark: mcelfresh2023-98-datasets
+  method: FTTransformer
+  metric: mean-train-time-per-1000
+  value: 27.67
+  location: Table 1
+  page: 4
+  quote: FTTransformer NN 1 18 8.14 8 0.76 0.80 0.31 0.21 27.67 18.40
+- id: r36
+  benchmark: mcelfresh2023-98-datasets
+  method: RandomForest
+  metric: mean-rank
+  value: 8.26
+  location: Table 1
+  page: 4
+  quote: RandomForest base 1 19 8.26 7 0.76 0.83 0.32 0.22 0.35 0.24
+- id: r37
+  benchmark: mcelfresh2023-98-datasets
+  method: RandomForest
+  metric: mean-normalized-accuracy
+  value: 0.76
+  location: Table 1
+  page: 4
+  quote: RandomForest base 1 19 8.26 7 0.76 0.83 0.32 0.22 0.35 0.24
+- id: r38
+  benchmark: mcelfresh2023-98-datasets
+  method: RandomForest
+  metric: median-normalized-accuracy
+  value: 0.83
+  location: Table 1
+  page: 4
+  quote: RandomForest base 1 19 8.26 7 0.76 0.83 0.32 0.22 0.35 0.24
+- id: r39
+  benchmark: mcelfresh2023-98-datasets
+  method: RandomForest
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.32
+  location: Table 1
+  page: 4
+  quote: RandomForest base 1 19 8.26 7 0.76 0.83 0.32 0.22 0.35 0.24
+- id: r40
+  benchmark: mcelfresh2023-98-datasets
+  method: RandomForest
+  metric: mean-train-time-per-1000
+  value: 0.35
+  location: Table 1
+  page: 4
+  quote: RandomForest base 1 19 8.26 7 0.76 0.83 0.32 0.22 0.35 0.24
+- id: r41
+  benchmark: mcelfresh2023-98-datasets
+  method: LightGBM
+  metric: mean-rank
+  value: 8.46
+  location: Table 1
+  page: 4
+  quote: LightGBM GBDT 1 19 8.46 8 0.76 0.84 0.36 0.21 0.87 0.34
+- id: r42
+  benchmark: mcelfresh2023-98-datasets
+  method: LightGBM
+  metric: mean-normalized-accuracy
+  value: 0.76
+  location: Table 1
+  page: 4
+  quote: LightGBM GBDT 1 19 8.46 8 0.76 0.84 0.36 0.21 0.87 0.34
+- id: r43
+  benchmark: mcelfresh2023-98-datasets
+  method: LightGBM
+  metric: median-normalized-accuracy
+  value: 0.84
+  location: Table 1
+  page: 4
+  quote: LightGBM GBDT 1 19 8.46 8 0.76 0.84 0.36 0.21 0.87 0.34
+- id: r44
+  benchmark: mcelfresh2023-98-datasets
+  method: LightGBM
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.36
+  location: Table 1
+  page: 4
+  quote: LightGBM GBDT 1 19 8.46 8 0.76 0.84 0.36 0.21 0.87 0.34
+- id: r45
+  benchmark: mcelfresh2023-98-datasets
+  method: LightGBM
+  metric: mean-train-time-per-1000
+  value: 0.87
+  location: Table 1
+  page: 4
+  quote: LightGBM GBDT 1 19 8.46 8 0.76 0.84 0.36 0.21 0.87 0.34
+- id: r46
+  benchmark: mcelfresh2023-98-datasets
+  method: SVM
+  metric: mean-rank
+  value: 9.09
+  location: Table 1
+  page: 4
+  quote: SVM base 1 18 9.09 10 0.69 0.76 0.26 0.19 30.40 1.67
+- id: r47
+  benchmark: mcelfresh2023-98-datasets
+  method: SVM
+  metric: mean-normalized-accuracy
+  value: 0.69
+  location: Table 1
+  page: 4
+  quote: SVM base 1 18 9.09 10 0.69 0.76 0.26 0.19 30.40 1.67
+- id: r48
+  benchmark: mcelfresh2023-98-datasets
+  method: SVM
+  metric: median-normalized-accuracy
+  value: 0.76
+  location: Table 1
+  page: 4
+  quote: SVM base 1 18 9.09 10 0.69 0.76 0.26 0.19 30.40 1.67
+- id: r49
+  benchmark: mcelfresh2023-98-datasets
+  method: SVM
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.26
+  location: Table 1
+  page: 4
+  quote: SVM base 1 18 9.09 10 0.69 0.76 0.26 0.19 30.40 1.67
+- id: r50
+  benchmark: mcelfresh2023-98-datasets
+  method: SVM
+  metric: mean-train-time-per-1000
+  value: 30.4
+  location: Table 1
+  page: 4
+  quote: SVM base 1 18 9.09 10 0.69 0.76 0.26 0.19 30.40 1.67
+- id: r51
+  benchmark: mcelfresh2023-98-datasets
+  method: DANet
+  metric: mean-rank
+  value: 9.73
+  location: Table 1
+  page: 4
+  quote: DANet NN 1 18 9.73 10 0.73 0.79 0.32 0.23 68.82 60.15
+- id: r52
+  benchmark: mcelfresh2023-98-datasets
+  method: DANet
+  metric: mean-normalized-accuracy
+  value: 0.73
+  location: Table 1
+  page: 4
+  quote: DANet NN 1 18 9.73 10 0.73 0.79 0.32 0.23 68.82 60.15
+- id: r53
+  benchmark: mcelfresh2023-98-datasets
+  method: DANet
+  metric: median-normalized-accuracy
+  value: 0.79
+  location: Table 1
+  page: 4
+  quote: DANet NN 1 18 9.73 10 0.73 0.79 0.32 0.23 68.82 60.15
+- id: r54
+  benchmark: mcelfresh2023-98-datasets
+  method: DANet
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.32
+  location: Table 1
+  page: 4
+  quote: DANet NN 1 18 9.73 10 0.73 0.79 0.32 0.23 68.82 60.15
+- id: r55
+  benchmark: mcelfresh2023-98-datasets
+  method: DANet
+  metric: mean-train-time-per-1000
+  value: 68.82
+  location: Table 1
+  page: 4
+  quote: DANet NN 1 18 9.73 10 0.73 0.79 0.32 0.23 68.82 60.15
+- id: r56
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP-rtdl
+  metric: mean-rank
+  value: 9.85
+  location: Table 1
+  page: 4
+  quote: MLP-rtdl NN 1 19 9.85 10.50 0.65 0.72 0.28 0.16 14.27 7.30
+- id: r57
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP-rtdl
+  metric: mean-normalized-accuracy
+  value: 0.65
+  location: Table 1
+  page: 4
+  quote: MLP-rtdl NN 1 19 9.85 10.50 0.65 0.72 0.28 0.16 14.27 7.30
+- id: r58
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP-rtdl
+  metric: median-normalized-accuracy
+  value: 0.72
+  location: Table 1
+  page: 4
+  quote: MLP-rtdl NN 1 19 9.85 10.50 0.65 0.72 0.28 0.16 14.27 7.30
+- id: r59
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP-rtdl
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.28
+  location: Table 1
+  page: 4
+  quote: MLP-rtdl NN 1 19 9.85 10.50 0.65 0.72 0.28 0.16 14.27 7.30
+- id: r60
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP-rtdl
+  metric: mean-train-time-per-1000
+  value: 14.27
+  location: Table 1
+  page: 4
+  quote: MLP-rtdl NN 1 19 9.85 10.50 0.65 0.72 0.28 0.16 14.27 7.30
+- id: r61
+  benchmark: mcelfresh2023-98-datasets
+  method: STG
+  metric: mean-rank
+  value: 11.76
+  location: Table 1
+  page: 4
+  quote: STG NN 1 19 11.76 12.50 0.56 0.63 0.29 0.17 18.44 15.79
+- id: r62
+  benchmark: mcelfresh2023-98-datasets
+  method: STG
+  metric: mean-normalized-accuracy
+  value: 0.56
+  location: Table 1
+  page: 4
+  quote: STG NN 1 19 11.76 12.50 0.56 0.63 0.29 0.17 18.44 15.79
+- id: r63
+  benchmark: mcelfresh2023-98-datasets
+  method: STG
+  metric: median-normalized-accuracy
+  value: 0.63
+  location: Table 1
+  page: 4
+  quote: STG NN 1 19 11.76 12.50 0.56 0.63 0.29 0.17 18.44 15.79
+- id: r64
+  benchmark: mcelfresh2023-98-datasets
+  method: STG
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.29
+  location: Table 1
+  page: 4
+  quote: STG NN 1 19 11.76 12.50 0.56 0.63 0.29 0.17 18.44 15.79
+- id: r65
+  benchmark: mcelfresh2023-98-datasets
+  method: STG
+  metric: mean-train-time-per-1000
+  value: 18.44
+  location: Table 1
+  page: 4
+  quote: STG NN 1 19 11.76 12.50 0.56 0.63 0.29 0.17 18.44 15.79
+- id: r66
+  benchmark: mcelfresh2023-98-datasets
+  method: DecisionTree
+  metric: mean-rank
+  value: 11.81
+  location: Table 1
+  page: 4
+  quote: DecisionTree base 1 19 11.81 13 0.59 0.68 0.35 0.25 0.03 0.01
+- id: r67
+  benchmark: mcelfresh2023-98-datasets
+  method: DecisionTree
+  metric: mean-normalized-accuracy
+  value: 0.59
+  location: Table 1
+  page: 4
+  quote: DecisionTree base 1 19 11.81 13 0.59 0.68 0.35 0.25 0.03 0.01
+- id: r68
+  benchmark: mcelfresh2023-98-datasets
+  method: DecisionTree
+  metric: median-normalized-accuracy
+  value: 0.68
+  location: Table 1
+  page: 4
+  quote: DecisionTree base 1 19 11.81 13 0.59 0.68 0.35 0.25 0.03 0.01
+- id: r69
+  benchmark: mcelfresh2023-98-datasets
+  method: DecisionTree
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.35
+  location: Table 1
+  page: 4
+  quote: DecisionTree base 1 19 11.81 13 0.59 0.68 0.35 0.25 0.03 0.01
+- id: r70
+  benchmark: mcelfresh2023-98-datasets
+  method: DecisionTree
+  metric: mean-train-time-per-1000
+  value: 0.03
+  location: Table 1
+  page: 4
+  quote: DecisionTree base 1 19 11.81 13 0.59 0.68 0.35 0.25 0.03 0.01
+- id: r71
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP
+  metric: mean-rank
+  value: 12.0
+  location: Table 1
+  page: 4
+  quote: MLP NN 1 19 12.00 13 0.57 0.57 0.29 0.18 18.39 11.20
+- id: r72
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP
+  metric: mean-normalized-accuracy
+  value: 0.57
+  location: Table 1
+  page: 4
+  quote: MLP NN 1 19 12.00 13 0.57 0.57 0.29 0.18 18.39 11.20
+- id: r73
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP
+  metric: median-normalized-accuracy
+  value: 0.57
+  location: Table 1
+  page: 4
+  quote: MLP NN 1 19 12.00 13 0.57 0.57 0.29 0.18 18.39 11.20
+- id: r74
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.29
+  location: Table 1
+  page: 4
+  quote: MLP NN 1 19 12.00 13 0.57 0.57 0.29 0.18 18.39 11.20
+- id: r75
+  benchmark: mcelfresh2023-98-datasets
+  method: MLP
+  metric: mean-train-time-per-1000
+  value: 18.39
+  location: Table 1
+  page: 4
+  quote: MLP NN 1 19 12.00 13 0.57 0.57 0.29 0.18 18.39 11.20
+- id: r76
+  benchmark: mcelfresh2023-98-datasets
+  method: LinearModel
+  metric: mean-rank
+  value: 12.18
+  location: Table 1
+  page: 4
+  quote: LinearModel base 1 19 12.18 14 0.51 0.53 0.31 0.24 0.04 0.03
+- id: r77
+  benchmark: mcelfresh2023-98-datasets
+  method: LinearModel
+  metric: mean-normalized-accuracy
+  value: 0.51
+  location: Table 1
+  page: 4
+  quote: LinearModel base 1 19 12.18 14 0.51 0.53 0.31 0.24 0.04 0.03
+- id: r78
+  benchmark: mcelfresh2023-98-datasets
+  method: LinearModel
+  metric: median-normalized-accuracy
+  value: 0.53
+  location: Table 1
+  page: 4
+  quote: LinearModel base 1 19 12.18 14 0.51 0.53 0.31 0.24 0.04 0.03
+- id: r79
+  benchmark: mcelfresh2023-98-datasets
+  method: LinearModel
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.31
+  location: Table 1
+  page: 4
+  quote: LinearModel base 1 19 12.18 14 0.51 0.53 0.31 0.24 0.04 0.03
+- id: r80
+  benchmark: mcelfresh2023-98-datasets
+  method: LinearModel
+  metric: mean-train-time-per-1000
+  value: 0.04
+  location: Table 1
+  page: 4
+  quote: LinearModel base 1 19 12.18 14 0.51 0.53 0.31 0.24 0.04 0.03
+- id: r81
+  benchmark: mcelfresh2023-98-datasets
+  method: TabNet
+  metric: mean-rank
+  value: 12.69
+  location: Table 1
+  page: 4
+  quote: TabNet NN 1 19 12.69 14 0.54 0.60 0.39 0.25 34.95 29.90
+- id: r82
+  benchmark: mcelfresh2023-98-datasets
+  method: TabNet
+  metric: mean-normalized-accuracy
+  value: 0.54
+  location: Table 1
+  page: 4
+  quote: TabNet NN 1 19 12.69 14 0.54 0.60 0.39 0.25 34.95 29.90
+- id: r83
+  benchmark: mcelfresh2023-98-datasets
+  method: TabNet
+  metric: median-normalized-accuracy
+  value: 0.6
+  location: Table 1
+  page: 4
+  quote: TabNet NN 1 19 12.69 14 0.54 0.60 0.39 0.25 34.95 29.90
+- id: r84
+  benchmark: mcelfresh2023-98-datasets
+  method: TabNet
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.39
+  location: Table 1
+  page: 4
+  quote: TabNet NN 1 19 12.69 14 0.54 0.60 0.39 0.25 34.95 29.90
+- id: r85
+  benchmark: mcelfresh2023-98-datasets
+  method: TabNet
+  metric: mean-train-time-per-1000
+  value: 34.95
+  location: Table 1
+  page: 4
+  quote: TabNet NN 1 19 12.69 14 0.54 0.60 0.39 0.25 34.95 29.90
+- id: r86
+  benchmark: mcelfresh2023-98-datasets
+  method: KNN
+  metric: mean-rank
+  value: 13.69
+  location: Table 1
+  page: 4
+  quote: KNN base 1 19 13.69 15 0.45 0.51 0.29 0.21 0.01 0.00
+- id: r87
+  benchmark: mcelfresh2023-98-datasets
+  method: KNN
+  metric: mean-normalized-accuracy
+  value: 0.45
+  location: Table 1
+  page: 4
+  quote: KNN base 1 19 13.69 15 0.45 0.51 0.29 0.21 0.01 0.00
+- id: r88
+  benchmark: mcelfresh2023-98-datasets
+  method: KNN
+  metric: median-normalized-accuracy
+  value: 0.51
+  location: Table 1
+  page: 4
+  quote: KNN base 1 19 13.69 15 0.45 0.51 0.29 0.21 0.01 0.00
+- id: r89
+  benchmark: mcelfresh2023-98-datasets
+  method: KNN
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.29
+  location: Table 1
+  page: 4
+  quote: KNN base 1 19 13.69 15 0.45 0.51 0.29 0.21 0.01 0.00
+- id: r90
+  benchmark: mcelfresh2023-98-datasets
+  method: KNN
+  metric: mean-train-time-per-1000
+  value: 0.01
+  location: Table 1
+  page: 4
+  quote: KNN base 1 19 13.69 15 0.45 0.51 0.29 0.21 0.01 0.00
+- id: r91
+  benchmark: mcelfresh2023-98-datasets
+  method: VIME
+  metric: mean-rank
+  value: 14.98
+  location: Table 1
+  page: 4
+  quote: VIME NN 2 19 14.98 17 0.37 0.32 0.27 0.18 16.81 14.86
+- id: r92
+  benchmark: mcelfresh2023-98-datasets
+  method: VIME
+  metric: mean-normalized-accuracy
+  value: 0.37
+  location: Table 1
+  page: 4
+  quote: VIME NN 2 19 14.98 17 0.37 0.32 0.27 0.18 16.81 14.86
+- id: r93
+  benchmark: mcelfresh2023-98-datasets
+  method: VIME
+  metric: median-normalized-accuracy
+  value: 0.32
+  location: Table 1
+  page: 4
+  quote: VIME NN 2 19 14.98 17 0.37 0.32 0.27 0.18 16.81 14.86
+- id: r94
+  benchmark: mcelfresh2023-98-datasets
+  method: VIME
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.27
+  location: Table 1
+  page: 4
+  quote: VIME NN 2 19 14.98 17 0.37 0.32 0.27 0.18 16.81 14.86
+- id: r95
+  benchmark: mcelfresh2023-98-datasets
+  method: VIME
+  metric: mean-train-time-per-1000
+  value: 16.81
+  location: Table 1
+  page: 4
+  quote: VIME NN 2 19 14.98 17 0.37 0.32 0.27 0.18 16.81 14.86
+- id: r96
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-rank
+  value: 4.88
+  location: Table 2
+  page: 5
+  quote: TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00
+- id: r97
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-normalized-accuracy
+  value: 0.84
+  location: Table 2
+  page: 5
+  quote: TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00
+- id: r98
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: median-normalized-accuracy
+  value: 0.93
+  location: Table 2
+  page: 5
+  quote: TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00
+- id: r99
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.35
+  location: Table 2
+  page: 5
+  quote: TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00
+- id: r100
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabPFN* (3000-sample subset)
+  metric: mean-train-time-per-1000
+  value: 0.0
+  location: Table 2
+  page: 5
+  quote: TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00
+- id: r101
+  benchmark: mcelfresh2023-57-small-datasets
+  method: CatBoost
+  metric: mean-rank
+  value: 5.37
+  location: Table 2
+  page: 5
+  quote: CatBoost 1 18 5.37 4 0.85 0.91 0.39 0.30 26.22 2.75
+- id: r102
+  benchmark: mcelfresh2023-57-small-datasets
+  method: CatBoost
+  metric: mean-normalized-accuracy
+  value: 0.85
+  location: Table 2
+  page: 5
+  quote: CatBoost 1 18 5.37 4 0.85 0.91 0.39 0.30 26.22 2.75
+- id: r103
+  benchmark: mcelfresh2023-57-small-datasets
+  method: CatBoost
+  metric: median-normalized-accuracy
+  value: 0.91
+  location: Table 2
+  page: 5
+  quote: CatBoost 1 18 5.37 4 0.85 0.91 0.39 0.30 26.22 2.75
+- id: r104
+  benchmark: mcelfresh2023-57-small-datasets
+  method: CatBoost
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.39
+  location: Table 2
+  page: 5
+  quote: CatBoost 1 18 5.37 4 0.85 0.91 0.39 0.30 26.22 2.75
+- id: r105
+  benchmark: mcelfresh2023-57-small-datasets
+  method: CatBoost
+  metric: mean-train-time-per-1000
+  value: 26.22
+  location: Table 2
+  page: 5
+  quote: CatBoost 1 18 5.37 4 0.85 0.91 0.39 0.30 26.22 2.75
+- id: r106
+  benchmark: mcelfresh2023-57-small-datasets
+  method: ResNet
+  metric: mean-rank
+  value: 6.75
+  location: Table 2
+  page: 5
+  quote: ResNet 1 19 6.75 6 0.77 0.79 0.42 0.30 23.67 13.87
+- id: r107
+  benchmark: mcelfresh2023-57-small-datasets
+  method: ResNet
+  metric: mean-normalized-accuracy
+  value: 0.77
+  location: Table 2
+  page: 5
+  quote: ResNet 1 19 6.75 6 0.77 0.79 0.42 0.30 23.67 13.87
+- id: r108
+  benchmark: mcelfresh2023-57-small-datasets
+  method: ResNet
+  metric: median-normalized-accuracy
+  value: 0.79
+  location: Table 2
+  page: 5
+  quote: ResNet 1 19 6.75 6 0.77 0.79 0.42 0.30 23.67 13.87
+- id: r109
+  benchmark: mcelfresh2023-57-small-datasets
+  method: ResNet
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.42
+  location: Table 2
+  page: 5
+  quote: ResNet 1 19 6.75 6 0.77 0.79 0.42 0.30 23.67 13.87
+- id: r110
+  benchmark: mcelfresh2023-57-small-datasets
+  method: ResNet
+  metric: mean-train-time-per-1000
+  value: 23.67
+  location: Table 2
+  page: 5
+  quote: ResNet 1 19 6.75 6 0.77 0.79 0.42 0.30 23.67 13.87
+- id: r111
+  benchmark: mcelfresh2023-57-small-datasets
+  method: RandomForest
+  metric: mean-rank
+  value: 7.65
+  location: Table 2
+  page: 5
+  quote: RandomForest 1 18 7.65 7 0.76 0.82 0.40 0.29 0.47 0.32
+- id: r112
+  benchmark: mcelfresh2023-57-small-datasets
+  method: RandomForest
+  metric: mean-normalized-accuracy
+  value: 0.76
+  location: Table 2
+  page: 5
+  quote: RandomForest 1 18 7.65 7 0.76 0.82 0.40 0.29 0.47 0.32
+- id: r113
+  benchmark: mcelfresh2023-57-small-datasets
+  method: RandomForest
+  metric: median-normalized-accuracy
+  value: 0.82
+  location: Table 2
+  page: 5
+  quote: RandomForest 1 18 7.65 7 0.76 0.82 0.40 0.29 0.47 0.32
+- id: r114
+  benchmark: mcelfresh2023-57-small-datasets
+  method: RandomForest
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.4
+  location: Table 2
+  page: 5
+  quote: RandomForest 1 18 7.65 7 0.76 0.82 0.40 0.29 0.47 0.32
+- id: r115
+  benchmark: mcelfresh2023-57-small-datasets
+  method: RandomForest
+  metric: mean-train-time-per-1000
+  value: 0.47
+  location: Table 2
+  page: 5
+  quote: RandomForest 1 18 7.65 7 0.76 0.82 0.40 0.29 0.47 0.32
+- id: r116
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SAINT
+  metric: mean-rank
+  value: 7.67
+  location: Table 2
+  page: 5
+  quote: SAINT 1 19 7.67 6 0.74 0.87 0.42 0.31 197.41 181.62
+- id: r117
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SAINT
+  metric: mean-normalized-accuracy
+  value: 0.74
+  location: Table 2
+  page: 5
+  quote: SAINT 1 19 7.67 6 0.74 0.87 0.42 0.31 197.41 181.62
+- id: r118
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SAINT
+  metric: median-normalized-accuracy
+  value: 0.87
+  location: Table 2
+  page: 5
+  quote: SAINT 1 19 7.67 6 0.74 0.87 0.42 0.31 197.41 181.62
+- id: r119
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SAINT
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.42
+  location: Table 2
+  page: 5
+  quote: SAINT 1 19 7.67 6 0.74 0.87 0.42 0.31 197.41 181.62
+- id: r120
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SAINT
+  metric: mean-train-time-per-1000
+  value: 197.41
+  location: Table 2
+  page: 5
+  quote: SAINT 1 19 7.67 6 0.74 0.87 0.42 0.31 197.41 181.62
+- id: r121
+  benchmark: mcelfresh2023-57-small-datasets
+  method: FTTransformer
+  metric: mean-rank
+  value: 7.93
+  location: Table 2
+  page: 5
+  quote: FTTransformer 1 18 7.93 7 0.75 0.78 0.42 0.32 32.93 26.39
+- id: r122
+  benchmark: mcelfresh2023-57-small-datasets
+  method: FTTransformer
+  metric: mean-normalized-accuracy
+  value: 0.75
+  location: Table 2
+  page: 5
+  quote: FTTransformer 1 18 7.93 7 0.75 0.78 0.42 0.32 32.93 26.39
+- id: r123
+  benchmark: mcelfresh2023-57-small-datasets
+  method: FTTransformer
+  metric: median-normalized-accuracy
+  value: 0.78
+  location: Table 2
+  page: 5
+  quote: FTTransformer 1 18 7.93 7 0.75 0.78 0.42 0.32 32.93 26.39
+- id: r124
+  benchmark: mcelfresh2023-57-small-datasets
+  method: FTTransformer
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.42
+  location: Table 2
+  page: 5
+  quote: FTTransformer 1 18 7.93 7 0.75 0.78 0.42 0.32 32.93 26.39
+- id: r125
+  benchmark: mcelfresh2023-57-small-datasets
+  method: FTTransformer
+  metric: mean-train-time-per-1000
+  value: 32.93
+  location: Table 2
+  page: 5
+  quote: FTTransformer 1 18 7.93 7 0.75 0.78 0.42 0.32 32.93 26.39
+- id: r126
+  benchmark: mcelfresh2023-57-small-datasets
+  method: XGBoost
+  metric: mean-rank
+  value: 8.3
+  location: Table 2
+  page: 5
+  quote: XGBoost 1 17 8.30 8 0.74 0.80 0.42 0.30 0.95 0.61
+- id: r127
+  benchmark: mcelfresh2023-57-small-datasets
+  method: XGBoost
+  metric: mean-normalized-accuracy
+  value: 0.74
+  location: Table 2
+  page: 5
+  quote: XGBoost 1 17 8.30 8 0.74 0.80 0.42 0.30 0.95 0.61
+- id: r128
+  benchmark: mcelfresh2023-57-small-datasets
+  method: XGBoost
+  metric: median-normalized-accuracy
+  value: 0.8
+  location: Table 2
+  page: 5
+  quote: XGBoost 1 17 8.30 8 0.74 0.80 0.42 0.30 0.95 0.61
+- id: r129
+  benchmark: mcelfresh2023-57-small-datasets
+  method: XGBoost
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.42
+  location: Table 2
+  page: 5
+  quote: XGBoost 1 17 8.30 8 0.74 0.80 0.42 0.30 0.95 0.61
+- id: r130
+  benchmark: mcelfresh2023-57-small-datasets
+  method: XGBoost
+  metric: mean-train-time-per-1000
+  value: 0.95
+  location: Table 2
+  page: 5
+  quote: XGBoost 1 17 8.30 8 0.74 0.80 0.42 0.30 0.95 0.61
+- id: r131
+  benchmark: mcelfresh2023-57-small-datasets
+  method: NODE
+  metric: mean-rank
+  value: 8.35
+  location: Table 2
+  page: 5
+  quote: NODE 1 19 8.35 8 0.73 0.75 0.36 0.28 173.55 144.45
+- id: r132
+  benchmark: mcelfresh2023-57-small-datasets
+  method: NODE
+  metric: mean-normalized-accuracy
+  value: 0.73
+  location: Table 2
+  page: 5
+  quote: NODE 1 19 8.35 8 0.73 0.75 0.36 0.28 173.55 144.45
+- id: r133
+  benchmark: mcelfresh2023-57-small-datasets
+  method: NODE
+  metric: median-normalized-accuracy
+  value: 0.75
+  location: Table 2
+  page: 5
+  quote: NODE 1 19 8.35 8 0.73 0.75 0.36 0.28 173.55 144.45
+- id: r134
+  benchmark: mcelfresh2023-57-small-datasets
+  method: NODE
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.36
+  location: Table 2
+  page: 5
+  quote: NODE 1 19 8.35 8 0.73 0.75 0.36 0.28 173.55 144.45
+- id: r135
+  benchmark: mcelfresh2023-57-small-datasets
+  method: NODE
+  metric: mean-train-time-per-1000
+  value: 173.55
+  location: Table 2
+  page: 5
+  quote: NODE 1 19 8.35 8 0.73 0.75 0.36 0.28 173.55 144.45
+- id: r136
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SVM
+  metric: mean-rank
+  value: 9.54
+  location: Table 2
+  page: 5
+  quote: SVM 1 18 9.54 11 0.68 0.72 0.35 0.28 23.90 0.42
+- id: r137
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SVM
+  metric: mean-normalized-accuracy
+  value: 0.68
+  location: Table 2
+  page: 5
+  quote: SVM 1 18 9.54 11 0.68 0.72 0.35 0.28 23.90 0.42
+- id: r138
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SVM
+  metric: median-normalized-accuracy
+  value: 0.72
+  location: Table 2
+  page: 5
+  quote: SVM 1 18 9.54 11 0.68 0.72 0.35 0.28 23.90 0.42
+- id: r139
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SVM
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.35
+  location: Table 2
+  page: 5
+  quote: SVM 1 18 9.54 11 0.68 0.72 0.35 0.28 23.90 0.42
+- id: r140
+  benchmark: mcelfresh2023-57-small-datasets
+  method: SVM
+  metric: mean-train-time-per-1000
+  value: 23.9
+  location: Table 2
+  page: 5
+  quote: SVM 1 18 9.54 11 0.68 0.72 0.35 0.28 23.90 0.42
+- id: r141
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP-rtdl
+  metric: mean-rank
+  value: 9.77
+  location: Table 2
+  page: 5
+  quote: MLP-rtdl 1 19 9.77 10 0.64 0.69 0.39 0.31 21.48 12.21
+- id: r142
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP-rtdl
+  metric: mean-normalized-accuracy
+  value: 0.64
+  location: Table 2
+  page: 5
+  quote: MLP-rtdl 1 19 9.77 10 0.64 0.69 0.39 0.31 21.48 12.21
+- id: r143
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP-rtdl
+  metric: median-normalized-accuracy
+  value: 0.69
+  location: Table 2
+  page: 5
+  quote: MLP-rtdl 1 19 9.77 10 0.64 0.69 0.39 0.31 21.48 12.21
+- id: r144
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP-rtdl
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.39
+  location: Table 2
+  page: 5
+  quote: MLP-rtdl 1 19 9.77 10 0.64 0.69 0.39 0.31 21.48 12.21
+- id: r145
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP-rtdl
+  metric: mean-train-time-per-1000
+  value: 21.48
+  location: Table 2
+  page: 5
+  quote: MLP-rtdl 1 19 9.77 10 0.64 0.69 0.39 0.31 21.48 12.21
+- id: r146
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LightGBM
+  metric: mean-rank
+  value: 10.0
+  location: Table 2
+  page: 5
+  quote: LightGBM 1 19 10.00 10 0.68 0.71 0.45 0.38 0.64 0.23
+- id: r147
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LightGBM
+  metric: mean-normalized-accuracy
+  value: 0.68
+  location: Table 2
+  page: 5
+  quote: LightGBM 1 19 10.00 10 0.68 0.71 0.45 0.38 0.64 0.23
+- id: r148
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LightGBM
+  metric: median-normalized-accuracy
+  value: 0.71
+  location: Table 2
+  page: 5
+  quote: LightGBM 1 19 10.00 10 0.68 0.71 0.45 0.38 0.64 0.23
+- id: r149
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LightGBM
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.45
+  location: Table 2
+  page: 5
+  quote: LightGBM 1 19 10.00 10 0.68 0.71 0.45 0.38 0.64 0.23
+- id: r150
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LightGBM
+  metric: mean-train-time-per-1000
+  value: 0.64
+  location: Table 2
+  page: 5
+  quote: LightGBM 1 19 10.00 10 0.68 0.71 0.45 0.38 0.64 0.23
+- id: r151
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LinearModel
+  metric: mean-rank
+  value: 10.21
+  location: Table 2
+  page: 5
+  quote: LinearModel 1 19 10.21 11 0.61 0.71 0.38 0.29 0.06 0.05
+- id: r152
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LinearModel
+  metric: mean-normalized-accuracy
+  value: 0.61
+  location: Table 2
+  page: 5
+  quote: LinearModel 1 19 10.21 11 0.61 0.71 0.38 0.29 0.06 0.05
+- id: r153
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LinearModel
+  metric: median-normalized-accuracy
+  value: 0.71
+  location: Table 2
+  page: 5
+  quote: LinearModel 1 19 10.21 11 0.61 0.71 0.38 0.29 0.06 0.05
+- id: r154
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LinearModel
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.38
+  location: Table 2
+  page: 5
+  quote: LinearModel 1 19 10.21 11 0.61 0.71 0.38 0.29 0.06 0.05
+- id: r155
+  benchmark: mcelfresh2023-57-small-datasets
+  method: LinearModel
+  metric: mean-train-time-per-1000
+  value: 0.06
+  location: Table 2
+  page: 5
+  quote: LinearModel 1 19 10.21 11 0.61 0.71 0.38 0.29 0.06 0.05
+- id: r156
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DANet
+  metric: mean-rank
+  value: 10.74
+  location: Table 2
+  page: 5
+  quote: DANet 1 18 10.74 10 0.68 0.69 0.41 0.34 83.57 71.19
+- id: r157
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DANet
+  metric: mean-normalized-accuracy
+  value: 0.68
+  location: Table 2
+  page: 5
+  quote: DANet 1 18 10.74 10 0.68 0.69 0.41 0.34 83.57 71.19
+- id: r158
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DANet
+  metric: median-normalized-accuracy
+  value: 0.69
+  location: Table 2
+  page: 5
+  quote: DANet 1 18 10.74 10 0.68 0.69 0.41 0.34 83.57 71.19
+- id: r159
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DANet
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.41
+  location: Table 2
+  page: 5
+  quote: DANet 1 18 10.74 10 0.68 0.69 0.41 0.34 83.57 71.19
+- id: r160
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DANet
+  metric: mean-train-time-per-1000
+  value: 83.57
+  location: Table 2
+  page: 5
+  quote: DANet 1 18 10.74 10 0.68 0.69 0.41 0.34 83.57 71.19
+- id: r161
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DecisionTree
+  metric: mean-rank
+  value: 11.44
+  location: Table 2
+  page: 5
+  quote: DecisionTree 1 19 11.44 13 0.60 0.67 0.45 0.32 0.02 0.01
+- id: r162
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DecisionTree
+  metric: mean-normalized-accuracy
+  value: 0.6
+  location: Table 2
+  page: 5
+  quote: DecisionTree 1 19 11.44 13 0.60 0.67 0.45 0.32 0.02 0.01
+- id: r163
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DecisionTree
+  metric: median-normalized-accuracy
+  value: 0.67
+  location: Table 2
+  page: 5
+  quote: DecisionTree 1 19 11.44 13 0.60 0.67 0.45 0.32 0.02 0.01
+- id: r164
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DecisionTree
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.45
+  location: Table 2
+  page: 5
+  quote: DecisionTree 1 19 11.44 13 0.60 0.67 0.45 0.32 0.02 0.01
+- id: r165
+  benchmark: mcelfresh2023-57-small-datasets
+  method: DecisionTree
+  metric: mean-train-time-per-1000
+  value: 0.02
+  location: Table 2
+  page: 5
+  quote: DecisionTree 1 19 11.44 13 0.60 0.67 0.45 0.32 0.02 0.01
+- id: r166
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP
+  metric: mean-rank
+  value: 11.49
+  location: Table 2
+  page: 5
+  quote: MLP 1 19 11.49 13 0.57 0.54 0.38 0.30 27.88 16.81
+- id: r167
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP
+  metric: mean-normalized-accuracy
+  value: 0.57
+  location: Table 2
+  page: 5
+  quote: MLP 1 19 11.49 13 0.57 0.54 0.38 0.30 27.88 16.81
+- id: r168
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP
+  metric: median-normalized-accuracy
+  value: 0.54
+  location: Table 2
+  page: 5
+  quote: MLP 1 19 11.49 13 0.57 0.54 0.38 0.30 27.88 16.81
+- id: r169
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.38
+  location: Table 2
+  page: 5
+  quote: MLP 1 19 11.49 13 0.57 0.54 0.38 0.30 27.88 16.81
+- id: r170
+  benchmark: mcelfresh2023-57-small-datasets
+  method: MLP
+  metric: mean-train-time-per-1000
+  value: 27.88
+  location: Table 2
+  page: 5
+  quote: MLP 1 19 11.49 13 0.57 0.54 0.38 0.30 27.88 16.81
+- id: r171
+  benchmark: mcelfresh2023-57-small-datasets
+  method: STG
+  metric: mean-rank
+  value: 11.49
+  location: Table 2
+  page: 5
+  quote: STG 1 19 11.49 12 0.57 0.64 0.40 0.34 21.22 18.24
+- id: r172
+  benchmark: mcelfresh2023-57-small-datasets
+  method: STG
+  metric: mean-normalized-accuracy
+  value: 0.57
+  location: Table 2
+  page: 5
+  quote: STG 1 19 11.49 12 0.57 0.64 0.40 0.34 21.22 18.24
+- id: r173
+  benchmark: mcelfresh2023-57-small-datasets
+  method: STG
+  metric: median-normalized-accuracy
+  value: 0.64
+  location: Table 2
+  page: 5
+  quote: STG 1 19 11.49 12 0.57 0.64 0.40 0.34 21.22 18.24
+- id: r174
+  benchmark: mcelfresh2023-57-small-datasets
+  method: STG
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.4
+  location: Table 2
+  page: 5
+  quote: STG 1 19 11.49 12 0.57 0.64 0.40 0.34 21.22 18.24
+- id: r175
+  benchmark: mcelfresh2023-57-small-datasets
+  method: STG
+  metric: mean-train-time-per-1000
+  value: 21.22
+  location: Table 2
+  page: 5
+  quote: STG 1 19 11.49 12 0.57 0.64 0.40 0.34 21.22 18.24
+- id: r176
+  benchmark: mcelfresh2023-57-small-datasets
+  method: KNN
+  metric: mean-rank
+  value: 13.12
+  location: Table 2
+  page: 5
+  quote: KNN 1 19 13.12 15 0.46 0.51 0.38 0.32 0.00 0.00
+- id: r177
+  benchmark: mcelfresh2023-57-small-datasets
+  method: KNN
+  metric: mean-normalized-accuracy
+  value: 0.46
+  location: Table 2
+  page: 5
+  quote: KNN 1 19 13.12 15 0.46 0.51 0.38 0.32 0.00 0.00
+- id: r178
+  benchmark: mcelfresh2023-57-small-datasets
+  method: KNN
+  metric: median-normalized-accuracy
+  value: 0.51
+  location: Table 2
+  page: 5
+  quote: KNN 1 19 13.12 15 0.46 0.51 0.38 0.32 0.00 0.00
+- id: r179
+  benchmark: mcelfresh2023-57-small-datasets
+  method: KNN
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.38
+  location: Table 2
+  page: 5
+  quote: KNN 1 19 13.12 15 0.46 0.51 0.38 0.32 0.00 0.00
+- id: r180
+  benchmark: mcelfresh2023-57-small-datasets
+  method: KNN
+  metric: mean-train-time-per-1000
+  value: 0.0
+  location: Table 2
+  page: 5
+  quote: KNN 1 19 13.12 15 0.46 0.51 0.38 0.32 0.00 0.00
+- id: r181
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabNet
+  metric: mean-rank
+  value: 14.54
+  location: Table 2
+  page: 5
+  quote: TabNet 3 19 14.54 16 0.42 0.40 0.52 0.49 41.83 34.35
+- id: r182
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabNet
+  metric: mean-normalized-accuracy
+  value: 0.42
+  location: Table 2
+  page: 5
+  quote: TabNet 3 19 14.54 16 0.42 0.40 0.52 0.49 41.83 34.35
+- id: r183
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabNet
+  metric: median-normalized-accuracy
+  value: 0.4
+  location: Table 2
+  page: 5
+  quote: TabNet 3 19 14.54 16 0.42 0.40 0.52 0.49 41.83 34.35
+- id: r184
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabNet
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.52
+  location: Table 2
+  page: 5
+  quote: TabNet 3 19 14.54 16 0.42 0.40 0.52 0.49 41.83 34.35
+- id: r185
+  benchmark: mcelfresh2023-57-small-datasets
+  method: TabNet
+  metric: mean-train-time-per-1000
+  value: 41.83
+  location: Table 2
+  page: 5
+  quote: TabNet 3 19 14.54 16 0.42 0.40 0.52 0.49 41.83 34.35
+- id: r186
+  benchmark: mcelfresh2023-57-small-datasets
+  method: VIME
+  metric: mean-rank
+  value: 14.88
+  location: Table 2
+  page: 5
+  quote: VIME 2 19 14.88 17 0.33 0.27 0.36 0.29 18.95 16.43
+- id: r187
+  benchmark: mcelfresh2023-57-small-datasets
+  method: VIME
+  metric: mean-normalized-accuracy
+  value: 0.33
+  location: Table 2
+  page: 5
+  quote: VIME 2 19 14.88 17 0.33 0.27 0.36 0.29 18.95 16.43
+- id: r188
+  benchmark: mcelfresh2023-57-small-datasets
+  method: VIME
+  metric: median-normalized-accuracy
+  value: 0.27
+  location: Table 2
+  page: 5
+  quote: VIME 2 19 14.88 17 0.33 0.27 0.36 0.29 18.95 16.43
+- id: r189
+  benchmark: mcelfresh2023-57-small-datasets
+  method: VIME
+  metric: mean-fold-std-normalized-accuracy
+  value: 0.36
+  location: Table 2
+  page: 5
+  quote: VIME 2 19 14.88 17 0.33 0.27 0.36 0.29 18.95 16.43
+- id: r190
+  benchmark: mcelfresh2023-57-small-datasets
+  method: VIME
+  metric: mean-train-time-per-1000
+  value: 18.95
+  location: Table 2
+  page: 5
+  quote: VIME 2 19 14.88 17 0.33 0.27 0.36 0.29 18.95 16.43
+relations:
+- winner: TabPFN* (3000-sample subset)
+  loser: All other 18 algorithms
+  basis: Mean log-loss rank over the 98 datasets; Friedman test then Wilcoxon signed-rank tests with Holm-Bonferroni correction (Figure 3).
+  benchmark: mcelfresh2023-98-datasets
+  location: Section 2.1, Figure 3
+  page: 6
+  quote: We find that TabPFN outperforms all other algorithms on average across 98 datasets, and this result is statistically significant.
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Results extracted mechanically from Table 1 (98 datasets) and Table 2 (57 datasets <= 1250 instances); rank min/max and medians of rank/std/time were not recorded. Table values are aggregates of
+    accuracy-based quantities; the significance result (relation) is on log loss. Two inconsistencies in the text (c12, c13). Training time depends on hardware and is per 1000 instances. Normalized accuracy
+    is 0-1 scaled per dataset (ADTM), so means are only comparable within the same dataset set.

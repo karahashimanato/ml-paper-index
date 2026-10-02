@@ -34,6 +34,8 @@ method_families:
     parent: deep-learning
   - id: heterogeneous-ensembles
     description: Ensembles combining different model types (e.g. averaging deep models with GBDT).
+  - id: automl-systems
+    description: AutoML systems that search over and ensemble many model types (e.g. AutoGluon, Auto-sklearn).
   - id: linear-models
     description: Linear / generalized linear models.
 

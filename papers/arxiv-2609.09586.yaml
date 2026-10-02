@@ -1,0 +1,62 @@
+id: arxiv-2609.09586
+title: Distillation of Synthetic Data for Time Series Foundation Models
+authors:
+- Niloy Biswas
+- Noureddine El Karoui
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.09586
+  code: https://github.com/niloyb/sdd
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e00c043270104efe4e69a7132104ee2602d98b7b7e73087e460e745514ae2766
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+proposes:
+- 'Synthetic data distillation (SDD): pre-training loss against the conditional forecast distribution of synthetic trajectories'
+claims:
+- id: c1
+  statement: SDD replaces the usual loss against the realized future values of a synthetic trajectory with a loss against the trajectory's conditional forecast distribution.
+  location: Abstract
+  page: 1
+  quote: We instead propose loss objectives which compare TSFM outputs to the conditional forecast distribution of each trajectory, a procedure we call synthetic data distillation (SDD).
+- id: c2
+  statement: 'SDD is a Rao-Blackwellization of the training objective: the expected stochastic gradient is unchanged while its covariance is provably reduced.'
+  location: Abstract
+  page: 1
+  quote: SDD corresponds to a Rao-Blackwellization of the training objective, in that it leaves the expectation of stochastic gradients unchanged while provably reducing the covariance of the stochastic
+    gradient under the Loewner partial ordering.
+- id: c3
+  statement: SDD reaches the same validation loss as the status-quo loss with fewer FLOPs, with the speed-up depending on model size.
+  location: Numerical Experiments
+  page: 4
+  quote: Figure 2 shows that SDD attains the same validation loss as Status Quo while spending 38-46% fewer FLOPs, a convergence speed-up of 1.6× to 1.85× depending on model size.
+- id: c4
+  statement: 'Experimental setup: five Toto-2 architectures are pre-trained from random initialization on univariate Gaussian-process trajectories only.'
+  location: Numerical Experiments
+  page: 4
+  quote: We pre-train the five Toto-2 architectures [9], spanning 4M to 2.5B parameters, from random initialization on trajectories from univariate Gaussian processes of length T = 512.
+- id: c5
+  statement: The held-out validation set is drawn fresh from the same synthetic generator (with disjoint seeds), so no real-world forecasting benchmark is used.
+  location: Experimental Details (appendix)
+  page: 11
+  quote: Held-out throughout means a validation set drawn fresh from the same generator, using generator seeds disjoint from those that produced the training data, rather than a held-out split of the training
+    corpus.
+- id: c6
+  statement: Seeds vary only initialization and masking draws, not the training corpus, so the reported error bars understate the spread from retraining on a freshly drawn corpus.
+  location: Experimental Details (appendix)
+  page: 11
+  quote: The error bars therefore carry no data-sampling variability and understate the spread that retraining on a freshly drawn corpus would show.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Time-series forecasting paper (not tabular); it mentions applying SDD to tabular
+    foundation models only as future work. Under teacher forcing (appendix) the paper reports that SDD still wins every paired seed but the effect is an order of magnitude smaller than under contiguous
+    patch masking.'

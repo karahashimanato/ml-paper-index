@@ -1,0 +1,71 @@
+id: arxiv-1811.10154
+title: Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead
+authors:
+- Cynthia Rudin
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1811.10154
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: cfaa96d39b6508de2ca18683fa7977fed30feaf3a0e31e97d7afe6d6d7b6792b
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - interpretable-models
+  paradigms:
+  - supervised
+proposes:
+- 'Position: use inherently interpretable models instead of post-hoc explanations of black boxes for high-stakes decisions'
+claims:
+- id: c1
+  statement: Rudin argues that trying to explain black box models, instead of building models that are interpretable in the first place, is likely to perpetuate bad practices and can potentially cause catastrophic
+    harm to society.
+  location: Abstract
+  page: 1
+  quote: trying to explain black box models, rather than creating models that are interpretable in the first place, is likely to perpetuate bad practices and can potentially cause catastrophic harm to society
+- id: c2
+  statement: 'The paper argues it is a myth that there is necessarily an accuracy-interpretability trade-off: for problems with structured data and meaningful features, there is often no significant performance
+    difference between complex classifiers (deep nets, boosted trees, random forests) and much simpler ones (logistic regression, decision lists) after preprocessing.'
+  location: Key Issues with Explainable ML
+  page: 2
+  quote: there is often no significant difference in performance between more complex classifiers (deep neural networks, boosted decision trees, random forests) and much simpler classifiers (logistic regression,
+    decision lists) after preprocessing
+- id: c3
+  statement: 'Post-hoc explanations cannot have perfect fidelity to the original model: a fully faithful explanation would equal the model itself, so an explanation may misrepresent the black box in parts
+    of the feature space.'
+  location: Key Issues with Explainable ML
+  page: 3
+  quote: If the explanation was completely faithful to what the original model computes, the explanation would equal the original model, and one would not need the original model in the first place, only
+    the explanation.
+- id: c4
+  statement: The paper criticises saliency maps, which can look essentially the same for different classes, and the practice of showing explanations only for the correct label, which it calls misleading.
+  location: Key Issues with Explainable ML
+  page: 4
+  quote: Demonstrating a method using explanations only for the correct class is misleading.
+- id: c5
+  statement: As evidence, the paper compares the proprietary COMPAS model with a three-rule CORELS rule list using only age, priors and (optionally) gender, stating that both have similar true/false positive
+    and negative rates on Broward County, Florida data.
+  location: Key Issues with Interpretable ML
+  page: 6
+  quote: Both models have similar true and false positive rates and true and false negative rates on data from Broward County, Florida.
+- id: c6
+  statement: 'The paper''s ''Rashomon set'' argument: when the data admit a large set of nearly equally accurate models, that set often contains at least one interpretable model.'
+  location: A Technical Reason Why Accurate Interpretable Models Might Exist in Many Domains
+  page: 14
+  quote: Because this set of accurate models is large, it often contains at least one model that is interpretable.
+- id: c7
+  statement: 'Scope/limitation: Rudin concedes there could be application domains where a complete black box is required for a high-stakes decision, while stating she has not yet encountered one.'
+  location: Key Issues with Explainable ML
+  page: 3
+  quote: It could be possible that there are application domains where a complete black box is required for a high stakes decision.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. Position/commentary paper: no systematic benchmark
+    experiments were found in the text; evidence consists of argument and case examples (COMPAS vs CORELS, FICO challenge, prototype networks for images). PDF states a preliminary version appeared at a
+    workshop (''Please Stop Explaining Black Box Machine Learning Models for High Stakes Decisions''). Wiegreffe & Pinter (arxiv-1908.04626) cite Rudin''s distinction between explainability and interpretability.'

@@ -1,0 +1,72 @@
+id: arxiv-1705.07874
+title: A Unified Approach to Interpreting Model Predictions
+authors:
+- Scott Lundberg
+- Su-In Lee
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1705.07874
+  code: https://github.com/slundberg/shap
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 01c7aa8f7d9edcf0cd185bf02e82363f743e441fcaf05b99e6054bfb470bf8ae
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - feature-attribution
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- SHAP values (Shapley values of a conditional expectation function) as a unified additive feature attribution measure; Kernel SHAP, Deep SHAP, Max SHAP estimators
+claims:
+- id: c1
+  statement: SHAP is presented as a unified framework for interpreting predictions that assigns each feature an importance value for a particular prediction.
+  location: Abstract
+  page: 1
+  quote: To address this problem, we present a unified framework for interpreting predictions, SHAP (SHapley Additive exPlanations).
+- id: c2
+  statement: Within the class of additive feature attribution methods, the uniqueness result implies that methods not based on Shapley values violate local accuracy and/or consistency.
+  location: Simple Properties Uniquely Determine Additive Feature Attributions
+  page: 4
+  quote: This result implies that methods not based on Shapley values violate local accuracy and/or consistency (methods in Section 2 already respect missingness).
+- id: c3
+  statement: 'Assumptions: the practical estimators may assume feature independence and model linearity to simplify computing the conditional expectations.'
+  location: SHAP (SHapley Additive exPlanation) Values
+  page: 5
+  quote: When using these methods, feature independence and model linearity are two optional assumptions simplifying the computation of the expected values
+- id: c4
+  statement: If DeepLIFT's reference value is interpreted as E[x], DeepLIFT approximates SHAP values assuming independent input features and a linear deep model; Deep SHAP adapts DeepLIFT on this basis.
+  location: Model-Specific Approximations (Deep SHAP)
+  page: 7
+  quote: If we interpret the reference value in Equation 3 as representing E[x] in Equation 12, then DeepLIFT approximates SHAP values assuming that the input features are independent of one another and
+    the deep model is linear.
+- id: c5
+  statement: 'Evaluation (computational): Kernel SHAP, Shapley sampling and LIME are compared on dense and sparse decision tree models, showing Kernel SHAP''s sample efficiency and that LIME values can
+    differ significantly from SHAP values.'
+  location: Computational Efficiency
+  page: 8
+  quote: Comparing Shapley sampling, SHAP, and LIME on both dense and sparse decision tree models illustrates both the improved sample efficiency of Kernel SHAP and that values from LIME can differ significantly
+    from SHAP values that satisfy local accuracy and consistency.
+- id: c6
+  statement: 'Evaluation (human): explanation quality is judged by agreement with explanations from Mechanical Turk users on simple models, assuming good explanations should match humans who understand
+    the model.'
+  location: Consistency with Human Intuition
+  page: 8
+  quote: Our testing assumes that good model explanations should be consistent with explanations from humans who understand that model.
+- id: c7
+  statement: 'Evaluation (MNIST): following DeepLIFT''s example, 20% of pixels chosen by each method''s attribution are masked to switch the predicted class from 8 to 3.'
+  location: Explaining Class Differences
+  page: 9
+  quote: To match [7], we masked 20% of the pixels chosen to switch the predicted class from 8 to 3 according to the feature attribution given by each method.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: 31st Conference on Neural Information
+    Processing Systems (NIPS 2017). Human-study models are simple hand-built functions (a sickness score and a max allocation); the MNIST check masks pixels on the same trained network (no retraining is
+    described). Conclusion lists as next steps estimators that make fewer assumptions and interaction effects.'

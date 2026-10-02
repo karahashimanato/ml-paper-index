@@ -1,0 +1,76 @@
+id: arxiv-1712.05877
+title: Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference
+authors:
+- Benoit Jacob
+- Skirmantas Kligys
+- Bo Chen
+- Menglong Zhu
+- Matthew Tang
+- Andrew Howard
+- Hartwig Adam
+- Dmitry Kalenichenko
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1712.05877
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 049f08b194f03bb401e96c841708da3b71ae0924261224bc34444ebdc41ff675
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - quantization-aware-training
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- integer-arithmetic-only 8-bit quantization scheme (affine, scale + zero-point)
+- training with simulated quantization
+claims:
+- id: c1
+  statement: Proposes a quantization scheme that lets inference run with integer-only arithmetic, plus a co-designed training procedure to preserve accuracy after quantization.
+  location: Abstract
+  page: 1
+  quote: We propose a quantization scheme that allows inference to be carried out using integer-only arithmetic, which can be implemented more efficiently than floating point inference on commonly available
+    integer-only hardware.
+- id: c2
+  statement: 'Granularity: one set of quantization parameters (scale and zero-point) per activations array and per weights array (per-tensor), with separate parameters for separate arrays.'
+  location: Quantized Inference
+  page: 3
+  quote: Our quantization scheme uses a single set of quantization parameters for all values within each activations array and within each weights array; separate arrays use separate quantization parameters.
+- id: c3
+  statement: The training procedure simulates quantization in the forward pass while backpropagation and weight storage stay in floating point (quantization-aware training).
+  location: Training with simulated quantization
+  page: 5
+  quote: We propose an approach that simulates quantization effects in the forward pass of training.
+- id: c4
+  statement: 'Failure mode: the authors found that training in float and then quantizing works sufficiently well for large models but leads to significant accuracy drops for small models; the common failure
+    modes they list for simple post-training quantization are large differences in weight ranges across output channels and outlier weight values.'
+  location: Training with simulated quantization
+  page: 5
+  quote: We found that this approach works sufficiently well for large models with considerable representational capacity, but leads to significant accuracy drops for small models.
+- id: c5
+  statement: 'Speed was evaluated on real hardware: MobileNets with varying depth multipliers and resolutions on ImageNet were benchmarked on three types of Qualcomm (Snapdragon) cores.'
+  location: Experiments
+  page: 7
+  quote: We benchmarked the MobileNet architecture with varying depth-multipliers (DM) and resolutions on ImageNet on three types of Qualcomm cores
+- id: c6
+  statement: 'Evaluation-practice position: rather than only minimizing accuracy loss for a fixed architecture, the authors advocate the latency-vs-accuracy tradeoff as a better measure.'
+  location: Experiments
+  page: 7
+  quote: While most of the quantization literature focuses on minimizing accuracy loss for a given architecture, we advocate for a more comprehensive latency-vs-accuracy tradeoff as a better measure.
+- id: c7
+  statement: 'Affiliation/product disclosure: the authors are at Google, and the described scheme is the one adopted in TensorFlow Lite.'
+  location: Quantized Inference (footnote)
+  page: 2
+  quote: The quantization scheme described here is the one adopted in TensorFlow Lite [5] and we will refer to specific parts of its code to illustrate aspects discussed below.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. Experiments are on image models (ImageNet classification,
+    COCO detection); no image-task tag exists, so only model-compression is used as task.'

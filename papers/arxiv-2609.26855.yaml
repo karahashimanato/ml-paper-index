@@ -1,0 +1,68 @@
+id: arxiv-2609.26855
+title: 'QUARTET: Quad-branch cross-Attention and Random-walk Traces for Enhancing Transformers on Relational Graphs'
+authors:
+- Kyaw Hpone Myint
+- Nan Jiang
+- Xiang Li
+- Zhe Wu
+- Alexandre G. R. Day
+- Pranab Mohanty
+- Giri Iyengar
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.26855
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7421a5dff92879839d61d1954036cb9cc50ade14e685a87ed55e6e2b1f561e88
+tags:
+  tasks:
+  - tabular-classification
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  paradigms:
+  - supervised
+proposes:
+- QUARTET (graph transformer with Causal Random Walk sampler and quad-branch cross-attention for relational databases)
+claims:
+- id: c1
+  statement: QUARTET is a graph transformer for relational deep learning that uses full self-attention on local subgraphs plus cross-attention branches for global context.
+  location: Abstract
+  page: 1
+  quote: we introduce QUARTET, an expressive graph transformer architecture that applies full self-attention on local subgraphs while enriching global context through cross-attention branches
+- id: c2
+  statement: The abstract claims QUARTET consistently matches or outperforms HGT and RelGT on the RelBench v1 classification tasks.
+  location: Abstract
+  page: 1
+  quote: Across the RELBENCH v1 classification tasks, QUARTET consistently matches or outperforms the current state-of-the-art graph transformer baselines (HGT and RelGT).
+- id: c3
+  statement: 'The conclusion is more qualified: QUARTET matches or beats RelGT on eight of twelve tasks, and RelGT keeps an edge on a few large, stationary tasks.'
+  location: Conclusion
+  page: 10
+  quote: matching or outperforming the original RelGT model on eight of twelve tasks and securing top test ROC-AUC on seven
+- id: c4
+  statement: 'Evaluation: twelve binary classification tasks from seven RelBench datasets, ROC-AUC, reporting the test score of the model selected on the validation split.'
+  location: Experimental Setup
+  page: 7
+  quote: We use ROC-AUC as the primary evaluation metric and report test ROC-AUC for the model selected on the validation split.
+- id: c5
+  statement: Baselines HGT and RelGT were reproduced from scratch under the shared RelBench v2 pipeline with the original authors' reported hyperparameters; baselines and QUARTET are averaged over four
+    random seeds.
+  location: Experimental Setup
+  page: 7
+  quote: we reproduced both graph-transformer baselines (HGT and RelGT) from scratch under this shared v2 pipeline, utilizing the original authors’ reported hyper-parameters
+- id: c6
+  statement: Baselines were not re-tuned because the RelBench v2 classification datasets are unchanged except for a leakage patch to one task.
+  location: Appendix
+  page: 20
+  quote: Re-tuning was deemed unnecessary because the classification datasets in RELBENCH v2 are unchanged to the prior version, aside from a patch to rel-event user-ignore that resolved temporal leakage.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Relational-database (multi-table) entity classification, modelled as node prediction
+    on a heterogeneous temporal graph. Tuning is asymmetric (Appendix A.3.2 and Table 5): baselines use published hyperparameters, the proposed model is tuned per task. Authors are affiliated with Capital
+    One.'

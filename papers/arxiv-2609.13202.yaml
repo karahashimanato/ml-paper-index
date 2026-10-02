@@ -1,0 +1,67 @@
+id: arxiv-2609.13202
+title: Do Tabular Foundation Models Still Need Feature Engineering?
+authors:
+- Yifan WU
+- Pinjun Dong
+- Jiran Tao
+- Binyan Jiang
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.13202
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e93cbcbf2d45eb2ecc8b9b700a401aa4ae7ff5f80e1141f5f912404872d32d52
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- Controlled within-estimator study of 26 feature-engineering conditions across TabPFN and TabICL versions
+- NNRC screening for context augmentation from related datasets
+claims:
+- id: c1
+  statement: Feature engineering gains are concentrated in earlier TFM generations and become negligible for the strongest models.
+  location: Abstract
+  page: 1
+  quote: 'We find a consistent pattern: feature engineering gains are concentrated in earlier model generations and become negligible for the strongest models.'
+- id: c2
+  statement: The classification datasets are restricted to TabPFN v1's limits (at most 1,024 training samples and 100 features) so that all model generations are evaluated on the same datasets (13 TabArena
+    datasets in total).
+  location: Experiments
+  page: 3
+  quote: all selected classification datasets satisfy the sample and feature limits of TabPFN v1 (at most 1,024 training samples and 100 features), ensuring that every generation is evaluated on the same
+    datasets.
+- id: c3
+  statement: Every condition is evaluated on the 30 official TabArena splits, and gains are paired against the identity representation on the same split.
+  location: Experiments
+  page: 3
+  quote: Every condition is evaluated on the 30 official TabArena splits (10 repeats × 3 folds).
+- id: c4
+  statement: Each estimator is fixed at its checkpoint with its default configuration, ensemble procedure and native preprocessing. No tuning of the TFMs is part of the comparison.
+  location: Problem Setup and Estimand
+  page: 2
+  quote: Let m denote a fixed tabular foundation model estimator, including its checkpoint, default configuration, ensemble procedure, and native preprocessing pipeline.
+- id: c5
+  statement: The reported best-observed feature-engineering gain is an oracle maximum over conditions, not a validation-selected choice.
+  location: Results (Figure 1 caption)
+  page: 5
+  quote: the maximum is oracle, not validation-selected
+- id: c6
+  statement: The context-augmentation experiment with related source datasets covers only three target tasks and is a feasibility study, not a benchmark-wide evaluation.
+  location: Experiments
+  page: 4
+  quote: The analysis is therefore a feasibility study conditioned on source availability and schema compatibility, rather than a benchmark wide evaluation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Evaluates TabPFN v1/v2/v2.5/v2.6/v3 and TabICL v1/v2 (12 estimator versions) on 8
+    classification + 5 regression TabArena datasets. Most TabPrep pipeline variants have negative median within-estimator effects here, whereas the TabPrep paper (Tschalzev et al. 2026) reports gains inside
+    the TabArena tuning/ensembling pipeline; the authors frame their question as complementary to that one. No code link was found in the text.'

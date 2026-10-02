@@ -1,0 +1,76 @@
+id: arxiv-1703.01365
+title: Axiomatic Attribution for Deep Networks
+authors:
+- Mukund Sundararajan
+- Ankur Taly
+- Qiqi Yan
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1703.01365
+  code: https://github.com/ankurtaly/Attributions
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f7ebd6fea293c844b94c8ae86ad80e28f48b828d562a316841d4eab8fcd7dee1
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - feature-attribution
+  - saliency-maps
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- Integrated Gradients (path integral of gradients from a baseline to the input)
+- Sensitivity and Implementation Invariance axioms
+claims:
+- id: c1
+  statement: The paper identifies two axioms (Sensitivity, Implementation Invariance) and shows that most known attribution methods do not satisfy them, which it considers a fundamental weakness of those
+    methods.
+  location: Abstract
+  page: 1
+  quote: We show that they are not satisfied by most known attribution methods, which we consider to be a fundamental weakness of those methods.
+- id: c2
+  statement: 'Main contribution: Integrated Gradients, implementable with a few gradient calls and applicable to many deep networks.'
+  location: Conclusion
+  page: 8
+  quote: The primary contribution of this paper is a method called integrated gradients that attributes the prediction of a deep network to its inputs.
+- id: c3
+  statement: 'Assumption: attributions are relative to a baseline; the authors recommend a baseline with near-zero score that conveys complete absence of signal (e.g. black image, zero embedding).'
+  location: Applying Integrated Gradients
+  page: 5
+  quote: So we would additionally like the baseline to convey a complete absence of signal, so that the features that are apparent from the attributions are properties only of the input, and not of the
+    baseline.
+- id: c4
+  statement: 'Critique of perturbation-based evaluation: perturbed images may be unnatural, so a score drop may reflect distribution shift rather than attribution quality; the paper therefore uses an axiomatic
+    approach instead of an empirical benchmark.'
+  location: Uniqueness of Integrated Gradients
+  page: 3
+  quote: However, the images resulting from pixel perturbation could be unnatural, and it could be that the scores drop simply because the network has never seen anything like it in training.
+- id: c5
+  statement: If averaging over multiple paths is allowed, the Shapley-Shubik method also satisfies the axioms but yields attributions different from Integrated Gradients; on a min(x1, x2) example the authors
+    say it seems somewhat subjective to prefer one result over the other.
+  location: Integrated Gradients is Symmetry-Preserving
+  page: 5
+  quote: This method yields attributions that are different from integrated gradients.
+- id: c6
+  statement: 'Critique of local surrogate methods (LIME): implementation invariant but without a guarantee of sensitivity.'
+  location: Other Related work
+  page: 8
+  quote: However, this approach does not guarantee sensitivity.
+- id: c7
+  statement: 'Stated limitation: interactions between input features and the network''s logic are not addressed.'
+  location: Conclusion
+  page: 8
+  quote: While our and other works have made some progress on understanding the relative importance of input features in a deep network, we have not addressed the interactions between the input features
+    or the logic employed by the network.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 34th International
+    Conference on Machine Learning (ICML 2017). Authors'' affiliation: Google Inc. Explanation quality is not evaluated quantitatively: the applications (ImageNet GoogleNet, diabetic retinopathy, question
+    classification, NMT, chemistry) are qualitative case studies. Recommends 20 to 300 Riemann steps and checking that attributions sum to F(x) - F(baseline).'

@@ -1,0 +1,63 @@
+id: arxiv-2609.36881
+title: 'What You Observe Determines How You Identify Causal Effects: Evaluating Causal Models across Observational Views'
+authors:
+- Heejin Jung
+- Gyeongdeok Seo
+- Hoyoon Byun
+- Joseph Lee
+- Kyungwoo Song
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.36881
+  code: https://github.com/MLAI-Yonsei/CausalIDView
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 4099305753198c21571e55abce2dcf940494c598cbb82707a3e88f2695fe1fbf
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- CausalIDView multi-view benchmark for causal effect estimators
+claims:
+- id: c1
+  statement: CausalIDView holds the SCM realization and target estimand fixed and varies only the observational view given to the estimator.
+  location: Abstract
+  page: 1
+  quote: a multi-view benchmark that holds the SCM realization and target estimand fixed while varying only the observational view available to the estimator.
+- id: c2
+  statement: Across matched views, no causal foundation model is consistently best and rankings vary substantially.
+  location: Abstract
+  page: 1
+  quote: Across these matched views, no CFM consistently performs best and model rankings vary substantially.
+- id: c3
+  statement: A modular approach pairing a predictive TFM with regime-specific identification procedures is competitive with CFMs and beats several of them.
+  location: Abstract
+  page: 1
+  quote: A modular approach that pairs a predictive tabular foundation model with regime-specific identification procedures is competitive with CFMs and outperforms several of them.
+- id: c4
+  statement: CFMs are evaluated with their released checkpoints without fine-tuning.
+  location: Appendix
+  page: 26
+  quote: We evaluate CausalPFN, Do-PFN, and CausalFM (Balazadeh Meresht et al., 2026; Ma et al., 2026; Robertson et al., 2026) using their released checkpoints without fine-tuning.
+- id: c5
+  statement: Predictive backbones in the modular estimators use fixed settings and package defaults with no hyperparameter optimization.
+  location: Appendix
+  page: 27
+  quote: All remaining parameters use the corresponding package defaults and we perform no hyperparameter optimization.
+- id: c6
+  statement: The comparisons concern the evaluated model-input configurations, not natively supported estimators in every regime.
+  location: Appendix
+  page: 26
+  quote: These comparisons concern the evaluated model–input configurations, not equally supported native estimators in every regime.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The modular estimators use TabPFN-v3.5 as one of the predictive backbones.'

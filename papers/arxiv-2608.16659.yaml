@@ -1,0 +1,73 @@
+id: arxiv-2608.16659
+title: Hoeffding adaptive splitting trees for data stream classification with concept drift and ensemble learning
+authors:
+- Daniel Nowak Assis
+- Jean Paul Barddal
+- Fabrício Enembreck
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.16659
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: fa346713c16e449f94aa4b4677be5ffdca8e1bd657f89665af5014e43d5d35b1
+tags:
+  tasks:
+  - stream-classification
+  method_families:
+  - tree-ensembles
+  - random-forests
+  - error-rate-drift-detectors
+  paradigms:
+  - supervised
+  - streaming
+proposes:
+- 'Hoeffding Adaptive Splitting Trees (HLAST, EFLAST): incremental trees that split both periodically (Hoeffding bound) and when a leaf change detector fires, used as ensemble base learners'
+claims:
+- id: c1
+  statement: 'Main claim: the proposed Hoeffding Adaptive Splitting Trees improve ensemble performance and achieve state-of-the-art results in an evaluation covering benchmark comparisons, computational
+    cost and concept drift adaptation.'
+  location: Abstract
+  page: 1
+  quote: Experimental results demonstrate that Hoeffding Adaptive Splitting Trees enhance ensemble performance and achieve state-of-the-art results across a comprehensive evaluation, including benchmark
+    comparisons, computational cost analysis, and concept drift adaptation.
+- id: c2
+  statement: 'Data: 13 real-world streams and 24 synthetic streams (AGRAWAL, SEA, LED, RBF, HYPER generators); in the synthetic streams drift is simulated by the generator (e.g. switching concept functions),
+    so drift positions are known by construction.'
+  location: Methodology
+  page: 12
+  quote: We performed experiments with 13 real-world datasets made available in [32] and 24 synthetic datasets retrieved from [33].
+- id: c3
+  statement: 'Ensemble hyperparameters were not tuned: all ensembles (100 base learners) used the MOA default parameters.'
+  location: Methodology
+  page: 14
+  quote: All parameters from ensembles were set to default as implemented in the MOA framework.
+- id: c4
+  statement: 'Evaluation protocol: prequential (test-then-train) evaluation, with metrics averaged over 20 evenly spaced points of the stream; ensembles are compared with a Friedman test and Holm-corrected
+    Wilcoxon post-hoc tests.'
+  location: Methodology
+  page: 14
+  quote: As in [7], we assess the predictive performance obtained with a test-then-train validation strategy, where every instance is used first for testing and then for training, known as Prequential evaluation
+    [40].
+- id: c5
+  statement: The change detector inside all LAST-type trees is HDDM_A, chosen from the authors' earlier detector comparison, where HDDM_A, MDDM_A and ADWIN performed comparably and were cheaper than DDM-type
+    detectors.
+  location: Methodology
+  page: 15
+  quote: The detector used in all LAST versions was HDDMA [44], given the analysis done in [6].
+- id: c6
+  statement: On synthetic drifting streams the proposed trees have little effect relative to a Hoeffding Tree; the gains appear mainly on real-world, multi-class data.
+  location: Results
+  page: 18
+  quote: Figure 6 shows that on synthetic data the proposed trees have little effect, with the F1-Score difference to HT staying close to zero for all ensembles.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Stream classification with drift adaptation, not a drift-detector benchmark: change
+    detectors are used inside tree leaves to trigger splits and in ensembles (ARF/SRP/ARTE) for resets; no detection metrics (delay, false alarms, missed detections) are reported. Drift reaction is assessed
+    only by F1-Score curves over time with the known drift points of the synthetic streams marked; the drift type of most real-world streams is listed as Unknown (INSECTS variants are labeled abrupt/incremental/gradual).
+    Detector parameter settings beyond the HDDM_A choice were not found in the text. Tuning the base learners'' hyperparameters is listed as future work. SGBT was excluded for computational cost. The authors
+    also proposed LAST (the main adaptive baseline) in earlier work. Code/results site in the PDF: https://sites.google.com/view/last-ensemble (not added to links because it is not a code repository URL).'

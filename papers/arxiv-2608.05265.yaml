@@ -1,0 +1,79 @@
+id: arxiv-2608.05265
+title: Evaluating Machine Learning Models for Post-Wildfire Debris-Flow Prediction
+authors:
+- Quinn Ledingham
+- Zhengsen Xu
+- Yimin Zhu
+- Zack Dewis
+- Mabel Heffring
+- Saeid Taleghanidoozdoozan
+- Motasem Alkayid
+- Megan Greenwood
+- Lincoln Linlin Xu
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.05265
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 75e358674ac75ebd36b0a24f7cdaff6c20d2e06d31802210dbf8eeeefc7b3fb0
+tags:
+  tasks:
+  - tabular-classification
+  - model-explanation
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - random-forests
+  - deep-learning
+  - linear-models
+  - kernel-methods
+  - feature-attribution
+  paradigms:
+  - supervised
+proposes:
+- 15-model benchmark for post-wildfire debris-flow prediction (USGS basin-scale data) with SHAP analysis and TabPFN-based synthetic augmentation
+claims:
+- id: c1
+  statement: The paper compares 15 models, including TabPFN, on basin-scale post-wildfire debris-flow observations across the western United States.
+  location: Abstract
+  page: 1
+  quote: Using basin-scale observations of post-wildfire debris-flow events across the western United States, we compare 15 models, including a new foundation model, the Tabular Prior-Data Fitted Network
+    (TabPFN).
+- id: c2
+  statement: Evaluation uses stratified 5-fold cross-validation repeated 10 times, with splits precomputed once and shared by all models.
+  location: Cross-Validation
+  page: 7
+  quote: In particular, we used stratified 5-fold cross-validation repeated 10 times, producing 50 outer evaluation splits with an equal percentage of no-debris-flow and debris-flow observations in each
+    split.
+- id: c3
+  statement: Tuned models used Bayesian optimization with 100 trials and Hyperband pruning on an inner validation split, tuned separately for unaugmented and augmented training; some models used native
+    tuning or none.
+  location: Hyperparameter Tuning
+  page: 7
+  quote: For each model and training condition, we used Bayesian optimization with 100 trials and Hyperband pruning to maximize validation threat score under fold-aware training (Akiba et al.; Li et al.).
+- id: c4
+  statement: Decision thresholds were not optimized, and class-weight rebalancing was fixed rather than tuned.
+  location: Hyperparameter Tuning
+  page: 7
+  quote: Decision-threshold optimization was likewise not performed to avoid conflating hyperparameter selection with the metric used for model comparison.
+- id: c5
+  statement: TabPFN and the leading tree ensembles form a top tier whose within-tier order is not stable; TabPFN was run with static settings while tree models needed Bayesian search.
+  location: Discussion
+  page: 18
+  quote: Tree-based models such as ExtraTrees, CatBoost, and XGBoost required Bayesian hyperparameter search, whereas TabPFN was run with static settings with no dataset-specific tuning and still matched
+    or exceeded them.
+- id: c6
+  statement: 'Limitation: the dataset is geographically concentrated in southern California fires, which may favor features and models that generalize within that region.'
+  location: Discussion
+  page: 19
+  quote: The dataset is geographically concentrated, with 61% of records from southern California fires, which may favor features and model structures that generalize well within that region but perform
+    differently in the drier, more continental environments represented by the remaining fires.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Single dataset (about 1,550 basin-storm records). Outer CV splits are random stratified,
+    not fire- or space-blocked; leave-one-fire-out is used only for the SHAP maps. Conflicts of interest: none stated.'

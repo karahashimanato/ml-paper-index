@@ -1,0 +1,74 @@
+id: arxiv-2609.25340
+title: Concept Drift from a Causal Perspective
+authors:
+- Eduardo V. L. Barboza
+- Jean Paul Barddal
+- Robert Sabourin
+- Rafael M. O. Cruz
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.25340
+  code: https://github.com/eduardovlb/CaDrift
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9112b75c3c7deb3beeaaf95e6da0076b55ae63b4dac01e4de2dc840690e27579
+tags:
+  tasks:
+  - tabular-data-generation
+  - stream-classification
+  - concept-drift-detection
+  method_families:
+  - error-rate-drift-detectors
+  - tree-ensembles
+  - tabular-foundation-model
+  paradigms:
+  - streaming
+  - supervised
+proposes:
+- Causal (SCM-based) taxonomy of concept drift
+- 'CaDrift: SCM-based synthetic data stream generator with mechanism-level drift events'
+claims:
+- id: c1
+  statement: The paper proposes a taxonomy that categorizes drift events by their causal origin within a structural causal model.
+  location: Abstract
+  page: 1
+  quote: We propose a taxonomy that categorizes drift events by their causal origin, including changes in exogenous variables, endogenous mechanisms, confounders, and target-generating processes.
+- id: c2
+  statement: 'Main empirical claim: drifts with different causal origins induce distinct patterns of distribution shift and predictive behavior.'
+  location: Abstract
+  page: 1
+  quote: Our experiments empirically characterize the distributional effects of each drift type and show that drifts with different causal origins induce distinct patterns of distribution shift and predictive
+    behavior.
+- id: c3
+  statement: 'Ground-truth drift is synthetic: CaDrift streams are generated with drift events at known, regular positions (abrupt unless stated otherwise).'
+  location: Experimental setup (Distributional impact analysis)
+  page: 11
+  quote: For this analysis, we generate streams of 20,000 samples with a drift event introduced every 2,000 samples.
+- id: c4
+  statement: 'Performance protocol: a Hoeffding Tree is evaluated test-then-train with immediate labels and with labels delayed by 100 samples, and is also coupled with DDM; DDM parameter settings were
+    not found in the text.'
+  location: Experimental setup (Performance evaluation)
+  page: 12
+  quote: we measure the predictive performance of the Hoeffding Tree (HT) classifier (Domingos & Hulten, 2000) under different drift scenarios in a test-then-train manner, considering a prompt label availability
+    after the test, as well as when label availability is delayed by 100 samples
+- id: c5
+  statement: Under endogenous drift with nonlinear mappers, DDM does not seem to help the Hoeffding Tree; its triggers appear to lower immediate accuracy more than not using DDM.
+  location: Results (impact of causal drift events)
+  page: 12
+  quote: DDM does not seem to provide any advantage over the HT – the triggers in concept drift actually seem to decrease the immediate accuracy more than if not using DDM.
+- id: c6
+  statement: 'Case study: CaDrift samples generated from a DAG inferred on ELEC2 are used to augment stream learners, including TabPFNv2.5 run with a sliding context window.'
+  location: Case study (ELEC2 data augmentation)
+  page: 22
+  quote: In addition to the online learners, we also include TabPFNv2.5 (Grinsztajn et al., 2026), a transformer-based tabular classifier.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Off-theme in part: the main contribution is a drift taxonomy and a synthetic stream
+    generator, not a drift detector; no detection metrics (delay, false alarms) are reported. Tagged tabular-data-generation (synthetic stream generator) and stream-classification (Hoeffding Tree / online
+    learners under drift); concept-drift-detection is kept only because drift effects are characterized (MMD, conditional KL) and DDM is used for adaptation. The augmentation case study compares IncA-DES
+    (Barboza et al., 2025, i.e. the first author''s own method), ARF and TabPFNv2.5; the class-generation design is described as similar to the prior-generation of TabPFN (Hollmann et al., 2025).'

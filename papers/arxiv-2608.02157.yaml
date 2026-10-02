@@ -1,0 +1,67 @@
+id: arxiv-2608.02157
+title: 'RamanPFN: learning from Raman spectral structure with a tabular foundation model'
+authors:
+- Xingyu Pan
+- Huan Wang
+- Jinjia Guo
+- Zhenlin Zhao
+- Siming Dong
+- Jixi Lu
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.02157
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c95b56ebde6ee34186eea4965516222b03a19c93eb0dddf22897067886414c83
+tags:
+  tasks:
+  - tabular-regression
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- RamanPFN (GCU + LVSE spectral representations for TabPFN in-context inference)
+claims:
+- id: c1
+  statement: RamanPFN is a spectral framework that feeds physics-guided Raman representations to a tabular foundation model for in-context inference.
+  location: Abstract
+  page: 1
+  quote: Here we present RamanPFN, a general-purpose spectral foundation framework that enables unified in-context inference through physics-guided spectral learning.
+- id: c2
+  statement: RamanPFN achieves the best aggregate metrics against 28 independently reproduced methods, including tabular foundation models.
+  location: Abstract
+  page: 1
+  quote: RamanPFN achieved state-of-the-art performance across all reported aggregate metrics against 28 independently reproduced methods spanning chemometrics, spectral neural networks, deep tabular learners
+    and tabular foundation models.
+- id: c3
+  statement: Evaluation uses the public RamanBench collection and its published task definitions.
+  location: Methods
+  page: 11
+  quote: We evaluated RamanPFN using the public RamanBench collection and its published task definitions [12].
+- id: c4
+  statement: The protocol is the published 80/20 train-test split with three seeds.
+  location: Methods
+  page: 11
+  quote: Experiments followed the published 80/20 train–test protocol, with seeds 0, 1 and 2 defining three repetitions.
+- id: c5
+  statement: Baselines keep their own preprocessing and fitting procedures on common partitions; a hyperparameter tuning budget for baselines was not found in the text.
+  location: Methods
+  page: 13
+  quote: Each baseline retained its own preprocessing and fitting procedure on the common data partitions.
+- id: c6
+  statement: 'Regression tasks are small and wide: 6 to 6,203 training spectra with 114 to 11,689 channels.'
+  location: Results
+  page: 3
+  quote: Regression training sets ranged from 6 to 6,203 spectra, with 114 to 11,689 wavenumber channels.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Inputs are Raman spectra (ordered spectral channels) treated as wide tables for TabPFN;
+    tabular task tags are kept as the closest fit. Authors list Beihang University and Cleer Science (company); no competing-interest statement found. The paper also argues that TFM feature subsampling
+    on wide spectra separates channels that belong together (''Coverage is not context'').'

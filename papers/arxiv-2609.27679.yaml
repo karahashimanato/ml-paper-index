@@ -1,0 +1,71 @@
+id: arxiv-2609.27679
+title: What Do Tabular Foundation Models Compute In Context? In-Situ Representation Refinement through Attention-Gated Updates
+authors:
+- Tian Zhou
+- Beverly Jin
+- Linxiao Yang
+- Xue Wang
+- Wenwei Wang
+- Bingqing Peng
+- Mengni Ye
+- Jinjie Gu
+- Liang Sun
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.27679
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 18a0ea04d61de0d57a70b028cd1b439bceca34df23765e7d048f14fe6e3e2f69
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- REFINEICL (attention-gated, FFN-free tabular ICL model)
+- In-situ representation refinement view of tabular ICL
+claims:
+- id: c1
+  statement: A leave-one-out derivation separates attention-based reading from state-dependent scaling, which motivates REFINEICL, an attention-gated FFN-free stack with low-rank feature interaction and
+    typed memory.
+  location: Abstract
+  page: 1
+  quote: 'The leading term separates attention-based reading from state-dependent scaling, motivating REFINEICL: an attention-gated, FFN-free contextual stack with selected low-rank feature interac- tion
+    and typed memory.'
+- id: c2
+  statement: The benchmark-informed REFINEICL continuation also improves all four reported metrics over TabPFN-v3 on both TabZilla views.
+  location: Abstract
+  page: 1
+  quote: It also improves all four reported metrics over TabPFN-v3 on both TabZilla views.
+- id: c3
+  statement: 'Evaluation protocol (TabArena): REFINEICL is evaluated on fold 0 only, with eight ensemble members and one support ordering.'
+  location: Appendix
+  page: 14
+  quote: REFINEICL uses fold 0, eight ensemble members, and one support ordering shared across model sizes.
+- id: c4
+  statement: The TabArena comparison uses a fixed v0.1 snapshot with reference methods, which is not interchangeable with the live leaderboard.
+  location: Appendix
+  page: 14
+  quote: This fixed benchmark snapshot contains 77 reference methods and is not interchangeable with the live leaderboard.
+- id: c5
+  statement: The TabArena checkpoint is a benchmark-informed continuation; the authors call the TabArena result a development-exposed comparison.
+  location: Appendix
+  page: 15
+  quote: continuation’s prior choice; this is a development-exposed comparison.
+- id: c6
+  statement: The native AMLB29 inference protocol follows the archived TabPFNv2 classifier defaults (fixed number of estimators, seed, temperature and a row ceiling).
+  location: Appendix
+  page: 15
+  quote: 'The AMLB29 native protocol follows the archived TabPFNv2 classifier defaults: four estimators, seed 0, temperature 0.9, and a 10,000-row ceiling.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Authors are affiliated with Ant Group (and independent researchers). Benchmarks:
+    TabArena v0.1 snapshot, AMLB29, OpenML-CC18, Grinsztajn, TabZilla.'

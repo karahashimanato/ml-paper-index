@@ -1,0 +1,78 @@
+id: arxiv-2609.04388
+title: 'Candidate Comparability Before Promotion: Conditional Validation in Adaptive Network Intrusion Detection'
+authors:
+- Roberto Fernández-Barrios
+- Iker Pastor-López
+- Amaia Pikatza-Huerga
+- Pablo García Bringas
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.04388
+  code: https://github.com/roberto-fernandez-barrios/Validate-Before-Commit
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e34a4492b05be09e7f3f0c9f2ab8df53c8178eff2e6815c5d5dcf7ccb9689314
+tags:
+  tasks:
+  - dataset-shift-detection
+  - stream-classification
+  - tabular-classification
+  method_families:
+  - two-sample-tests
+  - error-rate-drift-detectors
+  - window-based-drift-detectors
+  - kernel-methods
+  paradigms:
+  - supervised
+  - streaming
+proposes:
+- Candidate-comparability audit before promotion in drift-triggered retraining (adaptive NIDS)
+- Labeled-probe validation gate for incumbent-challenger promotion
+claims:
+- id: c1
+  statement: 'The paper separates drift detection from model promotion: a drift alarm in an adaptive intrusion detection system detects change but does not establish that a retrained challenger should replace
+    the deployed model.'
+  location: Abstract
+  page: 1
+  quote: Adaptive network intrusion detection systems retrain classifiers after drift alarms, but an alarm detects change; it does not establish that a challenger should replace the deployed incumbent.
+- id: c2
+  statement: 'Main finding on construction: incumbent-owned frozen preprocessing amplified the apparent harm of promotion, and with self-contained challenger pipelines the mean full-drift harm did not persist.'
+  location: Abstract
+  page: 1
+  quote: Incumbent-owned frozen preprocessing amplified apparent promotion harm; with self-contained challenger pipelines the mean full-drift harm did not persist.
+- id: c3
+  statement: 'Drift-monitor threshold: thresholds are set at the 0.95 quantile of detector scores over pre-drift calibration windows, and the retraining trigger requires consecutive alarms followed by a
+    cooldown.'
+  location: Experimental setup (shared protocol constants)
+  page: 8
+  quote: thresholds are the 0.95 quantile of detector scores over 30 pre-drift calibration windows; the trigger is 3 consecutive alarms with a 10-window cooldown; windows contain 128 flows.
+- id: c4
+  statement: In the common-harness comparison, DDM and ADWIN (river reference implementations) were used as retraining triggers at default parameters (default DDM thresholds, ADWIN delta = 0.002) with a
+    small number of monitoring labels per window.
+  location: Common-harness comparison
+  page: 11
+  quote: the river reference implementations of DDM and ADWIN [17, 29] as retraining triggers with always-deploy on fire, run at their registered reference parameters — the implementations’ default DDM
+    thresholds and ADWIN δ = 0.002 — on 8 monitoring labels per window (800 per stream)
+- id: c5
+  statement: The authors caution that DDM and ADWIN were not tuned, so their results describe that configuration only; a parameter sweep would be needed before reading them as properties of the methods.
+  location: Limitations
+  page: 24
+  quote: DDM and ADWIN were run at their registered reference parameters and were not tuned; their cells characterize that configuration, and a parameter sweep would be required before reading them as properties
+    of the methods.
+- id: c6
+  statement: 'Ground-truth drift is constructed: the core drift trajectories are gradual mixing ramps between real regime pools (covariate/regime drift); a P(y|x) change is not isolated and recurrent drift
+    is not tested.'
+  location: Limitations
+  page: 24
+  quote: The core drift trajectories are gradual mixing ramps between real regime pools (covariate/regime drift); we do not isolate a p(y|x) change, and recurrent drift is untested.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Benchmarks: CICIDS2017, UNSW-NB15, ToN-IoT (binary benign vs attack). The paper is
+    about promotion after drift alarms rather than about detection accuracy; drift monitors are two-sample statistics (energy distance, RBF-MMD, per-feature KS, JS divergence). The abstract also reports
+    thirteen chronological replays on real time-ordered traffic in which always-deploy showed no net harm. Primary learner is SVC-RBF on 8-dim PCA; label-free baselines ATC and DoC also compared. Code also
+    archived on Zenodo.'

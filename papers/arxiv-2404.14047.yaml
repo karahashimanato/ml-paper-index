@@ -1,0 +1,83 @@
+id: arxiv-2404.14047
+title: 'An empirical study of LLaMA3 quantization: from LLMs to MLLMs'
+authors:
+- Wei Huang
+- Xingyu Zheng
+- Xudong Ma
+- Haotong Qin
+- Chengtao Lv
+- Hong Chen
+- Jie Luo
+- Xiaojuan Qi
+- Xianglong Liu
+- Michele Magno
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2404.14047
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 2e89e7093faa6dec168f2c6cb931244d064604f47650ce0f166a3998dfd43f13
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - quantization-aware-training
+  - large-language-models
+  paradigms:
+  - post-hoc
+proposes:
+- Empirical evaluation of 9 PTQ and 2 LoRA-fine-tuning quantization methods on LLaMA3-8B/70B (1-8 bits) and of PTQ on the LLaMA3-based LLaVA-Next-8B (2-4 bits)
+claims:
+- id: c1
+  statement: 'Main claim: LLaMA3 still suffers non-negligible degradation from quantization in linguistic and visual contexts, particularly at ultra-low bit widths.'
+  location: Abstract
+  page: 1
+  quote: Our experimental results indicate that LLaMA3 still suffers from non-negligible degradation in linguistic and visual contexts, particularly under ultra-low bit widths.
+- id: c2
+  statement: 'Evaluation metrics: perplexity on WikiText2, PTB and part of C4, zero-shot accuracy on PIQA, Winogrande, ARC-e, ARC-c and HellaSwag, 5-shot MMLU for LoRA-FT methods, and visual-language benchmarks
+    for LLaVA-Next-8B.'
+  location: Introduction (evaluation datasets)
+  page: 2
+  quote: For the PTQ methods, we evaluate quantized LLaMA3 on the WikiText2 [18], PTB [20], and a portion of the C4 dataset [19], using perplexity (PPL) as the evaluation metric.
+- id: c3
+  statement: 'Calibration protocol: WikiText2 is the calibration set for all PTQ methods (128 samples, sequence length 2048), and group size is fixed at 128 for grouped methods; WikiText2 is also one of
+    the perplexity evaluation sets.'
+  location: Introduction (evaluation datasets)
+  page: 2
+  quote: To ensure fairness in evaluation of different PTQ methods, we set WikiText2 as the calibration dataset for all quantization methods, with a sample size of 128 and a sequence length of 2048.
+- id: c4
+  statement: LoRA fine-tuning (QLoRA, IR-QLoRA on Alpaca) does not compensate for quantization error on LLaMA3-8B below 4 bits and actually worsens MMLU, in contrast to LLaMA and LLaMA2, where 4-bit LoRA-FT
+    versions could even outperform FP16 on MMLU.
+  location: 'Track 2: LoRA-FT quantization'
+  page: 7
+  quote: On the MMLU dataset, the most notable observation with LLaMA3-8B under LoRA-FT quantization is that low-rank fine-tuning on the Alpaca [36] dataset not only fails to compensate for the errors introduced
+    by quantization, but actually exacerbates the degradation.
+- id: c5
+  statement: The authors find that LLaMA3-70B shows significant robustness to the different quantization methods, even for ultra-low bit widths.
+  location: 'Track 1: post-training quantization'
+  page: 5
+  quote: Moreover, we find that the LLaMA3-70B model shows significant robustness to different quantization methods, even for ultra-low bit-width quantization.
+- id: c6
+  statement: 'Multimodal failure: with GPTQ or AWQ, the 2-bit LLaVA-Next-8B collapses completely on the multimodal QA tasks; SliM-LLM mitigates the collapse but still degrades strongly.'
+  location: 'Track 3: MLLM quantization'
+  page: 9
+  quote: Notably, regardless of GPTQ or AWQ, we observe that the 2-bit LLaVA-Next-8B completely collapses in the six multi-modal QA tasks, with scores dropping to zero.
+- id: c7
+  statement: 'Possible conflict of interest not discussed in the paper: three evaluated methods (SliM-LLM, BiLLM, IR-QLoRA) have reference entries whose author lists include authors of this study, while
+    the paper''s competing-interests statement declares none.'
+  location: References
+  page: 12
+  quote: 'Wei Huang, Haotong Qin, Yangdong Liu, Yawei Li, Xianglong Liu, Luca Benini, et al. SliM-LLM: Salience-driven mixed-precision quantization for large language models.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. Version 3 (retitled by the authors); title copied
+    from arXiv API metadata. The PDF text lists 9 PTQ methods but Fig. 1 also shows SpinQuant and OmniQuant; the text says ''6 visual language benchmarks'' while listing 5. LoRA-FT methods (QLoRA, IR-QLoRA)
+    are tagged quantization-aware-training as the closest family: the base model is quantized and low-rank adapters are fine-tuned. Evaluation used 8 NVIDIA A800 80GB GPUs; GPU memory, training time and
+    inference latency are reported only for LoRA-FT methods (Table 10). Calibration and perplexity evaluation both use WikiText2 (splits not stated in the text found).'

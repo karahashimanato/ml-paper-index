@@ -1,0 +1,64 @@
+id: arxiv-2609.38744
+title: Molecular Property Prediction under Structural Shift with Tabular Foundation Models
+authors:
+- Jinmo Lee
+- Dooho Lee
+- Minho Jeong
+- Jaemin Yoo
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.38744
+  code: https://github.com/nums-ai/MolPAIR
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 20d87d8c627f967d7d6fa6550a64a69406ea5841f0da1c490d6ec1f1e0c38ba4
+tags:
+  tasks:
+  - tabular-regression
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- MolPAIR (Molecular Pair-Augmented In-context Refinement)
+claims:
+- id: c1
+  statement: MolPAIR uses a second frozen TFM that predicts error differences between a query and labeled reference molecules to refine the first TFM's prediction.
+  location: Abstract
+  page: 1
+  quote: A second frozen TFM predicts differences in prediction errors between the query and labeled reference molecules, using these comparisons to refine the initial prediction.
+- id: c2
+  statement: CheMeleon representations with TabPFN-3 alone already beat each evaluated baseline on a majority of the 58 tasks.
+  location: Abstract
+  page: 1
+  quote: Across 58 MoleculeACE and Polaris tasks, CheMeleon representations combined with TabPFN-3 already outperform each evaluated baseline on a majority of tasks.
+- id: c3
+  statement: The benchmark combines 30 MoleculeACE and 28 Polaris tasks (47 regression, 11 binary classification).
+  location: Evaluation protocol
+  page: 5
+  quote: We combine 30 MoleculeACE bioactivity tasks with 28 Polaris tasks (Van Tilborg et al., 2022; Polaris Hub, 2026), comprising 47 regression and 11 binary classification tasks.
+- id: c4
+  statement: Splits hold out scaffold groups and additionally filter out test molecules too similar to training molecules.
+  location: Evaluation protocol
+  page: 6
+  quote: The scaffold holdout separates structural groups, while the similarity filter removes close analogues that can remain across different scaffolds.
+- id: c5
+  statement: Tree baselines are tuned on training data only with Optuna (30 trials for RF/ExtraTrees, 50 for XGBoost/LightGBM).
+  location: Appendix
+  page: 18
+  quote: Random Forest and ExtraTrees use 30 Optuna trials; XGBoost and LightGBM use 50.
+- id: c6
+  statement: 'Limitation: real-world shifts may not be captured by scaffold and fingerprint-similarity splits; MolPAIR also increases inference cost.'
+  location: Limitations and future work
+  page: 9
+  quote: Broader real-world distribution shifts may also involve changes that are not captured by scaffold separation and fingerprint-similarity-based splits.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Authors are from Nums AI; no conflict with TabPFN-3 developers stated. Runtime analysis
+    compares default, 10-trial and full HPO for supervised baselines.'

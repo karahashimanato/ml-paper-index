@@ -1,0 +1,72 @@
+id: arxiv-2608.10522
+title: Unlocking the Power of Medical Tabular Data via Semantic-Aware Multimodal Pre-training
+authors:
+- Yingsheng Liu
+- Haiming Li
+- Jingmin Zhu
+- Jiajun Sun
+- Victoria Mar
+- Monika Janda
+- H. Peter Soyer
+- Zongyuan Ge
+- Zhen Yu
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.10522
+  code: https://github.com/Ethan-ysliu/AID
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 935c09c6e0dadfec09d9b220228c41f0897569b2048b8257ff4d9092eb9631e2
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - deep-learning
+  - tabular-attention
+  paradigms:
+  - self-supervised
+proposes:
+- AID (Adaptive Importance-guided Discretized reconstruction) for image-tabular pre-training
+- Importance-Aware Adaptive Masking
+- Soft-Label Discretized Module
+claims:
+- id: c1
+  statement: The paper proposes a semantic-aware multimodal pre-training framework that explicitly models the two-dimensional structure of medical tabular data.
+  location: Abstract
+  page: 1
+  quote: To overcome this, we propose a novel semantic-aware framework explicitly modeling the intrinsic two-dimensional structure of tabular data.
+- id: c2
+  statement: Experiments on dermatology (SLICE-3D, HOP) and ophthalmology (EyePACS) datasets are reported as establishing a new state of the art.
+  location: Abstract
+  page: 1
+  quote: Extensive experiments across large-scale dermatology (SLICE-3D, HOP) and ophthalmology (EyePACS) datasets establish a new state-of-the-art (SOTA), demonstrating exceptional robustness and cross-domain
+    generalizability.
+- id: c3
+  statement: Label-free feature importance is obtained by fitting a frozen tabular foundation model (TabPFN v2) to PCA-derived binary pseudo-labels and reading its attention weights.
+  location: Methodology
+  page: 4
+  quote: These pseudo-labels adapt a frozen tabular foundation model[12].
+- id: c4
+  statement: On SLICE-3D, samples from 220 patients are geographically held out as an out-of-domain test set and excluded from pre-training.
+  location: Experimental setup
+  page: 6
+  quote: To ensure rigorous evaluation, 80,433 samples from 220 patients are geographically isolated as an Out-of-Domain (OOD) test set and strictly excluded from pre-training.
+- id: c5
+  statement: Baselines (including CatBoost, FT-Transformer and TabPFN v2) are stated to be reproduced under identical settings; no baseline hyperparameter-tuning procedure was found in the text.
+  location: Main results
+  page: 7
+  quote: As presented in Table 1, all baseline experiments were rigorously reproduced under identical experimental settings.
+- id: c6
+  statement: The proposed method's hyperparameters were set empirically through validation experiments.
+  location: Experimental setup
+  page: 7
+  quote: All hyperparameter settings were empirically established through extensive validation experiments.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Image-tabular multimodal setting (ViT image encoder plus tabular transformer), not
+    pure tabular prediction. HOP is a private dataset. The paper declares no competing interests.'

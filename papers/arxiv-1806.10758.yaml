@@ -1,0 +1,74 @@
+id: arxiv-1806.10758
+title: A Benchmark for Interpretability Methods in Deep Neural Networks
+authors:
+- Sara Hooker
+- Dumitru Erhan
+- Pieter-Jan Kindermans
+- Been Kim
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1806.10758
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8e735036f4a70bc0fd8f6bceefd9b1c4267e2d6a39bca7c7fa76ed4d328ccfd8
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - saliency-maps
+  - feature-attribution
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- ROAR (RemOve And Retrain) benchmark for feature importance estimators
+claims:
+- id: c1
+  statement: ROAR is proposed as an empirical measure of the approximate accuracy of feature importance estimates in deep networks.
+  location: Abstract
+  page: 1
+  quote: We propose an empirical measure of the approximate accuracy of feature importance estimates in deep neural networks.
+- id: c2
+  statement: 'Critique of deletion metrics without retraining: the accuracy drop cannot be separated from the distribution shift caused by removal.'
+  location: Introduction
+  page: 1
+  quote: Without re-training,it is unclear whether the degradation in model performance comes from the distribution shift or because the features that were removed are truly informative [10, 12].
+- id: c3
+  statement: 'Protocol: for each dataset (ImageNet, Birdsnap, Food 101) and estimator, new train and test sets are generated at several fractions of modified features; five ResNet-50 models are trained
+    from random initialization on each modified dataset and the average test accuracy is reported.'
+  location: Experimental setup
+  page: 6
+  quote: We independently train 5 ResNet-50 models from random initialization on each of these modified dataset and report test accuracy as the average of these 5 runs.
+- id: c4
+  statement: 'Main finding: Gradients, Integrated Gradients and Guided BackProp are worse than or on par with a random assignment of importance.'
+  location: Conclusion and Future Work
+  page: 9
+  quote: Surprisingly, we find that the commonly used base estimators, Gradients, Integrated Gradients and Guided BackProp are worse or on par with a random assignment of importance.
+- id: c5
+  statement: VarGrad and SmoothGrad-Squared strongly improve the quality of the base estimators and far outperform a random guess, whereas ensembles such as SmoothGrad are more computationally intensive
+    but do not improve upon a single estimate (in some cases worse).
+  location: Conclusion and Future Work
+  page: 9
+  quote: However, we do find that VarGrad and SmoothGrad-Squared strongly improve the quality of these methods and far outperform a random guess.
+- id: c6
+  statement: 'Limitation: the retrained model used for evaluation is not the model on which the importance estimates were computed.'
+  location: 'ROAR: Remove And Retrain'
+  page: 4
+  quote: For one, while the architecture is the same, the model used during evaluation is not the same as the model on which the feature importance estimates were originally obtained.
+- id: c7
+  statement: 'Limitation: with fully redundant features, accuracy may not drop until the whole redundant set is removed.'
+  location: Figure 2 caption (validating ROAR on artificial data)
+  page: 5
+  quote: This plot also shows the limitation of ROAR, an accuracy decrease might not happen until a complete set of fully redundant features is removed.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: NeurIPS 2019. Authors are at Google
+    Brain. Scope: ImageNet, Food 101 and Birdsnap with ResNet-50 only; the estimator set is limited, and the paper says GB/IG results should not be taken as representative of other methods. IG uses a black
+    image reference with k = 25 steps; ensembles average 15 estimates. Code link in the PDF is a bit.ly short URL (not recorded). Reviewer note (not stated in this paper): the MNIST masking check in arxiv-1705.07874
+    masks pixels without retraining. Protocol details elsewhere in the paper: removed pixels are replaced by the per channel mean; a random ranking and a Sobel edge filter serve as controls independent
+    of the model.'

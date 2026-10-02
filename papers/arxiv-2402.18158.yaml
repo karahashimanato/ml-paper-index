@@ -1,0 +1,86 @@
+id: arxiv-2402.18158
+title: Evaluating Quantized Large Language Models
+authors:
+- Shiyao Li
+- Xuefei Ning
+- Luning Wang
+- Tengxuan Liu
+- Xiangsheng Shi
+- Shengen Yan
+- Guohao Dai
+- Huazhong Yang
+- Yu Wang
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2402.18158
+  code: https://github.com/thu-nics/qllm-eval
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 158aadce80d7165775216d1f7bfdfac9799c9dab23dcf413e731d9334cfeb6a0
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - large-language-models
+  paradigms:
+  - post-hoc
+proposes:
+- Systematic evaluation of PTQ of weights, activations and KV cache across 11 LLM families (125M-180B) and five task types, with bit-width recommendations
+claims:
+- id: c1
+  statement: 'Scope: PTQ of weights, activations and KV cache on 11 model families from 125M to 180B parameters, evaluated on basic NLP, emergent ability, trustworthiness, dialogue and long-context tasks.'
+  location: Abstract
+  page: 1
+  quote: 'The evaluation encompasses five types of tasks: basic NLP, emergent ability, trustworthiness, dialogue, and long-context tasks.'
+- id: c2
+  statement: 'Quantization format: uniform quantization; weight-only uses asymmetric group-wise quantization, weight-activation uses group-wise weights with symmetric per-token activations, and KV cache
+    uses asymmetric group-wise quantization of keys and values.'
+  location: Preliminaries
+  page: 3
+  quote: For Weight-only Quantization, we apply asymmetric group-wise quantization as shown in Figure 1 (b).
+- id: c3
+  statement: 'Tensor-type finding: in most cases larger models tolerate weight-only and KV cache quantization better but tolerate activation quantization worse, which the authors relate to activation kurtosis
+    (outliers) increasing with model size.'
+  location: Results (basic NLP tasks)
+  page: 4
+  quote: Notably, the Kurtosis of the Activation increases significantly with the size of the model, which means more outliers in the Activation tensors of larger LLMs.
+- id: c4
+  statement: 'Task-dependent degradation: in the Ethics benchmark, a W3-quantized model stops refusing some ethical questions and gives informative answers, so the measured accuracy increases after quantization;
+    the paper notes this kind of effect appears only in small models (< 7B), while for larger models lower bit-width means lower performance.'
+  location: Results (trustworthiness)
+  page: 7
+  quote: The FP16 LLM refrains from answering some ethical questions, but for W3, the model breaks this limitation and begins to provide informative answers.
+- id: c5
+  statement: Dialogue is scored by GPT-4 (MT-bench single-answer grading); most families can be quantized to W8, W8A8 and KV4 without significant loss of GPT-4 score, while lower bit-widths lead to sentence-level
+    and then token-level repetition.
+  location: Results (dialogue)
+  page: 8
+  quote: Most LLM families can be quantized to W8, W8A8, and KV4 without significant loss of GPT-4 score (< 2%), as shown in Table 1.
+- id: c6
+  statement: Long-context tasks are more sensitive to KV cache quantization than to weight-only or weight-activation quantization for most LLMs.
+  location: Results (long-context)
+  page: 9
+  quote: For long-context tasks (≥4k), most LLMs are more sensitive to KV Cache Quantization than Weight-only and Weight-Activation Quantization.
+- id: c7
+  statement: 'SOTA methods: AWQ improves weight-only quantized LLMs but cannot restore W2 models, and SmoothQuant only partially recovers W4A4.'
+  location: Appendix (SOTA quantization methods)
+  page: 21
+  quote: However, in the case of W2 quantization, where quantized LLMs lose their abilities entirely, AWQ cannot restore the corrupted performances.
+- id: c8
+  statement: 'Limitations: only PTQ (no QAT), no ablation of group size, not all small LLMs evaluated, and bit-width recommendations may not transfer to new tasks or LLMs.'
+  location: Limitations
+  page: 9
+  quote: In this paper, we focused solely on Post-training Quantization (PTQ) and did not consider Quantization-Aware Training (QAT).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 41st International
+    Conference on Machine Learning (ICML 2024), PMLR 235. The baseline quantizer is round-to-nearest (labeled RTN in the AWQ/SmoothQuant comparison tables); bit-width recommendations are defined as within
+    2% accuracy loss on the evaluated tasks. Tensor statistics for activations and KV cache are computed on pile-val. No measured speedups were found (the efficiency discussion is qualitative: memory-bound
+    decoding vs compute-bound prefill). Affiliations include Infinigence AI (a company) besides Tsinghua University and Shanghai Jiaotong University.'

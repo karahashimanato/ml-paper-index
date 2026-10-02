@@ -1,0 +1,191 @@
+import sys
+
+sys.path.insert(0, "scripts/cards")
+from _spec_builder import build  # noqa: E402
+
+SPECS = [
+  {"id": "arxiv-1705.07874",
+   "title": "A Unified Approach to Interpreting Model Predictions",
+   "authors": ["Scott Lundberg", "Su-In Lee"], "year": 2017, "version": "arXiv v2",
+   "links": {"arxiv": "https://arxiv.org/abs/1705.07874", "code": "https://github.com/slundberg/shap"},
+   "tasks": ["model-explanation"], "fam": ["feature-attribution", "deep-learning"], "par": ["post-hoc"],
+   "proposes": ["SHAP values (Shapley values of a conditional expectation function) as a unified additive feature attribution measure; Kernel SHAP, Deep SHAP, Max SHAP estimators"],
+   "claims": [
+     ("SHAP is presented as a unified framework for interpreting predictions that assigns each feature an importance value for a particular prediction.", "Abstract",
+      "To address this problem, we present a unified framework for interpreting predictions, SHAP (SHapley Additive exPlanations)."),
+     ("Within the class of additive feature attribution methods, the uniqueness result implies that methods not based on Shapley values violate local accuracy and/or consistency.", "Simple Properties Uniquely Determine Additive Feature Attributions",
+      "This result implies that methods not based on Shapley values violate local accuracy and/or consistency (methods in Section 2 already respect missingness)."),
+     ("Assumptions: the practical estimators may assume feature independence and model linearity to simplify computing the conditional expectations.", "SHAP (SHapley Additive exPlanation) Values",
+      "When using these methods, feature independence and model linearity are two optional assumptions simplifying the computation of the expected values"),
+     ("If DeepLIFT's reference value is interpreted as E[x], DeepLIFT approximates SHAP values assuming independent input features and a linear deep model; Deep SHAP adapts DeepLIFT on this basis.", "Model-Specific Approximations (Deep SHAP)",
+      "If we interpret the reference value in Equation 3 as representing E[x] in Equation 12, then DeepLIFT approximates SHAP values assuming that the input features are independent of one another and the deep model is linear."),
+     ("Evaluation (computational): Kernel SHAP, Shapley sampling and LIME are compared on dense and sparse decision tree models, showing Kernel SHAP's sample efficiency and that LIME values can differ significantly from SHAP values.", "Computational Efficiency",
+      "Comparing Shapley sampling, SHAP, and LIME on both dense and sparse decision tree models illustrates both the improved sample efficiency of Kernel SHAP and that values from LIME can differ significantly from SHAP values that satisfy local accuracy and consistency."),
+     ("Evaluation (human): explanation quality is judged by agreement with explanations from Mechanical Turk users on simple models, assuming good explanations should match humans who understand the model.", "Consistency with Human Intuition",
+      "Our testing assumes that good model explanations should be consistent with explanations from humans who understand that model."),
+     ("Evaluation (MNIST): following DeepLIFT's example, 20% of pixels chosen by each method's attribution are masked to switch the predicted class from 8 to 3.", "Explaining Class Differences",
+      "To match [7], we masked 20% of the pixels chosen to switch the predicted class from 8 to 3 according to the feature attribution given by each method."),
+   ],
+   "notes": "PDF states: 31st Conference on Neural Information Processing Systems (NIPS 2017). "
+            "Human-study models are simple hand-built functions (a sickness score and a max allocation); the MNIST check masks pixels on the same trained network (no retraining is described). "
+            "Conclusion lists as next steps estimators that make fewer assumptions and interaction effects."},
+
+  {"id": "arxiv-1602.04938",
+   "title": "\"Why Should I Trust You?\": Explaining the Predictions of Any Classifier",
+   "authors": ["Marco Tulio Ribeiro", "Sameer Singh", "Carlos Guestrin"], "year": 2016, "version": "arXiv v3",
+   "links": {"arxiv": "https://arxiv.org/abs/1602.04938", "code": "https://github.com/marcotcr/lime-experiments"},
+   "tasks": ["model-explanation"], "fam": ["feature-attribution", "linear-models"], "par": ["post-hoc"],
+   "proposes": ["LIME (local sparse linear surrogate fitted on perturbed samples)", "SP-LIME (submodular pick of representative explanations)"],
+   "claims": [
+     ("LIME explains predictions of any classifier by learning an interpretable model locally around the prediction.", "Abstract",
+      "In this work, we propose LIME, a novel explanation technique that explains the predictions of any classifier in an interpretable and faithful manner, by learning an interpretable model locally around the prediction."),
+     ("Assumption and stated drawback: with sparse linear explanations, a model that is highly non-linear even locally may have no faithful explanation.", "Sparse Linear Explanations",
+      "Second, our choice of G (sparse linear models) means that if the underlying model is highly non-linear even in the locality of the prediction, there may not be a faithful explanation."),
+     ("Faithfulness evaluation uses classifiers that are interpretable by construction (sparse logistic regression, decision trees) limited to 10 features per instance, so a gold set of important features is known and its recall is measured.", "Are explanations faithful to the model?",
+      "In particular, we train both classifiers such that the maximum number of features they use for any instance is 10, and thus we know the gold set of features that the are considered important by these models."),
+     ("In the simulated-user experiments, hyperparameters of LIME and the parzen baseline are set by cross validation.", "Simulated user experiments: Experiment Setup",
+      "We set the hyper-parameters for parzen and LIME using cross validation"),
+     ("The trust-in-prediction experiment relies on artificially designated untrustworthy features; the authors acknowledge this while concluding LIME helps assess trust.", "Should I trust this prediction?",
+      "Even though we artificially select which features are untrustworthy, these results indicate that LIME is helpful in assessing trust in individual predictions."),
+     ("In the human-subject experiment on choosing between two classifiers, subjects are recruited on Mechanical Turk and are not machine learning experts (people with basic knowledge about religion).", "Can users select the best classifier?",
+      "We recruit human subjects on Amazon Mechanical Turk – by no means machine learning experts, but instead people with basic knowledge about religion."),
+     ("Stated limitation: how to perform the pick step for images is left open.", "Conclusion and future work",
+      "One issue that we do not mention in this work was how to perform the pick step for images, and we would like to address this limitation in the future."),
+   ],
+   "notes": "PDF states: KDD 2016 San Francisco. Experiments are on text (sentiment, 20 newsgroups) and images (Inception); no tabular data task tag added. "
+            "The husky-vs-wolf study: \"Although our sample size is small\" (page 9). Explaining one Inception prediction is stated to take around 10 minutes. "
+            "Co-author Sameer Singh is also a co-author of arxiv-1911.02508 (Fooling LIME and SHAP)."},
+
+  {"id": "arxiv-1703.01365",
+   "title": "Axiomatic Attribution for Deep Networks",
+   "authors": ["Mukund Sundararajan", "Ankur Taly", "Qiqi Yan"], "year": 2017, "version": "arXiv v2",
+   "links": {"arxiv": "https://arxiv.org/abs/1703.01365", "code": "https://github.com/ankurtaly/Attributions"},
+   "tasks": ["model-explanation"], "fam": ["feature-attribution", "saliency-maps", "deep-learning"], "par": ["post-hoc"],
+   "proposes": ["Integrated Gradients (path integral of gradients from a baseline to the input)", "Sensitivity and Implementation Invariance axioms"],
+   "claims": [
+     ("The paper identifies two axioms (Sensitivity, Implementation Invariance) and shows that most known attribution methods do not satisfy them, which it considers a fundamental weakness of those methods.", "Abstract",
+      "We show that they are not satisfied by most known attribution methods, which we consider to be a fundamental weakness of those methods."),
+     ("Main contribution: Integrated Gradients, implementable with a few gradient calls and applicable to many deep networks.", "Conclusion",
+      "The primary contribution of this paper is a method called integrated gradients that attributes the prediction of a deep network to its inputs."),
+     ("Assumption: attributions are relative to a baseline; the authors recommend a baseline with near-zero score that conveys complete absence of signal (e.g. black image, zero embedding).", "Applying Integrated Gradients",
+      "So we would additionally like the baseline to convey a complete absence of signal, so that the features that are apparent from the attributions are properties only of the input, and not of the baseline."),
+     ("Critique of perturbation-based evaluation: perturbed images may be unnatural, so a score drop may reflect distribution shift rather than attribution quality; the paper therefore uses an axiomatic approach instead of an empirical benchmark.", "Uniqueness of Integrated Gradients",
+      "However, the images resulting from pixel perturbation could be unnatural, and it could be that the scores drop simply because the network has never seen anything like it in training."),
+     ("If averaging over multiple paths is allowed, the Shapley-Shubik method also satisfies the axioms but yields attributions different from Integrated Gradients; on a min(x1, x2) example the authors say it seems somewhat subjective to prefer one result over the other.", "Integrated Gradients is Symmetry-Preserving",
+      "This method yields attributions that are different from integrated gradients."),
+     ("Critique of local surrogate methods (LIME): implementation invariant but without a guarantee of sensitivity.", "Other Related work",
+      "However, this approach does not guarantee sensitivity."),
+     ("Stated limitation: interactions between input features and the network's logic are not addressed.", "Conclusion",
+      "While our and other works have made some progress on understanding the relative importance of input features in a deep network, we have not addressed the interactions between the input features or the logic employed by the network."),
+   ],
+   "notes": "PDF states: Proceedings of the 34th International Conference on Machine Learning (ICML 2017). Authors' affiliation: Google Inc. "
+            "Explanation quality is not evaluated quantitatively: the applications (ImageNet GoogleNet, diabetic retinopathy, question classification, NMT, chemistry) are qualitative case studies. "
+            "Recommends 20 to 300 Riemann steps and checking that attributions sum to F(x) - F(baseline)."},
+
+  {"id": "arxiv-1810.03292",
+   "title": "Sanity Checks for Saliency Maps",
+   "authors": ["Julius Adebayo", "Justin Gilmer", "Michael Muelly", "Ian Goodfellow", "Moritz Hardt", "Been Kim"], "year": 2018, "version": "arXiv v3",
+   "links": {"arxiv": "https://arxiv.org/abs/1810.03292"},
+   "tasks": ["model-explanation"], "fam": ["saliency-maps", "feature-attribution", "deep-learning"], "par": ["post-hoc"],
+   "proposes": ["Model parameter randomization test and data (label) randomization test as sanity checks for explanation methods"],
+   "claims": [
+     ("Model parameter randomization test: compare a saliency method's output on the trained model with its output on a randomly initialized network of the same architecture.", "Introduction",
+      "The model parameter randomization test compares the output of a saliency method on a trained model with the output of the saliency method on a randomly initialized untrained network of the same architecture."),
+     ("Data randomization test: compare explanations from a model trained on true labels with those from the same architecture trained on randomly permuted labels.", "Introduction",
+      "The data randomization test compares a given saliency method applied to a model trained on a labeled data set with the method applied to the same model architecture but trained on a copy of the data set in which we randomly permuted all labels."),
+     ("Evaluation metrics: similarity between original and randomized explanations is quantified by Spearman rank correlation (with and without absolute value), SSIM and HOG correlation.", "Visualization & Similarity Metrics",
+      "Spearman rank correlation without absolute value (diverging), the structural similarity index (SSIM), and the Pearson correlation of the histogram of gradients (HOGs) derived from two maps", 4),
+     ("Main result: Gradients and GradCAM pass, while Guided BackProp and Guided GradCAM are invariant to higher-layer parameters and fail.", "Introduction (contributions)",
+      "Of the methods tested, Gradients & GradCAM pass the sanity checks, while Guided BackProp & Guided GradCAM are invariant to higher layer parameters; hence, fail."),
+     ("Failure mode of visual assessment: naive visual inspection of masks does not distinguish networks of similar structure but very different parameters.", "Cascading Randomization",
+      "The observed visual perception versus ranking dichotomy indicates that naive visual inspection of the masks, in this setting, does not distinguish networks of similar structure but widely differing parameters."),
+     ("In an experiment that keeps the input fixed and multiplies it by random vectors in place of the gradient, the input dominates the product; the authors conclude that methods approximating the input-times-gradient product (they name epsilon-LRP, DeepLift and integrated gradients) mostly return the input when gradients look visually noisy.", "Element-wise input-gradient products",
+      "This experiment indicates that methods that approximate the “input-times-gradient” mostly return the input, in cases where the gradients look visually noisy as they tend to do."),
+     ("Scope: the authors present the tests as a step toward more rigorous evaluation, not a verdict on existing methods.", "Conclusion and future work",
+      "Along these lines, we hope that our paper is a stepping stone towards a more rigorous evaluation of new explanation methods, rather than a verdict on existing methods."),
+   ],
+   "notes": "PDF states: NeurIPS 2018. Affiliations: five co-authors list Google Brain (one also UC Berkeley); the first author's email is at MIT and his work was done during the Google AI Residency Program. "
+            "Models/data: Inception v3 on ImageNet, CNN and MLP on MNIST and Fashion MNIST; image classification only. "
+            "A footnote says a previous version of this work noted Guided Backprop was entirely invariant, which is not the case; the acknowledgments thank Leon Sixt for pointing out a bug in the Guided Backprop experiments of an earlier version. "
+            "No ground-truth attributions are used; the tests check sensitivity to model/data, not correctness."},
+
+  {"id": "arxiv-1806.10758",
+   "title": "A Benchmark for Interpretability Methods in Deep Neural Networks",
+   "authors": ["Sara Hooker", "Dumitru Erhan", "Pieter-Jan Kindermans", "Been Kim"], "year": 2018, "version": "arXiv v3",
+   "links": {"arxiv": "https://arxiv.org/abs/1806.10758"},
+   "tasks": ["model-explanation"], "fam": ["saliency-maps", "feature-attribution", "deep-learning"], "par": ["post-hoc"],
+   "proposes": ["ROAR (RemOve And Retrain) benchmark for feature importance estimators"],
+   "claims": [
+     ("ROAR is proposed as an empirical measure of the approximate accuracy of feature importance estimates in deep networks.", "Abstract",
+      "We propose an empirical measure of the approximate accuracy of feature importance estimates in deep neural networks."),
+     ("Critique of deletion metrics without retraining: the accuracy drop cannot be separated from the distribution shift caused by removal.", "Introduction",
+      "Without re-training,it is unclear whether the degradation in model performance comes from the distribution shift or because the features that were removed are truly informative [10, 12]."),
+     ("Protocol: for each dataset (ImageNet, Birdsnap, Food 101) and estimator, new train and test sets are generated at several fractions of modified features; five ResNet-50 models are trained from random initialization on each modified dataset and the average test accuracy is reported.", "Experimental setup",
+      "We independently train 5 ResNet-50 models from random initialization on each of these modified dataset and report test accuracy as the average of these 5 runs."),
+     ("Main finding: Gradients, Integrated Gradients and Guided BackProp are worse than or on par with a random assignment of importance.", "Conclusion and Future Work",
+      "Surprisingly, we find that the commonly used base estimators, Gradients, Integrated Gradients and Guided BackProp are worse or on par with a random assignment of importance."),
+     ("VarGrad and SmoothGrad-Squared strongly improve the quality of the base estimators and far outperform a random guess, whereas ensembles such as SmoothGrad are more computationally intensive but do not improve upon a single estimate (in some cases worse).", "Conclusion and Future Work",
+      "However, we do find that VarGrad and SmoothGrad-Squared strongly improve the quality of these methods and far outperform a random guess."),
+     ("Limitation: the retrained model used for evaluation is not the model on which the importance estimates were computed.", "ROAR: Remove And Retrain",
+      "For one, while the architecture is the same, the model used during evaluation is not the same as the model on which the feature importance estimates were originally obtained."),
+     ("Limitation: with fully redundant features, accuracy may not drop until the whole redundant set is removed.", "Figure 2 caption (validating ROAR on artificial data)",
+      "This plot also shows the limitation of ROAR, an accuracy decrease might not happen until a complete set of fully redundant features is removed."),
+   ],
+   "notes": "PDF states: NeurIPS 2019. Authors are at Google Brain. Scope: ImageNet, Food 101 and Birdsnap with ResNet-50 only; the estimator set is limited, and the paper says GB/IG results should not be taken as representative of other methods. "
+            "IG uses a black image reference with k = 25 steps; ensembles average 15 estimates. Code link in the PDF is a bit.ly short URL (not recorded). "
+            "Reviewer note (not stated in this paper): the MNIST masking check in arxiv-1705.07874 masks pixels without retraining. Protocol details elsewhere in the paper: removed pixels are replaced by the per channel mean; a random ranking and a Sobel edge filter serve as controls independent of the model."},
+
+  {"id": "arxiv-2202.01602",
+   "title": "The Disagreement Problem in Explainable Machine Learning: A Practitioner's Perspective",
+   "authors": ["Satyapriya Krishna", "Tessa Han", "Alex Gu", "Steven Wu", "Shahin Jabbari", "Himabindu Lakkaraju"], "year": 2022, "version": "arXiv v6",
+   "links": {"arxiv": "https://arxiv.org/abs/2202.01602"},
+   "tasks": ["model-explanation", "tabular-classification"], "fam": ["feature-attribution", "saliency-maps", "linear-models", "tree-ensembles", "deep-learning"], "par": ["post-hoc"],
+   "proposes": ["Formalization of explanation disagreement with six metrics (feature, rank, sign, signed rank agreement; rank correlation; pairwise rank agreement)"],
+   "claims": [
+     ("Six disagreement metrics are proposed, derived from practitioner interviews (top-k features, signs, ordering, and relative ordering of features of interest).", "Formalizing the Notion of Explanation Disagreement",
+      "To capture these intuitions about explanation disagreement, we propose six different metrics: feature agreement, rank agreement, sign agreement, signed rank agreement, rank correlation, and pairwise rank agreement."),
+     ("Tabular experiments explain logistic regression, a feed-forward neural network, random forest and gradient-boosted tree models (COMPAS and German Credit); text uses an LSTM and images a pre-trained ResNet-18.", "Experimental Setup",
+      "For tabular data, we train four models: logistic regression, densely connected feed-forward neural network, random forest, and gradient-boosted tree."),
+     ("Explainer sample sizes are set by running to convergence or using sizes above prior recommendations.", "Experimental Setup",
+      "we either run the explanation method to convergence (i.e., select a sample size such that an increase in the number of samples does not significantly change the explanations)"),
+     ("Main results: explanation methods often disagree, and practitioners often resolve disagreements with ad hoc heuristics.", "Abstract",
+      "Our results indicate that (1) state-of-the-art explanation methods often disagree in terms of the explanations they output, and (2) machine learning practitioners often employ ad hoc heuristics when resolving such disagreements."),
+     ("Disagreement may increase with model complexity (similar or stronger for the neural network than for logistic regression).", "Tabular Data",
+      "These trends suggest that disagreement among explanation methods may increase with model complexity."),
+     ("The measured extent of disagreement depends on the metric; variants of the metrics show slightly lower disagreement.", "Discussion and Conclusion",
+      "Finally, the extent of explanation disagreement would also depend on the specific metric being used to measure the disagreement."),
+     ("Scope: the paper prioritizes examining how prevalent disagreement is rather than its underlying causes, given the complexity of that analysis.", "Discussion and Conclusion",
+      "In this work, we prioritized examining the prevalence of explanation disagreement rather than exploring its underlying causes, given the complexity of this analysis."),
+   ],
+   "notes": "PDF states: Published in Transactions on Machine Learning Research (06/2024). No ground-truth attributions: agreement between methods is measured, not correctness. "
+            "Gradient-based methods are not applied to the tree models (gradients not available). Interview and user-study participants were recruited partly from three for-profit companies in technology and financial services; studies were IRB-approved. "
+            "Co-author Himabindu Lakkaraju is also a co-author of arxiv-1911.02508."},
+
+  {"id": "arxiv-1911.02508",
+   "title": "Fooling LIME and SHAP: Adversarial Attacks on Post hoc Explanation Methods",
+   "authors": ["Dylan Slack", "Sophie Hilgard", "Emily Jia", "Sameer Singh", "Himabindu Lakkaraju"], "year": 2019, "version": "arXiv v2",
+   "links": {"arxiv": "https://arxiv.org/abs/1911.02508", "code": "https://github.com/dylan-slack/Fooling-LIME-SHAP"},
+   "tasks": ["model-explanation", "tabular-classification"], "fam": ["feature-attribution"], "par": ["post-hoc"],
+   "proposes": ["Scaffolding attack: an OOD detector routes perturbed (off-manifold) queries to an innocuous model so LIME/SHAP explanations hide a biased classifier"],
+   "claims": [
+     ("A scaffolding technique hides the biases of any classifier by letting an adversary craft an arbitrary desired explanation.", "Abstract",
+      "Specifically, we propose a novel scaffolding technique that effectively hides the biases of any given classifier by allowing an adversarial entity to craft an arbitrary desired explanation."),
+     ("Failure mode exploited: a PCA view shows LIME-style perturbed samples distributed differently from the input data; the authors conclude detecting perturbations is not challenging, so approaches relying heavily on perturbations, such as LIME, can be gamed.", "Proposed Framework (intuition)",
+      "This result indicates that detecting whether a data point is a result of a perturbation or not is not a challenging task, and thus approaches that rely heavily on these perturbations, such as LIME, can be gamed."),
+     ("Setup: default LIME tabular (no discretization) and default Kernel SHAP with a 10-cluster k-means background are attacked; the biased model uses only the sensitive feature.", "Experimental Setup",
+      "We use default LIME tabular implementation without discretization, and the default Kernel SHAP implementation with kmeans with 10 clusters as the background distribution."),
+     ("Evaluation metric: the share of test points where the sensitive feature or the decoy features appear in the top 3 of the explanation's ranking.", "Effectiveness of Adversarial Classifiers",
+      "we compute the percentage of data points for which race, uncorrelated features (in case of COMPAS and CC) or Loan Rate % Income (in case of German credit data) show up in top 3 when features are ranked based on feature attributions output by LIME and SHAP"),
+     ("Against SHAP, the attack using two uncorrelated features is less successful at removing the sensitive feature from first place in the ranking; the authors attribute this to SHAP's local accuracy property.", "Effectiveness of Adversarial Classifiers",
+      "This is due to SHAP’s local accuracy property that ensures that feature attributions must add up to the difference between a given prediction and the average prediction for the background distribution."),
+     ("The attack works as long as perturbed points can be distinguished from input data with reasonable accuracy.", "Effect of Perturbation Detection Accuracy",
+      "These results indicate that our attacks are effective as long as it is possible to differentiate between perturbed instances and input data points with a reasonable accuracy."),
+     ("Main conclusion: on criminal justice and credit data the attack fools post hoc explainers, with LIME more vulnerable than SHAP.", "Conclusions and Future Work",
+      "Extensive experimentation with real world data from criminal justice and credit scoring domains demonstrates that our approach is effective at generating adversarial classifiers that can fool post hoc explanation techniques, finding that LIME is more vulnerable than SHAP."),
+   ],
+   "notes": "PDF states: AIES '20 (AAAI/ACM Conference on AI, Ethics, and Society). Datasets: COMPAS, Communities and Crime, German Credit (tabular), 90/10 split; OOD detector is a 100-tree sklearn random forest. "
+            "Gradient-based explainers are not studied (listed as future work). Funding acknowledgement includes AI2, NSF and Google. "
+            "Co-author Sameer Singh is a co-author of LIME (arxiv-1602.04938)."},
+]
+
+build(SPECS, base_note="Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only.")

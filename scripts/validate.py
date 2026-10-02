@@ -59,6 +59,8 @@ def duplicates(values) -> set:
 
 # 直前・直後の判定は英数字のみ(\w は日本語も含むため「約110秒」の「約」で判定が外れてしまう)
 SUSPECT_NUMBER = re.compile(r"(?<![0-9A-Za-z_.,])\d+(?:[.,]\d+)?\s*(?:%|秒|分(?!割)|時間|倍|ポイント)|(?<![0-9A-Za-z_./,])\d+\.\d+(?![0-9A-Za-z_.])")
+STALE_BLOCK = re.compile(r"<!-- generated:stale -->.*?<!-- /generated:stale -->", re.S)
+CARD_IDS = re.compile(r"`?(?:arxiv|doi|exp)-[^\s`\]),]+`?")
 LINKS = re.compile(r"\[[a-z0-9._-]+#[cr][0-9]+\]\([^)\s]*(?: \"[^\"]*\")?\)|\]\([^)]*\)|\[[a-z0-9._-]+(?:#[cr][0-9]+)?\]")
 
 
@@ -69,8 +71,10 @@ def number_warnings(root: Path) -> list[str]:
         text = path.read_text(encoding="utf-8")
         m = FRONT_MATTER.match(text)
         body = text[m.end():] if m else text
+        # 未反映ブロックは generate.py が書くカードIDの一覧なので対象外(行番号は保つため空行に置き換える)
+        body = STALE_BLOCK.sub(lambda b: "\n" * b.group(0).count("\n"), body)
         for i, line in enumerate(body.splitlines(), 1):
-            for hit in SUSPECT_NUMBER.finditer(LINKS.sub("", line)):
+            for hit in SUSPECT_NUMBER.finditer(CARD_IDS.sub("", LINKS.sub("", line))):
                 out.append(f"{path.relative_to(root)}: '{hit.group(0).strip()}' looks like a result number (body line {i}); allowed only for conditions")
     return out
 

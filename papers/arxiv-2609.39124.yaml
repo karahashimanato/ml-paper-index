@@ -1,0 +1,66 @@
+id: arxiv-2609.39124
+title: 'CDMD: A Cross-Dataset Mixed-Type Diffusion Model for Tabular Data'
+authors:
+- Mohamed Amine Ketata
+- Maximilian Schambach
+- Stephan Günnemann
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.39124
+  code: https://github.com/ketatam/cdmd
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d24bc0c3aaf83198242feef5ac78a15d48870c9ccf254f9537669dd18ec1a518
+tags:
+  tasks:
+  - tabular-data-generation
+  method_families:
+  - deep-learning
+  - tabular-attention
+  paradigms:
+  - unsupervised
+proposes:
+- CDMD (cross-dataset mixed-type diffusion model with schema-restricted masked diffusion and a schema-aware Transformer denoiser)
+claims:
+- id: c1
+  statement: CDMD is a tabular diffusion model trained jointly across datasets with different schemas, defining diffusion directly over the mixed-type feature space.
+  location: Abstract
+  page: 1
+  quote: Unlike existing cross-dataset tabular diffusion models that operate in continuous representation spaces, CDMD defines diffusion directly over the mixed-type feature space and is trained end-to-end.
+- id: c2
+  statement: On seven real-world datasets a single jointly trained CDMD achieves the highest average generation quality among single- and cross-dataset baselines with fewer total parameters.
+  location: Abstract
+  page: 1
+  quote: On seven real-world datasets, a single jointly trained CDMD achieves the highest average generation quality among strong single-dataset and cross-dataset baselines, while using substantially fewer
+    total parameters than the collection of separately trained models.
+- id: c3
+  statement: Each dataset is split into equal halves (train / held-out test); utility is measured by training XGBoost on synthetic data and testing on the held-out real data, alongside fidelity and privacy-proxy
+    metrics.
+  location: Experiments
+  page: 7
+  quote: Following Zhang et al. (2024), we train an XGBoost classifier or regressor on synthetic data and evaluate it on the held-out test data.
+- id: c4
+  statement: All baselines use their official implementations with default hyperparameters, without additional tuning.
+  location: Appendix (Baselines)
+  page: 21
+  quote: For each baseline, we use its official implementation with the default hyperparameters, without additional tuning.
+- id: c5
+  statement: 'Evaluation protocol (constrained-generation experiment): CDMD is pre-trained on a 337-dataset corpus from which the evaluation datasets are excluded by automated checks followed by manual
+    verification.'
+  location: Experiments
+  page: 8
+  quote: We exclude the evaluation datasets from this corpus through automated checks followed by manual verification.
+- id: c6
+  statement: 'Limitations: adaptation relies on per-dataset fine-tuning, and experiments are limited in scale.'
+  location: Conclusion
+  page: 10
+  quote: Our experiments are also limited in scale, leaving performance at larger scales an open question.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Downstream utility (MLE) is measured with XGBoost classifiers/regressors trained
+    on synthetic data. Affiliation: SAP SE (funding stated in Acknowledgments).'

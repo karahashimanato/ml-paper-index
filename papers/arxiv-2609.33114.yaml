@@ -1,0 +1,66 @@
+id: arxiv-2609.33114
+title: Can Tabular Foundation Models Amortize Statistical Inference?
+authors:
+- Kai Ye
+- Shijin Gong
+- Hongyi Zhou
+- Valentina Zangirolami
+- Chengchun Shi
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.33114
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c652c267acd8419b2f6b9ffcb4048ff38c2d85e67452846da244e1deaed2c6c4
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- TabCon (tabular foundation model with sparse MoE and RL post-training for confidence intervals of the regression function)
+claims:
+- id: c1
+  statement: TabCon is an amortized inference system on a tabular foundation model producing confidence intervals for new datasets in one forward pass, using a sparse MoE and RL-based post-training.
+  location: Abstract
+  page: 1
+  quote: The key methodological ingredients of TabCon are a sparse mixture-of-experts architecture and reinforcement-learning-based post-training that calibrate the resulting confidence intervals to a desired
+    coverage level.
+- id: c2
+  statement: Across benchmark datasets TabCon attains near-nominal coverage with short intervals and runs 50 times faster than a 50-sample bootstrap.
+  location: Abstract
+  page: 1
+  quote: Across a wide range of benchmark datasets, TabCon attains near-nominal coverage while producing short confidence intervals.
+- id: c3
+  statement: Evaluation uses 64 synthetic DGPs (32 seen in training, 32 unseen) in standard and stress-test settings, plus a semi-synthetic benchmark using real covariates from 13 OpenML-CC18 datasets with
+    synthetic responses.
+  location: Experiments
+  page: 8
+  quote: Finally, we construct a semi-synthetic benchmark based on real feature matrices from 13 OpenML-CC18 datasets (Bischl et al., 2021).
+- id: c4
+  statement: Baselines are Linear and RFF Wald-type intervals and three TabPFN-v3-based approaches (bootstrap with 50 samples, predictive-distribution PI, and approximate martingale posterior).
+  location: Experiments
+  page: 8
+  quote: We compare TabCon against five methods for CI construction, including two based on normal approximations and three built on TabPFN that represent different approaches to uncertainty quantification
+    with existing tabular foundation models.
+- id: c5
+  statement: Prediction intervals from existing TFMs are 13%-148% wider than TabCon's CIs in the experiments.
+  location: Introduction
+  page: 2
+  quote: In our experiments, the latter are 13%–148% wider than the CIs produced by TabCon.
+- id: c6
+  statement: 'Open question: whether other inference tasks such as hypothesis testing can be amortized in a unified foundation model.'
+  location: Discussion
+  page: 11
+  quote: It remains an open question whether these tasks can similarly be amortized within a unified foundation model.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Ground-truth coverage requires known regression functions, so real-data evaluation
+    is semi-synthetic only. Conflicts of interest: none stated.'

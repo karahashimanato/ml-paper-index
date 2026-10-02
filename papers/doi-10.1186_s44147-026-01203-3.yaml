@@ -1,0 +1,70 @@
+id: doi-10.1186_s44147-026-01203-3
+title: Interpretable TabPFN-Based prediction of unconfined compressive strength in chemically stabilized soft soils for transportation subgrade applications
+authors:
+- Quynh-Anh Thi Bui
+- Son Hoang Trinh
+- Khoa Minh Nguyen
+year: 2026
+venue: Journal of Engineering and Applied Science
+links:
+  doi: https://doi.org/10.1186/s44147-026-01203-3
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9733ce3b4cff97a73a3497413ec12c96ddf1a263cb3f89afb8f380ec42ba609d
+  pdf_url: https://link.springer.com/content/pdf/10.1186/s44147-026-01203-3.pdf
+  license: cc-by
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - random-forests
+  - kernel-methods
+  - feature-attribution
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- Interpretable TabPFN-based UCS prediction framework for stabilized soft soils (SHAP + PDP)
+claims:
+- id: c1
+  statement: The study develops an interpretable TabPFN-based framework for preliminary prediction of unconfined compressive strength of stabilized soft soils from the Mekong Delta.
+  location: Abstract
+  page: 1
+  quote: This study develops an interpretable Tabular Prior-data Fitted Network (TabPFN)-based framework for preliminary UCS prediction of stabilized soft soils from the Mekong Delta, Vietnam.
+- id: c2
+  statement: TabPFN is used with its default configuration and compared with SVR, k-nearest neighbors, Random Forest and CatBoost, each tuned with GridSearchCV.
+  location: Abstract
+  page: 1
+  quote: 'TabPFN was applied using its default configuration and compared with four GridSearchCV-optimized models: support vector regression, k-nearest neighbors, Random Forest, and CatBoost.'
+- id: c3
+  statement: Evaluation uses an 80/20 train-test split plus five-fold cross-validation on the development part; the dataset has 168 observations with seven predictors.
+  location: Abstract
+  page: 1
+  quote: Performance was assessed using an 80/20 train–test split and five-fold cross-validation, while SHAP and partial dependence plots were used for interpretation.
+- id: c4
+  statement: Grid search for the baselines minimizes RMSE within the development subset using five-fold cross-validation with fold assignments shared across models.
+  location: Methodology
+  page: 10
+  quote: RMSE was used as the optimization criterion because it penalizes larger prediction errors more strongly, while final model assessment incorporated multiple complementary regression metrics.
+- id: c5
+  statement: TabPFN had the strongest observed test performance among the five models evaluated.
+  location: Abstract
+  page: 1
+  quote: TabPFN achieved the strongest observed test performance among the five evaluated models
+- id: c6
+  statement: The 34-observation hold-out test set comes from the same experimental database, so it is not independent external validation.
+  location: Discussion
+  page: 22
+  quote: Although the independent test subset was excluded from all model development and contained 34 observations reserved for final evaluation, these observations were drawn from the same experimental
+    database and therefore do not constitute independent external validation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: geotechnical / civil engineering (soil stabilization with cement,
+    lime, fly ash). Very small data (168 observations from three study areas). The authors state the result is specific to this dataset and validation design.'

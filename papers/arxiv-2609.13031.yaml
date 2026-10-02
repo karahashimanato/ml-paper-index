@@ -1,0 +1,68 @@
+id: arxiv-2609.13031
+title: Attention Quantization for Tabular Foundation Models
+authors:
+- Jonas M. Kübler
+- Benjamin Jäger
+- Klemens Flöge
+- Noah Hollmann
+- Frank Hutter
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.13031
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7db750483be550faad0ed55ec8b217012db8489aa5ffb4902368881bb9cb858f
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  - model-compression
+  method_families:
+  - post-training-quantization
+  - quantization
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+  - post-hoc
+proposes:
+- FP8 attention quantization (Triton kernel) for the in-context-learning attention of tabular foundation models
+claims:
+- id: c1
+  statement: Quantization error must be aligned between test rows and training rows; otherwise accuracy drops drastically.
+  location: Abstract
+  page: 1
+  quote: We find that it is crucial to align the quantization error in the test rows with the quantization error in the training rows, as otherwise the accuracy drops drastically.
+- id: c2
+  statement: An FP8 attention kernel speeds up attention over 16-bit kernels with no relevant accuracy loss for TabPFN-v3 and TabICLv2 on TabArena and BeyondArena.
+  location: Abstract
+  page: 1
+  quote: Our Triton kernel achieves a speedup up to 1.7x over regular 16-bit kernels, and we show that on TabPFN-v3 and TabICLv2 there is no relevant accuracy loss across TabArena and BeyondArena.
+- id: c3
+  statement: Quality is tested on the full 51-dataset TabArena suite (and later BeyondArena), over three TabPFN-v3 preprocessing seeds.
+  location: Experiments
+  page: 3
+  quote: We first test the quality impact of our quantization scheme and kernel on TabArena [Erickson et al., 2026], where we run the full suite consisting of 51 datasets.
+- id: c4
+  statement: Degradation is tested with a one-sided sign test under the assumption that post-training quantization can only make the model worse.
+  location: Experiments
+  page: 3
+  quote: Following Kübler et al. [2026] we assume that post-training quantization can only make the model worse and use a one-sided sign test.
+- id: c5
+  statement: All authors list Prior Labs as their affiliation; the evaluated models are TabPFN-v3 and TabICLv2; no conflict-of-interest statement was found in the text.
+  location: Title page
+  page: 1
+  quote: 'Correspondence: jonas@priorlabs.ai'
+- id: c6
+  statement: Per the reference list, author Frank Hutter is a co-author of TabArena, the benchmark used for evaluation.
+  location: References
+  page: 5
+  quote: 'Salinas, and Frank Hutter. Tabarena: A living benchmark for machine learning on tabular data.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. TabArena covers both classification and regression; the paper does not split results
+    by task type in the text.'

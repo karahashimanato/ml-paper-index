@@ -1,0 +1,72 @@
+id: arxiv-2002.11097
+title: Problems with Shapley-value-based explanations as feature importance measures
+authors:
+- I. Elizabeth Kumar
+- Suresh Venkatasubramanian
+- Carlos Scheidegger
+- Sorelle Friedler
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2002.11097
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b099e3a9d877c048257779a596ae55ca68b0d907e6b559e47ece5b2d09c22834
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - feature-attribution
+  paradigms:
+  - post-hoc
+proposes:
+- Mathematical and human-centric critique of Shapley-value-based feature importance
+claims:
+- id: c1
+  statement: Mathematical problems arise when Shapley values are used for feature importance, and mitigating them necessarily adds complexity such as the need for causal reasoning.
+  location: Abstract
+  page: 1
+  quote: We show that mathematical problems arise when Shapley values are used for feature importance, and that the solutions to mitigate these necessarily induce further complexity, such as the need for
+    causal reasoning.
+- id: c2
+  statement: 'Choosing between conditional and interventional value functions is a catch-22: conditional methods require extra modelling of feature dependencies, interventional methods induce an out-of-distribution
+    problem.'
+  location: Conditional versus interventional distributions
+  page: 3
+  quote: Unfortunately, the decision between the two types of value functions is a catch-22.
+- id: c3
+  statement: With conditional value functions, adding a redundant copy of a feature changes the relative attributions of the other features, even though the model is effectively the same.
+  location: Issues with conditional distributions
+  page: 4
+  quote: The relative apparent importances of A and B thus depend on whether C is considered to be a third feature, even though the two functions are effectively the same.
+- id: c4
+  statement: Interventional value functions fundamentally rely on evaluating the model on out-of-distribution samples, which makes them highly sensitive to model properties not relevant to what it learned
+    about the training data.
+  location: Issues with interventional distributions
+  page: 5
+  quote: Methods which use an interventional value function fundamentally rely on evaluating a model on out-of-distribution samples (Figure 1).
+- id: c5
+  statement: 'Additivity issue: for multiplicative functions of independent, zero-centred features, every feature receives the same Shapley value regardless of its value.'
+  location: Additivity constraints
+  page: 6
+  quote: This property will, in fact, hold for all multiplicative functions of independently distributed, zero-centered data.
+- id: c6
+  statement: A large Shapley influence of a feature does not necessarily imply that changing that feature will change the outcome favourably, and Shapley-value frameworks do not explicitly attempt to guide
+    how a user might alter their situation (unlike actionable-recourse methods).
+  location: Using Shapley-valued based methods to enable action
+  page: 8
+  quote: Further, observing that a certain feature carries a large influence over the model does not necessarily imply that changing that feature (even significantly) will change the outcome favorably.
+- id: c7
+  statement: Evaluation evidence is drawn from the literature rather than new experiments; e.g. a cited human-grounded evaluation of SHAP found no evidence that it helped users assess prediction correctness.
+  location: Shapley-based explanations for normative evaluation
+  page: 9
+  quote: Weerts et al. (2019), for instance, conducted a human-grounded evaluation of SHAP and did not find evidence that it helped users assess the correctness of predictions.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 37th International
+    Conference on Machine Learning (ICML 2020), PMLR 119. No experiments were found in the text; the critique is analytic (toy functions) plus literature on human explanation. Classifies TreeSHAP as a conditional
+    method and KernelSHAP as effectively interventional (Table 1). Chen et al. (arxiv-2006.16234) respond to this paper.'

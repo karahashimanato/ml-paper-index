@@ -1,0 +1,78 @@
+id: arxiv-2609.29690
+title: Predicting Symptoms of Amotivation and Anhedonia among University Students with a Novel Oversampling Method
+authors:
+- Dang Nguyen
+- Bao Duong
+- Arun Kumar
+- Dat Phan-Trong
+- Julian Berk
+- Taylor Braund
+- Kien Do
+- Debopriyo Bal
+- Wu Yi Zheng
+- Leonard Hoon
+- Jill Newby
+- Helen Christensen
+- Svetha Venkatesh
+- Alexis Whitton
+- Sunil Gupta
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.29690
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 33c598227f7ce4f456dc8bc2e2b4b590edb35c8cfa48f25936d191365fba5d0c
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - imbalance-resampling
+  - gradient-boosted-trees
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- 'SMOTE-PRED: SMOTE oversampling that predicts nominal variables with a predictive model (XGBoost) instead of interpolating them'
+claims:
+- id: c1
+  statement: SMOTE-PRED generates nominal variables with a predictive model rather than by interpolation.
+  location: Abstract
+  page: 1
+  quote: Our approach leverages a predictive model to generate nominal variables, rather than interpolating them.
+- id: c2
+  statement: On a GPS location dataset from university students, the method is reported to be significantly better than existing oversampling approaches for predicting elevated amotivation and anhedonia
+    symptoms.
+  location: Abstract
+  page: 1
+  quote: We validate our method on a large-scale GPS location dataset collected from university students and demonstrate that it is significantly better than existing oversampling approaches in predicting
+    elevated symptoms of amotivation and anhedonia.
+- id: c3
+  statement: The oversampling baselines use default hyperparameters from their libraries.
+  location: Experimental setup
+  page: 8
+  quote: For the baselines, we use default hyper-parameters as suggested in the library/package.
+- id: c4
+  statement: The downstream classifiers (kNN, SVM, DT, RF, XGBoost) are tuned on the training set with ten-fold cross-validation.
+  location: Experimental setup
+  page: 8
+  quote: We tune their hyper-parameters (see Table 4) on the training set by using ten-fold cross-validation.
+- id: c5
+  statement: Experiments are repeated ten times with random 90/10 train/test splits and the average AUC is reported.
+  location: Experimental setup
+  page: 8
+  quote: In each time, we construct training and test sets by randomly splitting the dataset into 90% for training and 10% for testing.
+- id: c6
+  statement: kNN was chosen as the default classifier for the following experiments because it was the most effective classifier in the reported comparison.
+  location: Results and discussions
+  page: 9
+  quote: As kNN is the most effective classifier (it works well with not only our method SMOTE-PRED but also AdaSyn, SMOTE, and SMOTE-NC), we select it as the default classifier for our following experiments.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Single private dataset (Vibe Up trial). No statistical significance test was found
+    in the text (searched for significan, t-test, p-value, Wilcoxon) despite the word ''significantly''. Besides imbalance-resampling, the tree family tags reflect the XGBoost predictor inside SMOTE-PRED
+    and the downstream classifiers.'

@@ -1,0 +1,63 @@
+id: arxiv-2608.11431
+title: 'AutoGrable: What Is a Good Graph for a Table?'
+authors:
+- Tamara Cucumides
+- Floris Geerts
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.11431
+  code: https://github.com/TamaraCucumides/autoGrable
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 69ec86d9684830cd6375c537dc486c96dce1d6b2801c49ed0ad253e2e6d1a04b
+tags:
+  tasks:
+  - tabular-classification
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  paradigms:
+  - supervised
+proposes:
+- AutoGrable (training-free table-to-graph construction via a label-alignment score over column subsets)
+claims:
+- id: c1
+  statement: The alignment score builds no graph and trains no GNN, so AutoGrable can greedily search column subsets for both single tables and foreign-key schemas.
+  location: Abstract
+  page: 1
+  quote: The score materialises no graph and trains no GNN, so AUTOGRABLE can search the space of subsets greedily and cheaply, and returns the resulting grable for single tables and for foreign-key schemas
+    alike.
+- id: c2
+  statement: AutoGrable recovers label-generating columns on controlled tasks and outperforms fixed, random and task-aware constructors on real tasks under a fixed predictor.
+  location: Abstract
+  page: 1
+  quote: that AUTOGRABLE recovers the columns that generate the label on controlled tasks and outperforms fixed, random, and task-aware constructors on real tasks under a fixed predictor
+- id: c3
+  statement: All constructions are evaluated with GraphSAGE using a fixed architecture, budget and hyperparameters within each regime, with no per-constructor tuning.
+  location: Experimental setup
+  page: 7
+  quote: We use GraphSAGE throughout, with fixed architecture, budget and hyperparameters within regime (see Appendix D.6.1) for every construction and every dataset, and no per-constructor tuning.
+- id: c4
+  statement: TabArena is used as a negative control, since on i.i.d. single-table data each label should depend only on its own row.
+  location: Experimental setup
+  page: 7
+  quote: 'Negative control: the i.i.d. single-table benchmark TabArena [15], where each label should depend only on its own row.'
+- id: c5
+  statement: 'Only a subset of TabArena is used: datasets with more than 8 categorical features and a binary target.'
+  location: Appendix
+  page: 26
+  quote: The datasets are selected for having more than 8 categorical features and a binary classification target.
+- id: c6
+  statement: The association between the score and downstream AUC is weaker on test than on validation, which the authors expect because the score is also computed on the validation split.
+  location: Results
+  page: 8
+  quote: The association is weaker on test than on validation, as expected since J is also computed on the validation split.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Real-task regimes: FDB fraud tables (transactional), RelBench (relational), TabArena
+    subset (negative control). For the auGraph baseline, the reported metric variant is the one best on the validation set.'

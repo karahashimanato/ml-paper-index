@@ -1,0 +1,68 @@
+id: arxiv-2609.39639
+title: Marginal Response Surface Elicitation for Zero-Label Tabular Learning
+authors:
+- Liangyu Teng
+- Yicheng Ding
+- Jing Liu
+- Hengsong Liu
+- Juncen Guo
+- Hongru Li
+- Jingyu Zhang
+- Liang Song
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.39639
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7aaedfb952cd2e61d065195622442ec9edd29f2fc283a4874d849954533046b9
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - large-language-models
+  - interpretable-models
+proposes:
+- MARS (Marginal Response Surface Elicitation) zero-label classifier from LLM feature-level priors
+claims:
+- id: c1
+  statement: MARS turns feature-level LLM priors into a reusable zero-shot tabular classifier.
+  location: Abstract
+  page: 1
+  quote: We propose Marginal Response Surface Elicitation (MARS), a method that transforms feature-level LLM priors into a reusable, zero-shot tabular classifier.
+- id: c2
+  statement: On eight benchmark tasks MARS has the highest average AUC and AP and outperforms direct prompting at lower cost.
+  location: Abstract
+  page: 1
+  quote: Across eight tabular benchmark tasks, MARS achieves the highest average AUC and AP, outperforming direct prompting by 1.97 and 6.21 percentage points respectively, while substantially reducing
+    end-to-end costs.
+- id: c3
+  statement: A within-class permutation experiment with CatBoost suggests little benefit from cross-feature couplings with 4-16 training samples.
+  location: Introduction
+  page: 2
+  quote: We find that the average performance difference is close to zero for 4–16 training samples, suggesting that the model gains little additional predictive benefit from cross-feature couplings in
+    this regime.
+- id: c4
+  statement: Supervised and few-shot baselines (incl. XGBoost, CatBoost, TabPFN-3, TabICLv2) get only 4 labeled examples for both training and model selection.
+  location: Experimental setup
+  page: 6
+  quote: The first two groups of baselines are provided with 4 labeled examples (2 per class) for both training and model selection.
+- id: c5
+  statement: Results come from a single 80/20 stratified split with seed 0 (the five LLM responses are not data-split seeds).
+  location: Appendix
+  page: 13
+  quote: We use an 80/20 stratified split with random seed 0.
+- id: c6
+  statement: Test sets larger than 800 rows are subsampled to about 800 rows.
+  location: Appendix
+  page: 13
+  quote: For test partitions larger than 800 rows, we sample approximately 800 rows proportionally by class with seed 0; unused test records are not moved into the reference pool.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Family tags: the classifier is elicited from an LLM and is a nonlinear additive model
+    (weighted sum of per-feature response functions), hence interpretable-models. Possible LLM memorization of the public datasets is not discussed (not found in the text). One affiliation is a company
+    (International Networking Systems of Artificial Intelligence Limited).'

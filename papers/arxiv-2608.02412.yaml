@@ -1,0 +1,64 @@
+id: arxiv-2608.02412
+title: Why Large Language Models Fail at Tabular Prediction
+authors:
+- Marta Garnelo
+- Wojciech M. Czarnecki
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.02412
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 65a2c7ddd216e476a068395c72dbdf163d076bbe04926ac049eccbd2f57d62f6
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- Controlled evaluation protocol for LLM in-context tabular classification (including a memorisation probe)
+claims:
+- id: c1
+  statement: Under random linear projections, the LLM is the only one of nine methods whose accuracy decreases as dimensionality grows, while every classical baseline stays flat or improves.
+  location: Abstract
+  page: 1
+  quote: 'Dimensionality, in contrast, is decisive: sweeping random linear projections of thirty-one benchmark datasets, the LLM is the only method among nine whose accuracy decreases as dimensionality
+    grows, while every classical baseline stays flat or improves.'
+- id: c2
+  statement: The experiments use claude-opus-4-6, with an initial generalisation experiment using Qwen.
+  location: What do we mean by LLM
+  page: 3
+  quote: Concretely, our experiments use claude-opus-4-6 [2], a frontier model at the time of writing (Section C.3), alongside an initial generalizing experiment using Qwen to begin moving our claims from
+    a single model to LLMs more broadly.
+- id: c3
+  statement: Splits are 5-fold stratified cross-validation repeated over 5 seeds.
+  location: Datasets and experimental setup
+  page: 4
+  quote: Splits are 5-fold stratified cross-validation repeated over 5 seeds, giving 25 splits per dataset and 475 queries in total.
+- id: c4
+  statement: The main classical baselines use fixed scikit-learn configurations; e.g. gradient boosting uses 100 estimators and otherwise sklearn defaults. No tuning of the main baselines was found in the
+    text.
+  location: Appendix
+  page: 25
+  quote: GradientBoostingClassifier with n_estimators=100 and random_state=0; sklearn defaults otherwise
+- id: c5
+  statement: The authors suggest that a memorisation probe should be standard practice in any LLM-for-tabular evaluation.
+  location: Data hygiene
+  page: 5
+  quote: More broadly, we suggest that a probe of this kind should be standard practice in any LLM-for-tabular evaluation.
+- id: c6
+  statement: The evaluation is restricted to toy-scale tabular datasets, a restriction partly forced by the cost and context limits of the LLM.
+  location: Limitations
+  page: 14
+  quote: A limitation of our evaluation is that it is restricted to toy-scale tabular datasets; however, this restriction is itself partly forced by the cost and context limits of the method being studied.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The memorisation probe finds the LLM recovers held-out labels of classic datasets
+    (e.g. breast cancer, iris); such datasets are excluded, leaving 11 of 19 datasets for main analyses. Inconsistency: the abstract and introduction say ''thirty-one benchmark datasets'' for the projection
+    sweep, whereas the Figure 8 caption says ''11 benchmark datasets''; not reconciled here. The evaluated LLM is an Anthropic model; the authors'' stated affiliations are Fundamental Technologies and Voylab.'

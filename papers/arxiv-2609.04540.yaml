@@ -1,0 +1,80 @@
+id: arxiv-2609.04540
+title: Mitra-v2 Technical Report
+authors:
+- Yefan Tao
+- Xiyuan Zhang
+- Xinyi Liu
+- Boran Han
+- Danielle Maddix
+- Haoyang Fang
+- Zhen Han
+- Jiading Gai
+- Xuanqing Liu
+- Michael Bohlke-Schneider
+- Yuyang (Bernie) Wang
+- Gerald Friedland
+- Kevan Mah
+- Chris Lee
+- Chris Kong
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.04540
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 903adb02c60a4774b14c7368d81c9ced9a2e4814e756853f70d1b97bed87ef5b
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- Mitra-v2 (synthetic-pretrained 2D-Transformer tabular foundation model, deployed with fine-tuning and bagging)
+claims:
+- id: c1
+  statement: On the full TabArena benchmark Mitra-v2 performs at the level of TabFM and EXAONE Tabular and surpasses TabPFN-3 by a wide margin in classification and regression.
+  location: Abstract
+  page: 1
+  quote: On the full TabArena benchmark, Mitra-v2 delivers state-of-the-art performance at the level of the industry-scale TabFM and EXAONE Tabular models, while surpassing TabPFN-3 by a wide margin in
+    both classification and regression.
+- id: c2
+  statement: The headline system uses fine-tuning and eight-fold bagging; it is much slower than forward-pass models and should not be called zero-shot or Pareto-dominant.
+  location: Limitations
+  page: 24
+  quote: It is much slower than forward-pass foundation models and should not be described as zero-shot or Pareto-dominant (Figure 6).
+- id: c3
+  statement: All Mitra-v2 results use TabArena's one-hour per-unit budget, while TabFM's default artifacts on the reference leaderboard include fits exceeding that budget, so TabFM's rating reflects a larger
+    compute envelope.
+  location: TabArena setup and protocol
+  page: 9
+  quote: the TabFM (default) artifacts on the reference leaderboard include per-dataset fits whose fit time alone exceeds this budget (up to 5,886 s), so its rating reflects a larger compute envelope than
+    ours.
+- id: c4
+  statement: TALENT is used as a check of whether the TabArena results hold outside the protocol Mitra-v2 was developed against.
+  location: TALENT
+  page: 20
+  quote: it tests whether Mitra-v2’s TabArena results hold up outside the protocol it was developed against.
+- id: c5
+  statement: The primary TALENT preset excludes 26 datasets that served as TabPFN-2/TabICLv2 development data, leaving 274.
+  location: TALENT protocol
+  page: 20
+  quote: Our primary preset, main274, is the 274 that remain after excluding the 26 datasets that served as TabPFN-2/TabICLv2 development data
+- id: c6
+  statement: Choosing the configuration per dataset would score higher, but only as an oracle that amounts to tuning on the benchmark; all reported numbers use one uniform configuration.
+  location: Appendix (Negative results)
+  page: 33
+  quote: 'But this only works as an oracle: it amounts to tuning on the benchmark.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. All authors are affiliated with Amazon; the model is released under the autogluon
+    namespace, and AutoGluon portfolios are among the compared baselines (not stated as a conflict of interest in the text). On TALENT, the paper reports two matched context-policy boards (train-only vs
+    train+val in context) because context composition materially affects results. The text describes TabFM as a 1.6B-parameter model, whereas the TabFM paper (arxiv-2609.37959) describes it as 400M-parameter;
+    not reconciled. The authors list was corrected from the PDF (''Yuyang (Bernie) Wang''); the arXiv metadata splits this name into '' Yuyang'' and '' Wang''.'

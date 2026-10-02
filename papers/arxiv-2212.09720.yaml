@@ -1,0 +1,73 @@
+id: arxiv-2212.09720
+title: 'The case for 4-bit precision: k-bit Inference Scaling Laws'
+authors:
+- Tim Dettmers
+- Luke Zettlemoyer
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2212.09720
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0e976faaa27c1b021848bb5fea40f47dcaa015cc1d02a71a2a27c3c508adab35
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- k-bit inference scaling laws (model bits vs zero-shot accuracy)
+claims:
+- id: c1
+  statement: 'Study design: more than 35,000 experiments with 16-bit inputs and k-bit (3 to 8-bit) parameters, 19M to 176B parameters, across BLOOM, OPT, NeoX/Pythia and GPT-2.'
+  location: Abstract
+  page: 1
+  quote: We run more than 35,000 experiments with 16-bit inputs and k-bit parameters to examine which zero-shot quantization methods improve scaling for 3 to 8-bit precision at scales of 19M to 176B parameters
+    across the LLM families BLOOM, OPT, NeoX/Pythia, and GPT-2.
+- id: c2
+  statement: 'Main finding: 4-bit precision is almost universally optimal for the trade-off between total model bits and zero-shot accuracy.'
+  location: Abstract
+  page: 1
+  quote: Overall, our findings show that 4-bit precision is almost universally optimal for total model bits and zero-shot accuracy.
+- id: c3
+  statement: 'Metrics: perplexity on the CommonCrawl subset of the Pile and mean zero-shot performance from the EleutherAI LM Evaluation harness.'
+  location: Experimental setup
+  page: 4
+  quote: To measure inference performance for k-bit quantization methods, we use perplexity on the CommonCrawl subset of The Pile (Gao et al., 2020) and mean zero-shot performance on the EleutherAI LM Evaluation
+    harness (Gao et al., 2021).
+- id: c4
+  statement: 'Metric sensitivity: when zero-shot accuracy is used instead of perplexity, the float data type is sometimes better (whereas quantile quantization is best by perplexity), which the authors
+    attribute to zero-shot accuracy being noisier.'
+  location: Experimental setup
+  page: 4
+  quote: Still, when we use zero-shot accuracy as an evaluation metric, the float data type is sometimes better because zero-shot accuracy is noisier.
+- id: c5
+  statement: 'Failure mode: Pythia and OPT are unstable at 3-bit, with performance close to random for the largest models.'
+  location: Results & Analysis
+  page: 4
+  quote: Pythia and OPT are unstable for 3-bit inference where performance is close to random (35%) for the largest Pythia/OPT models.
+- id: c6
+  statement: 'Contrast with prior work: outlier-dependent quantization (citing Dettmers et al. 2022a and Xiao et al. 2022) improves predictive performance but is shown not to be effective for bit-level
+    scaling.'
+  location: Introduction
+  page: 2
+  quote: While earlier work has shown that it is possible to significantly improve the predictive performance of quantized models by using outlier-dependent quantization (Dettmers et al., 2022a; Xiao et
+    al., 2022), we show that this is not effective for bit-level scaling.
+- id: c7
+  statement: 'Limitation: certain classes of quantization methods (e.g. data types optimized with additional input data) were not considered; optimized GPU implementations are also lacking.'
+  location: Discussion & Limitations
+  page: 8
+  quote: While we ran more than 35,000 experiments, a main limitation is that we did not consider certain classes of quantization methods.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. The excluded ''optimized with additional input
+    data'' class cites Frantar et al. (2022), i.e. GPTQ-style one-shot methods.'

@@ -1,0 +1,64 @@
+id: arxiv-2609.32898
+title: 'When Less Compute Is More: Adaptive Early Exit Improves Pretrained Outlier Detection'
+authors:
+- Tianyang Zhou
+- Leman Akoglu
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.32898
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: eb2215a2556449933a7f64bacfd59ae6de82f1df8cff6c3f289d1a76e2fcfd6c
+tags:
+  tasks:
+  - tabular-classification
+  - model-compression
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - unsupervised
+  - in-context-learning
+proposes:
+- ROUT (pretrained plug-in router selecting a dataset-specific exit layer for pretrained tabular outlier detectors)
+claims:
+- id: c1
+  statement: The paper presents what it calls the first study of depth-adaptive early exit for pretrained (tabular) outlier detection models.
+  location: Abstract
+  page: 1
+  quote: we present the first study of depth-adaptive early-exit for pretrained outlier detection models
+- id: c2
+  statement: Exiting at the optimal (per-dataset oracle) intermediate layer can improve detection on real-world benchmarks on average, consistently across three foundation models; the paper identifies context
+    pollution (outliers among in-context samples) as a key mechanism.
+  location: Abstract
+  page: 1
+  quote: can also improve detection performance on diverse real-world benchmarks by 4.7–7.3% on average, consistent across three distinct foundation models
+- id: c3
+  statement: Evaluation uses three real-world outlier detection benchmarks (ADBench, OddBench, OvRBench) plus the synthetic SynBench, under clean and polluted context.
+  location: Experiments
+  page: 7
+  quote: We evaluate ROUT on ADBench (Han et al., 2022), OddBench, and OvRBench (Ding et al., 2026a), three real-world outlier detection benchmarks comprising 47, 690, and 755 datasets, respectively
+- id: c4
+  statement: For the LA-Entropy early-exit baseline, the entropy threshold is tuned on synthetic validation datasets and then fixed for all test datasets (not tuned on test labels).
+  location: Experiments
+  page: 7
+  quote: We tune τ on synthetic validation datasets and keep it fixed across all test datasets.
+- id: c5
+  statement: The Oracle (per-dataset best exit layer) and Best fixed layer rows are selected with ground-truth test AUROCs and are reported only as references, not as deployable methods.
+  location: Experiments
+  page: 7
+  quote: Both use ground-truth test AUROCs and are reported as references.
+- id: c6
+  statement: Per the reference list, author Leman Akoglu co-authored OutFormer, one of the three evaluated backbones; the paper does not discuss this as a conflict of interest.
+  location: References
+  page: 10
+  quote: Xueying Ding, Haomin Wen, Simon Klüttermann, and Leman Akoglu.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Task is tabular outlier detection, for which no task tag exists; tabular-classification
+    is the closest existing tag. The reference list also shows Akoglu as a co-author of MacrOData (Ding et al., 2026a), the source of OddBench/OvRBench/SynBench. model-compression is tagged because depth-adaptive
+    early exit reduces inference compute; no pruning/quantization/distillation family applies, so the family stays tabular-foundation-model.'

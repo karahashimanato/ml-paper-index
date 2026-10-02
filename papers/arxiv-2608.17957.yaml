@@ -1,0 +1,67 @@
+id: arxiv-2608.17957
+title: Understanding the Surprising Generalization Properties of Tabular Foundation Models
+authors:
+- Nour Shaheen
+- Junwei Ma
+- Alex Labach
+- Frank Hutter
+- Valentin Thomas
+- Anthony L. Caterini
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.17957
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 69930a0c00b76e0639e3c7ed3c82e9237b14e0baa1605cc6378c253807b8f547
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+  - self-supervised
+proposes:
+- Task-centric, retrieval-based account of TFM generalization
+- Column-level pre-processing of real-data pre-training corpora
+claims:
+- id: c1
+  statement: Surprisingly strong transfer can emerge from self-supervised pre-training on a single real table.
+  location: Abstract
+  page: 1
+  quote: In contrast, we show that surprisingly strong transfer can emerge from self-supervised pre-training on just a single real table.
+- id: c2
+  statement: Fine-grained column-level pre-processing consistently improves downstream performance, while dataset-level filtering or deduplication does not.
+  location: Abstract
+  page: 1
+  quote: fine-grained column-level pre-processing consistently improves downstream performance, while no improvements are observed when we filter or deduplicate at the dataset level.
+- id: c3
+  statement: Single-table models are evaluated on the 72 OpenML CC-18 classification and 35 CTR-23 regression datasets, with no overlap between pre-training and evaluation.
+  location: Generalization from single table training
+  page: 3
+  quote: the 72 CC-18 [3] classification datasets and 35 CTR-23 [9] regression datasets.
+- id: c4
+  statement: Linear and random-forest baselines use scikit-learn defaults; XGBoost is the tuned baseline taken from McElfresh et al.; TabDPT is run from its public repository.
+  location: Generalization from single table training
+  page: 3
+  quote: XGBoost is the tuned baseline from McElfresh et al. [23], and TabDPT is computed from the public repository (Version 1.1, Apache-2.0 license).
+- id: c5
+  statement: The large-corpus models are placed on the TabArena leaderboard against default-configuration baselines.
+  location: Corpus experiments
+  page: 6
+  quote: We contextualize these findings within the broader TabArena leaderboard in Figure 5, reporting Elo against some other default-configuration baselines, with details in Appendix C.
+- id: c6
+  statement: Several authors also authored TabDPT (reference list), whose architecture and pre-training procedure the study reuses; affiliations include Layer 6 AI and Prior Labs.
+  location: References
+  page: 12
+  quote: '[22] Junwei Ma, Valentin Thomas, Rasa Hosseinzadeh, Hamidreza Kamkari, Alex Labach, Jesse C.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The appendix leaderboard is TabArena-Lite (51 tasks, fold 0). The pre-training corpus
+    excludes CC-18, CTR-23 and TabArena datasets.'

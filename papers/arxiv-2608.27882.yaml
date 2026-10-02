@@ -1,0 +1,62 @@
+id: arxiv-2608.27882
+title: 'SOMTab: Set-Order Mamba for Efficient Tabular In-Context Learning'
+authors:
+- Hao Wang
+- Siyu Zhang
+- Wei Ma
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.27882
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 33242c3c4e1f6d60650fe14ba4c70e1c404c116ecd7a33be027d98ce3d30e581
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- SOMTab (Set-Order Mamba encoder with attention-based ICL reader)
+- DCH-TailMix synthetic prior
+claims:
+- id: c1
+  statement: SOMTab is a Set-Order Mamba architecture for efficient tabular in-context learning.
+  location: Abstract
+  page: 1
+  quote: We introduce SOMTab, a Set-Order Mamba architecture for efficient tabular in-context learning.
+- id: c2
+  statement: Across tabular benchmarks, SOMTab approaches strong Transformer-based TFMs while achieving faster inference and lower GPU memory.
+  location: Abstract
+  page: 1
+  quote: Across tabular benchmarks, SOMTab approaches the performance of strong Transformer-based tabular foundation models while achieving faster inference and lower GPU memory usage
+- id: c3
+  statement: The main evaluation covers all TALENT classification datasets using the official splits (train+validation as context, official test split).
+  location: Experimental setup
+  page: 7
+  quote: We evaluate SOMTab on all classification datasets in the TALENT benchmark (Ye et al., 2024).
+- id: c4
+  statement: Each baseline uses its official implementation and default configuration, including default preprocessing and ensemble size.
+  location: Experimental setup
+  page: 7
+  quote: For each baseline, we use its official implementation and default configuration, including the default preprocessing and ensemble size.
+- id: c5
+  statement: 'TabArena results are contextual only: public TabArena baselines keep their original H100 runs while SOMTab is measured on A100/H200.'
+  location: Results
+  page: 8
+  quote: Because the public TabArena baselines retain their original H100 configurations while SOMTab is measured on A100 and H200 GPUs, the runtime comparison provides contextual positioning rather than
+    a hardware-matched speed ranking.
+- id: c6
+  statement: Ablations are run on 15 TALENT datasets selected because SOMTab performs relatively less favorably than TabICLv2 on them in the main benchmark.
+  location: Ablation studies
+  page: 9
+  quote: To better reveal differences between variants, we evaluate them on 15 TALENT datasets where SOMTab performs relatively less favorably than TabICLv2 in the main benchmark.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only.'

@@ -21,14 +21,15 @@ import pymupdf
 
 from validate import load_yaml
 
-_PUNCT = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-", "—": "-", "−": "-"})
+_PUNCT = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-", "—": "-", "−": "-", "\u00ad": None})  # U+00AD(ソフトハイフン)は表示されないので除く
 
 
 def normalize(text: str, keep_hyphen: bool, join_hyphen: bool = True) -> str:
+    text = re.sub("\u00ad\\s*", "", text)  # ソフトハイフン(行末で単語を分割する不可視文字)は後ろの改行ごと除く
     text = unicodedata.normalize("NFKC", text).translate(_PUNCT)
     # 行末ハイフンは「単語の分割」「複合語のハイフン」「並列のハイフン(attention- and)」がありうるので、呼び出し側で全て試す
     if join_hyphen:
-        text = re.sub(r"(?<=[A-Za-z])-\s*\n\s*", "-" if keep_hyphen else "", text)
+        text = re.sub(r"(?<=[A-Za-z0-9])-\s*\n\s*", "-" if keep_hyphen else "", text)
     return re.sub(r"\s+", " ", text).strip()
 
 

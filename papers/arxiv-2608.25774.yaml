@@ -1,0 +1,69 @@
+id: arxiv-2608.25774
+title: 'EXAONE Tabular 1.0 : Technical Report'
+authors:
+- Moonjung Eo
+- Min-Kook Suh
+- Hye-Seung Cho
+- Jiwon Kim
+- Seoyoon Kim
+- Sangjun Nam
+- Soonyoung Lee
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.25774
+  code: https://github.com/LGAI-Research/EXAONE-Tabular
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 27ee093b8d7d3a0e0dfa1d2c3af9200ed2dea2c838a95d8b29390b92903c5502
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- EXAONE Tabular (Cross-Axis Summary Transformer, CAST)
+claims:
+- id: c1
+  statement: EXAONE Tabular interleaves feature-axis attention within each item with support-conditioned item-axis attention within each feature at every layer.
+  location: Abstract
+  page: 1
+  quote: EXAONE Tabular interleaves feature-axis attention within each item with support-conditioned item-axis attention within each feature at every Transformer layer
+- id: c2
+  statement: On TabArena, the classification model ranks first overall, surpassing tuned ensembles and 4-hour AutoML pipelines, while regression reaches the performance regime of the much larger TabFM.
+  location: Abstract
+  page: 1
+  quote: On TabArena, its 20.81M-parameter classification model ranks first overall, surpassing tuned ensembles and 4-hour AutoML pipelines, while regression reaches the performance regime of the 1.64B-parameter
+    TabFM at roughly 1/11 the inference cost.
+- id: c3
+  statement: TabArena baselines are taken from the official leaderboard, not re-run, so their preprocessing, hyperparameter optimization and ensembling follow the TabArena protocol.
+  location: Evaluation protocol
+  page: 10
+  quote: For TabArena, we use the results reported on the official leaderboard rather than re-running each comparison model.
+- id: c4
+  statement: On BCCO and TALENT the comparison is only against six tabular foundation models (no GBDT or neural baselines).
+  location: Evaluation protocol
+  page: 10
+  quote: 'For BCCO and TALENT, we conduct a controlled comparison against six tabular foundation models: TabSwift [31], TabDPT [23], TabPFN-3 [15], TabICLv2 [16], LimiX [19], and TabFM [18].'
+- id: c5
+  statement: On BCCO and TALENT the training/in-context support set is capped at 50,000 samples per fold.
+  location: Evaluation protocol
+  page: 10
+  quote: To control computational cost across datasets of different scales, the training or in-context support set was capped at 50,000 samples per fold for both classification and regression.
+- id: c6
+  statement: The model is developed by LG AI Research (company report on its own model).
+  location: Introduction
+  page: 2
+  quote: EXAONE Tabular is LG AI Research’s first tabular foundation model family
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Figure captions state that EXAONE Tabular is evaluated in a single untuned default
+    configuration. In TALENT, 12 datasets with more than 10 classes were excluded. ScoringBench results are taken from its live leaderboard (5-fold CV, at most 3,000 observations per dataset).'

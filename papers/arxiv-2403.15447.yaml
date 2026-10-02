@@ -1,0 +1,90 @@
+id: arxiv-2403.15447
+title: 'Decoding Compressed Trust: Scrutinizing the Trustworthiness of Efficient LLMs Under Compression'
+authors:
+- Junyuan Hong
+- Jinhao Duan
+- Chenhui Zhang
+- Zhangheng Li
+- Chulin Xie
+- Kelsey Lieberman
+- James Diffenderfer
+- Brian Bartoldson
+- Ajay Jaiswal
+- Kaidi Xu
+- Bhavya Kailkhura
+- Dan Hendrycks
+- Dawn Song
+- Zhangyang Wang
+- Bo Li
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2403.15447
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f3dfe1b01ed4086b1b7df24362268eaa76344ebb424acaaa75e01a91115b9782
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - pruning
+  - large-language-models
+  paradigms:
+  - post-hoc
+proposes:
+- Trustworthiness evaluation of compressed LLMs (GPTQ/AWQ quantization, magnitude/SparseGPT/Wanda 2:4 pruning) on eight DecodingTrust dimensions plus MMLU and refusal rates
+claims:
+- id: c1
+  statement: 'Main claim: quantization is currently more effective than pruning for obtaining efficiency and trustworthiness together (the abstract''s example: 4-bit quantization keeps the original''s trustworthiness
+    while pruning degrades it even at 50% sparsity).'
+  location: Abstract
+  page: 1
+  quote: We find that quantization is currently a more effective approach than pruning in achieving efficiency and trustworthiness simultaneously.
+- id: c2
+  statement: 'What is compressed: weights only, with GPTQ and AWQ at 3, 4 and 8 bits (post-training, calibration set of 128 samples), compared with 2:4 semi-structured pruning; models are LLAMA2 13b, LLAMA2
+    13b Chat and Vicuna 13b Chat.'
+  location: Experimental setup
+  page: 4
+  quote: 'In this paper, we study three pre-trained models: LLAMA2 13b, LLAMA2 13b Chat (Touvron et al., 2023b), and Vicuna 13b Chat (Chiang et al., 2023).'
+- id: c3
+  statement: 'Evaluation metrics: benign performance by MMLU average accuracy, trustworthiness by DecodingTrust''s eight dimensions (stereotype, privacy, toxicity, fairness, AdvGLUE++, OOD robustness, adversarial
+    demonstrations, ethics), and additionally refusal rates.'
+  location: Experimental setup
+  page: 4
+  quote: 'The benchmark includes 8 trustworthy dimensions: Stereotype, Privacy, Toxicity, Fairness, Adversarial Robustness (AdvGLUE++), Out-Of-Distribution (OOD) Robustness, Robustness to Adversarial Demonstrations
+    (AdvDemo), and Ethics.'
+- id: c4
+  statement: Extreme quantization (3 bits) tends to reduce trustworthiness significantly, and this risk is not visible from benign performance alone, so the authors call for comprehensive trustworthiness
+    evaluation in practice.
+  location: Abstract
+  page: 1
+  quote: This increased risk cannot be uncovered by looking at benign performance alone, in turn, mandating comprehensive trustworthiness evaluation in practice.
+- id: c5
+  statement: Moderate-bit quantization may unexpectedly improve some trust dimensions such as ethics and fairness.
+  location: Abstract
+  page: 1
+  quote: Moreover, employing quantization within a moderate bit range could unexpectedly improve certain trustworthiness dimensions such as ethics and fairness.
+- id: c6
+  statement: 'Calibration-set randomness matters: GPTQ at 4 bits can vary by over 5 points in fairness, ethics and adversarial demonstrations depending on the randomly sampled calibration set, and this
+    variance is not predictable from MMLU.'
+  location: Bag of tricks (discussion)
+  page: 8
+  quote: Note that such variance is not predictable from the standard MMLU benchmark.
+- id: c7
+  statement: The authors modified the DecodingTrust benchmark (to mitigate score variance caused by high refusal rates) and release it with the compressed models.
+  location: Conclusion
+  page: 9
+  quote: To benefit the reproducibility of our experiments, we release all models tested in the benchmark and the modified DecodingTrust benchmark to mitigate the large score variances caused by the large
+    refusal rates.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 41st International
+    Conference on Machine Learning (ICML 2024), PMLR 235. SparseGPT at 50% sparsity was repeated with three randomly sampled C4 calibration sets and averaged; 3-bit AWQ was run on three seeds. No speed/memory
+    measurements of their own were found; the introduction cites AWQ''s reported speedup. Project page in the PDF: https://decoding-comp-trust.github.io (not a code repository URL, so not added to links).
+    Ajay Jaiswal and Zhangyang Wang are also authors of arxiv-2310.01382 (LLM-KICK), which this paper cites as motivation.'

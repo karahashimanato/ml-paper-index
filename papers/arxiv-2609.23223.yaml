@@ -1,0 +1,65 @@
+id: arxiv-2609.23223
+title: 'Stealing profits: Spread-based temporal hierarchy forecasting for day-ahead electricity markets'
+authors:
+- Arkadiusz Lipiecki
+- Nikolaos Kourentzes
+- Rafal Weron
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.23223
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 3231f5d321a1ac66acf1a48afb1f8a585b12e5565cf5ea2184be50d751111038
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - tabular-foundation-model
+  - linear-models
+  - deep-learning
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- Spread THieF (temporal hierarchy reconciliation of hourly prices and all intraday price spreads)
+claims:
+- id: c1
+  statement: Jointly reconciling forecasts of hourly prices and all intraday price spreads improves performance across two European markets and three forecasting architectures.
+  location: Abstract
+  page: 1
+  quote: Here we show that a temporal hierarchy forecasting (THieF) framework that jointly reconciles forecasts of hourly electricity prices and all intraday price spreads consistently improves performance
+    across two major European electricity markets and three different forecasting architectures.
+- id: c2
+  statement: The gains also hold for a pretrained TabPFN model.
+  location: Abstract
+  page: 1
+  quote: The gains persist even for a highly accurate pretrained TabPFN foundation model.
+- id: c3
+  statement: TabPFN-2 is used zero-shot, without tuning weights or hyperparameters, with a 3-year rolling window as the in-context support set.
+  location: Forecasting models
+  page: 11
+  quote: Forecasts are generated in the so-called zero-shot mode, i.e., without task-specific tuning of the model weights or hyperparameters.
+- id: c4
+  statement: Data come from two European day-ahead markets, German EPEX-DE and Spanish OMIE (public data spanning eight years).
+  location: Datasets
+  page: 7
+  quote: 'To ensure a sound assessment of the THieF approach, we consider two major European power markets: EPEX-DE (Germany) and OMIE (Spain).'
+- id: c5
+  statement: 'Statistical and economic rankings differ: TabPFN is the most accurate model, but NARX with Spread THieF gives the highest arbitrage profit.'
+  location: Conclusions
+  page: 21
+  quote: although TabPFN is the most accurate model, NARX combined with Spread THieF yields the highest arbitrage profit in every market-efficiency combination
+- id: c6
+  statement: 'Stated limitation: the battery arbitrage exercise is stylized (price-taking, one daily cycle, fixed round-trip cost).'
+  location: Conclusions
+  page: 21
+  quote: 'The BESS exercise is deliberately stylized: we assume price-taking behavior, a single daily charge-discharge cycle, and a fixed round-trip cost.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Day-ahead electricity price forecasting with regressors on lagged features (ARX,
+    NARX, TabPFN-2). THieF for EPF was introduced by Lipiecki et al. (2026), i.e. prior work by the first author.'

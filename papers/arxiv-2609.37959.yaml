@@ -1,0 +1,74 @@
+id: arxiv-2609.37959
+title: 'TabFM: A Zero-Shot Foundation Model for Tabular Data'
+authors:
+- Weihao Kong
+- Erez Louidor Ilan
+- Shuxin Nie
+- Taman Narayan
+- Rajat Sen
+- Yichen Zhou
+- Deqing Fu
+- Samet Oymak
+- Abhimanyu Das
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.37959
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 73fc755e0a6ce468b023cee6c2e88bbfbf07e69122dfb0abb03cc5154d2a3698
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- TabFM (400M-parameter zero-shot tabular foundation model)
+- TabFM+ (multi-view expansion, ensembling, calibration)
+- TabFM-Auto (LLM-guided feature engineering around frozen TabFM)
+claims:
+- id: c1
+  statement: TabFM is a 400M-parameter tabular foundation model that casts supervised tabular prediction as in-context learning.
+  location: Abstract
+  page: 1
+  quote: We present TabFM, a 400M-parameter tabular foundation model that formulates supervised tabular prediction as in-context learning.
+- id: c2
+  statement: TabFM is trained only on synthetic tables generated from structural causal models and is applied zero-shot to real tasks.
+  location: Abstract
+  page: 1
+  quote: Trained entirely on synthetic tables generated from structural causal models, TabFM learns general tabular representations that transfer zero-shot to real-world tasks.
+- id: c3
+  statement: On all 51 TabArena datasets, zero-shot TabFM ranks first among default tabular foundation models and outperforms tuned AutoML pipelines.
+  location: Abstract
+  page: 1
+  quote: Across all 51 benchmark datasets in TabArena (38 classification and 13 regression), zero-shot TabFM ranks first among default tabular foundation models and outperforms tuned AutoML pipelines.
+- id: c4
+  statement: 'The TabArena comparison pool has 67 method configurations: tuned tree ensembles, tuned deep baselines, AutoML systems with four-hour budgets, and published tabular foundation models.'
+  location: Experimental setup
+  page: 7
+  quote: The comparison pool holds 67 method configurations including tuned tree ensembles, tuned deep baselines, AutoML systems at four-hour budgets, and published tabular foundation models.
+- id: c5
+  statement: For TabFM-Auto, each candidate program is scored by three-fold cross-validation inside the training split of the first fold; the selected program is then refit on every published fold.
+  location: TabFM-Auto
+  page: 10
+  quote: Each candidate program is scored by three-fold cross-validation inside the training split of the first fold with 8 ensemble members, and its score, its per-fold values, and any traceback are appended
+    to a log that is read before the next edit.
+- id: c6
+  statement: Pretraining covers tables of at most 16,384 rows and 100 columns; larger tables rely on length generalization or subsampling, and free text is encoded without semantic tokenization.
+  location: Conclusion
+  page: 11
+  quote: Current pretraining covers synthetic numerical and categorical tables of at most 16,384 rows and 100 columns, leaving larger tables to length generalization or subsampling and encoding free text
+    without semantic tokenization.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. All authors are affiliated with Google Research. TabFM-Auto is described in more
+    detail in a separate paper by overlapping authors (arxiv-2609.37989). The paper describes TabArena as ''repeated 10-fold cross-validation'', whereas other papers in this batch (e.g. arxiv-2609.04540,
+    arxiv-2609.37989) describe it as repeated 3-fold cross-validation; not reconciled here.'

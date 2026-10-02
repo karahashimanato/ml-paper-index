@@ -1,0 +1,64 @@
+id: doi-10.1109_tsg.2026.3676842
+title: Probabilistic Disaggregation of Behind-the-Meter PV Systems Using Conformal Prediction
+authors:
+- Jialin He
+- Tarek A. AlSkaif
+year: 2026
+venue: IEEE Transactions on Smart Grid
+links:
+  doi: https://doi.org/10.1109/tsg.2026.3676842
+source:
+  version: Publisher PDF via OpenAlex (submittedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0938ffaea490a081fe6bb79d2da86e09ae9a71be04673454a3fae5da3af92e82
+  pdf_url: https://edepot.wur.nl/713863
+  license: other-oa
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  - linear-models
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- Probabilistic behind-the-meter PV disaggregation framework based on conformal prediction
+- Adaptive Mondrian Binning (AMB) conformal prediction variant
+- Capacity estimation method for BtM PV systems
+claims:
+- id: c1
+  statement: The paper proposes a conformal-prediction variant, Adaptive Mondrian Binning (AMB), to address the arbitrary bin count of CP with Mondrian Binning.
+  location: Abstract
+  page: 2
+  quote: 'To address the arbitrary bin count in CP with MB, the paper proposes a novel CP variant, namely: Adaptive Mondrian Binning (AMB).'
+- id: c2
+  statement: 'Main claim: with LightGBM as the deterministic regressor, AMB outperforms quantile regression and the other CP variants.'
+  location: Abstract
+  page: 2
+  quote: Results show that using LightGBM as the deterministic regressor, AMB outperforms quantile regression and other CP variants.
+- id: c3
+  statement: 'Evaluation data: two real datasets (Amsterdam, the Netherlands; Sydney/Ausgrid, Australia); households are split into two groups, once in file order and in thirty random splits.'
+  location: Experiment Settings
+  page: 8
+  quote: 'Multiple splits: Thirty random splits are performed, each dividing the households into a group of 10 and a group of 11, similar to the single split'
+- id: c4
+  statement: Deterministic regressors compared were MLR, random forest and LightGBM, plus FCNN, ResNet and LSTM; DL models were similar to LightGBM in accuracy but took much longer to train.
+  location: Deterministic Disaggregation Results
+  page: 9
+  quote: In both datasets, DL methods are similar to LGB in terms of accuracy, while incurring significantly longer training time.
+- id: c5
+  statement: The quantile-regression baseline is LightGBM with a quantile objective. How the regressors' hyperparameters were set is not found in the text (only the capacity-estimation thresholds are given).
+  location: Probabilistic Disaggregation Results
+  page: 9
+  quote: In this study, QR is realized by changing the objective of LGB to "quantile".
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: energy (solar PV disaggregation from smart-meter net load and
+    weather features; hourly records). Tagged tabular-regression because a regressor maps tabular weather/net-load features to normalized PV output; the data are time-indexed. PDF is the author''s accepted
+    version from the WUR repository (Taverne).'

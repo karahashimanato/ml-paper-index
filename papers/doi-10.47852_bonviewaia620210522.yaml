@@ -1,0 +1,69 @@
+id: doi-10.47852_bonviewaia620210522
+title: 'WHSDA-AI: Interpretable Walsh-Hadamard Spectral Deviation Analysis for Structured Artificial Intelligence Applications in Banking Sector'
+authors:
+- Sergo A. Episkoposian
+- Suren H. Parsyan
+year: 2026
+venue: Artificial Intelligence and Applications
+links:
+  doi: https://doi.org/10.47852/bonviewaia620210522
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 78c5d41472e62d23df1055b657553f4c2de3d0478fe7eb435c806ec6fb7e10cc
+  pdf_url: https://ojs.bonviewpress.com/index.php/AIA/article/download/10522/2204
+  license: cc-by
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - linear-models
+  - gradient-boosted-trees
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- WHSDA-AI (fixed Walsh-Hadamard signed-contrast feature and explanation layer with reference-normalized deviations)
+claims:
+- id: c1
+  statement: The paper proposes WHSDA-AI, a Walsh-Hadamard spectral deviation framework for structured, profile-based AI in banking and related tabular risk-analysis settings.
+  location: Abstract
+  page: 1
+  quote: This paper proposes WHSDA-AI, a Walsh-Hadamard Spectral Deviation Analysis framework for structured and profile-based AI in the banking sector and related tabular risk-analysis settings.
+- id: c2
+  statement: The full Walsh-Hadamard transform is an isometry, so it cannot by itself improve Euclidean rankings; any value must come from coefficient selection, reference deviations, weighting or downstream
+    models.
+  location: Abstract
+  page: 1
+  quote: The full Walsh-Hadamard transform is an isometry and cannot improve Euclidean rankings by itself.
+- id: c3
+  statement: Comparisons are reported against sparse logistic regression, PCA, Haar contrasts, random signed projections, random forests, gradient boosting, XGBoost and LightGBM.
+  location: Introduction
+  page: 2
+  quote: Fourth, it reports comparative results against sparse logistic regression, PCA, Haar contrasts, random signed projections, random forests, gradient boosting, XGBoost, and LightGBM.
+- id: c4
+  statement: Evaluation uses repeated splits; the reported benchmarks are two controlled risk-style datasets, three public structured-data datasets and one public credit-card fraud dataset.
+  location: Limitations
+  page: 14
+  quote: The reported benchmarks now include two controlled risk-style datasets, three public structured-data datasets, and one public credit-card fraud benchmark.
+- id: c5
+  statement: The banking and credit-style benchmarks are diagnostic and synthetic; the other benchmarks are public datasets (including an anonymized public credit-card fraud dataset), so no institutional
+    bank data is used.
+  location: Ethical Statement
+  page: 14
+  quote: The reported banking and credit-style benchmarks are diagnostic and synthetic
+- id: c6
+  statement: EBM and TabPFN are discussed as adjacent contemporary directions, while XGBoost and LightGBM are treated as the closest production-grade comparators.
+  location: Discussion
+  page: 13
+  quote: 'EBM and TabPFN are discussed explicitly because they represent two adjacent contemporary directions: interpretable additive prediction and tabular foundation-model prediction [21, 35].'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: banking fraud / AML risk screening. Synthetic sets have 1200
+    profiles (Table 7); results are mean +/- SD over five splits (two stratified splits on the public credit-card fraud dataset). The number of retained coefficients K is chosen on validation data only.
+    How the baselines'' hyperparameters were set was not found in the text (searched ''tuned'', ''hyperparam'', ''default''). EBM/TabPFN appear only as acknowledged comparators; no TabPFN results were found.
+    Family tags are for the comparators; there is no tag for fixed orthogonal feature transforms.'

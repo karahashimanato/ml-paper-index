@@ -1,0 +1,61 @@
+id: arxiv-2608.18026
+title: 'TabNSM: Neural Sparse Mixer for Tabular Regression'
+authors:
+- Ali Eslamian
+- Qiang Cheng
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.18026
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0a80a664cadf5be33b5b1c1f54b5bbd2a9c1acaa8d2dd087d4e41cfc6d6e4a5f
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-attention
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- TabNSM (Adaptive Sparse Interaction Module, Multi-Stage Regression Head, GridLoss, RISE sampling)
+claims:
+- id: c1
+  statement: TabNSM is a regression framework that extends the authors' own earlier sparse-attention and mixer architectures (named TabNSA and TabMixer in the Introduction).
+  location: Abstract
+  page: 1
+  quote: We propose TabNSM, a scalable regression framework that extends our earlier sparse-attention and mixer architectures.
+- id: c2
+  statement: Across nine real-world regression benchmarks, TabNSM shows strong predictive performance and scalability, with consistent gains on high-dimensional and heterogeneous datasets.
+  location: Abstract
+  page: 1
+  quote: Across nine real-world regression benchmarks, TabNSM achieves strong predictive performance and practical scalability, with consistent gains on high-dimensional and heterogeneous datasets.
+- id: c3
+  statement: Evaluation uses a single 72/8/20 train/validation/test split with fixed random partitions across methods.
+  location: Experiments and Results
+  page: 7
+  quote: We use a 72/8/20 train/validation/test split with fixed random partitions across methods.
+- id: c4
+  statement: TabNSM's ASIM hyperparameters are selected with Optuna on the validation set.
+  location: Experiments and Results
+  page: 7
+  quote: The ASIM hyperparameters are selected via Optuna [46] on the validation set and fixed thereafter.
+- id: c5
+  statement: Baselines are tuned with Optuna using 3-fold CV on training+validation and 20 trials.
+  location: Appendix
+  page: 22
+  quote: Hyperparameter optimization was performed with Optuna (3-fold CV on training+validation, 20 trials, maximizing negative RMSE).
+- id: c6
+  statement: Some baselines were not tuned for most large-dataset benchmarks (non-convergence or outlier results) and are not reported in Table 2.
+  location: Appendix
+  page: 22
+  quote: were not tuned for most large-dataset benchmarks, often resulting in non-convergence or outlier performance
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Own collection of nine datasets (one, NACC/SCAN, requires a data use agreement).
+    TabNSM''s own Optuna trial budget is not stated in the main text.'

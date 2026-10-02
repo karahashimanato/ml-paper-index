@@ -1,0 +1,74 @@
+id: arxiv-2609.37989
+title: 'TabFM-Auto: Self-Evolving Pipelines for Tabular Foundation Models'
+authors:
+- Deqing Fu
+- Huangyuan Su
+- Rajat Sen
+- Taman Narayan
+- Sujay Sanghavi
+- Abhimanyu Das
+- Weihao Kong
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.37989
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 1190bb0c0b25b1eba0869f1f4d76af3d14762f7f8dc7666e356c848ce4940690
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - large-language-models
+  - automl-systems
+  paradigms:
+  - in-context-learning
+proposes:
+- TabFM-Auto (LLM coding agent that evolves the data pipeline around frozen TabFM)
+claims:
+- id: c1
+  statement: TabFM-Auto pairs the TabFM foundation model with a language-model agent that evolves the data pipeline around it.
+  location: Abstract
+  page: 1
+  quote: We introduce TabFM-Auto, which pairs a tabular foundation model, TabFM, with a language model agent that evolves the data pipeline around it.
+- id: c2
+  statement: On all 51 TabArena datasets, five TabFM-Auto configurations take the top five overall positions.
+  location: Abstract
+  page: 1
+  quote: Across all 51 datasets of the TabArena benchmark, five TabFM-Auto configurations with different agents and language models take the top five overall positions, and the best raises TabFM from 1785
+    to 2013 Elo.
+- id: c3
+  statement: Pipeline search runs once per dataset with 3-fold cross-validation on fold 0's training set (up to 96 evaluations or 6 hours), withholding evaluation labels; the frozen pipeline is then evaluated
+    on all folds.
+  location: Experimental setup
+  page: 5
+  quote: Thus, we run pipeline search once per dataset using 3-fold cross-validation on the training set of fold 0 (up to 96 evaluations or 6 hours on one H100 GPU), allowing both inductive and transductive
+    features while withholding evaluation labels.
+- id: c4
+  statement: The paper also reports a leaderboard on fold 0's held-out test split alone, where TabFM-Auto still holds the top overall, classification and regression ratings.
+  location: Results
+  page: 8
+  quote: 'On the held-out test split of fold 0 alone (Table 5), TabFM-Auto also holds the #1 Overall, Classification, and Regression Elo ratings (Appendix B.1).'
+- id: c5
+  statement: Candidate pipelines run in a sandbox without outbound network access and with restricted writes.
+  location: Appendix
+  page: 16
+  quote: The harness runs every candidate pipeline in an unprivileged bubblewrap Linux namespace sandbox that disables outbound network access, mounts system libraries read-only, and restricts writes to
+    an ephemeral scratch directory.
+- id: c6
+  statement: Gains are generally smaller on anonymized tables, and pipeline search needs repeated validation evaluations per dataset.
+  location: Conclusion
+  page: 11
+  quote: Gains are generally smaller on anonymized tables, where the agent relies on statistical and relational features, and pipeline search requires repeated validation evaluations for each dataset.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Authors (Google Research / Google DeepMind and universities) overlap with the TabFM
+    paper (arxiv-2609.37959). Because TabArena folds are repeated cross-validation, fold 0''s training split overlaps other folds'' test rows; the appendix states that fold 0''s training data affects other
+    folds only through which operations and settings the agent kept, and the fold-0-only board is the clean check. No discussion of whether the LLMs (Claude Opus 5, Gemini 3.8 Flash) had prior exposure
+    to the public TabArena datasets was found in the text. Also evaluated on the 8 tabular competitions of MLE-Bench.'

@@ -1,0 +1,60 @@
+id: arxiv-2608.07349
+title: Residual Algebra for Representation-Preserving Learning
+authors:
+- Yao Wu
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.07349
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 3b169a50e8cd906afe8e55b13ec75759cc8cb32b5de7c8ed7d2657da32f1af72
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- Residual algebra (Fold fields and FPRC-PQ relax-aggregate-close composition)
+claims:
+- id: c1
+  statement: Residual algebra keeps each representation's coordinate system and its own residual until an explicit aggregation step, instead of concatenating features.
+  location: Abstract
+  page: 1
+  quote: We propose residual algebra, in which each representation retains its coordinate system and owns its unresolved residual until an explicit aggregation boundary.
+- id: c2
+  statement: Against matched-capacity and other structural controls on Chinese A-share stock returns, the gain is attributed to explicit residual ownership and composition rather than more features or trees.
+  location: Abstract
+  page: 1
+  quote: The gain is thus attributable to explicit residual ownership and composition rather than additional features or trees.
+- id: c3
+  statement: Evaluation is annual point-in-time refitting on a single stock-return dataset, with a purge gap for label observability.
+  location: Experimental setup
+  page: 11
+  quote: 'Deployment is annual point-in-time: models for year Y are fit on data observable before Y with a purge gap covering label observability [24].'
+- id: c4
+  statement: Architecture, signal selections and hyperparameters were frozen before the evaluation window, and registered contrasts are reported rather than post-hoc winners.
+  location: Reproducibility statement
+  page: 14
+  quote: All architectural decisions, signal selections, and hyperparameters were frozen before the evaluation window; the paper reports the registered contrasts rather than post-hoc winners.
+- id: c5
+  statement: 'Limitation: evidence comes from one market and one asset class.'
+  location: Conclusion
+  page: 14
+  quote: Evidence still comes from one market and one asset class; the fields are two-dimensional; the contraction statement is conditional; and the orthogonality statements concern controlled refitting
+    paths rather than a general efficiency theorem.
+- id: c6
+  statement: The Rumination-B/H extensions do not contribute to the reported results and remain untested out of sample.
+  location: Conclusion
+  page: 14
+  quote: Neither extension contributes to the reported empirical headline, and both remain to be tested out of sample.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Single financial dataset (cross-sectional return prediction); not a multi-dataset
+    tabular benchmark. No comparison with deep tabular models or TFMs found in the text. All learners are XGBoost regressors with one frozen setting shared across compared rows (Table 1 caption).'

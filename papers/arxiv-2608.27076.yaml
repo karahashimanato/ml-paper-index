@@ -1,0 +1,64 @@
+id: arxiv-2608.27076
+title: 'Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation'
+authors:
+- Joshua Le Grice
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.27076
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d1050e80dec9bf0731a61c48c91148f3dba4968cbb2f72106e6b1b0fe8d18997
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  - tabular-attention
+  - tabular-mlp
+  - linear-models
+  - heterogeneous-ensembles
+  paradigms:
+  - supervised
+proposes:
+- Cross-regime Bayesian hyperparameter optimisation for equity signal models
+- XGBoost+TabNet rank-aggregation Hybrid ensemble
+claims:
+- id: c1
+  statement: Existing evaluations of equity prediction models do not explicitly target regime robustness in hyperparameter selection.
+  location: Abstract
+  page: 1
+  quote: Existing evaluations of equity prediction models do not explicitly target regime robustness during hyperparameter selection.
+- id: c2
+  statement: No single tabular deep learning architecture outperforms gradient-boosted trees; combining XGBoost and TabNet by rank aggregation gives the Hybrid ensemble.
+  location: Abstract
+  page: 1
+  quote: No individual tabular deep learning architecture outperforms gradient-boosted trees, but combining XGBoost and TabNet using rank aggregation produces a Hybrid ensemble
+- id: c3
+  statement: 'Tuning protocol: all models are tuned with Optuna TPE, with the same trial budget per model.'
+  location: Experimental setup
+  page: 8
+  quote: Hyperparameters for all models are selected using Bayesian optimisation via the Optuna framework [54], utilising a Tree-structured Parzen Estimator (TPE) [55] sampler with 30 trials per model.
+- id: c4
+  statement: The out-of-sample year is excluded from model development and hyperparameter selection.
+  location: Experimental setup
+  page: 7
+  quote: The 2025 period was excluded from model development and hyperparameter selection to provide an uninfluenced estimate of real-world performance.
+- id: c5
+  statement: 'Limitation: using index constituents identified at the end of the sample introduces survivorship bias.'
+  location: Limitations
+  page: 18
+  quote: Using S&P 500 constituents identified at the end of the sample period introduces survivorship bias.
+- id: c6
+  statement: 'Limitation: the reported figures come from selecting the best configuration among many trialled configurations (no deflated Sharpe correction).'
+  location: Limitations
+  page: 18
+  quote: Also, reported figures reflect the selection of the best-performing configuration from approximately 161 trialled across the five model classes and their ensemble combinations.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. MSc project; models: logistic regression, XGBoost, MLP, TabNet, FT-Transformer. Financial
+    time-ordered cross-sectional data with expanding-window validation.'

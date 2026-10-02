@@ -27,6 +27,8 @@ nav:
       - 時系列の異常検知: articles/tasks/time-series-anomaly-detection.md
   - 横断記事:
       - モデルと評価方法の弱点と改善: articles/topics/weaknesses-and-fixes.md
+      - モデルの解釈可能性: articles/topics/model-interpretability.md
+      - 量子化による影響: articles/topics/quantization-effects.md
   - 索引と論文ページ:
       - 索引: generated/index.md
       - 未反映カード: generated/stale.md

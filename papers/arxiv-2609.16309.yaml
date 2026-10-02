@@ -1,0 +1,69 @@
+id: arxiv-2609.16309
+title: Agentic Search Spaces for Tabular Machine Learning
+authors:
+- Renat Sergazinov
+- Artem Chistyakov
+- Sergey Pankevich
+- Artem Babenko
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.16309
+  code: https://github.com/yandex-research/agentic-hpset
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9006d6593ed0c282ad47934b868409a689feae2ef52a598fab5e416f76e3e826
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-mlp
+  - gradient-boosted-trees
+  - tabular-foundation-model
+  - large-language-models
+  paradigms:
+  - supervised
+proposes:
+- Agent-generated (LLM) extended HPO search spaces over pipeline modules for existing tabular models
+claims:
+- id: c1
+  statement: The agent-enlarged search spaces outperform the base spaces under the same tuning and ensembling budgets, i.e. at no extra tuning cost.
+  location: Abstract
+  page: 1
+  quote: 'Notably, these gains come at no extra tuning cost: the enlarged spaces outperform the base under the same tuning and ensembling budgets.'
+- id: c2
+  statement: Tuning uses TPE with 200 trials on small and medium datasets and 100 on large ones; the best-validation configuration is evaluated on the test subset with 15 seeds.
+  location: Experimental setup
+  page: 4
+  quote: the budget is 200 trials on small and medium datasets and 100 on the large ones (Microsoft and TabReD), after which the configuration with the best validation score is evaluated on the held-out
+    test subset with 15 random seeds
+- id: c3
+  statement: 'TabICLv2 is the exception: the base model is used untuned as published, while its agentic variant is tuned with 100 trials.'
+  location: Experimental setup
+  page: 4
+  quote: 'TabICLv2 is the exception: the default model is used as published, without tuning, while its agentic variant is tuned with a fixed budget of 100 trials on every dataset.'
+- id: c4
+  statement: The 45 datasets are drawn from the TabM, TabArena and TabReD benchmarks, from 768 to over 1M rows and 5 to over 1500 features.
+  location: Experimental setup
+  page: 3
+  quote: We use datasets derived from TabM [2], TabArena [8], and TabReD [7] benchmarks, which span both regression and classification datasets ranging from 768 to 1M+ objects and from 5 to 1500+ features.
+- id: c5
+  statement: Larger search spaces can overfit the validation set.
+  location: Limitations
+  page: 10
+  quote: Larger spaces can overfit validation.
+- id: c6
+  statement: Co-author Artem Babenko is an author of TabM, one of the evaluated model families (per the reference list).
+  location: References
+  page: 11
+  quote: Yury Gorishniy, Akim Kotelnikov, and Artem Babenko.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Authors are affiliated with Yandex and HSE University. Babenko is also listed on
+    the TabReD benchmark and the piecewise-linear embeddings paper used for MLP-dagger. The paper reports TabArena results separately (appendix) and notes its own protocol (single fit, no cross-validation)
+    is more conservative than TabArena''s 8-fold bagged configurations.'

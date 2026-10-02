@@ -1,0 +1,79 @@
+id: arxiv-2202.01602
+title: 'The Disagreement Problem in Explainable Machine Learning: A Practitioner''s Perspective'
+authors:
+- Satyapriya Krishna
+- Tessa Han
+- Alex Gu
+- Steven Wu
+- Shahin Jabbari
+- Himabindu Lakkaraju
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2202.01602
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 98a82be8fd7fd94502ed9a8fa960212e01d0b76267ab441d10d688fad61233f3
+tags:
+  tasks:
+  - model-explanation
+  - tabular-classification
+  method_families:
+  - feature-attribution
+  - saliency-maps
+  - linear-models
+  - tree-ensembles
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- Formalization of explanation disagreement with six metrics (feature, rank, sign, signed rank agreement; rank correlation; pairwise rank agreement)
+claims:
+- id: c1
+  statement: Six disagreement metrics are proposed, derived from practitioner interviews (top-k features, signs, ordering, and relative ordering of features of interest).
+  location: Formalizing the Notion of Explanation Disagreement
+  page: 5
+  quote: 'To capture these intuitions about explanation disagreement, we propose six different metrics: feature agreement, rank agreement, sign agreement, signed rank agreement, rank correlation, and pairwise
+    rank agreement.'
+- id: c2
+  statement: Tabular experiments explain logistic regression, a feed-forward neural network, random forest and gradient-boosted tree models (COMPAS and German Credit); text uses an LSTM and images a pre-trained
+    ResNet-18.
+  location: Experimental Setup
+  page: 6
+  quote: 'For tabular data, we train four models: logistic regression, densely connected feed-forward neural network, random forest, and gradient-boosted tree.'
+- id: c3
+  statement: Explainer sample sizes are set by running to convergence or using sizes above prior recommendations.
+  location: Experimental Setup
+  page: 7
+  quote: we either run the explanation method to convergence (i.e., select a sample size such that an increase in the number of samples does not significantly change the explanations)
+- id: c4
+  statement: 'Main results: explanation methods often disagree, and practitioners often resolve disagreements with ad hoc heuristics.'
+  location: Abstract
+  page: 1
+  quote: Our results indicate that (1) state-of-the-art explanation methods often disagree in terms of the explanations they output, and (2) machine learning practitioners often employ ad hoc heuristics
+    when resolving such disagreements.
+- id: c5
+  statement: Disagreement may increase with model complexity (similar or stronger for the neural network than for logistic regression).
+  location: Tabular Data
+  page: 8
+  quote: These trends suggest that disagreement among explanation methods may increase with model complexity.
+- id: c6
+  statement: The measured extent of disagreement depends on the metric; variants of the metrics show slightly lower disagreement.
+  location: Discussion and Conclusion
+  page: 15
+  quote: Finally, the extent of explanation disagreement would also depend on the specific metric being used to measure the disagreement.
+- id: c7
+  statement: 'Scope: the paper prioritizes examining how prevalent disagreement is rather than its underlying causes, given the complexity of that analysis.'
+  location: Discussion and Conclusion
+  page: 14
+  quote: In this work, we prioritized examining the prevalence of explanation disagreement rather than exploring its underlying causes, given the complexity of this analysis.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: Published in Transactions on Machine
+    Learning Research (06/2024). No ground-truth attributions: agreement between methods is measured, not correctness. Gradient-based methods are not applied to the tree models (gradients not available).
+    Interview and user-study participants were recruited partly from three for-profit companies in technology and financial services; studies were IRB-approved. Co-author Himabindu Lakkaraju is also a co-author
+    of arxiv-1911.02508.'

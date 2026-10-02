@@ -1,0 +1,79 @@
+id: arxiv-2609.03880
+title: 'Xiaomi-TabLDM: A Tabular Foundation Model Technical Report'
+authors:
+- Xiaomi-TabLDM Team
+- Penghui Wang
+- Wei Liu
+- Hong Wang
+- Chengyue Huang
+- Yuxi Sun
+- Zirui Wang
+- Hongming Huang
+- Quan Wang
+- Zhenwei Xin
+- Ping Hou
+- Jie Yu
+- Chunxiao Liu
+- Erli Meng
+- Bin Wang
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.03880
+  code: https://github.com/xiaomi-research/xiaomi-tabldm
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: bf9482753ceecce9011a09a0df739c7afa3a856ee6deaed98f93df05857ee821
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- Xiaomi-TabLDM (synthetic-pretrained tabular foundation model with sparse MoE and test-time scaling)
+claims:
+- id: c1
+  statement: Xiaomi-TabLDM is a tabular foundation model for classification and regression via in-context learning, without task-specific fine-tuning.
+  location: Abstract
+  page: 1
+  quote: We introduce Xiaomi-TabLDM, a tabular large data foundation model for classification and regression via in-context learning, which delivers superior prediction accuracy without requiring task-specific
+    fine-tuning.
+- id: c2
+  statement: 'Its strongest results are on regression: first on OpenML-CTR23 and second on regression across TALENT, TabArena and BCCO.'
+  location: Introduction
+  page: 3
+  quote: 'Its strongest and most consistent results are observed on regression: Xiaomi-TabLDM ranks first on OpenML-CTR23 and second on regression across TALENT, TabArena, and BCCO.'
+- id: c3
+  statement: Most benchmark datasets have fewer than 10K training examples, a smaller portion 10K-100K, and only TALENT includes some with more than 100K.
+  location: Evaluation
+  page: 9
+  quote: Across these benchmarks, most datasets contain fewer than 10K training examples, with a smaller portion ranging from 10K to 100K; TALENT additionally includes several datasets with more than 100K
+    training instances.
+- id: c4
+  statement: On TALENT, missing results of some methods on a subset of datasets are imputed with K-nearest-neighbour values.
+  location: Evaluation (TALENT figure caption)
+  page: 10
+  quote: For methods with missing results on a subset of datasets, the corresponding score entries are imputed using K-nearest-neighbour values following the evaluation protocol.
+- id: c5
+  statement: BCCO excludes datasets with more than 50,000 training samples, 10,000 features, or 10 target classes.
+  location: Evaluation (BCCO)
+  page: 13
+  quote: The benchmark excludes extremely large datasets with more than 50,000 training samples, 10,000 features, or 10 target classes.
+- id: c6
+  statement: OpenML-CTR23 results are reported on 33 datasets of the original 35-problem suite; no reason for the reduction was found in the text.
+  location: Evaluation (OpenML-CTR23)
+  page: 15
+  quote: In our experiments, we report results on 33 datasets and compare Xiaomi-TabLDM against both tabular foundation models and conventional learning baselines.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Industry report (Xiaomi). The authors list was corrected from the PDF (the arXiv
+    metadata contains an artifact entry '' :'', which was dropped). TabArena plots and leaderboard tables reuse the official TabArena metrics and evaluation code (Appendix). BCCO is a LimiX Team benchmark
+    (see arxiv-2609.17488).'

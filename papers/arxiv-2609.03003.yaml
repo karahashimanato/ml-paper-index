@@ -1,0 +1,65 @@
+id: arxiv-2609.03003
+title: Causal Foundation Models
+authors:
+- Christopher Stith
+- Hossein Rahmani
+- Jesse C. Cresswell
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.03003
+  code: https://github.com/layer6ai-labs/cfms
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 3a8977504f6ee82c366608dbe0502fd4eab284c62846f141a32d4e031763b891
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - automl-systems
+  paradigms:
+  - in-context-learning
+proposes:
+- Tutorial on causal foundation models (CFMs) and a standardized comparison of Do-PFN, CausalPFN and CausalFM on RealCause-Lalonde
+claims:
+- id: c1
+  statement: One stated contribution is a standardized empirical comparison of three causal foundation models on semi-synthetic observational data.
+  location: Benchmarking CFMs
+  page: 18
+  quote: One contribution of our work is establishing a standardized, fair empirical comparison across these three CFMs for causal inference on more complex semi-synthetic observational data.
+- id: c2
+  statement: Models are evaluated on the semi-synthetic RealCause-Lalonde benchmark (Lalonde-CPS and Lalonde-PSID cohorts), with metrics aggregated over 10 semi-synthetic realizations.
+  location: Experimental setup
+  page: 18
+  quote: we evaluate models on the semi-synthetic RealCause-Lalonde benchmark (LaLonde, 1986; Neal et al., 2020).
+- id: c3
+  statement: Nuisance models of the classical baselines are selected with FLAML AutoML, run separately per nuisance, estimator, realization and cohort, with a 900-second budget and 3-fold cross-validation.
+  location: Experimental setup
+  page: 18
+  quote: To provide strong, competitive baselines, all underlying nuisance models are selected via FLAML AutoML (v2.3.5; Wang et al. (2021)) run independently per nuisance, per estimator, per RealCause
+    realization, and per cohort with a 900-second budget and 3-fold cross-validation.
+- id: c4
+  statement: The CFMs are frozen pretrained checkpoints applied without any parameter or hyperparameter tuning.
+  location: Experimental setup
+  page: 19
+  quote: These models are downloaded out-of-the-box from their respective sources and applied without any parameter or hyperparameter tuning.
+- id: c5
+  statement: Without being trained on the Lalonde data distributions, the CFMs are reported to be competitive with the classical estimators.
+  location: Results and Discussion
+  page: 19
+  quote: Despite not being trained on the Lalonde data distributions, CFMs are remarkably competitive with classical estimators.
+- id: c6
+  statement: Runtime counts training, tuning and inference for classical baselines but only inference for CFMs; CFM pretraining is excluded.
+  location: Experimental setup
+  page: 19
+  quote: This means we include training, tuning, and inference for classical baselines, but only inference for CFMs since this is the only step we perform.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Tutorial/introduction paper with its own benchmark section. Authors are affiliated
+    with Layer 6 AI and TD Bank Group; no competing-interest statement was found in the text. No exact family tag for causal foundation models; tabular-foundation-model used as closest.'

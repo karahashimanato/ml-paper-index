@@ -1,0 +1,65 @@
+id: arxiv-2608.22069
+title: 'AstroBind: Machine learning prediction of binding energy distributions on interstellar water ice from geometric surface descriptors'
+authors:
+- Aneesa Ahmad
+- Catherine Walsh
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.22069
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 2c0f98078248516d3e75a3b62c7da6aafb5e6650101ab0ced81285b0c7a8fb4c
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  - linear-models
+  - gaussian-processes
+  - kernel-methods
+  paradigms:
+  - supervised
+proposes:
+- AstroBind (XGBoost regression of DFT binding energies on amorphous water ice from geometric descriptors)
+claims:
+- id: c1
+  statement: An ML model is trained on 27 geometric descriptors of the local ice-adsorbate environment to predict binding energies.
+  location: Abstract
+  page: 1
+  quote: We trained a machine-learning model using 27 geometric descriptors of the local ice–adsorbate environment.
+- id: c2
+  statement: The model is trained on binding energies of 13 adsorbates and evaluated with pooled leave-one-cluster-out validation across 15 ice surfaces.
+  location: Abstract
+  page: 1
+  quote: The model was trained on binding energies for 13 adsorbates on amorphous solid water clusters and evaluated through pooled leave-one-cluster-out validation across 15 ice surfaces.
+- id: c3
+  statement: Linear regression, ridge regression, random forest and XGBoost were compared, and XGBoost had the highest test-set accuracy.
+  location: Methods (model training)
+  page: 3
+  quote: XGBoost achieved the highest test-set accuracy
+- id: c4
+  statement: XGBoost uses fixed hyperparameters. A randomized-search cross-validation over hyperparameter combinations improved results only marginally.
+  location: Methods (model training)
+  page: 3
+  quote: Hyperparameter tuning via randomised-search cross-validation, in which 80 randomly sampled hyperparameter combinations are each scored by 5-fold cross-validation
+- id: c5
+  statement: Gradient-boosted trees were chosen over deep learning because, at this data size, boosted trees are competitive on tabular data and their feature attributions give mechanistic insight.
+  location: Discussion
+  page: 10
+  quote: boosted trees are competitive on tabular data of this scale
+- id: c6
+  statement: 'Limitation: performance collapses for dispersion-dominated adsorbates, which the authors describe as consistent with the absence of electronic information in the descriptors.'
+  location: Discussion
+  page: 10
+  quote: performance collapses for dispersion-dominated adsorbates
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Domain application (astrochemistry) on a small tabular regression dataset (1,429
+    configurations, 46 input features). The model comparison between linear, ridge, random forest and XGBoost is reported on the held-out test clusters; no separate validation set for that choice was found
+    in the text. Gaussian process regression and kernel ridge regression were also benchmarked on the same 80/20 cluster-based split.'

@@ -1,0 +1,68 @@
+id: arxiv-2608.14211
+title: Training Fair Tabular Foundation Models
+authors:
+- Patrik Kenfack
+- Jesse C. Cresswell
+- Anthony L. Caterini
+- Samira Ebrahimi Kahou
+- Ulrich Aïvodji
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.14211
+  code: https://github.com/patrikken/FairTFM-inference
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8e4d7f64b4427e3d67a17c52de7995dd7fb5561d31a16e6378575fe3dc37212d
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- FairTFM (fairness-aware TFM pretraining with synthetic fairness tasks and a gradient reversal layer)
+claims:
+- id: c1
+  statement: FairTFM is a training strategy for tabular foundation models that combines synthetic fairness tasks with a gradient-reversal architecture so that representations become invariant to sensitive
+    attributes.
+  location: Abstract
+  page: 1
+  quote: We propose FairTFM, a scalable training strategy based on synthetic fairness tasks and a fairness-aware architecture using a gradient reversal layer, which encourages the model to learn representations
+    invariant to sensitive attributes.
+- id: c2
+  statement: Across 132 fairness tasks, fairness improves consistently while accuracy stays competitive.
+  location: Abstract
+  page: 1
+  quote: Experiments on 132 fairness tasks show consistent improvements in fairness while maintaining competitive accuracy.
+- id: c3
+  statement: The main evaluation uses 120 fairness tasks built from the 2018 ACS surveys via the folktables library.
+  location: Experimental setup
+  page: 5
+  quote: We evaluate our model on 120 fairness tasks derived from the 2018 1-Year American Community Surveys [12], accessed through the folktables library, which is released under the MIT License.
+- id: c4
+  statement: The ACS task datasets range from roughly 3.5k to 12k samples and are evaluated with a single random 80/20 train-test split.
+  location: Appendix
+  page: 15
+  quote: Across all task instantiations, dataset sizes vary from roughly 3.5k to 12k samples, and we use a random 80/20 train–test split.
+- id: c5
+  statement: Classical baselines (LR, RF, XGBoost, KNN) are run in their default scikit-learn configuration.
+  location: Experimental setup
+  page: 5
+  quote: We compare our method against standard machine learning baselines, including logistic regression (LR), random forest (RF), XGBoost (XGB), and k-nearest neighbours (KNN) in their default scikit-learn
+    configuration [32].
+- id: c6
+  statement: 'Limitations: FairTFM does not dominate specialized fairness-aware baselines on every metric or task configuration, and the experiments use the lightweight nanoTabPFN backbone.'
+  location: Limitations and future work
+  page: 10
+  quote: Second, while FairTFM is broadly competitive, the results also show that it does not dominate specialized fairness-aware baselines on every metric or every task configuration, especially in the
+    stricter settings where age is used as sensitive attribute.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Two authors list Layer 6 AI as affiliation; no competing-interest statement found
+    in the text.'

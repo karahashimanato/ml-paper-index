@@ -1,0 +1,63 @@
+id: arxiv-2610.00391
+title: Interpretable Synthetic Medical Tabular Data Generation for Clinical Decision Support Using Fuzzy Cognitive Maps
+authors:
+- Michael Vasilakakis
+- Dimitris K. Iakovidis
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2610.00391
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9fd90a75ac7cc4cbc6040fec57445d70fec873c05e87b2a071eef0218e114cf7
+tags:
+  tasks:
+  - tabular-data-generation
+  method_families:
+  - interpretable-models
+  paradigms:
+  - unsupervised
+proposes:
+- Fuzzy Cognitive Map (FCM) based synthetic medical tabular data generator
+claims:
+- id: c1
+  statement: The paper applies Fuzzy Cognitive Maps to synthetic medical tabular data generation with explicit causality and privacy preservation.
+  location: Abstract
+  page: 1
+  quote: This paper proposes a novel application of Fuzzy Cognitive Maps (FCMs) in a framework for synthetic medical tabular data generation with explicit causality and privacy preservation.
+- id: c2
+  statement: On UCI medical datasets the method is reported to be competitive under a train-on-synthetic-test-on-real protocol.
+  location: Abstract
+  page: 1
+  quote: Experimental evaluation on UCI medical benchmark datasets demonstrates competitive performance under a Train-on-Synthetic-Test-on-Real (TSTR) protocol.
+- id: c3
+  statement: All baselines (Gaussian Copula, CTGAN, TVAE) use their default SDV configurations.
+  location: Experimental setup
+  page: 5
+  quote: All baseline models were implemented using their default SDV configurations.
+- id: c4
+  statement: Each dataset uses a single 80/20 train-test split shared across methods.
+  location: Experimental setup
+  page: 5
+  quote: For each dataset, a consistent train–test split of 80/20 was applied across all methods.
+- id: c5
+  statement: Models requiring extensive GPU resources were excluded from the comparison.
+  location: Experimental setup
+  page: 5
+  quote: Models requiring extensive GPU resources were excluded to maintain consistent experimental conditions.
+- id: c6
+  statement: Gaussian Copula attains marginally higher fidelity in some cases, which the authors say is often accompanied by reduced predictive utility.
+  location: Results
+  page: 6
+  quote: Although Gaussian Copula achieves marginally higher fidelity in certain cases, this is often accompanied by reduced predictive utility, whereas the proposed framework maintains a balanced trade-off
+    between realism and downstream task performance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Three small UCI datasets (Pima Indians Diabetes, South African Heart Disease, Statlog
+    Heart). The downstream TSTR classifier and the number of repetitions were not found in the text. The PDF states acceptance at IEEE CBMS 2026; venue omitted because it is not in the metadata. Funded
+    by the EU IHI JU project SEARCH with industry partners listed in the acknowledgement footnote. No fuzzy-model family tag exists; interpretable-models was used as the closest (FCM structure with linguistic
+    fuzzy sets is itself interpretable).'

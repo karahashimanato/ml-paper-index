@@ -1,0 +1,73 @@
+id: arxiv-2608.20024
+title: Systematic Evaluation of TabPFN-TS for Zero-Shot Probabilistic Heat Load Forecasting in District Heating Networks
+authors:
+- Ben Spoek
+- Karim K. Ben Hicham
+- Kai Derzsi
+- Philipp Althaus
+- Alexander Mitsos
+- Dirk Müller
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.20024
+  code: https://github.com/benspoek/tsfm-heatload
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 09b2f154b77688b2638af32cbf3b3eca439de52e8a333fd4aaede05dabca7c06
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - tabular-foundation-model
+  - time-series-foundation-model
+  - gradient-boosted-trees
+  - deep-learning
+  - automl-systems
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- Evaluation of TabPFN-TS for zero-shot probabilistic heat load forecasting
+- Multi-Resolution Residual-Correction (MRRC) Forecaster
+claims:
+- id: c1
+  statement: The study evaluates TabPFN-TS against time-series foundation models and trained ML baselines for probabilistic heat load forecasting in district heating networks.
+  location: Abstract
+  page: 1
+  quote: This study systematically evaluates TabPFN-TS against state-of-the-art time-series foundation models and trained machine-learning baselines for probabilistic heat load forecasting in district heating
+    networks.
+- id: c2
+  statement: Chronos-2 has the lowest aggregate full-year error, while TabPFN-TS shows better empirical calibration.
+  location: Abstract
+  page: 1
+  quote: Although Chronos-2 achieves the lowest aggregate full-year error, TabPFN-TS shows better empirical calibration.
+- id: c3
+  statement: The trained AutoGluon baselines are fitted on 2023 data and evaluated on rolling 24-hour forecasts in 2024. Each model class uses the target history according to its own defaults.
+  location: Methodology (forecasting models)
+  page: 6
+  quote: The predictors are trained on 2023 target values and evaluated on rolling 24-hour forecasts in 2024.
+- id: c4
+  statement: The TabPFN-TS configuration (context length, resolution, horizon, covariates) is chosen with diagnostics on three representative weeks of 2024, the same year used for the full-year evaluation.
+  location: Case Study and Experimental Design
+  page: 9
+  quote: The selected winter, transitional, and summer weeks in 2024 are January 15–21, April 22–28, and August 12–18, respectively.
+- id: c5
+  statement: The main experiments feed realized future temperature as the known covariate, which amounts to assuming a perfect weather forecast. A separate sensitivity analysis uses archived forecasts.
+  location: Methodology (forecasting models)
+  page: 6
+  quote: This setting can be interpreted as a perfect-weather-forecast assumption
+- id: c6
+  statement: The authors declare no known competing financial interests.
+  location: Declaration of Competing Interest
+  page: 25
+  quote: The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Time-series forecasting paper (tabularized forecasting with TabPFN-TS), not tabular
+    prediction; tagged time-series-forecasting. The configuration was chosen on weeks taken from 2024, and the full-year evaluation also covers 2024; the text does not discuss this overlap. The Munich data
+    are proprietary; the Flensburg transfer data are public.'

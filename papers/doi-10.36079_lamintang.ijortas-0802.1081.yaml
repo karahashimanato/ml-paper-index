@@ -1,0 +1,68 @@
+id: doi-10.36079_lamintang.ijortas-0802.1081
+title: Interpretable Machine Learning Framework for Personalized Health Insurance Risk Prediction
+authors:
+- Mohammed M. Al-Mhadawi
+- Qahtan Yas
+year: 2026
+venue: International Journal of Recent Technology and Applied Science (IJORTAS)
+links:
+  doi: https://doi.org/10.36079/lamintang.ijortas-0802.1081
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7621ea98b8348f1993ede6ee300db5d70b51721c0f8e46755f76c7e7b479e0ba
+  pdf_url: https://lamintang.org/journal/index.php/ijortas/article/download/1081/674
+  license: cc-by-sa
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  - tabular-mlp
+  - linear-models
+  - feature-attribution
+  paradigms:
+  - supervised
+proposes:
+- Interpretable tree-ensemble benchmarking framework for health insurance charge prediction (SHAP)
+claims:
+- id: c1
+  statement: Six predictive models (five tree ensembles and an MLP control) are benchmarked on one real-world insurance dataset of 1,338 records.
+  location: Abstract
+  page: 1
+  quote: We benchmarked six predictive architectures (five tree ensembles and a multi-layer perceptron control) on a real-world dataset (n=1,338).
+- id: c2
+  statement: Gradient Boosting performed best in their experiments.
+  location: Abstract
+  page: 1
+  quote: Experimental results demonstrate that Gradient Boosting achieved superior performance
+- id: c3
+  statement: Evaluation uses five folds with an 80/20 train-test partition per fold, with preprocessing fit on each training partition.
+  location: Methodology
+  page: 5
+  quote: The dataset is partitioned using an 80/20 train-test strategy across five folds, resulting in 1,070 training samples and 268 testing samples per fold.
+- id: c4
+  statement: All models use the fixed 'optimized' configurations listed in a hyperparameter table with a fixed random seed; how these configurations were selected was not found in the text.
+  location: Finding and Discussion
+  page: 9
+  quote: All experiments were conducted using the optimized hyperparameter configurations presented in Table 3, with random_state = 42 applied consistently across all models to ensure experimental reproducibility.
+- id: c5
+  statement: The MLP was a plain baseline control without tabular-specific adaptations such as TabNet, which the authors take as further support for tree ensembles.
+  location: Finding and Discussion
+  page: 9
+  quote: Since such adaptations were not incorporated into this baseline control, the results further emphasize the suitability of tree-based ensemble approaches for modeling nonlinear insurance risk patterns.
+- id: c6
+  statement: The single static U.S.-centric dataset limits generalizability across regulatory, demographic and economic contexts.
+  location: Conclusion
+  page: 11
+  quote: dataset, which restricts the generalizability of the findings across different regulatory, demographic, and economic contexts.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: health insurance charge prediction (UCI Medical Cost dataset
+    per Table 2 caption). A GitHub repository is mentioned but no URL was found. The model list is inconsistent in the text: Step 4 says five tree ensembles plus one linear baseline, while the abstract
+    says an MLP control and the framework section also lists linear models, AdaBoost and SVR.'

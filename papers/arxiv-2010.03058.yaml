@@ -1,0 +1,74 @@
+id: arxiv-2010.03058
+title: Characterising Bias in Compressed Models
+authors:
+- Sara Hooker
+- Nyalleng Moorosi
+- Gregory Clark
+- Samy Bengio
+- Emily Denton
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2010.03058
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8d8ebbcf652403f05a7b341af98ddd7880b40287b1b927d4dfa3ae80975fc852
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - pruning
+  - deep-learning
+  paradigms:
+  - supervised
+  - post-hoc
+proposes:
+- Compression Identified Exemplars (CIE; Modal and Taxicab variants) as a label-free, human-in-the-loop auditing tool for compression-induced bias
+claims:
+- id: c1
+  statement: 'Main claim: overall accuracy hides disproportionately high errors on a small subset (CIE), and for these examples compression amplifies existing algorithmic bias.'
+  location: Abstract
+  page: 1
+  quote: We further establish that for CIE examples, compression ampliﬁes existing algorithmic bias.
+- id: c2
+  statement: 'Setup: ResNet-18 on CelebA predicting Blonde hair; protected attributes Male and Young and their intersection; metrics are sub-group error rate, false positive rate and false negative rate
+    relative to the non-compressed baseline.'
+  location: Methodology
+  page: 3
+  quote: To characterize the impact of compression on age and gender sub-groups we compare sub-group error rate, false positive rate (FPR) and false negative rate (FNR) between a baseline (i.e. non-compressed)
+    and models pruned and quantized to different levels of compression (i.e. compressed).
+- id: c3
+  statement: 'Quantization protocol: post-training 8-bit quantization (hybrid dynamic range and fixed-point), with the first 100 training examples as representative (calibration) examples, via TensorFlow
+    Lite; pruning is magnitude pruning during training.'
+  location: Methodology
+  page: 4
+  quote: We use the MLIR implementation via TensorFlow Lite (Jacob et al., 2018; Lattner et al., 2020).
+- id: c4
+  statement: Pruning hyperparameters were chosen by a limited grid search minimizing test-set accuracy degradation, and 30 models were trained per compression level to separate effects from training noise.
+  location: Methodology
+  page: 3
+  quote: These hyperparameter choices were based upon a limited grid search which suggested that these particular settings minimized degradation to test-set accuracy across all pruning levels.
+- id: c5
+  statement: 'Failure mode: compression cannibalizes performance on low-frequency attributes to preserve overall performance; for example the false positive rate for Male rises much more than for not Male
+    at 95% pruning, which the authors note appears closely tied to the attributes'' representation in the training data.'
+  location: Results
+  page: 5
+  quote: Compression cannibalizes performance on low-frequency attributes in order to preserve overall performance.
+- id: c6
+  statement: CIE requires no attribute labels, but this becomes a limitation in an overfit regime with 0% training error, where neither CIE measure can be computed on the training set.
+  location: Divergence measures
+  page: 6
+  quote: That said, note that this turns into a limitation in an overﬁt 0% training error regime as without any predictive difference it would not be possible to compute CIE using either measure in the
+    training set.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. Single dataset (CelebA, binary task). The disaggregated
+    sub-group error/FPR/FNR table reported in the main text is for 95% pruning; for quantized models only overall and CIE accuracy are tabulated, so the sub-group bias evidence is mainly from pruning. The
+    methodology says 30 models are trained per compression level, while the Table 3 caption says error rates are averaged over 10 models. All authors list Google affiliations. Builds on arxiv-1911.05248
+    (Modal CIE = PIE).'

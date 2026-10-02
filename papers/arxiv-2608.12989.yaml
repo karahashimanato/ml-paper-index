@@ -1,0 +1,61 @@
+id: arxiv-2608.12989
+title: Balanced Adaptive Prototype Selection for Scalable TabPFN Inference on Large-Scale Tabular Data
+authors:
+- Mahboobe Jadid
+- Melika Rezaye Garkani
+- Ali Mousavi
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.12989
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e324f93eed6d64c56c0b0de048d5915635ce9954cc626a235b256b0ecfe356ec
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- BAPS (Balanced Adaptive Prototype Selection) for TabPFN context construction
+claims:
+- id: c1
+  statement: BAPS builds compact, information-preserving inference contexts so that a frozen TabPFN can be applied to large datasets.
+  location: Abstract
+  page: 1
+  quote: This paper introduces Balanced Adaptive Prototype Selection (BAPS), a framework for constructing compact, information-preserving contexts for scalable TabPFN inference.
+- id: c2
+  statement: On the million-row HIGGS and SUSY datasets, 512 prototypes retain strong predictive performance and calibration.
+  location: Abstract
+  page: 1
+  quote: Experiments on the million-row HIGGS and SUSY datasets show that 512 prototypes retain strong predictive performance and reliable calibration, corresponding to an approximately 1,953-fold context
+    compression.
+- id: c3
+  statement: Only results on the two largest datasets (HIGGS, SUSY) are reported, citing the conference page limit.
+  location: Experimental setup
+  page: 4
+  quote: To comply with the conference page limit, only the results on the two largest datasets, HIGGS and SUSY, are presented, as they provide the most challenging evaluation of scalability under million-scale
+    data.
+- id: c4
+  statement: 'The setup describes the evaluation inconsistently: one sentence says five benchmarks (HIGGS, SUSY, Covertype, Electricity, Diabetes), another says six datasets (Breast Cancer, Wine, Digits,
+    Covertype, SUSY, HIGGS).'
+  location: Experimental setup
+  page: 4
+  quote: The evaluation includes six binary and multi-class benchmark datasets spanning medical, chemical, image-derived, environmental, and high-energy physics domains.
+- id: c5
+  statement: Comparisons are among context-construction methods for the same TabPFN under identical partitions, seeds and prototype budgets; no non-TabPFN baseline (e.g. GBDT) was found in the reported
+    results.
+  location: Results
+  page: 4
+  quote: All reduced-context methods are compared under identical data partitions, random seeds, and prototype budgets; hence, observed differences primarily reflect the predictive value of the constructed
+    contexts.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The other sentence in the setup reads ''evaluated on five publicly available tabular
+    classification benchmarks, namely HIGGS, SUSY, Covertype, Electricity, and Diabetes''. Results are averaged over five runs.'

@@ -1,0 +1,68 @@
+id: arxiv-2609.23574
+title: 'PACE: Plug-and-Play Contextual Embedding for Feature Screening with Pretrained Tabular Foundation Models'
+authors:
+- Qi Qin
+- Erbo Li
+- Ting Wei
+- Zizhou Huang
+- Zixuan Qin
+- Wu Wang
+- Yifan Sun
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.23574
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0efa6cb24c2b8803c7a838e24631f5402dd69e8e8662128e65f020805af172e5
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - supervised
+proposes:
+- PACE (frozen TFM column encoder inserted before a feature-screening utility)
+claims:
+- id: c1
+  statement: PACE inserts a frozen tabular foundation model column encoder before an existing feature-scoring rule, expanding each feature into a higher-dimensional contextual representation.
+  location: Abstract
+  page: 1
+  quote: We intro- duce PACE (Plug-and-Play Contextual Embedding), which inserts a frozen tabular foundation model (TFM) column encoder before an existing feature-scoring rule, expanding each feature into
+    a higher-dimensional contextual representation.
+- id: c2
+  statement: Matched random-weight and random-feature controls indicate the gains come from pretrained structure, not just dimensional expansion.
+  location: Abstract
+  page: 1
+  quote: Matched random-weight and random-feature controls show that PACE gains from pretrained structure beyond generic dimen- sional expansion.
+- id: c3
+  statement: 'Evaluation protocol: TALENT datasets are augmented with independent Gaussian nuisance features up to a fixed total width before screening.'
+  location: Appendix
+  page: 28
+  quote: the nuisance-augmented table adds independent N(0, 1) features until its total width is 2,000
+- id: c4
+  statement: Screened features are evaluated with ten downstream learners in three families (tree models, neural networks, tabular foundation models).
+  location: Experimental setup
+  page: 6
+  quote: We evaluate the selected columns using ten learners in three families
+- id: c5
+  statement: When a TALENT training partition is large, embedding and utility estimation use a row-capped subsample.
+  location: Appendix
+  page: 14
+  quote: When a TALENT training partition exceeds 2,000 rows, embedding and utility estimation use at most 2,000 rows, selected by stratified sampling for classification and by sampling without replacement
+    for regression using the corresponding random seed.
+- id: c6
+  statement: 'Limitation: screening performance still depends on representation, utility, backbone and extraction strategy.'
+  location: Conclusion
+  page: 9
+  quote: Screening performance still depends on the representation, utility, backbone, and extraction strategy.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Feature screening method; no dedicated tag, tabular-foundation-model used as closest
+    family. How the downstream learners'' hyperparameters were set (defaults vs tuning) was not found in the text.'

@@ -1,0 +1,64 @@
+id: arxiv-2609.06941
+title: 'When and Why LLM Causal Priors Help: Closed-Loop Prior Selection for Amortized Causal Inference'
+authors:
+- Haohao Zhou
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.06941
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 56d546dc294c1ca39bfaccc8d403788fe17303ba14c1b66df5ecfae59be322e6
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - tabular-foundation-model
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- Closed-loop prior selection for injecting LLM-distilled causal graphs into a PFN (Do-PFN)
+claims:
+- id: c1
+  statement: On a 7.34M-parameter Do-PFN, the selected prior gives a significant gain on the primary evaluation domain (5 paired seeds), with error below the uninjected official base.
+  location: Abstract
+  page: 1
+  quote: On a 7.34M-parameter Do-PFN, the framework’s winner attains a formally significant 2.75× gain on the primary evaluation domain (n = 5 paired seeds, p = 0.0086), and its error falls below that of
+    the uninjected official base.
+- id: c2
+  statement: 'The comparison with the official base is only descriptive: the winner is built on a locally retrained base and the official base is not part of the paired test.'
+  location: Abstract
+  page: 1
+  quote: Because the winner is built on a locally retrained base and the official base is not part of the paired test, this is a descriptive cross-lineage comparison.
+- id: c3
+  statement: Injection gives significant gains only when the base is underfit on the task domain, the prior domain matches the task domain, and the task lies within the support of the base's training prior.
+  location: Abstract
+  page: 1
+  quote: injection yields significant gains only when the base is underfit on the task domain, the prior domain matches the task domain, and the task lies within the support of the base’s training prior.
+- id: c4
+  statement: The primary and adjacent evaluation domains are synthetic/proprietary causal benchmarks whose generation mechanism and release policy are not yet stated.
+  location: Reproducibility Statement
+  page: 25
+  quote: The primary domain law_race and the adjacent domain sales are synthetic/proprietary causal benchmarks with ground-truth graphs; their generation mechanism and release policy will be stated in the
+    released materials.
+- id: c5
+  statement: Baselines (CausalPFN and classical estimators such as S/T/X/DR-learners and CausalForestDML) are run under the same 5-fold split and protocol; baseline hyperparameter tuning was not found in
+    the text.
+  location: External validity
+  page: 19
+  quote: On our two domains, we compare against the direct SOTA (CausalPFN [3]) and a classical-estimator panel (S/T/X/DR-learner [13, 11], CausalForestDML [2], naive ATE) under the same 5-fold split and
+    the same protocol as model training.
+- id: c6
+  statement: On standard causal benchmarks (IHDP, Lalonde), the injection method is not superior to, and often worse than, existing methods.
+  location: Discussion
+  page: 23
+  quote: 'We state plainly: on standard causal benchmarks, our injection method is not superior to, and is often inferior to, existing methods.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Causal effect estimation with a PFN on tabular observational data; the priors are
+    causal graphs distilled from LLMs. Many comparisons use n = 3 seeds and are labelled directional by the author.'

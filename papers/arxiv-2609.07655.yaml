@@ -1,0 +1,66 @@
+id: arxiv-2609.07655
+title: 'Online Surrogate Repair: Decoupling High-Fidelity Feedback from Search Length in Closed-Loop Discovery'
+authors:
+- Xiaotang Feng
+- Philip Torr
+- Bruno Andreis
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.07655
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b886fc67e685634f9eddc0dda8d3391e12ca2025633f08a6302fb0fa7e86d1ba
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- Online surrogate repair (OSR) / Online EI with a tabular foundation model surrogate
+claims:
+- id: c1
+  statement: OSR uses sparse high-fidelity evaluations to update a surrogate during a longer agent search that mostly relies on cheap surrogate feedback.
+  location: Abstract
+  page: 1
+  quote: We propose online surrogate repair (OSR), a closed-loop algorithm that uses sparse high-fidelity evaluations to update the surrogate throughout a longer agent search conducted primarily with inexpensive
+    surrogate feedback.
+- id: c2
+  statement: In controlled synthetic environments, improving global surrogate fit does not necessarily reduce maximum regret, while Q90-UCB and EI acquisitions substantially reduce it.
+  location: Abstract
+  page: 1
+  quote: Across controlled synthetic environments, we demonstrate that improving global surrogate fit does not necessarily reduce maximum regret, whereas Q90-UCB and expected improvement (EI) substantially
+    reduce regret by directing evaluations toward regions that determine the optimizer’s decisions.
+- id: c3
+  statement: The authors argue that TabArena (global predictive accuracy) and TabPFN's training objective do not match the maximum-regret objective of closed-loop discovery.
+  location: Static surrogate repair
+  page: 7
+  quote: This is a crucial result because TabArena evaluates global predictive accuracy and TabPFN is trained for global prediction, not maximum regret, creating an objective mismatch with closed-loop discovery
+    (Erickson et al., 2025; Hollmann et al., 2025; Grinsztajn et al., 2026).
+- id: c4
+  statement: 'Static study protocol: 40 synthetic tabular worlds, a fixed budget of oracle queries, two context draws per world, two context sizes, with TabPFN-3 and TabICLv2 as surrogates.'
+  location: Static surrogate repair
+  page: 6
+  quote: Each acquisition rule repairs the surrogate with Q = 32 oracle queries on 40 synthetically generated tabular worlds, with two independent context draws per world, at both context sizes N = 100
+    and N = 1000
+- id: c5
+  statement: On the MADE benchmark the 'oracle' is a stronger machine-learned potential (Orb-v3), and a weaker one (MACE) provides surrogate feedback.
+  location: MADE benchmark
+  page: 8
+  quote: The weaker MACE model (Batatia et al., 2025) provides surrogate feedback, while the stronger Orb-v3 model (Rhodes et al., 2025) serves as the oracle.
+- id: c6
+  statement: 'Not tested: agents with test-time training or reinforcement learning, other surrogate classes, and more advanced scheduling.'
+  location: Discussions and Conclusion
+  page: 9
+  quote: We have not tested OSR or Online EI with agents using test-time training or reinforcement learning, with other surrogate classes, or with more advanced and optimization-aware scheduling.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Tabular foundation models are used as in-context regression surrogates (labels appended
+    as context rows, no parameter training). Surrogate hyperparameter settings (defaults vs tuned) were not found in the text. No competing-interest statement was found.'

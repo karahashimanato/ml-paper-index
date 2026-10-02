@@ -1,0 +1,70 @@
+id: arxiv-2610.00806
+title: Learning and Predicting Patent Technology Reuse Trajectories from Emergence-Time Signals
+authors:
+- Ayham Yousef
+- Qiang Ye
+- Qiang Cheng
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2610.00806
+  code: https://github.com/ayhamyousef/innovation_prediction
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: de8492092499f5165c3d837c5715b388058b5750ca1369f517dd09be9903aa2b
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  - tabular-attention
+  - tabular-mlp
+  - deep-learning
+  paradigms:
+  - supervised
+  - unsupervised
+proposes:
+- Framework coupling unsupervised reuse-trajectory labeling (GRU autoencoder + k-means) with tabular classification from emergence-time features
+claims:
+- id: c1
+  statement: Seven emergence-time features recover the GRU-based reuse labels well, but the calendar year of emergence alone is almost as predictive.
+  location: Abstract
+  page: 1
+  quote: Seven emergence-time features, observable in a technology’s first year, recover these labels at a one-vs-rest macro ROC-AUC of 0.914, but the calendar year of emergence alone reaches 0.874.
+- id: c2
+  statement: 'Seven classifiers are compared: GBDT, ExtraTrees, TabNet, FT-Transformer, TabM, TabKAN and TabMixer; GBDT is the primary baseline.'
+  location: Supervised Classification
+  page: 10
+  quote: We evaluate two tree ensembles, Gradient Boosting Decision Trees (GBDT) and Extremely Randomized Trees (ExtraTrees), and five deep tabular models
+- id: c3
+  statement: Classifiers use fixed settings listed per model (e.g. scikit-learn tree ensembles with the settings shown); no hyperparameter search procedure was found in the text.
+  location: Appendix (Classifier Hyperparameters)
+  page: 35
+  quote: The tree ensembles use the scikit-learn implementations with the settings shown.
+- id: c4
+  statement: Label construction is fit on the full corpus; a stratified 60/40 train/test split (with a 90/10 train/validation split for early stopping) is applied afterwards to the classification stage
+    only.
+  location: Methodology
+  page: 12
+  quote: 'The train/test split is applied afterwards, to the classification stage only: we use a stratified 60/40 train/test split, with a further 90/10 train/validation split within the training set for
+    early stopping.'
+- id: c5
+  statement: The sample-efficiency differences are mainly a GBDT effect rather than deep-versus-tree, and the sweep compares models that all already solve the (easy) emergence-profile task.
+  location: Discussion
+  page: 27
+  quote: What the sweep shows is that GBDT degrades faster than ExtraTrees, TabM, and FT-Transformer at very low data, and that the effect is confined to the smallest fractions.
+- id: c6
+  statement: 'Limitation: evaluation is single-domain (USPTO 2002-2022), untested on other patent offices.'
+  location: Limitations
+  page: 27
+  quote: 'First, the evaluation is single-domain: it uses USPTO patents from 2002–2022, and we have not tested whether the findings transfer to other patent offices such as the EPO or JPO.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Possible conflict of interest not disclosed as such: the reference list attributes
+    TabMixer to Ali Eslamian and Qiang Cheng and TabKAN to Eslamian, Afzal Aghaei and Qiang Cheng (same name as the corresponding author); FAE is Wu and Cheng (2021). Whether these are the same person is
+    not stated in the text.'

@@ -1,0 +1,75 @@
+id: arxiv-2006.16234
+title: True to the Model or True to the Data?
+authors:
+- Hugh Chen
+- Joseph D. Janizek
+- Scott Lundberg
+- Su-In Lee
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.16234
+  code: https://github.com/slundberg/shap/blob/master/shap/explainers/linear.py
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 23ecc0fbb298c76dea115638711e50fe119087e46b84cc697161d33e32ffcbfe
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - feature-attribution
+  - linear-models
+  paradigms:
+  - post-hoc
+proposes:
+- Argument that the interventional vs observational Shapley value function choice is application dependent ('true to the model' vs 'true to the data')
+- Efficient observational (conditional) Shapley values for linear models under a multivariate normal assumption
+claims:
+- id: c1
+  statement: Responding to Kumar et al. (2020), who suggest the two value functions present an irreconcilable problem, the authors argue that interventional and observational Shapley values are each meaningful
+    when applied in the proper context (the choice is application dependent).
+  location: Introduction
+  page: 2
+  quote: in this paper, we argue that rather than representing some critical flaw in using the Shapley value for feature attribution, each approach is meaningful when applied in the proper context
+- id: c2
+  statement: 'Assumption: to compute observational Shapley values for linear models, inputs are assumed to be multivariate normal.'
+  location: Linear SHAP
+  page: 2
+  quote: Estimating this conditional expectation is hard in general, so we assume the inputs x ∼N(µ, Σ) are multivariate normal.
+- id: c3
+  statement: On NHANES mortality data, a feature excluded from a linear model (BMI) receives importance under observational Shapley values because of its correlation with the used features.
+  location: Explaining a feature not used by the model
+  page: 3
+  quote: This implies that even though BMI is not included in the model, the correlation between BMI and other features makes BMI important under observational Shapley values.
+- id: c4
+  statement: '''True to the model'' evaluation on LendingClub with logistic regression: features are ranked by Shapley value, mean-imputed one at a time (up to 10), and the change in predicted log-odds
+    of default is measured.'
+  location: True to the Model
+  page: 5
+  quote: We then measured the change in the model’s predicted log odds of default after each feature (up to 10 features) had been mean-imputed.
+- id: c5
+  statement: In that loan setting, interventional Shapley values led to significantly better results than observational ones.
+  location: True to the Model
+  page: 5
+  quote: We find that using the interventional conditional expectation leads to significantly better results than the observational conditional expectation (Figure 3).
+- id: c6
+  statement: '''True to the data'' evaluation with ground truth: drug-response labels are simulated from 40 randomly selected causal genes on real RNA-seq data; for a Lasso model, observational Shapley
+    values recover more true causal genes than interventional ones.'
+  location: True to the Data
+  page: 5
+  quote: To create an experimental setting where we have access to the ground truth, we take the real RNA-seq data and simulate a drug response label as a function of 40 randomly selected causal genes (out
+    of 1000 total genes).
+- id: c7
+  statement: 'Limitation: the best case for feature attribution is when the perturbed features are independent, in which case observational and interventional attributions coincide.'
+  location: Conclusion
+  page: 6
+  quote: Currently, the best case for feature attribution is when the features that being perturbed are independent to start with.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. All analysis is on linear models (linear regression,
+    logistic regression, Lasso, Elastic Net). Co-authored by Scott Lundberg (SHAP author). Explicitly responds to Kumar et al. 2020 (arxiv-2002.11097), arguing the two value functions are each meaningful
+    in the proper context rather than an irreconcilable problem.'

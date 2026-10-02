@@ -1,0 +1,64 @@
+id: arxiv-2609.36108
+title: 'LoopICL: Looping a single transformer block to solve tabular tasks'
+authors:
+- Amir Rezaei Balef
+- Katharina Eggensperger
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.36108
+  code: https://github.com/amirbalef/loopicl
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8f87aa9e59646caea5db25a32cf5fcc4012aac5ef3ab2ce6032b75374e356553
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- LoopICL (looped single-block transformer for tabular ICL with learned early exit)
+claims:
+- id: c1
+  statement: LoopICL is a looped transformer whose design decouples parameter count from computational depth.
+  location: Abstract
+  page: 1
+  quote: We introduce LoopICL, a looped transformer whose core design decouples parameter count from computational depth.
+- id: c2
+  statement: In its standard setting, LoopICL performs competitively with TabICLv2 on TabArena and TALENT at the same FLOPs while using far fewer parameters.
+  location: Abstract
+  page: 1
+  quote: In its standard setting, LoopICL performs competitively with TabICLv2 on TabArena and TALENT at the same computational cost (FLOPs), while using nearly 90% fewer parameters.
+- id: c3
+  statement: Ablations use intermediate checkpoints evaluated on synthetic prior tasks and on 10 folds of the 54-dataset development set used by TabICLv2 and TabPFNv2, without ensembling.
+  location: Experiments
+  page: 6
+  quote: We study classification performance averaged across 1,000 synthetic tasks sampled from the prior and across 10 folds of the 54 development set used in TabICLv2 and TabPFNv2 (Hollmann et al., 2025)
+    , without any ensembling.
+- id: c4
+  statement: The final comparison is on TabArena and TALENT, with LoopICL evaluated as an ensemble of 8 members.
+  location: Experiments
+  page: 8
+  quote: We evaluate LoopICL using an ensemble of 8 members.
+- id: c5
+  statement: On TALENT all models are run on an A100 under identical conditions; on TabArena competitor runtimes are taken from the published benchmark and should not be used for direct runtime comparison.
+  location: Experiments (Figure 7 caption)
+  page: 9
+  quote: For TabArena, competitor runtimes are taken from the published benchmark and may reflect different hardware; these results should not be used for direct runtime comparisons of LoopICL with other
+    baselines.
+- id: c6
+  statement: The current model supports classification only; regression is left for future work.
+  location: Limitations
+  page: 10
+  quote: The current model supports classification tasks; extending it to regression tasks is left for future work.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. How TabArena/TALENT baselines were configured (default vs tuned) is not stated in
+    the text beyond ''Default'' / ''Tuned + Ens.'' labels in Figure 1.'

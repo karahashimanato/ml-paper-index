@@ -1,0 +1,64 @@
+id: arxiv-2609.31306
+title: Benchmarking Attention for Tabular Foundation Models
+authors:
+- Maximilian Schambach
+- Clemens Biehl
+- Sam Thelin
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.31306
+  code: https://github.com/SAP-samples/tabular-attention-benchmark
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 2a0b2a6d8e0829c7be2f4fcf80eaef2c00aab7467d2b70a7c42f427fae2f1562
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- Reproducible benchmark of attention backends for row/column attention in tabular foundation models
+claims:
+- id: c1
+  statement: The paper builds a reproducible benchmark of attention backends (SDPA, FlashAttention-2/3/4, vLLM, SageAttention) for the row/column attention used in tabular in-context learners.
+  location: Abstract
+  page: 1
+  quote: we create a reproducible benchmarking setup and study the unique characteristics of tabular attention across several backends
+- id: c2
+  statement: The best backend differs between column and row attention and depends on hardware and model specifics.
+  location: Abstract
+  page: 1
+  quote: We find that the optimal backend choice differs between column and row attention and varies across hardware as well as model specifics
+- id: c3
+  statement: The benchmark measures isolated kernel latency/throughput and memory on synthetic tabular tensors, not predictive accuracy.
+  location: Benchmark setup
+  page: 3
+  quote: measuring latency and memory consumption for isolated kernel throughput on synthetic tabular tensors
+- id: c4
+  statement: The train-test (context-query) split handled differently by TabPFN/Mitra and ConTextTab is ignored; standard full bidirectional attention is benchmarked instead.
+  location: Benchmark setup
+  page: 4
+  quote: Instead, we evaluate standard full bi-directional attention.
+- id: c5
+  statement: 'Stated limitation: only isolated kernels with synthetic tensors are benchmarked, not end-to-end training or inference; only bfloat16, non-causal attention and batch size 1 are used.'
+  location: Limitations
+  page: 10
+  quote: Our benchmark focuses on isolated attention kernels with synthetic tensors rather than end-to-end model training or inference
+- id: c6
+  statement: Two of the authors (SAP SE) are co-authors of ConTextTab, one of the models whose attention pattern is benchmarked; the main head configuration is taken from that model's reference.
+  location: References
+  page: 11
+  quote: Marco Spinaci, Marek Polewczyk, Maximilian Schambach, and Sam Thelin.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Kernel-throughput benchmark; no predictive task is evaluated, so task tags are approximate
+    (tabular foundation models serve both classification and regression).'

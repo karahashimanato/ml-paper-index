@@ -1,0 +1,65 @@
+id: arxiv-2609.39613
+title: Hybrid Methods for Robust Tabular Data Imputation
+authors:
+- Jinwei Li
+- Michelle Bruch
+- Daniel Tenbrinck
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.39613
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 1de66b42450975b4f1d45feaec13b9d2ef281abc4249ba1b3165b043de4e4c73
+tags:
+  tasks:
+  - tabular-imputation
+  method_families:
+  - random-forests
+  paradigms:
+  - unsupervised
+proposes:
+- NuclearForest (adaptive SVT initialization + one-pass random forest refinement)
+- SoftForest (SoftImpute initialization + one-pass random forest refinement)
+claims:
+- id: c1
+  statement: The paper proposes NuclearForest and SoftForest, combining nuclear-norm low-rank initialization (SVT or SoftImpute) with a non-iterative random forest refinement.
+  location: Abstract
+  page: 1
+  quote: In this work, we propose two hybrid imputation methods called NuclearForest and SoftForest, which combine nuclear-norm-based low-rank initialization using Singular Value Thresholding (SVT) and
+    SoftImpute, respectively, with a non-iterative Random Forest refinement.
+- id: c2
+  statement: The hybrids are reported to match or exceed the imputation fidelity of iterative methods such as MissForest at lower computational cost.
+  location: Abstract
+  page: 1
+  quote: Our results demonstrate that NuclearForest and SoftForest match or exceed the imputation fidelity of state-of-the-art iterative methods such as MissForest, while significantly reducing computational
+    cost.
+- id: c3
+  statement: Missing entries are regenerated independently over 10 repeated runs per setting.
+  location: Experiments and results
+  page: 5
+  quote: For each setting, missing entries are regenerated independently over 10 repeated experimental runs, ensuring different missingness masks across runs while preserving reproducibility.
+- id: c4
+  statement: Neural-network imputation methods are not included as primary baselines.
+  location: Experiments and results
+  page: 5
+  quote: Neural-network-based imputation methods are not included as primary baselines because the focus of this study is on efficient classical and hybrid tabular imputers.
+- id: c5
+  statement: On the metabolomics data, NuclearForest is competitive with MissForest and strong at low missing rates, while MissForest is best in several medium- and high-missingness settings.
+  location: Conclusion
+  page: 9
+  quote: On the former, NuclearForest remains competitive with MissForest across missingness levels and is particularly strong at low missing rates, while MissForest achieves the best performance in several
+    medium- and high-missingness settings.
+- id: c6
+  statement: The gains do not fully extend to the left-censored MNAR setting, where Half-min is well aligned with the mechanism.
+  location: Conclusion
+  page: 9
+  quote: A limitation is that these gains do not fully extend to the left-censored MNAR setting, where Half-min is well aligned with this mechanism.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Only two datasets: a metabolomics dataset (Wei et al. 2018) and a Kaggle housing
+    dataset. All methods use fixed hyperparameters listed in the appendix; no tuning procedure was found in the text. Code is stated to be released upon acceptance (no URL in the text).'

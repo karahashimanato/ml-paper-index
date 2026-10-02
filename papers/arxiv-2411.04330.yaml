@@ -1,0 +1,79 @@
+id: arxiv-2411.04330
+title: Scaling Laws for Precision
+authors:
+- Tanishq Kumar
+- Zachary Ankner
+- Benjamin F. Spector
+- Blake Bordelon
+- Niklas Muennighoff
+- Mansheej Paul
+- Cengiz Pehlevan
+- Christopher Ré
+- Aditi Raghunathan
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2411.04330
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a1ce8890b1ec505a309b081330d4d76f2762fc09af22bfbeb5e9dbd292b43761
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - quantization-aware-training
+  - large-language-models
+proposes:
+- 'Precision-aware scaling laws: an effective parameter count N_eff for low-precision training and a post-training-quantization degradation term delta_PTQ that grows with data'
+claims:
+- id: c1
+  statement: 'Main claim: PTQ degradation increases as models are trained on more data, eventually making additional pretraining data harmful; the authors propose that training in lower precision reduces
+    the effective parameter count.'
+  location: Abstract
+  page: 1
+  quote: For inference, we find that the degradation introduced by post-training quantization increases as models are trained on more data, eventually making additional pretraining data actively harmful.
+- id: c2
+  statement: 'Setup: OLMo-style models on Dolma V1.7 with 30-220M non-embedding parameters and 1.5-26B tokens, sweeping 8 precisions each for weights, activations and attention (KV); over 465 pretraining
+    runs, with predictions validated up to 1.7B parameters.'
+  location: Setup
+  page: 4
+  quote: Our experiments consist of a sweep of language model pretraining runs over N ∈[30, 60, 110, 220] million parameters (non-embedding) and D ∈[1.5, 3, 6, 13, 26] billion tokens.
+- id: c3
+  statement: 'PTQ setting: BF16-trained models are weight-quantized after training with GPTQ, with findings replicated with AWQ and round-to-nearest in the appendix.'
+  location: Scaling laws for post-train quantization
+  page: 4
+  quote: In this section, we consider models trained in BF16 and use GPTQ [Frantar et al., 2022] to post-train quantize them, replicating our findings with two other methods in Appendix F.
+- id: c4
+  statement: Within a model size, degradation from PTQ grows with training data, while for a fixed dataset size larger models degrade less; degradation grows exponentially as the post-training precision
+    is lowered.
+  location: Scaling laws for post-train quantization
+  page: 5
+  quote: We find that the degradation δPTQ increases in training data size across all model sizes, but that for a fixed dataset size larger models incur a smaller degradation.
+- id: c5
+  statement: For training, the fitted laws suggest that training larger models in lower precision may be compute optimal (under the paper's cost model).
+  location: Abstract
+  page: 1
+  quote: For training, our scaling laws allow us to predict the loss of a model with different parts in different precisions, and suggest that training larger models in lower precision may be compute optimal.
+- id: c6
+  statement: The authors stress that the contribution is the trends and functional forms rather than the fitted numerical constants, which can vary with small implementation differences.
+  location: Background
+  page: 4
+  quote: For this reason, we emphasize our contribution is not the numerical values we fit, but the trends and functional forms we identify.
+- id: c7
+  statement: 'Limitations: a fixed architecture, compute gains from halving precision usually below 2x due to systems overhead, and only loss scaling without downstream evaluations; trends are meant to
+    be suggestive.'
+  location: Conclusion and limitations
+  page: 12
+  quote: Third, we only consider loss scaling without downstream model evaluations.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. Evaluation metric is validation loss only (no perplexity-on-benchmark
+    or downstream tasks). Quantization-aware training here means weight-only quantization during training; low-precision training quantizes weights, activations and attention. Integer-type precision is
+    used in the main sweeps (floating-point replication in an appendix). No measured kernel speedups; compute costs come from a cost model. Affiliations include Databricks for two authors. No paradigm tag
+    fits language-model pretraining, so paradigms are omitted.'

@@ -1,0 +1,65 @@
+id: doi-10.65542_djei.v2i3.83
+title: Adaptive Multi-Task Learning for Urban Air Quality Assessment
+authors:
+- Iman Youssif Ibrahim
+- Dindar M. Ahmed
+year: 2026
+venue: Dasinya Journal for Engineering and Informatics
+links:
+  doi: https://doi.org/10.65542/djei.v2i3.83
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c160ddf84ceb7fbf8d928a87c962684e80047ba88dfa7f4f6fafd91547de528d
+  pdf_url: https://dasinya.dpu.edu.krd/index.php/pub/article/download/83/38
+  license: cc-by
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-mlp
+  paradigms:
+  - supervised
+proposes:
+- 'TMTL-AQI: multi-task MLP with cyclical temporal encoding and hard parameter sharing (AQI class + PM2.5/PM10 + auxiliary AQI regression)'
+claims:
+- id: c1
+  statement: TMTL-AQI jointly performs AQI category classification, PM2.5/PM10 regression and auxiliary AQI value regression from structured data with a shared backbone.
+  location: Abstract
+  page: 1
+  quote: 'The model simultaneously performs three tasks: Air Quality Index category classification, PM2.5 and PM10 particulate matter regression, and auxiliary AQI value prediction.'
+- id: c2
+  statement: 'Data and split: the TRAQID dataset (26,678 samples, 2022-2024) with a single stratified 80:20 train/test split.'
+  location: Dataset Description
+  page: 4
+  quote: The dataset comprises 26,678 samples collected between 2022 and 2024 and was divided into training and testing sets using a stratified 80:20 ratio to preserve the class distribution.
+- id: c3
+  statement: The evaluated models are a single-task model, a multi-task model and the proposed TMTL-AQI; no tree-based or other tabular baselines were run (the AQC-Net comparison uses results reported for
+    AQC-Net).
+  location: Results
+  page: 8
+  quote: 'Three models were evaluated: a single-task model, a multi-task model, and the proposed (TMTL-AQI) model.'
+- id: c4
+  statement: Hyperparameters were set empirically through preliminary validation.
+  location: Proposed Approach
+  page: 7
+  quote: The selected hyperparameters were determined empirically through preliminary validation to achieve stable convergence and consistent validation performance.
+- id: c5
+  statement: The comparison with AQC-Net uses results reported for AQC-Net, not a re-run under the same conditions.
+  location: Discussion
+  page: 10
+  quote: Table 5 provides an additional comparison with the state-of-the-art results reported on the AQC-Net dataset.
+- id: c6
+  statement: 'Limitation: no ablation study was conducted for the temporal encoding and the auxiliary AQI head; this and evaluation across multiple random seeds are left to future work.'
+  location: Discussion
+  page: 10
+  quote: A limitation of this study is that no ablation study was conducted to evaluate the individual contribution of the temporal encoding and the auxiliary AQI regression head.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: environmental / air quality (TRAQID dataset, meteorological and
+    temporal features). Single run with seed 42.'

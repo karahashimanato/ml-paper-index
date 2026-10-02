@@ -1,0 +1,69 @@
+id: arxiv-2608.30392
+title: 'Foundation Models Meet Agriculture: Challenges Beyond Pretraining'
+authors:
+- Vishal Nedungadi
+- Xingguo Xiong
+- Marc Rußwurm
+- Ioannis N. Athanasiadis
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.30392
+  code: https://github.com/vishalned/CropBench
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: fa34fdfe626ca5932a5357eece10b829bbb434b913859a8fd4e4e4e568143a43
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - random-forests
+  - deep-learning
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- Analysis of two bottlenecks (modality gap, task heterogeneity) for foundation models in agriculture, benchmarking EO FMs, TabPFN and supervised baselines
+claims:
+- id: c1
+  statement: Agricultural tasks often need non-imagery modalities that EO foundation models cannot ingest, while a tabular foundation model handles this heterogeneity more naturally.
+  location: Abstract
+  page: 1
+  quote: agricultural downstream tasks frequently require diverse, non-imagery data modalities that earth observation foundation models are architecturally unequipped to ingest, while a foundation model
+    built for tabular data handles this heterogeneity more naturally
+- id: c2
+  statement: TabPFN, without geospatial or agricultural pretraining, matches or outperforms the foundation models across several datasets.
+  location: Results
+  page: 6
+  quote: We find that it matches or outperforms FMs across several datasets.
+- id: c3
+  statement: A standardized set of hyperparameters is used across datasets instead of per-dataset optimization, because labels are limited on several datasets and the goal is robustness rather than best
+    achievable performance.
+  location: Hyperparameter Policy
+  page: 5
+  quote: We adopt a standardized set of hyperparameters across datasets.
+- id: c4
+  statement: The Random Forest uses 500 trees with default settings for all other hyperparameters.
+  location: Model Configurations
+  page: 5
+  quote: The Random Forest classifier/regressor is trained with 500 trees using the default settings for all remaining hyperparameters.
+- id: c5
+  statement: CY-Bench yield prediction uses chronological walk-forward validation on the final five years.
+  location: Evaluation Splits
+  page: 3
+  quote: Finally, to simulate operational forecasting for CY-Bench, we employ a chronological walk-forward validation strategy on the final 5 years.
+- id: c6
+  statement: 'Stated limitation: the baselines are traditional, simple methods rather than complex domain-specific models.'
+  location: Limitations
+  page: 8
+  quote: Thirdly, the study utilizes traditional, simple methods as baselines, whereas a large body of literature exists detailing complex, domain-specific models designed for each individual task.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Seven agricultural datasets (crop classification, phenology, yield). The discussion
+    refers to a ''well-tuned tabular baseline'', while the stated protocol uses fixed hyperparameters and a default-setting Random Forest. TabPFN version/configuration was not found in the text.'

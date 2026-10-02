@@ -1,0 +1,77 @@
+id: arxiv-1810.03292
+title: Sanity Checks for Saliency Maps
+authors:
+- Julius Adebayo
+- Justin Gilmer
+- Michael Muelly
+- Ian Goodfellow
+- Moritz Hardt
+- Been Kim
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1810.03292
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 654cb2393d1e2bf96374c2d8bf85d2561ed9a162ce58249e640d7685701c9ce0
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - saliency-maps
+  - feature-attribution
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- Model parameter randomization test and data (label) randomization test as sanity checks for explanation methods
+claims:
+- id: c1
+  statement: 'Model parameter randomization test: compare a saliency method''s output on the trained model with its output on a randomly initialized network of the same architecture.'
+  location: Introduction
+  page: 2
+  quote: The model parameter randomization test compares the output of a saliency method on a trained model with the output of the saliency method on a randomly initialized untrained network of the same
+    architecture.
+- id: c2
+  statement: 'Data randomization test: compare explanations from a model trained on true labels with those from the same architecture trained on randomly permuted labels.'
+  location: Introduction
+  page: 2
+  quote: The data randomization test compares a given saliency method applied to a model trained on a labeled data set with the method applied to the same model architecture but trained on a copy of the
+    data set in which we randomly permuted all labels.
+- id: c3
+  statement: 'Evaluation metrics: similarity between original and randomized explanations is quantified by Spearman rank correlation (with and without absolute value), SSIM and HOG correlation.'
+  location: Visualization & Similarity Metrics
+  page: 4
+  quote: Spearman rank correlation without absolute value (diverging), the structural similarity index (SSIM), and the Pearson correlation of the histogram of gradients (HOGs) derived from two maps
+- id: c4
+  statement: 'Main result: Gradients and GradCAM pass, while Guided BackProp and Guided GradCAM are invariant to higher-layer parameters and fail.'
+  location: Introduction (contributions)
+  page: 3
+  quote: Of the methods tested, Gradients & GradCAM pass the sanity checks, while Guided BackProp & Guided GradCAM are invariant to higher layer parameters; hence, fail.
+- id: c5
+  statement: 'Failure mode of visual assessment: naive visual inspection of masks does not distinguish networks of similar structure but very different parameters.'
+  location: Cascading Randomization
+  page: 5
+  quote: The observed visual perception versus ranking dichotomy indicates that naive visual inspection of the masks, in this setting, does not distinguish networks of similar structure but widely differing
+    parameters.
+- id: c6
+  statement: In an experiment that keeps the input fixed and multiplies it by random vectors in place of the gradient, the input dominates the product; the authors conclude that methods approximating the
+    input-times-gradient product (they name epsilon-LRP, DeepLift and integrated gradients) mostly return the input when gradients look visually noisy.
+  location: Element-wise input-gradient products
+  page: 9
+  quote: This experiment indicates that methods that approximate the “input-times-gradient” mostly return the input, in cases where the gradients look visually noisy as they tend to do.
+- id: c7
+  statement: 'Scope: the authors present the tests as a step toward more rigorous evaluation, not a verdict on existing methods.'
+  location: Conclusion and future work
+  page: 10
+  quote: Along these lines, we hope that our paper is a stepping stone towards a more rigorous evaluation of new explanation methods, rather than a verdict on existing methods.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: NeurIPS 2018. Affiliations: five
+    co-authors list Google Brain (one also UC Berkeley); the first author''s email is at MIT and his work was done during the Google AI Residency Program. Models/data: Inception v3 on ImageNet, CNN and
+    MLP on MNIST and Fashion MNIST; image classification only. A footnote says a previous version of this work noted Guided Backprop was entirely invariant, which is not the case; the acknowledgments thank
+    Leon Sixt for pointing out a bug in the Guided Backprop experiments of an earlier version. No ground-truth attributions are used; the tests check sensitivity to model/data, not correctness.'

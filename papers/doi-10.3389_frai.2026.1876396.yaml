@@ -1,0 +1,74 @@
+id: doi-10.3389_frai.2026.1876396
+title: Evaluation of hybrid models based on image segmentation and inference for pig weight estimation
+authors:
+- Miguel Angel Valles-Coral
+- Kelvin Lleins Rojas-Córdova
+- Lloy Pinedo
+- Richard Injante
+- Pierre Vidaurre-Rojas
+- Jorge Saavedra-Ramírez
+- Fernando Ruiz-Saavedra
+- Williams Ramirez
+year: 2026
+venue: Frontiers in Artificial Intelligence
+links:
+  doi: https://doi.org/10.3389/frai.2026.1876396
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8058f588eb03204be1be011e14b8264d74359ed8d7917052ce8fc857849a179b
+  pdf_url: https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2026.1876396/pdf
+  license: cc-by
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - kernel-methods
+  - gradient-boosted-trees
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Hybrid pipeline: YOLOv8n-seg segmentation + EfficientNet-B0 embeddings + tabular regressors (SVR / XGBoost / CatBoost) for pig weight'
+claims:
+- id: c1
+  statement: The paper proposes a non-invasive computer-vision approach to estimate pig weight under real farm conditions.
+  location: Abstract
+  page: 1
+  quote: This study proposes a non-invasive computer vision–based approach to estimate pig weight under real farm conditions in San Martín, Peru.
+- id: c2
+  statement: Frozen-CNN image embeddings are fed to SVR, XGBoost and CatBoost, evaluated with repeated stratified cross-validation and an independent test set.
+  location: Abstract
+  page: 1
+  quote: The resulting embeddings were used as input for supervised regression models (SVR, XGBoost, and CatBoost), evaluated using repeated stratified cross-validation and an independent test set, with
+    MAE, RMSE, and R² as performance metrics.
+- id: c3
+  statement: Hyperparameters are tuned on a separate tuning subset of the development data, distinct from the cross-validation pool and the held-out test set.
+  location: Materials and methods
+  page: 6
+  quote: subset represented 15% of TrainDev and was used for hyperparameter optimization, while CVPool comprised the remaining data.
+- id: c4
+  statement: Models are compared with a Friedman test followed by Wilcoxon post hoc tests with Holm correction.
+  location: Abstract
+  page: 1
+  quote: Statistical comparisons were conducted using the Friedman test followed by Wilcoxon post hoc analysis with Holm correction.
+- id: c5
+  statement: SVR gave the best results, with statistically significant differences from the other models.
+  location: Abstract
+  page: 1
+  quote: showing statistically significant differences compared to the other models.
+- id: c6
+  statement: The authors note a tendency to underestimate weight in higher weight ranges, which they take to indicate a limitation of two-dimensional images in representing the animal's full volume.
+  location: Discussion
+  page: 10
+  quote: However, the observed tendency toward underestimation in higher weight ranges indicates a limitation of two-dimensional images in representing the full volumetric characteristics of the animal,
+    as also reported in previous studies (Liu et al., 2023; Paudel et al., 2023).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: precision livestock farming (3,800 lateral RGB images from one
+    farm; each row is a 1,280-dimensional embedding). The number of distinct animals and whether splits were grouped by animal were not found in the text. The dataset is not public (available on request).
+    Tuning search method/budget on the Tune subset was not found in the text (only the selected configurations are listed).'

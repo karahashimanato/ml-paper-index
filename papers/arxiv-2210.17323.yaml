@@ -1,0 +1,73 @@
+id: arxiv-2210.17323
+title: 'GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers'
+authors:
+- Elias Frantar
+- Saleh Ashkboos
+- Torsten Hoefler
+- Dan Alistarh
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2210.17323
+  code: https://github.com/IST-DASLab/gptq
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 35e339171cd48bbf8dda246bd018b11aa33a5cda0c4a1587cdae574208f56396
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- GPTQ
+claims:
+- id: c1
+  statement: Proposes GPTQ, a one-shot weight quantization method using approximate second-order information.
+  location: Abstract
+  page: 1
+  quote: we address this challenge, and propose GPTQ, a new one-shot weight quantization method based on approximate second-order information, that is both highly-accurate and highly-efficient.
+- id: c2
+  statement: 'Calibration data: 128 random 2048-token segments from C4 (generic web text); the authors say GPTQ sees no task-specific data.'
+  location: Experimental validation (Setup)
+  page: 6
+  quote: Our entire GPTQ calibration data consists of 128 random 2048 token segments from the C4 dataset (Raffel et al., 2020), i.e., excerpts from randomly crawled websites, which represents generic text
+    data.
+- id: c3
+  statement: 'Granularity: standard uniform per-row asymmetric quantization on the min-max grid (weights only).'
+  location: Experimental validation (Setup)
+  page: 6
+  quote: We perform standard uniform per-row asymmetric quantization on the min-max grid, similar to Dettmers et al. (2022).
+- id: c4
+  statement: 'Metric choice: the main evaluation uses perplexity-based language generation tasks (WikiText2, PTB, C4) because they are known to be sensitive to quantization; zero-shot tasks are a complement.'
+  location: Experimental validation (Language Generation)
+  page: 7
+  quote: We focus on these perplexity-based tasks, as they are known to be particularly sensitive to model quantization (Yao et al., 2022).
+- id: c5
+  statement: 'Evaluation caveat stated by the authors: since calibration data is sampled from the C4 training set, the C4 perplexity evaluation is not fully zero-shot.'
+  location: Appendix (Tables 11-12 captions)
+  page: 14
+  quote: We note that the calibration data used by GPTQ is sampled from the C4 training set, this task is thus not fully zero-shot.
+- id: c6
+  statement: 'Limitation: speedups come from reduced memory movement, not from computational reductions; the study also does not consider activation quantization.'
+  location: Summary and limitations
+  page: 9
+  quote: our method obtains speedups from reduced memory movement, and does not lead to computational reductions.
+- id: c7
+  statement: The authors note that the study focused on standard 'leading accuracy' metrics such as perplexity, and that a thorough study of compression's impact on secondary measures, in particular bias
+    effects, is warranted.
+  location: Ethics statement
+  page: 10
+  quote: We believe a thorough study of the impact of compression upon secondary measures, and in particular bias effects (Bender et al., 2021) is warranted, and may be rendered easier through our work.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at
+    ICLR 2023. Speedups reported in the abstract are measured on NVIDIA A100 and A6000 GPUs with the authors'' custom kernels.'

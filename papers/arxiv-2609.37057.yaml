@@ -1,0 +1,65 @@
+id: arxiv-2609.37057
+title: Message Passing Does More with Less for In-Context Learning on Graphs
+authors:
+- Dooho Lee
+- Jinmo Lee
+- Minho Jeong
+- Kijung Shin
+- Jaemin Yoo
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.37057
+  code: https://github.com/nums-ai/ephris
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: dbef237278f8e95014a882b6cbf3c372bdebcc7e52d1a11953d3cb045b845433
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  paradigms:
+  - in-context-learning
+proposes:
+- Ephris (graph in-context learner with sparse message passing, pretrained on SCM-generated synthetic graphs)
+claims:
+- id: c1
+  statement: Ephris is a graph in-context learner built on sparse message passing that scales linearly with feature entries and edges, pretrained entirely on synthetic graphs.
+  location: Abstract
+  page: 1
+  quote: In this work, we present Ephris, a new graph in-context learner built on sparse message passing, scaling linearly with the number of node-feature entries and graph edges.
+- id: c2
+  statement: Evaluated on 51 node-classification datasets against 15 extensively tuned GNNs and existing graph ICL methods, Ephris ranks first on all four aggregate measures.
+  location: Abstract
+  page: 1
+  quote: 'Across both settings, Ephris ranks first on all four aggregate measures: Elo, improvability, average rank, and accuracy.'
+- id: c3
+  statement: Following TabArena, each GNN is evaluated with default hyperparameters and tuned (best of 200 configurations by validation); high- and low-label regimes with five splits each.
+  location: Evaluation protocol
+  page: 7
+  quote: 'Following TabArena (Erickson et al., 2026), each GNN is evaluated under two tuning budgets: default, using default hyperparameters, and tuned, selecting the best of 200 configurations by validation
+    performance.'
+- id: c4
+  statement: Under this broader evaluation, advantages reported for existing graph foundation models do not hold against tuned GNNs such as GCNII and GPRGNN.
+  location: Results
+  page: 8
+  quote: Therefore, the advantages reported for existing GFMs do not hold for broader datasets and stronger baselines.
+- id: c5
+  statement: 'Limitations: ablations use reduced-budget proxy pretraining; robustness under non-IID grouped and temporal splits remains to be improved; scope limited to node classification.'
+  location: Limitations
+  page: 9
+  quote: Our ablation studies use reduced-budget proxy pretraining, so their conclusions may not fully transfer to full-scale training.
+- id: c6
+  statement: Among the GFM baselines, Node4All is authored by two of this paper's authors (per the reference list); this overlap is not discussed as a conflict of interest.
+  location: References
+  page: 12
+  quote: 'Dooho Lee and Jaemin Yoo. Node4all: Learning node representation beyond datasets.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Graph node classification, not tabular. Affiliations: Nums AI, KAIST, Seoul National
+    University (corresponding author: Nums AI and Seoul National University).'

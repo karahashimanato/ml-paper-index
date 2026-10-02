@@ -1,0 +1,67 @@
+id: arxiv-2609.22866
+title: Causilo Technical Report
+authors:
+- Minyong Cho
+- Minho Jeong
+- Dooho Lee
+- Jinmo Lee
+- Jaemin Yoo
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.22866
+  code: https://github.com/nums-ai/causilo
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 2cc95c853b105f24a17385b614a0af93f9a0edba8175050508749a42a1e5df89
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - tabular-attention
+  paradigms:
+  - in-context-learning
+proposes:
+- Causilo (column-then-row tabular foundation model with a row-refinement stage before row compression)
+claims:
+- id: c1
+  statement: Causilo is a tabular foundation model aiming at frontier predictive performance with very fast inference.
+  location: Abstract
+  page: 1
+  quote: We introduce Causilo, a tabular foundation model (TFM) that combines frontier predictive performance with exceptionally fast inference.
+- id: c2
+  statement: Causilo follows TabICL's column-then-row architecture and adds a row-refinement module before row compression.
+  location: Abstract
+  page: 1
+  quote: Causilo follows TabICL’s column-then-row architecture but introduces another row-refinement module before row compression.
+- id: c3
+  statement: Pretrained on about 36M synthetic tables, Causilo reports frontier-level performance with substantially faster inference on TabArena, BeyondArena and ScoringBench.
+  location: Abstract
+  page: 1
+  quote: Pretrained on approximately 36M synthetic tables, Causilo delivers strong benchmark results across TabArena, BeyondArena, and ScoringBench, achieving frontier-level performance with substantially
+    faster inference.
+- id: c4
+  statement: TabArena comparisons use the latest public results as of 18 September 2026, with Elo computed over the full leaderboard including system submissions such as AutoGluon.
+  location: Evaluation (TabArena)
+  page: 7
+  quote: We use the latest public results as of 18 September 2026 and Elo ratings are computed over the full leaderboard, including system submissions such as AutoGluon [21]
+- id: c5
+  statement: BeyondArena has 142 curated datasets with IID, temporal and grouped splits, varied sizes, and tables with text or high-cardinality categoricals.
+  location: Evaluation (BeyondArena)
+  page: 9
+  quote: Its 142 curated datasets span IID, temporal, and grouped splits, a wide range of sample sizes and feature counts, and tables with text or high-cardinality categorical features.
+- id: c6
+  statement: For BeyondArena, published baseline results are reused and only Causilo is evaluated locally.
+  location: Evaluation (BeyondArena)
+  page: 9
+  quote: We therefore use its published baseline results and add only Causilo, which we evaluate locally.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Company report (Nums AI Inc. holds the commercial license for the weights). No limitations
+    section was found in the text. Baselines are not re-run: TabArena and BeyondArena numbers come from the public leaderboards.'

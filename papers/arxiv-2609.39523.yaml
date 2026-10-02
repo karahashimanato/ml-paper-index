@@ -1,0 +1,66 @@
+id: arxiv-2609.39523
+title: 'CIDER-FM: Foundation Models for Causal Inference from Diverse Experimental Regimes'
+authors:
+- Yuche Gao
+- Arik Reuter
+- Siyuan Guo
+- Anish Dhir
+- Bernhard Schölkopf
+- Adrian Weller
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.39523
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a6080c98f4055cd5518db0ee14e84a2e9a09c72990dadfc78004990a84191af8
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- CIDER-FM (causal foundation model with three-axis attention over variables, samples and experimental regimes)
+claims:
+- id: c1
+  statement: The paper studies causal foundation models that combine observational and surrogate-interventional data to predict a conditional interventional distribution.
+  location: Abstract
+  page: 1
+  quote: This work studies CFMs as a method to combine finite observational and surrogate-interventional datasets in order to predict a target conditional interventional distribution (CID) more accurately
+    than with observational data alone.
+- id: c2
+  statement: Results show strong CID prediction and that experimental context can improve over observational data alone.
+  location: Abstract
+  page: 1
+  quote: Our results demonstrate strong CID prediction performance and show that incorporating experimental context can improve predictions over observational data alone.
+- id: c3
+  statement: Because external CFMs are misspecified for this setting, the primary control is CIDER-FM-Obs, trained on the same prior with observational context only.
+  location: Experiments
+  page: 6
+  quote: Given the misspecification affecting external CFMs in our setting (Appendix D), we use CIDER-FM-Obs as our primary matched control.
+- id: c4
+  statement: The Do-PFN comparison is under treatment-domain misspecification (binary-treatment checkpoint given continuous treatments).
+  location: Appendix
+  page: 21
+  quote: Consequently, this comparison evaluates Do-PFN under treatment-domain misspecification.
+- id: c5
+  statement: 'Limitation: evaluation is limited to graphs with at most ten variables due to compute.'
+  location: Discussion, limitations and outlook
+  page: 9
+  quote: Due to limited available computational resources, our current evaluation is limited to graphs with at most ten variables and does not yet establish how the approach scales to larger systems.
+- id: c6
+  statement: Experiments use one intervention target per regime and assume all regimes share population and non-intervened mechanisms.
+  location: Discussion, limitations and outlook
+  page: 9
+  quote: Although the proposed input representation supports simultaneous interventions on multiple variables, our experiments use only one intervention target per regime and assume that all regimes share
+    the same population and non-intervened mechanisms.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. One author lists Prior Labs as affiliation while TabPFN v2 is a baseline; Graph4CFM
+    (cited as Reuter et al., 2026) is a baseline and an author is named Arik Reuter (name match only). No conflict statement found in the text.'

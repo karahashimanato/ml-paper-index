@@ -1,0 +1,68 @@
+id: arxiv-2608.13793
+title: On the Brittleness of Maximum Likelihood Estimation for Gaussian Process Hyperparameter Optimization
+authors:
+- Tyler R. Johnson
+- Kian Ben-Jacob
+- Christopher P. Muller
+- Ramin Bostanabad
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.13793
+  code: https://github.com/Bostanabad-Research-Group/GP-vs-TabPFN-vs-GPyTorch
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d65bb481e5fe44192306020d87b7d4530462d06fae0d4acc0f202f491734c116
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - gaussian-processes
+  - tabular-foundation-model
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- Practical remedies for MLE-based GP training (log-scale reparameterization, multiple initializations, smooth hyperparameter bounds)
+claims:
+- id: c1
+  statement: Implemented carefully, GPs trained via MLE remain highly competitive and can outperform foundation models such as TabPFN in prediction accuracy, UQ quality and inference cost.
+  location: Conclusion
+  page: 19
+  quote: When implemented carefully, GPs trained via MLE remain highly competitive and can outperform foundation models such as TabPFN in prediction accuracy, UQ quality, and inference cost.
+- id: c2
+  statement: To stress-test GPs, the GPs are trained with the default settings of GPyTorch and GP+.
+  location: Evaluation protocols
+  page: 8
+  quote: To stress-test GPs, we train them via the default settings of Gpytorch [55] and GP+ [56].
+- id: c3
+  statement: The regression benchmarks are analytic test functions from a simulation-experiment library, with categorical inputs studied via the Buckling function.
+  location: Evaluation protocols
+  page: 8
+  quote: Nine benchmark regression problems are adopted from [57] (i.e. Ackley, Borehole, Dixon-Price, Griewank, Rosenbrock, Wing Weight, and Zakharov) and we study the effects of categorical inputs in
+    the Buckling function obtained from [58].
+- id: c4
+  statement: For the comparison with TabPFN, the GP training process and kernel were not fine-tuned; evaluating the models under their best settings is left open.
+  location: Conclusion
+  page: 20
+  quote: For a fair comparison, we refrained from fine-tuning the training process and kernel of the GPs when comparing them to TabPFN but it is interesting to evaluate these models under their best settings.
+- id: c5
+  statement: The studies were mostly limited to analytic benchmarks with Gaussian observation noise.
+  location: Conclusion
+  page: 20
+  quote: Our studies were mostly limited to analytic benchmarks with Gaussian observation noise.
+- id: c6
+  statement: 'GP+, one of the evaluated GP libraries, is described by the authors as their own package (conflict-of-interest relevant: the authors'' library is compared against TabPFN).'
+  location: Section 3.2
+  page: 8
+  quote: In our GP+ package, the hyperparameters corresponding to the kernel in Equation (11) are bounded
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The GP+ reference [56] lists the corresponding author (Ramin Bostanabad) as an author.
+    TabPFN v2.0 and v2.5 are compared; in the 1D examples TabPFN v2.5 is also shown with a tuned configuration (small-samples checkpoint, larger ensemble). Each regression experiment is repeated 10 times
+    with 5000 test samples.'

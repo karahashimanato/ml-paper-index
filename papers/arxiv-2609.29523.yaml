@@ -1,0 +1,69 @@
+id: arxiv-2609.29523
+title: Towards Trustworthy Biological Alignment in TabPFN-Probed Pathology Foundation Models
+authors:
+- Ushashi Bhattacharjee
+- Alloy Das
+- Saria Hannan
+- Tirtho Roy
+- Koushik Howlader
+- Soumik Sarkar
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.29523
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a7aaa797ae3c427f0881d90969d4e2e226c6d65f1f2ce147f8d4c296d51b0217
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - linear-models
+  - deep-learning
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- Training-free audit of biological alignment in frozen pathology foundation models using a TabPFN regression probe with negative, shift, perturbation and shortcut controls
+claims:
+- id: c1
+  statement: The paper presents a training-free framework for auditing biological alignment in frozen pathology foundation models, using spatially paired histology and transcriptomics from HEST-1k (240
+    samples, 3 organs).
+  location: Abstract
+  page: 1
+  quote: We present a training-free framework for auditing biological alignment in frozen PFMs using spatially paired histology and transcriptomics from HEST-1k, evaluated on 240 samples spanning 3 organs.
+- id: c2
+  statement: TabPFN is used as a pretrained probe to measure how well molecular programs can be decoded from frozen embeddings without task-specific gradient updates.
+  location: Abstract
+  page: 1
+  quote: TabPFN serves as a pretrained probe to measure how well these molecular programs can be decoded without task-specific gradient updates.
+- id: c3
+  statement: The protocol uses specimen-level grouping with five-fold specimen-level cross-validation and three fixed seeds, reporting mean per-target Pearson correlation.
+  location: Method (leakage-safe protocol)
+  page: 4
+  quote: Five-fold specimen-level cross-validation with three fixed seeds; we report mean per-target Pearson correlation (PCC).
+- id: c4
+  statement: Baseline probes (mean, kNN, Ridge and a gradient-trained MLP with one fixed configuration) are run on identical folds and context. No hyperparameter search for the baselines was found in the
+    text.
+  location: Method (baselines)
+  page: 4
+  quote: Beyond TabPFN we run mean, kNN (cosine, distance-weighted), Ridge, and a gradient-trained MLP
+- id: c5
+  statement: With the UNI encoder fixed, the training-free probes outperform the gradient-trained MLP.
+  location: Results (label efficiency)
+  page: 5
+  quote: The training-free probes outperform the gradient-trained MLP
+- id: c6
+  statement: 'Limitation: TabPFN is the primary probe family, and absolute PCC and especially label efficiency may remain probe-specific.'
+  location: Limitations and Outlook
+  page: 7
+  quote: but absolute PCC and especially label efficiency can remain probe-specific.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Not tabular prediction in the usual sense: TabPFNRegressor is used as a frozen probe
+    that regresses gene/pathway targets from frozen pathology-image embeddings. Tagged tabular-regression as the closest existing task.'

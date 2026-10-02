@@ -1,0 +1,69 @@
+id: doi-10.3389_fpsyg.2026.1875261
+title: 'Cross-economy stability of predictor rankings for adolescent school belonging and mathematics anxiety: an explainable machine-learning analysis of PISA 2022'
+authors:
+- Yuan Liao
+- Peng Qin
+- Runlin Li
+year: 2026
+venue: Frontiers in Psychology
+links:
+  doi: https://doi.org/10.3389/fpsyg.2026.1875261
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 63a44a1707092ee74f6fa4ed204e1e07423cfbd202d9bfacb3980075e5375e03
+  pdf_url: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1875261/pdf
+  license: cc-by
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - gradient-boosted-trees
+  - linear-models
+  - feature-attribution
+  paradigms:
+  - supervised
+proposes:
+- Per-economy LightGBM + TreeSHAP rank analysis of PISA 2022 predictors with availability (questionnaire-coverage) filtering
+claims:
+- id: c1
+  statement: 'Data and models: PISA 2022 student data were analysed with one LightGBM model per economy, and TreeSHAP rankings were used to estimate the relative predictive salience of predictors for school
+    belonging and mathematics anxiety.'
+  location: Abstract
+  page: 1
+  quote: Per-economy LightGBM models and TreeSHAP rankings estimated relative predictive salience.
+- id: c2
+  statement: 'Pooled model comparison protocol: LightGBM (fixed hyperparameters, economy code as a categorical feature) was compared with ridge regression using ten student-level folds stratified by economy;
+    the paper notes this design does not evaluate transfer to unseen economies.'
+  location: Methods (pooled comparators)
+  page: 8
+  quote: Performance was estimated with ten student-level folds stratified by economy; this design preserves each economy's proportion in every fold and does not evaluate transfer to unseen economies.
+- id: c3
+  statement: Per-economy models used a fixed LightGBM configuration on a 64%/16%/20% train/validation/test split with early stopping on validation loss; no hyperparameter search is described.
+  location: Methods (per-economy LightGBM with TreeSHAP)
+  page: 8
+  quote: fit an independent LightGBM regressor on a 64%/16%/20% train/validation/test split with early stopping on validation loss.
+- id: c4
+  statement: Deep tabular networks (e.g. FT-Transformer, TabPFN) were not evaluated; the authors chose LightGBM citing prior findings that GBDTs match or exceed deep tabular networks on data like PISA.
+  location: Methods (pooled comparators)
+  page: 8
+  quote: The choice of LightGBM over deep tabular networks (e.g., FT-Transformer, TabPFN Hollmann et al., 2025) was motivated by the empirical finding that gradient-boosted decision trees match or exceed
+    deep tabular networks on heterogeneous tabular data of the size and structure of PISA
+- id: c5
+  statement: In the pooled comparison on untouched outer test folds, LightGBM had higher R2 than ridge regression with penalized economy indicators for both outcomes.
+  location: Results
+  page: 9
+  quote: In the pooled comparison evaluated on untouched outer test folds, LightGBM produced higher R2 than ridge regression with penalized economy indicators
+- id: c6
+  statement: 'Limitation: SHAP values were summarized over the entire per-economy sample rather than only the test split, so the rankings may partly reflect sample-internal fitted structure.'
+  location: Limitations
+  page: 17
+  quote: SHAP values were summarized across the entire per-economy sample rather than the test split alone, so the rankings may partly reflect sample-internal fitted structure
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: education / psychology (PISA 2022 student questionnaire; outcomes
+    are school belonging and mathematics anxiety indices). The ML is used for predictor ranking, not for proposing a new learner.'

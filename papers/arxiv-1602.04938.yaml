@@ -1,0 +1,73 @@
+id: arxiv-1602.04938
+title: '"Why Should I Trust You?": Explaining the Predictions of Any Classifier'
+authors:
+- Marco Tulio Ribeiro
+- Sameer Singh
+- Carlos Guestrin
+year: 2016
+links:
+  arxiv: https://arxiv.org/abs/1602.04938
+  code: https://github.com/marcotcr/lime-experiments
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 365079753571d7d14180e9796cf5d8ae53c5ef157f0a585ef8030b2a126eeccb
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - feature-attribution
+  - linear-models
+  paradigms:
+  - post-hoc
+proposes:
+- LIME (local sparse linear surrogate fitted on perturbed samples)
+- SP-LIME (submodular pick of representative explanations)
+claims:
+- id: c1
+  statement: LIME explains predictions of any classifier by learning an interpretable model locally around the prediction.
+  location: Abstract
+  page: 1
+  quote: In this work, we propose LIME, a novel explanation technique that explains the predictions of any classifier in an interpretable and faithful manner, by learning an interpretable model locally
+    around the prediction.
+- id: c2
+  statement: 'Assumption and stated drawback: with sparse linear explanations, a model that is highly non-linear even locally may have no faithful explanation.'
+  location: Sparse Linear Explanations
+  page: 4
+  quote: Second, our choice of G (sparse linear models) means that if the underlying model is highly non-linear even in the locality of the prediction, there may not be a faithful explanation.
+- id: c3
+  statement: Faithfulness evaluation uses classifiers that are interpretable by construction (sparse logistic regression, decision trees) limited to 10 features per instance, so a gold set of important
+    features is known and its recall is measured.
+  location: Are explanations faithful to the model?
+  page: 6
+  quote: In particular, we train both classifiers such that the maximum number of features they use for any instance is 10, and thus we know the gold set of features that the are considered important by
+    these models.
+- id: c4
+  statement: In the simulated-user experiments, hyperparameters of LIME and the parzen baseline are set by cross validation.
+  location: 'Simulated user experiments: Experiment Setup'
+  page: 6
+  quote: We set the hyper-parameters for parzen and LIME using cross validation
+- id: c5
+  statement: The trust-in-prediction experiment relies on artificially designated untrustworthy features; the authors acknowledge this while concluding LIME helps assess trust.
+  location: Should I trust this prediction?
+  page: 7
+  quote: Even though we artificially select which features are untrustworthy, these results indicate that LIME is helpful in assessing trust in individual predictions.
+- id: c6
+  statement: In the human-subject experiment on choosing between two classifiers, subjects are recruited on Mechanical Turk and are not machine learning experts (people with basic knowledge about religion).
+  location: Can users select the best classifier?
+  page: 7
+  quote: We recruit human subjects on Amazon Mechanical Turk – by no means machine learning experts, but instead people with basic knowledge about religion.
+- id: c7
+  statement: 'Stated limitation: how to perform the pick step for images is left open.'
+  location: Conclusion and future work
+  page: 10
+  quote: One issue that we do not mention in this work was how to perform the pick step for images, and we would like to address this limitation in the future.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: KDD 2016 San Francisco. Experiments
+    are on text (sentiment, 20 newsgroups) and images (Inception); no tabular data task tag added. The husky-vs-wolf study: "Although our sample size is small" (page 9). Explaining one Inception prediction
+    is stated to take around 10 minutes. Co-author Sameer Singh is also a co-author of arxiv-1911.02508 (Fooling LIME and SHAP).'

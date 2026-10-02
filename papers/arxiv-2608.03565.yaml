@@ -1,0 +1,66 @@
+id: arxiv-2608.03565
+title: Enhancing Tabular Learners with Context-Aware Semantic Embeddings
+authors:
+- Günther Schindler
+- Maximilian Schambach
+- Johannes Höhne
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.03565
+  code: https://github.com/SAP-samples/case
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8deb57722a57cb428541c3d60c824fafa375372477be17f57a892b1f3e71e884
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - large-language-models
+  - tabular-foundation-model
+  paradigms:
+  - supervised
+proposes:
+- CASE (context-aware row embeddings from a table-tuned Gemma 3 model, fused into tabular learners)
+claims:
+- id: c1
+  statement: CASE improves tabular learners on semantically rich datasets (CARTE, TextTab), particularly in low-data regimes.
+  location: Abstract
+  page: 1
+  quote: Our experiments across several benchmarks (CARTE, TextTab, and TabArena) demonstrate that CASE substantially improves the performance of tabular learners on semantically rich datasets, particularly
+    in low-data regimes.
+- id: c2
+  statement: 'On the numerics-heavy TabArena benchmark there is a small trade-off: the raw learners (TabICLv2, AutoGluon) keep a lead.'
+  location: Results
+  page: 6
+  quote: While showcasing significant improvements on semantically rich benchmarks, we observe a small performance trade-off on the numerics-heavy TabArena benchmark, where the raw statistical learners
+    (TabICLv2 and AutoGluon) maintain a lead.
+- id: c3
+  statement: Evaluation uses CARTE, TextTab, and only the single-fold variant of TabArena.
+  location: Experimental setup
+  page: 5
+  quote: 'We evaluate our approach across three distinct benchmark suites: CARTE [18], TextTab [22], and the single-fold variant of TabArena [7].'
+- id: c4
+  statement: XGBoost, CatBoost and RealMLP (via pytabkit) are tuned with ensembled hyperparameter optimization across 5-fold inner cross-validation, using TabArena search spaces.
+  location: Appendix (Baseline details)
+  page: 13
+  quote: We evaluate these models with ensembled hyperparameter optimization across 5-fold inner cross-validation (HPO-CV).
+- id: c5
+  statement: The cited check for overlap between the T4 continued-pretraining corpus and evaluation data was done in related work [27] and covers the CARTE benchmark.
+  location: Appendix (Data contamination)
+  page: 16
+  quote: Related work [27] conducted a systematic search for overlap between the T4 training set and the CARTE benchmark.
+- id: c6
+  statement: Co-author Maximilian Schambach is also an author of ConTextTab [27], one of the evaluated baselines (per the reference list).
+  location: References
+  page: 11
+  quote: Marco Spinaci, Marek Polewczyk, Maximilian Schambach, and Sam Thelin.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. All authors are affiliated with SAP SE (ConTextTab is also an SAP model). AutoGluon
+    baseline uses the best_quality preset with a 4 h limit. Family tags: large-language-models for the Gemma 3-based embedding model; tabular-foundation-model because the enriched learners include TabICLv2/TabPFN.'

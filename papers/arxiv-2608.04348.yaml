@@ -1,0 +1,66 @@
+id: arxiv-2608.04348
+title: 'iStructTab: Structured Feature Sequencing for Multimodal Learning of Image and Tabular Data'
+authors:
+- Al Zadid Sultan Bin Habib
+- Md Younus Ahamed
+- Prashnna Gyawali
+- Gianfranco Doretto
+- Donald A. Adjeroh
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.04348
+  code: https://github.com/zadid6pretam/iStructTab
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 6eeb5c09cbd16f7c2b791177c3888e0024120f7856f5cca9bdf7fee8fb6536ff
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-attention
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- GEDS (Graph-Enhanced Descriptor Sequencing)
+- OEMT (Order-Aware Efficient Transformer with Memory Augmentation)
+claims:
+- id: c1
+  statement: GEDS is a feature-sequencing algorithm based on the Column Permutation Problem, used for image-tabular fusion.
+  location: Abstract
+  page: 1
+  quote: To tackle this challenge, we introduce Graph-Enhanced Descriptor Sequencing (GEDS), a structured feature sequencing algorithm grounded in principles from the Column Permutation Problem (CPP).
+- id: c2
+  statement: Across six image-tabular benchmarks, iStructTab improves over concatenation and state-of-the-art baselines.
+  location: Conclusion
+  page: 10
+  quote: Across six benchmarks, iStructTab improves over concatenation and strong state-of-the-art baselines.
+- id: c3
+  statement: Evaluation uses six image-tabular datasets with stratified 64/16/20 splits, reporting test accuracy, average rank and regret.
+  location: Experiments and Results
+  page: 6
+  quote: We use stratified 64/16/20 train/validation/test splits and report test accuracy, average rank and regret (Table 1), noise robustness (Table 2), and efficiency (Fig. 2).
+- id: c4
+  statement: 'Tuning is asymmetric: iStructTab is tuned with Optuna for 20 trials per dataset, while baselines use recommended settings.'
+  location: Implementation Details
+  page: 6
+  quote: We tune iStructTab with Optuna [1] for 20 trials per dataset, following common tabular tuning practice [27, 26, 25, 24]; baselines use recommended settings.
+- id: c5
+  statement: Deep tabular baselines (TabSeq, TabM, SAINT, SCARF) use a single shared configuration per model family without dataset-specific tuning.
+  location: Appendix
+  page: 15
+  quote: For the deep baselines, we employ early stopping on validation performance and avoid dataset-specific hyperparameter tuning beyond a single, shared configuration per model family.
+- id: c6
+  statement: The authors state that this baseline design ensures the reported gains are not artifacts of unequal tuning effort.
+  location: Appendix
+  page: 15
+  quote: This design keeps the comparison focused on intrinsic modeling differences, ensuring that the reported gains of iStructTab over these baselines are not artifacts of unequal tuning effort.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The statement in c6 sits alongside the main-text statement (c4) that only iStructTab
+    receives per-dataset Optuna tuning. Accepted at ICPR 2026 per the PDF footnote (venue not recorded from metadata).'

@@ -1,0 +1,65 @@
+id: arxiv-2609.12105
+title: Language Is an Insufficient Substrate for Quantitative Reasoning, and Consequential Domains Need Large Quantitative Models
+authors:
+- Reuben Vandeventer
+- David Imrem
+- David J. Wild
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.12105
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 5a7a534303a0a512a2a1b24f1a3be89e190acd04ad8cd499913be0d0dd3b4f4a
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - large-language-models
+  - tabular-foundation-model
+proposes:
+- Large Quantitative Model (LQM) as a model class (position paper)
+claims:
+- id: c1
+  statement: The paper's position is that the assumption that progress on consequential quantitative decisions will follow from progress in LLMs is mistaken, and that the mistake is structural rather than
+    a matter of present capability.
+  location: Abstract
+  page: 1
+  quote: This paper takes the position that the assumption is mistaken, and that the mistake is structural rather than a matter of present capability.
+- id: c2
+  statement: Fidelity, reproducibility, lineage and calibration are argued to define a distinct model class, the Large Quantitative Model (LQM).
+  location: Abstract
+  page: 1
+  quote: We argue that these properties define a distinct model class, which we call the Large Quantitative Model (LQM)
+- id: c3
+  statement: A tabular foundation model can be native to the quantitative data and still lack lineage and structural explicitness, because its representation of the domain lives in its weights.
+  location: Tabular and time-series foundation models
+  page: 7
+  quote: A tabular foundation model can be substrate-native and still fail lineage and structural explicitness, because its representation of the domain lives in weights.
+- id: c4
+  statement: Citing prior literature (not its own experiments), the paper states that on tabular prediction with modest datasets, gradient-boosted trees or purpose-built tabular transformers continue to
+    outperform general-purpose deep models.
+  location: Empirical corroboration
+  page: 5
+  quote: In the setting closest to our own argument—tabular prediction on modest datasets—models designed for the statistical character of the data, whether gradient-boosted trees or purpose-built tabular
+    transformers, continue to outperform general-purpose deep models
+- id: c5
+  statement: The paper runs no benchmark experiments of its own; its empirical evidence is one deployed system (a security-operations architecture described by Vallabhaneni et al.), which the authors say
+    is not a full LQM.
+  location: Evidence
+  page: 10
+  quote: We have one deployed test of this prediction that we can report in full.
+- id: c6
+  statement: 'Competing interests: all three authors are affiliated with Duo Dimensio LLC, which develops systems of the kind the paper describes.'
+  location: Competing interests
+  page: 13
+  quote: R.V., D.I. and D.J.W. are affiliated with Duo Dimensio LLC, which develops systems of the kind described in Section 7.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Position paper without its own benchmark experiments. Task tags are approximate:
+    the paper discusses quantitative decision-making on tabular/relational records in general, not a specific classification or regression benchmark.'

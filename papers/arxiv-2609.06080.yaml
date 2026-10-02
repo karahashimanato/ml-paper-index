@@ -1,0 +1,74 @@
+id: arxiv-2609.06080
+title: 'PhenoBench: Mapping What a Deeply Phenotyped Human Cohort Can Tell Us'
+authors:
+- Gal Sapir
+- Alon Diament
+- Adva Wolf
+- Doron Yaya-Stupp
+- Dikla Gelbard Solodkin
+- Dana Azouri
+- Anat Etzion-Fuchs
+- Guy Lutsker
+- Eran Segal
+- Hagai Rossman
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.06080
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 2b65f8fbed44ad567818844c3e93a645ccb9f4ecc7b18546dcc72a84d89d498d
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - tabular-mlp
+  - linear-models
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- 'PhenoBench: executable benchmark of clinically grounded tasks with Task Cards and evaluation contracts on the Human Phenotype Project cohort'
+claims:
+- id: c1
+  statement: PhenoBench is a versioned collection of clinically grounded tasks with human-readable Task Cards and executable evaluation contracts.
+  location: Introduction
+  page: 2
+  quote: PhenoBench contributes a versioned collection of 90 clinically grounded tasks across 15 domains and 26 input modalities, with human-readable Task Cards and executable evaluation contracts.
+- id: c2
+  statement: Under a fixed single-estimator protocol with bounded tuning, the pretrained tabular models ranked above the evaluated task-specific baselines, including XGBoost and CatBoost, in aggregate.
+  location: Abstract
+  page: 1
+  quote: Under a fixed single-estimator protocol with bounded tuning, these models ranked above the evaluated task-specific baselines, including XGBoost and CatBoost, in aggregate.
+- id: c3
+  statement: The XGBoost and CatBoost grids were fixed before the matched comparison, selected by five-fold cross-validation within the training split, and evaluated once on the held-out test split.
+  location: Appendix (method configurations)
+  page: 15
+  quote: The XGBoost and CatBoost grids were fixed before their matched campaign, selected by five-fold cross-validation within the training split, and evaluated once on the held-out test split.
+- id: c4
+  statement: The tabular comparison uses a single-estimator CPU float32 protocol rather than each model's strongest recommended ensemble.
+  location: Limitations
+  page: 9
+  quote: The tabular comparison evaluates a single-estimator CPU float32 protocol, not each model’s strongest recommended ensemble.
+- id: c5
+  statement: XGBoost and CatBoost received the same bounded 12-candidate tuning budget rather than exhaustive library-specific optimization, so the small average gains do not settle the best attainable
+    performance of either model family.
+  location: Limitations
+  page: 9
+  quote: XGBoost and CatBoost used the same bounded 12-candidate tuning budget rather than exhaustive library-specific optimization.
+- id: c6
+  statement: 'Competing interests: seven authors are employees of Pheno.AI Ltd., and Eran Segal is a paid consultant of Pheno.AI Ltd.'
+  location: Competing interests
+  page: 10
+  quote: Gal Sapir, Alon Diament, Adva Wolf, Dikla Gelbard Solodkin, Dana Azouri, Anat Etzion-Fuchs, and Hagai Rossman are employees of Pheno.AI Ltd.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Tabular comparison: TabSwift, TabICL, TabDPT, TabPFN v2, Google TabFM, TabPFN 3.5
+    vs ridge, tuned XGBoost/CatBoost and RealMLP on 160 matched regression cells over 52 tasks (Results). The paper also evaluates 14 language models (PhenoBench-LLM), not recorded here. Pheno.AI is the
+    cohort/benchmark operator, not the developer of the evaluated tabular models.'

@@ -1,0 +1,63 @@
+id: arxiv-2608.28209
+title: Generalized Context in Cross Attention for Transfer Learning of Disjoint Tabular Data
+authors:
+- Kazi F. Akhter
+- Ibna Kowsar
+- Manar D. Samad
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.28209
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 525bc4450261413c1e6cce00cfa041b80120ac78a9189b41550710922646d186
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-attention
+  - deep-learning
+  paradigms:
+  - supervised
+  - self-supervised
+proposes:
+- CATTLE (Cross-domain Attention Transfer Learning via transferred key/value projection weights)
+claims:
+- id: c1
+  statement: The paper introduces generalized context learning to remove the requirement of shared features across source and target domains.
+  location: Abstract
+  page: 1
+  quote: This paper introduces generalized context learning to remove the requirement of shared features across domains.
+- id: c2
+  statement: On ten disjoint source-target pairs, CATTLE learns generalized context from a single source dataset and is rank-wise and statistically superior to nine baselines.
+  location: Abstract
+  page: 1
+  quote: show that CATTLE can learn generalized context from a single source data set and is rank-wise and statistically superior to nine state-of-the-art baselines
+- id: c3
+  statement: The study uses 14 OpenML datasets (nine source, five target) with 540 to 70000 samples and 8 to 76 features.
+  location: Experiments
+  page: 6
+  quote: The data sets have varying mixes of numerical and categorical features, sample sizes ranging from 540 to 70000, and feature dimensions ranging from 8 to 76.
+- id: c4
+  statement: Data are split 70:10:20 and resampled with ten random seeds.
+  location: Model implementation and evaluation
+  page: 7
+  quote: Data with 70:10:20 splits are randomly sampled ten times using ten random seeds to facilitate statistical comparison of model performance.
+- id: c5
+  statement: Models are tuned with 100 Optuna trials of random sampling evaluated on the validation set; the best validated model is reported on the test fold.
+  location: Model implementation and evaluation
+  page: 8
+  quote: In each of the 100 Optuna trials, a set of hyperparameter values is randomly sampled and evaluated on the validation set.
+- id: c6
+  statement: Traditional ML (XGBoost, logistic regression) performs strongly across most datasets, ranking better than the deep learning baselines without transfer.
+  location: Results
+  page: 10
+  quote: Traditional machine learning methods, particularly XGBoost and logistic regression, consistently achieve strong performance across most data sets.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Code URL in the PDF text is garbled by extraction (contains an em dash), so it is
+    not recorded in links. Tabular foundation models (e.g. TabPFNv2) are not among the nine baselines.'

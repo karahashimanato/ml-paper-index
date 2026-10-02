@@ -1,0 +1,68 @@
+id: arxiv-2608.30337
+title: 'Coarse composition suffices: tabular in-context learning for multi-activity antimicrobial peptide profiling'
+authors:
+- Anuj Pal
+- Raunak Kumar
+- Dhruvi Solanki
+- Parikshit Pareek
+- Juhi Singh
+- Jitin Singla
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.30337
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 17127c257294aa53f93eb7a67c89148695724531d3d3a1699c7b0022b10f535f
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- Sequence-descriptor + TabPFN pipeline with multi-label transforms (label powerset, classifier chains) for ESCAPE
+claims:
+- id: c1
+  statement: A sequence-only pipeline of 330 interpretable descriptors with TabPFN, without gradient training or hyperparameter search, is reported to match and surpass multimodal structure-conditioned
+    deep models on ESCAPE.
+  location: Abstract
+  page: 1
+  quote: We show that a simple, sequence-only pipeline can match and surpass these methods by combining 330 interpretable sequence descriptors with TabPFN, a tabular foundation model that performs in-context
+    prediction in a single forward pass without gradient-based training or hyperparameter search.
+- id: c2
+  statement: The gains persist under the prior state of the art's single-fold training protocol and are largest for remote homologues.
+  location: Abstract
+  page: 1
+  quote: The gains persist under the prior state-of-the-art single-fold training protocol, indicating they are not a training-set-size artefact, and are largest for remote homologues (+11.2 points below
+    30% sequence identity).
+- id: c3
+  statement: No hyperparameter was tuned on ESCAPE at any stage.
+  location: Experimental setup
+  page: 4
+  quote: No hyperparameter was tuned on ESCAPE at any stage.
+- id: c4
+  statement: For a paired comparison, the released ESCAPE baseline checkpoints were re-run without retraining.
+  location: ESCAPE baseline re-run and matched-protocol evaluation
+  page: 6
+  quote: For a paired comparison, we re-ran the released ESCAPE baseline checkpoints (Best_model_Fold1.pth, Best_model_Fold2.pth) on our hardware without any retraining.
+- id: c5
+  statement: Honest F1 uses per-label thresholds chosen on out-of-fold predictions over the in-context set and frozen before testing; Max-F1, with thresholds chosen on the test set, is reported only as
+    an optimistic upper bound.
+  location: Supplementary (threshold metrics)
+  page: 22
+  quote: Honest F1 uses per-label thresholds selected on 5-fold out-of-fold predictions over the in-context set and frozen before the test set is touched.
+- id: c6
+  statement: 'Stated limitations: antiparasitic activity is too sparse for firm conclusions, and homology is handled by stratification on the predefined split rather than holding out identity clusters.'
+  location: Discussion (limitations)
+  page: 17
+  quote: Homology is handled by stratification on the predefined split rather than by holding out entire identity clusters.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Benchmark: ESCAPE with its predefined split; TabPFN v3 (tabpfn 8.2.0), three seeds.
+    Published baseline numbers are unpaired; paired comparisons are restricted to the 5,495 test peptides with structural maps.'

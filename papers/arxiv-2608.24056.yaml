@@ -1,0 +1,70 @@
+id: arxiv-2608.24056
+title: 'PhysicsBench: A Unified Leaderboard for Generative and Predictive Models in Engineering Design and Simulation'
+authors:
+- Sang Won Lee
+- Hyogu Jeong
+- Namwoo Kang
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.24056
+  code: https://github.com/Narnialabs/leaderboard
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 98c0438ba8e47961300489c5e16b0b88779ce2467b692445655239178f429f2f
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - deep-learning
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - gaussian-processes
+  paradigms:
+  - supervised
+proposes:
+- PhysicsBench leaderboard
+- BenchRank (debiased PageRank ranking over a dominance graph)
+claims:
+- id: c1
+  statement: PhysicsBench is a unified benchmark and leaderboard that evaluates generative and predictive models under one standardized procedure.
+  location: Abstract
+  page: 1
+  quote: We present PhysicsBench, a unified benchmark and leaderboard that evaluates generative and predictive models under one standardized procedure.
+- id: c2
+  statement: An architecture's large-scale academic standing only weakly predicts its small-data ranking.
+  location: Abstract
+  page: 1
+  quote: Across tasks, an architecture’s large-scale academic standing weakly predicts its small-data ranking.
+- id: c3
+  statement: The tabular models in the 1D task include MLP, FT-Transformer, NODE, TabNet, TabPFN, gradient-boosted trees, Gaussian processes and ridge regression.
+  location: Experimental setup
+  page: 8
+  quote: The 1D tabular models are an MLP, FT-Transformer [46], NODE [77], TabNet [47], TabPFN [48], gradient-boosted trees [78, 79], Gaussian processes [80], and ridge regression [81]
+- id: c4
+  statement: 'Tuning protocol: splits, epoch/batch budget, early stopping and normalization are shared, but each model''s optimizer, learning rate and internal hyperparameters follow its source paper (no
+    re-tuning).'
+  location: Experimental setup
+  page: 10
+  quote: This fixes the shared procedure of data splits, resolution, epoch and batch budget, early stopping, and normalization, but not each model’s own optimizer, learning rate, and internal hyperparameters,
+    which follow its source paper.
+- id: c5
+  statement: The tabular regression part uses Concrete and Airfoil and is ranked separately from time-series models.
+  location: Results
+  page: 15
+  quote: The 1D scalar task is reported as two rows, tabular regression on Concrete and Airfoil and time-series RUL on CMAPSS, because these span disjoint model sets, so a single pooled ranking would compare
+    models that never competed head-to-head.
+- id: c6
+  statement: 'Conflict of interest: the leaderboard is vendor-hosted; author-affiliated in-house models are excluded from publication, and the authors say a fuller conflict-of-interest policy is needed.'
+  location: Limitations
+  page: 27
+  quote: We exclude all author-affiliated in-house models from publication regardless of their measured rank, so the policy applies whether an in-house model would have won or lost, but a fuller governance
+    and conflict-of-interest policy is needed.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Mostly an engineering simulation (CAD/CFD/FEA) benchmark; only the 1D scalar task
+    is tabular regression (small UCI datasets at limited data scales). Authors are affiliated with Narnia Labs, which hosts the leaderboard.'

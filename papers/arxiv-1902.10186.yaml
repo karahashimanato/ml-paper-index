@@ -1,0 +1,74 @@
+id: arxiv-1902.10186
+title: Attention is not Explanation
+authors:
+- Sarthak Jain
+- Byron C. Wallace
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1902.10186
+  code: https://github.com/successar/AttentionExplanation
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: ffc666e7e27ddf832b209027d9b35c5a8525d0bd2b114099d0bec252135fd322
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - attention-explanations
+  - feature-attribution
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- 'Empirical tests of attention as explanation: correlation with gradient / leave-one-out importance, attention permutation, adversarial attention search'
+claims:
+- id: c1
+  statement: Across a variety of NLP tasks, learned attention weights are frequently uncorrelated with gradient-based feature importance, and very different attention distributions can yield equivalent
+    predictions; the authors conclude standard attention modules do not provide meaningful explanations.
+  location: Abstract
+  page: 1
+  quote: learned attention weights are frequently uncorrelated with gradient-based measures of feature importance, and one can identify very different attention distributions that nonetheless yield equivalent
+    predictions
+- id: c2
+  statement: 'Assumed properties of faithful attention explanations: (i) attention should correlate with feature-importance measures and (ii) alternative (counterfactual) attention configurations should
+    change the prediction.'
+  location: Introduction
+  page: 1
+  quote: (i) Attention weights should correlate with feature importance measures (e.g., gradient-based measures); (ii) Alternative (or counterfactual) attention weight configurations ought to yield corresponding
+    changes in prediction
+- id: c3
+  statement: Neither property was consistently observed for a BiLSTM with a standard attention mechanism on text classification, question answering and natural language inference.
+  location: Introduction
+  page: 1
+  quote: We report that neither property is consistently observed by a BiLSTM with a standard attention mechanism in the context of text classification, question answering (QA), and Natural Language Inference
+    (NLI) tasks.
+- id: c4
+  statement: 'Evaluation protocol (no ground-truth explanations): Kendall tau correlation of attention with gradient-based importance and with leave-one-out output differences, computed on test sets.'
+  location: Section 4.1
+  page: 4
+  quote: 'Specifically we measure correlations between attention and: (1) gradient based measures of feature importance (τg), and, (2) differences in model output induced by leaving features out (τloo).'
+- id: c5
+  statement: For the adversarial attention search, the allowed change in model output (epsilon, in total variation distance) was set to 0.01 for text classification and 0.05 for QA datasets.
+  location: Adversarial Attention
+  page: 9
+  quote: In practice we simply set this to 0.01 for text classification and 0.05 for QA datasets.
+- id: c6
+  statement: 'Limitation: the authors do not claim that gradient or leave-one-out measures are ideal or should be treated as ground truth.'
+  location: Discussion and Conclusions
+  page: 11
+  quote: We do not intend to imply that such alternative measures are necessarily ideal or that they should be considered ‘ground truth’.
+- id: c7
+  statement: 'Limitation: only a handful of attention variants (focused on BiLSTM encoders with attention) were considered; alternative attention specifications may lead to different conclusions.'
+  location: Discussion and Conclusions
+  page: 11
+  quote: An additional limitation is that we have only considered a handful of attention variants, selected to reflect common module architectures for the respective tasks included in our analysis.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. Data are text (SST, IMDB, ADR Tweets, 20 Newsgroups,
+    AG News, MIMIC ICD9 Diabetes/Anemia, CNN, bAbI, SNLI); no data-task tag for NLP exists, so only model-explanation is tagged. The paper also states that attention over simple feedforward (averaging)
+    encoders correlates better with the importance measures. No human evaluation was found in the text. Directly rebutted by Wiegreffe & Pinter (arxiv-1908.04626).'

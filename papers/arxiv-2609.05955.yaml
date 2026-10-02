@@ -1,0 +1,67 @@
+id: arxiv-2609.05955
+title: 'LoGIC: Budgeted Context Construction for Node-Level Graph In-Context Learning with Tabular Foundation Models'
+authors:
+- Mingqi Yang
+- Zidong Guo
+- Jihui Yang
+- Wenming Zuo
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.05955
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 49f28ac697f1ea465fb0a112d2096b876bf0535fa76c5d2772b5603118042ddd
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - tabular-foundation-model
+  - graph-neural-networks
+  paradigms:
+  - in-context-learning
+proposes:
+- 'LoGIC: budgeted labeled-context and unlabeled-halo construction for frozen tabular-FM graph ICL'
+claims:
+- id: c1
+  statement: LoGIC retrieves labeled nodes by structural, feature and coverage channels, shares contexts within graph-local query clusters, adds an unlabeled halo for adapter backbones, and selects channel
+    and budget without test labels.
+  location: Abstract
+  page: 1
+  quote: We present LoGIC, which retrieves labeled nodes via structural, feature-based, and coverage channels, shares each context across the queries in a graph-local cluster, incorporates an unlabeled
+    halo for adapter backbones, and chooses the channel and context budget without test labels.
+- id: c2
+  statement: Budgeted contexts keep locally runnable full-context performance, remain competitive with published large-dataset results, and markedly reduce peak memory.
+  location: Abstract
+  page: 1
+  quote: budgeted contexts maintain locally runnable full-context performance, stay competitive with published large-dataset results, and markedly lower peak memory requirements compared with full-context
+    and whole-graph inference.
+- id: c3
+  statement: Evaluation uses eight GraphLand node-level benchmarks (12k-168k nodes) with classification (AP) and regression (R2) targets.
+  location: Experimental Setup
+  page: 6
+  quote: We conduct evaluations on eight GraphLand benchmarks [16] covering 12k–168k nodes, classification (AP) and regression (R2), and both assortative and disassortative targets.
+- id: c4
+  statement: The retrieval channel and budget k are chosen per dataset on held-out validation data from a coarse budget ladder.
+  location: Channel and Budget Configuration
+  page: 6
+  quote: For the reported LoGIC configurations, we assess a coarse ×4 budget ladder using held-out validation data and preserve one (channel, k) pair for each dataset.
+- id: c5
+  statement: Per-dataset trained baselines (LightGBM-NFA and GNNs) are published numbers taken from the G2T-FM evaluation, not rerun.
+  location: Predictive Performance on GraphLand
+  page: 7
+  quote: The first block lists individually trained LightGBM-NFA and GNN references from the G2T-FM evaluation.
+- id: c6
+  statement: The authors state that LoGIC is not a universal accuracy substitute for per-dataset training; it lags the strongest trained baselines on several datasets.
+  location: Predictive Performance on GraphLand
+  page: 7
+  quote: The contribution consequently does not constitute a universal accuracy substitute for per-dataset training.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Node-level classification/regression on graphs with tabular node attributes; GNNs
+    appear as per-dataset trained baselines and adapter backbones use message passing. The fixed-channel ablation tables report test-set values, while the deployed configuration is selected on held-out
+    data; the paper notes held-out and test rankings may diverge on some datasets. One author is affiliated with Meta Superintelligence Lab; no competing-interest statement was found in the text.'

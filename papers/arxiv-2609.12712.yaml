@@ -1,0 +1,67 @@
+id: arxiv-2609.12712
+title: 'InRTL: Effective Intra-Inter Interaction Learning for Relational Tables'
+authors:
+- Weichen Li
+- Ken Zhong
+- Zheng Wang
+- Li Pan
+- Jianhua Li
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.12712
+  code: https://github.com/W1nterFloW/InRTL
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: fbbf3e3b1dc8f42d226c36d701918c11cc7dc9299b27fbf94ca0b962a277acb0
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-attention
+  - graph-neural-networks
+  paradigms:
+  - supervised
+proposes:
+- 'InRTL (Intra-Inter Relational Table Learning: linearized self-attention within tables, HGNN cross-attention across PK-FK links)'
+claims:
+- id: c1
+  statement: InRTL is a unified framework that explicitly models dependencies within and across relational tables.
+  location: Abstract
+  page: 1
+  quote: In this paper, we propose Intra–Inter Relational Table Learning (InRTL), a unified framework that explicitly models dependencies both within and across relational tables.
+- id: c2
+  statement: Experiments are reported to show that InRTL consistently outperforms state-of-the-art baselines on diverse relational table tasks.
+  location: Conclusion
+  page: 9
+  quote: Extensive experiments demonstrate that InRTL consistently outperforms state-of-the-art baselines on diverse relational table tasks.
+- id: c3
+  statement: All experiments follow the standard preprocessing and train/val/test splits of each benchmark (SJTUTables and RelBench).
+  location: Experimental setup
+  page: 6
+  quote: Additionally, for all experiments, we follow the standard data preprocessing and train/val/test split provided by each benchmark.
+- id: c4
+  statement: All baselines were re-implemented from official code or the original papers and tuned by grid search over key hyperparameters.
+  location: Appendix
+  page: 12
+  quote: To ensure fairness, we re-implemented all baselines based on the official code or their original papers and performed a comprehensive grid search over key hyper-parameters (see Appendix C.5 for
+    details).
+- id: c5
+  statement: Hyperparameters of all models are selected on validation performance.
+  location: Appendix
+  page: 12
+  quote: We tune all model hyper-parameters based on validation performance.
+- id: c6
+  statement: The evaluation focuses mainly on well-curated relational databases with explicit table relationships.
+  location: Limitations
+  page: 9
+  quote: Our evaluation mainly focuses on well-curated relational databases with explicit table relationships.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Single-table baselines (LightGBM, TabPFN, FT-Transformer, TabNet, SAINT, Trompt,
+    ExcelFormer) are given a flattened table built by LEFT JOINs. Results are averaged over 20 runs. Baselines include LightGBM and TabPFN but no CatBoost/XGBoost.'

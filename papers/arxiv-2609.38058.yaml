@@ -1,0 +1,67 @@
+id: arxiv-2609.38058
+title: Latent Inference-Time Guidance of Time Series Foundation Models
+authors:
+- Chloé Hashimoto-Cullen
+- Amaury Durand
+- Laurent Bozzi
+- Benjamin Guedj
+- Yannig Goude
+- Sylvain Le Corff
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.38058
+  code: https://anonymous.4open.science/r/LITiG-TSFM-77FD/README.md
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 5fae8f279359944f9818f41b1d78fb3e7c74fa0686ab1fb7908ea6dd65a24c1d
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- LITiG-TSFM (latent inference-time guidance combining TSFM forecasts)
+claims:
+- id: c1
+  statement: LITiG-TSFM combines a pool of TSFM forecasts through a time-dependent latent space with independent components.
+  location: Abstract
+  page: 1
+  quote: This paper introduces Latent Inference-Time Guidance for TSFMs, which adaptively combines a pool of TSFM forecasts through a time-dependent latent space with independent components.
+- id: c2
+  statement: Experiments on datasets of various frequencies and domains show the approach is competitive with traditional ensembling.
+  location: Abstract
+  page: 1
+  quote: 'We provide experiments on datasets at various frequencies and from multiple domains: these show that the approach is competitive with traditional ensembling approaches.'
+- id: c3
+  statement: The experts are forecasts from a single foundation model, TabICLv2, chosen as representative rather than searched for the best TSFM.
+  location: Baselines
+  page: 7
+  quote: Rather than looking to find the best TSFM and its best configuration, we choose TabICLv2 as a representative sample of the current state of the art for TSFMs and use a set of its forecasts.
+- id: c4
+  statement: The best single TSFM forecast is selected on a validation fold and evaluated on the test fold.
+  location: Baselines
+  page: 7
+  quote: To replicate implementation conditions where performance is evaluated on a static training dataset to select a model, the best TSFM from the validation fold of the data is retained as the best
+    TSFM, and evaluated on the test fold of the data.
+- id: c5
+  statement: The oracle mixture, which uses ground truth to pick the best expert per step, is reported as a performance floor, not as a baseline to beat.
+  location: Baselines
+  page: 7
+  quote: So we use it as a performance floor, rather than a baseline to beat.
+- id: c6
+  statement: 'Limitation: some assumptions behind the guarantees may be too restrictive for real-life datasets.'
+  location: Discussion, limitations and conclusion
+  page: 10
+  quote: Furthermore, some of the assumptions made to achieve the results can be too restrictive for a real-life dataset.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. tabular-foundation-model is tagged because the TSFM used is TabICLv2. Three authors
+    are from EDF R&D; the Kalman filter baseline uses the EDF-Lab viking_kalman package.'

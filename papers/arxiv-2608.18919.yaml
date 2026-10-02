@@ -1,0 +1,68 @@
+id: arxiv-2608.18919
+title: 'Lost in Aggregation: How Benchmarks Overlook Irreplaceable Model Strengths'
+authors:
+- Andrej Tschalzev
+- Stefan Lüdtke
+- Heiner Stuckenschmidt
+- Christian Bartelt
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.18919
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e137809f404f77444c4c50d689ea98e3cb7a6412a45dacfb4638e82fd2cfea7a
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - tabular-mlp
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- Peak-performance-frontier metrics for benchmarks (irreplaceability, sufficiency, fallibility)
+claims:
+- id: c1
+  statement: Benchmark evaluation should also consider a per-dataset peak performance frontier, defined by the best statistically supported performance on each dataset.
+  location: Abstract
+  page: 1
+  quote: We argue that benchmark evaluation should also consider the data-centric peak performance frontier, defined by the best statistically supported performance achieved on each dataset.
+- id: c2
+  statement: On TabArena, common aggregation metrics are highly correlated, mostly measure consistency and failure avoidance, and are much less aligned with dataset-level irreplaceability.
+  location: Abstract
+  page: 1
+  quote: Applying this framework to the TabArena benchmark, we find that common aggregation metrics are highly correlated and largely measure consistency and avoiding failures, while being much less aligned
+    with dataset-level irreplaceability.
+- id: c3
+  statement: The analysis uses TabArena, a maintained benchmark with a live leaderboard and public evaluation results, which currently comprises 27 models on 51 curated datasets.
+  location: Experimental setup
+  page: 2
+  quote: using a stricter data curation and more extensive evaluation protocol, and currently comprises 27 models evaluated on 51 carefully curated datasets.
+- id: c4
+  statement: All models benefit from tuning on most datasets; foundation models can only be compared adequately when traditional alternatives are appropriately tuned.
+  location: Appendix
+  page: 11
+  quote: This implies that, even though modern foundation models often perform well by default, they can only be compared adequately when the traditional alternatives are appropriately tuned.
+- id: c5
+  statement: RealMLP, ranked first at TabArena's publication, is never irreplaceable in this analysis; its strength lies mainly in avoiding poor outcomes.
+  location: Results
+  page: 3
+  quote: yet in our analysis it ranks 13th on sufficiency, is never irreplaceable
+- id: c6
+  statement: The first author (Tschalzev) is listed as a co-author of the TabArena paper whose results are analysed; the paper does not discuss this as a conflict of interest.
+  location: References
+  page: 5
+  quote: Erickson, N., Purucker, L., Tschalzev, A.,
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Analysis paper over TabArena live-leaderboard results (June 2026); no new model is
+    proposed. Per-dataset superiority is decided with a one-sided Wilcoxon signed-rank test (alpha = 0.05) on paired fold-wise differences (method section). A footnote also says TabSTAR''s strong performance
+    may result from leaks, since part of the TabArena datasets were used for its pretraining.'

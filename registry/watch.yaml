@@ -20,3 +20,12 @@ themes:
     tags: [time-series-anomaly-detection]
     arxiv_queries:
       - 'abs:"time series" AND abs:"anomaly detection" AND (abs:benchmark OR abs:evaluation OR abs:"point adjust" OR abs:baseline) AND (cat:cs.LG OR cat:stat.ML)'
+  # 以下2テーマは投稿数が多いため、手法の新提案ではなく「評価・検証」の論文に絞った検索語にしている
+  - name: モデルの解釈可能性
+    tags: [model-explanation]
+    arxiv_queries:
+      - '(abs:explanation OR abs:interpretability OR abs:attribution OR abs:SHAP) AND (abs:faithfulness OR abs:"sanity check" OR abs:evaluation OR abs:benchmark OR abs:disagreement) AND (cat:cs.LG OR cat:stat.ML)'
+  - name: 量子化による影響
+    tags: [model-compression]
+    arxiv_queries:
+      - 'abs:quantization AND (abs:evaluation OR abs:degradation OR abs:empirical OR abs:benchmark OR abs:trustworthiness OR abs:fairness) AND (cat:cs.LG OR cat:cs.CL)'

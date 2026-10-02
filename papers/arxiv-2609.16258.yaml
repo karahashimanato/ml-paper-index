@@ -1,0 +1,68 @@
+id: arxiv-2609.16258
+title: The AI-Enabled Scientific Frontier
+authors:
+- Gabriel Manso
+- Emma Fu
+- Neil Thompson
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.16258
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8a8712b2bf349d4b9cedca4c53c00a572e52fa21e7dbc55663763dc498a9401a
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - deep-learning
+  - linear-models
+  - random-forests
+  - kernel-methods
+  paradigms:
+  - supervised
+proposes:
+- Corpus of AI-vs-other-method comparisons across scientific disciplines (performance and computational cost)
+claims:
+- id: c1
+  statement: The authors assemble a corpus of head-to-head comparisons between AI and other analysis techniques across 27 disciplines from papers published 2000 to early 2025.
+  location: Abstract
+  page: 1
+  quote: To assess the claims, we assemble a corpus of 2,507 head-to-head comparisons between AI and other scientific analysis techniques across 27 scientific disciplines from papers published between 2000
+    and early 2025.
+- id: c2
+  statement: Relative to traditional statistics, AI often performs better but at a significantly higher computational cost.
+  location: Abstract
+  page: 1
+  quote: Relative to traditional statistics, AI often outperforms, but at a significantly higher computational cost.
+- id: c3
+  statement: In nearly a quarter of cases AI is both more expensive and worse than traditional statistical techniques, a fraction stable for a decade.
+  location: Abstract
+  page: 1
+  quote: But there are also nearly a quarter of cases where AI is both more expensive and performs worse than traditional statistical techniques and this fraction has been stable for a decade.
+- id: c4
+  statement: Inclusion required each study to evaluate at least two methods on a shared problem, dataset or setting (comparisons are taken from the published papers, not rerun).
+  location: 'Supplementary: Corpus Construction'
+  page: 17
+  quote: Each retained study had to evaluate at least two methods on a shared problem, dataset, or experimental setting, thereby permitting a meaningful assessment of relative performance and computational
+    cost.
+- id: c5
+  statement: On the statistical side, the baselines in the corpus are usually strong workhorses (SVMs, random forests, logistic regression, decision trees, k-NN).
+  location: Analysis techniques across scientific domains
+  page: 4
+  quote: On the statistical side, AI is usually compared not with trivial models but with strong workhorses such as support vector machines, random forests, logistic regression, decision trees
+- id: c6
+  statement: 'Stated limitation: only about half of comparisons report numerical cost, in diverse units, and reporting bias cannot be fully corrected.'
+  location: Discussion
+  page: 12
+  quote: Only about half of the comparisons in our dataset report numerical cost metrics, and cost is measured in diverse units; we mitigate this with log-ratio encodings and robustness checks but cannot
+    fully correct for reporting bias.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Cross-domain meta-analysis of published comparisons; not specific to tabular data,
+    so task and family tags are approximate.'

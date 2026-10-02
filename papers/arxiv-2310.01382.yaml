@@ -1,0 +1,83 @@
+id: arxiv-2310.01382
+title: 'Compressing LLMs: The Truth is Rarely Pure and Never Simple'
+authors:
+- Ajay Jaiswal
+- Zhe Gan
+- Xianzhi Du
+- Bowen Zhang
+- Zhangyang Wang
+- Yinfei Yang
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2310.01382
+  code: https://github.com/VITA-Group/llm-kick
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 1d5be31b21aca37bdc942b91ad1f34238cdffa943559c7e0a7923560a7fc1417
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - pruning
+  - large-language-models
+  paradigms:
+  - post-hoc
+proposes:
+- 'LLM-KICK (Knowledge-Intensive Compressed LLM BenchmarK): a curated task collection to evaluate compressed LLMs beyond perplexity'
+claims:
+- id: c1
+  statement: 'Critique of evaluation practice: state-of-the-art LLM compression methods are evaluated mostly with perplexity, a metric that is widely questioned even for dense LLMs; the paper re-evaluates
+    them with LLM-KICK.'
+  location: Abstract
+  page: 1
+  quote: As recent research efforts are focused on developing increasingly sophisticated compression methods, our work takes a step back and re-evaluates the effectiveness of existing SoTA compression methods,
+    which rely on a fairly simple and widely questioned metric, perplexity (even for dense LLMs).
+- id: c2
+  statement: 'Setup: compression methods are SparseGPT, Wanda and one-shot magnitude pruning (unstructured and N:M sparsity) plus GPTQ quantization, applied to Vicuna models without fine-tuning.'
+  location: LLM-KICK setup
+  page: 4
+  quote: our work primarily focuses on the top-2 existing training-free and data-free LLM pruning techniques (i.e., SparseGPT (Frantar & Alistarh, 2023) and Wanda (Sun et al., 2023)), along with the baseline
+    of One-shot Magnitude-based Pruning (Han et al., 2016), plus a popular quantization technique (GPTQ)
+- id: c3
+  statement: 'Evaluation metric definition: a compressed LLM is called ''matching'' if its task performance drops by at most 5% relative to the dense model, a tolerance the authors deliberately relaxed
+    from prior work, which used the dense performance itself or a 1% margin as the matching threshold.'
+  location: LLM-KICK setup
+  page: 4
+  quote: In this work, we consider ϵ0 to be ≤5% of the performance of f(x; θ, T).
+- id: c4
+  statement: 'Tasks: factoid QA (FreebaseQA), multiple-choice reasoning QA (MMLU), in-context retrieval-augmented QA, in-context summarization (CNN/DailyMail, judged by GPT-4 against GPT-3.5 summaries)
+    and instruction following.'
+  location: LLM-KICK tasks
+  page: 7
+  quote: For evaluation, similar to Zheng et al. (2023), we propose to use GPT-4 as a judge, which compares the compressed LLM generated summaries wrt. GPT-3.5 (text-davinci-003) generated summaries.
+- id: c5
+  statement: 'Main findings: pruning methods fail for N:M sparsity on knowledge-intensive tasks; current quantization methods are more successful than pruning; pruned LLMs at 50% or more sparsity remain
+    robust in-context retrieval and summarization systems.'
+  location: Abstract
+  page: 1
+  quote: and fail for N:M sparsity in knowledge-intensive tasks; current quantization methods are more successful than pruning; yet, pruned LLMs even at ≥50% sparsity are robust in-context retrieval and
+    summarization systems
+- id: c6
+  statement: Even non-aggressive 8-bit GPTQ quantization shows a roughly 8-10% drop on factoid QA, so the authors argue 8-bit quantization is not yet solved.
+  location: Results (factoid QA)
+  page: 5
+  quote: 3 ∼8-10% drop in performance for non-aggressive 8-bit quantization indicates that along with chasing for aggressive quantization levels (1-2 bits), it is also important to focus on yet unsolved
+    8-bit quantization.
+- id: c7
+  statement: 'Limitation: the evaluation is restricted mainly to Vicuna (decoder-only) models.'
+  location: Conclusion and limitations
+  page: 9
+  quote: We primarily restrict our evaluation to Vicuna (decoder-only architecture) due to its open-source license, high performance, and instruction-following ability.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at
+    ICLR 2024. First author''s work was done during an internship at Apple; four co-authors are at Apple. Quantization is weight-only GPTQ at 8 and 4 bits (figure legends also list 16-bit GPTQ); calibration
+    data for GPTQ and GPTQ group size were not found in the main text. No speed/memory measurements were found. The introduction states that methods are run ''in their most common, default settings''. The
+    main text says Vicuna models are used, but the Figure 2 (factoid QA) panels are labelled ''LLama-7B''.'

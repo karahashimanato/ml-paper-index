@@ -1,0 +1,72 @@
+id: arxiv-1908.04626
+title: Attention is not not Explanation
+authors:
+- Sarah Wiegreffe
+- Yuval Pinter
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1908.04626
+  code: https://github.com/sarahwie/attention
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d9e507dfa544d04e2738b069352cad8849246e58650a1f6c19f6ba7091260a47
+tags:
+  tasks:
+  - model-explanation
+  method_families:
+  - attention-explanations
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- 'Four tests for attention as explanation: uniform-weights baseline, random-seed variance baseline, diagnostic MLP guided by frozen attention weights, model-consistent adversarial attention training'
+claims:
+- id: c1
+  statement: 'The paper proposes four tests of when attention can serve as explanation: a uniform-weights baseline, a variance calibration over random seeds, a diagnostic framework using frozen pretrained
+    attention weights, and end-to-end adversarial attention training.'
+  location: Abstract
+  page: 1
+  quote: We propose four alternative tests to determine when/whether attention can be used as explanation
+- id: c2
+  statement: 'Critique of Jain & Wallace: they detach the attention distribution and output layer from the parameters that compute them and treat each attention score as a standalone unit, and compute an
+    independent adversarial distribution per instance.'
+  location: Attention Might be Explanation
+  page: 3
+  quote: Jain and Wallace detach the attention distribution and output layer of their pretrained network from the parameters that compute them (see Figure 1), treating each attention score as a standalone
+    unit independent of the model.
+- id: c3
+  statement: Compared with a variant whose attention is frozen to uniform weights, the attention layer appears to offer little to no improvement on three of the classification tasks; the authors conclude
+    these datasets (notably AG News and 20 Newsgroups) are not useful test cases, since attention is not explanation if it is not needed.
+  location: Uniform as the Adversary
+  page: 5
+  quote: 'We conclude that these datasets, notably AG NEWS and 20 NEWSGROUPS, are not useful test cases for the debated question: attention is not explanation if you don’t need it.'
+- id: c4
+  statement: 'Their evaluation is functionally grounded: an analysis on proxy tasks without human evaluation.'
+  location: Defining Explanation
+  page: 9
+  quote: our proposed methods provide a functionally-grounded evaluation of attention as explanation, i.e. an analysis conducted on proxy tasks without human evaluation.
+- id: c5
+  statement: 'Whether attention is explanation depends on the definition one adopts: plausible explanations, faithful explanations, or both.'
+  location: Attention is All you Need it to Be
+  page: 9
+  quote: 'Whether or not attention is explanation depends on the definition of explainability one is looking for: plausible or faithful explanations (or both).'
+- id: c6
+  statement: 'Partial agreement with Jain & Wallace: adversarial attention distributions can be found for LSTM models in some classification tasks.'
+  location: Attention is All you Need it to Be
+  page: 9
+  quote: However, we have confirmed that adversarial distributions can be found for LSTM models in some classification tasks, as originally hypothesized by Jain and Wallace.
+- id: c7
+  statement: Adversarially trained attention distributions perform poorly, relative to the original attention, when used as guide weights in the diagnostic MLP.
+  location: Attention is All you Need it to Be
+  page: 9
+  quote: We’ve shown that alternative attention distributions found via adversarial training methods perform poorly relative to traditional attention mechanisms when used in our diagnostic MLP model.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. Scope: experiments restricted to the binary
+    classification subset of Jain & Wallace''s datasets (SST, IMDB, 20 Newsgroups, AG News, MIMIC Diabetes/Anemia; ADR dropped) and a single-layer BiLSTM with additive attention, using Jain & Wallace''s
+    hyperparameters and train/test splits; analysis on test sets. Direct response to arxiv-1902.10186.'

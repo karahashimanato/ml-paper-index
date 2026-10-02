@@ -1,0 +1,73 @@
+id: arxiv-2608.18849
+title: 'GEAR: Generative Expansion and Real Anchoring for Two-Stage Distillation of Tabular Foundation Models'
+authors:
+- Qi Qin
+- Jiajie Zhu
+- Dali Chen
+- Yuzhao Zhang
+- Jia-Xing Han
+- Peng Zhang
+- Ying Yan
+- Yifan Sun
+- Yu Su
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.18849
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 28925f126c1074fdab0d9b3cb2d0d5cd2e9e04b5a8ce33dc146f13d390252ec5
+tags:
+  tasks:
+  - tabular-classification
+  - model-compression
+  method_families:
+  - knowledge-distillation
+  - tabular-foundation-model
+  - tabular-mlp
+  - gradient-boosted-trees
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- 'GEAR (two-stage distillation of TFMs: generative query expansion + out-of-fold real-data anchoring)'
+claims:
+- id: c1
+  statement: GEAR distills TFMs into lightweight MLP or tree-based predictors deployable on commodity CPUs.
+  location: Abstract
+  page: 1
+  quote: We propose GEAR (Generative Expansion and Real Anchoring), a modular two-stage framework that distills TFMs into lightweight MLP or tree-based predictors that can be deployed on commodity CPUs.
+- id: c2
+  statement: Stage 2 uses out-of-fold teacher predictions on real rows to avoid self-labeling leakage.
+  location: Abstract
+  page: 1
+  quote: Stage 2 re-anchors the student to the target distribution using real labels and out-of-fold teacher predictions, which avoids self-labeling leakage.
+- id: c3
+  statement: On binary tasks the gains transfer to LightGBM and XGBoost students, and all three student families outperform CatBoost in mean AUC.
+  location: Abstract
+  page: 1
+  quote: On binary tasks, the gains also transfer to LightGBM and XGBoost, and all three student families outperform CatBoost, the strongest non-TFM baseline, in mean AUC.
+- id: c4
+  statement: Evaluation is on TALENT and TabArena with ROC-AUC (binary) and macro one-vs-rest AUC (multiclass), averaged over five random runs.
+  location: Experimental setup
+  page: 4
+  quote: For all settings, we use ROC-AUC for binary classification and macro one-vs-rest AUC for multiclass classification; reported values are averaged over five random runs.
+- id: c5
+  statement: Detailed optimization settings and implementation are deferred to the supplementary material; how the supervised baselines (CatBoost, RealMLP, TabM) were tuned, and dataset counts or size limits,
+    were not found in the main text.
+  location: Experimental setup
+  page: 5
+  quote: Detailed optimization settings and implementation are provided in the supplementary material.
+- id: c6
+  statement: The work covers classification and single-teacher distillation only.
+  location: Conclusion
+  page: 7
+  quote: Although this work focuses on classification and single-teacher distillation, GEAR could be extended to regression and multi-teacher distillation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Company affiliation: most authors are at Ant Digital Technologies, Ant Group (first
+    author''s work done during an internship there).'

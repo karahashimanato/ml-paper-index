@@ -1,0 +1,69 @@
+id: arxiv-2608.17856
+title: 'ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction'
+authors:
+- Samirasadat Jamalidinan
+- Yue Xu
+- Kazem Cheshmi
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.17856
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 795f0e706aeb6c0ecab7a2270f8952d47aa3a76c4530bf179b5de561417d892e
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - tabular-mlp
+  - tabular-attention
+  - large-language-models
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- ARASH (adaptive, query-specific retrieval and shot selection for TFM/LLM in-context tabular prediction)
+claims:
+- id: c1
+  statement: ARASH selects query-specific context shots for tabular foundation models from local-neighbourhood analysis of the training set.
+  location: Abstract
+  page: 1
+  quote: This paper introduces ARASH (Adaptive, query-specific Retrieval And Shot selection), a method that improves TFM efficiency by selecting optimal shots based on local neighborhood analysis within
+    the training set.
+- id: c2
+  statement: ARASH reduces TabPFN's prompt length and memory use while giving comparable accuracy.
+  location: Abstract
+  page: 1
+  quote: Our results demonstrate that ARASH reduces the prompt length and memory usage of TabPFN by 1261.5× and 2.56×, respectively, while providing comparable accuracy.
+- id: c3
+  statement: Evaluation uses OpenML-CC18 plus the Combo collection, with a single 80/20 train-test split (seed 42) shared by all methods.
+  location: Experimental results (setup)
+  page: 5
+  quote: For datasets, we use an 80/20 train–test split with random seed 42, and the same split is used consistently across all compared methods.
+- id: c4
+  statement: Tabular baselines come from the TALENT toolbox and its standardized implementations and hyperparameter settings. Results are reported only on datasets where each method ran successfully.
+  location: Experimental results (baselines)
+  page: 5
+  quote: We use the latest TALENT release and report results on the datasets for which the corresponding methods are successfully executed.
+- id: c5
+  statement: ARASH's locality, purity and clustering thresholds are grid-searched on a held-out 10% of datasets that are not used in training, evaluation or test.
+  location: Experimental results (evaluation metrics)
+  page: 5
+  quote: we define a tuning set as random 10% of datasets (seed=42) never appearing in training, evaluation, or test and perform a grid search for locality, purity, and auto-clustering thresholds to avoid
+    bias.
+- id: c6
+  statement: The LoCalPFN-style comparison is reported only on datasets where both large-budget runs finished within the time limit.
+  location: Experimental results (ICL demonstration-selection baselines)
+  page: 6
+  quote: We therefore report this comparison only on the datasets for which both LoCalPFN-style kNN and DPP runs completed successfully.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Whether TALENT baselines were run with default settings or with hyperparameter search
+    is not stated beyond ''standardized implementations and hyperparameter settings''. A single train-test split is used, with no repeated seeds for the main comparison. ARASH is also evaluated with serialized-table
+    language models (LLaMA 3.2, Qwen 2.5, FLAN-T5).'

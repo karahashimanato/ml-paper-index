@@ -1,0 +1,79 @@
+id: arxiv-2004.13912
+title: 'Neural Additive Models: Interpretable Machine Learning with Neural Nets'
+authors:
+- Rishabh Agarwal
+- Levi Melnick
+- Nicholas Frosst
+- Xuezhou Zhang
+- Ben Lengerich
+- Rich Caruana
+- Geoffrey Hinton
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2004.13912
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a8f154e5abcd75699a20282991c58b53cd5c9cf8fffb569d667d17156c66c1c2
+tags:
+  tasks:
+  - model-explanation
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - interpretable-models
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Neural Additive Models (NAMs): GAMs whose shape functions are per-feature neural nets'
+- ExU (exp-centered) hidden units for jagged shape functions
+claims:
+- id: c1
+  statement: NAMs learn a linear combination of neural networks, each of which takes a single input feature (a generalized additive model with neural-net shape functions), trained jointly.
+  location: Abstract
+  page: 1
+  quote: NAMs learn a linear combination of neural networks that each attend to a single input feature.
+- id: c2
+  statement: 'Interpretability argument: the per-feature shape-function plots are not just an explanation but an exact description of how the NAM computes a prediction.'
+  location: Intelligibility and Modularity of NAMs
+  page: 4
+  quote: Please note these shape function plots are not just an explanation but an exact description of how NAMs compute a prediction.
+- id: c3
+  statement: As an example of intelligibility, the authors state that they validated the behaviour of NAMs on MIMIC-II with a doctor (Appendix A.1, a qualitative discussion of shape functions).
+  location: Intelligibility and Modularity of NAMs
+  page: 4
+  quote: A decision-maker can easily interpret such models and understand exactly how they make decisions, for example, we validated the behavior of NAMs on the MIMIC-II dataset [38] with a doctor (Appendix
+    A.1).
+- id: c4
+  statement: NAMs achieve performance comparable to Explainable Boosting Machines on the classification and regression datasets, evaluated by 5-fold cross validation.
+  location: Evaluating the Accuracy of NAMs
+  page: 6
+  quote: NAMs achieve comparable performance to EBMs on both classification and regression datasets, making them a competitive alternative to EBMs.
+- id: c5
+  statement: NAM hyperparameters (learning rate, output penalty, weight decay, dropout, feature dropout) are tuned by Bayesian optimization based on cross-validation performance with a single train-validation
+    split per fold.
+  location: Appendix (Experimental Details)
+  page: 18
+  quote: For computational efficiency, we tune these hyperparameters using Bayesian optimization [11, 39] based on cross-validation performance with a single train-validation split for each fold.
+- id: c6
+  statement: 'Baseline tuning: EBMs use the open-source implementation with parameters specified by prior work (linear models and decision trees are tuned by grid search).'
+  location: Appendix (Hyperparameters)
+  page: 18
+  quote: We use the open-source implementation [26] with the parameters specified by prior work [5] for a fair comparison.
+- id: c7
+  statement: 'Limitation/scope: pairwise feature interactions are not considered, to keep the paper focused on additive modelling.'
+  location: Related Work
+  page: 9
+  quote: We don’t consider such interactions to keep the paper focused on additive modeling with neural nets.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. PDF states: 35th Conference on Neural Information
+    Processing Systems (NeurIPS 2021). Datasets in the main accuracy table: MIMIC-II, Credit (fraud), California Housing, FICO; plus COMPAS and synthetic multitask data. Main text says AUC denotes area
+    under the precision-recall curve, while the COMPAS table caption says ROC AUC. Tuning protocol for the XGBoost baseline was not found in the text. Authors include Rich Caruana (Microsoft Research),
+    whose prior work is the EBM/GA2M baseline. No quantitative explanation-quality metric was found; interpretability is argued from the additive structure. Source code is announced at ''neural-additive-models.github.io''
+    (not added as a link).'

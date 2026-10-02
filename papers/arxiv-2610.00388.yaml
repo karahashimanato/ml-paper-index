@@ -1,0 +1,63 @@
+id: arxiv-2610.00388
+title: 'T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning'
+authors:
+- Bo-Wen Zhang
+- Junwei He
+- Maoqi Liu
+- Feiran Li
+- Song-Lin Lv
+- Wentao Ma
+- Rongyi Lin
+- Shuhan Zhong
+- Lan-Zhe Guo
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2610.00388
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 6761af13c262b793b906dc1ef2b0475414263e6c19a3f7b6216ff7bfc919be2f
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- T2SPO (step-level credit for LLM-agent RL from a frozen TabPFN regressor estimating remaining distance to success)
+claims:
+- id: c1
+  statement: A pretrained TabPFN regressor, conditioned on states from past successful trajectories, estimates remaining distance to success; changes in this estimate give auxiliary step credit.
+  location: Abstract
+  page: 1
+  quote: Conditioned on these examples, a pretrained TabPFN regressor estimates the remaining distance to success at each state of a new rollout.
+- id: c2
+  statement: With 1.5B and 7B models on ALFWorld and WebShop, T2SPO consistently improves overall task success over GRPO.
+  location: Abstract
+  page: 1
+  quote: Experiments with 1.5B and 7B language models on ALFWorld and WebShop show that T2SPO consistently improves overall task success over GRPO.
+- id: c3
+  statement: All baseline results (GRPO, PPO, RLOO, GiGPO, ReAct, base model) are taken from Feng et al. (2025) rather than re-run.
+  location: Experimental setup
+  page: 7
+  quote: All baseline results are taken from Feng et al. (2025).
+- id: c4
+  statement: In offline remaining-distance prediction on WebShop, TabPFN is compared with kNN regression; the lowest observed kNN MAE over tested k is reported for each context budget.
+  location: Comparison with Nearest Neighbors
+  page: 8
+  quote: We test 𝑘∈{8, 16, 𝑀/4, 𝑀/2, 𝑀} and plot the lowest observed kNN MAE at each budget (Figure 2b).
+- id: c5
+  statement: 'Limitation: a fixed proportion of failure examples has mixed effects, motivating adaptive supervision.'
+  location: Limitations
+  page: 10
+  quote: The mixed effects of a fixed proportion of failure examples motivate supervision that adapts to the task and the agent’s experience.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Not a tabular benchmark paper: TabPFN is used as a component (regressor) inside LLM-agent
+    RL. Affiliations: Nanjing University and ByteDance.'

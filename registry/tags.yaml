@@ -5,6 +5,12 @@ tasks:
     description: Classification on tabular (heterogeneous-column) data.
   - id: tabular-regression
     description: Regression on tabular (heterogeneous-column) data.
+  - id: time-series-forecasting
+    description: Forecasting future values of time series.
+  - id: causal-effect-estimation
+    description: Estimating causal / treatment effects from data.
+  - id: graph-node-prediction
+    description: Node-level classification or regression on graphs.
   - id: drift-detection
     description: Detecting that the data distribution or the input-output relationship has changed over time (MLOps monitoring).
   - id: concept-drift-detection
@@ -16,6 +22,21 @@ tasks:
     description: Detecting distribution shift between training and deployment data (covariate, label, or general shift), typically with statistical tests.
     parent: drift-detection
 
+  - id: change-point-detection
+    description: Offline / retrospective detection of the locations where a sequence's distribution changes.
+    parent: drift-detection
+  - id: stream-classification
+    description: Supervised learning on data streams that must keep accuracy under drift (adaptation rather than detection).
+  - id: time-series-classification
+    description: Classifying whole time series or windows.
+  - id: tabular-data-generation
+    description: Generating synthetic tabular data (evaluated e.g. by fidelity or train-on-synthetic-test-on-real).
+  - id: tabular-imputation
+    description: Filling in missing values of tabular data.
+  - id: model-explanation
+    description: Explaining or interpreting a model's predictions (local or global), and evaluating whether explanations are faithful.
+  - id: model-compression
+    description: Reducing a model's memory or compute (quantization, pruning, distillation) and measuring what changes in its behaviour.
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -66,6 +87,37 @@ method_families:
   - id: linear-models
     description: Linear / generalized linear models.
 
+  - id: feature-attribution
+    description: Post-hoc methods that assign each input feature a contribution to a prediction (e.g. SHAP, LIME, Integrated Gradients).
+  - id: saliency-maps
+    description: Gradient- or perturbation-based attribution maps over inputs of deep networks.
+    parent: feature-attribution
+  - id: attention-explanations
+    description: Using attention weights as explanations of model decisions.
+  - id: interpretable-models
+    description: Models whose structure is itself interpretable (e.g. GAMs, Neural Additive Models, sparse linear models, rule lists).
+  - id: quantization
+    description: Representing weights and/or activations with fewer bits.
+  - id: post-training-quantization
+    description: Quantizing a trained model without (or with little) retraining, typically with a small calibration set.
+    parent: quantization
+  - id: quantization-aware-training
+    description: Training or fine-tuning with simulated quantization so that the model adapts to low precision.
+    parent: quantization
+  - id: pruning
+    description: Removing weights, neurons, heads or layers from a trained model.
+  - id: knowledge-distillation
+    description: Training a smaller student model to imitate a larger teacher model.
+  - id: large-language-models
+    description: Large pretrained (generative) language models.
+  - id: gaussian-processes
+    description: Gaussian process models.
+  - id: kernel-methods
+    description: Kernel machines such as SVM / SVR.
+  - id: graph-neural-networks
+    description: Neural networks operating on graphs (e.g. GCN, GraphSAGE).
+  - id: imbalance-resampling
+    description: Over- or under-sampling methods for class imbalance (e.g. SMOTE).
 paradigms:
   - id: supervised
     description: Supervised learning.
@@ -75,3 +127,7 @@ paradigms:
     description: Online learning / processing of data streams.
   - id: in-context-learning
     description: Prediction by conditioning a pretrained model on training examples without gradient updates.
+  - id: self-supervised
+    description: Learning representations from unlabeled data with pretext tasks.
+  - id: post-hoc
+    description: Applied to an already trained model without changing it.

@@ -1,0 +1,71 @@
+id: arxiv-2609.24278
+title: High-Dimensional Online Change Point Detection with Adaptive Thresholding and Interpretability
+authors:
+- Sven Jacob
+- Bardh Prenkaj
+- Weijia Shao
+- Gjergji Kasneci
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.24278
+  code: https://github.com/jsve96/SWCPD_Code
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 742f8a78e124e70e531325a568018d1251cba27fa05863c0269110a7a00265d7
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - two-sample-tests
+  - window-based-drift-detectors
+  - feature-attribution
+  paradigms:
+  - unsupervised
+  - streaming
+proposes:
+- 'SWCPD: Sliced-Wasserstein-based online change point detection with an adaptive (Gamma-motivated) quantile threshold'
+- Contrastive explanations for detected change points
+claims:
+- id: c1
+  statement: The paper proposes a self-adapting online change point detection algorithm combining a Sliced Wasserstein score with an adaptive quantile-based threshold.
+  location: Abstract
+  page: 1
+  quote: we propose a self-adapting online CPD algorithm that combines this SW-based score with an adaptive quantile-based threshold
+- id: c2
+  statement: 'Main empirical claim: the method reduces false positives on average compared with popular online and offline CPD baselines while keeping competitive or better detection performance.'
+  location: Abstract
+  page: 1
+  quote: Empirically, our method reduces false positives by at least 48% on average compared with popular online and offline CPD baselines, while maintaining competitive or superior detection performance
+- id: c3
+  statement: 'Evaluation metrics: AUC and segmentation covering (following the evaluation protocol of Van den Burg & Williams and Ermshaus et al.), average detection delay and the average number of false
+    positives, on one synthetic and four real datasets (MNIST, HAR, HASC, Occupancy) with annotated change points.'
+  location: Experiments (Change point detection)
+  page: 9
+  quote: We report Area Under the Curve (AUC), segmentation covering scores (COV), average detection delay (DD), and the average number of false positives (FP).
+- id: c4
+  statement: 'Synthetic ground truth: change points are created by injecting mean offsets into randomly selected features of a simulated stream of segments.'
+  location: Experiments (Synthetic Data)
+  page: 10
+  quote: We randomly select a total of 3 features for which we inject a drift by offsetting the mean ci randomly sampled within (−3, 3) for each drifted feature.
+- id: c5
+  statement: SWCPD hyperparameters were set by a fixed set of heuristic rules (window shorter than the average segment length, small quantile level), with dataset-specific values reported.
+  location: Appendix (Hyperparameter selection)
+  page: 19
+  quote: For all experiments, hyperparameters were selected according to a fixed set of heuristic rules.
+- id: c6
+  statement: For the RIO-CPD baselines, window size and CUSUM threshold were grid-searched and the reported settings are those giving the best AUC; a separate validation split for this selection was not
+    found in the text.
+  location: Appendix (baseline hyperparameters, RIO)
+  page: 23
+  quote: 'The following hyperparameter resulted in the best AUC scores for RIO-LE:'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Online change point detection (unsupervised, multivariate), framed as closely related
+    to concept drift detection; tagged change-point-detection because it is evaluated on CPD benchmarks with CPD metrics against online and offline CPD baselines. The explanation part is compared with Integrated
+    Gradients, GradientShap and DeepLIFT (hence feature-attribution). Baselines: BOCPD, e-divisive, KCP, OT-CPD, RuLSIF, RIO-LE/RIO-LC, ClaSP, DeepRuLSIF, DeepCLF; several run at package defaults with one
+    varied parameter (e.g. lag). No error-rate detectors (DDM/ADWIN) compared. Published in TMLR (08/2026) per the PDF header; venue not set because it is not in the batch metadata.'

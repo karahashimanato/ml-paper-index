@@ -1,0 +1,67 @@
+id: arxiv-2609.09432
+title: 'SCCM : Stream Cruise Control Method for Automated Drift Detection and Adaptation'
+authors:
+- Mohammad Abu-Shaira
+- Weishi Shi
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.09432
+  code: https://github.com/anonymous273800/SCCM
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c7138b2351a0b05573febb4c472cb01339f1d9771b7bbabcd4ea727ce3372d80
+tags:
+  tasks:
+  - concept-drift-detection
+  - tabular-regression
+  method_families:
+  - error-rate-drift-detectors
+  - window-based-drift-detectors
+  - linear-models
+  paradigms:
+  - streaming
+  - supervised
+proposes:
+- 'SCCM: KPI-window drift detection with CFAR-inspired adaptive threshold, drift-magnitude-driven hyperparameter control and bounded recalibration for online regression'
+claims:
+- id: c1
+  statement: The paper presents SCCM, a framework combining drift detection and adaptation for online regression.
+  location: Abstract
+  page: 1
+  quote: This paper presents the Stream Cruise Control Method (SCCM ), a comprehensive framework for drift detection and adaptation in online regression.
+- id: c2
+  statement: 'Evaluation scope: SCCM is attached to four online regressors and evaluated on synthetic streams with abrupt, incremental and alternating gradual drift plus real-world datasets.'
+  location: Abstract
+  page: 1
+  quote: SCCM is integrated with four online regression models and evaluated on 18 synthetic datasets covering abrupt, incremental, and alternating gradual drift, together with eight real-world datasets.
+- id: c3
+  statement: Baselines combine ADWIN or KSWIN with four adaptation strategies; the detectors use scikit-multiflow default settings.
+  location: Experimental setup (Baseline Configuration Protocol)
+  page: 36
+  quote: Specifically, ADWIN used δ = 0.002, while KSWIN used αKS = 0.005, WKS = 100, and SKS = 30.
+- id: c4
+  statement: No detector parameter search was done for the baselines; the authors argue that grid search over the evaluated stream would introduce look-ahead bias.
+  location: Experimental setup (Baseline Configuration Protocol)
+  page: 37
+  quote: Consequently, no detector candidate grid, designated pilot seed, separate pilot stream, or data-driven detector-parameter selection procedure was used.
+- id: c5
+  statement: Detection metrics (TP, FP, missed drifts, delay, precision, recall, F1) are computed only on synthetic streams, because the real datasets have no annotated drift locations.
+  location: Drift-Alarm Quality Metrics and Alignment Protocol
+  page: 40
+  quote: Because the real-world datasets do not provide annotated drift locations or known concept boundaries, ground-truth alarm-quality metrics are evaluated only on the synthetic datasets.
+- id: c6
+  statement: The alarm-matching parameters were applied identically to SCCM, ADWIN and KSWIN and fixed before the final comparative analysis, with a separate sensitivity analysis.
+  location: Drift-Alarm Quality Metrics and Alignment Protocol
+  page: 42
+  quote: These values are applied identically to SCCM , ADWIN, and KSWIN and were fixed before the final comparative analysis.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Ground truth: synthetic streams with known drift points; a true positive is the earliest
+    unmatched raw alarm within a post-drift tolerance window, all other alarms are false positives. SCCM alarms are scored at the consolidated episode level, while ADWIN/KSWIN raw alarms are scored without
+    cooldown consolidation in the primary analysis (an episode-level comparison is also given). SCCM''s own threshold multiplier is reported as z = 1.5 in the configuration tables; how that value was chosen
+    was not found in the text. Learners: RLS, PA, LMS, OLR-WA (OLR-WA, ref. [40], is an earlier paper by the first author).'

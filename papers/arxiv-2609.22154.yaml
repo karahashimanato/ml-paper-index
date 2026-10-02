@@ -1,0 +1,62 @@
+id: arxiv-2609.22154
+title: 'A Comparative Framework for Evaluating Foundation Models on Tabular Data: A Case Study in Healthcare'
+authors:
+- Majid Lotfian Delouee
+- Sjors G. J. G. In 't Veld
+- Martijn C. Schut
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.22154
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 5b28b1b916ebe5083487ecde8e6f2591bafebbc5d02c0e52debeda52d9b1b93c
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+proposes:
+- OpTFM (property-based comparative framework for tabular foundation models)
+- Taxonomy of 45 tabular foundation models
+claims:
+- id: c1
+  statement: OpTFM scores and ranks tabular foundation models across six clinically meaningful dimensions.
+  location: Abstract
+  page: 1
+  quote: We introduce OpTFM, a comparative evaluation framework that scores and ranks tabular foundation models (TFMs) across six clinically meaningful dimensions
+- id: c2
+  statement: Applied to two healthcare use cases, the same metrics lead to different model rankings depending on clinical priorities.
+  location: Abstract
+  page: 1
+  quote: To show how the framework works in practice, we apply it to two healthcare use cases, screening for iron deficiency and predicting heart failure, demonstrating how the same set of metrics leads
+    to different model rankings depending on what matters most in each clinical context.
+- id: c3
+  statement: 'Evaluation protocol: no models are run; sub-metric scores are derived from each model''s documented design properties.'
+  location: Framework
+  page: 7
+  quote: sub-metric scores are derived from each model’s documented design properties
+- id: c4
+  statement: Scores start at a default of 10 and are reduced by 1 for each missing or problematic property.
+  location: Case study
+  page: 12
+  quote: Models start with a default sub-metric score of 10, and each missing or problematic property reduces the relevant sub-metric scores by 1.
+- id: c5
+  statement: The scores are property-based estimates, not substitutes for empirical measurement.
+  location: Case study
+  page: 12
+  quote: The resulting scores should therefore be interpreted as property- based estimates of model suitability for comparison within the framework, rather than as substitutes for direct empirical measurement.
+- id: c6
+  statement: Scoring each model only against its own paper rewards papers with narrow or dated baselines and penalises papers candid about limitations, which motivated a second audit pass using independent
+    literature.
+  location: Case study
+  page: 22
+  quote: scoring each model’s properties against its own publication alone systematically rewards models whose papers compare against a narrow or dated set of baselines, and penalizes models whose papers
+    are comparatively candid about their own limitations
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. No empirical experiments; rankings are property-based from literature, not measured.'

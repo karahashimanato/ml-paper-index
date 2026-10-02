@@ -1,0 +1,69 @@
+id: arxiv-2609.36594
+title: 'Optimal detection of general moment changes: Simultaneous mean and covariance change detection and beyond'
+authors:
+- Xiaokai Luo
+- Chenghao Xu
+- Haotian Xu
+- Carlos Misael Madrid Padilla
+- Daren Wang
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.36594
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9c6ba44bfe58a0140fbca415c113f78a39b700582b73e9b58aad200d32bf744a
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - two-sample-tests
+  paradigms:
+  - unsupervised
+proposes:
+- Tensor-moment CUSUM change-point method (seeded intervals + narrowest-over-threshold, then local refinement) detecting changes in all joint moments up to order p in multivariate time series, with confidence
+  intervals
+claims:
+- id: c1
+  statement: A tensor representation unifies moments of different orders, giving a method that detects changes in all moments up to a fixed order p.
+  location: Abstract
+  page: 1
+  quote: Our tensor representation unifies moments of different orders within a common linear algebraic framework, enabling a new method to detect changes in moments of all orders up to a prescribed fixed
+    order p.
+- id: c2
+  statement: 'Theory: under regularity conditions the localization error rate matches a new minimax lower bound (temporal dependence and growing dimension allowed).'
+  location: Abstract
+  page: 1
+  quote: Under suitable regularity conditions, the proposed procedure achieves a localization error rate that matches a newly developed minimax lower bound.
+- id: c3
+  statement: Competing methods (CPWZ, changeAUC, mean-change binary segmentation, MNSBS) use their default or paper-recommended tuning parameters and their own data-driven selection procedures.
+  location: Simulation and real data example (tuning parameter selection)
+  page: 12
+  quote: For the competing methods, we use their default or paper-recommended tuning parameters and their associated data-driven selection procedures.
+- id: c4
+  statement: 'The proposed method''s threshold tau and moment order p are chosen jointly from a grid by sample splitting: fit on odd-indexed observations and score the segmentation on even-indexed observations
+    with an empirical kernel score (no ground-truth change points used).'
+  location: Simulation and real data example (tuning parameter selection)
+  page: 12
+  quote: To select the candidate pair in a data-driven manner, we evaluate these segments on the even-indexed observations using an empirical kernel score (Steinwart and Ziegel, 2021).
+- id: c5
+  statement: 'Simulations: D = 100 dimensional AR(1) series, 100 repetitions per setting, with change points injected at fixed known locations; accuracy is the Hausdorff distance between true and estimated
+    change sets plus the frequency of under/over-estimating the number of changes.'
+  location: Simulation studies
+  page: 13
+  quote: We use D = 100 and 100 independent repetitions per setting.
+- id: c6
+  statement: 'Main empirical claim: in the simulations the method recovers the correct number of changes in every repetition and has the lowest mean Hausdorff distance.'
+  location: Simulation studies
+  page: 13
+  quote: Table 1 shows that Tensor recovers the correct number of changes in all 100 repetitions of each setting, and its refined estimates attain the lowest mean Hausdorff distance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Offline (retrospective) multiple change-point detection in multivariate time series,
+    not online stream drift detection; no detection delay or false-alarm-rate metrics. Tagged change-point-detection; two-sample-tests is the closest family (CUSUM contrasts of moment tensors between adjacent
+    segments). Ground truth exists only for the synthetic settings R1-R5; the real-data example (two Nasdaq-100 return panels) has no ground truth and estimated dates are compared with market events (Lehman
+    bankruptcy, COVID-19 onset). CPWZ is omitted in the two-change settings because it targets a single change.'

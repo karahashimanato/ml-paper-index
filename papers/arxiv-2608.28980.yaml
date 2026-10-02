@@ -1,0 +1,66 @@
+id: arxiv-2608.28980
+title: 'The Illusion of Replacement: Rethinking Specialized Machine Learning Models in the Foundation Model Era'
+authors:
+- Kiyan Rezaee
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.28980
+  code: https://github.com/kiyan-rezaee/language-vs-structure
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 69ecd080163b673c22e6b9e6461dbe859cff6d679ef89f9029874cfa05803e94
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - large-language-models
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+proposes:
+- Review of whether language-mediated models replace specialized architectures, with a regime ladder and a proposed controlled experiment
+claims:
+- id: c1
+  statement: The review draws on a corpus of 186 papers from 2016 to 2026 across nine modalities to ask whether structural assumptions can be acquired through language.
+  location: Abstract
+  page: 1
+  quote: This review asks whether such assumptions can instead be acquired through language, drawing on a corpus of 186 papers published between 2016 and 2026 across nine modalities
+- id: c2
+  statement: Once structure itself is evaluated, no evidence of general replacement survives; where direct tests exist, apparent parity is traced to information asymmetry, benchmark contamination, or computation
+    outside the language model.
+  location: Abstract
+  page: 1
+  quote: 'No evidence of general replacement survives once structure itself is evaluated: where direct tests exist, apparent parity is traceable to information asymmetry, benchmark contamination, or computation
+    performed outside the language model.'
+- id: c3
+  statement: For tabular data, the review concludes there is only a narrow form of functional replacement, confined to a regime where strong non-linguistic baselines lack the same advantage.
+  location: Tabular Data
+  page: 13
+  quote: Tabular data therefore illustrates a narrow form of functional replacement, confined to a regime in which strong non-linguistic baselines do not hold the same advantage.
+- id: c4
+  statement: Citing Purucker et al., the review states that TabArena and TALENT are dominated by small-to-medium IID datasets where tabular foundation models do well, and that this advantage weakens substantially
+    under temporal and grouped shift.
+  location: Datasets and Benchmarks
+  page: 18
+  quote: TabArena and TALENT are dominated by small-to-medium IID tabular datasets, the regime in which tabular foundation models perform particularly well, whereas Purucker et al. [109]’s purpose-built
+    alternative shows that this advantage weakens substantially under temporal and grouped shift.
+- id: c5
+  statement: Averaging over datasets of different structural difficulty, as in TabArena and TALENT, can produce a favorable mean while masking failures in harder or less-represented cases.
+  location: Evaluation
+  page: 20
+  quote: averaging across datasets with different structural difficulty, as in TabArena and TALENT, can produce a favorable mean while masking failures concentrated in harder or less-represented cases [109].
+- id: c6
+  statement: 'Stated limitation: screening was done by a single author, so screening decisions cannot be reproduced by a second screener.'
+  location: Survey methodology
+  page: 4
+  quote: 'Single-author screening introduces an important limitation: screening decisions cannot be independently reproduced by a second screener.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Literature review without its own benchmark experiments; covers nine modalities,
+    only the tabular parts are recorded here. Tags approximate.'

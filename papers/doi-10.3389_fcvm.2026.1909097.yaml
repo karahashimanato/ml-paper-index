@@ -1,0 +1,75 @@
+id: doi-10.3389_fcvm.2026.1909097
+title: 'CIN-RiskNet: a dynamic feature-enhanced TabTransformer with hybrid SMOTE-noise augmentation for contrast-induced nephropathy prediction'
+authors:
+- Peng Zhang
+- Zehao Yang
+- Xue Zhang
+- Keyu Gong
+- Xiaogang Liu
+- Shicheng Yang
+- Zhiwei Zhang
+- Ximing Li
+- Runnan He
+year: 2026
+venue: Frontiers in Cardiovascular Medicine
+links:
+  doi: https://doi.org/10.3389/fcvm.2026.1909097
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 933ab779cedec0fd6734c8dd91df8167afb1c4c4ed0dacbdde5391080faec074
+  pdf_url: https://www.frontiersin.org/journals/cardiovascular-medicine/articles/10.3389/fcvm.2026.1909097/pdf
+  license: cc-by
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-attention
+  - imbalance-resampling
+  paradigms:
+  - supervised
+proposes:
+- 'CIN-RiskNet: feature-gated TabTransformer encoder with SMOTE + Gaussian-noise augmentation'
+claims:
+- id: c1
+  statement: CIN-RiskNet combines adaptive feature gating, SMOTE oversampling and multi-head self-attention in a TabTransformer.
+  location: Abstract
+  page: 1
+  quote: The approach includes adaptive feature gating to suppress noise, synthetic minority oversampling to address class imbalance, and multi-head self-attention to capture complex feature interactions.
+- id: c2
+  statement: 'Data and protocol: single-center cohort of 1,679 PCI patients (103 with CIN), evaluated with five-fold cross-validation; SMOTE and noise were applied only to the training subset of each fold,
+    and 20% of each training set was held out for validation.'
+  location: Model training and evaluation protocol
+  page: 9
+  quote: Importantly, in each fold, SMOTE and Gaussian noise were applied strictly to the training subset only, while validation and test subsets were kept untouched to prevent synthetic-sample leakage.
+- id: c3
+  statement: Baselines (logistic regression, random forest, XGBoost, SVM, MLP) used identical splits and preprocessing; how their hyperparameters were set is not found in the text.
+  location: Results
+  page: 10
+  quote: To ensure fairness in model comparisons, all methods adopted identical training/testing splits, uniform data preprocessing pipelines, and 5-fold cross-validation.
+- id: c4
+  statement: The paper reports CIN-RiskNet had the highest recall and F1 among the evaluated models, while random forest and XGBoost had slightly higher accuracy.
+  location: Results
+  page: 10
+  quote: Among all compared models, CIN-RiskNet achieved the highest recall (0.9540) and F1-score (0.9542), substantially outperforming traditional machine learning baselines in detecting minority-class
+    samples (Table 4).
+- id: c5
+  statement: The Mehran comparator is a modified version built from available variables because several original Mehran variables were not recorded.
+  location: Comparison with clinical scoring
+  page: 9
+  quote: We therefore constructed a modified Mehran-like comparator using available variables (age, diabetes, contrast volume, baseline Scr/eGFR) to provide a pragmatic local benchmark.
+- id: c6
+  statement: 'Limitation: single-center retrospective study; external multicenter validation is still required.'
+  location: Limitations
+  page: 14
+  quote: First, this was a single-center retrospective study, which limits external generalizability despite the relatively large cohort (n = 1,679).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: cardiology / nephrology (contrast-induced nephropathy after PCI;
+    23 pre-/intra-procedural clinical variables). Reader caution (not a paper claim): the proposed model''s reported accuracy and recall are identical, while baseline recall values look like positive-class
+    recall; whether all models use the same averaging is not stated. The Table 5 ablation column labels also appear not to match the values quoted in the text. The decision threshold is fixed at 0.5 (Figure
+    3 caption).'

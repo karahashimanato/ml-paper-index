@@ -1,0 +1,84 @@
+id: doi-10.1007_s40123-026-01482-2
+title: 'Machine Learning-Based Prediction of Cycloplegic Refraction Using the Eyerobo Vision Screener: Design—A Cross-Sectional Comparative Device Study'
+authors:
+- Mengmeng Xia
+- Boxue Yao
+- Yumei Wang
+- Fengwei Liang
+- Wuxia Zhao
+- Li Qin
+- Shoukuan Liu
+- Muhammad Usama
+- Zhihui Zhang
+- Wu Guo
+- Emmanuel Eric Pazo
+- Xinjun Ren
+year: 2026
+venue: Ophthalmology and Therapy
+links:
+  doi: https://doi.org/10.1007/s40123-026-01482-2
+  code: https://github.com/Usama1002/cycloplegic-refraction-prediction
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a1efbf9a4be83672163e7830486aea4296d8b7df5a8fffde74e122e1188734bd
+  pdf_url: https://link.springer.com/content/pdf/10.1007/s40123-026-01482-2.pdf
+  license: cc-by-nc
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - random-forests
+  - linear-models
+  - kernel-methods
+  - tabular-mlp
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- Device comparison (Eyerobo VS vs auto-refractor, with/without IOL Master biometry) for ML prediction of cycloplegic refraction; no new learner
+claims:
+- id: c1
+  statement: 'Data and protocol: 1129 eyes of 574 patients aged 6-18; TabPFN (no hyperparameter tuning) evaluated alongside seven conventional ML algorithms with patient-level five-fold grouped cross-validation
+    repeated over three random seeds.'
+  location: Abstract
+  page: 1
+  quote: TabPFN, a tabular foundation model requiring no hyperparameter tuning, was evaluated alongside seven conventional machine-learning algorithms using patient-level five-fold grouped cross-validation
+    repeated over three random
+- id: c2
+  statement: 'Tuning: all gradient-boosting baselines (XGBoost, LightGBM, CatBoost) used default hyperparameters without per-dataset tuning, to match TabPFN''s zero-tuning design; the authors note tuning
+    may narrow the margin.'
+  location: Machine Learning Models
+  page: 10
+  quote: All gradient-boosting models used default hyperparameters without per-dataset tuning to ensure a fair comparison with TabPFN's zero-tuning design
+- id: c3
+  statement: TabPFN had the lowest MAE on all Eyerobo scenarios and was competitive with Ridge on auto-refractor scenarios.
+  location: Abstract
+  page: 2
+  quote: TabPFN achieved the lowest mean absolute error (MAE) on all Eyerobo scenarios and was competitive with Ridge on auto-refractor scenarios
+- id: c4
+  statement: 'Screening thresholds: a Youden-optimal cutoff was selected on each training fold, and the cross-validation-averaged cutoff was used as the reported operating point.'
+  location: Screening-oriented classification analysis
+  page: 11
+  quote: A noncycloplegic Youden-optimal cutoff was selected on each training fold and the cross-validation-averaged cutoff was used as the reported operating point.
+- id: c5
+  statement: The authors say the modest margin over linear and gradient-boosting baselines and the lack of external validation preclude recommending TabPFN as the definitive algorithm.
+  location: Conclusions
+  page: 2
+  quote: the modest margin over linear and gradient-boosting baselines and the absence of external validation preclude any recommendation as the definitive algorithm of choice.
+- id: c6
+  statement: 'Main limitation: all development and evaluation used internal cross-validation within a single-center cohort.'
+  location: Limitations
+  page: 26
+  quote: The most important limitation of this study is that all model development and evaluation were conducted within a single-center cohort using internal cross-validation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: ophthalmology (pediatric myopia; predicting cycloplegic refraction
+    from non-cycloplegic device readings and biometry). Although the GBDT baselines are described as default, the paper also lists fixed settings for XGBoost (200 rounds, depth 6, learning rate 0.05) and
+    random forest (100 trees, depth 10). Authors declare no financial relationships with the device manufacturers.'

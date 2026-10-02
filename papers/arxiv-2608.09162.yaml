@@ -1,0 +1,69 @@
+id: arxiv-2608.09162
+title: Tabular Numeric Stretch Transformation
+authors:
+- Zihao Ye
+- Juyong Kim
+- Johnna Sundberg
+- Burak Varici
+- Pradeep Ravikumar
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.09162
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 491fb561ef570dc1ff2e553f0eff598d352ed427c97b89c4185660ac7605d65e
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-mlp
+  - tabular-attention
+  paradigms:
+  - supervised
+proposes:
+- Supervised stretch (target-aware numeric feature transformation via Dirichlet-energy minimization)
+- Unsupervised stretch (minimax density redistribution)
+claims:
+- id: c1
+  statement: The stretch framework formulates numeric feature preprocessing as an optimization problem that makes the target function smoother and so more learnable.
+  location: Abstract
+  page: 1
+  quote: We introduce the stretch transformation framework, which formulates numeric feature preprocessing as an optimization problem to make the target function smoother and thus more learnable.
+- id: c2
+  statement: On 38 TALENT datasets, supervised stretch consistently outperforms all baseline transformations.
+  location: Abstract
+  page: 1
+  quote: Comprehensive experiments on 38 datasets from the TALENT benchmark demonstrate that supervised stretch consistently outperforms all baselines.
+- id: c3
+  statement: Every dataset-model-transformation combination gets 100 Optuna trials, jointly tuning model and transformation hyperparameters on the official TALENT train and validation partitions only.
+  location: Experimental setup
+  page: 7
+  quote: We conduct Bayesian optimization using Optuna [1] with 100 trials for each dataset-model-transformation combination, jointly tuning model and transformation hyperparameters (e.g., number of bins
+    for stretch and PLE) using only the training and validation partitions.
+- id: c4
+  statement: Selected configurations are run with 15 seeds on one fixed split, so the reported variability covers initialization and optimization, not alternative data splits.
+  location: Experimental setup
+  page: 7
+  quote: Each selected configuration is evaluated with 15 random seeds on the fixed split; these seeds measure initialization, minibatch-order, and optimization variability, not variability over alternative
+    data splits.
+- id: c5
+  statement: The 38 datasets come from the 42-dataset TALENT Benchmark 1 collection after excluding four datasets with only categorical features.
+  location: Appendix
+  page: 15
+  quote: From the original TALENT Benchmark 1 collection of 42 datasets, we exclude four datasets that contain only categorical features
+- id: c6
+  statement: The transformation is marginal (per feature), so it does not optimize a joint or conditional smoothness objective and is not interaction-aware.
+  location: Limitations
+  page: 10
+  quote: The current transformation is marginal and therefore does not optimize a joint or conditional smoothness objective; the downstream model may learn feature interactions, but the preprocessing itself
+    is not interaction-aware.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Evaluated with five neural models (FT-Transformer, MLP, MLP-PLR, RealMLP, ResNet);
+    the paper calls this a controlled transformation comparison, not an end-to-end model leaderboard. No GBDT or foundation-model comparison. No code URL found in the text.'

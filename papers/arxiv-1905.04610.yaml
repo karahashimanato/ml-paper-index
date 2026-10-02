@@ -1,0 +1,89 @@
+id: arxiv-1905.04610
+title: 'Explainable AI for Trees: From Local Explanations to Global Understanding'
+authors:
+- Scott M. Lundberg
+- Gabriel Erion
+- Hugh Chen
+- Alex DeGrave
+- Jordan M. Prutkin
+- Bala Nair
+- Ronit Katz
+- Jonathan Himmelfarb
+- Nisha Bansal
+- Su-In Lee
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1905.04610
+  code: https://github.com/suinleelab/treeexplainer-study
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: aa3824ce44c797539ec61cbb24a900a348363dc609a3ae717df5c92315557482
+tags:
+  tasks:
+  - model-explanation
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - feature-attribution
+  - tree-ensembles
+  - gradient-boosted-trees
+  paradigms:
+  - post-hoc
+proposes:
+- 'TreeExplainer (Tree SHAP): exact polynomial-time SHAP values for tree ensembles'
+- SHAP interaction values
+- Global tools built from local explanations (summary/dependence plots, explanation embeddings, loss-based model monitoring)
+claims:
+- id: c1
+  statement: TreeExplainer is a local explanation method for trees that computes optimal local explanations, defined by game-theoretic properties, in tractable (polynomial) time.
+  location: Introduction
+  page: 3
+  quote: Here we propose TreeExplainer, a new local explanation method for trees that enables the tractable computation of optimal local explanations, as defined by desirable properties from game theory
+    (Section 2.5).
+- id: c2
+  statement: 'Axiomatic justification: within additive feature attribution methods, Shapley values are the only way to satisfy local accuracy, consistency and missingness.'
+  location: Results (TreeExplainer)
+  page: 5
+  quote: 'results from game theory imply the Shapley values are the only way to satisfy three important properties: local accuracy, consistency, and missingness (Methods 9)'
+- id: c3
+  statement: By default TreeExplainer computes conditional expectations by tree traversal; an option enforces feature independence and supports explaining the model's loss.
+  location: Results (TreeExplainer)
+  page: 6
+  quote: By default, TreeExplainer computes conditional expectations using tree traversal, but it also provides an option that enforces feature independence and supports explaining a model’s loss function
+    (Methods 10).
+- id: c4
+  statement: Explanation quality was evaluated with 21 metrics designed by the authors, applied to eight explanation methods across three model types and three datasets.
+  location: Results (TreeExplainer)
+  page: 6
+  quote: We designed 21 metrics to comprehensively evaluate the performance of local explanation methods, and applied these metrics to eight different explanation methods across three different model types
+    and three datasets (Methods 11).
+- id: c5
+  statement: The benchmark hides features by mean masking, by resampling under feature independence, or by imputation; metrics based on retraining the model were deliberately excluded because they can be
+    misleading in certain situations.
+  location: Methods (Benchmark evaluation metrics)
+  page: 24
+  quote: After extensive consideration, we did not include metrics based on retraining the original model since, while informative, these can produce misleading results in certain situations.
+- id: c6
+  statement: A user-study benchmark of 12 scenarios compared methods with human consensus explanations of simple models; Shapley-value-based methods agreed with human intuition in all tested scenarios,
+    unlike the Saabas heuristic.
+  location: Results (TreeExplainer)
+  page: 6
+  quote: In contrast to the heuristic Saabas values, Shapley value based explanation methods agree with human intuition in all the scenarios we tested (Methods 12).
+- id: c7
+  statement: 'Failure mode of the prior Saabas heuristic: it is inconsistent, i.e. a model can be changed to make a feature clearly more important while the Saabas attribution of that feature decreases.'
+  location: Results
+  page: 5
+  quote: This causes Saabas values to be inconsistent, which means we can modify a model to make a feature clearly more important, and yet the Saabas value attributed to that feature will decrease (Supplementary
+    Figure 2).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): interpretability; carded by a subagent. Results tables not recorded; claims only. Conflict of interest to note: the authors developed
+    SHAP/TreeExplainer and also designed the 21-metric benchmark on which TreeExplainer is reported to be best. Data: three medical tabular datasets (NHANES I mortality with Cox loss, CRIC kidney disease
+    classification, hospital procedure duration regression). The paper also reports gradient boosted trees outperforming lasso linear models and neural networks on these datasets (hyperparameters chosen
+    on validation sets, 100 random train/test splits for significance); not carded as a claim here. Kumar et al. (arxiv-2002.11097) classify TreeSHAP as a conditional method; Chen et al. (arxiv-2006.16234)
+    discuss the interventional vs observational choice.'

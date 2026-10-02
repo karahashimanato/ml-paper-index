@@ -1,0 +1,80 @@
+id: arxiv-2306.00978
+title: 'AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration'
+authors:
+- Ji Lin
+- Jiaming Tang
+- Haotian Tang
+- Shang Yang
+- Wei-Ming Chen
+- Wei-Chen Wang
+- Guangxuan Xiao
+- Xingyu Dang
+- Chuang Gan
+- Song Han
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2306.00978
+  code: https://github.com/mit-han-lab/llm-awq
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 6e35c8fe7af1f18a5c48dd2524629d859a2013a91d4b3666b554705287a17764
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- AWQ (activation-aware weight quantization)
+- TinyChat inference framework
+claims:
+- id: c1
+  statement: Proposes AWQ, a hardware-friendly method for low-bit weight-only quantization of LLMs.
+  location: Abstract
+  page: 1
+  quote: We propose Activation-aware Weight Quantization (AWQ), a hardware-friendly approach for LLM low-bit weight-only quantization.
+- id: c2
+  statement: 'Key assumption: salient weight channels should be identified from the activation distribution rather than from the weights.'
+  location: Abstract
+  page: 1
+  quote: To identify salient weight channels, we should refer to the activation distribution, not weights.
+- id: c3
+  statement: 'Granularity: grouped weight-only quantization with group size 128 throughout unless otherwise specified (INT4/INT3 focus).'
+  location: Experiments (Settings)
+  page: 7
+  quote: We used a group size of 128 throughout the work, except otherwise specified.
+- id: c4
+  statement: 'Calibration: a small calibration set from the Pile, chosen to avoid overfitting to a specific downstream domain.'
+  location: Experiments (Settings)
+  page: 7
+  quote: For AWQ, we used a small calibration set from the Pile (Gao et al., 2020) dataset in order not to overfit to a specific downstream domain.
+- id: c5
+  statement: 'Critique of GPTQ stated by the AWQ authors in related work: GPTQ''s reconstruction process overfits the calibration set and may not preserve the generalist abilities of LLMs for other modalities
+    and domains.'
+  location: Related work
+  page: 2
+  quote: However, the reconstruction process of GPTQ leads to an over-fitting issue to the calibration set and may not preserve the generalist abilities of LLMs for other modalities and domains.
+- id: c6
+  statement: 'Evaluation of instruction-tuned models uses an LLM judge: GPT-4 scores the quantized Vicuna against its FP16 counterpart on 80 sample questions, comparing both response orders because the
+    authors found GPT-4 tends to increase the rating of the first input.'
+  location: Experiments (instruction-tuned models)
+  page: 8
+  quote: We used the GPT-4 score to evaluate the quantized models' performance against the FP16 counterpart on 80 sample questions (Chiang et al., 2023).
+- id: c7
+  statement: 'Speed measurement: TinyChat benchmarking on RTX 4090 and Jetson Orin following the exllama protocol.'
+  location: Speedup Evaluation
+  page: 10
+  quote: We conduct benchmarking experiments on RTX 4090 and Jetson Orin following the protocol described in exllama
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 7th MLSys Conference,
+    2024 (Best Paper Award). Some authors are affiliated with NVIDIA. BLOOM was excluded from the study as ''generally worse in quality''. arXiv v6 is dated 2026.'

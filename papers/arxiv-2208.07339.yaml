@@ -1,0 +1,79 @@
+id: arxiv-2208.07339
+title: 'LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale'
+authors:
+- Tim Dettmers
+- Mike Lewis
+- Younes Belkada
+- Luke Zettlemoyer
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2208.07339
+  code: https://github.com/TimDettmers/bitsandbytes
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 40da3ce2d38eb3baa8b638cab093bd048178205c1eb4d0671e79c108f72906bf
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - large-language-models
+  paradigms:
+  - post-hoc
+proposes:
+- 'LLM.int8(): vector-wise Int8 quantization plus mixed-precision decomposition that keeps outlier feature dimensions in 16-bit'
+claims:
+- id: c1
+  statement: 'Method: Int8 matrix multiplication for feed-forward and attention projection layers, combining vector-wise quantization with a mixed-precision decomposition that isolates outlier feature dimensions
+    into 16-bit multiplication while more than 99.9% of values are multiplied in 8-bit.'
+  location: Abstract
+  page: 1
+  quote: However, for the emergent outliers, we also include a new mixed-precision decomposition scheme, which isolates the outlier feature dimensions into a 16-bit matrix multiplication while still more
+    than 99.9% of values are multiplied in 8-bit.
+- id: c2
+  statement: 'Post-training use without retraining: a 16/32-bit checkpoint can be converted to Int8 and used immediately; the paper claims no performance degradation up to 175B parameters.'
+  location: Abstract
+  page: 1
+  quote: With our method, a 175B parameter 16/32-bit checkpoint can be loaded, converted to Int8, and used immediately without performance degradation.
+- id: c3
+  statement: 'Failure mode of regular 8-bit quantization: systematic large-magnitude outlier features emerge in all transformer layers from about 6.7B parameters, and regular quantization methods fail from
+    that scale (shown with C4 perplexity and OPT zero-shot accuracy).'
+  location: Introduction
+  page: 2
+  quote: the need to explicitly represent the sparse but systematic large magnitude outlier features that ruin quantization precision once they emerge in all transformer layers starting at scales of 6.7B
+    parameters
+- id: c4
+  statement: 'Evaluation metrics: C4 validation perplexity on fairseq-pretrained models (125M-13B) to compare quantization baselines, and zero-shot accuracy on OPT models (up to 175B) via the EleutherAI
+    evaluation harness compared only against a 16-bit baseline.'
+  location: Section 3.3
+  page: 5
+  quote: Additionally, we evaluate zeroshot accuracy degradation on OPT models for a range of different end tasks, where we compare our methods with a 16-bit baseline.
+- id: c5
+  statement: 'Speed: the main focus is memory; quantization overhead can slow inference for models below 6.7B parameters relative to FP16, while large matrix multiplications equivalent to 175B models run
+    about two times faster (appendix benchmarks).'
+  location: Section 3.4
+  page: 6
+  quote: The quantization overhead can slow inference for models with less than 6.7B parameters, as compared to a FP16 baseline.
+- id: c6
+  statement: End-to-end BLOOM-176B inference in Hugging Face with Int8 is slightly slower but close to 16-bit per-token latency.
+  location: Appendix D.2
+  page: 18
+  quote: Overall Int8 inference is slightly slower but close to the millisecond latency per token compared to 16-bit inference.
+- id: c7
+  statement: 'Limitations: only the Int8 data type (no FP8), only models up to 175B, no Int8 for the attention function, and only inference (not training or fine-tuning).'
+  location: Discussion and limitations
+  page: 10
+  quote: The main limitation of our work is that our analysis is solely on the Int8 data type, and we do not study 8-bit ﬂoating-point (FP8) data types.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. PDF states: 36th Conference on Neural Information
+    Processing Systems (NeurIPS 2022). Quantization of weights and hidden-state inputs of linear layers is done on the fly (absmax / vector-wise), with no calibration dataset; the outlier threshold alpha
+    = 6.0 was chosen from perplexity degradation analysis. Perplexity evaluation on NVIDIA A40 GPUs; matrix-multiplication speed benchmarks compare cuBLASLt Int8 with cuBLAS 16-bit, and the authors note
+    default PyTorch/NVIDIA quantization kernels slow down most matrix multiplications. Affiliations: University of Washington, Facebook AI Research, Hugging Face (the method is integrated into Hugging Face
+    Transformers).'

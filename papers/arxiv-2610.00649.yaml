@@ -1,0 +1,71 @@
+id: arxiv-2610.00649
+title: On Evaluating Quantum Kernel Robustness for Low-Resource Cross-Corpus Audio Deepfake Detection
+authors:
+- Lisan Al Amin
+- Lei Zhang
+- Vandana P. Janeja
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2610.00649
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 44609ba8ae2edb12fc8c05b7ed934b7e273ed0b934c3b5e68b4e854ed7361259
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - kernel-methods
+  - tabular-mlp
+  - linear-models
+  - random-forests
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- Controlled comparison of a quantum-kernel SVM, an RBF SVM and an MLP back-end on 4-dimensional PCA-reduced frozen wav2vec 2.0 embeddings for cross-corpus audio deepfake detection
+claims:
+- id: c1
+  statement: 'Design: QSVM, classical SVM and MLP back-ends are trained on the same frozen wav2vec 2.0 embeddings with only 200 labeled training samples.'
+  location: Abstract
+  page: 1
+  quote: We compare a Quantum Support Vector Machine (QSVM), a classical support vector machine (SVM), and a multilayer perceptron (MLP), all trained on frozen wav2vec 2.0 embeddings using a strict low-resource
+    budget of 200 training samples.
+- id: c2
+  statement: 'Main claim: quantum kernels can be competitive under severe cross-corpus shift with few labels, but give no consistent advantage under near-domain transfer.'
+  location: Abstract
+  page: 1
+  quote: These findings suggest that quantum kernel methods can provide a competitive alternative under severe cross-corpus shifts and strict low-resource constraints, although they provide no consistent
+    advantage under near-domain transfer.
+- id: c3
+  statement: 'Tuning protocol: hyperparameters are selected on the training split only with inner cross-validation, using the same search ranges for all back-ends.'
+  location: Experimental setup
+  page: 3
+  quote: For fairness, hyperparameters are selected on the training split only, using an inner cross-validation loop, and the same search ranges are used across back-ends.
+- id: c4
+  statement: 'Thresholds: EER is computed by sweeping the threshold on the target data, while accuracy uses the training-derived threshold; the authors note the gap between the two is the cost of carrying
+    the threshold across the shift and recommend re-estimating it on labeled target data.'
+  location: Results (cross-corpus robustness)
+  page: 5
+  quote: The threshold should be re-estimated on a small labeled sample from the target domain rather than carried over from training.
+- id: c5
+  statement: No significance tests are reported because the five folds come from the same 200-sample pool.
+  location: Results (in-corpus discrimination)
+  page: 4
+  quote: We do not attach significance tests to these differences as the five folds are drawn from the same 200-sample pool and are not independent, so a paired test would overstate the evidence.
+- id: c6
+  statement: 'Limitation: no comparison with fine-tuned state-of-the-art detectors and no results on recent large multilingual corpora; all back-ends see only the 4-dimensional PCA features.'
+  location: Limitations
+  page: 6
+  quote: We do not benchmark against fine-tuned state-of-the-art detectors such as Whisper- or AASIST-based systems [30], and we do not report results on the recent large-scale multilingual corpora MLAAD
+    [31] and XMAD-Bench [32].
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Off-theme for drift detection: the paper studies classifier robustness under cross-corpus
+    distribution shift (ASVspoof 2019, ASVspoof 5, ADD 2023, In-the-Wild), not detecting when a shift occurs. Task is binary audio deepfake classification on 4-dimensional embedding vectors; no audio/representation-classification
+    tag exists, so tabular-classification is used as the closest. Family tags: kernel-methods for the QSVM and RBF SVM, plus the classical comparators (MLP, LR, RF, GB); k-NN has no family tag. The authors
+    frame results as the inductive bias of a classically simulable 4-qubit kernel, not quantum advantage. Funding: NSF award stated in Acknowledgment.'

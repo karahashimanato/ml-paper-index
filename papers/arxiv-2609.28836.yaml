@@ -1,0 +1,66 @@
+id: arxiv-2609.28836
+title: 'M$^2$PFN: End-to-End Disentangled Alignment for Generalizable Multimodal In-Context Learning in Alzheimer''s Disease'
+authors:
+- Lujia Zhong
+- Shuo Huang
+- Jianwei Zhang
+- Xinyu Nie
+- Yonggang Shi
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.28836
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 18a4be8150c360cee99a30a921c36088bc87381363ecd10fe4a519e35feb20d7
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - deep-learning
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- M2PFN (frozen TabPFN as ICL head with end-to-end trained MRI and tabular encoders)
+claims:
+- id: c1
+  statement: M2PFN is an end-to-end framework that turns TabPFN into a multimodal (MRI + tabular) Alzheimer's disease predictor.
+  location: Abstract
+  page: 1
+  quote: M2PFN, an end-to-end framework that turns this tabular foundation model into a multimodal AD predictor.
+- id: c2
+  statement: On two external cohorts without retraining, M2PFN achieves the best AUC and lowest MMSE MAE among the baselines.
+  location: Abstract
+  page: 1
+  quote: On two external cohorts (OASIS-3 and SCAN) with no retraining, M2PFN achieves the best AUC and the lowest MMSE MAE across all baselines, and transfers even when the cognitive instrument changes.
+- id: c3
+  statement: 'Evaluation protocol: all models are trained only on ADNI; OASIS-3 and SCAN serve only as external test sets.'
+  location: Experimental setup
+  page: 8
+  quote: All models are trained exclusively on ADNI; OASIS-3 and SCAN are held out and used solely as external test sets.
+- id: c4
+  statement: Baselines are run with the default hyperparameters of their published code (no tuning).
+  location: Baselines
+  page: 9
+  quote: For every baseline, we adopt the default hyperparameters specified in the published code.
+- id: c5
+  statement: The tabular-only baselines are XGBoost, AutoGluon and TabPFN-v2.5.
+  location: Baselines
+  page: 10
+  quote: 'Unimodal tabular: XGBoost [42], AutoGluon [43], TabPFN-v2.5 [21].'
+- id: c6
+  statement: Results are reported as mean and standard deviation over 5 random seeds.
+  location: Experimental setup
+  page: 8
+  quote: Both instantiations are trained and evaluated with 5 random seeds, and we report the mean ± standard deviation across seeds
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The authors state they contributed the differentiable-input path used here to the
+    official TabPFN library (footnote, Introduction). Single dataset domain (Alzheimer''s cohorts); tabular part is one modality.'

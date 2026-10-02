@@ -1,0 +1,69 @@
+id: arxiv-2609.29182
+title: 'ScalarLens: Numerical Embeddings with Stable Coordinates and Contextual Responses for CTR Prediction'
+authors:
+- Heng Yao
+- Tianying Liu
+- Yulou Shu
+- Yong He
+- Chuan Yuan
+- Kaibin Qiu
+- Guowei Chen
+- Jiayu Zhao
+- Siyun Hou
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.29182
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c9468d4356b1583af4646f38e9888c39ffce8fe5069455fde785eeff27aff784
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- ScalarLens (numerical embedding with a stable per-value coordinate and a contextual response)
+claims:
+- id: c1
+  statement: ScalarLens is a numerical-feature embedding for CTR models that keeps a stable coordinate for a value while adapting its interpretation to the sample's context.
+  location: Abstract
+  page: 1
+  quote: We introduce ScalaRLens, a numerical embedding that preserves what a value is while adapting how it should be interpreted.
+- id: c2
+  statement: In the primary evaluation (19 representations, three datasets, nine backbones, three seeds, original numerical scales), ScalarLens ranks first in most settings and second in the rest.
+  location: Abstract
+  page: 1
+  quote: In a 1,539-run primary evaluation covering 19 representations, three datasets, nine backbones, and three seeds, ScalaRLens ranks first in 25 of 27 settings on original numerical scales and second
+    in the remaining two.
+- id: c3
+  statement: Datasets are AutoML-A/E from AutoML3 and Criteo, with Criteo's numerical fields kept without a log transform; backbones share one fixed training configuration with early stopping on validation
+    AUC.
+  location: Experiments
+  page: 4
+  quote: AutoML-A/E come from AutoML3 [11]; Criteo preserves all 13 numerical fields without a shared logarithmic transformation.
+- id: c4
+  statement: No method gets dataset-specific hyperparameters, private preprocessing, or a different split.
+  location: Experiments
+  page: 5
+  quote: No method receives private preprocessing, a different split, or hyperparameters specific to a dataset.
+- id: c5
+  statement: Several baselines (DAE, DEER, NaryDis, DAES) are the authors' re-implementations from published descriptions, not official code.
+  location: Experiments
+  page: 5
+  quote: DAE, DEER, NaryDis, and DAES-Gate/Tran are implementations based on the published descriptions because no official module compatible with our code version was available
+- id: c6
+  statement: 'Stated limitation: AutoML-A/E come from one family, all datasets informed development, and the 27 settings are correlated; random splits do not establish temporal or cross-family transfer.'
+  location: Discussion and Limitations
+  page: 8
+  quote: AutoML-A/E share one family, all datasets informed development, and the 27 settings are correlated.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. CTR prediction (binary classification on tabular features). Most authors are affiliated
+    with Ant Group or Alibaba per the title page.'

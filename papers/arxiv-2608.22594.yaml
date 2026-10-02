@@ -1,0 +1,68 @@
+id: arxiv-2608.22594
+title: Tabular foundation models for non-tabular tasks
+authors:
+- Goran Nakerst
+- John Brennan
+- Wouter Beugeling
+- Masudul Haque
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.22594
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c5b282c7cdec03418f1628f9b55cfea03fe55895ae3e8c9d7bbc960f643e5093
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - deep-learning
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- Empirical study of TabPFN v3 on non-tabular classification tasks (MNIST, French/German words, Tiny ImageNet) recast as tables
+claims:
+- id: c1
+  statement: 'TabPFN v3 is applied to three non-tabular classification problems: MNIST digits, French vs. German word identification, and Tiny ImageNet.'
+  location: Abstract
+  page: 1
+  quote: 'We address this question by using TabPFN v3 on three non-tabular classification problems: handwritten digit recognition on MNIST, language identification of French and German words, and image
+    classification on Tiny ImageNet.'
+- id: c2
+  statement: Without access to spatial or sequential structure, TabPFN v3 in some cases reaches accuracies comparable to task-specific models.
+  location: Abstract
+  page: 1
+  quote: Despite having no explicit access to the spatial or sequential structure characterizing the data, TabPFN v3 in some cases achieves accuracies comparable with that of models or methods geared specifically
+    toward the corresponding tasks.
+- id: c3
+  statement: TabPFN v3 is run with library defaults, with one override that disables the pretraining input-size limits. Every experiment exceeds those limits.
+  location: Appendix A (TabPFN v3 configuration)
+  page: 6
+  quote: All TabPFN results use model v3 library defaults with a single override
+- id: c4
+  statement: On MNIST, the LightGBM baseline is not hyperparameter-searched. Its regularization is scaled by hand with training size.
+  location: Appendix A (MNIST)
+  page: 6
+  quote: LightGBM sees the same 784 columns, with regularization scaled to the training size rather than searched
+- id: c5
+  statement: On the word task, LightGBM is tuned separately at each training size and encoding with randomized search and stratified 5-fold CV on the training set only. The test set is never seen during
+    tuning.
+  location: Appendix A (French/German words)
+  page: 7
+  quote: LightGBM is tuned independently at each training size and encoding.
+- id: c6
+  statement: On the word task, tuned LightGBM pulls clearly ahead only when data is plentiful.
+  location: Conclusion
+  page: 4
+  quote: Only once data is plentiful does the tuned LightGBM pull clearly ahead.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Non-tabular tasks (images, words) recast as tables; tagged tabular-classification
+    as the closest existing task. Each task uses one fixed held-out test set with resampled training/context sets. The CNN baseline uses a fixed architecture and 100 epochs at all training sizes.'

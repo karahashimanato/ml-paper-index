@@ -1,0 +1,59 @@
+id: arxiv-2609.01262
+title: Solving In-Table Prediction Problems by Deep Neural Networks with Performance Evaluation Using Synthetic Data
+authors:
+- Xiao Zhao
+- Daniela Oelke
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.01262
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 8464bd364b835a13a895839fc451efb6d2d186a58fd587dbefbd33fae940e115
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - deep-learning
+  - tabular-mlp
+  - tabular-attention
+  paradigms:
+  - self-supervised
+proposes:
+- In-Table Prediction (ITP) problem; self-supervised column masking with an embedding layer for numerical and empty values
+claims:
+- id: c1
+  statement: The paper applies self-supervised learning to in-table prediction by randomly masking columns and using them as learning targets.
+  location: Abstract
+  page: 1
+  quote: A self-supervised learning approach is applied to address this problem by randomly selecting columns to be masked out and used as learning targets.
+- id: c2
+  statement: A new neural layer is proposed that embeds both numerical and empty values of continuous features.
+  location: Abstract
+  page: 1
+  quote: To handle missing values in continuous features, a novel neural layer is proposed to embed both numerical and empty values.
+- id: c3
+  statement: On the synthetic data, the attention-based network outperforms MLP and ResNet when enough training examples are available and a relatively large embedding length is chosen.
+  location: Abstract
+  page: 1
+  quote: We conclude that, the attention-based structure outperforms the other two networks, when a sufficiently large number of training examples is available and a relatively large embedding length is
+    chosen.
+- id: c4
+  statement: Network structures and learning rate are fixed and no hyperparameter tuning of the model structures is done; early stopping uses a validation set.
+  location: Training strategy
+  page: 6
+  quote: Hyperparameter tuning of selected model structures is not done in this work.
+- id: c5
+  statement: The evaluation is limited to two synthetic three-column relationships with known dependencies, so the trends may not transfer to larger or real-world tables.
+  location: Conclusion
+  page: 11
+  quote: The evaluation is limited to two synthetic, three-column relationships with predefined, known dependencies.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Only the three neural architectures are compared; no comparison against imputation
+    methods (kNNimpute, missForest, MICE are mentioned in related work) or tree models was found in the text. Task tag approximate: ITP predicts masked continuous columns; the paper calls it slightly different
+    from table imputation, so tabular-imputation is not used.'

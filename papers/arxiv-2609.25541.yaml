@@ -1,0 +1,66 @@
+id: arxiv-2609.25541
+title: A JEPA Recipe for Tabular Foundation Models
+authors:
+- Mingyu Jeon
+- Suwan Cho
+- Jae Young Suh
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.25541
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: eb1a97bc2f64d7e7951f0b337f6c3bd825ca66211e796019e1d28a86f25cd995
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+  - self-supervised
+proposes:
+- Recipe for training a JEPA latent term beside the value objective of a tabular foundation model without collapse
+- Open-horizon plateau stopping rule for comparing training arms
+claims:
+- id: c1
+  statement: 'A recipe lets the JEPA latent term survive to convergence beside the value objective: the value head reads the encoder field and the target is an EMA difference.'
+  location: Abstract
+  page: 1
+  quote: 'We report a recipe under which the latent term survives to convergence beside the value objective: the value head reads the encoder field rather than the predictor, and the target is an exponential
+    moving average (EMA) difference.'
+- id: c2
+  statement: The JEPA recipe does not beat the value-only arm at convergence, and the authors do not claim it does.
+  location: Introduction
+  page: 2
+  quote: The recipe does not beat the value-only arm at convergence, and we do not claim that it does (§4.3).
+- id: c3
+  statement: 'Evaluation suite: classification and regression datasets drawn from OpenML-CC18, the Grinsztajn benchmark and TabArena.'
+  location: Experimental setup
+  page: 4
+  quote: The real-data suite holds 115 classification and 32 regression datasets from OpenML-CC18, the Grinsztajn benchmark and TabArena (Bischl et al., 2021; Grinsztajn et al., 2022; Erickson et al., 2025).
+- id: c4
+  statement: Each model gets a capped context and feature budget (features chosen by an F-test before the split) and is scored on 3 random halves with a capped test size.
+  location: Appendix
+  page: 12
+  quote: give each model at most 1,024 rows of context and 64 features picked by an F-test ahead of the split, average 3 random halves scoring no more than 512 test rows in each
+- id: c5
+  statement: Neither foundation-model arm beats gradient-boosted trees (HistGB) on the suite.
+  location: Results
+  page: 7
+  quote: Neither arm beats gradient-boosted trees, with ds at 28:84 on classification and 4:28 on regression and jepa at 27:87 and 3:29 (Figure 4).
+- id: c6
+  statement: 'Limitation: one seed per arm is the sharpest limit on every claim.'
+  location: Limitations
+  page: 8
+  quote: One seed per arm is the sharpest limit on every claim, because the sign test spans datasets rather than seeds and the noise floor comes from a second run of the same seed, which a second seed would
+    be expected to widen (§4.1).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. HistGB and linear references are fitted on the full training half (more rows than
+    the 1,024-row context of the arms); their hyperparameter settings were not found in the text.'

@@ -1,0 +1,76 @@
+id: arxiv-2211.10438
+title: 'SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models'
+authors:
+- Guangxuan Xiao
+- Ji Lin
+- Mickael Seznec
+- Hao Wu
+- Julien Demouth
+- Song Han
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2211.10438
+  code: https://github.com/mit-han-lab/smoothquant
+source:
+  version: arXiv v7
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d17856490ff664a99f8d08fe76eabd83219ed048cd1bc18ce3d0571e71056ff8
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- SmoothQuant
+claims:
+- id: c1
+  statement: Proposes SmoothQuant, a training-free PTQ method for 8-bit weight and 8-bit activation (W8A8) quantization of LLMs.
+  location: Abstract
+  page: 1
+  quote: We propose SmoothQuant, a training-free, accuracy-preserving, and general-purpose post-training quantization (PTQ) solution to enable 8-bit weight, 8-bit activation (W8A8) quantization for LLMs.
+- id: c2
+  statement: 'Mechanism: activation outliers are smoothed by offline migrating quantization difficulty from activations to weights via a mathematically equivalent transformation.'
+  location: Abstract
+  page: 1
+  quote: SmoothQuant smooths the activation outliers by offline migrating the quantization difficulty from activations to weights with a mathematically equivalent transformation.
+- id: c3
+  statement: 'Motivation, stated with citations to prior work (Dettmers et al. 2022; Wei et al. 2022; Bondarenko et al. 2021) rather than as a new finding: LLMs are notoriously difficult to quantize due
+    to outliers in the activations.'
+  location: Review of Quantization Difficulty
+  page: 3
+  quote: LLMs are notoriously difficult to quantize due to the outliers in the activations (Dettmers et al., 2022; Wei et al., 2022; Bondarenko et al., 2021).
+- id: c4
+  statement: 'Calibration: smoothing factors and static quantization step sizes are calibrated once with 512 random sentences from the Pile and the same model is used for all downstream tasks.'
+  location: Experimental setup (Activation smoothing)
+  page: 5
+  quote: To get the statistics of activations, we calibrate the smoothing factors and the static quantization step sizes once with 512 random sentences from the pre-training dataset Pile, and apply the
+    same smoothed and quantized model for all downstream tasks.
+- id: c5
+  statement: 'Hyperparameter selection: the migration strength alpha is chosen by a quick grid search on a subset of the Pile validation set (the paper reports alpha = 0.5 for OPT/BLOOM and 0.75 for GLM-130B).'
+  location: Experimental setup (Activation smoothing)
+  page: 5
+  quote: We get a suitable α by running a quick grid search on a subset of the Pile (Gao et al., 2020) validation set.
+- id: c6
+  statement: 'Metrics for the OPT-175B comparison (Table 3): average accuracy over 7 zero-shot benchmarks plus 1 language-modeling benchmark (perplexity).'
+  location: Results (Table 3 caption)
+  page: 6
+  quote: We extensively benchmark the performance on 7 zero-shot benchmarks (by reporting the average accuracy) and 1 language modeling benchmark (perplexity).
+- id: c7
+  statement: The authors state that they focus on the relative performance change before and after quantization, not on absolute values.
+  location: Experimental setup (Models and datasets)
+  page: 5
+  quote: Note that we focus on the relative performance change before and after quantization but not the absolute value.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 40th International
+    Conference on Machine Learning (PMLR 202, 2023). Three authors are affiliated with NVIDIA; one evaluated backend is NVIDIA''s FasterTransformer, and all speed experiments are on NVIDIA A100 80GB GPU
+    servers. GLM-130B was evaluated on a different task set because some benchmarks appear in its training set.'

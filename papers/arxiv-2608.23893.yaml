@@ -1,0 +1,67 @@
+id: arxiv-2608.23893
+title: Provenance Guided Incremental Learning Under Evolving Concept Definitions
+authors:
+- Ismail Lamaakal
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.23893
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 058097cb7282a512f4400dfa24bb3382dcfcba854ba60b7ab3cb2e6a8e50250a
+tags:
+  tasks:
+  - stream-classification
+  - tabular-classification
+  - graph-node-prediction
+  method_families:
+  - window-based-drift-detectors
+  - gradient-boosted-trees
+  - tabular-mlp
+  paradigms:
+  - supervised
+  - streaming
+proposes:
+- Provenance-guided incremental learning for rule-induced concept shift (rule-delta compilation, provenance tracing, localized relabeling, incremental repair)
+- RuleShift-Bench
+claims:
+- id: c1
+  statement: The paper proposes a provenance-guided incremental learning framework for explicitly revised concept definitions, which localizes the records that need relabeling.
+  location: Abstract
+  page: 1
+  quote: We introduce a provenance-guided incremental learning framework that compiles consecutive concept definitions into a structured rule delta, traces the changed components through historical provenance
+- id: c2
+  statement: It introduces RuleShift-Bench, where concept shifts are controlled rule revisions over financial, demographic, cybersecurity and graph data (so the shift points are known by construction).
+  location: Abstract
+  page: 1
+  quote: We also introduce RuleShift-Bench, spanning financial, demographic, cybersecurity, and graph-structured data with threshold, predicate, logical, relational, recurring, and mixed concept revisions.
+- id: c3
+  statement: 'Main empirical claim on cost: provenance-guided repair has a much lower average update latency than complete relabeling and retraining.'
+  location: Abstract
+  page: 1
+  quote: Its average update latency is 179 s compared with 993 s for complete relabeling and retraining.
+- id: c4
+  statement: Rule thresholds, predicate statistics and provenance structures are built from the training partition only (temporal or official splits with a validation partition).
+  location: Experimental setup
+  page: 10
+  quote: All rule thresholds, predicate statistics, and provenance structures are constructed using training data only.
+- id: c5
+  statement: An ADWIN-triggered adaptation pipeline is included as a representative drift-detection baseline; its ADWIN parameter settings were not found in the text.
+  location: Comparison Methods
+  page: 10
+  quote: We further include an ADWIN-triggered adaptation pipeline as a representative drift-detection baseline.
+- id: c6
+  statement: 'Limitation: the benefit decreases when revisions are global, provenance is incomplete, definitions are not fully executable, or relational/graph dependencies enlarge the candidate region.'
+  location: Conclusion
+  page: 13
+  quote: Its main limitations arise when concept revisions are global, historical provenance is incomplete, concept definitions are not fully executable, or highly coupled relational and graph dependencies
+    enlarge the candidate region, in which cases the benefit of selective maintenance decreases.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Off-theme: this is not a drift detection paper; the concept change is known explicitly
+    (rule revision) and the paper is about efficient relabeling/repair. Tagged stream-classification (keeping a deployed predictor accurate after concept revisions) rather than a detection task. Datasets:
+    PaySim, Census-Income (KDD), UNSW-NB15, ogbn-arxiv. Predictors: XGBoost, an MLP, Hoeffding Adaptive Tree, with fixed hyperparameters stated in the text (no tuning described).'

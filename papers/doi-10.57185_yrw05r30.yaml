@@ -1,0 +1,67 @@
+id: doi-10.57185_yrw05r30
+title: Penerapan Deep Learning (Artificial Neural Network) Untuk Klasifikasi Diagnostik Kanker Payudara Guna Mendukung Efisiensi Biaya Deteksi Dini
+authors:
+- Zeny Widianingsih
+- Aldi Algino
+year: 2026
+venue: Al Makki Health Informatics Journal
+links:
+  doi: https://doi.org/10.57185/yrw05r30
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b460f52354a7fe72af7799ea822f33458ea87d12115ed63bed92f7214d9984bc
+  pdf_url: https://healthinformaticsjournal.al-makkipublisher.com/index.php/hij/article/download/99/85
+  license: cc-by-sa
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-mlp
+  - linear-models
+  - random-forests
+  - kernel-methods
+  paradigms:
+  - supervised
+proposes:
+- MLP (64-32-16) classifier for WDBC breast-tumor diagnosis, benchmarked against classical models
+claims:
+- id: c1
+  statement: The study designs and evaluates an MLP-based neural network to classify breast tumors as benign or malignant.
+  location: Abstract (English)
+  page: 1
+  quote: This study aims to design and evaluate a deep learning model based on an Artificial Neural Network (Multi-Layer Perceptron) to classify breast tumors as either benign or malignant.
+- id: c2
+  statement: Data are the WDBC dataset (569 samples, 30 numerical features), with a stratified 80:20 train-test split.
+  location: Abstract (English)
+  page: 1
+  quote: The study utilized the Wisconsin Diagnostic Breast Cancer (WDBC) dataset, comprising 569 samples and 30 numerical features, split into 455 training samples and 114 test samples (80:20) using a
+    stratified approach.
+- id: c3
+  statement: The neural network did not outperform classical models (logistic regression, random forest, SVM) on this small tabular dataset.
+  location: Abstract (English)
+  page: 1
+  quote: These findings indicate that the Deep Neural Network model does not outperform classical models on small-scale tabular data.
+- id: c4
+  statement: The MLP uses scikit-learn MLPClassifier defaults except the stated architecture, Adam, early stopping on a 15% validation split and the random seed.
+  location: Methods
+  page: 6
+  quote: regularisasi L2 (alpha) mengikuti nilai bawaan (default) MLPClassifier scikit-learn kecuali yang telah disebutkan secara eksplisit.
+- id: c5
+  statement: Evaluation uses a single 80:20 hold-out split, not k-fold cross-validation.
+  location: Methods
+  page: 6
+  quote: Perlu ditegaskan bahwa evaluasi pada penelitian ini menggunakan satu kali pembagian data latih-uji (single hold-out split 80:20), bukan validasi silang k-lipat (k-fold cross-validation).
+- id: c6
+  statement: With 114 test samples, accuracy differences of about one percent correspond to about one sample, so the model ranking is not statistically reliable without further testing.
+  location: Methods
+  page: 6
+  quote: sehingga peringkat antar-model tidak dapat dianggap andal secara statistik tanpa pengujian tambahan.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: medical diagnosis (breast cancer cytology features). Paper is
+    in Indonesian with an English abstract; some quotes are Indonesian. Baseline tuning was not found in the text; only Random Forest''s 300 trees and SVM''s RBF kernel are stated.'

@@ -1,0 +1,78 @@
+id: arxiv-1911.05248
+title: What Do Compressed Deep Neural Networks Forget?
+authors:
+- Sara Hooker
+- Aaron Courville
+- Gregory Clark
+- Yann Dauphin
+- Andrea Frome
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1911.05248
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0f72c3600059dac19fb3a11651795eebbee6213976e6d5b0241a649184f291e9
+tags:
+  tasks:
+  - model-compression
+  method_families:
+  - quantization
+  - post-training-quantization
+  - pruning
+  - deep-learning
+  paradigms:
+  - supervised
+  - post-hoc
+proposes:
+- Pruning Identified Exemplars (PIEs) and a class-level statistical audit (Welch's t-test over 30-model populations) of the disparate impact of compression
+claims:
+- id: c1
+  statement: 'Main claim: top-line accuracy hides that compressed models with very different weight counts diverge on a narrow subset of the data, which the authors call Pruning Identified Exemplars (PIEs).'
+  location: Abstract
+  page: 1
+  quote: We ﬁnd that models with radically different numbers of weights have comparable top-line performance metrics but diverge considerably in behavior on a narrow subset of the dataset.
+- id: c2
+  statement: 'Compression methods: magnitude pruning during training at 30-90% sparsity, and three post-training quantization variants (float16, hybrid dynamic-range int8 weights, and fixed-point int8 using
+    a small representative dataset).'
+  location: Experimental framework
+  page: 5
+  quote: All quantization methods we evaluate are implemented post-training, in contrast to the pruning which is applied progressively over the course of training.
+- id: c3
+  statement: 'Evaluation protocol: a population of independently trained models per compression method, dataset and model (30 per pruning level); for each class a two-tailed Welch''s t-test on mean-shifted
+    class accuracy decides (p <= 0.05) whether compression impacts that class disproportionately; tasks are CIFAR-10 (wide ResNet), ImageNet (ResNet-50) and CelebA (ResNet-18).'
+  location: Methodology
+  page: 3
+  quote: If the p-value <= 0.05, we reject the null hypothesis and consider the class to be disparately impacted by t level of compression relative to the baseline.
+- id: c4
+  statement: 'PIEs are more difficult for models and humans: a human study finds they are more often mislabelled, lower quality, multi-object or fine-grained, and compression impairs prediction on the long
+    tail of less frequent instances.'
+  location: Introduction (contributions)
+  page: 2
+  quote: Compression impairs the model’s ability to predict accurately on the long-tail of less frequent instances.
+- id: c5
+  statement: 'Quantization versus pruning: all evaluated techniques have non-uniform impact, but quantization appears to introduce less disparate harm than (high levels of) pruning.'
+  location: Results
+  page: 6
+  quote: While all the techniques we benchmark evidence disparate class level impact, we note that quantization appears to introduce less disparate harm.
+- id: c6
+  statement: Pruned networks are more sensitive to distribution shift (ImageNet-C corruptions and ImageNet-A natural adversarial images), increasingly so at higher sparsity.
+  location: Introduction (contributions)
+  page: 2
+  quote: Pruned networks are more sensitive to natural adversarial images and corruptions.
+- id: c7
+  statement: 'Limitations: implications for fairness remain open, and other domains such as language and audio were not evaluated.'
+  location: Limitations
+  page: 10
+  quote: Underserved areas worthy of future consideration include evaluating the impact of compression on additional domains such as language and audio, and leveraging these insights to explicitly optimize
+    for compressed models that also minimize the disparate impact on underrepresented data attributes.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): quantization; carded by a subagent. Results tables not recorded; claims only. Image classification only. Pruning schedule and
+    hyperparameters were chosen by a limited grid search to maximize top-1 accuracy. PIEs are defined from modal-label disagreement between compressed and uncompressed model populations, which needs no
+    true labels. The distribution-shift analysis (ImageNet-C/A) is for pruned models only; quantized models are not included there. The PDF says the code is publicly available but the link text did not
+    survive extraction, so no code link is recorded. All authors list Google affiliations except Aaron Courville (MILA).'

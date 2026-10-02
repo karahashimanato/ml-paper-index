@@ -1,0 +1,71 @@
+id: doi-10.70393_6a6374616d.343334
+title: 'Tabular In-Context Learning for Low-Resource Rare Industrial Fault Detection: a Cost-Sensitive Comparison on Scania APS and SECOM'
+authors:
+- Guoqing Song
+year: 2026
+venue: Journal of Computer Technology and Applied Mathematics
+links:
+  doi: https://doi.org/10.70393/6a6374616d.343334
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 14e56e0346140d96eff34ab09141895ce7f8c19562cc9ef6a267fe86ed3180d4
+  pdf_url: https://www.suaspress.org/ojs/index.php/JCTAM/article/download/v3n4a01/v3n4a01
+  license: cc-by
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - tabular-mlp
+  - linear-models
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- Locked-test, cost-sensitive comparison of TabICLv2 vs TabM, XGBoost and logistic regression on Scania APS and SECOM (no new method)
+claims:
+- id: c1
+  statement: 'Scania protocol: nested stratified training samples of 5,000 and 10,000 records under five seeds; tunable models selected by out-of-fold AUPRC on shared three-fold splits; decision thresholds
+    fixed by minimizing out-of-fold cost; the official test set stayed locked until all selections were complete.'
+  location: Abstract
+  page: 1
+  quote: Shared three-fold splits supported out-of-fold (OOF) evaluation; tunable models were selected by OOF AUPRC, and decision thresholds were locked by minimizing OOF cost, defined as C = 10 × FP +
+    500 × FN.
+- id: c2
+  statement: 'SECOM protocol: three repeats of five-fold outer cross-validation with three-fold inner selection.'
+  location: Abstract
+  page: 1
+  quote: SECOM used three repeats of five-fold outer cross-validation with three-fold inner selection.
+- id: c3
+  statement: Tuning budgets were unequal (TabICLv2 one fixed configuration, TabM four presets, logistic regression eight candidates, XGBoost 12 candidates), and CatBoost, LightGBM and broader tuning were
+    not evaluated.
+  location: Limitations and threats to validity
+  page: 8
+  quote: 'Search budgets were also unequal: TabICLv2 used one fixed configuration, TabM four presets, logistic regression eight candidates, and XGBoost 12 candidates.'
+- id: c4
+  statement: On the prespecified Scania design, TabICLv2 improved AUPRC, MCC, official cost and Brier score relative to XGBoost, with paired bootstrap intervals supporting all four directions.
+  location: Discussion
+  page: 7
+  quote: Under the prespecified Scania design, TabICLv2 improved AUPRC, MCC, official cost, and Brier score relative to XGBoost, with paired confidence intervals supporting all four directions.
+- id: c5
+  statement: In a time-ordered SECOM sensitivity analysis (few failures in the test segment), threshold transfer failed for every model; the author treats it as a robustness warning, not a ranking.
+  location: Results (temporal sensitivity on SECOM)
+  page: 7
+  quote: Threshold transfer failed for every model
+- id: c6
+  statement: 'Conclusion: the evidence supports TabICLv2 in this specific low-resource, cost-sensitive setting but does not establish universal superiority or temporal deployment validity.'
+  location: Conclusion
+  page: 8
+  quote: The evidence therefore supports TabICLv2 in this specific low-resource, cost-sensitive setting but does not establish universal superiority or temporal deployment validity.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Application domain: industrial fault detection (Scania APS truck failures; SECOM
+    semiconductor manufacturing). Single-author study; the paper reports TabICLv2 needed far more task-side time than XGBoost on a 4 GiB laptop GPU. SECOM record-level AUPRC difference vs XGBoost had an
+    interval crossing zero (described as suggestive, not definitive). The Limitations section states that TabICLv2 also used historical pretraining, so the runtime comparison is task-side rather than total-compute
+    cost.'

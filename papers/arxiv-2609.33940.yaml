@@ -1,0 +1,71 @@
+id: arxiv-2609.33940
+title: Behavioral Monitoring of JEPA World Models with Jacobian Centroids
+authors:
+- Thomas Walker
+- Randall Balestriero
+- Richard Baraniuk
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.33940
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 6dab57c7f5730d58df49fa2ebddf7d9b4f23cae52f26e941910a97e11c7c16cb
+tags:
+  tasks:
+  - dataset-shift-detection
+  method_families:
+  - deep-learning
+  - reconstruction-based-detectors
+  - saliency-maps
+  paradigms:
+  - unsupervised
+  - post-hoc
+proposes:
+- 'Jacobian-centroid (behavioral) signals for runtime monitoring of JEPA world models: failure prediction, encoder/predictor dissociation gate, saliency maps'
+claims:
+- id: c1
+  statement: Centroids (sub-component Jacobian row-sums) identify behavioral properties of world models and complement activation-based signals.
+  location: Abstract
+  page: 1
+  quote: Here, we show that centroids—sub-component Jacobian row-sums—effectively identify the behavioral properties of WMs, complementing traditional activation-based knowledge signals.
+- id: c2
+  statement: 'Main claim: centroid-based methods outperform baseline methods as distribution-shift detectors.'
+  location: Abstract
+  page: 1
+  quote: Moreover, centroid-based methods outperform baseline methods as distribution-shift detectors.
+- id: c3
+  statement: 'Evaluation: the target is episode success/failure from environment feedback on Push-T and TwoRoom (LeWorldModel + CEM planner), scored by AUC; distribution shift is induced by a larger goal
+    offset than in-distribution.'
+  location: Centroid Signals for Failure Prediction (experimental setup)
+  page: 4
+  quote: We evaluate on Push-T and TwoRoom using the trained LeWorldModel with a CEM planner (300 samples, 30 steps, receding-horizon K = 2), and label each episode as a success or failure based on the
+    environment’s feedback.
+- id: c4
+  statement: The pre-execution gate thresholds are calibrated from in-distribution data only, without labeled failures.
+  location: Pre-Execution Gate and Adaptive Replanning
+  page: 6
+  quote: Both thresholds are calibrated from in-distribution data alone with no labeled failures, and yield zero in-distribution false positives on Push-T and a 1% false-alarm rate on TwoRoom.
+- id: c5
+  statement: Layer choice for the calibration signal is task-specific (layer 0 for Push-T, deepest layer for TwoRoom) and is reported relative to the oracle-best layer.
+  location: Appendix (signal definitions)
+  page: 9
+  quote: Layer-0 suffices for Push-T (AUC within 0.02 of oracle in-distribution, within 0.01 out-of-distribution), whereas layer-5 (deepest) is consistently oracle-optimal across all seeds and regimes on
+    TwoRoom.
+- id: c6
+  statement: 'Limitation: all results come from one world-model family on two tasks.'
+  location: Conclusion
+  page: 6
+  quote: All results come from a single WM family (LeWorldModel) on two tasks.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Off-theme for stream drift detection: per-episode failure prediction for world-model
+    planning under an induced goal-offset shift; ''distribution-shift detectors'' in the abstract refers to this failure-prediction AUC. dataset-shift-detection is used as the closest task tag; saliency-maps
+    because centroid-based saliency maps are one of the proposed tools; post-hoc because the signals are read from a trained world model without changing it. Baselines are activation-based signals (embedding
+    cost, activation calibration, OMP/SAE goal codes) and a reconstruction-error analogue of VAE-based monitoring; no classical drift detectors. The main text says the per-layer OOD AUC profile (Figure
+    6) motivated the task-adaptive layer heuristic, so layer choice was informed by outcome-labeled evaluation data. The conclusion states that in-distribution the centroid and activation views are largely
+    interchangeable.'

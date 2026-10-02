@@ -1,0 +1,66 @@
+id: arxiv-2609.36968
+title: 'TaskBridge: Bridging Unsupervised Tabular Anomaly Detection and In-Context Learning via Virtual Tasks'
+authors:
+- Doyun Choi
+- Dooho Lee
+- Jaemin Yoo
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.36968
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 3e5a2a3e458888815a5c911ee5261608da57d364b31f3f88669c580f359743f6
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - classical-outlier-detectors
+  paradigms:
+  - unsupervised
+  - in-context-learning
+proposes:
+- TaskBridge (virtual supervised tasks that repurpose general-purpose TFMs such as TabICLv2 for unsupervised tabular anomaly detection)
+claims:
+- id: c1
+  statement: TaskBridge repurposes pretrained general-purpose TFMs for unsupervised tabular anomaly detection by constructing virtual supervised tasks for in-context inference.
+  location: Abstract
+  page: 1
+  quote: we introduce TASKBRIDGE, a new framework that efficiently repurposes pretrained general-purpose TFMs for unsupervised TAD by constructing virtual supervised tasks that directly recast anomaly detection
+    as supervised in-context inference of TFMs
+- id: c2
+  statement: Across 790 real-world datasets it outperforms 30 baselines without anomaly-specific pretraining or dataset-specific optimization.
+  location: Abstract
+  page: 1
+  quote: Across 790 real-world datasets, TASKBRIDGE consistently outperforms 30 baselines, including state-of-the-art TFM-based approaches, without anomaly-specific TFM pretraining or dataset-specific model
+    optimization.
+- id: c3
+  statement: Evaluation is on ODDBench (790 datasets) with AUCROC/AUCPR and Elo, five seeds; framework hyperparameters are calibrated once per backbone on ADBench datasets disjoint from the main benchmark.
+  location: Experiment
+  page: 7
+  quote: we perform a one-time backbone-specific calibration of the framework-level hyperparameters governing Selectintra, Selectinter, and Ensemble using a set of real-world datasets from ADBench (Han
+    et al., 2022), which are disjoint from the main benchmark
+- id: c4
+  statement: Classical and shallow baselines use default PyOD hyperparameters; others follow original papers / the DTE repository.
+  location: Appendix (Baseline settings)
+  page: 25
+  quote: we use the default PyOD hyperparameter configurations for all classical and shallow baselines
+- id: c5
+  statement: Datasets are subsampled to at most 100,000 total samples for a consistent computational budget.
+  location: Appendix (Evaluation datasets)
+  page: 25
+  quote: To ensure a consistent computational budget across datasets, we limit the total number of samples in each dataset to at most 100,000.
+- id: c6
+  statement: 'Limitation: it assumes a clean normal context; performance degrades under heavy anomaly contamination.'
+  location: Conclusion
+  page: 9
+  quote: As shown in our appendix experiments, performance degrades when the context is heavily contaminated with anomalies.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Task is tabular anomaly detection; no such task tag exists, tabular-classification
+    used as the closest. Affiliation: Nums AI Inc. (two authors). Conflicts of interest: none stated.'

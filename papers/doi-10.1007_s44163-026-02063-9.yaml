@@ -1,0 +1,66 @@
+id: doi-10.1007_s44163-026-02063-9
+title: Awareness based internal reliability monitoring of streaming models using incremental principal component analysis
+authors:
+- Zainab Nadhim Jawad
+- Balázs János Villányi
+year: 2026
+venue: Discover Artificial Intelligence
+links:
+  doi: https://doi.org/10.1007/s44163-026-02063-9
+source:
+  version: Publisher PDF via OpenAlex (publishedVersion)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 058e57c407827ef7ee3a5981f455e82fe2fb8b8c2865a5101ce5072e72096a0a
+  pdf_url: https://link.springer.com/content/pdf/10.1007/s44163-026-02063-9.pdf
+  license: cc-by
+tags:
+  tasks:
+  - drift-detection
+  method_families:
+  - reconstruction-based-detectors
+  - dimensionality-reduction-for-shift
+  paradigms:
+  - unsupervised
+  - streaming
+proposes:
+- Label-free 'awareness' signal from normalized, smoothed Incremental PCA reconstruction residuals
+claims:
+- id: c1
+  statement: The paper proposes a continuous, label-free internal reliability metric based on Incremental PCA reconstruction residuals.
+  location: Abstract
+  page: 1
+  quote: This paper introduces a continuous, label-free internal reliability metric built on an Incremental Principal Component Analysis (IPCA) backbone.
+- id: c2
+  statement: The authors state the observed differences are small, so the signal is better suited as a continuous reliability indicator than as a universal detector of frozen adaptation.
+  location: Abstract
+  page: 1
+  quote: The observed differences are small in magnitude, indicating that the awareness signal is more suitable as a continuous internal reliability indicator than as a universal detector of frozen adaptation.
+- id: c3
+  statement: 'Ground truth drift is synthetic: a gradual drift ramp is placed at a fixed interval chosen by the experimenters, not at an estimated drift location in the original (AI4I 2020, WSN) data.'
+  location: Research design (stream length and temporal segmentation)
+  page: 8
+  quote: The selected interval was an experimental segmentation choice rather than an estimated drift location in the original datasets.
+- id: c4
+  statement: The injected drift is a small shift-and-scale of the standardized features that stays active after the ramp.
+  location: Controlled drift injection
+  page: 11
+  quote: At maximum drift intensity, every standardized feature was multiplied by 1.05 and shifted by 0.05 standardized units.
+- id: c5
+  statement: The authors state the synthetic shift-and-scale experiment is a reproducible stress test but does not establish general concept-drift detection performance.
+  location: Discussion (Scope of the synthetic drift experiment)
+  page: 29
+  quote: It is useful as a reproducible stress test, but it does not establish general concept-drift detection
+- id: c6
+  statement: 'Limitation: only one fixed drift strength and two adaptation conditions (full adaptation, complete freezing) are tested.'
+  location: Limitations and future research
+  page: 33
+  quote: 'The present experiment uses one fixed drift strength and two adaptation conditions: full adaptation and complete freezing.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #2 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Datasets: AI4I 2020 predictive maintenance and a wireless sensor network dataset,
+    both treated as unlabeled streams. No comparison with classical drift detectors (ADWIN, DDM, KSWIN) was found in the text; they appear only in related work. IPCA component count was chosen by minimizing
+    reconstruction error on a temporal hold-out split. Authors declare no competing interests.'

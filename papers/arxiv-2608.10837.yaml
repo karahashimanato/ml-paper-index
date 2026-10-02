@@ -1,0 +1,70 @@
+id: arxiv-2608.10837
+title: 'TACTICL: Task-Aware Compression of Tabular ICL Models'
+authors:
+- Mykhailo Koshil
+- Matthias Feurer
+- Katharina Eggensperger
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.10837
+  code: https://github.com/Hebog/tfm_compression
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 6324b7382f59630720f257ab7bbae457acb6e6a36f3d4e43a65f233b7f29b812
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  - model-compression
+  method_families:
+  - pruning
+  - tabular-foundation-model
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- TACTICL (task-aware layer pruning/substitution with adapters for TabPFN models)
+claims:
+- id: c1
+  statement: TACTICL jointly prunes transformer layers of a tabular ICL model and replaces them with lightweight adapters trained on the downstream task, blending in-context and in-weight learning.
+  location: Abstract
+  page: 1
+  quote: an automated task-aware compression framework for tabular in-context learning models that jointly prunes transformer layers and replaces them with lightweight adapters trained on downstream tasks,
+    thus blending in-context with in-weight learning
+- id: c2
+  statement: On 47 benchmark datasets, up to 85% of layers can be substituted without substantial performance drop on a given downstream task.
+  location: Abstract
+  page: 1
+  quote: We study TACTICL on 47 benchmark datasets and show that we can substitute up to 85% of layers without substantial performance drop on a given downstream task.
+- id: c3
+  statement: 'Evaluation uses 34 classification and 13 regression TabArena datasets: those within TabPFN v2.5''s native limits (at most 50,000 training samples and 2,000 features); one fold for TabPFNv2
+    and three folds for TabPFNv2.5.'
+  location: Appendix (Datasets)
+  page: 16
+  quote: From TabArena’s datasets, we retain only those that fit within TabPFN v2.5’s native pretraining limits (at most 50,000 training samples and 2,000 features, checked against the actual per-fold training-split
+    size)
+- id: c4
+  statement: 'For TabPFNv2.5, the compressed model is compared with the full model and two simple baselines: dropping/substituting layers from last to first, and distilling the full model into a shallow
+    MLP.'
+  location: Experiments
+  page: 8
+  quote: First, substitution or dropping layers starting from the last to first; and second, we distill the full model into a shallow MLP (see Appendix F for further details).
+- id: c5
+  statement: Layer-importance metrics commonly used in the literature fail to identify good compression configurations, and no single pruning configuration is universally optimal across datasets.
+  location: Conclusion
+  page: 10
+  quote: Notably, we find that layer-importance metrics commonly used in the literature fail to identify good compression configurations.
+- id: c6
+  statement: 'Limitations: no principled criterion for the compression/performance trade-off, and evaluation limited to tasks within TabPFNv2.5''s pre-training constraints; the full TabArena benchmark is
+    deferred.'
+  location: Limitations
+  page: 10
+  quote: Moreover, our empirical evaluation is limited to tasks within the pre-training constraints of TabPFNv2.5.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Conflicts of interest: none stated in the text.'

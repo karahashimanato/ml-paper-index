@@ -1,0 +1,66 @@
+id: arxiv-2609.16091
+title: Distilling Foundation Models for Agentic What-If Reasoning:Cost, Latency, and Governance in a Hybrid LLM+SLM Architecture
+authors:
+- Sourish Dey
+- Aditya Kumar
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.16091
+  code: https://github.com/nitsourish/Model-Distillation-Agentic-Workflow
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 199912deaba3019abd8df8f7a8bdde4efb29745b4fd097b8d2ebb00fc475f6a7
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  - model-compression
+  method_families:
+  - knowledge-distillation
+  - tabular-foundation-model
+  - tabular-mlp
+  - large-language-models
+  paradigms:
+  - supervised
+proposes:
+- TabPFN-to-MLP knowledge distillation embedded in a hybrid LLM+SLM agentic pipeline
+claims:
+- id: c1
+  statement: A TabPFN teacher is distilled into a compact feed-forward student on a UCI Adult business-decision simulation and five OpenML datasets.
+  location: Abstract
+  page: 1
+  quote: We distill a TabPFN teacher into a compact feed-forward student across a business-decision simulation on UCI Adult and five OpenML benchmarks
+- id: c2
+  statement: The end-to-end latency gain comes almost entirely from removing in-context TabPFN from the hot path.
+  location: Abstract
+  page: 1
+  quote: Span-level attribution shows that this wall-clock gain is almost entirely from removing in-context TabPFN from the hot path; fewer cloud round-trips cut token cost (2.1×) rather than latency.
+- id: c3
+  statement: 'Evaluation protocol: classification results use the default settings of the authors'' scripts (no per-dataset tuning was found in the text).'
+  location: Experimental setup
+  page: 5
+  quote: Unless a caption names an exception, every classification result in Tables 3 and 9 uses the defaults of scripts/run_distillation.py and scripts/run_classification_benchmark.py.
+- id: c4
+  statement: For the UCI Adult simulation, training used a row-capped stratified subsample (because of the teacher's context limit) with an 80/20 train/test split.
+  location: Experimental setup
+  page: 5
+  quote: Training used a stratified 10,000-row subsample (the tabular foundation-model teacher’s pretrained context window is optimized for ≤10K rows) with an 80/20 train/test split (8,000/2,000).
+- id: c5
+  statement: 'Limitation: the regression target is synthetic (rule-simulated) with no external ground truth.'
+  location: Limitations
+  page: 10
+  quote: max_loan is a rule-simulated target with no external ground truth; classification labels are the real Adult income indicator.
+- id: c6
+  statement: 'Limitation: distillation results come from a single seed.'
+  location: Limitations
+  page: 10
+  quote: Distillation tables use seed 42.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. First author is affiliated with SumUp (company). Mostly a systems/agentic paper;
+    the tabular part is distillation of TabPFN.'

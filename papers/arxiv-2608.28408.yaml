@@ -1,0 +1,67 @@
+id: arxiv-2608.28408
+title: 'SymboLLM-FE: LLM-Accelerated Symbolic Regression for Automated Feature Engineering on Tabular Data'
+authors:
+- Zi-Jian Cheng
+- Zi-Yi Jia
+- Zhi Zhou
+- Yu-Feng Li
+- Lan-Zhe Guo
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.28408
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 524418f35fb7d29be2d8be8b0a4f24d102a2ecd38af0597e00969411f8d60b94
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - large-language-models
+  - automl-systems
+  paradigms:
+  - supervised
+proposes:
+- SymboLLM-FE (symbolic regression formulas refined by an LLM for automated feature engineering)
+claims:
+- id: c1
+  statement: Formulas correlated with the target are extracted by symbolic regression and then refined by an LLM for interpretability.
+  location: Abstract
+  page: 1
+  quote: We extract math- ematically expressive formulas strongly corre- lated with the target via symbolic regression, which can enhance model performance, then refine them by LLMs with rich prior knowl-
+    edge to ensure interpretability.
+- id: c2
+  statement: On six real-world datasets and four Kaggle competitions, SymboLLM-FE outperforms existing AutoFE methods.
+  location: Abstract
+  page: 1
+  quote: Empirical re- sults on six real-world datasets and four Kaggle competitions demonstrate that SymboLLM-FE outperforms existing AutoFE.
+- id: c3
+  statement: 'Evaluation protocol: a fold-wise protocol within cross-validation is used.'
+  location: Method
+  page: 4
+  quote: SymboLLM-FE strictly adheres to a fold-wise training protocol within a cross- validation framework.
+- id: c4
+  statement: The validation set is used only for hyperparameter tuning, to prevent leakage into the test evaluation.
+  location: Method
+  page: 5
+  quote: To strictly prevent data leakage, the validation set is employed exclusively for hyperparameter tuning.
+- id: c5
+  statement: Downstream models (CatBoost, XGBoost, MLP, TabPFN) have hyperparameter grids reported in the appendix.
+  location: Experimental setup
+  page: 6
+  quote: Appendix C.2 shows these baselines’ information and full hyperparameter grids.
+- id: c6
+  statement: 'Limitation: the sliding-window subset construction over importance-sorted features may miss synergies among non-adjacent variables.'
+  location: Limitations
+  page: 9
+  quote: Second, the subset construction strategy, which sorts features in descending order of importance and employs a continuous sliding window, may fail to capture synergistic effects among non-adjacent
+    variables.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Automated feature engineering (symbolic regression + LLM refinement); no feature-engineering
+    tag exists, so large-language-models (the refinement step) and automl-systems are the closest families.'

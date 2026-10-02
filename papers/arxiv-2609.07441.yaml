@@ -1,0 +1,74 @@
+id: arxiv-2609.07441
+title: 'TabBench-Bio: A Living Benchmark for Machine Learning on High-Dimensional Biomedical Tables'
+authors:
+- Jules Kreuer
+- Sofiane Ouaari
+- Julia Hellmig
+- Julius Braitinger
+- Nico Pfeifer
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.07441
+  code: https://github.com/not-a-feature/TabBench-Bio
+  url: https://tabbench-bio.eu
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 120612958e4b082cf2877f1cc70824ab430106cf03892e110a2f1ee7d09b9ec6
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - random-forests
+  - tabular-mlp
+  - linear-models
+  - automl-systems
+  paradigms:
+  - supervised
+  - in-context-learning
+proposes:
+- TabBench-Bio living benchmark (43 high-dimensional low-sample-size biomedical datasets, 4-by-7 feature-by-sample grid)
+claims:
+- id: c1
+  statement: TabBench-Bio is a living, interactive benchmark of 43 biomedical datasets.
+  location: Abstract
+  page: 1
+  quote: We introduce TabBench-Bio, a living and interactive benchmark of 43 biomedical datasets spanning multiple domains.
+- id: c2
+  statement: At the reference cell (10,000 features, 100 training samples), RealTabPFN 2.5 has the highest point estimate, closely followed by TabPFN 3 and Logistic Regression.
+  location: Abstract
+  page: 1
+  quote: At the reference cell of 10,000 features and 100 training samples, RealTabPFN 2.5 has the highest point estimate, closely followed by TabPFN 3 and Logistic Regression.
+- id: c3
+  statement: All peer models use the default configuration of their AutoGluon adapter without per-dataset hyperparameter search, with bagging/stacking/ensembling disabled; tuning effects are not evaluated.
+  location: Models and fitting regime
+  page: 4
+  quote: Results concern these fixed configurations; the effects of bagging and hyperparameter tuning are not evaluated.
+- id: c4
+  statement: Evaluation uses 5-fold cross-validation with folds shared across all grid cells and models (group folds when biological group identifiers are available).
+  location: Cross-validation and leakage control
+  page: 4
+  quote: We use 5-fold cross-validation, with complementary folds shared across all cells and models.
+- id: c5
+  statement: Under AUROC (TabArena's binary metric) instead of macro-F1, Logistic Regression drops out of the leading group, so part of the contrast with TabArena reflects threshold placement rather than
+    the domain alone.
+  location: Discussion
+  page: 8
+  quote: under AUROC, the metric TabArena uses for binary classification, Logistic Regression drops out of the leading group and the top 6 places are held by tabular foundation models (Appendix E), so part
+    of the contrast reflects threshold placement rather than the domain alone.
+- id: c6
+  statement: Three benchmark datasets come from the same collection that supplied datasets used in TabDPT pretraining, so TabDPT results on them should be interpreted with this overlap in mind.
+  location: Limitations
+  page: 8
+  quote: TabDPT performance on these related datasets should therefore be interpreted with this overlap in mind.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Dataset selection required (generally) at least 70 samples and 1,000 features. AutoGluon
+    extreme preset (1 h) only at two prespecified cells. Fit and predict each have a 1-hour timeout; failures are imputed with the constant-predictor score.'

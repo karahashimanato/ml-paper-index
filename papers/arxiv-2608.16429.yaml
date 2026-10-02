@@ -1,0 +1,63 @@
+id: arxiv-2608.16429
+title: 'Localized TabICLv2: Scaling Tabular In-Context Learning through k-NN'
+authors:
+- Beimnet Bekele Guta
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.16429
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 05378788c3bf0c8e940cd1b2e6a1aae48b55944f67aec81b60385f9064402635
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  paradigms:
+  - in-context-learning
+proposes:
+- Localized TabICLv2 (k-NN retrieval in TabICLv2's Stage 2 representation space, with Stage 2+3 fine-tuning)
+claims:
+- id: c1
+  statement: Localized TabICLv2 cuts TabICLv2's inference cost by retrieving only the k nearest training neighbours of each test point in the model's Stage 2 representation space, instead of using the full
+    training context.
+  location: Abstract
+  page: 1
+  quote: Localized TabICLv2 introduces a method that reduces the inference cost of TabICLv2 by retrieving only the k nearest training neighbours for each test point, measured by similarity in the model’s
+    Stage 2 row-representation space, rather than using the full training context.
+- id: c2
+  statement: On TabArena classification tasks, the fine-tuned localized model keeps most of Full TabICLv2's accuracy and speeds up batch inference.
+  location: Abstract
+  page: 1
+  quote: On TabArena classification tasks, the fine-tuned localized model retains 98.64% of Full TabICLv2 accuracy and it achieves a median 2.18× speedup in batch inference
+- id: c3
+  statement: Evaluation covers 38 TabArena binary and multiclass classification datasets, using an 80/20 stratified train/test split and three random seeds.
+  location: Results and Discussion
+  page: 3
+  quote: We use an 80/20 stratified train/test split and run each experiment over three random seeds.
+- id: c4
+  statement: The XGBoost baseline is trained on the full training set. No hyperparameter configuration or tuning for XGBoost was found in the text.
+  location: Results and Discussion
+  page: 3
+  quote: XGBoost trained on the full training set and retrieval-only baselines
+- id: c5
+  statement: The localized method does not exceed Full TabICLv2's accuracy.
+  location: Results and Discussion
+  page: 3
+  quote: Overall, the localized method does not surpass the accuracy of Full TabICLv2.
+- id: c6
+  statement: 'Limitation: localization may underperform when the retrieved neighbours miss useful evidence, and retrieval overhead can reduce speedups on smaller datasets or large query batches.'
+  location: Conclusion
+  page: 4
+  quote: However, localization may underperform when useful evidence is not captured by the retrieved neighbours, and retrieval overhead can reduce speedups on smaller datasets or large query batches.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. The PDF header names the 2nd ICML Workshop on Foundation Models for Structured Data
+    (2026); venue is not recorded because it is not in the batch metadata. The paper uses its own 80/20 split with 3 seeds instead of TabArena''s official splits, and all 38 datasets are classification.
+    The XGBoost baseline (no stated tuning) is compared on ROC AUC / log-loss.'

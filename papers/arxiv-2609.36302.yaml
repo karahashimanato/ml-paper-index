@@ -1,0 +1,64 @@
+id: arxiv-2609.36302
+title: The Universal Classifier for Graph Learning
+authors:
+- Ben Finkelshtein
+- André Linhares
+- Petar Veličković
+- Bryan Perozzi
+- Mikhail Galkin
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.36302
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: ff9565884b7cd55bef12e1ab13bd449eb215d5f2b70858bd0c9690a514e696bd
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  paradigms:
+  - in-context-learning
+proposes:
+- 'Universal Classifier (UC): similarity-based query-anchor model for node-, edge- and graph-level tasks across feature schemas'
+claims:
+- id: c1
+  statement: UC supports arbitrary feature and class cardinalities and unifies node-, edge- and graph-level objectives under one similarity-based classification objective.
+  location: Abstract
+  page: 1
+  quote: In this paper, we introduce the UNIVERSAL CLASSIFIER (UC), which supports arbitrary feature and class cardinalities, unifying node-, edge-, and graph-level objectives under a single similarity-based
+    classification objective.
+- id: c2
+  statement: The pre-training mixture, training code and parameter count are not released; the authors state that no evaluation dataset appears in the pre-training mixture.
+  location: Experiments
+  page: 6
+  quote: While organizational policy prevents us from releasing the mixture, our training code, or the parameter count, we state the property on which the validity of our results depends
+- id: c3
+  statement: A single checkpoint is evaluated without error bars.
+  location: Experiments
+  page: 6
+  quote: so we evaluate a single fixed checkpoint and report UC results without error bars
+- id: c4
+  statement: Node-classification baseline results are sourced from the respective papers; baselines include TS-Mean (Finkelshtein et al., 2025), prior work sharing the first author's name.
+  location: Node classification
+  page: 6
+  quote: Baseline results are sourced from the respective papers.
+- id: c5
+  statement: UC consistently outperforms inductive classifiers and TFM-derived baselines on node classification, and in most cases even supervised GNNs trained per graph.
+  location: Results
+  page: 8
+  quote: Notably, in most cases, the UC even surpasses supervised GNNs trained separately on each graph end-to-end.
+- id: c6
+  statement: 'Limitations: memory and inference overhead from 3D tensors; the evaluated checkpoint was pre-trained on node- and edge-level objectives only.'
+  location: Appendix (Limitations)
+  page: 16
+  quote: The evaluated checkpoint was pre-trained on node- and edge-level objectives only; although it already transfers zero-shot to some graph-level targets.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Approved from candidate issue #1 (2026-10-02); carded by a subagent. Results tables not recorded; claims only. Graph learning, not tabular (node classification/regression, link prediction, graph
+    regression; only the node-level task has a tag). Affiliation: Google Research / Google DeepMind.'

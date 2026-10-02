@@ -28,21 +28,26 @@ claims:
   page: 1
   quote: 'These scores mix two separate things: how well the detector represents the physical process, and how well its alarm threshold is set.'
 - id: c2
-  statement: The paper evaluates the detector's residuals directly, independent of any alarm rule (threshold, CUSUM, point adjustment).
+  statement: The paper evaluates the detector's residuals (Stage 1) directly, independent of a specific alarm rule.
   location: Abstract
   page: 1
   quote: Instead of scoring only the final alarms, we evaluate Stage 1 directly using normalized residual energy
 - id: c3
+  statement: The residual-level evaluation applies before thresholding, CUSUM, point adjustment or other alarm policies.
+  location: Conclusion
+  page: 13
+  quote: before thresholding, CUSUM, point adjustment, or other alarm policies are applied
+- id: c4
   statement: Detectors with similar ROC-AUC on SWaT differ by more than an order of magnitude at a common false-alarm rate.
   location: Abstract
   page: 1
   quote: Although the detectors have similar ROC-AUC values on SWaT, their performance differs by more than an order of magnitude at a common false-alarm rate.
-- id: c4
+- id: c5
   statement: Rankings change across testbeds (e.g. TranAD first on HAI but last on SWaT).
   location: Abstract
   page: 1
   quote: 'Rankings also change across testbeds: TranAD ranks first on HAI but last on SWaT, while NSIBF ranks first on WADI but last on HAI.'
-- id: c5
+- id: c6
   statement: Detection failures can stem from a weak representation, poor threshold calibration, or an attack with little physical effect.
   location: Abstract
   page: 1

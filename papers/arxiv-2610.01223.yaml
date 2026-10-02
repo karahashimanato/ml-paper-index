@@ -34,6 +34,11 @@ claims:
   location: Metrics
   page: 4
   quote: On TSB-AD we follow the Time-RCD protocol and re- port the affiliation F-measure [11]
+- id: c4
+  statement: Threshold-dependent metrics are reported at their score-optimal operating point (best attainable value over score quantiles).
+  location: Evaluation
+  page: 9
+  quote: the harness reports each threshold-dependent metric at its score-optimal operating point
 results: []
 relations: []
 card:

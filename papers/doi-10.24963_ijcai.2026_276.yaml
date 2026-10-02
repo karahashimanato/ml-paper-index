@@ -35,6 +35,11 @@ claims:
   location: Implemented details
   page: 5
   quote: As noted by [Kim et al., 2022], point-adjustment metrics can lead to misleading rankings
+- id: c3
+  statement: All thresholds are selected by SPOT.
+  location: Implemented details
+  page: 5
+  quote: All thresholds were selected by SPOT
 results: []
 relations: []
 card:

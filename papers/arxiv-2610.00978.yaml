@@ -43,6 +43,11 @@ claims:
   location: Metrics
   page: 7
   quote: we report VUS-PR, Affiliation-F1, F1T, and Standard-F1
+- id: c4
+  statement: Threshold-dependent metrics use oracle thresholds selected from evaluation labels.
+  location: Metrics
+  page: 8
+  quote: Threshold-dependent metrics use oracle thresholds selected from evaluation labels
 results: []
 relations: []
 card:

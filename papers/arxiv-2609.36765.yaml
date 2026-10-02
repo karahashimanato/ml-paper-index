@@ -28,10 +28,10 @@ claims:
   page: 1
   quote: we propose GRASP, a flow matching framework with a graph-spectral path for multivariate time series anomaly detec- tion.
 - id: c2
-  statement: Evaluation uses ROC, PRC and Best-F1, where Best-F1 uses the threshold that maximizes F1.
+  statement: Evaluation uses ROC, PRC and Best-F1, where Best-F1 uses the threshold that maximizes F1 on test labels.
   location: Experimental setup
   page: 8
-  quote: The Best-F1 score measures point-wise detection performance with the threshold that maximizes the
+  quote: with the threshold that maximizes the F1 score using test labels
 results: []
 relations: []
 card:

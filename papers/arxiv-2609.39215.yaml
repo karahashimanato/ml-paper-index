@@ -28,7 +28,8 @@ proposes:
 - TSB-drift dataset
 claims:
 - id: c1
-  statement: Most streaming anomaly detection methods come from streaming outlier detection and ignore core characteristics of time-series anomalies; they are evaluated on synthetic or small benchmarks.
+  statement: Most streaming anomaly detection methods come from streaming outlier detection and largely ignore core characteristics of time-series anomalies; their evaluation is typically on synthetic or
+    small-scale benchmarks.
   location: Abstract
   page: 1
   quote: most of these approaches originate from the streaming outlier detection litera- ture and largely ignore core characteristics of time series anomalies.

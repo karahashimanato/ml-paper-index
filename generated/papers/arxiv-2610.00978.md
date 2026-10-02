@@ -16,4 +16,5 @@
 - **c1** Different datasets favor different detection criteria; TS-Router uses foundation-model representations to select specialist detectors per series.([Abstract, p.1](https://arxiv.org/pdf/2610.00978v1#page=1 "estimates the relative competence of heterogeneous anomaly de- tectors from pretrained temporal representations and selects suitable specialists for each target series."))
 - **c2** Across 16 benchmarks and four metrics it achieves the best overall average rank.([Abstract, p.1](https://arxiv.org/pdf/2610.00978v1#page=1 "Across 16 real-world benchmarks and four complementary evaluation metrics, TS-Router achieves the best overall aver- age rank."))
 - **c3** It reports VUS-PR, Affiliation-F1, F1T and Standard-F1.([Metrics, p.7](https://arxiv.org/pdf/2610.00978v1#page=7 "we report VUS-PR, Affiliation-F1, F1T, and Standard-F1"))
+- **c4** Threshold-dependent metrics use oracle thresholds selected from evaluation labels.([Metrics, p.8](https://arxiv.org/pdf/2610.00978v1#page=8 "Threshold-dependent metrics use oracle thresholds selected from evaluation labels"))
 

@@ -41,7 +41,7 @@ claims:
   page: 6
   quote: unlike Point-Adjusted F1 (PA-F1) it is threshold-free and not gameable by random scores.
 - id: c4
-  statement: Thresholded F1 variants in the TSB-AD implementation are reported at the best threshold and can be sensitive to threshold selection and point adjustment.
+  statement: Thresholded F1 variants of the TSB-AD implementation (reported at the best threshold when no fixed threshold is supplied) can be sensitive to threshold selection and, in some cases, point adjustment.
   location: Evaluation metrics (appendix)
   page: 19
   quote: These metrics are useful for diagnosing detector behavior but can be sensitive to threshold selection and, in some cases, to point-adjustment effects.

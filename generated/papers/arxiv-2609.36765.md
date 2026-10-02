@@ -14,5 +14,5 @@
 出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
 
 - **c1** GRASP builds graph structure into the flow-matching probability path for multivariate TSAD.([Abstract, p.1](https://arxiv.org/pdf/2609.36765v1#page=1 "we propose GRASP, a flow matching framework with a graph-spectral path for multivariate time series anomaly detec- tion."))
-- **c2** Evaluation uses ROC, PRC and Best-F1, where Best-F1 uses the threshold that maximizes F1.([Experimental setup, p.8](https://arxiv.org/pdf/2609.36765v1#page=8 "The Best-F1 score measures point-wise detection performance with the threshold that maximizes the"))
+- **c2** Evaluation uses ROC, PRC and Best-F1, where Best-F1 uses the threshold that maximizes F1 on test labels.([Experimental setup, p.8](https://arxiv.org/pdf/2609.36765v1#page=8 "with the threshold that maximizes the F1 score using test labels"))
 

@@ -26,7 +26,7 @@ claims:
   page: 1
   quote: At inference, PISCES separates the anomaly score into magnetic and plasma reconstruction errors, physics relations, and resid- ual corrections
 - id: c2
-  statement: Evaluation uses PR-AUC because point-adjusted F1 can make random scores look competitive.
+  statement: PR-AUC over all thresholds is used; the paper also notes that point-adjusted F1 can make random scores look competitive.
   location: Evaluation
   page: 10
   quote: Point-adjusted F1 can make random anomaly scores appear competitive [41]
@@ -35,6 +35,11 @@ claims:
   location: Abstract
   page: 1
   quote: Attenuation of the skip connections, selected on validation data, improves average precision for the trained models, while the untrained scores remain nearly the same.
+- id: c4
+  statement: Threshold-based alarms use the 99th percentile of anomaly scores on a separate validation period (not the test labels).
+  location: Evaluation
+  page: 10
+  quote: The detection threshold is the 99th percentile of composite anomaly scores in the 2016 to 2017 validation set.
 results: []
 relations: []
 card:

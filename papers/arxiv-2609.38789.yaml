@@ -38,6 +38,11 @@ claims:
   location: Evaluation
   page: 13
   quote: No point adjustment is applied to any metric.
+- id: c4
+  statement: Threshold-based metrics are reported at the R-F1-maximizing operating point among normal-validation quantile candidates.
+  location: Evaluation
+  page: 7
+  quote: we report the R-F1-maximizing operating point over normal-validation quantile candidates
 results: []
 relations: []
 card:

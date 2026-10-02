@@ -25,12 +25,12 @@ proposes:
 - SHAD benchmark (detection, explainability, interpretability)
 claims:
 - id: c1
-  statement: Current benchmarks focus on detection accuracy; few evaluate explainability and none provides rich semantic annotations.
+  statement: Current benchmarks focus mainly on detection accuracy; only a few evaluate spatial explainability, and none provides semantic annotations rich enough for human-understandable interpretations.
   location: Abstract
   page: 1
   quote: One of the main reasons for this gap is that current benchmarks primarily focus on detection accuracy, and only few of them evaluate spatial explainability.
 - id: c2
-  statement: SHAD has 215 multivariate high-dimensional series from real distributed cloud storage systems, with per-dimension labels and textual annotations.
+  statement: SHAD has 215 fully annotated multivariate high-dimensional series from real distributed cloud storage systems.
   location: Abstract
   page: 1
   quote: a fully annotated benchmark composed of 215 multivariate, high-dimensional time series collected from real-world distributed cloud storage systems operated by Scality.
@@ -44,6 +44,11 @@ claims:
   location: Conclusion
   page: 10
   quote: (ii) Explanability on SHAD cannot be natively solved with existing TSAD methods, and (iii) frozen LLMs are not able to provide correct interpretations of anomalies.
+- id: c5
+  statement: SHAD provides per-dimension labels and rich textual annotations for each dimension and anomaly.
+  location: Conclusion
+  page: 10
+  quote: provides per-dimension labels along with rich textual annotations for each dimension and anomaly
 results: []
 relations: []
 card:

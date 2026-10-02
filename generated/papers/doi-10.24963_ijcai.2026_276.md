@@ -15,4 +15,5 @@
 
 - **c1** Minimizing reconstruction loss alone lets models reconstruct anomalies well by overfitting local patterns (misalignment between reconstruction and detection).([Abstract, p.1](https://www.ijcai.org/proceedings/2026/0276.pdf#page=1 "Consequently, anomalies that violate global de- pendencies can also be reconstructed well, leading to a misalignment between reconstruction and detection."))
 - **c2** Citing Kim et al., it avoids point-adjustment metrics and uses affiliation F1 and VUS-ROC.([Implemented details, p.5](https://www.ijcai.org/proceedings/2026/0276.pdf#page=5 "As noted by [Kim et al., 2022], point-adjustment metrics can lead to misleading rankings"))
+- **c3** All thresholds are selected by SPOT.([Implemented details, p.5](https://www.ijcai.org/proceedings/2026/0276.pdf#page=5 "All thresholds were selected by SPOT"))
 

@@ -24,15 +24,16 @@ from validate import load_yaml
 _PUNCT = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-", "—": "-", "−": "-"})
 
 
-def normalize(text: str, keep_hyphen: bool) -> str:
+def normalize(text: str, keep_hyphen: bool, join_hyphen: bool = True) -> str:
     text = unicodedata.normalize("NFKC", text).translate(_PUNCT)
-    # 行末ハイフンは「単語の分割」と「本来のハイフン」の両方がありうるので、呼び出し側で両方試す
-    text = re.sub(r"(?<=[A-Za-z])-\s*\n\s*", "-" if keep_hyphen else "", text)
+    # 行末ハイフンは「単語の分割」「複合語のハイフン」「並列のハイフン(attention- and)」がありうるので、呼び出し側で全て試す
+    if join_hyphen:
+        text = re.sub(r"(?<=[A-Za-z])-\s*\n\s*", "-" if keep_hyphen else "", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
 def variants(text: str) -> list[str]:
-    return [normalize(text, keep_hyphen=False), normalize(text, keep_hyphen=True)]
+    return [normalize(text, keep_hyphen=False), normalize(text, keep_hyphen=True), normalize(text, keep_hyphen=True, join_hyphen=False)]
 
 
 def match(quote: str, pages: list[list[str]]) -> str | None:

@@ -1,0 +1,237 @@
+id: doi-10.1038_s41586-024-08328-6
+title: Accurate predictions on small data with a tabular foundation model
+authors:
+- Noah Hollmann
+- Samuel Müller
+- Lennart Purucker
+- Arjun Krishnakumar
+- Max Körfer
+- Shi Bin Hoo
+- Robin Tibor Schirrmeister
+- Frank Hutter
+year: 2025
+venue: Nature 637, 319-326 (2025)
+links:
+  doi: https://doi.org/10.1038/s41586-024-08328-6
+source:
+  version: Nature published version (open access)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 6b5ce3dba2ef7454ad0868ad733a64b4ac89bcd98307773fad1e0e977caaa013
+  license: CC BY 4.0
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-foundation-model
+  - gradient-boosted-trees
+  - automl-systems
+  paradigms:
+  - in-context-learning
+proposes:
+- TabPFN v2
+claims:
+- id: c1
+  statement: TabPFN v2 outperformed all previous methods on datasets with up to 10,000 samples by a wide margin, with much less training time.
+  location: Abstract
+  page: 1
+  quote: a tabular foundation model that outperforms all previous methods on datasets with up to 10,000 samples by a wide margin, using substantially less training time.
+- id: c2
+  statement: In 2.8 s, TabPFN v2 outperformed an ensemble of the strongest baselines tuned for 4 h (classification).
+  location: Abstract
+  page: 1
+  quote: In 2.8 s, TabPFN outperforms an ensemble of the strongest baselines tuned for 4 h in a classification setting.
+- id: c3
+  statement: Compared with the 2023 TabPFN, v2 scales to 50x larger datasets, supports regression, categorical data and missing values, and is robust to unimportant features and outliers.
+  location: Introduction
+  page: 2
+  quote: the new TabPFN scales to 50× larger datasets; supports regression tasks, categorical data and missing values; and is robust to unimportant features and outliers.
+- id: c4
+  statement: Training only on synthetic data avoids privacy/copyright issues and contamination of training data with test data.
+  location: Architecture / prior
+  page: 3
+  quote: By relying on synthetic data instead of large collections of public tabular data, we avoid common problems of foundational models, such as privacy and copyright infringements, contaminating our
+    training data with test data
+- id: c5
+  statement: About 100 million synthetic datasets (from structural causal models) are generated per model training.
+  location: Synthetic data
+  page: 4
+  quote: we created a massive corpus of around 100 million synthetic datasets per model training
+- id: c6
+  statement: 'The architecture uses two-way attention: each cell attends within its row, then within its column, making it invariant to sample and feature order.'
+  location: Architecture
+  page: 3
+  quote: uses a two-way attention mechanism, with each cell attending to the other features in its row (that is, its sample) and then attending to the same feature across its column (that is, all other
+    samples).
+- id: c7
+  statement: 'Primary evaluation: 29 classification and 28 regression datasets from the AutoML Benchmark and OpenML-CTR23 with up to 10,000 samples, 500 features and 10 classes.'
+  location: Results
+  page: 5
+  quote: we use the 29 classification datasets and 28 regression datasets that have up to 10,000 samples, 500 features and 10 classes.
+- id: c8
+  statement: 'Each dataset and method: 10 repetitions with different seeds and 90/10 train/test splits.'
+  location: Results
+  page: 5
+  quote: For each dataset and method, we ran 10 repetitions with different random seeds and train–test splits (90% train, 10% test).
+- id: c9
+  statement: Baselines were tuned by random search with five-fold CV, with budgets from 30 s to 4 h.
+  location: Results
+  page: 5
+  quote: We tuned hyperparameters using random search with five-fold cross-validation, with time budgets ranging from 30 s to 4 h.
+- id: c10
+  statement: TabPFN v2 was pre-trained once on eight RTX 2080 GPUs for 2 weeks.
+  location: Results
+  page: 5
+  quote: TabPFN was pre-trained once using eight NVIDIA RTX 2080 GPUs over 2 weeks
+- id: c11
+  statement: Scores are normalized per dataset, 1.0 = best and 0.0 = worst with respect to all baselines (so values depend on the set of baselines).
+  location: Results
+  page: 5
+  quote: Scores were normalized per dataset, with 1.0 representing the best and 0.0 the worst performance with respect to all baselines.
+- id: c12
+  statement: TabPFN v2 also substantially outperformed all baselines on the Grinsztajn et al. and McElfresh et al. (TabZilla) benchmarks (refs 14, 15).
+  location: Results, Extended Data Fig. 2
+  page: 5
+  quote: TabPFN substantially outperformed all baselines on the benchmarks of refs. 14,15.
+- id: c13
+  statement: Default TabPFN v2 beat default CatBoost on all five recent Kaggle tabular competitions with fewer than 10,000 training samples.
+  location: Results, Extended Data Table 6
+  page: 5
+  quote: default TabPFN outperforms default CatBoost on all five Kaggle competitions with less than 10,000 training samples
+- id: c14
+  statement: Dataset characteristics (categorical features, missing values, size) did not strongly change TabPFN v2's relative performance, but this is not evidence that it scales beyond 10,000 samples
+    and 500 features.
+  location: Results
+  page: 6
+  quote: these results should not be taken as evidence that TabPFN scales well beyond the 10,000 samples and 500 features considered here.
+- id: c15
+  statement: TabPFN v2 was very robust to added uninformative features and outliers.
+  location: Results, Fig. 5a
+  page: 6
+  quote: The results show that TabPFN is very robust to uninformative features and outliers
+- id: c16
+  statement: With half the training samples, TabPFN v2 still performed as well as the next best method.
+  location: Results, Fig. 5a
+  page: 6
+  quote: with half the samples TabPFN still performs as well as the next best method
+- id: c17
+  statement: For regression, hyperparameter tuning of TabPFN v2 matters more than for classification.
+  location: Results
+  page: 6
+  quote: For regression tasks, tuning hyperparameters is more important.
+- id: c18
+  statement: 'Competing interests: two authors are affiliated with PriorLabs (a tabular foundation model company); related patent applications were filed by Bosch.'
+  location: Competing interests
+  page: 13
+  quote: F.H. and N.H. are affiliated with PriorLabs, a company focused on developing tabular foundation models.
+results:
+- id: r1
+  benchmark: hollmann2025-amlb-small-classification
+  method: TabPFN v2 (default)
+  metric: normalized-roc-auc
+  value: 0.939
+  location: Results (main text)
+  page: 5
+  quote: TabPFN surpasses CatBoost, the strongest default baseline, by 0.187 (0.939 compared with 0.752) in normalized ROC AUC in the default setting
+- id: r2
+  benchmark: hollmann2025-amlb-small-classification
+  method: CatBoost (default)
+  metric: normalized-roc-auc
+  value: 0.752
+  location: Results (main text)
+  page: 5
+  quote: TabPFN surpasses CatBoost, the strongest default baseline, by 0.187 (0.939 compared with 0.752) in normalized ROC AUC in the default setting
+- id: r3
+  benchmark: hollmann2025-amlb-small-classification
+  method: TabPFN v2 (tuned)
+  metric: normalized-roc-auc
+  value: 0.952
+  location: Results (main text)
+  page: 5
+  quote: and by 0.13 (0.952 compared with 0.822) in the tuned setting.
+- id: r4
+  benchmark: hollmann2025-amlb-small-classification
+  method: CatBoost (tuned)
+  metric: normalized-roc-auc
+  value: 0.822
+  location: Results (main text)
+  page: 5
+  quote: and by 0.13 (0.952 compared with 0.822) in the tuned setting.
+- id: r5
+  benchmark: hollmann2025-amlb-ctr23-small-regression
+  method: TabPFN v2 (default)
+  metric: normalized-rmse
+  value: 0.923
+  location: Results (main text)
+  page: 5
+  quote: TabPFN outperforms CatBoost in normalized RMSE by 0.051 (0.923 compared with 0.872) in the default setting
+- id: r6
+  benchmark: hollmann2025-amlb-ctr23-small-regression
+  method: CatBoost (default)
+  metric: normalized-rmse
+  value: 0.872
+  location: Results (main text)
+  page: 5
+  quote: TabPFN outperforms CatBoost in normalized RMSE by 0.051 (0.923 compared with 0.872) in the default setting
+- id: r7
+  benchmark: hollmann2025-amlb-ctr23-small-regression
+  method: TabPFN v2 (tuned)
+  metric: normalized-rmse
+  value: 0.968
+  location: Results (main text)
+  page: 5
+  quote: and by 0.093 (0.968 compared with 0.875) in the tuned setting.
+- id: r8
+  benchmark: hollmann2025-amlb-ctr23-small-regression
+  method: CatBoost (tuned)
+  metric: normalized-rmse
+  value: 0.875
+  location: Results (main text)
+  page: 5
+  quote: and by 0.093 (0.968 compared with 0.875) in the tuned setting.
+- id: r9
+  benchmark: hollmann2025-amlb-small-classification
+  method: TabPFN v2 (PHE)
+  metric: normalized-roc-auc
+  value: 0.971
+  location: Results (main text)
+  page: 6
+  quote: TabPFN (PHE) further improves performance leading to an average normalized ROC AUC score of 0.971, compared with 0.939 for TabPFN (default) and 0.914 for AutoGluon.
+- id: r10
+  benchmark: hollmann2025-amlb-small-classification
+  method: AutoGluon 1.0
+  metric: normalized-roc-auc
+  value: 0.914
+  location: Results (main text)
+  page: 6
+  quote: TabPFN (PHE) further improves performance leading to an average normalized ROC AUC score of 0.971, compared with 0.939 for TabPFN (default) and 0.914 for AutoGluon.
+  note: The sentence does not state AutoGluon's tuning budget (Fig. 5c shows budgets from 300 s up to 4 h).
+relations:
+- winner: TabPFN v2 (default, ~2.8 s / ~4.8 s)
+  loser: All baselines tuned for up to 4 h
+  basis: Normalized ROC AUC / RMSE vs. tuning time (Fig. 4c).
+  benchmark: hollmann2025-amlb-small-classification
+  location: Results
+  page: 5
+  quote: The default of TabPFN, taking 2.8 s on average for classification and 4.8 s for regression, outperforms all baselines, even when tuning them for 4 h
+- winner: TabPFN v2 (default)
+  loser: AutoGluon 1.0 (up to 4 h)
+  basis: Classification, normalized ROC AUC (Fig. 5c).
+  benchmark: hollmann2025-amlb-small-classification
+  location: Results
+  page: 6
+  quote: In just 2.8 s, TabPFN (default) outperforms AutoGluon for classification tasks, even if AutoGluon is allowed up to 4 h
+- winner: TabPFN v2 (PHE)
+  loser: AutoGluon 1.0 (allowed 4 h)
+  basis: Regression, normalized RMSE, after TabPFN (PHE)'s minimal 300 s budget (Fig. 5d).
+  benchmark: hollmann2025-amlb-ctr23-small-regression
+  location: Results
+  page: 6
+  quote: TabPFN (PHE) outperforms AutoGluon (allowed 4 h) after its minimal
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Aggregate tables (Extended Data Tables 1, 2, 6) are embedded as images and could not be extracted as text; only numbers stated in the main text were recorded, quoting the sentence. Normalized scores
+    depend on the set of baselines used for normalization (c11). 'TabPFN' in this paper is TabPFN v2, a different model from the 2023 TabPFN (arxiv-2207.01848). Two authors are affiliated with PriorLabs
+    (c18).

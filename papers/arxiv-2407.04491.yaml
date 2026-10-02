@@ -1,0 +1,186 @@
+id: arxiv-2407.04491
+title: 'Better by Default: Strong Pre-Tuned MLPs and Boosted Trees on Tabular Data'
+authors:
+- David Holzmüller
+- Léo Grinsztajn
+- Ingo Steinwart
+year: 2024
+venue: NeurIPS 2024
+links:
+  arxiv: https://arxiv.org/abs/2407.04491
+  doi: https://doi.org/10.18419/darus-4555
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a4fb4e2cd821175b5afe7fa1af0593068af152711e5397218f1d032ec8b084c0
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-mlp
+  - gradient-boosted-trees
+  - random-forests
+  - tabular-attention
+  paradigms:
+  - supervised
+proposes:
+- RealMLP
+- Tuned default parameters (TD) for XGBoost, LightGBM, CatBoost and RealMLP
+- RealTabR-D
+claims:
+- id: c1
+  statement: RealMLP offers a favorable time-accuracy tradeoff compared with other neural baselines and is competitive with GBDTs on medium-to-large datasets.
+  location: Abstract
+  page: 1
+  quote: RealMLP offers a favorable time-accuracy tradeoff compared to other neural baselines and is competitive with GBDTs in terms of benchmark scores.
+- id: c2
+  statement: Combining RealMLP and GBDTs with improved default parameters gives excellent results without hyperparameter tuning.
+  location: Abstract
+  page: 1
+  quote: a combination of RealMLP and GBDTs with improved default parameters can achieve excellent results without hyperparameter tuning.
+- id: c3
+  statement: Defaults are tuned on a meta-train benchmark of 118 datasets and evaluated on a disjoint meta-test benchmark of 90 datasets.
+  location: Abstract
+  page: 1
+  quote: We tune RealMLP and the default parameters on a meta-train benchmark with 118 datasets and compare them to hyperparameter-optimized versions on a disjoint meta-test benchmark with 90 datasets
+- id: c4
+  statement: The benchmarks cover medium-to-large datasets (1K-500K samples).
+  location: Abstract
+  page: 1
+  quote: Our benchmark results on medium-to-large tabular datasets (1K–500K samples)
+- id: c5
+  statement: Unlike McElfresh et al., who favor tuning CatBoost over trying NNs, the authors' results favor model portfolios as in AutoML systems.
+  location: Section 5
+  page: 10
+  quote: Unlike McElfresh et al. [43], who argue in favor of CatBoost-HPO over trying NNs, our results favor model portfolios as used in modern AutoML systems [10].
+- id: c6
+  statement: Trying all default (tuned-default) algorithms is faster and very often better than naive single-algorithm HPO.
+  location: Section 5
+  page: 10
+  quote: Simply trying all default algorithms is faster and very often better than (naive) single-algorithm HPO.
+- id: c7
+  statement: RealMLP's tuned defaults transfer very well from meta-train to meta-test.
+  location: Section 5
+  page: 9
+  quote: indicating that the tuned defaults transfer very well to the meta-test benchmark.
+- id: c8
+  statement: For GBDTs, tuned defaults match HPO on meta-train but not on meta-test (still clearly better than library defaults).
+  location: Section 5
+  page: 9
+  quote: For GBDTs, tuned defaults are competitive with HPO on the meta-train set, but not as good on the meta-test set.
+- id: c9
+  statement: Using AUROC instead of classification error favors GBDTs.
+  location: Section 6
+  page: 10
+  quote: For classification, using AUROC instead of classification error (Figure 3, Appendix B.5) favors GBDTs.
+- id: c10
+  statement: Aggregation metrics other than the shifted geometric mean reduce the advantage of tuned-default methods.
+  location: Section 6
+  page: 10
+  quote: The use of different aggregation metrics than the shifted geometric mean reduces the advantage of TD methods
+- id: c11
+  statement: Non-architectural aspects are not equalized across NN models, so the work is not a comparison of architectures.
+  location: Section 6 Limitations
+  page: 10
+  quote: our work should therefore not be seen as a comparison of architectures.
+- id: c12
+  statement: Generalization of the defaults to very small data, distribution shift, missing numerical values and other metrics such as log-loss is unclear.
+  location: Section 6 Limitations
+  page: 10
+  quote: it is unclear to which extent the obtained defaults can generalize to very small datasets, distribution shifts, datasets with missing numerical values, and other metrics such as log-loss.
+- id: c13
+  statement: Each dataset is evaluated on 10 random 60/20/20 train/validation/test splits.
+  location: Section 2.2
+  page: 4
+  quote: we evaluate a method on Nsplits = 10 random training-validation-test splits (60%-20%-20%) on each dataset.
+- id: c14
+  statement: HPO uses 50 steps of random search per split and dataset.
+  location: Section 5
+  page: 7
+  quote: Hyperparameters optimized separately for every train-test split on every dataset, using 50 steps of random search.
+- id: c15
+  statement: XGBoost results on some (mainly meta-test) datasets are affected by a bug in handling rare categories.
+  location: Figure 2 caption
+  page: 8
+  quote: Note that XGB results on some (mainly meta-test) datasets are affected by a bug in handling rare categories, see Appendix B.
+- id: c16
+  statement: On the electricity dataset MLPs struggle to learn high-frequency patterns.
+  location: Section 5
+  page: 9
+  quote: where MLPs struggle to learn high-frequency patterns
+- id: c17
+  statement: Among GBDTs, CatBoost defaults are better but slower.
+  location: Section 5
+  page: 9
+  quote: Among GBDTs, CatBoost defaults are better and slower.
+- id: c18
+  statement: RealMLP's numerical preprocessing (robust scaling + smooth clipping) is easy to adopt and often helps other NNs.
+  location: Section 6
+  page: 10
+  quote: our numerical preprocessing is easy to adopt and often beneficial for other NNs as well
+- id: c19
+  statement: Label smoothing is influential but can hurt metrics like AUROC.
+  location: Section 6
+  page: 10
+  quote: label smoothing is influential but can be detrimental for metrics like AUROC
+- id: c20
+  statement: A single training-validation split per train-test split means HPO can overfit the validation set more easily than with cross-validation.
+  location: Section 6 Limitations
+  page: 10
+  quote: This means that HPO can overfit the validation set more easily than in a cross-validation setup.
+- id: c21
+  statement: With good default parameters it is worth trying both NNs and GBDTs, even with a moderate time budget.
+  location: Section 7
+  page: 10
+  quote: with good default parameters, it is worth trying both algorithm families even with a moderate training time budget.
+results: []
+relations:
+- winner: RealMLP and RealTabR
+  loser: GBDTs (XGBoost, LightGBM, CatBoost)
+  basis: Shifted geometric mean error on the meta-train benchmarks (Figure 2); the sentence does not specify D/TD/HPO variants.
+  location: Section 5
+  page: 9
+  quote: On the meta-train and meta-test benchmarks, RealMLP and RealTabR perform better than GBDTs in terms of shifted geometric mean error
+  benchmark: holzmuller2024-meta-train
+- winner: RealMLP and RealTabR
+  loser: GBDTs (XGBoost, LightGBM, CatBoost)
+  basis: Shifted geometric mean error on the meta-test benchmarks (Figure 2); the sentence does not specify D/TD/HPO variants.
+  location: Section 5
+  page: 9
+  quote: On the meta-train and meta-test benchmarks, RealMLP and RealTabR perform better than GBDTs in terms of shifted geometric mean error
+  benchmark: holzmuller2024-meta-test
+- winner: CatBoost
+  loser: RealMLP
+  basis: Grinsztajn et al. classification benchmark under this paper's protocol (Figure 2).
+  location: Section 5
+  page: 9
+  quote: On the Grinsztajn et al. [18] benchmark, RealMLP performs worse than CatBoost for classification and comparably for regression, while RealTabR-D performs comparably to CatBoost-TD for classification
+    and better for regression.
+  benchmark: holzmuller2024-grinsztajn
+- winner: RealTabR-D
+  loser: CatBoost-TD
+  basis: Grinsztajn et al. regression benchmark under this paper's protocol (Figure 2).
+  location: Section 5
+  page: 9
+  quote: On the Grinsztajn et al. [18] benchmark, RealMLP performs worse than CatBoost for classification and comparably for regression, while RealTabR-D performs comparably to CatBoost-TD for classification
+    and better for regression.
+  benchmark: holzmuller2024-grinsztajn
+- winner: RealTabR-D
+  loser: RealMLP-TD
+  basis: Four out of six benchmarks, especially all regression benchmarks (Figure 2).
+  location: Section 5
+  page: 9
+  quote: RealTabR-D performs even better on four out of six benchmarks, especially all regression benchmarks.
+- winner: RealMLP-HPO
+  loser: Best-D (best of library-default XGB, LGBM, CatBoost, MLP-PLR)
+  basis: Benchmark scores in Figure 2 ('often').
+  location: Section 5
+  page: 10
+  quote: Best-D is often outperformed by RealMLP-HPO.
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Aggregate results are figures (Figures 2, 3); recorded as relations. Appendix D (Tables D.1-D.12) contains per-dataset errors for all methods and could be extracted mechanically in the future;
+    not recorded yet. The 'link' doi in links is the code/data archive stated in the paper, not the paper's DOI. The first author is also a TabArena author (see arxiv-2506.16791 c22).

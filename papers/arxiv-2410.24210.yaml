@@ -1,0 +1,248 @@
+id: arxiv-2410.24210
+title: 'TabM: Advancing Tabular Deep Learning with Parameter-Efficient Ensembling'
+authors:
+- Yury Gorishniy
+- Akim Kotelnikov
+- Artem Babenko
+year: 2025
+venue: ICLR 2025
+links:
+  arxiv: https://arxiv.org/abs/2410.24210
+  code: https://github.com/yandex-research/tabm
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a6988aa10d726e99c706dc92856c5a07f4e3f9fa854d08c8f854f06dc83ea34f
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-mlp
+  - tabular-attention
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- TabM
+- TabM-mini
+claims:
+- id: c1
+  statement: TabM showed the best performance among tabular deep learning models.
+  location: Abstract
+  page: 1
+  quote: In particular, we find that TabM demonstrates the best performance among tabular DL models.
+- id: c2
+  statement: MLP-based models, including TabM, are stronger and more practical than attention- and retrieval-based architectures.
+  location: Abstract
+  page: 1
+  quote: Generally, we show that MLPs, including TabM, form a line of stronger and more practical models compared to attention- and retrieval-based architectures.
+- id: c3
+  statement: TabM's multiple predictions are weak individually but powerful collectively.
+  location: Abstract
+  page: 1
+  quote: We observe that the multiple predictions of TabM are weak individually, but powerful collectively.
+- id: c4
+  statement: A plain MLP with BatchEnsemble already outperforms attention-based models such as FT-Transformer.
+  location: Section 1
+  page: 2
+  quote: MLP coupled with BatchEnsemble (Wen et al., 2020) — a long-existing method — right away outperforms popular attention-based models, such as FT-Transformer
+- id: c5
+  statement: TabM competes with GBDT and outperforms prior tabular DL models while being more efficient.
+  location: Section 1
+  page: 2
+  quote: TabM easily competes with GBDT and outperforms prior tabular DL models
+- id: c6
+  statement: The benchmark has 46 public datasets from prior work (incl. Grinsztajn et al., TabR, TabReD).
+  location: Section 3.1
+  page: 3
+  quote: Our benchmark consists of 46 publicly available datasets used in prior work
+- id: c7
+  statement: Datasets with domain-aware (e.g. time-based) splits exhibit distribution shift and are challenging for some methods.
+  location: Section 3.1
+  page: 3
+  quote: Such datasets were shown to be challenging for some methods because they naturally exhibit a certain degree of distribution shift between training and test parts
+- id: c8
+  statement: 'Protocol: tune on validation, retrain the tuned model under multiple seeds, report the test metric averaged over seeds.'
+  location: Section 3.1
+  page: 3
+  quote: a given model undergoes hyperparameter tuning on the validation set, then the tuned model is trained from scratch under multiple random seeds, and the test metric averaged over the random seeds
+    becomes the final score of the model on the dataset.
+- id: c9
+  statement: The ensemble size k is fixed at 32 and not tuned.
+  location: Section 3.3
+  page: 6
+  quote: We heuristically set k = 32 and do not tune this value.
+- id: c10
+  statement: Weight sharing among the implicit MLPs acts as an effective regularizer on tabular tasks.
+  location: Section 3.3
+  page: 5
+  quote: Thus, constraining the ensemble with weight sharing turns out to be a highly effective regularization on tabular tasks.
+- id: c11
+  statement: The two key reasons for TabM's performance are simultaneous training of the implicit MLPs and weight sharing.
+  location: Section 1
+  page: 2
+  quote: the two key reasons for TabM's high performance are the collective training of the underlying implicit MLPs and the weight sharing.
+- id: c12
+  statement: Many DL methods are no better, or worse, than a plain MLP on a non-negligible number of datasets.
+  location: Section 4.2
+  page: 7
+  quote: many DL methods turn out to be no better or even worse than MLP on a non-negligible number of datasets
+- id: c13
+  statement: Simple MLPs are the fastest DL models and TabM is the runner-up; attention- and retrieval-based models are much slower.
+  location: Section 4.3
+  page: 8
+  quote: Simple MLPs are the fastest DL models, with TabM being the runner-up.
+- id: c14
+  statement: On large datasets, attention- and retrieval-based models need extremely long training or are inapplicable without extra effort.
+  location: Section 4.3
+  page: 8
+  quote: As expected, attention- and retrieval-based models struggle, yielding extremely long training times, or being simply inapplicable without additional effort.
+- id: c15
+  statement: Even the best individual submodel of TabM is no better than a simple MLP.
+  location: Section 5.1
+  page: 9
+  quote: individually, even the best submodel of TabM is no better than a simple MLP.
+- id: c16
+  statement: TabM's strength comes from the collective prediction of weak but diverse submodels.
+  location: Section 5.1
+  page: 9
+  quote: TabM draws its power from the collective prediction of weak, but diverse submodels.
+- id: c17
+  statement: Too large k can be detrimental.
+  location: Section 5.3
+  page: 10
+  quote: too high values of k can be detrimental.
+- id: c18
+  statement: MLP with piecewise-linear embeddings (MLP†) is a decent practical option between a plain MLP and TabM.
+  location: Section 4.2
+  page: 7
+  quote: MLP† seems to be a decent practical option between the plain MLP and TabM
+- id: c19
+  statement: Variants with AMP and torch.compile (marked ∗) showcase efficiency and should not be directly compared to other DL models.
+  location: Section 4.3
+  page: 8
+  quote: they should not be directly compared to other DL models.
+- id: c20
+  statement: 'Metrics: RMSE for regression; accuracy or ROC-AUC for classification depending on the dataset source.'
+  location: Section 3.1
+  page: 3
+  quote: We use RMSE (the root mean square error) for regression tasks, and accuracy or ROC-AUC for classification tasks depending on the dataset source.
+results:
+- id: r1
+  benchmark: gorishniy2025-maps-routing
+  method: XGBoost
+  metric: rmse
+  value: 0.1601
+  location: Table 2
+  page: 8
+  quote: Maps Routing 6.5M 986 0.1601 0.1592 0.1583 0.1582 0.1594 OOM
+- id: r2
+  benchmark: gorishniy2025-maps-routing
+  method: MLP
+  metric: rmse
+  value: 0.1592
+  location: Table 2
+  page: 8
+  quote: Maps Routing 6.5M 986 0.1601 0.1592 0.1583 0.1582 0.1594 OOM
+- id: r3
+  benchmark: gorishniy2025-maps-routing
+  method: TabM-mini† (shared batches, AMP + torch.compile)
+  metric: rmse
+  value: 0.1583
+  location: Table 2
+  page: 8
+  quote: Maps Routing 6.5M 986 0.1601 0.1592 0.1583 0.1582 0.1594 OOM
+  note: Efficiency-optimized variant; the paper says it should not be directly compared to other DL models (c19).
+- id: r4
+  benchmark: gorishniy2025-maps-routing
+  method: TabM-mini†
+  metric: rmse
+  value: 0.1582
+  location: Table 2
+  page: 8
+  quote: Maps Routing 6.5M 986 0.1601 0.1592 0.1583 0.1582 0.1594 OOM
+- id: r5
+  benchmark: gorishniy2025-maps-routing
+  method: FT-Transformer
+  metric: rmse
+  value: 0.1594
+  location: Table 2
+  page: 8
+  quote: Maps Routing 6.5M 986 0.1601 0.1592 0.1583 0.1582 0.1594 OOM
+- id: r6
+  benchmark: gorishniy2025-weather
+  method: XGBoost
+  metric: rmse
+  value: 1.4234
+  location: Table 2
+  page: 8
+  quote: Weather 13M 103 1.4234 1.4842 1.4090 1.4112 1.4409 OOM
+- id: r7
+  benchmark: gorishniy2025-weather
+  method: MLP
+  metric: rmse
+  value: 1.4842
+  location: Table 2
+  page: 8
+  quote: Weather 13M 103 1.4234 1.4842 1.4090 1.4112 1.4409 OOM
+- id: r8
+  benchmark: gorishniy2025-weather
+  method: TabM-mini† (shared batches, AMP + torch.compile)
+  metric: rmse
+  value: 1.409
+  location: Table 2
+  page: 8
+  quote: Weather 13M 103 1.4234 1.4842 1.4090 1.4112 1.4409 OOM
+  note: Efficiency-optimized variant; the paper says it should not be directly compared to other DL models (c19).
+- id: r9
+  benchmark: gorishniy2025-weather
+  method: TabM-mini†
+  metric: rmse
+  value: 1.4112
+  location: Table 2
+  page: 8
+  quote: Weather 13M 103 1.4234 1.4842 1.4090 1.4112 1.4409 OOM
+- id: r10
+  benchmark: gorishniy2025-weather
+  method: FT-Transformer
+  metric: rmse
+  value: 1.4409
+  location: Table 2
+  page: 8
+  quote: Weather 13M 103 1.4234 1.4842 1.4090 1.4112 1.4409 OOM
+relations:
+- winner: TabM
+  loser: Other tabular DL models (MLP, FT-T, SAINT, T2G, Excel, TabR, ModernNCA and embedding variants)
+  basis: Mean performance rank over the 46 datasets (Figure 3); GBDTs are also in the figure but the statement is about DL models.
+  benchmark: gorishniy2025-46-datasets
+  location: Section 4.2
+  page: 7
+  quote: The performance ranks render TabM as the top-tier DL model.
+- winner: TabM-packed (MLP + Packed-Ensemble)
+  loser: MLPxk (deep ensemble of independently trained MLPs)
+  basis: Figure 2, tuned models on 46 datasets.
+  benchmark: gorishniy2025-46-datasets
+  location: Section 3.3
+  page: 5
+  quote: TabMpacked delivers significantly better performance compared to MLP×k.
+- winner: TabM-naive (MLP + BatchEnsemble)
+  loser: TabM-packed
+  basis: Figure 2, tuned models on 46 datasets.
+  benchmark: gorishniy2025-46-datasets
+  location: Section 3.3
+  page: 5
+  quote: Interestingly, Figure 2 reports higher performance of TabMnaive compared to TabMpacked.
+- winner: MLPxk (deep ensemble)
+  loser: FT-Transformer
+  basis: Figure 2, tuned models on 46 datasets.
+  benchmark: gorishniy2025-46-datasets
+  location: Section 3.3
+  page: 4
+  quote: Notably, the results are already better and more stable than those of FT-Transformer
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Main comparisons (Figures 2, 3: ranks and relative improvement over MLP on 46 datasets) are figures; recorded as relations. Table 2 (two large datasets) RMSE values extracted mechanically; training
+    times in Table 2 were not recorded (strings such as ''13.5h''). TabR is OOM on both large datasets. Per-dataset appendix tables were not recorded.'

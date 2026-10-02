@@ -95,7 +95,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 490.18 ± 1.19
+  quote: XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80
 - id: r2
   benchmark: shwartzziv2021-covertype
   method: XGBoost
@@ -105,7 +105,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 3.13 ± 0.09
+  quote: XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80
 - id: r3
   benchmark: shwartzziv2021-higgs
   method: XGBoost
@@ -115,7 +115,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 21.62 ± 0.33
+  quote: XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80
 - id: r4
   benchmark: shwartzziv2021-gas-concentrations
   method: XGBoost
@@ -125,7 +125,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 2.18 ± 0.20
+  quote: XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80
 - id: r5
   benchmark: shwartzziv2021-eye-movements
   method: XGBoost
@@ -135,7 +135,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 56.07±0.65
+  quote: XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80
 - id: r6
   benchmark: shwartzziv2021-gesture-phase
   method: XGBoost
@@ -145,7 +145,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 80.64 ± 0.80
+  quote: XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80
 - id: r7
   benchmark: shwartzziv2021-rossmann
   method: NODE
@@ -155,7 +155,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 488.59 ± 1.24
+  quote: NODE 488.59 ± 1.24 4.15 ± 0.13 21.19 ± 0.69 2.17 ± 0.18 68.35 ± 0.66 92.12 ± 0.82
 - id: r8
   benchmark: shwartzziv2021-covertype
   method: NODE
@@ -165,7 +165,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 4.15 ± 0.13
+  quote: NODE 488.59 ± 1.24 4.15 ± 0.13 21.19 ± 0.69 2.17 ± 0.18 68.35 ± 0.66 92.12 ± 0.82
 - id: r9
   benchmark: shwartzziv2021-higgs
   method: NODE
@@ -175,7 +175,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 21.19 ± 0.69
+  quote: NODE 488.59 ± 1.24 4.15 ± 0.13 21.19 ± 0.69 2.17 ± 0.18 68.35 ± 0.66 92.12 ± 0.82
 - id: r10
   benchmark: shwartzziv2021-gas-concentrations
   method: NODE
@@ -185,7 +185,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 2.17 ± 0.18
+  quote: NODE 488.59 ± 1.24 4.15 ± 0.13 21.19 ± 0.69 2.17 ± 0.18 68.35 ± 0.66 92.12 ± 0.82
 - id: r11
   benchmark: shwartzziv2021-eye-movements
   method: NODE
@@ -195,7 +195,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 68.35 ± 0.66
+  quote: NODE 488.59 ± 1.24 4.15 ± 0.13 21.19 ± 0.69 2.17 ± 0.18 68.35 ± 0.66 92.12 ± 0.82
 - id: r12
   benchmark: shwartzziv2021-gesture-phase
   method: NODE
@@ -205,7 +205,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 92.12 ± 0.82
+  quote: NODE 488.59 ± 1.24 4.15 ± 0.13 21.19 ± 0.69 2.17 ± 0.18 68.35 ± 0.66 92.12 ± 0.82
 - id: r13
   benchmark: shwartzziv2021-rossmann
   method: DNF-Net
@@ -215,7 +215,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 503.83 ± 1.41
+  quote: DNF-Net 503.83 ± 1.41 3.96 ± 0.11 23.68 ± 0.83 1.44 ±0.09 68.38 ± 0.65 86.98 ± 0.74
 - id: r14
   benchmark: shwartzziv2021-covertype
   method: DNF-Net
@@ -225,7 +225,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 3.96 ± 0.11
+  quote: DNF-Net 503.83 ± 1.41 3.96 ± 0.11 23.68 ± 0.83 1.44 ±0.09 68.38 ± 0.65 86.98 ± 0.74
 - id: r15
   benchmark: shwartzziv2021-higgs
   method: DNF-Net
@@ -235,7 +235,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 23.68 ± 0.83
+  quote: DNF-Net 503.83 ± 1.41 3.96 ± 0.11 23.68 ± 0.83 1.44 ±0.09 68.38 ± 0.65 86.98 ± 0.74
 - id: r16
   benchmark: shwartzziv2021-gas-concentrations
   method: DNF-Net
@@ -245,7 +245,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 1.44 ±0.09
+  quote: DNF-Net 503.83 ± 1.41 3.96 ± 0.11 23.68 ± 0.83 1.44 ±0.09 68.38 ± 0.65 86.98 ± 0.74
 - id: r17
   benchmark: shwartzziv2021-eye-movements
   method: DNF-Net
@@ -255,7 +255,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 68.38 ± 0.65
+  quote: DNF-Net 503.83 ± 1.41 3.96 ± 0.11 23.68 ± 0.83 1.44 ±0.09 68.38 ± 0.65 86.98 ± 0.74
 - id: r18
   benchmark: shwartzziv2021-gesture-phase
   method: DNF-Net
@@ -265,7 +265,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 86.98 ± 0.74
+  quote: DNF-Net 503.83 ± 1.41 3.96 ± 0.11 23.68 ± 0.83 1.44 ±0.09 68.38 ± 0.65 86.98 ± 0.74
 - id: r19
   benchmark: shwartzziv2021-rossmann
   method: TabNet
@@ -275,7 +275,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 485.12±1.93
+  quote: TabNet 485.12±1.93 3.01 ± 0.08 21.14±0.20 1.92 ± 0.14 67.13 ± 0.69 96.42 ± 0.87
 - id: r20
   benchmark: shwartzziv2021-covertype
   method: TabNet
@@ -285,7 +285,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 3.01 ± 0.08
+  quote: TabNet 485.12±1.93 3.01 ± 0.08 21.14±0.20 1.92 ± 0.14 67.13 ± 0.69 96.42 ± 0.87
 - id: r21
   benchmark: shwartzziv2021-higgs
   method: TabNet
@@ -295,7 +295,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 21.14±0.20
+  quote: TabNet 485.12±1.93 3.01 ± 0.08 21.14±0.20 1.92 ± 0.14 67.13 ± 0.69 96.42 ± 0.87
 - id: r22
   benchmark: shwartzziv2021-gas-concentrations
   method: TabNet
@@ -305,7 +305,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 1.92 ± 0.14
+  quote: TabNet 485.12±1.93 3.01 ± 0.08 21.14±0.20 1.92 ± 0.14 67.13 ± 0.69 96.42 ± 0.87
 - id: r23
   benchmark: shwartzziv2021-eye-movements
   method: TabNet
@@ -315,7 +315,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 67.13 ± 0.69
+  quote: TabNet 485.12±1.93 3.01 ± 0.08 21.14±0.20 1.92 ± 0.14 67.13 ± 0.69 96.42 ± 0.87
 - id: r24
   benchmark: shwartzziv2021-gesture-phase
   method: TabNet
@@ -325,7 +325,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 96.42 ± 0.87
+  quote: TabNet 485.12±1.93 3.01 ± 0.08 21.14±0.20 1.92 ± 0.14 67.13 ± 0.69 96.42 ± 0.87
 - id: r25
   benchmark: shwartzziv2021-rossmann
   method: 1D-CNN
@@ -335,7 +335,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 493.81 ± 2.23
+  quote: 1D-CNN 493.81 ± 2.23 3.51 ± 0.13 22.33 ± 0.73 1.79 ± 0.19 67.9 ± 0.64 97.89 ± 0.82
 - id: r26
   benchmark: shwartzziv2021-covertype
   method: 1D-CNN
@@ -345,7 +345,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 3.51 ± 0.13
+  quote: 1D-CNN 493.81 ± 2.23 3.51 ± 0.13 22.33 ± 0.73 1.79 ± 0.19 67.9 ± 0.64 97.89 ± 0.82
 - id: r27
   benchmark: shwartzziv2021-higgs
   method: 1D-CNN
@@ -355,7 +355,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 22.33 ± 0.73
+  quote: 1D-CNN 493.81 ± 2.23 3.51 ± 0.13 22.33 ± 0.73 1.79 ± 0.19 67.9 ± 0.64 97.89 ± 0.82
 - id: r28
   benchmark: shwartzziv2021-gas-concentrations
   method: 1D-CNN
@@ -365,7 +365,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 1.79 ± 0.19
+  quote: 1D-CNN 493.81 ± 2.23 3.51 ± 0.13 22.33 ± 0.73 1.79 ± 0.19 67.9 ± 0.64 97.89 ± 0.82
 - id: r29
   benchmark: shwartzziv2021-eye-movements
   method: 1D-CNN
@@ -375,7 +375,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 67.9 ± 0.64
+  quote: 1D-CNN 493.81 ± 2.23 3.51 ± 0.13 22.33 ± 0.73 1.79 ± 0.19 67.9 ± 0.64 97.89 ± 0.82
 - id: r30
   benchmark: shwartzziv2021-gesture-phase
   method: 1D-CNN
@@ -385,7 +385,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 97.89 ± 0.82
+  quote: 1D-CNN 493.81 ± 2.23 3.51 ± 0.13 22.33 ± 0.73 1.79 ± 0.19 67.9 ± 0.64 97.89 ± 0.82
 - id: r31
   benchmark: shwartzziv2021-rossmann
   method: Simple Ensemble
@@ -395,7 +395,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 488.57 ± 2.14
+  quote: Simple Ensemble 488.57 ± 2.14 3.19 ± 0.18 22.46 ± 0.38 2.36 ± 0.13 58.72 ± 0.67 89.45 ± 0.89
 - id: r32
   benchmark: shwartzziv2021-covertype
   method: Simple Ensemble
@@ -405,7 +405,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 3.19 ± 0.18
+  quote: Simple Ensemble 488.57 ± 2.14 3.19 ± 0.18 22.46 ± 0.38 2.36 ± 0.13 58.72 ± 0.67 89.45 ± 0.89
 - id: r33
   benchmark: shwartzziv2021-higgs
   method: Simple Ensemble
@@ -415,7 +415,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 22.46 ± 0.38
+  quote: Simple Ensemble 488.57 ± 2.14 3.19 ± 0.18 22.46 ± 0.38 2.36 ± 0.13 58.72 ± 0.67 89.45 ± 0.89
 - id: r34
   benchmark: shwartzziv2021-gas-concentrations
   method: Simple Ensemble
@@ -425,7 +425,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 2.36 ± 0.13
+  quote: Simple Ensemble 488.57 ± 2.14 3.19 ± 0.18 22.46 ± 0.38 2.36 ± 0.13 58.72 ± 0.67 89.45 ± 0.89
 - id: r35
   benchmark: shwartzziv2021-eye-movements
   method: Simple Ensemble
@@ -435,7 +435,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 58.72 ± 0.67
+  quote: Simple Ensemble 488.57 ± 2.14 3.19 ± 0.18 22.46 ± 0.38 2.36 ± 0.13 58.72 ± 0.67 89.45 ± 0.89
 - id: r36
   benchmark: shwartzziv2021-gesture-phase
   method: Simple Ensemble
@@ -445,7 +445,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 89.45 ± 0.89
+  quote: Simple Ensemble 488.57 ± 2.14 3.19 ± 0.18 22.46 ± 0.38 2.36 ± 0.13 58.72 ± 0.67 89.45 ± 0.89
 - id: r37
   benchmark: shwartzziv2021-rossmann
   method: Deep Ensemble w/o XGBoost
@@ -455,7 +455,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 489.94 ± 2.09
+  quote: Deep Ensemble w/o XGBoost 489.94 ± 2.09 3.52 ± 0.10 22.41 ± 0.54 1.98 ± 0.13 69.28 ± 0.62 93.50 ± 0.75
 - id: r38
   benchmark: shwartzziv2021-covertype
   method: Deep Ensemble w/o XGBoost
@@ -465,7 +465,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 3.52 ± 0.10
+  quote: Deep Ensemble w/o XGBoost 489.94 ± 2.09 3.52 ± 0.10 22.41 ± 0.54 1.98 ± 0.13 69.28 ± 0.62 93.50 ± 0.75
 - id: r39
   benchmark: shwartzziv2021-higgs
   method: Deep Ensemble w/o XGBoost
@@ -475,7 +475,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 22.41 ± 0.54
+  quote: Deep Ensemble w/o XGBoost 489.94 ± 2.09 3.52 ± 0.10 22.41 ± 0.54 1.98 ± 0.13 69.28 ± 0.62 93.50 ± 0.75
 - id: r40
   benchmark: shwartzziv2021-gas-concentrations
   method: Deep Ensemble w/o XGBoost
@@ -485,7 +485,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 1.98 ± 0.13
+  quote: Deep Ensemble w/o XGBoost 489.94 ± 2.09 3.52 ± 0.10 22.41 ± 0.54 1.98 ± 0.13 69.28 ± 0.62 93.50 ± 0.75
 - id: r41
   benchmark: shwartzziv2021-eye-movements
   method: Deep Ensemble w/o XGBoost
@@ -495,7 +495,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 69.28 ± 0.62
+  quote: Deep Ensemble w/o XGBoost 489.94 ± 2.09 3.52 ± 0.10 22.41 ± 0.54 1.98 ± 0.13 69.28 ± 0.62 93.50 ± 0.75
 - id: r42
   benchmark: shwartzziv2021-gesture-phase
   method: Deep Ensemble w/o XGBoost
@@ -505,7 +505,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 93.50 ± 0.75
+  quote: Deep Ensemble w/o XGBoost 489.94 ± 2.09 3.52 ± 0.10 22.41 ± 0.54 1.98 ± 0.13 69.28 ± 0.62 93.50 ± 0.75
 - id: r43
   benchmark: shwartzziv2021-rossmann
   method: Deep Ensemble w XGBoost
@@ -515,7 +515,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 485.33 ± 1.29
+  quote: Deep Ensemble w XGBoost 485.33 ± 1.29 2.99 ±0.08 22.34 ± 0.81 1.69 ± 0.10 59.43 ± 0.60 78.93 ±0.73
 - id: r44
   benchmark: shwartzziv2021-covertype
   method: Deep Ensemble w XGBoost
@@ -525,7 +525,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 2.99 ±0.08
+  quote: Deep Ensemble w XGBoost 485.33 ± 1.29 2.99 ±0.08 22.34 ± 0.81 1.69 ± 0.10 59.43 ± 0.60 78.93 ±0.73
 - id: r45
   benchmark: shwartzziv2021-higgs
   method: Deep Ensemble w XGBoost
@@ -535,7 +535,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 22.34 ± 0.81
+  quote: Deep Ensemble w XGBoost 485.33 ± 1.29 2.99 ±0.08 22.34 ± 0.81 1.69 ± 0.10 59.43 ± 0.60 78.93 ±0.73
 - id: r46
   benchmark: shwartzziv2021-gas-concentrations
   method: Deep Ensemble w XGBoost
@@ -545,7 +545,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 1.69 ± 0.10
+  quote: Deep Ensemble w XGBoost 485.33 ± 1.29 2.99 ±0.08 22.34 ± 0.81 1.69 ± 0.10 59.43 ± 0.60 78.93 ±0.73
 - id: r47
   benchmark: shwartzziv2021-eye-movements
   method: Deep Ensemble w XGBoost
@@ -555,7 +555,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 59.43 ± 0.60
+  quote: Deep Ensemble w XGBoost 485.33 ± 1.29 2.99 ±0.08 22.34 ± 0.81 1.69 ± 0.10 59.43 ± 0.60 78.93 ±0.73
 - id: r48
   benchmark: shwartzziv2021-gesture-phase
   method: Deep Ensemble w XGBoost
@@ -565,7 +565,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 78.93 ±0.73
+  quote: Deep Ensemble w XGBoost 485.33 ± 1.29 2.99 ±0.08 22.34 ± 0.81 1.69 ± 0.10 59.43 ± 0.60 78.93 ±0.73
 - id: r49
   benchmark: shwartzziv2021-yearprediction
   method: XGBoost
@@ -575,7 +575,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 77.98 ± 0.11
+  quote: XGBoost 77.98 ± 0.11 55.43±2e-2 11.12±3e-2 13.82 ± 0.19 20.39 ± 0.21
 - id: r50
   benchmark: shwartzziv2021-mslr-web10k
   method: XGBoost
@@ -585,7 +585,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 55.43±2e-2
+  quote: XGBoost 77.98 ± 0.11 55.43±2e-2 11.12±3e-2 13.82 ± 0.19 20.39 ± 0.21
 - id: r51
   benchmark: shwartzziv2021-epsilon
   method: XGBoost
@@ -595,7 +595,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 11.12±3e-2
+  quote: XGBoost 77.98 ± 0.11 55.43±2e-2 11.12±3e-2 13.82 ± 0.19 20.39 ± 0.21
 - id: r52
   benchmark: shwartzziv2021-shrutime
   method: XGBoost
@@ -605,7 +605,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 13.82 ± 0.19
+  quote: XGBoost 77.98 ± 0.11 55.43±2e-2 11.12±3e-2 13.82 ± 0.19 20.39 ± 0.21
 - id: r53
   benchmark: shwartzziv2021-blastchar
   method: XGBoost
@@ -615,7 +615,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 20.39 ± 0.21
+  quote: XGBoost 77.98 ± 0.11 55.43±2e-2 11.12±3e-2 13.82 ± 0.19 20.39 ± 0.21
 - id: r54
   benchmark: shwartzziv2021-yearprediction
   method: NODE
@@ -625,7 +625,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 76.39 ± 0.13
+  quote: NODE 76.39 ± 0.13 55.72±3e-2 10.39±1e-2 14.61 ± 0.10 21.40 ± 0.25
 - id: r55
   benchmark: shwartzziv2021-mslr-web10k
   method: NODE
@@ -635,7 +635,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 55.72±3e-2
+  quote: NODE 76.39 ± 0.13 55.72±3e-2 10.39±1e-2 14.61 ± 0.10 21.40 ± 0.25
 - id: r56
   benchmark: shwartzziv2021-epsilon
   method: NODE
@@ -645,7 +645,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 10.39±1e-2
+  quote: NODE 76.39 ± 0.13 55.72±3e-2 10.39±1e-2 14.61 ± 0.10 21.40 ± 0.25
 - id: r57
   benchmark: shwartzziv2021-shrutime
   method: NODE
@@ -655,7 +655,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 14.61 ± 0.10
+  quote: NODE 76.39 ± 0.13 55.72±3e-2 10.39±1e-2 14.61 ± 0.10 21.40 ± 0.25
 - id: r58
   benchmark: shwartzziv2021-blastchar
   method: NODE
@@ -665,7 +665,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 21.40 ± 0.25
+  quote: NODE 76.39 ± 0.13 55.72±3e-2 10.39±1e-2 14.61 ± 0.10 21.40 ± 0.25
 - id: r59
   benchmark: shwartzziv2021-yearprediction
   method: DNF-Net
@@ -675,7 +675,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 81.21 ± 0.18
+  quote: DNF-Net 81.21 ± 0.18 56.83±3e-2 12.23±4e-2 16.8 ± 0.09 27.91 ± 0.17
 - id: r60
   benchmark: shwartzziv2021-mslr-web10k
   method: DNF-Net
@@ -685,7 +685,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 56.83±3e-2
+  quote: DNF-Net 81.21 ± 0.18 56.83±3e-2 12.23±4e-2 16.8 ± 0.09 27.91 ± 0.17
 - id: r61
   benchmark: shwartzziv2021-epsilon
   method: DNF-Net
@@ -695,7 +695,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 12.23±4e-2
+  quote: DNF-Net 81.21 ± 0.18 56.83±3e-2 12.23±4e-2 16.8 ± 0.09 27.91 ± 0.17
 - id: r62
   benchmark: shwartzziv2021-shrutime
   method: DNF-Net
@@ -705,7 +705,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 16.8 ± 0.09
+  quote: DNF-Net 81.21 ± 0.18 56.83±3e-2 12.23±4e-2 16.8 ± 0.09 27.91 ± 0.17
 - id: r63
   benchmark: shwartzziv2021-blastchar
   method: DNF-Net
@@ -715,7 +715,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 27.91 ± 0.17
+  quote: DNF-Net 81.21 ± 0.18 56.83±3e-2 12.23±4e-2 16.8 ± 0.09 27.91 ± 0.17
 - id: r64
   benchmark: shwartzziv2021-yearprediction
   method: TabNet
@@ -725,7 +725,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 83.19 ± 0.19
+  quote: TabNet 83.19 ± 0.19 56.04±1e-2 11.92±3e-2 14.94±, 0.13 23.72 ± 0.19
 - id: r65
   benchmark: shwartzziv2021-mslr-web10k
   method: TabNet
@@ -735,7 +735,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 56.04±1e-2
+  quote: TabNet 83.19 ± 0.19 56.04±1e-2 11.92±3e-2 14.94±, 0.13 23.72 ± 0.19
 - id: r66
   benchmark: shwartzziv2021-epsilon
   method: TabNet
@@ -745,7 +745,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 11.92±3e-2
+  quote: TabNet 83.19 ± 0.19 56.04±1e-2 11.92±3e-2 14.94±, 0.13 23.72 ± 0.19
 - id: r67
   benchmark: shwartzziv2021-shrutime
   method: TabNet
@@ -755,7 +755,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 14.94±, 0.13
+  quote: TabNet 83.19 ± 0.19 56.04±1e-2 11.92±3e-2 14.94±, 0.13 23.72 ± 0.19
 - id: r68
   benchmark: shwartzziv2021-blastchar
   method: TabNet
@@ -765,7 +765,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 23.72 ± 0.19
+  quote: TabNet 83.19 ± 0.19 56.04±1e-2 11.92±3e-2 14.94±, 0.13 23.72 ± 0.19
 - id: r69
   benchmark: shwartzziv2021-yearprediction
   method: 1D-CNN
@@ -775,7 +775,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 78.94 ± 0.14
+  quote: 1D-CNN 78.94 ± 0.14 55.97±4e-2 11.08±6e-2 15.31 ± 0.16 24.68 ± 0.22
 - id: r70
   benchmark: shwartzziv2021-mslr-web10k
   method: 1D-CNN
@@ -785,7 +785,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 55.97±4e-2
+  quote: 1D-CNN 78.94 ± 0.14 55.97±4e-2 11.08±6e-2 15.31 ± 0.16 24.68 ± 0.22
 - id: r71
   benchmark: shwartzziv2021-epsilon
   method: 1D-CNN
@@ -795,7 +795,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 11.08±6e-2
+  quote: 1D-CNN 78.94 ± 0.14 55.97±4e-2 11.08±6e-2 15.31 ± 0.16 24.68 ± 0.22
 - id: r72
   benchmark: shwartzziv2021-shrutime
   method: 1D-CNN
@@ -805,7 +805,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 15.31 ± 0.16
+  quote: 1D-CNN 78.94 ± 0.14 55.97±4e-2 11.08±6e-2 15.31 ± 0.16 24.68 ± 0.22
 - id: r73
   benchmark: shwartzziv2021-blastchar
   method: 1D-CNN
@@ -815,7 +815,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 24.68 ± 0.22
+  quote: 1D-CNN 78.94 ± 0.14 55.97±4e-2 11.08±6e-2 15.31 ± 0.16 24.68 ± 0.22
 - id: r74
   benchmark: shwartzziv2021-yearprediction
   method: Simple Ensemble
@@ -825,7 +825,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 78.01 ± 0.17
+  quote: Simple Ensemble 78.01 ± 0.17 55.46±4e-2 11.07±4e-2 13.61±, 0.14 21.18 ± 0.17
 - id: r75
   benchmark: shwartzziv2021-mslr-web10k
   method: Simple Ensemble
@@ -835,7 +835,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 55.46±4e-2
+  quote: Simple Ensemble 78.01 ± 0.17 55.46±4e-2 11.07±4e-2 13.61±, 0.14 21.18 ± 0.17
 - id: r76
   benchmark: shwartzziv2021-epsilon
   method: Simple Ensemble
@@ -845,7 +845,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 11.07±4e-2
+  quote: Simple Ensemble 78.01 ± 0.17 55.46±4e-2 11.07±4e-2 13.61±, 0.14 21.18 ± 0.17
 - id: r77
   benchmark: shwartzziv2021-shrutime
   method: Simple Ensemble
@@ -855,7 +855,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 13.61±, 0.14
+  quote: Simple Ensemble 78.01 ± 0.17 55.46±4e-2 11.07±4e-2 13.61±, 0.14 21.18 ± 0.17
 - id: r78
   benchmark: shwartzziv2021-blastchar
   method: Simple Ensemble
@@ -865,7 +865,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 21.18 ± 0.17
+  quote: Simple Ensemble 78.01 ± 0.17 55.46±4e-2 11.07±4e-2 13.61±, 0.14 21.18 ± 0.17
 - id: r79
   benchmark: shwartzziv2021-yearprediction
   method: Deep Ensemble w/o XGBoost
@@ -875,7 +875,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 78.99 ± 0.11
+  quote: Deep Ensemble w/o XGBoost 78.99 ± 0.11 55.59±3e-2 10.95±1e-2 14.69 ± 0.11 24.25 ± 0.22
 - id: r80
   benchmark: shwartzziv2021-mslr-web10k
   method: Deep Ensemble w/o XGBoost
@@ -885,7 +885,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 55.59±3e-2
+  quote: Deep Ensemble w/o XGBoost 78.99 ± 0.11 55.59±3e-2 10.95±1e-2 14.69 ± 0.11 24.25 ± 0.22
 - id: r81
   benchmark: shwartzziv2021-epsilon
   method: Deep Ensemble w/o XGBoost
@@ -895,7 +895,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 10.95±1e-2
+  quote: Deep Ensemble w/o XGBoost 78.99 ± 0.11 55.59±3e-2 10.95±1e-2 14.69 ± 0.11 24.25 ± 0.22
 - id: r82
   benchmark: shwartzziv2021-shrutime
   method: Deep Ensemble w/o XGBoost
@@ -905,7 +905,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 14.69 ± 0.11
+  quote: Deep Ensemble w/o XGBoost 78.99 ± 0.11 55.59±3e-2 10.95±1e-2 14.69 ± 0.11 24.25 ± 0.22
 - id: r83
   benchmark: shwartzziv2021-blastchar
   method: Deep Ensemble w/o XGBoost
@@ -915,7 +915,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 24.25 ± 0.22
+  quote: Deep Ensemble w/o XGBoost 78.99 ± 0.11 55.59±3e-2 10.95±1e-2 14.69 ± 0.11 24.25 ± 0.22
 - id: r84
   benchmark: shwartzziv2021-yearprediction
   method: Deep Ensemble w XGBoost
@@ -925,7 +925,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 76.19 ±0.21
+  quote: Deep Ensemble w XGBoost 76.19 ±0.21 55.38±1e-2 11.18±1e-2 13.10±0.15 20.18±0.16
 - id: r85
   benchmark: shwartzziv2021-mslr-web10k
   method: Deep Ensemble w XGBoost
@@ -935,7 +935,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 55.38±1e-2
+  quote: Deep Ensemble w XGBoost 76.19 ±0.21 55.38±1e-2 11.18±1e-2 13.10±0.15 20.18±0.16
 - id: r86
   benchmark: shwartzziv2021-epsilon
   method: Deep Ensemble w XGBoost
@@ -945,7 +945,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 11.18±1e-2
+  quote: Deep Ensemble w XGBoost 76.19 ±0.21 55.38±1e-2 11.18±1e-2 13.10±0.15 20.18±0.16
 - id: r87
   benchmark: shwartzziv2021-shrutime
   method: Deep Ensemble w XGBoost
@@ -955,7 +955,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 13.10±0.15
+  quote: Deep Ensemble w XGBoost 76.19 ±0.21 55.38±1e-2 11.18±1e-2 13.10±0.15 20.18±0.16
 - id: r88
   benchmark: shwartzziv2021-blastchar
   method: Deep Ensemble w XGBoost
@@ -965,7 +965,7 @@ results:
   note: std is the standard error of the mean over four runs (Table 2 caption).
   location: Table 2
   page: 6
-  quote: 20.18±0.16
+  quote: Deep Ensemble w XGBoost 76.19 ±0.21 55.38±1e-2 11.18±1e-2 13.10±0.15 20.18±0.16
 - id: r89
   benchmark: shwartzziv2021-unseen-average
   method: XGBoost
@@ -973,7 +973,7 @@ results:
   value: 3.34
   location: Table 3
   page: 7
-  quote: '3.34'
+  quote: XGBoost 3.34
 - id: r90
   benchmark: shwartzziv2021-unseen-average
   method: NODE
@@ -981,7 +981,7 @@ results:
   value: 14.21
   location: Table 3
   page: 7
-  quote: '14.21'
+  quote: NODE 14.21
 - id: r91
   benchmark: shwartzziv2021-unseen-average
   method: DNF-Net
@@ -989,7 +989,7 @@ results:
   value: 11.96
   location: Table 3
   page: 7
-  quote: '11.96'
+  quote: DNF-Net 11.96
 - id: r92
   benchmark: shwartzziv2021-unseen-average
   method: TabNet
@@ -997,7 +997,7 @@ results:
   value: 10.51
   location: Table 3
   page: 7
-  quote: '10.51'
+  quote: TabNet 10.51
 - id: r93
   benchmark: shwartzziv2021-unseen-average
   method: 1D-CNN
@@ -1005,7 +1005,7 @@ results:
   value: 7.56
   location: Table 3
   page: 7
-  quote: '7.56'
+  quote: 1D-CNN 7.56
 - id: r94
   benchmark: shwartzziv2021-unseen-average
   method: Simple Ensemble
@@ -1013,7 +1013,7 @@ results:
   value: 3.15
   location: Table 3
   page: 7
-  quote: '3.15'
+  quote: Simple Ensemble 3.15
 - id: r95
   benchmark: shwartzziv2021-unseen-average
   method: Deep Ensemble w/o XGBoost
@@ -1021,7 +1021,7 @@ results:
   value: 6.91
   location: Table 3
   page: 7
-  quote: '6.91'
+  quote: Deep Ensemble w/o XGBoost 6.91
 - id: r96
   benchmark: shwartzziv2021-unseen-average
   method: Deep Ensemble w XGBoost
@@ -1029,7 +1029,7 @@ results:
   value: 2.32
   location: Table 3
   page: 7
-  quote: '2.32'
+  quote: Deep Ensemble w XGBoost 2.32
 relations: []
 card:
   created_at: '2026-10-02'

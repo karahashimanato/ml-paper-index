@@ -178,3 +178,327 @@ benchmarks:
     higher_is_better: false
     definition: 'Table 3: average relative performance deterioration (%).'
   defined_in: arxiv-2106.03253
+- id: gorishniy2021-ca-single
+  scope: paper-private
+  task: tabular-regression
+  dataset: California Housing
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id001
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ca-ensemble
+  scope: paper-private
+  task: tabular-regression
+  dataset: California Housing
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id001
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ad-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: Adult
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id002
+  - name: accuracy
+    higher_is_better: true
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ad-ensemble
+  scope: paper-private
+  task: tabular-classification
+  dataset: Adult
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id002
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-he-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: Helena
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id003
+  - name: accuracy
+    higher_is_better: true
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-he-ensemble
+  scope: paper-private
+  task: tabular-classification
+  dataset: Helena
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id003
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ja-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: Jannis
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id004
+  - name: accuracy
+    higher_is_better: true
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ja-ensemble
+  scope: paper-private
+  task: tabular-classification
+  dataset: Jannis
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id004
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-hi-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: Higgs Small (OpenML, 98K)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id005
+  - name: accuracy
+    higher_is_better: true
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-hi-ensemble
+  scope: paper-private
+  task: tabular-classification
+  dataset: Higgs Small (OpenML, 98K)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id005
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-al-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: ALOI
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id006
+  - name: accuracy
+    higher_is_better: true
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-al-ensemble
+  scope: paper-private
+  task: tabular-classification
+  dataset: ALOI
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id006
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ep-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: Epsilon
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id007
+  - name: accuracy
+    higher_is_better: true
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ep-ensemble
+  scope: paper-private
+  task: tabular-classification
+  dataset: Epsilon
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id007
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ye-single
+  scope: paper-private
+  task: tabular-regression
+  dataset: Year (YearPrediction MSD)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id008
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ye-ensemble
+  scope: paper-private
+  task: tabular-regression
+  dataset: Year (YearPrediction MSD)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id008
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-co-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: Covertype
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id009
+  - name: accuracy
+    higher_is_better: true
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-co-ensemble
+  scope: paper-private
+  task: tabular-classification
+  dataset: Covertype
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id009
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ya-single
+  scope: paper-private
+  task: tabular-regression
+  dataset: Yahoo LTR (pointwise regression)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id010
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-ya-ensemble
+  scope: paper-private
+  task: tabular-regression
+  dataset: Yahoo LTR (pointwise regression)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id010
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-mi-single
+  scope: paper-private
+  task: tabular-regression
+  dataset: Microsoft MSLR-WEB10K (pointwise regression)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
+  metrics: &id011
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-mi-ensemble
+  scope: paper-private
+  task: tabular-regression
+  dataset: Microsoft MSLR-WEB10K (pointwise regression)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
+  metrics: *id011
+  defined_in: arxiv-2106.11959
+- id: gorishniy2021-avg-rank-single
+  scope: paper-private
+  task: tabular-classification
+  dataset: Average over the 11 datasets of Table 2 (classification and regression)
+  protocol:
+    split: One fixed train/validation/test split per dataset, shared by all algorithms (Section 4.2; sizes in Appendix Table 7).
+    preprocessing: 'Quantile transformation by default; standardization for Helena and ALOI; raw features for Epsilon; regression targets standardized (Section 4.3). XGBoost: one-hot categorical; CatBoost:
+      native categorical; NNs: categorical embeddings.'
+    tuning: Optuna (TPE) with per-model iteration budgets, or predefined configuration grids from the original papers (Section 4.3, Appendices E-F). FT-Transformer untuned on Yahoo and heuristic configurations
+      on Epsilon (Appendix E.2).
+    repetitions: Ranks computed per dataset by sorting the 15-seed mean scores (Table 2 caption).
+  metrics:
+  - name: average-rank
+    higher_is_better: false
+    definition: Average rank across datasets among the 9 DL models of Table 2.
+  defined_in: arxiv-2106.11959

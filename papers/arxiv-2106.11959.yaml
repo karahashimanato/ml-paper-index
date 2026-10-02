@@ -1,0 +1,1718 @@
+id: arxiv-2106.11959
+title: Revisiting Deep Learning Models for Tabular Data
+authors:
+- Yury Gorishniy
+- Ivan Rubachev
+- Valentin Khrulkov
+- Artem Babenko
+year: 2021
+venue: NeurIPS 2021
+links:
+  arxiv: https://arxiv.org/abs/2106.11959
+  code: https://github.com/yandex-research/tabular-dl-revisiting-models
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f2faa32ffd8c15ed8534677f978dc02730fdbe1f94e9c9557ada6aa19163478d
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-attention
+  - tabular-mlp
+  - differentiable-trees
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- FT-Transformer
+- ResNet-like baseline for tabular data
+claims:
+- id: c1
+  statement: None of the considered DL models consistently outperformed the simple ResNet-like baseline.
+  location: Section 1
+  page: 2
+  quote: First, we reveal that none of the considered DL models can consistently outperform the ResNet-like model.
+- id: c2
+  statement: FT-Transformer (proposed) performed best among DL models on most tasks.
+  location: Section 1
+  page: 2
+  quote: Second, FT-Transformer demonstrates the best performance on most tasks and becomes a new powerful solution for the field.
+- id: c3
+  statement: There is no universally superior solution among GBDT and deep models.
+  location: Section 1
+  page: 2
+  quote: We reveal that there is still no universally superior solution among GBDT and deep models.
+- id: c4
+  statement: With tuned hyperparameters, GBDT ensembles dominated on California Housing, Adult and Yahoo.
+  location: Section 4.5
+  page: 8
+  quote: Once hyperparameters are properly tuned, GBDTs start dominating on some datasets (California Housing, Adult, Yahoo; see Table 4).
+- id: c5
+  statement: Authors state that DL winning on most of their datasets reflects a benchmark slightly biased towards DL-friendly problems, not DL being better.
+  location: Section 4.5
+  page: 8
+  quote: it only means that the constructed benchmark is slightly biased towards "DL-friendly" problems.
+- id: c6
+  statement: 'GBDT struggled on multiclass problems with many classes: poor on Helena (100 classes), untunable on ALOI (1000 classes) due to slow training.'
+  location: Section 4.5
+  page: 8
+  quote: GBDT can demonstrate unsatisfactory performance (Helena) or even be untunable due to extremely slow training (ALOI).
+- id: c7
+  statement: Ensembles of default FT-Transformers performed roughly on par with ensembles of tuned FT-Transformers.
+  location: Section 4.5
+  page: 8
+  quote: Interestingly, the ensemble of default FT-Transformers performs quite on par with the ensembles of tuned FT-Transformers.
+- id: c8
+  statement: Tuning made simple models (MLP, ResNet) competitive; authors recommend tuning baselines.
+  location: Section 4.4
+  page: 7
+  quote: Tuning makes simple models such as MLP and ResNet competitive, so we recommend tuning baselines when possible.
+- id: c9
+  statement: FT-Transformer needs more hardware and time than ResNet and may not scale to very many features (attention is quadratic in the number of features).
+  location: Section 3.3 Limitations
+  page: 5
+  quote: FT-Transformer requires more resources (both hardware and time) for training than simple models such as ResNet
+- id: c10
+  statement: NODE was inferior to ResNet on six of the eleven datasets despite being more complex.
+  location: Section 4.4
+  page: 7
+  quote: However, it is still inferior to ResNet on six datasets (Helena, Jannis, Higgs, ALOI, Epsilon, Covertype), while being a more complex solution.
+- id: c11
+  statement: On synthetic targets interpolating between GBDT-friendly and DL-friendly functions, ResNet degraded as targets became GBDT-friendly while FT-Transformer stayed competitive.
+  location: Section 5.1, Figure 3
+  page: 9
+  quote: By contrast, FT-Transformer yields competitive performance across the whole range of tasks.
+- id: c12
+  statement: FT-Transformer was not tuned on Yahoo (default configuration reported) and only heuristic default configurations were tried on Epsilon.
+  location: Appendix E.2
+  page: 18
+  quote: For Yahoo, we did not perform tuning at all, since the default configuration already performed well.
+- id: c13
+  statement: Each tuned configuration was evaluated over 15 random seeds; ensembles are three disjoint groups of 5 models.
+  location: Section 4.3
+  page: 6
+  quote: For each tuned configuration, we run 15 experiments with different random seeds and report the performance on the test set.
+- id: c14
+  statement: XGBoost used one-hot encoding for categorical features; CatBoost used its built-in categorical support.
+  location: Section 4.3
+  page: 6
+  quote: For XGBoost, we use one-hot encoding.
+- id: c15
+  statement: Averaging [CLS] attention maps gave feature-importance rankings comparable to Integrated Gradients at much lower cost.
+  location: Section 5.3
+  page: 10
+  quote: we conclude that the simple averaging of attention maps can be a good choice in terms of cost-effectiveness.
+results:
+- id: r1
+  benchmark: gorishniy2021-ca-single
+  method: TabNet
+  metric: rmse
+  value: 0.51
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r2
+  benchmark: gorishniy2021-ad-single
+  method: TabNet
+  metric: accuracy
+  value: 0.85
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r3
+  benchmark: gorishniy2021-he-single
+  method: TabNet
+  metric: accuracy
+  value: 0.378
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r4
+  benchmark: gorishniy2021-ja-single
+  method: TabNet
+  metric: accuracy
+  value: 0.723
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r5
+  benchmark: gorishniy2021-hi-single
+  method: TabNet
+  metric: accuracy
+  value: 0.719
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r6
+  benchmark: gorishniy2021-al-single
+  method: TabNet
+  metric: accuracy
+  value: 0.954
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r7
+  benchmark: gorishniy2021-ep-single
+  method: TabNet
+  metric: accuracy
+  value: 0.8896
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r8
+  benchmark: gorishniy2021-ye-single
+  method: TabNet
+  metric: rmse
+  value: 8.909
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r9
+  benchmark: gorishniy2021-co-single
+  method: TabNet
+  metric: accuracy
+  value: 0.957
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r10
+  benchmark: gorishniy2021-ya-single
+  method: TabNet
+  metric: rmse
+  value: 0.823
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r11
+  benchmark: gorishniy2021-mi-single
+  method: TabNet
+  metric: rmse
+  value: 0.751
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r12
+  benchmark: gorishniy2021-avg-rank-single
+  method: TabNet
+  metric: average-rank
+  value: 7.5
+  std: 2.0
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)
+- id: r13
+  benchmark: gorishniy2021-ca-single
+  method: SNN
+  metric: rmse
+  value: 0.493
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r14
+  benchmark: gorishniy2021-ad-single
+  method: SNN
+  metric: accuracy
+  value: 0.854
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r15
+  benchmark: gorishniy2021-he-single
+  method: SNN
+  metric: accuracy
+  value: 0.373
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r16
+  benchmark: gorishniy2021-ja-single
+  method: SNN
+  metric: accuracy
+  value: 0.719
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r17
+  benchmark: gorishniy2021-hi-single
+  method: SNN
+  metric: accuracy
+  value: 0.722
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r18
+  benchmark: gorishniy2021-al-single
+  method: SNN
+  metric: accuracy
+  value: 0.954
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r19
+  benchmark: gorishniy2021-ep-single
+  method: SNN
+  metric: accuracy
+  value: 0.8975
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r20
+  benchmark: gorishniy2021-ye-single
+  method: SNN
+  metric: rmse
+  value: 8.895
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r21
+  benchmark: gorishniy2021-co-single
+  method: SNN
+  metric: accuracy
+  value: 0.961
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r22
+  benchmark: gorishniy2021-ya-single
+  method: SNN
+  metric: rmse
+  value: 0.761
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r23
+  benchmark: gorishniy2021-mi-single
+  method: SNN
+  metric: rmse
+  value: 0.751
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r24
+  benchmark: gorishniy2021-avg-rank-single
+  method: SNN
+  metric: average-rank
+  value: 6.4
+  std: 1.4
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: SNN 0.493 0.854 0.373 0.719 0.722 0.954 0.8975 8.895 0.961 0.761 0.751 6.4 (1.4)
+- id: r25
+  benchmark: gorishniy2021-ca-single
+  method: AutoInt
+  metric: rmse
+  value: 0.474
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r26
+  benchmark: gorishniy2021-ad-single
+  method: AutoInt
+  metric: accuracy
+  value: 0.859
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r27
+  benchmark: gorishniy2021-he-single
+  method: AutoInt
+  metric: accuracy
+  value: 0.372
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r28
+  benchmark: gorishniy2021-ja-single
+  method: AutoInt
+  metric: accuracy
+  value: 0.721
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r29
+  benchmark: gorishniy2021-hi-single
+  method: AutoInt
+  metric: accuracy
+  value: 0.725
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r30
+  benchmark: gorishniy2021-al-single
+  method: AutoInt
+  metric: accuracy
+  value: 0.945
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r31
+  benchmark: gorishniy2021-ep-single
+  method: AutoInt
+  metric: accuracy
+  value: 0.8949
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r32
+  benchmark: gorishniy2021-ye-single
+  method: AutoInt
+  metric: rmse
+  value: 8.882
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r33
+  benchmark: gorishniy2021-co-single
+  method: AutoInt
+  metric: accuracy
+  value: 0.934
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r34
+  benchmark: gorishniy2021-ya-single
+  method: AutoInt
+  metric: rmse
+  value: 0.768
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r35
+  benchmark: gorishniy2021-mi-single
+  method: AutoInt
+  metric: rmse
+  value: 0.75
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r36
+  benchmark: gorishniy2021-avg-rank-single
+  method: AutoInt
+  metric: average-rank
+  value: 5.7
+  std: 2.3
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: AutoInt 0.474 0.859 0.372 0.721 0.725 0.945 0.8949 8.882 0.934 0.768 0.750 5.7 (2.3)
+- id: r37
+  benchmark: gorishniy2021-ca-single
+  method: GrowNet
+  metric: rmse
+  value: 0.487
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r38
+  benchmark: gorishniy2021-ad-single
+  method: GrowNet
+  metric: accuracy
+  value: 0.857
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r39
+  benchmark: gorishniy2021-hi-single
+  method: GrowNet
+  metric: accuracy
+  value: 0.722
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r40
+  benchmark: gorishniy2021-ep-single
+  method: GrowNet
+  metric: accuracy
+  value: 0.897
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r41
+  benchmark: gorishniy2021-ye-single
+  method: GrowNet
+  metric: rmse
+  value: 8.827
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r42
+  benchmark: gorishniy2021-ya-single
+  method: GrowNet
+  metric: rmse
+  value: 0.765
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r43
+  benchmark: gorishniy2021-mi-single
+  method: GrowNet
+  metric: rmse
+  value: 0.751
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r44
+  benchmark: gorishniy2021-avg-rank-single
+  method: GrowNet
+  metric: average-rank
+  value: 5.7
+  std: 2.2
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: GrowNet 0.487 0.857 – – 0.722 – 0.8970 8.827 – 0.765 0.751 5.7 (2.2)
+- id: r45
+  benchmark: gorishniy2021-ca-single
+  method: MLP
+  metric: rmse
+  value: 0.499
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r46
+  benchmark: gorishniy2021-ad-single
+  method: MLP
+  metric: accuracy
+  value: 0.852
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r47
+  benchmark: gorishniy2021-he-single
+  method: MLP
+  metric: accuracy
+  value: 0.383
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r48
+  benchmark: gorishniy2021-ja-single
+  method: MLP
+  metric: accuracy
+  value: 0.719
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r49
+  benchmark: gorishniy2021-hi-single
+  method: MLP
+  metric: accuracy
+  value: 0.723
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r50
+  benchmark: gorishniy2021-al-single
+  method: MLP
+  metric: accuracy
+  value: 0.954
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r51
+  benchmark: gorishniy2021-ep-single
+  method: MLP
+  metric: accuracy
+  value: 0.8977
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r52
+  benchmark: gorishniy2021-ye-single
+  method: MLP
+  metric: rmse
+  value: 8.853
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r53
+  benchmark: gorishniy2021-co-single
+  method: MLP
+  metric: accuracy
+  value: 0.962
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r54
+  benchmark: gorishniy2021-ya-single
+  method: MLP
+  metric: rmse
+  value: 0.757
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r55
+  benchmark: gorishniy2021-mi-single
+  method: MLP
+  metric: rmse
+  value: 0.747
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r56
+  benchmark: gorishniy2021-avg-rank-single
+  method: MLP
+  metric: average-rank
+  value: 4.8
+  std: 1.9
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: MLP 0.499 0.852 0.383 0.719 0.723 0.954 0.8977 8.853 0.962 0.757 0.747 4.8 (1.9)
+- id: r57
+  benchmark: gorishniy2021-ca-single
+  method: DCN2
+  metric: rmse
+  value: 0.484
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r58
+  benchmark: gorishniy2021-ad-single
+  method: DCN2
+  metric: accuracy
+  value: 0.853
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r59
+  benchmark: gorishniy2021-he-single
+  method: DCN2
+  metric: accuracy
+  value: 0.385
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r60
+  benchmark: gorishniy2021-ja-single
+  method: DCN2
+  metric: accuracy
+  value: 0.716
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r61
+  benchmark: gorishniy2021-hi-single
+  method: DCN2
+  metric: accuracy
+  value: 0.723
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r62
+  benchmark: gorishniy2021-al-single
+  method: DCN2
+  metric: accuracy
+  value: 0.955
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r63
+  benchmark: gorishniy2021-ep-single
+  method: DCN2
+  metric: accuracy
+  value: 0.8977
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r64
+  benchmark: gorishniy2021-ye-single
+  method: DCN2
+  metric: rmse
+  value: 8.89
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r65
+  benchmark: gorishniy2021-co-single
+  method: DCN2
+  metric: accuracy
+  value: 0.965
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r66
+  benchmark: gorishniy2021-ya-single
+  method: DCN2
+  metric: rmse
+  value: 0.757
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r67
+  benchmark: gorishniy2021-mi-single
+  method: DCN2
+  metric: rmse
+  value: 0.749
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r68
+  benchmark: gorishniy2021-avg-rank-single
+  method: DCN2
+  metric: average-rank
+  value: 4.7
+  std: 2.0
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: DCN2 0.484 0.853 0.385 0.716 0.723 0.955 0.8977 8.890 0.965 0.757 0.749 4.7 (2.0)
+- id: r69
+  benchmark: gorishniy2021-ca-single
+  method: NODE
+  metric: rmse
+  value: 0.464
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r70
+  benchmark: gorishniy2021-ad-single
+  method: NODE
+  metric: accuracy
+  value: 0.858
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r71
+  benchmark: gorishniy2021-he-single
+  method: NODE
+  metric: accuracy
+  value: 0.359
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r72
+  benchmark: gorishniy2021-ja-single
+  method: NODE
+  metric: accuracy
+  value: 0.727
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r73
+  benchmark: gorishniy2021-hi-single
+  method: NODE
+  metric: accuracy
+  value: 0.726
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r74
+  benchmark: gorishniy2021-al-single
+  method: NODE
+  metric: accuracy
+  value: 0.918
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r75
+  benchmark: gorishniy2021-ep-single
+  method: NODE
+  metric: accuracy
+  value: 0.8958
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r76
+  benchmark: gorishniy2021-ye-single
+  method: NODE
+  metric: rmse
+  value: 8.784
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r77
+  benchmark: gorishniy2021-co-single
+  method: NODE
+  metric: accuracy
+  value: 0.958
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r78
+  benchmark: gorishniy2021-ya-single
+  method: NODE
+  metric: rmse
+  value: 0.753
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r79
+  benchmark: gorishniy2021-mi-single
+  method: NODE
+  metric: rmse
+  value: 0.745
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r80
+  benchmark: gorishniy2021-avg-rank-single
+  method: NODE
+  metric: average-rank
+  value: 3.9
+  std: 2.8
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745 3.9 (2.8)
+- id: r81
+  benchmark: gorishniy2021-ca-single
+  method: ResNet
+  metric: rmse
+  value: 0.486
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r82
+  benchmark: gorishniy2021-ad-single
+  method: ResNet
+  metric: accuracy
+  value: 0.854
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r83
+  benchmark: gorishniy2021-he-single
+  method: ResNet
+  metric: accuracy
+  value: 0.396
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r84
+  benchmark: gorishniy2021-ja-single
+  method: ResNet
+  metric: accuracy
+  value: 0.728
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r85
+  benchmark: gorishniy2021-hi-single
+  method: ResNet
+  metric: accuracy
+  value: 0.727
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r86
+  benchmark: gorishniy2021-al-single
+  method: ResNet
+  metric: accuracy
+  value: 0.963
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r87
+  benchmark: gorishniy2021-ep-single
+  method: ResNet
+  metric: accuracy
+  value: 0.8969
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r88
+  benchmark: gorishniy2021-ye-single
+  method: ResNet
+  metric: rmse
+  value: 8.846
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r89
+  benchmark: gorishniy2021-co-single
+  method: ResNet
+  metric: accuracy
+  value: 0.964
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r90
+  benchmark: gorishniy2021-ya-single
+  method: ResNet
+  metric: rmse
+  value: 0.757
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r91
+  benchmark: gorishniy2021-mi-single
+  method: ResNet
+  metric: rmse
+  value: 0.748
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r92
+  benchmark: gorishniy2021-avg-rank-single
+  method: ResNet
+  metric: average-rank
+  value: 3.3
+  std: 1.8
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: ResNet 0.486 0.854 0.396 0.728 0.727 0.963 0.8969 8.846 0.964 0.757 0.748 3.3 (1.8)
+- id: r93
+  benchmark: gorishniy2021-ca-single
+  method: FT-Transformer
+  metric: rmse
+  value: 0.459
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r94
+  benchmark: gorishniy2021-ad-single
+  method: FT-Transformer
+  metric: accuracy
+  value: 0.859
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r95
+  benchmark: gorishniy2021-he-single
+  method: FT-Transformer
+  metric: accuracy
+  value: 0.391
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r96
+  benchmark: gorishniy2021-ja-single
+  method: FT-Transformer
+  metric: accuracy
+  value: 0.732
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r97
+  benchmark: gorishniy2021-hi-single
+  method: FT-Transformer
+  metric: accuracy
+  value: 0.729
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r98
+  benchmark: gorishniy2021-al-single
+  method: FT-Transformer
+  metric: accuracy
+  value: 0.96
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r99
+  benchmark: gorishniy2021-ep-single
+  method: FT-Transformer
+  metric: accuracy
+  value: 0.8982
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r100
+  benchmark: gorishniy2021-ye-single
+  method: FT-Transformer
+  metric: rmse
+  value: 8.855
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r101
+  benchmark: gorishniy2021-co-single
+  method: FT-Transformer
+  metric: accuracy
+  value: 0.97
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r102
+  benchmark: gorishniy2021-ya-single
+  method: FT-Transformer
+  metric: rmse
+  value: 0.756
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r103
+  benchmark: gorishniy2021-mi-single
+  method: FT-Transformer
+  metric: rmse
+  value: 0.746
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r104
+  benchmark: gorishniy2021-avg-rank-single
+  method: FT-Transformer
+  metric: average-rank
+  value: 1.8
+  std: 1.2
+  note: std is the standard deviation of ranks across datasets.
+  location: Table 2
+  page: 7
+  quote: FT-T 0.459 0.859 0.391 0.732 0.729 0.960 0.8982 8.855 0.970 0.756 0.746 1.8 (1.2)
+- id: r105
+  benchmark: gorishniy2021-ca-ensemble
+  method: ResNet (tuned)
+  metric: rmse
+  value: 0.478
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r106
+  benchmark: gorishniy2021-ad-ensemble
+  method: ResNet (tuned)
+  metric: accuracy
+  value: 0.857
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r107
+  benchmark: gorishniy2021-he-ensemble
+  method: ResNet (tuned)
+  metric: accuracy
+  value: 0.398
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r108
+  benchmark: gorishniy2021-ja-ensemble
+  method: ResNet (tuned)
+  metric: accuracy
+  value: 0.734
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r109
+  benchmark: gorishniy2021-hi-ensemble
+  method: ResNet (tuned)
+  metric: accuracy
+  value: 0.731
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r110
+  benchmark: gorishniy2021-al-ensemble
+  method: ResNet (tuned)
+  metric: accuracy
+  value: 0.966
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r111
+  benchmark: gorishniy2021-ep-ensemble
+  method: ResNet (tuned)
+  metric: accuracy
+  value: 0.8976
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r112
+  benchmark: gorishniy2021-ye-ensemble
+  method: ResNet (tuned)
+  metric: rmse
+  value: 8.77
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r113
+  benchmark: gorishniy2021-co-ensemble
+  method: ResNet (tuned)
+  metric: accuracy
+  value: 0.967
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r114
+  benchmark: gorishniy2021-ya-ensemble
+  method: ResNet (tuned)
+  metric: rmse
+  value: 0.751
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r115
+  benchmark: gorishniy2021-mi-ensemble
+  method: ResNet (tuned)
+  metric: rmse
+  value: 0.745
+  location: Table 3
+  page: 7
+  quote: ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745
+- id: r116
+  benchmark: gorishniy2021-ca-ensemble
+  method: FT-Transformer (tuned)
+  metric: rmse
+  value: 0.448
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r117
+  benchmark: gorishniy2021-ad-ensemble
+  method: FT-Transformer (tuned)
+  metric: accuracy
+  value: 0.86
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r118
+  benchmark: gorishniy2021-he-ensemble
+  method: FT-Transformer (tuned)
+  metric: accuracy
+  value: 0.398
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r119
+  benchmark: gorishniy2021-ja-ensemble
+  method: FT-Transformer (tuned)
+  metric: accuracy
+  value: 0.739
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r120
+  benchmark: gorishniy2021-hi-ensemble
+  method: FT-Transformer (tuned)
+  metric: accuracy
+  value: 0.731
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r121
+  benchmark: gorishniy2021-al-ensemble
+  method: FT-Transformer (tuned)
+  metric: accuracy
+  value: 0.967
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r122
+  benchmark: gorishniy2021-ep-ensemble
+  method: FT-Transformer (tuned)
+  metric: accuracy
+  value: 0.8984
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r123
+  benchmark: gorishniy2021-ye-ensemble
+  method: FT-Transformer (tuned)
+  metric: rmse
+  value: 8.751
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r124
+  benchmark: gorishniy2021-co-ensemble
+  method: FT-Transformer (tuned)
+  metric: accuracy
+  value: 0.973
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r125
+  benchmark: gorishniy2021-ya-ensemble
+  method: FT-Transformer (tuned)
+  metric: rmse
+  value: 0.747
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r126
+  benchmark: gorishniy2021-mi-ensemble
+  method: FT-Transformer (tuned)
+  metric: rmse
+  value: 0.743
+  location: Table 3
+  page: 7
+  quote: FT-Transformer 0.448 0.860 0.398 0.739 0.731 0.967 0.8984 8.751 0.973 0.747 0.743
+- id: r127
+  benchmark: gorishniy2021-ca-ensemble
+  method: NODE (tuned)
+  metric: rmse
+  value: 0.464
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r128
+  benchmark: gorishniy2021-ad-ensemble
+  method: NODE (tuned)
+  metric: accuracy
+  value: 0.858
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r129
+  benchmark: gorishniy2021-he-ensemble
+  method: NODE (tuned)
+  metric: accuracy
+  value: 0.359
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r130
+  benchmark: gorishniy2021-ja-ensemble
+  method: NODE (tuned)
+  metric: accuracy
+  value: 0.727
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r131
+  benchmark: gorishniy2021-hi-ensemble
+  method: NODE (tuned)
+  metric: accuracy
+  value: 0.726
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r132
+  benchmark: gorishniy2021-al-ensemble
+  method: NODE (tuned)
+  metric: accuracy
+  value: 0.918
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r133
+  benchmark: gorishniy2021-ep-ensemble
+  method: NODE (tuned)
+  metric: accuracy
+  value: 0.8958
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r134
+  benchmark: gorishniy2021-ye-ensemble
+  method: NODE (tuned)
+  metric: rmse
+  value: 8.784
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r135
+  benchmark: gorishniy2021-co-ensemble
+  method: NODE (tuned)
+  metric: accuracy
+  value: 0.958
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r136
+  benchmark: gorishniy2021-ya-ensemble
+  method: NODE (tuned)
+  metric: rmse
+  value: 0.753
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r137
+  benchmark: gorishniy2021-mi-ensemble
+  method: NODE (tuned)
+  metric: rmse
+  value: 0.745
+  location: Table 3
+  page: 7
+  quote: NODE 0.464 0.858 0.359 0.727 0.726 0.918 0.8958 8.784 0.958 0.753 0.745
+- id: r138
+  benchmark: gorishniy2021-ca-ensemble
+  method: CatBoost (default)
+  metric: rmse
+  value: 0.428
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r139
+  benchmark: gorishniy2021-ad-ensemble
+  method: CatBoost (default)
+  metric: accuracy
+  value: 0.873
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r140
+  benchmark: gorishniy2021-he-ensemble
+  method: CatBoost (default)
+  metric: accuracy
+  value: 0.386
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r141
+  benchmark: gorishniy2021-ja-ensemble
+  method: CatBoost (default)
+  metric: accuracy
+  value: 0.724
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r142
+  benchmark: gorishniy2021-hi-ensemble
+  method: CatBoost (default)
+  metric: accuracy
+  value: 0.728
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r143
+  benchmark: gorishniy2021-al-ensemble
+  method: CatBoost (default)
+  metric: accuracy
+  value: 0.948
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r144
+  benchmark: gorishniy2021-ep-ensemble
+  method: CatBoost (default)
+  metric: accuracy
+  value: 0.8893
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r145
+  benchmark: gorishniy2021-ye-ensemble
+  method: CatBoost (default)
+  metric: rmse
+  value: 8.885
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r146
+  benchmark: gorishniy2021-co-ensemble
+  method: CatBoost (default)
+  metric: accuracy
+  value: 0.91
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r147
+  benchmark: gorishniy2021-ya-ensemble
+  method: CatBoost (default)
+  metric: rmse
+  value: 0.749
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r148
+  benchmark: gorishniy2021-mi-ensemble
+  method: CatBoost (default)
+  metric: rmse
+  value: 0.744
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744
+- id: r149
+  benchmark: gorishniy2021-ca-ensemble
+  method: FT-Transformer (default)
+  metric: rmse
+  value: 0.454
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r150
+  benchmark: gorishniy2021-ad-ensemble
+  method: FT-Transformer (default)
+  metric: accuracy
+  value: 0.86
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r151
+  benchmark: gorishniy2021-he-ensemble
+  method: FT-Transformer (default)
+  metric: accuracy
+  value: 0.395
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r152
+  benchmark: gorishniy2021-ja-ensemble
+  method: FT-Transformer (default)
+  metric: accuracy
+  value: 0.734
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r153
+  benchmark: gorishniy2021-hi-ensemble
+  method: FT-Transformer (default)
+  metric: accuracy
+  value: 0.731
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r154
+  benchmark: gorishniy2021-al-ensemble
+  method: FT-Transformer (default)
+  metric: accuracy
+  value: 0.966
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r155
+  benchmark: gorishniy2021-ep-ensemble
+  method: FT-Transformer (default)
+  metric: accuracy
+  value: 0.8969
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r156
+  benchmark: gorishniy2021-ye-ensemble
+  method: FT-Transformer (default)
+  metric: rmse
+  value: 8.727
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r157
+  benchmark: gorishniy2021-co-ensemble
+  method: FT-Transformer (default)
+  metric: accuracy
+  value: 0.973
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r158
+  benchmark: gorishniy2021-ya-ensemble
+  method: FT-Transformer (default)
+  metric: rmse
+  value: 0.747
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r159
+  benchmark: gorishniy2021-mi-ensemble
+  method: FT-Transformer (default)
+  metric: rmse
+  value: 0.742
+  location: Table 4
+  page: 8
+  quote: FT-Transformer 0.454 0.860 0.395 0.734 0.731 0.966 0.8969 8.727 0.973 0.747 0.742
+- id: r160
+  benchmark: gorishniy2021-ca-ensemble
+  method: XGBoost (default)
+  metric: rmse
+  value: 0.462
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r161
+  benchmark: gorishniy2021-ad-ensemble
+  method: XGBoost (default)
+  metric: accuracy
+  value: 0.874
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r162
+  benchmark: gorishniy2021-he-ensemble
+  method: XGBoost (default)
+  metric: accuracy
+  value: 0.348
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r163
+  benchmark: gorishniy2021-ja-ensemble
+  method: XGBoost (default)
+  metric: accuracy
+  value: 0.711
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r164
+  benchmark: gorishniy2021-hi-ensemble
+  method: XGBoost (default)
+  metric: accuracy
+  value: 0.717
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r165
+  benchmark: gorishniy2021-al-ensemble
+  method: XGBoost (default)
+  metric: accuracy
+  value: 0.924
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r166
+  benchmark: gorishniy2021-ep-ensemble
+  method: XGBoost (default)
+  metric: accuracy
+  value: 0.8799
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r167
+  benchmark: gorishniy2021-ye-ensemble
+  method: XGBoost (default)
+  metric: rmse
+  value: 9.192
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r168
+  benchmark: gorishniy2021-co-ensemble
+  method: XGBoost (default)
+  metric: accuracy
+  value: 0.964
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r169
+  benchmark: gorishniy2021-ya-ensemble
+  method: XGBoost (default)
+  metric: rmse
+  value: 0.761
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r170
+  benchmark: gorishniy2021-mi-ensemble
+  method: XGBoost (default)
+  metric: rmse
+  value: 0.751
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.462 0.874 0.348 0.711 0.717 0.924 0.8799 9.192 0.964 0.761 0.751
+- id: r171
+  benchmark: gorishniy2021-ca-ensemble
+  method: XGBoost (tuned)
+  metric: rmse
+  value: 0.431
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r172
+  benchmark: gorishniy2021-ad-ensemble
+  method: XGBoost (tuned)
+  metric: accuracy
+  value: 0.872
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r173
+  benchmark: gorishniy2021-he-ensemble
+  method: XGBoost (tuned)
+  metric: accuracy
+  value: 0.377
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r174
+  benchmark: gorishniy2021-ja-ensemble
+  method: XGBoost (tuned)
+  metric: accuracy
+  value: 0.724
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r175
+  benchmark: gorishniy2021-hi-ensemble
+  method: XGBoost (tuned)
+  metric: accuracy
+  value: 0.728
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r176
+  benchmark: gorishniy2021-ep-ensemble
+  method: XGBoost (tuned)
+  metric: accuracy
+  value: 0.8861
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r177
+  benchmark: gorishniy2021-ye-ensemble
+  method: XGBoost (tuned)
+  metric: rmse
+  value: 8.819
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r178
+  benchmark: gorishniy2021-co-ensemble
+  method: XGBoost (tuned)
+  metric: accuracy
+  value: 0.969
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r179
+  benchmark: gorishniy2021-ya-ensemble
+  method: XGBoost (tuned)
+  metric: rmse
+  value: 0.732
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r180
+  benchmark: gorishniy2021-mi-ensemble
+  method: XGBoost (tuned)
+  metric: rmse
+  value: 0.742
+  location: Table 4
+  page: 8
+  quote: XGBoost 0.431 0.872 0.377 0.724 0.728 – 0.8861 8.819 0.969 0.732 0.742
+- id: r181
+  benchmark: gorishniy2021-ca-ensemble
+  method: CatBoost (tuned)
+  metric: rmse
+  value: 0.423
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r182
+  benchmark: gorishniy2021-ad-ensemble
+  method: CatBoost (tuned)
+  metric: accuracy
+  value: 0.874
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r183
+  benchmark: gorishniy2021-he-ensemble
+  method: CatBoost (tuned)
+  metric: accuracy
+  value: 0.388
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r184
+  benchmark: gorishniy2021-ja-ensemble
+  method: CatBoost (tuned)
+  metric: accuracy
+  value: 0.727
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r185
+  benchmark: gorishniy2021-hi-ensemble
+  method: CatBoost (tuned)
+  metric: accuracy
+  value: 0.729
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r186
+  benchmark: gorishniy2021-ep-ensemble
+  method: CatBoost (tuned)
+  metric: accuracy
+  value: 0.8898
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r187
+  benchmark: gorishniy2021-ye-ensemble
+  method: CatBoost (tuned)
+  metric: rmse
+  value: 8.837
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r188
+  benchmark: gorishniy2021-co-ensemble
+  method: CatBoost (tuned)
+  metric: accuracy
+  value: 0.968
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r189
+  benchmark: gorishniy2021-ya-ensemble
+  method: CatBoost (tuned)
+  metric: rmse
+  value: 0.74
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r190
+  benchmark: gorishniy2021-mi-ensemble
+  method: CatBoost (tuned)
+  metric: rmse
+  value: 0.741
+  location: Table 4
+  page: 8
+  quote: CatBoost 0.423 0.874 0.388 0.727 0.729 – 0.8898 8.837 0.968 0.740 0.741
+- id: r191
+  benchmark: gorishniy2021-ca-single
+  method: FT-Transformer (w/o feature biases)
+  metric: rmse
+  value: 0.47
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+- id: r192
+  benchmark: gorishniy2021-he-single
+  method: FT-Transformer (w/o feature biases)
+  metric: accuracy
+  value: 0.381
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+- id: r193
+  benchmark: gorishniy2021-ja-single
+  method: FT-Transformer (w/o feature biases)
+  metric: accuracy
+  value: 0.724
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+- id: r194
+  benchmark: gorishniy2021-hi-single
+  method: FT-Transformer (w/o feature biases)
+  metric: accuracy
+  value: 0.727
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+- id: r195
+  benchmark: gorishniy2021-al-single
+  method: FT-Transformer (w/o feature biases)
+  metric: accuracy
+  value: 0.958
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+- id: r196
+  benchmark: gorishniy2021-ye-single
+  method: FT-Transformer (w/o feature biases)
+  metric: rmse
+  value: 8.843
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+- id: r197
+  benchmark: gorishniy2021-co-single
+  method: FT-Transformer (w/o feature biases)
+  metric: accuracy
+  value: 0.964
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+- id: r198
+  benchmark: gorishniy2021-mi-single
+  method: FT-Transformer (w/o feature biases)
+  metric: rmse
+  value: 0.751
+  location: Table 5
+  page: 9
+  quote: FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Results were extracted mechanically from the PDF text of Tables 2-5 (not typed by hand). Single models (mean of 15 seeds; Tables 2, 5) and ensembles (mean of three 5-model ensembles; Tables 3,
+    4) are registered as different benchmarks (-single / -ensemble) so they are never mixed in one comparison. Default vs tuned is encoded in the method name for ensembles. Duplicate rows were not re-recorded:
+    Table 4''s tuned ResNet/FT-Transformer rows equal Table 3; Table 5''s AutoInt/FT-Transformer rows equal Table 2. Tuning budgets are not identical across models (Optuna iterations differ by model and
+    dataset group; FT-Transformer untuned on Yahoo, heuristic on Epsilon; c12). Standard deviations are only in the supplementary and were not recorded.'

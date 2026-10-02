@@ -27,7 +27,7 @@ _PUNCT = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "
 def normalize(text: str, keep_hyphen: bool) -> str:
     text = unicodedata.normalize("NFKC", text).translate(_PUNCT)
     # 行末ハイフンは「単語の分割」と「本来のハイフン」の両方がありうるので、呼び出し側で両方試す
-    text = re.sub(r"-\s*\n\s*", "-" if keep_hyphen else "", text)
+    text = re.sub(r"(?<=[A-Za-z])-\s*\n\s*", "-" if keep_hyphen else "", text)
     return re.sub(r"\s+", " ", text).strip()
 
 

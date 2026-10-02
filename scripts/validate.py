@@ -5,6 +5,7 @@
 - タグ・比較条件ID・指標名が登録簿に存在する
 - paper-private な比較条件は、それを定義した論文カードからしか使えない
 - 記事の depends_on と本文中の [card-id#cN] 参照が実在する
+- 論文カードの result の value / std が、その quote の中に数値として現れる(転記ミスの検出)
 
 使い方: uv run python scripts/validate.py [--root PATH]
 """
@@ -30,6 +31,7 @@ _StrDateLoader.yaml_implicit_resolvers = {
 
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 CITATION = re.compile(r"\[((?:arxiv|doi|exp)-[^\]#\s]+)#([cr][0-9]+)\]")
+NUMBER = re.compile(r"[0-9]+(?:\.[0-9]+)?(?:e-?[0-9]+)?")
 
 
 def load_yaml(path: Path):
@@ -118,6 +120,10 @@ def validate(root: Path) -> list[str]:
             errors.append(f"{where}: duplicate claim/result id '{d}'")
         for r in card.get("results") or []:
             check_result(r, f"{where}: result {r.get('id')}", path.stem, is_paper=True)
+            numbers = [float(n) for n in NUMBER.findall(r.get("quote", ""))]
+            for field in ("value", "std"):
+                if field in r and not any(abs(n - r[field]) < 1e-9 for n in numbers):
+                    errors.append(f"{where}: result {r.get('id')}: {field} {r[field]} does not appear in its quote")
         for rel in card.get("relations") or []:
             if "benchmark" in rel and rel["benchmark"] not in benchmarks:
                 errors.append(f"{where}: relation uses unknown benchmark '{rel['benchmark']}'")

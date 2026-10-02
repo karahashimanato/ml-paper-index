@@ -653,11 +653,73 @@ benchmarks:
     higher_is_better: true
   defined_in: arxiv-2305.02997
   notes: Registered for future cards; this paper reports only per-dataset top-3 algorithms for the suite (Table 4).
+- id: gorishniy2025-46-datasets
+  scope: paper-private
+  task: tabular-classification
+  dataset: 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression
+  protocol: &id017
+    split: Splits inherited from prior work; domain-aware (e.g. time-based) splits for TabReD datasets and Microsoft (Section 3.1).
+    preprocessing: Model-specific; feature embeddings for models marked † or ‡ (Section 4.1, Appendix D).
+    tuning: Hyperparameter tuning on the validation set following Gorishniy et al. (2024) (Appendix D.2).
+    repetitions: Tuned model retrained under multiple random seeds; test metric averaged over seeds (Section 3.1).
+  metrics:
+  - name: mean-rank
+    higher_is_better: false
+  defined_in: arxiv-2410.24210
+- id: gorishniy2025-maps-routing
+  scope: paper-private
+  task: tabular-regression
+  dataset: Maps Routing (6.5M objects, 986 features; large dataset of Table 2)
+  protocol: *id017
+  metrics:
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2410.24210
+- id: gorishniy2025-weather
+  scope: paper-private
+  task: tabular-regression
+  dataset: Weather (13M objects, 103 features; large dataset of Table 2)
+  protocol: *id017
+  metrics:
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2410.24210
+- id: holzmuller2024-meta-train
+  scope: paper-private
+  task: tabular-classification
+  dataset: 'Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression)'
+  protocol: &id018
+    split: 10 random 60/20/20 train/validation/test splits per dataset; rows with missing numerical values removed (Sections 2.1-2.2).
+    preprocessing: Method-specific; RealMLP uses robust scaling + smooth clipping and one-hot for low-cardinality categoricals (Section 3).
+    tuning: Library defaults (D), tuned defaults from the meta-train benchmark (TD), or 50-step random-search HPO per split (Section 5).
+    repetitions: Shifted geometric mean of errors over datasets (eps = 0.01), with dataset weights on meta-train (Section 2.2).
+  metrics: &id019
+  - name: sgm-classification-error
+    higher_is_better: false
+    definition: Shifted geometric mean of classification error over datasets (Section 2.2).
+  - name: sgm-nrmse
+    higher_is_better: false
+    definition: Shifted geometric mean of normalized RMSE over datasets (Section 2.2).
+  defined_in: arxiv-2407.04491
+- id: holzmuller2024-meta-test
+  scope: paper-private
+  task: tabular-classification
+  dataset: 'Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression)'
+  protocol: *id018
+  metrics: *id019
+  defined_in: arxiv-2407.04491
+- id: holzmuller2024-grinsztajn
+  scope: paper-private
+  task: tabular-classification
+  dataset: Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol)
+  protocol: *id018
+  metrics: *id019
+  defined_in: arxiv-2407.04491
 - id: hollmann2025-amlb-small-classification
   scope: paper-private
   task: tabular-classification
   dataset: 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes
-  protocol: &id017
+  protocol: &id020
     split: 10 repetitions per dataset with different seeds and 90% train / 10% test splits (Results).
     preprocessing: Method-specific; TabPFN v2 handles categorical features and missing values natively (Results, Methods).
     tuning: 'Baselines: random search with 5-fold CV, budgets from 30 s to 4 h; TabPFN v2: default (no tuning), tuned, or PHE (post-hoc ensembled TabPFN v2 models, from 300 s).'
@@ -671,71 +733,9 @@ benchmarks:
   scope: paper-private
   task: tabular-regression
   dataset: 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features
-  protocol: *id017
+  protocol: *id020
   metrics:
   - name: normalized-rmse
     higher_is_better: true
     definition: Negative RMSE normalized per dataset over all baselines (1 = best), averaged.
   defined_in: doi-10.1038_s41586-024-08328-6
-- id: gorishniy2025-46-datasets
-  scope: paper-private
-  task: tabular-classification
-  dataset: 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression
-  protocol: &id018
-    split: Splits inherited from prior work; domain-aware (e.g. time-based) splits for TabReD datasets and Microsoft (Section 3.1).
-    preprocessing: Model-specific; feature embeddings for models marked † or ‡ (Section 4.1, Appendix D).
-    tuning: Hyperparameter tuning on the validation set following Gorishniy et al. (2024) (Appendix D.2).
-    repetitions: Tuned model retrained under multiple random seeds; test metric averaged over seeds (Section 3.1).
-  metrics:
-  - name: mean-rank
-    higher_is_better: false
-  defined_in: arxiv-2410.24210
-- id: gorishniy2025-maps-routing
-  scope: paper-private
-  task: tabular-regression
-  dataset: Maps Routing (6.5M objects, 986 features; large dataset of Table 2)
-  protocol: *id018
-  metrics:
-  - name: rmse
-    higher_is_better: false
-  defined_in: arxiv-2410.24210
-- id: gorishniy2025-weather
-  scope: paper-private
-  task: tabular-regression
-  dataset: Weather (13M objects, 103 features; large dataset of Table 2)
-  protocol: *id018
-  metrics:
-  - name: rmse
-    higher_is_better: false
-  defined_in: arxiv-2410.24210
-- id: holzmuller2024-meta-train
-  scope: paper-private
-  task: tabular-classification
-  dataset: 'Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression)'
-  protocol: &id019
-    split: 10 random 60/20/20 train/validation/test splits per dataset; rows with missing numerical values removed (Sections 2.1-2.2).
-    preprocessing: Method-specific; RealMLP uses robust scaling + smooth clipping and one-hot for low-cardinality categoricals (Section 3).
-    tuning: Library defaults (D), tuned defaults from the meta-train benchmark (TD), or 50-step random-search HPO per split (Section 5).
-    repetitions: Shifted geometric mean of errors over datasets (eps = 0.01), with dataset weights on meta-train (Section 2.2).
-  metrics: &id020
-  - name: sgm-classification-error
-    higher_is_better: false
-    definition: Shifted geometric mean of classification error over datasets (Section 2.2).
-  - name: sgm-nrmse
-    higher_is_better: false
-    definition: Shifted geometric mean of normalized RMSE over datasets (Section 2.2).
-  defined_in: arxiv-2407.04491
-- id: holzmuller2024-meta-test
-  scope: paper-private
-  task: tabular-classification
-  dataset: 'Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression)'
-  protocol: *id019
-  metrics: *id020
-  defined_in: arxiv-2407.04491
-- id: holzmuller2024-grinsztajn
-  scope: paper-private
-  task: tabular-classification
-  dataset: Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol)
-  protocol: *id019
-  metrics: *id020
-  defined_in: arxiv-2407.04491

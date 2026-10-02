@@ -5,32 +5,35 @@
 - カード: [`arxiv-2305.02997`](../../papers/arxiv-2305.02997.yaml)
 - 著者: Duncan McElfresh, Sujay Khandagale, Jonathan Valverde, Vishak Prasad C, Benjamin Feuer, Chinmay Hegde, Ganesh Ramakrishnan, Micah Goldblum, Colin White
 - 年・掲載: 2023 NeurIPS 2023 Datasets and Benchmarks Track
+- 原論文: [PDF](https://arxiv.org/pdf/2305.02997v4)(arXiv v4、カード作成時に読んだ版)
 - タグ: differentiable-trees, gradient-boosted-trees, in-context-learning, linear-models, random-forests, supervised, tabular-attention, tabular-classification, tabular-foundation-model, tabular-mlp
 - 人手レビュー: 未
 
 ## 主張
 
-- **c1** The 'NN vs. GBDT' debate is overemphasized: for many datasets the GBDT-NN difference is negligible or light GBDT tuning matters more than the choice.(Abstract)
-- **c2** Light hyperparameter tuning of a GBDT is often more important than choosing between NNs and GBDTs.(Abstract)
-- **c3** TabPFN outperformed all other algorithms on average, even when only a random 3000-sample subset of the training data was used.(Abstract)
-- **c4** GBDTs handle skewed or heavy-tailed feature distributions and other dataset irregularities much better than NNs.(Abstract)
-- **c5** For about one-third of datasets, light tuning (30 random-search iterations) of CatBoost improved performance more than choosing between the best default GBDT and NN.(Section 2.1)
-- **c6** GBDTs performed comparatively better than NNs and baselines on larger datasets.(Section 2.2)
-- **c7** Authors' recommendation: try simple baselines first, then lightly tune CatBoost.(Section 2.2)
-- **c8** Each dataset uses the ten train/test folds provided by OpenML (comparable with other works using the same folds).(Section 2)
-- **c9** Each algorithm was evaluated with at most 30 hyperparameter sets (default + 29 random via Optuna), up to 10 hours per algorithm and split.(Section 2)
-- **c10** The 98-dataset comparison excludes datasets on which many algorithms hit memory or time limits.(Section 2.1)
-- **c11** On the 57 smallest datasets (<=1250 instances), TabPFN had the best average performance and the fastest training time.(Section 2.1)
-- **c12** The text states CatBoost's average rank is 5.06 (Table 1 shows a mean rank of 5.50 for CatBoost; the paper is inconsistent).(Section 2.1)
-- **c13** The text says Figure 3 uses accuracy and Table 1 log loss, but the Figure 3 caption says log loss and the Table 1 caption says accuracy (inconsistent).(Section 2.1)
-- **c14** By log-loss rank with Wilcoxon signed-rank tests (Holm-Bonferroni), TabPFN outperformed all other algorithms across the 98 datasets with statistical significance.(Section 2.1, Figure 3)
-- **c15** TabPFN was run on larger datasets by randomly subsampling 3000 training samples (TabPFN*).(Section 2)
-- **c16** Dataset sizes range from 32 to 1,025,009 (vs. 3,000-10,000 or 50,000 in Grinsztajn et al.).(Section 1)
-- **c17** TabPFN was excluded from the GBDT-vs-NN family analyses because it works differently from other NNs.(Section 2.1 footnote)
-- **c18** The TabZilla Benchmark Suite consists of the 36 'hardest' of the 176 datasets.(Section 3)
-- **c19** All 176 datasets are classification datasets from OpenML.(Section 2)
-- **c20** Across datasets, accuracy is aggregated with the average distance to the minimum (ADTM): per-dataset 0-1 scaling after selecting the best hyperparameters.(Section 2)
-- **c21** The study compares 19 algorithms on 176 datasets.(Abstract)
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** The 'NN vs. GBDT' debate is overemphasized: for many datasets the GBDT-NN difference is negligible or light GBDT tuning matters more than the choice.([Abstract, p.1](https://arxiv.org/pdf/2305.02997v4#page=1 "we find that the 'NN vs. GBDT' debate is overemphasized"))
+- **c2** Light hyperparameter tuning of a GBDT is often more important than choosing between NNs and GBDTs.([Abstract, p.1](https://arxiv.org/pdf/2305.02997v4#page=1 "light hyperparameter tuning on a GBDT is more important than choosing between NNs and GBDTs"))
+- **c3** TabPFN outperformed all other algorithms on average, even when only a random 3000-sample subset of the training data was used.([Abstract, p.1](https://arxiv.org/pdf/2305.02997v4#page=1 "we find that it outperforms all other algorithms on average, even when randomly sampling 3000 training datapoints."))
+- **c4** GBDTs handle skewed or heavy-tailed feature distributions and other dataset irregularities much better than NNs.([Abstract, p.1](https://arxiv.org/pdf/2305.02997v4#page=1 "GBDTs are much better than NNs at handling skewed or heavy-tailed feature distributions and other forms of dataset irregularities."))
+- **c5** For about one-third of datasets, light tuning (30 random-search iterations) of CatBoost improved performance more than choosing between the best default GBDT and NN.([Section 2.1, p.7](https://arxiv.org/pdf/2305.02997v4#page=7 "Surprisingly, light hyperparameter tuning yields a greater performance improvement than GBDT-vs-NN selection for about one-third of all datasets."))
+- **c6** GBDTs performed comparatively better than NNs and baselines on larger datasets.([Section 2.2, p.8](https://arxiv.org/pdf/2305.02997v4#page=8 "Throughout our metafeature analyses, we find that GBDTs perform comparatively better than NNs and baselines with larger datasets."))
+- **c7** Authors' recommendation: try simple baselines first, then lightly tune CatBoost.([Section 2.2, p.9](https://arxiv.org/pdf/2305.02997v4#page=9 "first try simple baselines, and then conduct light hyperparameter tuning on CatBoost."))
+- **c8** Each dataset uses the ten train/test folds provided by OpenML (comparable with other works using the same folds).([Section 2, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "For each dataset, we use the ten train/test folds provided by OpenML"))
+- **c9** Each algorithm was evaluated with at most 30 hyperparameter sets (default + 29 random via Optuna), up to 10 hours per algorithm and split.([Section 2, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "we train and evaluate the algorithm with at most 30 hyperparameter sets (one default set and 29 random sets, using Optuna [3])."))
+- **c10** The 98-dataset comparison excludes datasets on which many algorithms hit memory or time limits.([Section 2.1, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "while excluding datasets which ran into memory or timeout issues on a nontrivial number of algorithms"))
+- **c11** On the 57 smallest datasets (<=1250 instances), TabPFN had the best average performance and the fastest training time.([Section 2.1, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "Now, we find that TabPFN achieves the best average performance of all algorithms, while also having the fastest training time."))
+- **c12** The text states CatBoost's average rank is 5.06 (Table 1 shows a mean rank of 5.50 for CatBoost; the paper is inconsistent).([Section 2.1, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "The fact that the best out of all algorithms, CatBoost, only achieved an average rank of 5.06"))
+- **c13** The text says Figure 3 uses accuracy and Table 1 log loss, but the Figure 3 caption says log loss and the Table 1 caption says accuracy (inconsistent).([Section 2.1, p.6](https://arxiv.org/pdf/2305.02997v4#page=6 "Note that the slight differences between Figure 3 and Table 1 is that the former uses accuracy, while the latter uses log loss."))
+- **c14** By log-loss rank with Wilcoxon signed-rank tests (Holm-Bonferroni), TabPFN outperformed all other algorithms across the 98 datasets with statistical significance.([Section 2.1, Figure 3, p.6](https://arxiv.org/pdf/2305.02997v4#page=6 "We find that TabPFN outperforms all other algorithms on average across 98 datasets, and this result is statistically significant."))
+- **c15** TabPFN was run on larger datasets by randomly subsampling 3000 training samples (TabPFN*).([Section 2, p.3](https://arxiv.org/pdf/2305.02997v4#page=3 "In order to run on datasets of size larger than 3000, we simply take a random sample of size 3000 from the full training dataset."))
+- **c16** Dataset sizes range from 32 to 1,025,009 (vs. 3,000-10,000 or 50,000 in Grinsztajn et al.).([Section 1, p.3](https://arxiv.org/pdf/2305.02997v4#page=3 "in contrast to our dataset sizes which range from 32 to 1 025 009"))
+- **c17** TabPFN was excluded from the GBDT-vs-NN family analyses because it works differently from other NNs.([Section 2.1 footnote, p.7](https://arxiv.org/pdf/2305.02997v4#page=7 "we exclude it from our analysis in this section and the next section when discussing 'GBDTs vs. NNs.'"))
+- **c18** The TabZilla Benchmark Suite consists of the 36 'hardest' of the 176 datasets.([Section 3, p.9](https://arxiv.org/pdf/2305.02997v4#page=9 "a collection of the 36 'hardest' of the 176 datasets we studied in Section 2."))
+- **c19** All 176 datasets are classification datasets from OpenML.([Section 2, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "We run the algorithms on 176 classification datasets from OpenML"))
+- **c20** Across datasets, accuracy is aggregated with the average distance to the minimum (ADTM): per-dataset 0-1 scaling after selecting the best hyperparameters.([Section 2, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "we use the average distance to the minimum (ADTM) metric, which consists of 0-1 scaling"))
+- **c21** The study compares 19 algorithms on 176 datasets.([Abstract, p.1](https://arxiv.org/pdf/2305.02997v4#page=1 "comparing 19 algorithms across 176 datasets"))
 
 ## 結果表
 
@@ -62,6 +65,8 @@
 | KNN | 13.69 | 13.12 |
 | VIME | 14.98 | 14.88 |
 
+出典: [Table 1, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08") / [Table 2, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00")
+
 #### mean-normalized-accuracy(大きいほど良い)
 
 繰り返し: Ten folds per dataset; accuracy 0-1 scaled per dataset (ADTM) and aggregated over datasets (Section 2).
@@ -87,6 +92,8 @@
 | TabNet | 0.54 | 0.42 |
 | KNN | 0.45 | 0.46 |
 | VIME | 0.37 | 0.33 |
+
+出典: [Table 1, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08") / [Table 2, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00")
 
 #### median-normalized-accuracy(大きいほど良い)
 
@@ -114,6 +121,8 @@
 | KNN | 0.51 | 0.51 |
 | VIME | 0.32 | 0.27 |
 
+出典: [Table 1, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08") / [Table 2, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00")
+
 #### mean-fold-std-normalized-accuracy(小さいほど良い)
 
 繰り返し: Ten folds per dataset; accuracy 0-1 scaled per dataset (ADTM) and aggregated over datasets (Section 2).
@@ -140,6 +149,8 @@
 | KNN | 0.29 | 0.38 |
 | VIME | 0.27 | 0.36 |
 
+出典: [Table 1, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08") / [Table 2, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00")
+
 #### mean-train-time-per-1000(小さいほど良い)
 
 繰り返し: Ten folds per dataset; accuracy 0-1 scaled per dataset (ADTM) and aggregated over datasets (Section 2).
@@ -165,6 +176,8 @@
 | TabNet | 34.95 | 41.83 |
 | KNN | **0.01** | **0** |
 | VIME | 16.81 | 18.95 |
+
+出典: [Table 1, p.4](https://arxiv.org/pdf/2305.02997v4#page=4 "CatBoost GBDT 1 18 5.50 4 0.87 0.93 0.30 0.22 21.70 2.08") / [Table 2, p.5](https://arxiv.org/pdf/2305.02997v4#page=5 "TabPFN∗ 1 18 4.88 3 0.84 0.93 0.35 0.26 0.00 0.00")
 
 ## 論文内の勝敗(結果から導出)
 
@@ -348,5 +361,5 @@
 
 | 勝ち | 負け | 根拠 | 比較条件 | 出典 |
 |---|---|---|---|---|
-| TabPFN* (3000-sample subset) | All other 18 algorithms | Mean log-loss rank over the 98 datasets; Friedman test then Wilcoxon signed-rank tests with Holm-Bonferroni correction (Figure 3). | `mcelfresh2023-98-datasets` | Section 2.1, Figure 3 |
+| TabPFN* (3000-sample subset) | All other 18 algorithms | Mean log-loss rank over the 98 datasets; Friedman test then Wilcoxon signed-rank tests with Holm-Bonferroni correction (Figure 3). | `mcelfresh2023-98-datasets` | [Section 2.1, Figure 3, p.6](https://arxiv.org/pdf/2305.02997v4#page=6 "We find that TabPFN outperforms all other algorithms on average across 98 datasets, and this result is statistically significant.") |
 

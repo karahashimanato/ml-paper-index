@@ -20,7 +20,7 @@ XGBoost などの勾配ブースティング木(GBDT)と、表データ向けの
 近年は、多数の合成データで事前学習しておき、新しい表には学習なしで予測する**表データ向け基盤モデル**(TabPFN など)が第三の選択肢になっている。
 
 ここで扱う論文はいずれも「既存の論文はそれぞれ別のデータセットと別の評価手順で自分の手法を評価しており、比較になっていない」という問題意識を共有している
-[arxiv-2106.03253#c4] [arxiv-2207.08815#c10] [arxiv-2305.02997#c1]。それでも結論は一致しない。その違いの多くは、**評価条件の違い**で説明できる。
+[arxiv-2106.03253#c4](https://arxiv.org/pdf/2106.03253v2#page=6 "Each deep model was better only on the datasets that appeared in its own paper.") [arxiv-2207.08815#c10](https://arxiv.org/pdf/2207.08815v1#page=3 "Specifically, we remove a dataset if a default Logistic Regression (or Linear Regression for regression) reach a score whose relative difference") [arxiv-2305.02997#c1](https://arxiv.org/pdf/2305.02997v4#page=1 "we find that the 'NN vs. GBDT' debate is overemphasized")。それでも結論は一致しない。その違いの多くは、**評価条件の違い**で説明できる。
 
 ## 比較条件の違い
 
@@ -30,33 +30,33 @@ XGBoost などの勾配ブースティング木(GBDT)と、表データ向けの
 
 | 観点 | Shwartz-Ziv & Armon 2021 | Gorishniy et al. 2021 | Grinsztajn et al. 2022 |
 |---|---|---|---|
-| データセット | 深層モデルの元論文から3つずつ+新規2つ、計11 [arxiv-2106.03253#c13] | 公開データ11(分類・回帰・ランキング) [arxiv-2106.11959#c16] | 45データセット(数値/カテゴリ×分類/回帰の4設定) [arxiv-2207.08815#c14] |
-| データ規模 | 元論文の分割に従う [arxiv-2106.03253#c15] | 約2万〜約120万件 [arxiv-2106.11959#c16] | 訓練データを1万件に切り詰め [arxiv-2207.08815#c8] |
-| 多クラス | 元論文の前処理に従う [arxiv-2106.03253#c15] | 100クラス・1000クラスの問題を含む [arxiv-2106.11959#c16] | 上位2クラスに二値化・均衡化 [arxiv-2207.08815#c9] |
-| チューニング | HyperOptで1,000ステップ [arxiv-2106.03253#c7] | 主にOptuna(TPE) [arxiv-2106.11959#c17]。FT-TransformerはYahooで未チューニング [arxiv-2106.11959#c12] | ランダムサーチ約400回、予算ごとに評価 [arxiv-2207.08815#c7] |
-| 繰り返し | 4回の平均 [arxiv-2106.03253#c14] | 15シードの平均、アンサンブルは別集計 [arxiv-2106.11959#c13] | 探索順序を15回シャッフル [arxiv-2207.08815#c15] |
-| 欠損値 | 元論文の前処理に従う [arxiv-2106.03253#c15] | 記載を確認できず | 除外 [arxiv-2207.08815#c11] |
+| データセット | 深層モデルの元論文から3つずつ+新規2つ、計11 [arxiv-2106.03253#c13](https://arxiv.org/pdf/2106.03253v2#page=4 "We use nine datasets from the TabNet, DNF-Net, and NODE papers, drawing three datasets from each paper.") | 公開データ11(分類・回帰・ランキング) [arxiv-2106.11959#c16](https://arxiv.org/pdf/2106.11959v5#page=6 "#objects 20640 48842 65196 83733 98050 108000 500000 515345 581012 709877 1200192") | 45データセット(数値/カテゴリ×分類/回帰の4設定) [arxiv-2207.08815#c14](https://arxiv.org/pdf/2207.08815v1#page=1 "We define a standard set of 45 datasets from varied domains") |
+| データ規模 | 元論文の分割に従う [arxiv-2106.03253#c15](https://arxiv.org/pdf/2106.03253v2#page=4 "Each dataset was preprocessed and trained as described in the original paper.") | 約2万〜約120万件 [arxiv-2106.11959#c16](https://arxiv.org/pdf/2106.11959v5#page=6 "#objects 20640 48842 65196 83733 98050 108000 500000 515345 581012 709877 1200192") | 訓練データを1万件に切り詰め [arxiv-2207.08815#c8](https://arxiv.org/pdf/2207.08815v1#page=3 "We truncate the training set to 10,000 samples for bigger datasets.") |
+| 多クラス | 元論文の前処理に従う [arxiv-2106.03253#c15](https://arxiv.org/pdf/2106.03253v2#page=4 "Each dataset was preprocessed and trained as described in the original paper.") | 100クラス・1000クラスの問題を含む [arxiv-2106.11959#c16](https://arxiv.org/pdf/2106.11959v5#page=6 "#objects 20640 48842 65196 83733 98050 108000 500000 515345 581012 709877 1200192") | 上位2クラスに二値化・均衡化 [arxiv-2207.08815#c9](https://arxiv.org/pdf/2207.08815v1#page=3 "For classification, the target is binarised if there are several classes, by taking the two most numerous classes, and we keep half of samples in each class.") |
+| チューニング | HyperOptで1,000ステップ [arxiv-2106.03253#c7](https://arxiv.org/pdf/2106.03253v2#page=4 "The hyperparameter search was run for 1, 000 steps on each dataset by optimizing the results on a validation set.") | 主にOptuna(TPE) [arxiv-2106.11959#c17](https://arxiv.org/pdf/2106.11959v5#page=6 "we use the Optuna library (Akiba et al., 2019) to run Bayesian optimization (the Tree-Structured Parzen Estimator algorithm)")。FT-TransformerはYahooで未チューニング [arxiv-2106.11959#c12](https://arxiv.org/pdf/2106.11959v5#page=18 "For Yahoo, we did not perform tuning at all, since the default configuration already performed well.") | ランダムサーチ約400回、予算ごとに評価 [arxiv-2207.08815#c7](https://arxiv.org/pdf/2207.08815v1#page=4 "We run a random search of ≈400 iterations per dataset") |
+| 繰り返し | 4回の平均 [arxiv-2106.03253#c14](https://arxiv.org/pdf/2106.03253v2#page=6 "The values are the averages of four training runs (lower value is better), along with the standard error of the mean (SEM)") | 15シードの平均、アンサンブルは別集計 [arxiv-2106.11959#c13](https://arxiv.org/pdf/2106.11959v5#page=6 "For each tuned configuration, we run 15 experiments with different random seeds and report the performance on the test set.") | 探索順序を15回シャッフル [arxiv-2207.08815#c15](https://arxiv.org/pdf/2207.08815v1#page=4 "We do this 15 times while shuffling the random search order at each time.") |
+| 欠損値 | 元論文の前処理に従う [arxiv-2106.03253#c15](https://arxiv.org/pdf/2106.03253v2#page=4 "Each dataset was preprocessed and trained as described in the original paper.") | 記載を確認できず | 除外 [arxiv-2207.08815#c11](https://arxiv.org/pdf/2207.08815v1#page=3 "We remove all missing data from the datasets.") |
 
 ### 2023〜2025年の3本(基盤モデル以後)
 
 | 観点 | Hollmann et al. 2023 (TabPFN) | McElfresh et al. 2023 (TabZilla) | Erickson et al. 2025 (TabArena v0.1) |
 |---|---|---|---|
-| 課題 | 分類のみ [arxiv-2207.01848#c2] | 分類のみ [arxiv-2305.02997#c19] | 分類と回帰 [arxiv-2506.16791#c7] |
-| データセット | OpenML-CC18 の小規模データ。主結果は数値特徴のみ・欠損なしの18個 [arxiv-2207.01848#c9] | OpenML の176個。主な比較は98個 [arxiv-2305.02997#c10] | 1053個から手作業で選んだ51個 [arxiv-2506.16791#c5] |
-| データ規模 | 訓練1,000件以下 [arxiv-2207.01848#c2] | 32件〜約100万件 [arxiv-2305.02997#c16] | 小〜中規模のIIDデータ [arxiv-2506.16791#c7] |
-| チューニング | 比較手法は5分割CVのランダムサーチ、TabPFNはチューニングなし [arxiv-2207.01848#c14] [arxiv-2207.01848#c16] | 最大30設定(既定+ランダム29) [arxiv-2305.02997#c9] | 固定の200設定から選択、さらに設定のアンサンブル [arxiv-2506.16791#c18] |
-| 繰り返し | 5回(50/50分割) [arxiv-2207.01848#c8] | OpenMLの10分割 [arxiv-2305.02997#c8] | 繰り返し交差検証 [arxiv-2506.16791#c8] |
-| 集計 | データセット平均・順位・勝数 [arxiv-2207.01848#c17] | データセットごとに0-1正規化して平均 [arxiv-2305.02997#c20] | Elo(既定のランダムフォレスト=1000) [arxiv-2506.16791#c10] |
+| 課題 | 分類のみ [arxiv-2207.01848#c2](https://arxiv.org/pdf/2207.01848v6#page=2 "tasks (≤1 000 training examples, ≤100 purely numerical features without missing values and ≤10 classes)") | 分類のみ [arxiv-2305.02997#c19](https://arxiv.org/pdf/2305.02997v4#page=4 "We run the algorithms on 176 classification datasets from OpenML") | 分類と回帰 [arxiv-2506.16791#c7](https://arxiv.org/pdf/2506.16791v4#page=2 "Tabular classification and regression for independent and identically distributed (IID) data, spanning the small to medium data regime.") |
+| データセット | OpenML-CC18 の小規模データ。主結果は数値特徴のみ・欠損なしの18個 [arxiv-2207.01848#c9](https://arxiv.org/pdf/2207.01848v6#page=7 "As test datasets, we used all datasets from the curated open-source OpenML-CC18 benchmark suite (Bischl et al., 2021) that contain up to 2 000 samples (1 000 for the training split), 100 features and 10 classes.") | OpenML の176個。主な比較は98個 [arxiv-2305.02997#c10](https://arxiv.org/pdf/2305.02997v4#page=5 "while excluding datasets which ran into memory or timeout issues on a nontrivial number of algorithms") | 1053個から手作業で選んだ51個 [arxiv-2506.16791#c5](https://arxiv.org/pdf/2506.16791v4#page=2 "We investigate 1053 datasets used in tabular data research and carefully, manually curate a set of 51 datasets out of these") |
+| データ規模 | 訓練1,000件以下 [arxiv-2207.01848#c2](https://arxiv.org/pdf/2207.01848v6#page=2 "tasks (≤1 000 training examples, ≤100 purely numerical features without missing values and ≤10 classes)") | 32件〜約100万件 [arxiv-2305.02997#c16](https://arxiv.org/pdf/2305.02997v4#page=3 "in contrast to our dataset sizes which range from 32 to 1 025 009") | 小〜中規模のIIDデータ [arxiv-2506.16791#c7](https://arxiv.org/pdf/2506.16791v4#page=2 "Tabular classification and regression for independent and identically distributed (IID) data, spanning the small to medium data regime.") |
+| チューニング | 比較手法は5分割CVのランダムサーチ、TabPFNはチューニングなし [arxiv-2207.01848#c14](https://arxiv.org/pdf/2207.01848v6#page=7 "we used 5-fold cross-validation to evaluate randomly drawn hyperparameter configurations until a given budget was exhausted") [arxiv-2207.01848#c16](https://arxiv.org/pdf/2207.01848v6#page=1 "needs no hyperparameter tuning and is competitive with state-of-the-art classification methods") | 最大30設定(既定+ランダム29) [arxiv-2305.02997#c9](https://arxiv.org/pdf/2305.02997v4#page=4 "we train and evaluate the algorithm with at most 30 hyperparameter sets (one default set and 29 random sets, using Optuna [3]).") | 固定の200設定から選択、さらに設定のアンサンブル [arxiv-2506.16791#c18](https://arxiv.org/pdf/2506.16791v4#page=10 "We use a fixed set of 200 random hyperparameter configurations to enable the study of ensemble pipelines.") |
+| 繰り返し | 5回(50/50分割) [arxiv-2207.01848#c8](https://arxiv.org/pdf/2207.01848v6#page=8 "each with a different random seed and train- and test split (50% train and 50% test samples; all methods used the same split given a seed).") | OpenMLの10分割 [arxiv-2305.02997#c8](https://arxiv.org/pdf/2305.02997v4#page=4 "For each dataset, we use the ten train/test folds provided by OpenML") | 繰り返し交差検証 [arxiv-2506.16791#c8](https://arxiv.org/pdf/2506.16791v4#page=6 "for datasets with less than 2 500 samples, we use 10 times repeated 3-fold outer cross-validation; (II) for all other datasets, we use 3 repeats.") |
+| 集計 | データセット平均・順位・勝数 [arxiv-2207.01848#c17](https://arxiv.org/pdf/2207.01848v6#page=8 "we report the ROC AUC (one-vs-one (OVO) for multi-class classification) average, ranks and wins including the 95% confidence interval") | データセットごとに0-1正規化して平均 [arxiv-2305.02997#c20](https://arxiv.org/pdf/2305.02997v4#page=5 "we use the average distance to the minimum (ADTM) metric, which consists of 0-1 scaling") | Elo(既定のランダムフォレスト=1000) [arxiv-2506.16791#c10](https://arxiv.org/pdf/2506.16791v4#page=6 "We calibrate 1000 Elo to the performance of our default random forest configuration across all figures") |
 
 ### TabArena 上位モデルの原論文3本
 
 | 観点 | Hollmann et al. 2025 (TabPFN v2) | Gorishniy et al. 2025 (TabM) | Holzmüller et al. 2024 (RealMLP) |
 |---|---|---|---|
-| データセット | AutoML Benchmark・OpenML-CTR23 の分類29・回帰28 [doi-10.1038_s41586-024-08328-6#c7] | 先行研究の公開データ46 [arxiv-2410.24210#c6] | メタ訓練118・メタテスト90 [arxiv-2407.04491#c3] |
-| データ規模 | 1万件以下・500特徴以下 [doi-10.1038_s41586-024-08328-6#c7] | 数百万件規模の大規模データも別途評価 [arxiv-2410.24210#r1] | 1千〜50万件 [arxiv-2407.04491#c4] |
-| 分割 | 90/10を10回 [doi-10.1038_s41586-024-08328-6#c8] | 先行研究の分割。一部は時間などで分けた分割 [arxiv-2410.24210#c7] | 60/20/20を10回 [arxiv-2407.04491#c13] |
-| チューニング | 比較手法は5分割CVのランダムサーチ(最大4時間) [doi-10.1038_s41586-024-08328-6#c9] | 検証データでチューニング後、複数シードで再学習 [arxiv-2410.24210#c8] | 既定値・調整済み既定値・50回のランダムサーチ [arxiv-2407.04491#c14] |
-| 集計 | 比較手法全体でデータセットごとに正規化 [doi-10.1038_s41586-024-08328-6#c11] | 順位とMLPに対する相対性能 [arxiv-2410.24210#c20] | 誤差のシフト幾何平均 [arxiv-2407.04491#c10] |
+| データセット | AutoML Benchmark・OpenML-CTR23 の分類29・回帰28 [doi-10.1038_s41586-024-08328-6#c7](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=5 "we use the 29 classification datasets and 28 regression datasets that have up to 10,000 samples, 500 features and 10 classes.") | 先行研究の公開データ46 [arxiv-2410.24210#c6](https://arxiv.org/pdf/2410.24210v3#page=3 "Our benchmark consists of 46 publicly available datasets used in prior work") | メタ訓練118・メタテスト90 [arxiv-2407.04491#c3](https://arxiv.org/pdf/2407.04491v3#page=1 "We tune RealMLP and the default parameters on a meta-train benchmark with 118 datasets and compare them to hyperparameter-optimized versions on a disjoint meta-test benchmark with 90 datasets") |
+| データ規模 | 1万件以下・500特徴以下 [doi-10.1038_s41586-024-08328-6#c7](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=5 "we use the 29 classification datasets and 28 regression datasets that have up to 10,000 samples, 500 features and 10 classes.") | 数百万件規模の大規模データも別途評価 [arxiv-2410.24210#r1](https://arxiv.org/pdf/2410.24210v3#page=8 "Maps Routing 6.5M 986 0.1601 0.1592 0.1583 0.1582 0.1594 OOM") | 1千〜50万件 [arxiv-2407.04491#c4](https://arxiv.org/pdf/2407.04491v3#page=1 "Our benchmark results on medium-to-large tabular datasets (1K–500K samples)") |
+| 分割 | 90/10を10回 [doi-10.1038_s41586-024-08328-6#c8](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=5 "For each dataset and method, we ran 10 repetitions with different random seeds and train–test splits (90% train, 10% test).") | 先行研究の分割。一部は時間などで分けた分割 [arxiv-2410.24210#c7](https://arxiv.org/pdf/2410.24210v3#page=3 "Such datasets were shown to be challenging for some methods because they naturally exhibit a certain degree of distribution shift between training and test parts") | 60/20/20を10回 [arxiv-2407.04491#c13](https://arxiv.org/pdf/2407.04491v3#page=4 "we evaluate a method on Nsplits = 10 random training-validation-test splits (60%-20%-20%) on each dataset.") |
+| チューニング | 比較手法は5分割CVのランダムサーチ(最大4時間) [doi-10.1038_s41586-024-08328-6#c9](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=5 "We tuned hyperparameters using random search with five-fold cross-validation, with time budgets ranging from 30 s to 4 h.") | 検証データでチューニング後、複数シードで再学習 [arxiv-2410.24210#c8](https://arxiv.org/pdf/2410.24210v3#page=3 "a given model undergoes hyperparameter tuning on the validation set, then the tuned model is trained from scratch under multiple random seeds, and the test metric averaged over the random seeds becomes the final score of the model on the dataset.") | 既定値・調整済み既定値・50回のランダムサーチ [arxiv-2407.04491#c14](https://arxiv.org/pdf/2407.04491v3#page=7 "Hyperparameters optimized separately for every train-test split on every dataset, using 50 steps of random search.") |
+| 集計 | 比較手法全体でデータセットごとに正規化 [doi-10.1038_s41586-024-08328-6#c11](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=5 "Scores were normalized per dataset, with 1.0 representing the best and 0.0 the worst performance with respect to all baselines.") | 順位とMLPに対する相対性能 [arxiv-2410.24210#c20](https://arxiv.org/pdf/2410.24210v3#page=3 "We use RMSE (the root mean square error) for regression tasks, and accuracy or ROC-AUC for classification tasks depending on the dataset source.") | 誤差のシフト幾何平均 [arxiv-2407.04491#c10](https://arxiv.org/pdf/2407.04491v3#page=10 "The use of different aggregation metrics than the shifted geometric mean reduces the advantage of TD methods") |
 
 ## 論文内の勝敗の関係
 
@@ -74,112 +74,112 @@ XGBoost などの勾配ブースティング木(GBDT)と、表データ向けの
 
 ### Shwartz-Ziv & Armon 2021: 「XGBoostが勝つ」の正確な意味
 
-要旨は「XGBoostが深層モデルを上回った」と述べる [arxiv-2106.03253#c1]。しかし生成された結果表を見ると、
+要旨は「XGBoostが深層モデルを上回った」と述べる [arxiv-2106.03253#c1](https://arxiv.org/pdf/2106.03253v2#page=1 "Our study shows that XGBoost outperforms these deep models across the datasets, including the datasets used in the papers that proposed the deep models.")。しかし生成された結果表を見ると、
 単一モデルとしてXGBoostが列内で最良になっているデータセットは多くない。この主張は、各深層モデルを
 **その手法の元論文に出てこなかったデータセット**で評価したときの比較であり、
-「各深層モデルは自分の論文のデータセットでだけ強い」という観察とセットで読む必要がある [arxiv-2106.03253#c4]。
-著者はその理由として、元論文でのデータセット選択の偏り [arxiv-2106.03253#c5] と、チューニング努力の差 [arxiv-2106.03253#c6] を挙げている。
+「各深層モデルは自分の論文のデータセットでだけ強い」という観察とセットで読む必要がある [arxiv-2106.03253#c4](https://arxiv.org/pdf/2106.03253v2#page=6 "Each deep model was better only on the datasets that appeared in its own paper.")。
+著者はその理由として、元論文でのデータセット選択の偏り [arxiv-2106.03253#c5](https://arxiv.org/pdf/2106.03253v2#page=6 "The first possibility is selection bias.") と、チューニング努力の差 [arxiv-2106.03253#c6](https://arxiv.org/pdf/2106.03253v2#page=6 "The second possibility is differences in the optimization of hyperparameters.") を挙げている。
 
-もう一つの結論は、XGBoostと深層モデルを混ぜたアンサンブルが最も良かったことである [arxiv-2106.03253#c3]。
-なお、この論文には回帰指標の記述(本文はRMSE、表の注記はMSE)など内部の食い違いがある [arxiv-2106.03253#c11] [arxiv-2106.03253#c12]。
+もう一つの結論は、XGBoostと深層モデルを混ぜたアンサンブルが最も良かったことである [arxiv-2106.03253#c3](https://arxiv.org/pdf/2106.03253v2#page=1 "we show that an ensemble of deep models and XGBoost performs better on these datasets than XGBoost alone.")。
+なお、この論文には回帰指標の記述(本文はRMSE、表の注記はMSE)など内部の食い違いがある [arxiv-2106.03253#c11](https://arxiv.org/pdf/2106.03253v2#page=5 "For regression problems, we report the root mean square error.") [arxiv-2106.03253#c12](https://arxiv.org/pdf/2106.03253v2#page=6 "MSE is presented for the YearPrediction and Rossman datasets")。
 
 ### Gorishniy et al. 2021: 深層モデル同士の比較と、GBDTとの比較
 
-深層モデル同士では、単純なResNet風のモデルを他の既存手法が一貫して上回ることはなく [arxiv-2106.11959#c1]、
-提案手法のFT-Transformerが多くのタスクで最良だった [arxiv-2106.11959#c2]。
-GBDTとの比較では、チューニング後のGBDTが一部のデータセットで優勢であり [arxiv-2106.11959#c4]、
-著者自身が「普遍的に優れた解はない」と結論している [arxiv-2106.11959#c3]。
-さらに著者は、深層学習が多くのデータセットで勝ったことは、ベンチマークが深層学習に有利な問題へ偏っていることを意味するだけだと注意している [arxiv-2106.11959#c5]。
-多クラス数の大きい問題でGBDTが苦戦したこと [arxiv-2106.11959#c6] も、その偏りの一因と読める。
+深層モデル同士では、単純なResNet風のモデルを他の既存手法が一貫して上回ることはなく [arxiv-2106.11959#c1](https://arxiv.org/pdf/2106.11959v5#page=2 "First, we reveal that none of the considered DL models can consistently outperform the ResNet-like model.")、
+提案手法のFT-Transformerが多くのタスクで最良だった [arxiv-2106.11959#c2](https://arxiv.org/pdf/2106.11959v5#page=2 "Second, FT-Transformer demonstrates the best performance on most tasks and becomes a new powerful solution for the field.")。
+GBDTとの比較では、チューニング後のGBDTが一部のデータセットで優勢であり [arxiv-2106.11959#c4](https://arxiv.org/pdf/2106.11959v5#page=8 "Once hyperparameters are properly tuned, GBDTs start dominating on some datasets (California Housing, Adult, Yahoo; see Table 4).")、
+著者自身が「普遍的に優れた解はない」と結論している [arxiv-2106.11959#c3](https://arxiv.org/pdf/2106.11959v5#page=2 "We reveal that there is still no universally superior solution among GBDT and deep models.")。
+さらに著者は、深層学習が多くのデータセットで勝ったことは、ベンチマークが深層学習に有利な問題へ偏っていることを意味するだけだと注意している [arxiv-2106.11959#c5](https://arxiv.org/pdf/2106.11959v5#page=8 "it only means that the constructed benchmark is slightly biased towards 'DL-friendly' problems.")。
+多クラス数の大きい問題でGBDTが苦戦したこと [arxiv-2106.11959#c6](https://arxiv.org/pdf/2106.11959v5#page=8 "GBDT can demonstrate unsatisfactory performance (Helena) or even be untunable due to extremely slow training (ALOI).") も、その偏りの一因と読める。
 
 ### Grinsztajn et al. 2022: 中規模データでは木モデル
 
-訓練データを中規模に揃えた条件では、木モデルがどのチューニング予算でも深層モデルを上回った [arxiv-2207.08815#c1]。
-差はカテゴリ変数だけでは説明できない [arxiv-2207.08815#c3]。著者は原因として、
-深層モデルが滑らかな関数に偏ること(**目的関数**の不規則さを学びにくい) [arxiv-2207.08815#c4]、無関係な特徴量に弱いこと [arxiv-2207.08815#c5]、
-特徴量の回転に対して不変であること(列ごとの意味を活かせない) [arxiv-2207.08815#c6] を挙げている。
-一方、付録の大規模設定では差が縮まる傾向も報告されている [arxiv-2207.08815#c12]。
+訓練データを中規模に揃えた条件では、木モデルがどのチューニング予算でも深層モデルを上回った [arxiv-2207.08815#c1](https://arxiv.org/pdf/2207.08815v1#page=1 "Results show that tree-based models remain state-of-the-art on medium-sized data")。
+差はカテゴリ変数だけでは説明できない [arxiv-2207.08815#c3](https://arxiv.org/pdf/2207.08815v1#page=6 "Still, most of this gap subsists when learning on numerical features only.")。著者は原因として、
+深層モデルが滑らかな関数に偏ること(**目的関数**の不規則さを学びにくい) [arxiv-2207.08815#c4](https://arxiv.org/pdf/2207.08815v1#page=6 "For small lengthscales, smoothing the target function on the train set decreases markedly the accuracy of tree-based models, but barely impacts that of NNs.")、無関係な特徴量に弱いこと [arxiv-2207.08815#c5](https://arxiv.org/pdf/2207.08815v1#page=7 "This shows that MLPs are less robust to uninformative features")、
+特徴量の回転に対して不変であること(列ごとの意味を活かせない) [arxiv-2207.08815#c6](https://arxiv.org/pdf/2207.08815v1#page=7 "only Resnets are rotationally invariant") を挙げている。
+一方、付録の大規模設定では差が縮まる傾向も報告されている [arxiv-2207.08815#c12](https://arxiv.org/pdf/2207.08815v1#page=16 "it seems that, in most cases, increasing the train set size reduces the gap between neural networks and tree-based models.")。
 
 ### Hollmann et al. 2023 (TabPFN): 小規模データでの基盤モデル
 
-TabPFNは、因果構造を持つ合成データの事前分布で一度だけ事前学習したTransformerで [arxiv-2207.01848#c5] [arxiv-2207.01848#c3]、
-新しいデータセットではパラメータを更新せず、訓練データを入力として与えるだけで予測する(文脈内学習) [arxiv-2207.01848#c4]。
-小規模・数値特徴のみの18データセットでは、チューニング済みのGBDTを明確に上回り、AutoMLシステムと同等だった [arxiv-2207.01848#c1]。
-ただし対象は訓練1,000件以下などの小規模に限られ [arxiv-2207.01848#c2] [arxiv-2207.01848#c12]、
-カテゴリ特徴や欠損値があると弱くなる [arxiv-2207.01848#c7] [arxiv-2207.01848#c15]。全データセットで最良の手法はなかった [arxiv-2207.01848#c6]。
-TabPFNとAutoGluonの予測の平均が最も良かった点は、異なる種類のモデルを混ぜると効くという他の論文の観察と同じ方向にある [arxiv-2207.01848#c10]。
+TabPFNは、因果構造を持つ合成データの事前分布で一度だけ事前学習したTransformerで [arxiv-2207.01848#c5](https://arxiv.org/pdf/2207.01848v6#page=1 "This prior incorporates ideas from causal reasoning: It entails a large space of structural causal models with a preference for simple structures.") [arxiv-2207.01848#c3](https://arxiv.org/pdf/2207.01848v6#page=3 "we trained a 12-layer Transformer for 18 000 batches of 512 synthetically generated datasets each, which required a total of 20 hours on one machine with 8 GPUs (Nvidia RTX 2080 Ti).")、
+新しいデータセットではパラメータを更新せず、訓練データを入力として与えるだけで予測する(文脈内学習) [arxiv-2207.01848#c4](https://arxiv.org/pdf/2207.01848v6#page=1 "TabPFN performs in-context learning (ICL), it learns to make predictions using sequences of labeled examples (x, f(x)) given in the input, without requiring further parameter updates.")。
+小規模・数値特徴のみの18データセットでは、チューニング済みのGBDTを明確に上回り、AutoMLシステムと同等だった [arxiv-2207.01848#c1](https://arxiv.org/pdf/2207.01848v6#page=1 "we show that our method clearly outperforms boosted trees and performs on par with complex state-of-the-art AutoML systems with up to 230× speedup.")。
+ただし対象は訓練1,000件以下などの小規模に限られ [arxiv-2207.01848#c2](https://arxiv.org/pdf/2207.01848v6#page=2 "tasks (≤1 000 training examples, ≤100 purely numerical features without missing values and ≤10 classes)") [arxiv-2207.01848#c12](https://arxiv.org/pdf/2207.01848v6#page=10 "the underlying Transformer architecture only scales to small datasets")、
+カテゴリ特徴や欠損値があると弱くなる [arxiv-2207.01848#c7](https://arxiv.org/pdf/2207.01848v6#page=9 "Generally, TabPFN is less strong when categorical features or missing values are present.") [arxiv-2207.01848#c15](https://arxiv.org/pdf/2207.01848v6#page=7 "still show strong aggregate performance for TabPFN, albeit not as strong as for the purely numerical case")。全データセットで最良の手法はなかった [arxiv-2207.01848#c6](https://arxiv.org/pdf/2207.01848v6#page=9 "no classification method, including TabPFN, performs best on all individual datasets.")。
+TabPFNとAutoGluonの予測の平均が最も良かった点は、異なる種類のモデルを混ぜると効くという他の論文の観察と同じ方向にある [arxiv-2207.01848#c10](https://arxiv.org/pdf/2207.01848v6#page=9 "averaging the predictions of TabPFN and AutoGluon; this strongly outperforms all other methods.")。
 
 ### McElfresh et al. 2023 (TabZilla): 「NN対GBDT」論争は過大評価
 
-19手法・176データセットという規模で比較し [arxiv-2305.02997#c21]、多くのデータセットでGBDTとNNの差は小さいか、
-**どちらを選ぶかよりGBDTを軽くチューニングするほうが効く**と結論している [arxiv-2305.02997#c1] [arxiv-2305.02997#c2]。
-軽いチューニングのほうが手法選択より改善が大きいデータセットは、全体の約3分の1だった [arxiv-2305.02997#c5]。
+19手法・176データセットという規模で比較し [arxiv-2305.02997#c21](https://arxiv.org/pdf/2305.02997v4#page=1 "comparing 19 algorithms across 176 datasets")、多くのデータセットでGBDTとNNの差は小さいか、
+**どちらを選ぶかよりGBDTを軽くチューニングするほうが効く**と結論している [arxiv-2305.02997#c1](https://arxiv.org/pdf/2305.02997v4#page=1 "we find that the 'NN vs. GBDT' debate is overemphasized") [arxiv-2305.02997#c2](https://arxiv.org/pdf/2305.02997v4#page=1 "light hyperparameter tuning on a GBDT is more important than choosing between NNs and GBDTs")。
+軽いチューニングのほうが手法選択より改善が大きいデータセットは、全体の約3分の1だった [arxiv-2305.02997#c5](https://arxiv.org/pdf/2305.02997v4#page=7 "Surprisingly, light hyperparameter tuning yields a greater performance improvement than GBDT-vs-NN selection for about one-third of all datasets.")。
 
-データセットの性質との関係では、**特徴量の分布**が歪んでいたり裾が重かったりする「不規則な」データでGBDTが強く [arxiv-2305.02997#c4]、
-データが大きいほどGBDTが相対的に有利だった [arxiv-2305.02997#c6]。
+データセットの性質との関係では、**特徴量の分布**が歪んでいたり裾が重かったりする「不規則な」データでGBDTが強く [arxiv-2305.02997#c4](https://arxiv.org/pdf/2305.02997v4#page=1 "GBDTs are much better than NNs at handling skewed or heavy-tailed feature distributions and other forms of dataset irregularities.")、
+データが大きいほどGBDTが相対的に有利だった [arxiv-2305.02997#c6](https://arxiv.org/pdf/2305.02997v4#page=8 "Throughout our metafeature analyses, we find that GBDTs perform comparatively better than NNs and baselines with larger datasets.")。
 (Grinsztajn らの「不規則」は目的関数の性質、こちらは特徴量分布の性質で、指すものが違う点に注意。)
 
-TabPFNは、大きなデータでは訓練データを3,000件に間引いて使っても [arxiv-2305.02997#c15]、平均では全手法を上回った [arxiv-2305.02997#c3]。
-対数損失の順位では統計的に有意な差だった [arxiv-2305.02997#c14]。小規模なデータセットに絞ると、TabPFNが平均で最良かつ最速だった [arxiv-2305.02997#c11]。
-ただしTabPFNは「GBDT対NN」の分析からは除外されている [arxiv-2305.02997#c17]。
-この論文にも、CatBoostの平均順位や図表の指標についての本文と表の食い違いがある [arxiv-2305.02997#c12] [arxiv-2305.02997#c13]。
-著者の推奨は「まず単純なベースライン、次にCatBoostを軽くチューニング」である [arxiv-2305.02997#c7]。
+TabPFNは、大きなデータでは訓練データを3,000件に間引いて使っても [arxiv-2305.02997#c15](https://arxiv.org/pdf/2305.02997v4#page=3 "In order to run on datasets of size larger than 3000, we simply take a random sample of size 3000 from the full training dataset.")、平均では全手法を上回った [arxiv-2305.02997#c3](https://arxiv.org/pdf/2305.02997v4#page=1 "we find that it outperforms all other algorithms on average, even when randomly sampling 3000 training datapoints.")。
+対数損失の順位では統計的に有意な差だった [arxiv-2305.02997#c14](https://arxiv.org/pdf/2305.02997v4#page=6 "We find that TabPFN outperforms all other algorithms on average across 98 datasets, and this result is statistically significant.")。小規模なデータセットに絞ると、TabPFNが平均で最良かつ最速だった [arxiv-2305.02997#c11](https://arxiv.org/pdf/2305.02997v4#page=5 "Now, we find that TabPFN achieves the best average performance of all algorithms, while also having the fastest training time.")。
+ただしTabPFNは「GBDT対NN」の分析からは除外されている [arxiv-2305.02997#c17](https://arxiv.org/pdf/2305.02997v4#page=7 "we exclude it from our analysis in this section and the next section when discussing 'GBDTs vs. NNs.'")。
+この論文にも、CatBoostの平均順位や図表の指標についての本文と表の食い違いがある [arxiv-2305.02997#c12](https://arxiv.org/pdf/2305.02997v4#page=5 "The fact that the best out of all algorithms, CatBoost, only achieved an average rank of 5.06") [arxiv-2305.02997#c13](https://arxiv.org/pdf/2305.02997v4#page=6 "Note that the slight differences between Figure 3 and Table 1 is that the former uses accuracy, while the latter uses log loss.")。
+著者の推奨は「まず単純なベースライン、次にCatBoostを軽くチューニング」である [arxiv-2305.02997#c7](https://arxiv.org/pdf/2305.02997v4#page=9 "first try simple baselines, and then conduct light hyperparameter tuning on CatBoost.")。
 
 ### Erickson et al. 2025 (TabArena v0.1): 評価の仕方で順位が入れ替わる
 
 TabArenaは、継続的に更新される「生きた」ベンチマークで、ここで扱うのはその初期版 v0.1 である。
 最も重要な観察は、**順位が評価方式に依存する**ことである。
-1つの最良設定を選ぶ従来のチューニングではCatBoostが1位だったが [arxiv-2506.16791#c11]、
-複数のハイパーパラメータ設定を事後的にアンサンブルすると、ニューラルネットが最も強い単一モデルになった [arxiv-2506.16791#c12]。
-要旨も「GBDTはなお強いが、時間をかけてアンサンブルすれば深層学習が追いついた」とまとめている [arxiv-2506.16791#c1]。
-ただし RealMLP がGBDTを上回るのは、かなりの訓練時間をかけた後である [arxiv-2506.16791#c15]。
-また、モデル選択をホールドアウトで行うと全モデルが過小評価され、もともとアンサンブルを使うモデルが有利になる [arxiv-2506.16791#c14]。
+1つの最良設定を選ぶ従来のチューニングではCatBoostが1位だったが [arxiv-2506.16791#c11](https://arxiv.org/pdf/2506.16791v4#page=7 "In line with previous work [33], CatBoost is ranked first in the conventional tuning regime (Figure 1).")、
+複数のハイパーパラメータ設定を事後的にアンサンブルすると、ニューラルネットが最も強い単一モデルになった [arxiv-2506.16791#c12](https://arxiv.org/pdf/2506.16791v4#page=7 "after post-hoc ensembling, neural networks are the strongest single models on average in TabArena-v0.1.")。
+要旨も「GBDTはなお強いが、時間をかけてアンサンブルすれば深層学習が追いついた」とまとめている [arxiv-2506.16791#c1](https://arxiv.org/pdf/2506.16791v4#page=1 "While gradient-boosted trees are still strong contenders on practical tabular datasets, we observe that deep learning methods have caught up under larger time budgets with ensembling.")。
+ただし RealMLP がGBDTを上回るのは、かなりの訓練時間をかけた後である [arxiv-2506.16791#c15](https://arxiv.org/pdf/2506.16791v4#page=8 "RealMLP only starts to dominate them after a considerable amount of training time with an ensemble of 25+ configurations.")。
+また、モデル選択をホールドアウトで行うと全モデルが過小評価され、もともとアンサンブルを使うモデルが有利になる [arxiv-2506.16791#c14](https://arxiv.org/pdf/2506.16791v4#page=8 "when using holdout validation instead of cross-validation for model selection, all models are greatly underestimated, and performance is biased in favor of models that already use ensembling.")。
 
-基盤モデルについては、適用条件内のデータセットでTabPFNv2が他を大きく上回った [arxiv-2506.16791#c13] [arxiv-2506.16791#c21]。
-著者は「GBDT対深層学習」は誤った二者択一で、両者を含むモデル横断のアンサンブルが個々の系統を上回ると主張している [arxiv-2506.16791#c16] [arxiv-2506.16791#c3]。
-ただし、アンサンブルでは検証データへの過学習のため一部の深層モデルが過大に選ばれる [arxiv-2506.16791#c4]。
-読む際は、著者の一部が評価対象のモデル(TabPFNv2、RealMLP、TabICL)の著者でもあることを開示している点に留意する [arxiv-2506.16791#c22] [arxiv-2506.16791#c23]。
+基盤モデルについては、適用条件内のデータセットでTabPFNv2が他を大きく上回った [arxiv-2506.16791#c13](https://arxiv.org/pdf/2506.16791v4#page=7 "TabPFNv2 outperforms related approaches by a large margin, establishing tabular foundation models as the go-to solution for datasets within their constraints.") [arxiv-2506.16791#c21](https://arxiv.org/pdf/2506.16791v4#page=7 "For TabPFNv2, we obtain 33 datasets (≤10K training samples, ≤500 features). For TabICL, we obtain 36 classification datasets (≤100K, ≤500).")。
+著者は「GBDT対深層学習」は誤った二者択一で、両者を含むモデル横断のアンサンブルが個々の系統を上回ると主張している [arxiv-2506.16791#c16](https://arxiv.org/pdf/2506.16791v4#page=9 "We argue that the battle between GBDTs and deep learning is a false dichotomy, as both model families contribute to ensembles that strongly outperform individual model families") [arxiv-2506.16791#c3](https://arxiv.org/pdf/2506.16791v4#page=1 "Finally, we show that ensembles across models advance the state-of-the-art in tabular machine learning.")。
+ただし、アンサンブルでは検証データへの過学習のため一部の深層モデルが過大に選ばれる [arxiv-2506.16791#c4](https://arxiv.org/pdf/2506.16791v4#page=1 "We observe that some deep learning models are overrepresented in cross-model ensembles due to validation set overfitting")。
+読む際は、著者の一部が評価対象のモデル(TabPFNv2、RealMLP、TabICL)の著者でもあることを開示している点に留意する [arxiv-2506.16791#c22](https://arxiv.org/pdf/2506.16791v4#page=11 "D.H. is one of the authors of RealMLP and one of the authors of TabICL.") [arxiv-2506.16791#c23](https://arxiv.org/pdf/2506.16791v4#page=11 "L.P. and F.H. are a subset of the authors of TabPFNv2.")。
 
 ### TabArena 上位モデルを原論文で確かめる
 
 TabArena v0.1 で上位だった3つのモデルについて、それぞれの原論文が何を主張しているかを並べる。
 
-**TabPFN v2**(Hollmann et al. 2025)は、2023年版から規模を大きく広げ、回帰・カテゴリ特徴・欠損値に対応した [doi-10.1038_s41586-024-08328-6#c3]。
-1万件以下のデータでは、既定設定のまま、4時間チューニングした比較手法すべてを上回ったと報告している [doi-10.1038_s41586-024-08328-6#c1] [doi-10.1038_s41586-024-08328-6#c2]。
-Grinsztajn らや TabZilla のベンチマークでも比較手法を上回った [doi-10.1038_s41586-024-08328-6#c12]。
-これは TabArena の「適用条件内では TabPFNv2 が大差で上位」という結果 [arxiv-2506.16791#c13] と同じ方向である。
-ただし原論文自身が、1万件・500特徴を超える規模に拡張できる根拠にはならないと断っている [doi-10.1038_s41586-024-08328-6#c14]。
-また、スコアの正規化は比較手法の集合に依存する [doi-10.1038_s41586-024-08328-6#c11]。
+**TabPFN v2**(Hollmann et al. 2025)は、2023年版から規模を大きく広げ、回帰・カテゴリ特徴・欠損値に対応した [doi-10.1038_s41586-024-08328-6#c3](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=2 "the new TabPFN scales to 50× larger datasets; supports regression tasks, categorical data and missing values; and is robust to unimportant features and outliers.")。
+1万件以下のデータでは、既定設定のまま、4時間チューニングした比較手法すべてを上回ったと報告している [doi-10.1038_s41586-024-08328-6#c1](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=1 "a tabular foundation model that outperforms all previous methods on datasets with up to 10,000 samples by a wide margin, using substantially less training time.") [doi-10.1038_s41586-024-08328-6#c2](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=1 "In 2.8 s, TabPFN outperforms an ensemble of the strongest baselines tuned for 4 h in a classification setting.")。
+Grinsztajn らや TabZilla のベンチマークでも比較手法を上回った [doi-10.1038_s41586-024-08328-6#c12](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=5 "TabPFN substantially outperformed all baselines on the benchmarks of refs. 14,15.")。
+これは TabArena の「適用条件内では TabPFNv2 が大差で上位」という結果 [arxiv-2506.16791#c13](https://arxiv.org/pdf/2506.16791v4#page=7 "TabPFNv2 outperforms related approaches by a large margin, establishing tabular foundation models as the go-to solution for datasets within their constraints.") と同じ方向である。
+ただし原論文自身が、1万件・500特徴を超える規模に拡張できる根拠にはならないと断っている [doi-10.1038_s41586-024-08328-6#c14](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=6 "these results should not be taken as evidence that TabPFN scales well beyond the 10,000 samples and 500 features considered here.")。
+また、スコアの正規化は比較手法の集合に依存する [doi-10.1038_s41586-024-08328-6#c11](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=5 "Scores were normalized per dataset, with 1.0 representing the best and 0.0 the worst performance with respect to all baselines.")。
 
-**TabM**(Gorishniy et al. 2025)は、重みの大半を共有した多数のMLPを同時に学習する「1つのモデルの中のアンサンブル」である [arxiv-2410.24210#c11]。
-原論文は、TabMが深層モデルの中で最良だったと主張し [arxiv-2410.24210#c1]、個々のサブモデルは弱いが集めると強いことを示している [arxiv-2410.24210#c3] [arxiv-2410.24210#c15]。
-TabArena で「設定のアンサンブル」を加えると深層モデルが逆転したこと [arxiv-2506.16791#c12] と、TabM自身がアンサンブルの一種であることは、同じ方向の観察として読める(これは記事筆者の解釈で、どちらの論文も直接この関係を述べてはいない)。
-GBDTとは「十分に競争できる」という表現にとどまっている [arxiv-2410.24210#c5]。
+**TabM**(Gorishniy et al. 2025)は、重みの大半を共有した多数のMLPを同時に学習する「1つのモデルの中のアンサンブル」である [arxiv-2410.24210#c11](https://arxiv.org/pdf/2410.24210v3#page=2 "the two key reasons for TabM's high performance are the collective training of the underlying implicit MLPs and the weight sharing.")。
+原論文は、TabMが深層モデルの中で最良だったと主張し [arxiv-2410.24210#c1](https://arxiv.org/pdf/2410.24210v3#page=1 "In particular, we find that TabM demonstrates the best performance among tabular DL models.")、個々のサブモデルは弱いが集めると強いことを示している [arxiv-2410.24210#c3](https://arxiv.org/pdf/2410.24210v3#page=1 "We observe that the multiple predictions of TabM are weak individually, but powerful collectively.") [arxiv-2410.24210#c15](https://arxiv.org/pdf/2410.24210v3#page=9 "individually, even the best submodel of TabM is no better than a simple MLP.")。
+TabArena で「設定のアンサンブル」を加えると深層モデルが逆転したこと [arxiv-2506.16791#c12](https://arxiv.org/pdf/2506.16791v4#page=7 "after post-hoc ensembling, neural networks are the strongest single models on average in TabArena-v0.1.") と、TabM自身がアンサンブルの一種であることは、同じ方向の観察として読める(これは記事筆者の解釈で、どちらの論文も直接この関係を述べてはいない)。
+GBDTとは「十分に競争できる」という表現にとどまっている [arxiv-2410.24210#c5](https://arxiv.org/pdf/2410.24210v3#page=2 "TabM easily competes with GBDT and outperforms prior tabular DL models")。
 
-**RealMLP**(Holzmüller et al. 2024)は、MLPの改良と、GBDT・MLPの「調整済み既定値」を提案した [arxiv-2407.04491#c2]。
+**RealMLP**(Holzmüller et al. 2024)は、MLPの改良と、GBDT・MLPの「調整済み既定値」を提案した [arxiv-2407.04491#c2](https://arxiv.org/pdf/2407.04491v3#page=1 "a combination of RealMLP and GBDTs with improved default parameters can achieve excellent results without hyperparameter tuning.")。
 メタ訓練・メタテストのベンチマークではRealMLPとRealTabRがGBDTを上回ったが、Grinsztajn らのデータセットの分類ではCatBoostに劣った(いずれも生成された勝敗表を参照)。
-評価指標をAUROCにするとGBDTが有利になり [arxiv-2407.04491#c9]、集計方法を変えると調整済み既定値の優位が小さくなる [arxiv-2407.04491#c10] と、著者自身が結果の条件依存性を認めている。
-推奨は TabZilla と異なり、「CatBoostをチューニングする」より「調整済み既定値のモデルを複数試す」ほうを支持している [arxiv-2407.04491#c5] [arxiv-2407.04491#c6]。
+評価指標をAUROCにするとGBDTが有利になり [arxiv-2407.04491#c9](https://arxiv.org/pdf/2407.04491v3#page=10 "For classification, using AUROC instead of classification error (Figure 3, Appendix B.5) favors GBDTs.")、集計方法を変えると調整済み既定値の優位が小さくなる [arxiv-2407.04491#c10](https://arxiv.org/pdf/2407.04491v3#page=10 "The use of different aggregation metrics than the shifted geometric mean reduces the advantage of TD methods") と、著者自身が結果の条件依存性を認めている。
+推奨は TabZilla と異なり、「CatBoostをチューニングする」より「調整済み既定値のモデルを複数試す」ほうを支持している [arxiv-2407.04491#c5](https://arxiv.org/pdf/2407.04491v3#page=10 "Unlike McElfresh et al. [43], who argue in favor of CatBoost-HPO over trying NNs, our results favor model portfolios as used in modern AutoML systems [10].") [arxiv-2407.04491#c6](https://arxiv.org/pdf/2407.04491v3#page=10 "Simply trying all default algorithms is faster and very often better than (naive) single-algorithm HPO.")。
 
-**裏付けの独立性に関する注意**: TabArena の著者には TabPFNv2 の著者2名 [arxiv-2506.16791#c23] と RealMLP・TabICL の著者1名 [arxiv-2506.16791#c22] が含まれる。TabPFNv2 の著者2名は表データ基盤モデルの企業にも所属している [doi-10.1038_s41586-024-08328-6#c18]。
+**裏付けの独立性に関する注意**: TabArena の著者には TabPFNv2 の著者2名 [arxiv-2506.16791#c23](https://arxiv.org/pdf/2506.16791v4#page=11 "L.P. and F.H. are a subset of the authors of TabPFNv2.") と RealMLP・TabICL の著者1名 [arxiv-2506.16791#c22](https://arxiv.org/pdf/2506.16791v4#page=11 "D.H. is one of the authors of RealMLP and one of the authors of TabICL.") が含まれる。TabPFNv2 の著者2名は表データ基盤モデルの企業にも所属している [doi-10.1038_s41586-024-08328-6#c18](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=13 "F.H. and N.H. are affiliated with PriorLabs, a company focused on developing tabular foundation models.")。
 したがって、TabArena が TabPFNv2 と RealMLP の強さを確認したことは、**著者の重なりがない第三者による独立した検証ではない**。3つのうち、原論文の著者が TabArena の著者に含まれていないのは TabM だけである。
 
 ## 現時点での整理
 
 9本の論文内の比較から言えることは、「どちらが強いか」は**評価条件に強く依存する**ということである。
 
-- **データ規模**: 小規模データでは基盤モデルが強い [arxiv-2207.01848#c1] [arxiv-2305.02997#c11] [arxiv-2506.16791#c2] [doi-10.1038_s41586-024-08328-6#c1]。訓練データを中規模に切り詰めた条件では木モデルが一貫して優勢で [arxiv-2207.08815#c1]、データが大きいほどGBDTが相対的に有利という分析もある [arxiv-2305.02997#c6]。一方、切り詰めない大規模データを含む条件では深層モデルが多くのデータセットで上回った [arxiv-2106.11959#c2]。
-- **評価方式**: 単一の最良設定で比べるか、設定のアンサンブルで比べるかで順位が入れ替わる [arxiv-2506.16791#c11] [arxiv-2506.16791#c12]。モデル選択の方法(ホールドアウトか交差検証か)も結果を偏らせる [arxiv-2506.16791#c14]。評価指標をAUROCにするとGBDTが有利になり、集計方法を変えると結論の強さが変わる [arxiv-2407.04491#c9] [arxiv-2407.04491#c10]。
-- **データセットの選び方**: 手法の元論文のデータセットでは、その手法が強く見えやすい [arxiv-2106.03253#c4]。ベンチマークの構成自体がどちらかに有利になりうる [arxiv-2106.11959#c5] [arxiv-2207.08815#c10]。
-- **チューニングと既定値**: 手法の選択より軽いチューニングのほうが効くデータセットが多い [arxiv-2305.02997#c5]。単純なモデルもチューニングで競争力を持つ [arxiv-2106.11959#c8]。よく調整した既定値だけでも強い組み合わせを作れる [arxiv-2407.04491#c2]。時間あたりでは木モデルが有利 [arxiv-2207.08815#c13] [arxiv-2506.16791#c15]。
-- **データの性質**: 特徴量の分布が不規則なデータではGBDTが強い [arxiv-2305.02997#c4]。カテゴリ特徴や欠損値は2023年版TabPFNの弱点だったが [arxiv-2207.01848#c7]、TabPFN v2 は対応したと報告している [doi-10.1038_s41586-024-08328-6#c3]。多クラス数の大きい問題はGBDTの弱点になりうる [arxiv-2106.11959#c6]。
-- **アンサンブル**: 異なる系統のモデルを混ぜると単独より良くなるという観察は、3本で一致している [arxiv-2106.03253#c3] [arxiv-2207.01848#c10] [arxiv-2506.16791#c3]。深層モデルの最上位の一つであるTabM自体も、弱いサブモデルを集めたアンサンブルとして強さを得ている [arxiv-2410.24210#c16]。
-- **評価者の独立性**: 新しいモデルの評価は、そのモデルの著者自身か、著者が重なるベンチマークによるものが多い [arxiv-2506.16791#c22] [arxiv-2506.16791#c23] [doi-10.1038_s41586-024-08328-6#c18]。各手法が自分の論文のデータで強く見えやすいという指摘 [arxiv-2106.03253#c4] と合わせて、独立した追試の有無を意識して読む必要がある。
+- **データ規模**: 小規模データでは基盤モデルが強い [arxiv-2207.01848#c1](https://arxiv.org/pdf/2207.01848v6#page=1 "we show that our method clearly outperforms boosted trees and performs on par with complex state-of-the-art AutoML systems with up to 230× speedup.") [arxiv-2305.02997#c11](https://arxiv.org/pdf/2305.02997v4#page=5 "Now, we find that TabPFN achieves the best average performance of all algorithms, while also having the fastest training time.") [arxiv-2506.16791#c2](https://arxiv.org/pdf/2506.16791v4#page=1 "At the same time, foundation models excel on smaller datasets.") [doi-10.1038_s41586-024-08328-6#c1](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=1 "a tabular foundation model that outperforms all previous methods on datasets with up to 10,000 samples by a wide margin, using substantially less training time.")。訓練データを中規模に切り詰めた条件では木モデルが一貫して優勢で [arxiv-2207.08815#c1](https://arxiv.org/pdf/2207.08815v1#page=1 "Results show that tree-based models remain state-of-the-art on medium-sized data")、データが大きいほどGBDTが相対的に有利という分析もある [arxiv-2305.02997#c6](https://arxiv.org/pdf/2305.02997v4#page=8 "Throughout our metafeature analyses, we find that GBDTs perform comparatively better than NNs and baselines with larger datasets.")。一方、切り詰めない大規模データを含む条件では深層モデルが多くのデータセットで上回った [arxiv-2106.11959#c2](https://arxiv.org/pdf/2106.11959v5#page=2 "Second, FT-Transformer demonstrates the best performance on most tasks and becomes a new powerful solution for the field.")。
+- **評価方式**: 単一の最良設定で比べるか、設定のアンサンブルで比べるかで順位が入れ替わる [arxiv-2506.16791#c11](https://arxiv.org/pdf/2506.16791v4#page=7 "In line with previous work [33], CatBoost is ranked first in the conventional tuning regime (Figure 1).") [arxiv-2506.16791#c12](https://arxiv.org/pdf/2506.16791v4#page=7 "after post-hoc ensembling, neural networks are the strongest single models on average in TabArena-v0.1.")。モデル選択の方法(ホールドアウトか交差検証か)も結果を偏らせる [arxiv-2506.16791#c14](https://arxiv.org/pdf/2506.16791v4#page=8 "when using holdout validation instead of cross-validation for model selection, all models are greatly underestimated, and performance is biased in favor of models that already use ensembling.")。評価指標をAUROCにするとGBDTが有利になり、集計方法を変えると結論の強さが変わる [arxiv-2407.04491#c9](https://arxiv.org/pdf/2407.04491v3#page=10 "For classification, using AUROC instead of classification error (Figure 3, Appendix B.5) favors GBDTs.") [arxiv-2407.04491#c10](https://arxiv.org/pdf/2407.04491v3#page=10 "The use of different aggregation metrics than the shifted geometric mean reduces the advantage of TD methods")。
+- **データセットの選び方**: 手法の元論文のデータセットでは、その手法が強く見えやすい [arxiv-2106.03253#c4](https://arxiv.org/pdf/2106.03253v2#page=6 "Each deep model was better only on the datasets that appeared in its own paper.")。ベンチマークの構成自体がどちらかに有利になりうる [arxiv-2106.11959#c5](https://arxiv.org/pdf/2106.11959v5#page=8 "it only means that the constructed benchmark is slightly biased towards 'DL-friendly' problems.") [arxiv-2207.08815#c10](https://arxiv.org/pdf/2207.08815v1#page=3 "Specifically, we remove a dataset if a default Logistic Regression (or Linear Regression for regression) reach a score whose relative difference")。
+- **チューニングと既定値**: 手法の選択より軽いチューニングのほうが効くデータセットが多い [arxiv-2305.02997#c5](https://arxiv.org/pdf/2305.02997v4#page=7 "Surprisingly, light hyperparameter tuning yields a greater performance improvement than GBDT-vs-NN selection for about one-third of all datasets.")。単純なモデルもチューニングで競争力を持つ [arxiv-2106.11959#c8](https://arxiv.org/pdf/2106.11959v5#page=7 "Tuning makes simple models such as MLP and ResNet competitive, so we recommend tuning baselines when possible.")。よく調整した既定値だけでも強い組み合わせを作れる [arxiv-2407.04491#c2](https://arxiv.org/pdf/2407.04491v3#page=1 "a combination of RealMLP and GBDTs with improved default parameters can achieve excellent results without hyperparameter tuning.")。時間あたりでは木モデルが有利 [arxiv-2207.08815#c13](https://arxiv.org/pdf/2207.08815v1#page=14 "for the same amount of time spent on random search, tree-based models scores are always high above neural networks.") [arxiv-2506.16791#c15](https://arxiv.org/pdf/2506.16791v4#page=8 "RealMLP only starts to dominate them after a considerable amount of training time with an ensemble of 25+ configurations.")。
+- **データの性質**: 特徴量の分布が不規則なデータではGBDTが強い [arxiv-2305.02997#c4](https://arxiv.org/pdf/2305.02997v4#page=1 "GBDTs are much better than NNs at handling skewed or heavy-tailed feature distributions and other forms of dataset irregularities.")。カテゴリ特徴や欠損値は2023年版TabPFNの弱点だったが [arxiv-2207.01848#c7](https://arxiv.org/pdf/2207.01848v6#page=9 "Generally, TabPFN is less strong when categorical features or missing values are present.")、TabPFN v2 は対応したと報告している [doi-10.1038_s41586-024-08328-6#c3](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=2 "the new TabPFN scales to 50× larger datasets; supports regression tasks, categorical data and missing values; and is robust to unimportant features and outliers.")。多クラス数の大きい問題はGBDTの弱点になりうる [arxiv-2106.11959#c6](https://arxiv.org/pdf/2106.11959v5#page=8 "GBDT can demonstrate unsatisfactory performance (Helena) or even be untunable due to extremely slow training (ALOI).")。
+- **アンサンブル**: 異なる系統のモデルを混ぜると単独より良くなるという観察は、3本で一致している [arxiv-2106.03253#c3](https://arxiv.org/pdf/2106.03253v2#page=1 "we show that an ensemble of deep models and XGBoost performs better on these datasets than XGBoost alone.") [arxiv-2207.01848#c10](https://arxiv.org/pdf/2207.01848v6#page=9 "averaging the predictions of TabPFN and AutoGluon; this strongly outperforms all other methods.") [arxiv-2506.16791#c3](https://arxiv.org/pdf/2506.16791v4#page=1 "Finally, we show that ensembles across models advance the state-of-the-art in tabular machine learning.")。深層モデルの最上位の一つであるTabM自体も、弱いサブモデルを集めたアンサンブルとして強さを得ている [arxiv-2410.24210#c16](https://arxiv.org/pdf/2410.24210v3#page=9 "TabM draws its power from the collective prediction of weak, but diverse submodels.")。
+- **評価者の独立性**: 新しいモデルの評価は、そのモデルの著者自身か、著者が重なるベンチマークによるものが多い [arxiv-2506.16791#c22](https://arxiv.org/pdf/2506.16791v4#page=11 "D.H. is one of the authors of RealMLP and one of the authors of TabICL.") [arxiv-2506.16791#c23](https://arxiv.org/pdf/2506.16791v4#page=11 "L.P. and F.H. are a subset of the authors of TabPFNv2.") [doi-10.1038_s41586-024-08328-6#c18](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=13 "F.H. and N.H. are affiliated with PriorLabs, a company focused on developing tabular foundation models.")。各手法が自分の論文のデータで強く見えやすいという指摘 [arxiv-2106.03253#c4](https://arxiv.org/pdf/2106.03253v2#page=6 "Each deep model was better only on the datasets that appeared in its own paper.") と合わせて、独立した追試の有無を意識して読む必要がある。
 
 実務的には、まず単純なベースラインとGBDT(CatBoostなど)から始める点は各論文と矛盾しない。ただし**次の一手についての推奨は分かれる**。
-TabZilla は「CatBoostを軽くチューニングする」ことを勧め [arxiv-2305.02997#c7]、RealMLP の著者は「調整済み既定値のモデルを複数試す」ほうが時間あたりで有利だとしている [arxiv-2407.04491#c5] [arxiv-2407.04491#c6]。
-データが基盤モデルの適用条件内に収まる小規模なものなら、基盤モデルを試す価値が高い [arxiv-2506.16791#c13] [doi-10.1038_s41586-024-08328-6#c1]。
-計算予算に余裕があれば、系統の違うモデルのアンサンブルが最も強い選択肢になる [arxiv-2506.16791#c3]。
+TabZilla は「CatBoostを軽くチューニングする」ことを勧め [arxiv-2305.02997#c7](https://arxiv.org/pdf/2305.02997v4#page=9 "first try simple baselines, and then conduct light hyperparameter tuning on CatBoost.")、RealMLP の著者は「調整済み既定値のモデルを複数試す」ほうが時間あたりで有利だとしている [arxiv-2407.04491#c5](https://arxiv.org/pdf/2407.04491v3#page=10 "Unlike McElfresh et al. [43], who argue in favor of CatBoost-HPO over trying NNs, our results favor model portfolios as used in modern AutoML systems [10].") [arxiv-2407.04491#c6](https://arxiv.org/pdf/2407.04491v3#page=10 "Simply trying all default algorithms is faster and very often better than (naive) single-algorithm HPO.")。
+データが基盤モデルの適用条件内に収まる小規模なものなら、基盤モデルを試す価値が高い [arxiv-2506.16791#c13](https://arxiv.org/pdf/2506.16791v4#page=7 "TabPFNv2 outperforms related approaches by a large margin, establishing tabular foundation models as the go-to solution for datasets within their constraints.") [doi-10.1038_s41586-024-08328-6#c1](https://www.nature.com/articles/s41586-024-08328-6.pdf#page=1 "a tabular foundation model that outperforms all previous methods on datasets with up to 10,000 samples by a wide margin, using substantially less training time.")。
+計算予算に余裕があれば、系統の違うモデルのアンサンブルが最も強い選択肢になる [arxiv-2506.16791#c3](https://arxiv.org/pdf/2506.16791v4#page=1 "Finally, we show that ensembles across models advance the state-of-the-art in tabular machine learning.")。
 
 **この整理に含まれていないもの**: TabICL・ModernNCA・TabDPT などその他の TabArena 参加モデルの原論文、TabArena の現在のライブ・リーダーボード(このカードは v0.1 時点)、RealMLP 論文付録のデータセット別の数値表、回帰に特化した比較。
 

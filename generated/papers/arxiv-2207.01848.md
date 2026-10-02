@@ -5,28 +5,31 @@
 - カード: [`arxiv-2207.01848`](../../papers/arxiv-2207.01848.yaml)
 - 著者: Noah Hollmann, Samuel Müller, Katharina Eggensperger, Frank Hutter
 - 年・掲載: 2023 ICLR 2023
+- 原論文: [PDF](https://arxiv.org/pdf/2207.01848v6)(arXiv v6、カード作成時に読んだ版)
 - タグ: automl-systems, gradient-boosted-trees, in-context-learning, tabular-classification, tabular-foundation-model
 - 人手レビュー: 未
 
 ## 主張
 
-- **c1** On the 18 small numerical OpenML-CC18 datasets, TabPFN clearly outperformed boosted trees and was on par with AutoML systems, with up to 230x speedup.(Abstract)
-- **c2** TabPFN targets small tasks: up to 1,000 training examples, 100 purely numerical features without missing values, and 10 classes.(Section 1)
-- **c3** TabPFN is pre-trained once, offline, on synthetic datasets (12-layer Transformer, 20 hours on 8 GPUs); the same model is used for all evaluations.(Section 3)
-- **c4** TabPFN predicts by in-context learning: training examples are given as input and no parameters are updated on the new dataset.(Abstract)
-- **c5** The synthetic-data prior is based on structural causal models with a preference for simple structures (mixed with a BNN prior).(Abstract)
-- **c6** No method, including TabPFN, was best on all individual datasets; TabPFN lost even to default baselines on some.(Section 5.2)
-- **c7** TabPFN is weaker when categorical features or missing values are present.(Section 5.2)
-- **c8** Evaluation: 5 repetitions per dataset, each with its own seed and a 50/50 train/test split shared by all methods.(Section 5.2)
-- **c9** Test datasets: all OpenML-CC18 datasets with up to 2,000 samples (1,000 for training), 100 features and 10 classes (30 datasets; 18 purely numerical without missing values).(Section 5.2)
-- **c10** Averaging TabPFN and AutoGluon predictions strongly outperformed all other methods in Table 1; TabPFN's errors are relatively uncorrelated with the baselines'.(Section 5.2)
-- **c11** On the small datasets of the OpenML-AutoML Benchmark, using official baseline results, TabPFN outperformed all baselines in mean cross-entropy, accuracy and the OpenML metric.(Section 5.2)
-- **c12** Limitation: the Transformer architecture only scales to small datasets.(Section 6)
-- **c13** TabPFN generalized to training-set sizes larger than those seen during prior-fitting.(Section 5.2)
-- **c14** Baselines were tuned by random search with 5-fold cross-validation until a time budget was exhausted.(Section 5.2)
-- **c15** On all 30 test datasets (including categorical/missing), aggregate results were still strong but weaker than on purely numerical data.(Section 5.2)
-- **c16** TabPFN needs no hyperparameter tuning.(Abstract)
-- **c17** Results are aggregated across datasets as average ROC AUC (OVO for multiclass), ranks and wins with 95% confidence intervals.(Section 5.2)
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** On the 18 small numerical OpenML-CC18 datasets, TabPFN clearly outperformed boosted trees and was on par with AutoML systems, with up to 230x speedup.([Abstract, p.1](https://arxiv.org/pdf/2207.01848v6#page=1 "we show that our method clearly outperforms boosted trees and performs on par with complex state-of-the-art AutoML systems with up to 230× speedup."))
+- **c2** TabPFN targets small tasks: up to 1,000 training examples, 100 purely numerical features without missing values, and 10 classes.([Section 1, p.2](https://arxiv.org/pdf/2207.01848v6#page=2 "tasks (≤1 000 training examples, ≤100 purely numerical features without missing values and ≤10 classes)"))
+- **c3** TabPFN is pre-trained once, offline, on synthetic datasets (12-layer Transformer, 20 hours on 8 GPUs); the same model is used for all evaluations.([Section 3, p.3](https://arxiv.org/pdf/2207.01848v6#page=3 "we trained a 12-layer Transformer for 18 000 batches of 512 synthetically generated datasets each, which required a total of 20 hours on one machine with 8 GPUs (Nvidia RTX 2080 Ti)."))
+- **c4** TabPFN predicts by in-context learning: training examples are given as input and no parameters are updated on the new dataset.([Abstract, p.1](https://arxiv.org/pdf/2207.01848v6#page=1 "TabPFN performs in-context learning (ICL), it learns to make predictions using sequences of labeled examples (x, f(x)) given in the input, without requiring further parameter updates."))
+- **c5** The synthetic-data prior is based on structural causal models with a preference for simple structures (mixed with a BNN prior).([Abstract, p.1](https://arxiv.org/pdf/2207.01848v6#page=1 "This prior incorporates ideas from causal reasoning: It entails a large space of structural causal models with a preference for simple structures."))
+- **c6** No method, including TabPFN, was best on all individual datasets; TabPFN lost even to default baselines on some.([Section 5.2, p.9](https://arxiv.org/pdf/2207.01848v6#page=9 "no classification method, including TabPFN, performs best on all individual datasets."))
+- **c7** TabPFN is weaker when categorical features or missing values are present.([Section 5.2, p.9](https://arxiv.org/pdf/2207.01848v6#page=9 "Generally, TabPFN is less strong when categorical features or missing values are present."))
+- **c8** Evaluation: 5 repetitions per dataset, each with its own seed and a 50/50 train/test split shared by all methods.([Section 5.2, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "each with a different random seed and train- and test split (50% train and 50% test samples; all methods used the same split given a seed)."))
+- **c9** Test datasets: all OpenML-CC18 datasets with up to 2,000 samples (1,000 for training), 100 features and 10 classes (30 datasets; 18 purely numerical without missing values).([Section 5.2, p.7](https://arxiv.org/pdf/2207.01848v6#page=7 "As test datasets, we used all datasets from the curated open-source OpenML-CC18 benchmark suite (Bischl et al., 2021) that contain up to 2 000 samples (1 000 for the training split), 100 features and 10 classes."))
+- **c10** Averaging TabPFN and AutoGluon predictions strongly outperformed all other methods in Table 1; TabPFN's errors are relatively uncorrelated with the baselines'.([Section 5.2, p.9](https://arxiv.org/pdf/2207.01848v6#page=9 "averaging the predictions of TabPFN and AutoGluon; this strongly outperforms all other methods."))
+- **c11** On the small datasets of the OpenML-AutoML Benchmark, using official baseline results, TabPFN outperformed all baselines in mean cross-entropy, accuracy and the OpenML metric.([Section 5.2, p.9](https://arxiv.org/pdf/2207.01848v6#page=9 "TabPFN outperformed all baselines in terms of mean cross-entropy, accuracy and the OpenML Metric"))
+- **c12** Limitation: the Transformer architecture only scales to small datasets.([Section 6, p.10](https://arxiv.org/pdf/2207.01848v6#page=10 "the underlying Transformer architecture only scales to small datasets"))
+- **c13** TabPFN generalized to training-set sizes larger than those seen during prior-fitting.([Section 5.2, p.9](https://arxiv.org/pdf/2207.01848v6#page=9 "Surprisingly, our models generalize beyond sample sizes seen during training"))
+- **c14** Baselines were tuned by random search with 5-fold cross-validation until a time budget was exhausted.([Section 5.2, p.7](https://arxiv.org/pdf/2207.01848v6#page=7 "we used 5-fold cross-validation to evaluate randomly drawn hyperparameter configurations until a given budget was exhausted"))
+- **c15** On all 30 test datasets (including categorical/missing), aggregate results were still strong but weaker than on purely numerical data.([Section 5.2, p.7](https://arxiv.org/pdf/2207.01848v6#page=7 "still show strong aggregate performance for TabPFN, albeit not as strong as for the purely numerical case"))
+- **c16** TabPFN needs no hyperparameter tuning.([Abstract, p.1](https://arxiv.org/pdf/2207.01848v6#page=1 "needs no hyperparameter tuning and is competitive with state-of-the-art classification methods"))
+- **c17** Results are aggregated across datasets as average ROC AUC (OVO for multiclass), ranks and wins with 95% confidence intervals.([Section 5.2, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "we report the ROC AUC (one-vs-one (OVO) for multi-class classification) average, ranks and wins including the 95% confidence interval"))
 
 ## 結果表
 
@@ -47,6 +50,8 @@
 | TabPFN | 2.9444 |
 | TabPFN + AutoGluon | **2.6667** |
 
+出典: [Table 1, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "M. rank AUC OVO 6.9722 4.9444 6.1944 4.4722 4 3.8056 2.9444 2.6667")
+
 #### mean-rank-accuracy(小さいほど良い)
 
 繰り返し: Aggregated over 18 datasets x 5 splits; ranks and means across datasets (Table 1).
@@ -61,6 +66,8 @@
 | TabPFN (no ensembling) | 3.8889 |
 | TabPFN | 2.8889 |
 | TabPFN + AutoGluon | **2.25** |
+
+出典: [Table 1, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "Mean rank Acc. 6.8889 4.9722 6.0556 5.1667 3.8889 3.8889 2.8889 2.25")
 
 #### mean-rank-cross-entropy(小さいほど良い)
 
@@ -77,6 +84,8 @@
 | TabPFN | 3.0278 |
 | TabPFN + AutoGluon | **2.0833** |
 
+出典: [Table 1, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "Mean rank CE 5.7778 5.4444 6 6.4167 3.1111 4.1389 3.0278 2.0833")
+
 #### mean-roc-auc-ovo(大きいほど良い)
 
 繰り返し: Aggregated over 18 datasets x 5 splits; ranks and means across datasets (Table 1).
@@ -91,6 +100,8 @@
 | TabPFN (no ensembling) | 0.932 ± 0.0088 |
 | TabPFN | **0.934 ± 0.0086** |
 | TabPFN + AutoGluon | **0.934 ± 0.0084** |
+
+出典: [Table 1, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "Mean AUC OVO 0.92±.013 0.924±.011 0.924±.01 0.929±.0096 0.93±.0091 0.932±.0088 0.934±.0086 0.934±.0084")
 
 #### mean-accuracy(大きいほど良い)
 
@@ -107,6 +118,8 @@
 | TabPFN | 0.879 ± 0.0089 |
 | TabPFN + AutoGluon | **0.886 ± 0.0094** |
 
+出典: [Table 1, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "Mean Acc. 0.862±.012 0.864±.011 0.866±.011 0.87±.014 0.881±.01 0.873±.0095 0.879±.0089 0.886±.0094")
+
 #### mean-cross-entropy(小さいほど良い)
 
 繰り返し: Aggregated over 18 datasets x 5 splits; ranks and means across datasets (Table 1).
@@ -121,6 +134,8 @@
 | TabPFN (no ensembling) | 0.727 ± 0.021 |
 | TabPFN | 0.716 ± 0.019 |
 | TabPFN + AutoGluon | **0.711 ± 0.014** |
+
+出典: [Table 1, p.8](https://arxiv.org/pdf/2207.01848v6#page=8 "Mean CE 0.75±.039 0.747±.029 0.759±.04 0.813±.073 0.714±.014 0.727±.021 0.716±.019 0.711±.014")
 
 ## 論文内の勝敗(結果から導出)
 

@@ -5,6 +5,7 @@
 - generated/index.md              タグ別のカード一覧・比較条件一覧
 - generated/stale.md              記事ごとの未反映カード
 - 記事本文の <!-- generated:stale --> ... <!-- /generated:stale --> ブロック
+- 記事本文の根拠 [card-id#cN] を、原論文PDFの該当ページへのリンク(ホバーで原文引用)に書き換える
 
 使い方: uv run python scripts/generate.py [--root PATH] [--check]
   --check: 生成物が最新か確認だけする(差分があれば終了コード1)
@@ -22,6 +23,8 @@ from validate import FRONT_MATTER, _StrDateLoader, load_yaml
 import yaml
 
 STALE_BLOCK = re.compile(r"(<!-- generated:stale -->\n).*?(<!-- /generated:stale -->)", re.DOTALL)
+# [card-id#c1] と、既にリンク化された [card-id#c1](url "title") の両方に一致させる(何度実行しても同じ結果になるように)
+CITATION_LINK = re.compile(r'\[((?:arxiv|doi|exp)-[^\]#\s]+)#([cr][0-9]+)\](?:\([^)\s]*(?: "[^"]*")?\))?')
 HEADER = "<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->\n\n"
 
 
@@ -44,6 +47,50 @@ def load_all(root: Path):
         m = FRONT_MATTER.match(text)
         articles.append((path, text, yaml.load(m.group(1), Loader=_StrDateLoader) if m else {}))
     return cards, benchmarks, tags, articles
+
+
+def pdf_url(card) -> str | None:
+    """カードを作ったときに読んだ版のPDF URL。arXiv は版を固定してページ番号のずれを防ぐ。"""
+    src = card.get("source") or {}
+    if src.get("pdf_url"):
+        return src["pdf_url"]
+    arxiv = (card.get("links") or {}).get("arxiv")
+    if not arxiv:
+        return None
+    version = re.search(r"v(\d+)", src.get("version", ""))
+    return f"https://arxiv.org/pdf/{arxiv.rstrip('/').split('/')[-1]}" + (f"v{version.group(1)}" if version else "")
+
+
+def item_url(card, item) -> str | None:
+    """主張・結果・勝敗の出典URL。論文はPDFの該当ページ、実験はコミット固定のファイル。"""
+    if card["_kind"] == "experiment":
+        return f"{card['repo'].rstrip('/')}/blob/{card['commit']}/{item['path']}" if item.get("path") else None
+    url = pdf_url(card)
+    if url and item.get("page"):
+        url += f"#page={item['page']}"
+    return url
+
+
+def link_title(item) -> str:
+    text = item.get("quote") or item.get("locator") or item.get("json_pointer") or ""
+    return text.replace('"', "'").replace("|", "/")
+
+
+def source_link(card, item) -> str:
+    label = item.get("location", "") + (f", p.{item['page']}" if item.get("page") else "")
+    url = item_url(card, item)
+    return f'[{label}]({url} "{link_title(item)}")' if url else label
+
+
+def link_citations(text: str, cards) -> str:
+    def sub(m):
+        cid, iid = m.group(1), m.group(2)
+        card = cards.get(cid)
+        items = {i["id"]: i for i in (card.get("claims") or []) + (card.get("results") or [])} if card else {}
+        item = items.get(iid)
+        url = item_url(card, item) if item else None
+        return f'[{cid}#{iid}]({url} "{link_title(item)}")' if url else f"[{cid}#{iid}]"
+    return CITATION_LINK.sub(sub, text)
 
 
 def card_tags(card) -> set[str]:
@@ -82,6 +129,11 @@ def result_tables(card, benchmarks) -> list[str]:
                 s = fmt(r["value"]) + (f" ± {fmt(r['std'])}" if "std" in r else "")
                 cells.append(f"**{s}**" if r["value"] == best[c] else s)
             out.append(f"| {m} | " + " | ".join(cells) + " |")
+        sources = {}
+        for c in cols:
+            for r in by_bench[c].values():
+                sources.setdefault((r["location"], r.get("page")), r)
+        out.append("\n出典: " + " / ".join(source_link(card, r) for r in sources.values()))
         out.append("")
     return out
 
@@ -106,11 +158,13 @@ def paper_page(card, benchmarks) -> str:
              f"- カード: [`{card['id']}`](../../{'papers' if card['_kind'] == 'paper' else 'experiments'}/{card['id']}.yaml)",
              f"- 著者: {', '.join(card.get('authors', []))}" if card.get("authors") else "",
              f"- 年・掲載: {card.get('year', '')} {card.get('venue', '')}".rstrip(),
+             f"- 原論文: [PDF]({pdf_url(card)})({card['source']['version']}、カード作成時に読んだ版)" if card["_kind"] == "paper" and pdf_url(card) else "",
              f"- タグ: {', '.join(sorted(card_tags(card)))}",
              f"- 人手レビュー: {'済' if card['card']['reviewed'] else '未'}\n"]
     if card.get("claims"):
         lines.append("## 主張\n")
-        lines += [f"- **{c['id']}** {c['statement']}({c['location']})" for c in card["claims"]]
+        lines.append("出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。\n")
+        lines += [f"- **{c['id']}** {c['statement']}({source_link(card, c)})" for c in card["claims"]]
         lines.append("")
     if card.get("results"):
         lines.append("## 結果表\n")
@@ -128,7 +182,7 @@ def paper_page(card, benchmarks) -> str:
         lines.append("| 勝ち | 負け | 根拠 | 比較条件 | 出典 |")
         lines.append("|---|---|---|---|---|")
         for r in card["relations"]:
-            lines.append(f"| {r['winner']} | {r['loser']} | {r['basis']} | {('`' + r['benchmark'] + '`') if r.get('benchmark') else '–'} | {r['location']} |")
+            lines.append(f"| {r['winner']} | {r['loser']} | {r['basis']} | {('`' + r['benchmark'] + '`') if r.get('benchmark') else '–'} | {source_link(card, r)} |")
         lines.append("")
     return "\n".join(l for l in lines if l is not None) + "\n"
 
@@ -173,6 +227,8 @@ def generate(root: Path) -> dict[Path, str]:
         stale = stale_for(fm, cards)
         rel = path.relative_to(root)
         lines.append(f"- [{rel}](../{rel}): " + (", ".join(f"`{s}`" for s in stale) if stale else "なし"))
+        text = link_citations(text, cards)
+        out[path] = text
         if STALE_BLOCK.search(text):
             note = (f"> ⚠ この記事の執筆後({fm.get('written_at')})に、関連カードが {len(stale)} 件追加されています(未反映): "
                     + ", ".join(f"`{s}`" for s in stale) + "\n") if stale else "> 未反映のカードはありません。\n"

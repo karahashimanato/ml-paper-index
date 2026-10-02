@@ -91,6 +91,11 @@
         "license": {
           "description": "Paper license if stated (e.g. 'CC BY 4.0', 'arXiv non-exclusive'). Omit if unknown.",
           "type": "string"
+        },
+        "pdf_url": {
+          "description": "URL of exactly this PDF version, used for citation links (#page=N). Optional for arXiv cards: derived from links.arxiv + source.version.",
+          "type": "string",
+          "format": "uri"
         }
       }
     },

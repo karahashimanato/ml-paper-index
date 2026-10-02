@@ -5,28 +5,31 @@
 - カード: [`arxiv-2106.11959`](../../papers/arxiv-2106.11959.yaml)
 - 著者: Yury Gorishniy, Ivan Rubachev, Valentin Khrulkov, Artem Babenko
 - 年・掲載: 2021 NeurIPS 2021
+- 原論文: [PDF](https://arxiv.org/pdf/2106.11959v5)(arXiv v5、カード作成時に読んだ版)
 - タグ: differentiable-trees, gradient-boosted-trees, supervised, tabular-attention, tabular-classification, tabular-mlp, tabular-regression
 - 人手レビュー: 未
 
 ## 主張
 
-- **c1** None of the considered DL models consistently outperformed the simple ResNet-like baseline.(Section 1)
-- **c2** FT-Transformer (proposed) performed best among DL models on most tasks.(Section 1)
-- **c3** There is no universally superior solution among GBDT and deep models.(Section 1)
-- **c4** With tuned hyperparameters, GBDT ensembles dominated on California Housing, Adult and Yahoo.(Section 4.5)
-- **c5** Authors state that DL winning on most of their datasets reflects a benchmark slightly biased towards DL-friendly problems, not DL being better.(Section 4.5)
-- **c6** GBDT struggled on multiclass problems with many classes: poor on Helena (100 classes), untunable on ALOI (1000 classes) due to slow training.(Section 4.5)
-- **c7** Ensembles of default FT-Transformers performed roughly on par with ensembles of tuned FT-Transformers.(Section 4.5)
-- **c8** Tuning made simple models (MLP, ResNet) competitive; authors recommend tuning baselines.(Section 4.4)
-- **c9** FT-Transformer needs more hardware and time than ResNet and may not scale to very many features (attention is quadratic in the number of features).(Section 3.3 Limitations)
-- **c10** NODE was inferior to ResNet on six of the eleven datasets despite being more complex.(Section 4.4)
-- **c11** On synthetic targets interpolating between GBDT-friendly and DL-friendly functions, ResNet degraded as targets became GBDT-friendly while FT-Transformer stayed competitive.(Section 5.1, Figure 3)
-- **c12** FT-Transformer was not tuned on Yahoo (default configuration reported) and only heuristic default configurations were tried on Epsilon.(Appendix E.2)
-- **c13** Each tuned configuration was evaluated over 15 random seeds; ensembles are three disjoint groups of 5 models.(Section 4.3)
-- **c14** XGBoost used one-hot encoding for categorical features; CatBoost used its built-in categorical support.(Section 4.3)
-- **c15** Averaging [CLS] attention maps gave feature-importance rankings comparable to Integrated Gradients at much lower cost.(Section 5.3)
-- **c16** Dataset sizes (#objects) range from 20,640 (California Housing) to 1,200,192 (Microsoft); the 11 datasets include multiclass problems with 100 (Helena) and 1000 (ALOI) classes.(Table 1)
-- **c17** Most models were tuned with Optuna's TPE (Bayesian optimization); the rest used predefined configurations from their papers. The test set was never used for tuning.(Section 4.3)
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** None of the considered DL models consistently outperformed the simple ResNet-like baseline.([Section 1, p.2](https://arxiv.org/pdf/2106.11959v5#page=2 "First, we reveal that none of the considered DL models can consistently outperform the ResNet-like model."))
+- **c2** FT-Transformer (proposed) performed best among DL models on most tasks.([Section 1, p.2](https://arxiv.org/pdf/2106.11959v5#page=2 "Second, FT-Transformer demonstrates the best performance on most tasks and becomes a new powerful solution for the field."))
+- **c3** There is no universally superior solution among GBDT and deep models.([Section 1, p.2](https://arxiv.org/pdf/2106.11959v5#page=2 "We reveal that there is still no universally superior solution among GBDT and deep models."))
+- **c4** With tuned hyperparameters, GBDT ensembles dominated on California Housing, Adult and Yahoo.([Section 4.5, p.8](https://arxiv.org/pdf/2106.11959v5#page=8 "Once hyperparameters are properly tuned, GBDTs start dominating on some datasets (California Housing, Adult, Yahoo; see Table 4)."))
+- **c5** Authors state that DL winning on most of their datasets reflects a benchmark slightly biased towards DL-friendly problems, not DL being better.([Section 4.5, p.8](https://arxiv.org/pdf/2106.11959v5#page=8 "it only means that the constructed benchmark is slightly biased towards 'DL-friendly' problems."))
+- **c6** GBDT struggled on multiclass problems with many classes: poor on Helena (100 classes), untunable on ALOI (1000 classes) due to slow training.([Section 4.5, p.8](https://arxiv.org/pdf/2106.11959v5#page=8 "GBDT can demonstrate unsatisfactory performance (Helena) or even be untunable due to extremely slow training (ALOI)."))
+- **c7** Ensembles of default FT-Transformers performed roughly on par with ensembles of tuned FT-Transformers.([Section 4.5, p.8](https://arxiv.org/pdf/2106.11959v5#page=8 "Interestingly, the ensemble of default FT-Transformers performs quite on par with the ensembles of tuned FT-Transformers."))
+- **c8** Tuning made simple models (MLP, ResNet) competitive; authors recommend tuning baselines.([Section 4.4, p.7](https://arxiv.org/pdf/2106.11959v5#page=7 "Tuning makes simple models such as MLP and ResNet competitive, so we recommend tuning baselines when possible."))
+- **c9** FT-Transformer needs more hardware and time than ResNet and may not scale to very many features (attention is quadratic in the number of features).([Section 3.3 Limitations, p.5](https://arxiv.org/pdf/2106.11959v5#page=5 "FT-Transformer requires more resources (both hardware and time) for training than simple models such as ResNet"))
+- **c10** NODE was inferior to ResNet on six of the eleven datasets despite being more complex.([Section 4.4, p.7](https://arxiv.org/pdf/2106.11959v5#page=7 "However, it is still inferior to ResNet on six datasets (Helena, Jannis, Higgs, ALOI, Epsilon, Covertype), while being a more complex solution."))
+- **c11** On synthetic targets interpolating between GBDT-friendly and DL-friendly functions, ResNet degraded as targets became GBDT-friendly while FT-Transformer stayed competitive.([Section 5.1, Figure 3, p.9](https://arxiv.org/pdf/2106.11959v5#page=9 "By contrast, FT-Transformer yields competitive performance across the whole range of tasks."))
+- **c12** FT-Transformer was not tuned on Yahoo (default configuration reported) and only heuristic default configurations were tried on Epsilon.([Appendix E.2, p.18](https://arxiv.org/pdf/2106.11959v5#page=18 "For Yahoo, we did not perform tuning at all, since the default configuration already performed well."))
+- **c13** Each tuned configuration was evaluated over 15 random seeds; ensembles are three disjoint groups of 5 models.([Section 4.3, p.6](https://arxiv.org/pdf/2106.11959v5#page=6 "For each tuned configuration, we run 15 experiments with different random seeds and report the performance on the test set."))
+- **c14** XGBoost used one-hot encoding for categorical features; CatBoost used its built-in categorical support.([Section 4.3, p.6](https://arxiv.org/pdf/2106.11959v5#page=6 "For XGBoost, we use one-hot encoding."))
+- **c15** Averaging [CLS] attention maps gave feature-importance rankings comparable to Integrated Gradients at much lower cost.([Section 5.3, p.10](https://arxiv.org/pdf/2106.11959v5#page=10 "we conclude that the simple averaging of attention maps can be a good choice in terms of cost-effectiveness."))
+- **c16** Dataset sizes (#objects) range from 20,640 (California Housing) to 1,200,192 (Microsoft); the 11 datasets include multiclass problems with 100 (Helena) and 1000 (ALOI) classes.([Table 1, p.6](https://arxiv.org/pdf/2106.11959v5#page=6 "#objects 20640 48842 65196 83733 98050 108000 500000 515345 581012 709877 1200192"))
+- **c17** Most models were tuned with Optuna's TPE (Bayesian optimization); the rest used predefined configurations from their papers. The test set was never used for tuning.([Section 4.3, p.6](https://arxiv.org/pdf/2106.11959v5#page=6 "we use the Optuna library (Akiba et al., 2019) to run Bayesian optimization (the Tree-Structured Parzen Estimator algorithm)"))
 
 ## 結果表
 
@@ -49,6 +52,8 @@
 | FT-Transformer | **0.459** | 8.855 | 0.756 | 0.746 |
 | FT-Transformer (w/o feature biases) | 0.47 | 8.843 | – | 0.751 |
 
+出典: [Table 2, p.7](https://arxiv.org/pdf/2106.11959v5#page=7 "TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)") / [Table 5, p.9](https://arxiv.org/pdf/2106.11959v5#page=9 "FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751")
+
 #### accuracy(大きいほど良い)
 
 繰り返し: Mean of 15 runs with different random seeds of the tuned configuration (Section 4.3).
@@ -66,6 +71,8 @@
 | FT-Transformer | **0.859** | 0.391 | **0.732** | **0.729** | 0.96 | **0.8982** | **0.97** |
 | FT-Transformer (w/o feature biases) | – | 0.381 | 0.724 | 0.727 | 0.958 | – | 0.964 |
 
+出典: [Table 2, p.7](https://arxiv.org/pdf/2106.11959v5#page=7 "TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)") / [Table 5, p.9](https://arxiv.org/pdf/2106.11959v5#page=9 "FT-Transformer (w/o feature biases) 0.470 0.381 0.724 0.727 0.958 8.843 0.964 0.751")
+
 #### average-rank(小さいほど良い)
 
 繰り返し: Ranks computed per dataset by sorting the 15-seed mean scores (Table 2 caption).
@@ -82,6 +89,8 @@
 | ResNet | 3.3 ± 1.8 |
 | FT-Transformer | **1.8 ± 1.2** |
 
+出典: [Table 2, p.7](https://arxiv.org/pdf/2106.11959v5#page=7 "TabNet 0.510 0.850 0.378 0.723 0.719 0.954 0.8896 8.909 0.957 0.823 0.751 7.5 (2.0)")
+
 #### rmse(小さいほど良い)
 
 繰り返し: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
@@ -97,6 +106,8 @@
 | XGBoost (tuned) | 0.431 | 8.819 | **0.732** | 0.742 |
 | CatBoost (tuned) | **0.423** | 8.837 | 0.74 | **0.741** |
 
+出典: [Table 3, p.7](https://arxiv.org/pdf/2106.11959v5#page=7 "ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745") / [Table 4, p.8](https://arxiv.org/pdf/2106.11959v5#page=8 "CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744")
+
 #### accuracy(大きいほど良い)
 
 繰り返し: 15 single models split into three disjoint groups of 5; predictions averaged within a group; mean over the three ensembles (Section 4.3).
@@ -111,6 +122,8 @@
 | XGBoost (default) | **0.874** | 0.348 | 0.711 | 0.717 | 0.924 | 0.8799 | 0.964 |
 | XGBoost (tuned) | 0.872 | 0.377 | 0.724 | 0.728 | – | 0.8861 | 0.969 |
 | CatBoost (tuned) | **0.874** | 0.388 | 0.727 | 0.729 | – | 0.8898 | 0.968 |
+
+出典: [Table 3, p.7](https://arxiv.org/pdf/2106.11959v5#page=7 "ResNet 0.478 0.857 0.398 0.734 0.731 0.966 0.8976 8.770 0.967 0.751 0.745") / [Table 4, p.8](https://arxiv.org/pdf/2106.11959v5#page=8 "CatBoost 0.428 0.873 0.386 0.724 0.728 0.948 0.8893 8.885 0.910 0.749 0.744")
 
 ## 論文内の勝敗(結果から導出)
 

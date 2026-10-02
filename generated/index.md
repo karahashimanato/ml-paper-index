@@ -77,11 +77,11 @@
 | `mcelfresh2023-98-datasets` | paper-private | tabular-classification | 98 of the 176 OpenML classification datasets (excluding those where many algorithms hit memory/time limits) | arxiv-2305.02997 | 96 |
 | `mcelfresh2023-57-small-datasets` | paper-private | tabular-classification | 57 smallest datasets (<= 1250 instances) of the 176 OpenML classification datasets | arxiv-2305.02997 | 95 |
 | `tabzilla-suite` | public | tabular-classification | TabZilla Benchmark Suite: 36 'hard' OpenML classification datasets (Section 3, Table 4) | arxiv-2305.02997 | 0 |
-| `hollmann2025-amlb-small-classification` | paper-private | tabular-classification | 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes | doi-10.1038_s41586-024-08328-6 | 8 |
-| `hollmann2025-amlb-ctr23-small-regression` | paper-private | tabular-regression | 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features | doi-10.1038_s41586-024-08328-6 | 5 |
 | `gorishniy2025-46-datasets` | paper-private | tabular-classification | 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression | arxiv-2410.24210 | 4 |
 | `gorishniy2025-maps-routing` | paper-private | tabular-regression | Maps Routing (6.5M objects, 986 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |
 | `gorishniy2025-weather` | paper-private | tabular-regression | Weather (13M objects, 103 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |
 | `holzmuller2024-meta-train` | paper-private | tabular-classification | Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression) | arxiv-2407.04491 | 1 |
 | `holzmuller2024-meta-test` | paper-private | tabular-classification | Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression) | arxiv-2407.04491 | 1 |
 | `holzmuller2024-grinsztajn` | paper-private | tabular-classification | Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol) | arxiv-2407.04491 | 2 |
+| `hollmann2025-amlb-small-classification` | paper-private | tabular-classification | 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes | doi-10.1038_s41586-024-08328-6 | 8 |
+| `hollmann2025-amlb-ctr23-small-regression` | paper-private | tabular-regression | 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features | doi-10.1038_s41586-024-08328-6 | 5 |

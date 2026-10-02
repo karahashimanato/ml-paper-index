@@ -5,26 +5,29 @@
 - カード: [`arxiv-2106.03253`](../../papers/arxiv-2106.03253.yaml)
 - 著者: Ravid Shwartz-Ziv, Amitai Armon
 - 年・掲載: 2021
+- 原論文: [PDF](https://arxiv.org/pdf/2106.03253v2)(arXiv v2、カード作成時に読んだ版)
 - タグ: differentiable-trees, gradient-boosted-trees, heterogeneous-ensembles, supervised, tabular-attention, tabular-classification, tabular-cnn, tabular-regression
 - 人手レビュー: 未
 
 ## 主張
 
-- **c1** XGBoost outperformed the four deep tabular models (TabNet, NODE, DNF-Net, 1D-CNN) across the 11 datasets, including datasets from the deep models' own papers.(Abstract)
-- **c2** XGBoost needed much less hyperparameter tuning than the deep models.(Abstract)
-- **c3** An ensemble of the deep models and XGBoost performed better than XGBoost alone on these datasets.(Abstract)
-- **c4** Each deep model did best only on the datasets from its own paper; no deep model was consistently better than the others.(Section 3.2)
-- **c5** Authors name selection bias in the original papers (datasets chosen where the model works well) as one possible explanation.(Section 3.2)
-- **c6** Authors name unequal hyperparameter optimization in the original papers as a second possible explanation.(Section 3.2)
-- **c7** All models were tuned with HyperOpt (Bayesian optimization) for 1,000 steps per dataset on a validation set.(Section 3.1.2)
-- **c8** XGBoost trained/tuned more than an order of magnitude faster than the deep models in their runs; authors caution this depends on software optimization.(Section 3.2)
-- **c9** An ensemble of classical models (XGBoost, SVM, CatBoost) was reported to perform much worse than the deep-models-plus-XGBoost ensemble.(Section 3.2)
-- **c10** On Shrutime, choosing ensemble members by validation loss needed only three models for near-optimal performance.(Section 3.2, Figure 1)
-- **c11** The text says the regression metric is RMSE.(Section 3.1.2)
-- **c12** The Table 2 caption says MSE is shown for YearPrediction and Rossman (inconsistent with the RMSE statement in Section 3.1.2).(Table 2 caption)
-- **c13** The 11 datasets are nine taken from the TabNet, DNF-Net and NODE papers (three each) plus two Kaggle datasets not used by any of them.(Section 3.1.1)
-- **c14** Table 2 values are averages of four training runs with the standard error of the mean.(Table 2 caption)
-- **c15** Each dataset was preprocessed and trained as described in its original paper.(Section 3.1.1)
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** XGBoost outperformed the four deep tabular models (TabNet, NODE, DNF-Net, 1D-CNN) across the 11 datasets, including datasets from the deep models' own papers.([Abstract, p.1](https://arxiv.org/pdf/2106.03253v2#page=1 "Our study shows that XGBoost outperforms these deep models across the datasets, including the datasets used in the papers that proposed the deep models."))
+- **c2** XGBoost needed much less hyperparameter tuning than the deep models.([Abstract, p.1](https://arxiv.org/pdf/2106.03253v2#page=1 "We also demonstrate that XGBoost requires much less tuning."))
+- **c3** An ensemble of the deep models and XGBoost performed better than XGBoost alone on these datasets.([Abstract, p.1](https://arxiv.org/pdf/2106.03253v2#page=1 "we show that an ensemble of deep models and XGBoost performs better on these datasets than XGBoost alone."))
+- **c4** Each deep model did best only on the datasets from its own paper; no deep model was consistently better than the others.([Section 3.2, p.6](https://arxiv.org/pdf/2106.03253v2#page=6 "Each deep model was better only on the datasets that appeared in its own paper."))
+- **c5** Authors name selection bias in the original papers (datasets chosen where the model works well) as one possible explanation.([Section 3.2, p.6](https://arxiv.org/pdf/2106.03253v2#page=6 "The first possibility is selection bias."))
+- **c6** Authors name unequal hyperparameter optimization in the original papers as a second possible explanation.([Section 3.2, p.6](https://arxiv.org/pdf/2106.03253v2#page=6 "The second possibility is differences in the optimization of hyperparameters."))
+- **c7** All models were tuned with HyperOpt (Bayesian optimization) for 1,000 steps per dataset on a validation set.([Section 3.1.2, p.4](https://arxiv.org/pdf/2106.03253v2#page=4 "The hyperparameter search was run for 1, 000 steps on each dataset by optimizing the results on a validation set."))
+- **c8** XGBoost trained/tuned more than an order of magnitude faster than the deep models in their runs; authors caution this depends on software optimization.([Section 3.2, p.7](https://arxiv.org/pdf/2106.03253v2#page=7 "Generally, we found XGBoost to be significantly faster than the deep networks in our experiments (more than an order of magnitude)."))
+- **c9** An ensemble of classical models (XGBoost, SVM, CatBoost) was reported to perform much worse than the deep-models-plus-XGBoost ensemble.([Section 3.2, p.7](https://arxiv.org/pdf/2106.03253v2#page=7 "Table 2 shows that the ensemble of classical models performed much worse than the ensemble of deep networks and XGBoost."))
+- **c10** On Shrutime, choosing ensemble members by validation loss needed only three models for near-optimal performance.([Section 3.2, Figure 1, p.7](https://arxiv.org/pdf/2106.03253v2#page=7 "Only three models were needed to achieve almost optimal performance this way."))
+- **c11** The text says the regression metric is RMSE.([Section 3.1.2, p.5](https://arxiv.org/pdf/2106.03253v2#page=5 "For regression problems, we report the root mean square error."))
+- **c12** The Table 2 caption says MSE is shown for YearPrediction and Rossman (inconsistent with the RMSE statement in Section 3.1.2).([Table 2 caption, p.6](https://arxiv.org/pdf/2106.03253v2#page=6 "MSE is presented for the YearPrediction and Rossman datasets"))
+- **c13** The 11 datasets are nine taken from the TabNet, DNF-Net and NODE papers (three each) plus two Kaggle datasets not used by any of them.([Section 3.1.1, p.4](https://arxiv.org/pdf/2106.03253v2#page=4 "We use nine datasets from the TabNet, DNF-Net, and NODE papers, drawing three datasets from each paper."))
+- **c14** Table 2 values are averages of four training runs with the standard error of the mean.([Table 2 caption, p.6](https://arxiv.org/pdf/2106.03253v2#page=6 "The values are the averages of four training runs (lower value is better), along with the standard error of the mean (SEM)"))
+- **c15** Each dataset was preprocessed and trained as described in its original paper.([Section 3.1.1, p.4](https://arxiv.org/pdf/2106.03253v2#page=4 "Each dataset was preprocessed and trained as described in the original paper."))
 
 ## 結果表
 
@@ -45,6 +48,8 @@
 | Deep Ensemble w/o XGBoost | 489.94 ± 2.09 | 78.99 ± 0.11 |
 | Deep Ensemble w XGBoost | 485.33 ± 1.29 | **76.19 ± 0.21** |
 
+出典: [Table 2, p.6](https://arxiv.org/pdf/2106.03253v2#page=6 "XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80")
+
 #### cross-entropy-x100(小さいほど良い)
 
 繰り返し: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
@@ -60,6 +65,8 @@
 | Deep Ensemble w/o XGBoost | 3.52 ± 0.1 | 22.41 ± 0.54 | 1.98 ± 0.13 | 69.28 ± 0.62 | 93.5 ± 0.75 | 55.59 ± 0.03 | 10.95 ± 0.01 | 14.69 ± 0.11 | 24.25 ± 0.22 |
 | Deep Ensemble w XGBoost | **2.99 ± 0.08** | 22.34 ± 0.81 | 1.69 ± 0.1 | 59.43 ± 0.6 | **78.93 ± 0.73** | **55.38 ± 0.01** | 11.18 ± 0.01 | **13.1 ± 0.15** | **20.18 ± 0.16** |
 
+出典: [Table 2, p.6](https://arxiv.org/pdf/2106.03253v2#page=6 "XGBoost 490.18 ± 1.19 3.13 ± 0.09 21.62 ± 0.33 2.18 ± 0.20 56.07±0.65 80.64 ± 0.80")
+
 #### avg-relative-deterioration-pct(小さいほど良い)
 
 繰り返し: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
@@ -74,6 +81,8 @@
 | Simple Ensemble | 3.15 |
 | Deep Ensemble w/o XGBoost | 6.91 |
 | Deep Ensemble w XGBoost | **2.32** |
+
+出典: [Table 3, p.7](https://arxiv.org/pdf/2106.03253v2#page=7 "XGBoost 3.34")
 
 ## 論文内の勝敗(結果から導出)
 

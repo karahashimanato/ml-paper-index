@@ -63,10 +63,19 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 
 生成物の入口: [generated/index.md](generated/index.md)
 
+## 新着論文の候補
+
+毎週月曜 9:00(日本時間)に GitHub Actions が新着論文の候補を集め、テーマごとに Issue(ラベル `paper-candidates`)を作る。AIは使わない。
+
+- 候補の出どころ: [registry/watch.yaml](registry/watch.yaml) のキーワードでの arXiv 検索と、既存カードを2本以上引用している新しい論文(Semantic Scholar)
+- カード化したい候補にチェックを付け、ローカルで `uv run python scripts/list_approved.py` を実行してカード化する
+- 既存カードと、過去の Issue に載せた論文は再度出さない
+- 既知の問題: RealMLP の論文(arxiv-2407.04491)は Semantic Scholar で 404 になり、引用の追跡ができていない
+- Semantic Scholar の API キー(無料)をリポジトリの Secret `S2_API_KEY` に登録すると、レート制限で失敗しにくくなる
+
 ## 今後の実装予定
 
 - 実験カードの照合(指定コミットのファイルに値が存在するか)
-- 新着論文の候補検出(GitHub Actions の cron、AI不使用)
 - RealMLP 論文付録(Table D.1-D.12)のデータセット別数値の機械抽出
 - TabICL・ModernNCA・TabDPT などその他の TabArena 参加モデルの原論文
 - ドリフト検出: 表データのデータシフト検出、ラベルシフト推定

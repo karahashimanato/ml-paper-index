@@ -15,6 +15,7 @@ API の失敗はジョブを止めずに一覧の末尾に書く。
 import argparse
 import datetime as dt
 import json
+import os
 import re
 import subprocess
 import sys
@@ -34,9 +35,13 @@ ARXIV_ID = re.compile(r"(\d{4}\.\d{4,5})")
 
 
 def http_get(url: str, retries: int = 3, wait: float = 5.0) -> bytes:
+    headers = {"User-Agent": UA}
+    # Semantic Scholar の API キー(任意)。キーなしの共有枠は混雑すると 429 になりやすい。
+    if "semanticscholar.org" in url and os.environ.get("S2_API_KEY"):
+        headers["x-api-key"] = os.environ["S2_API_KEY"]
     for attempt in range(retries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            req = urllib.request.Request(url, headers=headers)
             with urllib.request.urlopen(req, timeout=60) as r:
                 return r.read()
         except urllib.error.HTTPError as e:

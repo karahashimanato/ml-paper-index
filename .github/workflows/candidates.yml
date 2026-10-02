@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
+      S2_API_KEY: ${{ secrets.S2_API_KEY }}   # 任意。未設定ならキーなしの共有枠を使う
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5

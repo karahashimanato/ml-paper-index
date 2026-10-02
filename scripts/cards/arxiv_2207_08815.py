@@ -40,6 +40,10 @@ claims = [
    "We define a standard set of 45 datasets from varied domains"),
   ("Scores for a given search budget are averaged over 15 shuffles of the random-search order (bootstrap-like estimate).", "Section 3.3",
    "We do this 15 times while shuffling the random search order at each time."),
+  ("Embedding layers (even for numerical features) break rotation invariance; that different embeddings all help suggests breaking invariance is key to their gains.", "Section 5.4",
+   "The fact that very different types of embeddings seem to improve performance suggests that the sheer presence of an embedding which breaks the invariance is a key part of these improvements."),
+  ("Adequate regularization and careful optimization may let NNs learn irregular patterns (the findings do not contradict regularization papers).", "Section 5.2",
+   "as adequate regularization and careful optimization may allow NNs to learn irregular patterns."),
 ]
 TREES = "Tree-based models (RandomForest, GradientBoostingTrees, XGBoost)"
 NNS = "Neural networks (MLP, Resnet, FT_Transformer, SAINT)"

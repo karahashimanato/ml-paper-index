@@ -52,6 +52,12 @@ claims = P.claims([
    "This means that HPO can overfit the validation set more easily than in a cross-validation setup."),
   ("With good default parameters it is worth trying both NNs and GBDTs, even with a moderate time budget.", "Section 6 (Conclusion)",
    "with good default parameters, it is worth trying both algorithm families even with a moderate training time budget."),
+  ("RealMLP adds a learnable per-feature scaling layer before the first linear layer to encourage soft feature selection.", "Section 3",
+   "To encourage (soft) feature selection, we introduce a scaling layer before the first linear layer"),
+  ("Robust scaling with smooth clipping keeps outliers from dominating the result and from distorting the scaling of inliers.", "Section 3",
+   "Intuitively, when features have large outliers, smooth clipping prevents the outliers from affecting the result too strongly"),
+  ("The architectural improvements alone help a plain MLP, but non-architectural aspects (training, preprocessing, defaults) matter at least as much.", "Section 5 (discussion)",
+   "our architectural improvements alone are beneficial when applied to MLP-D directly, although non-architectural aspects are at least as important."),
 ])
 
 

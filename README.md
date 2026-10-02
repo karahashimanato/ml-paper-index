@@ -29,6 +29,7 @@ registry/
   tags.yaml        タグの統制語彙(課題・手法ファミリー・学習の枠組み)
 articles/
   tasks/           課題別の比較記事(日本語)
+  topics/          テーマを横断する記事(日本語)
   methods/         手法ファミリー別の解説・系譜記事(日本語)
 generated/         カードから生成した結果表・勝敗・索引・未反映一覧(手で編集しない)
 schemas/           上記すべてのJSON Schema
@@ -60,6 +61,10 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 
 | ドリフト検出(概念ドリフト・データシフト、MLOps) | 論文カード7本(2019〜2026、教師なし検出器を含む)、記事 [articles/tasks/drift-detection.md](articles/tasks/drift-detection.md) |
 | 時系列の異常検知 | 論文カード5本(2020〜2025、評価方法の批判とベンチマーク)、記事 [articles/tasks/time-series-anomaly-detection.md](articles/tasks/time-series-anomaly-detection.md) |
+
+横断記事:
+
+- [モデルと評価方法の弱点、それを改善した研究](articles/topics/weaknesses-and-fixes.md) — 3テーマを横断して「問題点 → 改善策 → 検証 → 独立した確認」を整理
 
 生成物の入口: [generated/index.md](generated/index.md)
 

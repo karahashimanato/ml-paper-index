@@ -69,6 +69,8 @@ claims = P.claims([
    "they should not be directly compared to other DL models."),
   ("Metrics: RMSE for regression; accuracy or ROC-AUC for classification depending on the dataset source.", "Section 3.1",
    "We use RMSE (the root mean square error) for regression tasks, and accuracy or ROC-AUC for classification tasks depending on the dataset source."),
+  ("Tabular MLPs have potential, but overfitting and optimization issues must be handled to reveal it.", "Related work",
+   "one has to deal with overfitting and optimization issues to reveal that potential."),
 ])
 
 

@@ -502,74 +502,16 @@ benchmarks:
     higher_is_better: false
     definition: Average rank across datasets among the 9 DL models of Table 2.
   defined_in: arxiv-2106.11959
-- id: grinsztajn2022-medium-num-clf
-  scope: public
-  task: tabular-classification
-  dataset: Grinsztajn et al. medium-sized benchmark, numerical features, classification (15 datasets)
-  protocol: &id012
-    split: 70% train (capped at 10,000 samples), remaining 30% split 30/70 into validation/test (each capped at 50,000); 1-5 folds depending on test size (Appendix A).
-    preprocessing: No missing data; multiclass binarised to two balanced classes; categorical features with >20 levels removed; numerical features with <10 unique values removed; QuantileTransformer for
-      NNs; heavy-tailed regression targets log-transformed; one-hot for models without native categorical support (Sections 3.2, 3.5).
-    tuning: Random search of ~400 iterations per model and dataset starting from defaults; scores for budget n are the test score of the best-on-validation configuration among n iterations, averaged over
-      15 shuffles of the search order (Section 3.3).
-    repetitions: 15 shuffles of the random-search order (Section 3.3).
-  metrics:
-  - name: normalized-accuracy
-    higher_is_better: true
-    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
-      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
-  defined_in: arxiv-2207.08815
-  external_ids:
-    openml_benchmark_suite: '298'
-- id: grinsztajn2022-medium-num-reg
-  scope: public
-  task: tabular-regression
-  dataset: Grinsztajn et al. medium-sized benchmark, numerical features, regression (19 datasets)
-  protocol: *id012
-  metrics:
-  - name: normalized-r2
-    higher_is_better: true
-    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
-      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
-  defined_in: arxiv-2207.08815
-  external_ids:
-    openml_benchmark_suite: '297'
-- id: grinsztajn2022-medium-cat-clf
-  scope: public
-  task: tabular-classification
-  dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, classification (7 datasets)
-  protocol: *id012
-  metrics:
-  - name: normalized-accuracy
-    higher_is_better: true
-    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
-      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
-  defined_in: arxiv-2207.08815
-  external_ids:
-    openml_benchmark_suite: '300'
-- id: grinsztajn2022-medium-cat-reg
-  scope: public
-  task: tabular-regression
-  dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, regression (14 datasets)
-  protocol: *id012
-  metrics:
-  - name: normalized-r2
-    higher_is_better: true
-    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
-      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
-  defined_in: arxiv-2207.08815
-  external_ids:
-    openml_benchmark_suite: '299'
 - id: tabarena-v0-1
   scope: public
   task: tabular-classification
   dataset: 'TabArena-v0.1: 51 curated IID datasets (classification and regression)'
-  protocol: &id013
+  protocol: &id012
     split: 'Outer CV: 10x repeated 3-fold for datasets with <2,500 samples, 3 repeats otherwise; class-stratified for classification (Section 2.3).'
     preprocessing: Model-specific pipelines implemented with model authors; no extra feature engineering (Sections 2.1, 5).
     tuning: Default, tuned (best of 200 fixed random configurations, selected by inner cross-validation) and tuned + post-hoc weighted ensembling of configurations (Sections 2.1, 3.1, 5).
     repetitions: Elo with 1000 = default RandomForest; 95% CIs from 200 bootstrap rounds (Section 2.3).
-  metrics: &id014
+  metrics: &id013
   - name: elo
     higher_is_better: true
     definition: Pairwise Elo across datasets from ROC AUC (binary), log-loss (multiclass), RMSE (regression); default RandomForest = 1000.
@@ -579,15 +521,15 @@ benchmarks:
   scope: public
   task: tabular-classification
   dataset: 'TabArena-v0.1 datasets within TabPFNv2 constraints (33 datasets: <=10K training samples, <=500 features)'
-  protocol: *id013
-  metrics: *id014
+  protocol: *id012
+  metrics: *id013
   defined_in: arxiv-2506.16791
 - id: tabarena-v0-1-tabicl-subset
   scope: public
   task: tabular-classification
   dataset: 'TabArena-v0.1 classification datasets within TabICL constraints (36 datasets: <=100K samples, <=500 features)'
-  protocol: *id013
-  metrics: *id014
+  protocol: *id012
+  metrics: *id013
   defined_in: arxiv-2506.16791
 - id: hollmann2023-cc18-small-numerical
   scope: paper-private
@@ -616,13 +558,13 @@ benchmarks:
   scope: paper-private
   task: tabular-classification
   dataset: 98 of the 176 OpenML classification datasets (excluding those where many algorithms hit memory/time limits)
-  protocol: &id015
+  protocol: &id014
     split: Ten OpenML train/test folds per dataset; each training fold further split into training and validation (Section 2).
     preprocessing: Algorithm-specific; TabPFN uses a random 3000-sample subset of the training data when larger (Section 2).
     tuning: Up to 30 hyperparameter sets per algorithm and split (default + 29 random via Optuna), up to 10 hours per algorithm and split, 2 hours per train/eval cycle on a V100; the best-on-validation
       setting is reported (Section 2).
     repetitions: Ten folds per dataset; accuracy 0-1 scaled per dataset (ADTM) and aggregated over datasets (Section 2).
-  metrics: &id016
+  metrics: &id015
   - name: mean-rank
     higher_is_better: false
   - name: mean-normalized-accuracy
@@ -638,14 +580,14 @@ benchmarks:
   scope: paper-private
   task: tabular-classification
   dataset: 57 smallest datasets (<= 1250 instances) of the 176 OpenML classification datasets
-  protocol: *id015
-  metrics: *id016
+  protocol: *id014
+  metrics: *id015
   defined_in: arxiv-2305.02997
 - id: tabzilla-suite
   scope: public
   task: tabular-classification
   dataset: 'TabZilla Benchmark Suite: 36 ''hard'' OpenML classification datasets (Section 3, Table 4)'
-  protocol: *id015
+  protocol: *id014
   metrics:
   - name: log-loss
     higher_is_better: false
@@ -653,42 +595,11 @@ benchmarks:
     higher_is_better: true
   defined_in: arxiv-2305.02997
   notes: Registered for future cards; this paper reports only per-dataset top-3 algorithms for the suite (Table 4).
-- id: gorishniy2025-46-datasets
-  scope: paper-private
-  task: tabular-classification
-  dataset: 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression
-  protocol: &id017
-    split: Splits inherited from prior work; domain-aware (e.g. time-based) splits for TabReD datasets and Microsoft (Section 3.1).
-    preprocessing: Model-specific; feature embeddings for models marked † or ‡ (Section 4.1, Appendix D).
-    tuning: Hyperparameter tuning on the validation set following Gorishniy et al. (2024) (Appendix D.2).
-    repetitions: Tuned model retrained under multiple random seeds; test metric averaged over seeds (Section 3.1).
-  metrics:
-  - name: mean-rank
-    higher_is_better: false
-  defined_in: arxiv-2410.24210
-- id: gorishniy2025-maps-routing
-  scope: paper-private
-  task: tabular-regression
-  dataset: Maps Routing (6.5M objects, 986 features; large dataset of Table 2)
-  protocol: *id017
-  metrics:
-  - name: rmse
-    higher_is_better: false
-  defined_in: arxiv-2410.24210
-- id: gorishniy2025-weather
-  scope: paper-private
-  task: tabular-regression
-  dataset: Weather (13M objects, 103 features; large dataset of Table 2)
-  protocol: *id017
-  metrics:
-  - name: rmse
-    higher_is_better: false
-  defined_in: arxiv-2410.24210
 - id: hollmann2025-amlb-small-classification
   scope: paper-private
   task: tabular-classification
   dataset: 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes
-  protocol: &id018
+  protocol: &id016
     split: 10 repetitions per dataset with different seeds and 90% train / 10% test splits (Results).
     preprocessing: Method-specific; TabPFN v2 handles categorical features and missing values natively (Results, Methods).
     tuning: 'Baselines: random search with 5-fold CV, budgets from 30 s to 4 h; TabPFN v2: default (no tuning), tuned, or PHE (post-hoc ensembled TabPFN v2 models, from 300 s).'
@@ -702,48 +613,17 @@ benchmarks:
   scope: paper-private
   task: tabular-regression
   dataset: 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features
-  protocol: *id018
+  protocol: *id016
   metrics:
   - name: normalized-rmse
     higher_is_better: true
     definition: Negative RMSE normalized per dataset over all baselines (1 = best), averaged.
   defined_in: doi-10.1038_s41586-024-08328-6
-- id: holzmuller2024-meta-train
-  scope: paper-private
-  task: tabular-classification
-  dataset: 'Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression)'
-  protocol: &id019
-    split: 10 random 60/20/20 train/validation/test splits per dataset; rows with missing numerical values removed (Sections 2.1-2.2).
-    preprocessing: Method-specific; RealMLP uses robust scaling + smooth clipping and one-hot for low-cardinality categoricals (Section 3).
-    tuning: Library defaults (D), tuned defaults from the meta-train benchmark (TD), or 50-step random-search HPO per split (Section 5).
-    repetitions: Shifted geometric mean of errors over datasets (eps = 0.01), with dataset weights on meta-train (Section 2.2).
-  metrics: &id020
-  - name: sgm-classification-error
-    higher_is_better: false
-    definition: Shifted geometric mean of classification error over datasets (Section 2.2).
-  - name: sgm-nrmse
-    higher_is_better: false
-    definition: Shifted geometric mean of normalized RMSE over datasets (Section 2.2).
-  defined_in: arxiv-2407.04491
-- id: holzmuller2024-meta-test
-  scope: paper-private
-  task: tabular-classification
-  dataset: 'Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression)'
-  protocol: *id019
-  metrics: *id020
-  defined_in: arxiv-2407.04491
-- id: holzmuller2024-grinsztajn
-  scope: paper-private
-  task: tabular-classification
-  dataset: Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol)
-  protocol: *id019
-  metrics: *id020
-  defined_in: arxiv-2407.04491
 - id: rabanser2019-shift-suite-n10
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 10 target samples
-  protocol: &id021
+  protocol: &id017
     split: MNIST and CIFAR-10 split into train/validation/test; shifts applied to the test set only; 5 random splits (Section 5).
     preprocessing: Dimensionality reduction to K=32 (PCA, SRP, UAE, TAE) or to class outputs (BBSDs, BBSDh, Classif), learned on training data (Section 5).
     tuning: Not applicable (fixed architectures; ResNet-18 label/domain classifiers; significance level 0.05).
@@ -757,7 +637,7 @@ benchmarks:
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 20 target samples
-  protocol: *id021
+  protocol: *id017
   metrics:
   - name: detection-accuracy
     higher_is_better: true
@@ -767,7 +647,7 @@ benchmarks:
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 50 target samples
-  protocol: *id021
+  protocol: *id017
   metrics:
   - name: detection-accuracy
     higher_is_better: true
@@ -777,7 +657,7 @@ benchmarks:
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 100 target samples
-  protocol: *id021
+  protocol: *id017
   metrics:
   - name: detection-accuracy
     higher_is_better: true
@@ -787,7 +667,7 @@ benchmarks:
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 200 target samples
-  protocol: *id021
+  protocol: *id017
   metrics:
   - name: detection-accuracy
     higher_is_better: true
@@ -797,7 +677,7 @@ benchmarks:
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 500 target samples
-  protocol: *id021
+  protocol: *id017
   metrics:
   - name: detection-accuracy
     higher_is_better: true
@@ -807,7 +687,7 @@ benchmarks:
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 1000 target samples
-  protocol: *id021
+  protocol: *id017
   metrics:
   - name: detection-accuracy
     higher_is_better: true
@@ -817,7 +697,7 @@ benchmarks:
   scope: paper-private
   task: dataset-shift-detection
   dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 10000 target samples
-  protocol: *id021
+  protocol: *id017
   metrics:
   - name: detection-accuracy
     higher_is_better: true
@@ -827,12 +707,12 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Aguiar & Cano locality benchmark streams: all evaluated drift difficulties'
-  protocol: &id022
+  protocol: &id018
     split: Synthetic streams with one known drift point each; prequential evaluation with a Hoeffding Tree (Section 4).
     preprocessing: Detectors monitor the binary error signal of the Hoeffding Tree (Section 4).
     tuning: 'Not described as tuned per stream (implementation: river).'
     repetitions: Averaged over all benchmark streams in the respective category (Tables 4-9).
-  metrics: &id023
+  metrics: &id019
   - name: precision-pct
     higher_is_better: true
   - name: recall-pct
@@ -846,35 +726,35 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Aguiar & Cano locality benchmark streams: single-class local drifts'
-  protocol: *id022
-  metrics: *id023
+  protocol: *id018
+  metrics: *id019
   defined_in: arxiv-2311.06396
 - id: aguiar2023-single-class-global
   scope: public
   task: concept-drift-detection
   dataset: 'Aguiar & Cano locality benchmark streams: single-class global drifts'
-  protocol: *id022
-  metrics: *id023
+  protocol: *id018
+  metrics: *id019
   defined_in: arxiv-2311.06396
 - id: aguiar2023-multi-class-local
   scope: public
   task: concept-drift-detection
   dataset: 'Aguiar & Cano locality benchmark streams: multi-class local drifts'
-  protocol: *id022
-  metrics: *id023
+  protocol: *id018
+  metrics: *id019
   defined_in: arxiv-2311.06396
 - id: aguiar2023-multi-class-global
   scope: public
   task: concept-drift-detection
   dataset: 'Aguiar & Cano locality benchmark streams: multi-class global drifts'
-  protocol: *id022
-  metrics: *id023
+  protocol: *id018
+  metrics: *id019
   defined_in: arxiv-2311.06396
 - id: aguiar2023-no-drift
   scope: public
   task: concept-drift-detection
   dataset: Aguiar & Cano locality benchmark streams without drift
-  protocol: *id022
+  protocol: *id018
   metrics:
   - name: false-positives
     higher_is_better: false
@@ -884,7 +764,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt feature filtering drift'
-  protocol: &id024
+  protocol: &id020
     split: 7 real-world streams (USP Data Stream Repository), shuffled, with one injected drift per Monte Carlo trial at a random point between 50% and 80% of the stream (drift simulation and experimental
       setup sections).
     preprocessing: Detectors monitor the Hoeffding Tree's error (ABCD(X) monitors features, STUDD a compression loss) (experimental setup).
@@ -899,7 +779,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt feature permutation drift'
-  protocol: *id024
+  protocol: *id020
   metrics:
   - name: avg-rank-f1
     higher_is_better: false
@@ -909,7 +789,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt class prior drift'
-  protocol: *id024
+  protocol: *id020
   metrics:
   - name: avg-rank-f1
     higher_is_better: false
@@ -919,7 +799,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt class swap drift'
-  protocol: *id024
+  protocol: *id020
   metrics:
   - name: avg-rank-f1
     higher_is_better: false
@@ -929,7 +809,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual feature filtering drift'
-  protocol: *id024
+  protocol: *id020
   metrics:
   - name: avg-rank-f1
     higher_is_better: false
@@ -939,7 +819,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual feature permutation drift'
-  protocol: *id024
+  protocol: *id020
   metrics:
   - name: avg-rank-f1
     higher_is_better: false
@@ -949,7 +829,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual class prior drift'
-  protocol: *id024
+  protocol: *id020
   metrics:
   - name: avg-rank-f1
     higher_is_better: false
@@ -959,7 +839,7 @@ benchmarks:
   scope: public
   task: concept-drift-detection
   dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual class swap drift'
-  protocol: *id024
+  protocol: *id020
   metrics:
   - name: avg-rank-f1
     higher_is_better: false
@@ -969,7 +849,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Electricity stream (USP Data Stream Repository) under the paper's protocol
-  protocol: &id025
+  protocol: &id021
     split: Prequential (test-then-train) evaluation over the full real-world stream (Section 5).
     preprocessing: Default parameters; periodic reset/retrain intervals per dataset, partly from domain knowledge (Appendix).
     tuning: No per-stream tuning; library defaults (Appendix A).
@@ -983,7 +863,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Forest Covertype stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -993,7 +873,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Insects-Abrupt (balanced) stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1003,7 +883,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Insects-Incremental (balanced) stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1013,7 +893,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Keystroke stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1023,7 +903,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Luxembourg stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1033,7 +913,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: MIRS stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1043,7 +923,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: NOAA Weather stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1053,7 +933,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Ozone stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1063,7 +943,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Rialto stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1073,7 +953,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: Yoga stream (USP Data Stream Repository) under the paper's protocol
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: mean-prequential-accuracy
     higher_is_better: true
@@ -1083,7 +963,7 @@ benchmarks:
   scope: paper-private
   task: concept-drift-detection
   dataset: 11 real-world streams of the paper (aggregate)
-  protocol: *id025
+  protocol: *id021
   metrics:
   - name: median-rank
     higher_is_better: false
@@ -1116,7 +996,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: SWaT
-  protocol: &id026
+  protocol: &id022
     split: Standard train/test split of each benchmark; no preprocessing such as early time step removal or downsampling (Section 5).
     preprocessing: Normalization and sliding windows (stride 1) (Section 3.1).
     tuning: Best numbers from original papers or reproduction with hyperparameters searched in the suggested ranges; best-score thresholds (Section 5).
@@ -1133,7 +1013,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: WADI
-  protocol: *id026
+  protocol: *id022
   metrics:
   - name: f1-pa
     higher_is_better: true
@@ -1146,7 +1026,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: MSL
-  protocol: *id026
+  protocol: *id022
   metrics:
   - name: f1-pa
     higher_is_better: true
@@ -1159,7 +1039,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: SMAP
-  protocol: *id026
+  protocol: *id022
   metrics:
   - name: f1-pa
     higher_is_better: true
@@ -1172,7 +1052,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: SMD
-  protocol: *id026
+  protocol: *id022
   metrics:
   - name: f1-pa
     higher_is_better: true
@@ -1185,7 +1065,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: SWaT
-  protocol: &id027
+  protocol: &id023
     split: Benchmark train/test splits; SWaT labels from attack start/end (Section 5).
     preprocessing: Method-specific; PCA with input scaling, clipping and score smoothing (Section 5).
     tuning: Official implementations; threshold chosen to maximize point-wise F1 (Table 1 caption).
@@ -1203,7 +1083,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: WADI (2017)
-  protocol: *id027
+  protocol: *id023
   metrics:
   - name: f1-pointwise
     higher_is_better: true
@@ -1217,7 +1097,7 @@ benchmarks:
   scope: paper-private
   task: time-series-anomaly-detection
   dataset: PSM
-  protocol: *id027
+  protocol: *id023
   metrics:
   - name: f1-pointwise
     higher_is_better: true
@@ -1231,7 +1111,7 @@ benchmarks:
   scope: public
   task: time-series-anomaly-detection
   dataset: CalIt2 (TAB multivariate)
-  protocol: &id028
+  protocol: &id024
     split: TAB's unified split (validation from training data); non-overlapping test windows by default (experimental settings).
     preprocessing: Unified pipeline; drop-last disabled (Introduction, experimental settings).
     tuning: Original hyperparameters plus a search over several sets; best result reported; metrics computed at all thresholds and the best reported.
@@ -1244,7 +1124,7 @@ benchmarks:
   scope: public
   task: time-series-anomaly-detection
   dataset: Daphnet (TAB multivariate)
-  protocol: *id028
+  protocol: *id024
   metrics:
   - name: auc-roc
     higher_is_better: true
@@ -1253,7 +1133,7 @@ benchmarks:
   scope: public
   task: time-series-anomaly-detection
   dataset: MSL (TAB multivariate)
-  protocol: *id028
+  protocol: *id024
   metrics:
   - name: auc-roc
     higher_is_better: true
@@ -1262,7 +1142,7 @@ benchmarks:
   scope: public
   task: time-series-anomaly-detection
   dataset: PSM (TAB multivariate)
-  protocol: *id028
+  protocol: *id024
   metrics:
   - name: auc-roc
     higher_is_better: true
@@ -1271,7 +1151,7 @@ benchmarks:
   scope: public
   task: time-series-anomaly-detection
   dataset: SKAB (TAB multivariate)
-  protocol: *id028
+  protocol: *id024
   metrics:
   - name: auc-roc
     higher_is_better: true
@@ -1280,7 +1160,7 @@ benchmarks:
   scope: public
   task: time-series-anomaly-detection
   dataset: SMAP (TAB multivariate)
-  protocol: *id028
+  protocol: *id024
   metrics:
   - name: auc-roc
     higher_is_better: true
@@ -1289,7 +1169,7 @@ benchmarks:
   scope: public
   task: time-series-anomaly-detection
   dataset: TAB univariate collection (1,635 series)
-  protocol: *id028
+  protocol: *id024
   metrics:
   - name: v-pr
     higher_is_better: true
@@ -1298,3 +1178,123 @@ benchmarks:
     higher_is_better: true
     definition: Affiliation F1.
   defined_in: arxiv-2506.18046
+- id: grinsztajn2022-medium-num-clf
+  scope: public
+  task: tabular-classification
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical features, classification (15 datasets)
+  protocol: &id025
+    split: 70% train (capped at 10,000 samples), remaining 30% split 30/70 into validation/test (each capped at 50,000); 1-5 folds depending on test size (Appendix A).
+    preprocessing: No missing data; multiclass binarised to two balanced classes; categorical features with >20 levels removed; numerical features with <10 unique values removed; QuantileTransformer for
+      NNs; heavy-tailed regression targets log-transformed; one-hot for models without native categorical support (Sections 3.2, 3.5).
+    tuning: Random search of ~400 iterations per model and dataset starting from defaults; scores for budget n are the test score of the best-on-validation configuration among n iterations, averaged over
+      15 shuffles of the search order (Section 3.3).
+    repetitions: 15 shuffles of the random-search order (Section 3.3).
+  metrics:
+  - name: normalized-accuracy
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '298'
+- id: grinsztajn2022-medium-num-reg
+  scope: public
+  task: tabular-regression
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical features, regression (19 datasets)
+  protocol: *id025
+  metrics:
+  - name: normalized-r2
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '297'
+- id: grinsztajn2022-medium-cat-clf
+  scope: public
+  task: tabular-classification
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, classification (7 datasets)
+  protocol: *id025
+  metrics:
+  - name: normalized-accuracy
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '300'
+- id: grinsztajn2022-medium-cat-reg
+  scope: public
+  task: tabular-regression
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, regression (14 datasets)
+  protocol: *id025
+  metrics:
+  - name: normalized-r2
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '299'
+- id: holzmuller2024-meta-train
+  scope: paper-private
+  task: tabular-classification
+  dataset: 'Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression)'
+  protocol: &id026
+    split: 10 random 60/20/20 train/validation/test splits per dataset; rows with missing numerical values removed (Sections 2.1-2.2).
+    preprocessing: Method-specific; RealMLP uses robust scaling + smooth clipping and one-hot for low-cardinality categoricals (Section 3).
+    tuning: Library defaults (D), tuned defaults from the meta-train benchmark (TD), or 50-step random-search HPO per split (Section 5).
+    repetitions: Shifted geometric mean of errors over datasets (eps = 0.01), with dataset weights on meta-train (Section 2.2).
+  metrics: &id027
+  - name: sgm-classification-error
+    higher_is_better: false
+    definition: Shifted geometric mean of classification error over datasets (Section 2.2).
+  - name: sgm-nrmse
+    higher_is_better: false
+    definition: Shifted geometric mean of normalized RMSE over datasets (Section 2.2).
+  defined_in: arxiv-2407.04491
+- id: holzmuller2024-meta-test
+  scope: paper-private
+  task: tabular-classification
+  dataset: 'Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression)'
+  protocol: *id026
+  metrics: *id027
+  defined_in: arxiv-2407.04491
+- id: holzmuller2024-grinsztajn
+  scope: paper-private
+  task: tabular-classification
+  dataset: Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol)
+  protocol: *id026
+  metrics: *id027
+  defined_in: arxiv-2407.04491
+- id: gorishniy2025-46-datasets
+  scope: paper-private
+  task: tabular-classification
+  dataset: 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression
+  protocol: &id028
+    split: Splits inherited from prior work; domain-aware (e.g. time-based) splits for TabReD datasets and Microsoft (Section 3.1).
+    preprocessing: Model-specific; feature embeddings for models marked † or ‡ (Section 4.1, Appendix D).
+    tuning: Hyperparameter tuning on the validation set following Gorishniy et al. (2024) (Appendix D.2).
+    repetitions: Tuned model retrained under multiple random seeds; test metric averaged over seeds (Section 3.1).
+  metrics:
+  - name: mean-rank
+    higher_is_better: false
+  defined_in: arxiv-2410.24210
+- id: gorishniy2025-maps-routing
+  scope: paper-private
+  task: tabular-regression
+  dataset: Maps Routing (6.5M objects, 986 features; large dataset of Table 2)
+  protocol: *id028
+  metrics:
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2410.24210
+- id: gorishniy2025-weather
+  scope: paper-private
+  task: tabular-regression
+  dataset: Weather (13M objects, 103 features; large dataset of Table 2)
+  protocol: *id028
+  metrics:
+  - name: rmse
+    higher_is_better: false
+  defined_in: arxiv-2410.24210

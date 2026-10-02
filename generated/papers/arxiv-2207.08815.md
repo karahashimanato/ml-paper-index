@@ -28,6 +28,8 @@
 - **c13** Per unit of random-search time (rather than iterations), tree-based models were always well above NNs (hardware differs, so not a rigorous speed comparison).([Appendix A.2, p.14](https://arxiv.org/pdf/2207.08815v1#page=14 "for the same amount of time spent on random search, tree-based models scores are always high above neural networks."))
 - **c14** The benchmark consists of 45 datasets from varied domains.([Abstract, p.1](https://arxiv.org/pdf/2207.08815v1#page=1 "We define a standard set of 45 datasets from varied domains"))
 - **c15** Scores for a given search budget are averaged over 15 shuffles of the random-search order (bootstrap-like estimate).([Section 3.3, p.4](https://arxiv.org/pdf/2207.08815v1#page=4 "We do this 15 times while shuffling the random search order at each time."))
+- **c16** Embedding layers (even for numerical features) break rotation invariance; that different embeddings all help suggests breaking invariance is key to their gains.([Section 5.4, p.8](https://arxiv.org/pdf/2207.08815v1#page=8 "The fact that very different types of embeddings seem to improve performance suggests that the sheer presence of an embedding which breaks the invariance is a key part of these improvements."))
+- **c17** Adequate regularization and careful optimization may let NNs learn irregular patterns (the findings do not contradict regularization papers).([Section 5.2, p.7](https://arxiv.org/pdf/2207.08815v1#page=7 "as adequate regularization and careful optimization may allow NNs to learn irregular patterns."))
 
 ## 論文内の勝敗(本文の記述)
 

@@ -128,6 +128,11 @@ claims:
   location: Section 3.1
   page: 3
   quote: We use RMSE (the root mean square error) for regression tasks, and accuracy or ROC-AUC for classification tasks depending on the dataset source.
+- id: c21
+  statement: Tabular MLPs have potential, but overfitting and optimization issues must be handled to reveal it.
+  location: Related work
+  page: 2
+  quote: one has to deal with overfitting and optimization issues to reveal that potential.
 results:
 - id: r1
   benchmark: gorishniy2025-maps-routing

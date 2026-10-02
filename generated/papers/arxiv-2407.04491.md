@@ -34,6 +34,9 @@
 - **c19** Label smoothing is influential but can hurt metrics like AUROC.([Section 5 (discussion), p.10](https://arxiv.org/pdf/2407.04491v3#page=10 "label smoothing is influential but can be detrimental for metrics like AUROC"))
 - **c20** A single training-validation split per train-test split means HPO can overfit the validation set more easily than with cross-validation.([Limitations (end of Section 5), p.10](https://arxiv.org/pdf/2407.04491v3#page=10 "This means that HPO can overfit the validation set more easily than in a cross-validation setup."))
 - **c21** With good default parameters it is worth trying both NNs and GBDTs, even with a moderate time budget.([Section 6 (Conclusion), p.10](https://arxiv.org/pdf/2407.04491v3#page=10 "with good default parameters, it is worth trying both algorithm families even with a moderate training time budget."))
+- **c22** RealMLP adds a learnable per-feature scaling layer before the first linear layer to encourage soft feature selection.([Section 3, p.5](https://arxiv.org/pdf/2407.04491v3#page=5 "To encourage (soft) feature selection, we introduce a scaling layer before the first linear layer"))
+- **c23** Robust scaling with smooth clipping keeps outliers from dominating the result and from distorting the scaling of inliers.([Section 3, p.4](https://arxiv.org/pdf/2407.04491v3#page=4 "Intuitively, when features have large outliers, smooth clipping prevents the outliers from affecting the result too strongly"))
+- **c24** The architectural improvements alone help a plain MLP, but non-architectural aspects (training, preprocessing, defaults) matter at least as much.([Section 5 (discussion), p.10](https://arxiv.org/pdf/2407.04491v3#page=10 "our architectural improvements alone are beneficial when applied to MLP-D directly, although non-architectural aspects are at least as important."))
 
 ## 論文内の勝敗(本文の記述)
 

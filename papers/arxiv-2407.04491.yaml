@@ -134,6 +134,21 @@ claims:
   location: Section 6 (Conclusion)
   page: 10
   quote: with good default parameters, it is worth trying both algorithm families even with a moderate training time budget.
+- id: c22
+  statement: RealMLP adds a learnable per-feature scaling layer before the first linear layer to encourage soft feature selection.
+  location: Section 3
+  page: 5
+  quote: To encourage (soft) feature selection, we introduce a scaling layer before the first linear layer
+- id: c23
+  statement: Robust scaling with smooth clipping keeps outliers from dominating the result and from distorting the scaling of inliers.
+  location: Section 3
+  page: 4
+  quote: Intuitively, when features have large outliers, smooth clipping prevents the outliers from affecting the result too strongly
+- id: c24
+  statement: The architectural improvements alone help a plain MLP, but non-architectural aspects (training, preprocessing, defaults) matter at least as much.
+  location: Section 5 (discussion)
+  page: 10
+  quote: our architectural improvements alone are beneficial when applied to MLP-D directly, although non-architectural aspects are at least as important.
 results: []
 relations:
 - winner: RealMLP and RealTabR

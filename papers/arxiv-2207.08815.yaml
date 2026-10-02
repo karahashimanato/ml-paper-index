@@ -101,6 +101,16 @@ claims:
   location: Section 3.3
   page: 4
   quote: We do this 15 times while shuffling the random search order at each time.
+- id: c16
+  statement: Embedding layers (even for numerical features) break rotation invariance; that different embeddings all help suggests breaking invariance is key to their gains.
+  location: Section 5.4
+  page: 8
+  quote: The fact that very different types of embeddings seem to improve performance suggests that the sheer presence of an embedding which breaks the invariance is a key part of these improvements.
+- id: c17
+  statement: Adequate regularization and careful optimization may let NNs learn irregular patterns (the findings do not contradict regularization papers).
+  location: Section 5.2
+  page: 7
+  quote: as adequate regularization and careful optimization may allow NNs to learn irregular patterns.
 results: []
 relations:
 - winner: Tree-based models (RandomForest, GradientBoostingTrees, XGBoost)

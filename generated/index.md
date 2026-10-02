@@ -79,10 +79,6 @@
 | `gorishniy2021-mi-single` | paper-private | tabular-regression | Microsoft MSLR-WEB10K (pointwise regression) | arxiv-2106.11959 | 10 |
 | `gorishniy2021-mi-ensemble` | paper-private | tabular-regression | Microsoft MSLR-WEB10K (pointwise regression) | arxiv-2106.11959 | 8 |
 | `gorishniy2021-avg-rank-single` | paper-private | tabular-classification | Average over the 11 datasets of Table 2 (classification and regression) | arxiv-2106.11959 | 9 |
-| `grinsztajn2022-medium-num-clf` | public | tabular-classification | Grinsztajn et al. medium-sized benchmark, numerical features, classification (15 datasets) | arxiv-2207.08815 | 1 |
-| `grinsztajn2022-medium-num-reg` | public | tabular-regression | Grinsztajn et al. medium-sized benchmark, numerical features, regression (19 datasets) | arxiv-2207.08815 | 1 |
-| `grinsztajn2022-medium-cat-clf` | public | tabular-classification | Grinsztajn et al. medium-sized benchmark, numerical + categorical features, classification (7 datasets) | arxiv-2207.08815 | 1 |
-| `grinsztajn2022-medium-cat-reg` | public | tabular-regression | Grinsztajn et al. medium-sized benchmark, numerical + categorical features, regression (14 datasets) | arxiv-2207.08815 | 1 |
 | `tabarena-v0-1` | public | tabular-classification | TabArena-v0.1: 51 curated IID datasets (classification and regression) | arxiv-2506.16791 | 3 |
 | `tabarena-v0-1-tabpfnv2-subset` | public | tabular-classification | TabArena-v0.1 datasets within TabPFNv2 constraints (33 datasets: <=10K training samples, <=500 features) | arxiv-2506.16791 | 1 |
 | `tabarena-v0-1-tabicl-subset` | public | tabular-classification | TabArena-v0.1 classification datasets within TabICL constraints (36 datasets: <=100K samples, <=500 features) | arxiv-2506.16791 | 0 |
@@ -90,14 +86,8 @@
 | `mcelfresh2023-98-datasets` | paper-private | tabular-classification | 98 of the 176 OpenML classification datasets (excluding those where many algorithms hit memory/time limits) | arxiv-2305.02997 | 96 |
 | `mcelfresh2023-57-small-datasets` | paper-private | tabular-classification | 57 smallest datasets (<= 1250 instances) of the 176 OpenML classification datasets | arxiv-2305.02997 | 95 |
 | `tabzilla-suite` | public | tabular-classification | TabZilla Benchmark Suite: 36 'hard' OpenML classification datasets (Section 3, Table 4) | arxiv-2305.02997 | 0 |
-| `gorishniy2025-46-datasets` | paper-private | tabular-classification | 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression | arxiv-2410.24210 | 4 |
-| `gorishniy2025-maps-routing` | paper-private | tabular-regression | Maps Routing (6.5M objects, 986 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |
-| `gorishniy2025-weather` | paper-private | tabular-regression | Weather (13M objects, 103 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |
 | `hollmann2025-amlb-small-classification` | paper-private | tabular-classification | 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes | doi-10.1038_s41586-024-08328-6 | 8 |
 | `hollmann2025-amlb-ctr23-small-regression` | paper-private | tabular-regression | 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features | doi-10.1038_s41586-024-08328-6 | 5 |
-| `holzmuller2024-meta-train` | paper-private | tabular-classification | Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression) | arxiv-2407.04491 | 1 |
-| `holzmuller2024-meta-test` | paper-private | tabular-classification | Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression) | arxiv-2407.04491 | 1 |
-| `holzmuller2024-grinsztajn` | paper-private | tabular-classification | Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol) | arxiv-2407.04491 | 2 |
 | `rabanser2019-shift-suite-n10` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 10 target samples | arxiv-1810.11953 | 14 |
 | `rabanser2019-shift-suite-n20` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 20 target samples | arxiv-1810.11953 | 14 |
 | `rabanser2019-shift-suite-n50` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 50 target samples | arxiv-1810.11953 | 14 |
@@ -148,3 +138,13 @@
 | `tab2025-skab` | public | time-series-anomaly-detection | SKAB (TAB multivariate) | arxiv-2506.18046 | 12 |
 | `tab2025-smap` | public | time-series-anomaly-detection | SMAP (TAB multivariate) | arxiv-2506.18046 | 12 |
 | `tab2025-univariate` | public | time-series-anomaly-detection | TAB univariate collection (1,635 series) | arxiv-2506.18046 | 1 |
+| `grinsztajn2022-medium-num-clf` | public | tabular-classification | Grinsztajn et al. medium-sized benchmark, numerical features, classification (15 datasets) | arxiv-2207.08815 | 1 |
+| `grinsztajn2022-medium-num-reg` | public | tabular-regression | Grinsztajn et al. medium-sized benchmark, numerical features, regression (19 datasets) | arxiv-2207.08815 | 1 |
+| `grinsztajn2022-medium-cat-clf` | public | tabular-classification | Grinsztajn et al. medium-sized benchmark, numerical + categorical features, classification (7 datasets) | arxiv-2207.08815 | 1 |
+| `grinsztajn2022-medium-cat-reg` | public | tabular-regression | Grinsztajn et al. medium-sized benchmark, numerical + categorical features, regression (14 datasets) | arxiv-2207.08815 | 1 |
+| `holzmuller2024-meta-train` | paper-private | tabular-classification | Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression) | arxiv-2407.04491 | 1 |
+| `holzmuller2024-meta-test` | paper-private | tabular-classification | Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression) | arxiv-2407.04491 | 1 |
+| `holzmuller2024-grinsztajn` | paper-private | tabular-classification | Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol) | arxiv-2407.04491 | 2 |
+| `gorishniy2025-46-datasets` | paper-private | tabular-classification | 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression | arxiv-2410.24210 | 4 |
+| `gorishniy2025-maps-routing` | paper-private | tabular-regression | Maps Routing (6.5M objects, 986 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |
+| `gorishniy2025-weather` | paper-private | tabular-regression | Weather (13M objects, 103 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |

@@ -33,6 +33,7 @@
 - **c18** MLP with piecewise-linear embeddings (MLP†) is a decent practical option between a plain MLP and TabM.([Section 4.2, p.7](https://arxiv.org/pdf/2410.24210v3#page=7 "MLP† seems to be a decent practical option between the plain MLP and TabM"))
 - **c19** Variants with AMP and torch.compile (marked ∗) showcase efficiency and should not be directly compared to other DL models.([Section 4.3, p.8](https://arxiv.org/pdf/2410.24210v3#page=8 "they should not be directly compared to other DL models."))
 - **c20** Metrics: RMSE for regression; accuracy or ROC-AUC for classification depending on the dataset source.([Section 3.1, p.3](https://arxiv.org/pdf/2410.24210v3#page=3 "We use RMSE (the root mean square error) for regression tasks, and accuracy or ROC-AUC for classification tasks depending on the dataset source."))
+- **c21** Tabular MLPs have potential, but overfitting and optimization issues must be handled to reveal it.([Related work, p.2](https://arxiv.org/pdf/2410.24210v3#page=2 "one has to deal with overfitting and optimization issues to reveal that potential."))
 
 ## 結果表
 

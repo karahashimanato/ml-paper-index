@@ -5,6 +5,14 @@ tasks:
     description: Classification on tabular (heterogeneous-column) data.
   - id: tabular-regression
     description: Regression on tabular (heterogeneous-column) data.
+  - id: drift-detection
+    description: Detecting that the data distribution or the input-output relationship has changed over time (MLOps monitoring).
+  - id: concept-drift-detection
+    description: Detecting changes in P(y|X) or the joint distribution in data streams, often from the model's error signal.
+    parent: drift-detection
+  - id: dataset-shift-detection
+    description: Detecting distribution shift between training and deployment data (covariate, label, or general shift), typically with statistical tests.
+    parent: drift-detection
 
 method_families:
   - id: tree-ensembles
@@ -36,11 +44,21 @@ method_families:
     description: Ensembles combining different model types (e.g. averaging deep models with GBDT).
   - id: automl-systems
     description: AutoML systems that search over and ensemble many model types (e.g. AutoGluon, Auto-sklearn).
+  - id: error-rate-drift-detectors
+    description: Drift detectors monitoring a learner's error rate or performance (e.g. DDM, EDDM, HDDM, Page-Hinkley on errors).
+  - id: window-based-drift-detectors
+    description: Drift detectors comparing data or statistics between (adaptive) windows (e.g. ADWIN, KSWIN).
+  - id: two-sample-tests
+    description: Statistical two-sample tests for distribution shift (e.g. Kolmogorov-Smirnov, MMD, chi-squared).
+  - id: dimensionality-reduction-for-shift
+    description: Reducing representations (e.g. PCA, autoencoders, black-box predictor softmax) before testing for shift.
   - id: linear-models
     description: Linear / generalized linear models.
 
 paradigms:
   - id: supervised
     description: Supervised learning.
+  - id: streaming
+    description: Online learning / processing of data streams.
   - id: in-context-learning
     description: Prediction by conditioning a pretrained model on training examples without gradient updates.

@@ -1,0 +1,1605 @@
+id: arxiv-2311.06396
+title: A comprehensive analysis of concept drift locality in data streams
+authors:
+- Gabriel J. Aguiar
+- Alberto Cano
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2311.06396
+  code: https://github.com/gabrieljaguiar/locality-concept-drift
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: bd06f1560720d1bd8185399165ebb575cd6297cef5b6d8eb83372c339fc7b14c
+tags:
+  tasks:
+  - concept-drift-detection
+  method_families:
+  - error-rate-drift-detectors
+  - window-based-drift-detectors
+  paradigms:
+  - streaming
+proposes:
+- Locality-based categorization of concept drift
+- Benchmark of 2,760 synthetic drifting streams
+claims:
+- id: c1
+  statement: A locality/scale-based categorization of concept drift yields 2,760 benchmark problems.
+  location: Abstract
+  page: 1
+  quote: A systematic approach leads to a set of 2,760 benchmark problems
+- id: c2
+  statement: Nine supervised drift detectors are compared across the difficulties.
+  location: Abstract
+  page: 1
+  quote: We conduct a comparative assessment of 9 state-of-the-art drift detectors across diverse difficulties
+- id: c3
+  statement: 'ADWIN, DDM and PH were strong overall: few false alarms on stationary streams and good detection with drift.'
+  location: Section 5.1
+  page: 12
+  quote: ADWIN, DDM, and PH stood out as strong performers in both evaluated scenarios.
+- id: c4
+  statement: ADWIN and PH consistently showed the best detection performance across all scenarios.
+  location: Results
+  page: 13
+  quote: ADWIN and PH consistently demonstrated superior detection performance across all evaluated scenarios.
+- id: c5
+  statement: EDDM had the lowest delay and second-highest recall but so many alarms that its precision was 0%.
+  location: Section 5.1
+  page: 12
+  quote: EDDM exhibited the lowest delay among all evaluated drift detectors and the second-highest recall, although this came at the cost of raising numerous drift alerts, leading to a precision of 0%.
+- id: c6
+  statement: 'Difficulty from easiest to hardest: multi-class global, single-class global, multi-class local, single-class local.'
+  location: Results
+  page: 13
+  quote: 'a hierarchy of difficulty emerges, from easiest to hardest detection as follows: Multi-Class Global, Single-Class Global, Multi-Class Local, Single-Class Local.'
+- id: c7
+  statement: More localized drifts produce more false alarms for all detectors.
+  location: Results
+  page: 13
+  quote: scenarios with more localized drifts tended to generate a higher number of false alarms.
+- id: c8
+  statement: Completely retraining the classifier after detection reduced accuracy in all evaluated scenarios.
+  location: Results (classifier impact)
+  page: 21
+  quote: completely retraining the classifier resulted in decreased accuracy across all evaluated scenarios.
+- id: c9
+  statement: A Hoeffding Tree is the monitored classifier; detectors monitor its binary error signal.
+  location: Experimental setup
+  page: 10
+  quote: we opted to use Hoeffding Tree (HT) [49] as our classifier.
+- id: c10
+  statement: Error-rate-based detectors often raise many false alarms, even on positive changes in the error rate.
+  location: Lessons learned
+  page: 24
+  quote: Drift detectors that rely on error rates often generate numerous false alarms.
+- id: c11
+  statement: On stationary streams, ADWIN and DDM raised the fewest false alarms.
+  location: Section 5.1
+  page: 12
+  quote: DDM and ADWIN displayed the lowest values of false alerts
+- id: c12
+  statement: Experiments, stream generators and detectors were implemented in Python with the river library.
+  location: Experimental setup
+  page: 11
+  quote: All the experiments, generators and drift detectors were implemented using Python 3.8 and the river [50] package.
+results:
+- id: r1
+  benchmark: aguiar2023-all-drifts
+  method: ADWIN
+  metric: precision-pct
+  value: 7.4
+  location: Table 5
+  page: 13
+  quote: ADWIN 7.40% 34.50% 12.19% 2192
+- id: r2
+  benchmark: aguiar2023-all-drifts
+  method: ADWIN
+  metric: recall-pct
+  value: 34.5
+  location: Table 5
+  page: 13
+  quote: ADWIN 7.40% 34.50% 12.19% 2192
+- id: r3
+  benchmark: aguiar2023-all-drifts
+  method: ADWIN
+  metric: f1-pct
+  value: 12.19
+  location: Table 5
+  page: 13
+  quote: ADWIN 7.40% 34.50% 12.19% 2192
+- id: r4
+  benchmark: aguiar2023-all-drifts
+  method: ADWIN
+  metric: delay
+  value: 2192.0
+  location: Table 5
+  page: 13
+  quote: ADWIN 7.40% 34.50% 12.19% 2192
+- id: r5
+  benchmark: aguiar2023-all-drifts
+  method: DDM
+  metric: precision-pct
+  value: 1.82
+  location: Table 5
+  page: 13
+  quote: DDM 1.82% 5.45% 2.73% 2168
+- id: r6
+  benchmark: aguiar2023-all-drifts
+  method: DDM
+  metric: recall-pct
+  value: 5.45
+  location: Table 5
+  page: 13
+  quote: DDM 1.82% 5.45% 2.73% 2168
+- id: r7
+  benchmark: aguiar2023-all-drifts
+  method: DDM
+  metric: f1-pct
+  value: 2.73
+  location: Table 5
+  page: 13
+  quote: DDM 1.82% 5.45% 2.73% 2168
+- id: r8
+  benchmark: aguiar2023-all-drifts
+  method: DDM
+  metric: delay
+  value: 2168.0
+  location: Table 5
+  page: 13
+  quote: DDM 1.82% 5.45% 2.73% 2168
+- id: r9
+  benchmark: aguiar2023-all-drifts
+  method: ECDD
+  metric: precision-pct
+  value: 0.03
+  location: Table 5
+  page: 13
+  quote: ECDD 0.03% 36.48% 0.06% 235
+- id: r10
+  benchmark: aguiar2023-all-drifts
+  method: ECDD
+  metric: recall-pct
+  value: 36.48
+  location: Table 5
+  page: 13
+  quote: ECDD 0.03% 36.48% 0.06% 235
+- id: r11
+  benchmark: aguiar2023-all-drifts
+  method: ECDD
+  metric: f1-pct
+  value: 0.06
+  location: Table 5
+  page: 13
+  quote: ECDD 0.03% 36.48% 0.06% 235
+- id: r12
+  benchmark: aguiar2023-all-drifts
+  method: ECDD
+  metric: delay
+  value: 235.0
+  location: Table 5
+  page: 13
+  quote: ECDD 0.03% 36.48% 0.06% 235
+- id: r13
+  benchmark: aguiar2023-all-drifts
+  method: EDDM
+  metric: precision-pct
+  value: 0.0
+  location: Table 5
+  page: 13
+  quote: EDDM 0.00% 95.18% 0.00% 15
+- id: r14
+  benchmark: aguiar2023-all-drifts
+  method: EDDM
+  metric: recall-pct
+  value: 95.18
+  location: Table 5
+  page: 13
+  quote: EDDM 0.00% 95.18% 0.00% 15
+- id: r15
+  benchmark: aguiar2023-all-drifts
+  method: EDDM
+  metric: f1-pct
+  value: 0.0
+  location: Table 5
+  page: 13
+  quote: EDDM 0.00% 95.18% 0.00% 15
+- id: r16
+  benchmark: aguiar2023-all-drifts
+  method: EDDM
+  metric: delay
+  value: 15.0
+  location: Table 5
+  page: 13
+  quote: EDDM 0.00% 95.18% 0.00% 15
+- id: r17
+  benchmark: aguiar2023-all-drifts
+  method: HDDM
+  metric: precision-pct
+  value: 1.65
+  location: Table 5
+  page: 13
+  quote: HDDM 1.65% 76.61% 3.23% 1271
+- id: r18
+  benchmark: aguiar2023-all-drifts
+  method: HDDM
+  metric: recall-pct
+  value: 76.61
+  location: Table 5
+  page: 13
+  quote: HDDM 1.65% 76.61% 3.23% 1271
+- id: r19
+  benchmark: aguiar2023-all-drifts
+  method: HDDM
+  metric: f1-pct
+  value: 3.23
+  location: Table 5
+  page: 13
+  quote: HDDM 1.65% 76.61% 3.23% 1271
+- id: r20
+  benchmark: aguiar2023-all-drifts
+  method: HDDM
+  metric: delay
+  value: 1271.0
+  location: Table 5
+  page: 13
+  quote: HDDM 1.65% 76.61% 3.23% 1271
+- id: r21
+  benchmark: aguiar2023-all-drifts
+  method: KSWIN
+  metric: precision-pct
+  value: 3.32
+  location: Table 5
+  page: 13
+  quote: KSWIN 3.32% 42.54% 6.16% 1866
+- id: r22
+  benchmark: aguiar2023-all-drifts
+  method: KSWIN
+  metric: recall-pct
+  value: 42.54
+  location: Table 5
+  page: 13
+  quote: KSWIN 3.32% 42.54% 6.16% 1866
+- id: r23
+  benchmark: aguiar2023-all-drifts
+  method: KSWIN
+  metric: f1-pct
+  value: 6.16
+  location: Table 5
+  page: 13
+  quote: KSWIN 3.32% 42.54% 6.16% 1866
+- id: r24
+  benchmark: aguiar2023-all-drifts
+  method: KSWIN
+  metric: delay
+  value: 1866.0
+  location: Table 5
+  page: 13
+  quote: KSWIN 3.32% 42.54% 6.16% 1866
+- id: r25
+  benchmark: aguiar2023-all-drifts
+  method: PH
+  metric: precision-pct
+  value: 5.18
+  location: Table 5
+  page: 13
+  quote: PH 5.18% 72.19% 9.66% 1867
+- id: r26
+  benchmark: aguiar2023-all-drifts
+  method: PH
+  metric: recall-pct
+  value: 72.19
+  location: Table 5
+  page: 13
+  quote: PH 5.18% 72.19% 9.66% 1867
+- id: r27
+  benchmark: aguiar2023-all-drifts
+  method: PH
+  metric: f1-pct
+  value: 9.66
+  location: Table 5
+  page: 13
+  quote: PH 5.18% 72.19% 9.66% 1867
+- id: r28
+  benchmark: aguiar2023-all-drifts
+  method: PH
+  metric: delay
+  value: 1867.0
+  location: Table 5
+  page: 13
+  quote: PH 5.18% 72.19% 9.66% 1867
+- id: r29
+  benchmark: aguiar2023-all-drifts
+  method: RDDM
+  metric: precision-pct
+  value: 0.89
+  location: Table 5
+  page: 13
+  quote: RDDM 0.89% 25.99% 1.72% 2027
+- id: r30
+  benchmark: aguiar2023-all-drifts
+  method: RDDM
+  metric: recall-pct
+  value: 25.99
+  location: Table 5
+  page: 13
+  quote: RDDM 0.89% 25.99% 1.72% 2027
+- id: r31
+  benchmark: aguiar2023-all-drifts
+  method: RDDM
+  metric: f1-pct
+  value: 1.72
+  location: Table 5
+  page: 13
+  quote: RDDM 0.89% 25.99% 1.72% 2027
+- id: r32
+  benchmark: aguiar2023-all-drifts
+  method: RDDM
+  metric: delay
+  value: 2027.0
+  location: Table 5
+  page: 13
+  quote: RDDM 0.89% 25.99% 1.72% 2027
+- id: r33
+  benchmark: aguiar2023-all-drifts
+  method: STEPD
+  metric: precision-pct
+  value: 0.01
+  location: Table 5
+  page: 13
+  quote: STEPD 0.01% 95.80% 0.03% 516
+- id: r34
+  benchmark: aguiar2023-all-drifts
+  method: STEPD
+  metric: recall-pct
+  value: 95.8
+  location: Table 5
+  page: 13
+  quote: STEPD 0.01% 95.80% 0.03% 516
+- id: r35
+  benchmark: aguiar2023-all-drifts
+  method: STEPD
+  metric: f1-pct
+  value: 0.03
+  location: Table 5
+  page: 13
+  quote: STEPD 0.01% 95.80% 0.03% 516
+- id: r36
+  benchmark: aguiar2023-all-drifts
+  method: STEPD
+  metric: delay
+  value: 516.0
+  location: Table 5
+  page: 13
+  quote: STEPD 0.01% 95.80% 0.03% 516
+- id: r37
+  benchmark: aguiar2023-single-class-local
+  method: ADWIN
+  metric: precision-pct
+  value: 5.48
+  location: Table 6
+  page: 13
+  quote: ADWIN 5.48% 22.40% 8.80% 2728
+- id: r38
+  benchmark: aguiar2023-single-class-local
+  method: ADWIN
+  metric: recall-pct
+  value: 22.4
+  location: Table 6
+  page: 13
+  quote: ADWIN 5.48% 22.40% 8.80% 2728
+- id: r39
+  benchmark: aguiar2023-single-class-local
+  method: ADWIN
+  metric: f1-pct
+  value: 8.8
+  location: Table 6
+  page: 13
+  quote: ADWIN 5.48% 22.40% 8.80% 2728
+- id: r40
+  benchmark: aguiar2023-single-class-local
+  method: ADWIN
+  metric: delay
+  value: 2728.0
+  location: Table 6
+  page: 13
+  quote: ADWIN 5.48% 22.40% 8.80% 2728
+- id: r41
+  benchmark: aguiar2023-single-class-local
+  method: DDM
+  metric: precision-pct
+  value: 1.88
+  location: Table 6
+  page: 13
+  quote: DDM 1.88% 5.47% 2.80% 2287
+- id: r42
+  benchmark: aguiar2023-single-class-local
+  method: DDM
+  metric: recall-pct
+  value: 5.47
+  location: Table 6
+  page: 13
+  quote: DDM 1.88% 5.47% 2.80% 2287
+- id: r43
+  benchmark: aguiar2023-single-class-local
+  method: DDM
+  metric: f1-pct
+  value: 2.8
+  location: Table 6
+  page: 13
+  quote: DDM 1.88% 5.47% 2.80% 2287
+- id: r44
+  benchmark: aguiar2023-single-class-local
+  method: DDM
+  metric: delay
+  value: 2287.0
+  location: Table 6
+  page: 13
+  quote: DDM 1.88% 5.47% 2.80% 2287
+- id: r45
+  benchmark: aguiar2023-single-class-local
+  method: ECDD
+  metric: precision-pct
+  value: 0.03
+  location: Table 6
+  page: 13
+  quote: ECDD 0.03% 29.17% 0.07% 201
+- id: r46
+  benchmark: aguiar2023-single-class-local
+  method: ECDD
+  metric: recall-pct
+  value: 29.17
+  location: Table 6
+  page: 13
+  quote: ECDD 0.03% 29.17% 0.07% 201
+- id: r47
+  benchmark: aguiar2023-single-class-local
+  method: ECDD
+  metric: f1-pct
+  value: 0.07
+  location: Table 6
+  page: 13
+  quote: ECDD 0.03% 29.17% 0.07% 201
+- id: r48
+  benchmark: aguiar2023-single-class-local
+  method: ECDD
+  metric: delay
+  value: 201.0
+  location: Table 6
+  page: 13
+  quote: ECDD 0.03% 29.17% 0.07% 201
+- id: r49
+  benchmark: aguiar2023-single-class-local
+  method: EDDM
+  metric: precision-pct
+  value: 0.0
+  location: Table 6
+  page: 13
+  quote: EDDM 0.00% 97.40% 0.00% 4
+- id: r50
+  benchmark: aguiar2023-single-class-local
+  method: EDDM
+  metric: recall-pct
+  value: 97.4
+  location: Table 6
+  page: 13
+  quote: EDDM 0.00% 97.40% 0.00% 4
+- id: r51
+  benchmark: aguiar2023-single-class-local
+  method: EDDM
+  metric: f1-pct
+  value: 0.0
+  location: Table 6
+  page: 13
+  quote: EDDM 0.00% 97.40% 0.00% 4
+- id: r52
+  benchmark: aguiar2023-single-class-local
+  method: EDDM
+  metric: delay
+  value: 4.0
+  location: Table 6
+  page: 13
+  quote: EDDM 0.00% 97.40% 0.00% 4
+- id: r53
+  benchmark: aguiar2023-single-class-local
+  method: HDDM
+  metric: precision-pct
+  value: 1.69
+  location: Table 6
+  page: 13
+  quote: HDDM 1.69% 67.45% 3.30% 1359
+- id: r54
+  benchmark: aguiar2023-single-class-local
+  method: HDDM
+  metric: recall-pct
+  value: 67.45
+  location: Table 6
+  page: 13
+  quote: HDDM 1.69% 67.45% 3.30% 1359
+- id: r55
+  benchmark: aguiar2023-single-class-local
+  method: HDDM
+  metric: f1-pct
+  value: 3.3
+  location: Table 6
+  page: 13
+  quote: HDDM 1.69% 67.45% 3.30% 1359
+- id: r56
+  benchmark: aguiar2023-single-class-local
+  method: HDDM
+  metric: delay
+  value: 1359.0
+  location: Table 6
+  page: 13
+  quote: HDDM 1.69% 67.45% 3.30% 1359
+- id: r57
+  benchmark: aguiar2023-single-class-local
+  method: KSWIN
+  metric: precision-pct
+  value: 2.91
+  location: Table 6
+  page: 13
+  quote: KSWIN 2.91% 31.51% 5.32% 1991
+- id: r58
+  benchmark: aguiar2023-single-class-local
+  method: KSWIN
+  metric: recall-pct
+  value: 31.51
+  location: Table 6
+  page: 13
+  quote: KSWIN 2.91% 31.51% 5.32% 1991
+- id: r59
+  benchmark: aguiar2023-single-class-local
+  method: KSWIN
+  metric: f1-pct
+  value: 5.32
+  location: Table 6
+  page: 13
+  quote: KSWIN 2.91% 31.51% 5.32% 1991
+- id: r60
+  benchmark: aguiar2023-single-class-local
+  method: KSWIN
+  metric: delay
+  value: 1991.0
+  location: Table 6
+  page: 13
+  quote: KSWIN 2.91% 31.51% 5.32% 1991
+- id: r61
+  benchmark: aguiar2023-single-class-local
+  method: PH
+  metric: precision-pct
+  value: 5.21
+  location: Table 6
+  page: 13
+  quote: PH 5.21% 64.06% 9.63% 2176
+- id: r62
+  benchmark: aguiar2023-single-class-local
+  method: PH
+  metric: recall-pct
+  value: 64.06
+  location: Table 6
+  page: 13
+  quote: PH 5.21% 64.06% 9.63% 2176
+- id: r63
+  benchmark: aguiar2023-single-class-local
+  method: PH
+  metric: f1-pct
+  value: 9.63
+  location: Table 6
+  page: 13
+  quote: PH 5.21% 64.06% 9.63% 2176
+- id: r64
+  benchmark: aguiar2023-single-class-local
+  method: PH
+  metric: delay
+  value: 2176.0
+  location: Table 6
+  page: 13
+  quote: PH 5.21% 64.06% 9.63% 2176
+- id: r65
+  benchmark: aguiar2023-single-class-local
+  method: RDDM
+  metric: precision-pct
+  value: 1.13
+  location: Table 6
+  page: 13
+  quote: RDDM 1.13% 31.77% 2.18% 2016
+- id: r66
+  benchmark: aguiar2023-single-class-local
+  method: RDDM
+  metric: recall-pct
+  value: 31.77
+  location: Table 6
+  page: 13
+  quote: RDDM 1.13% 31.77% 2.18% 2016
+- id: r67
+  benchmark: aguiar2023-single-class-local
+  method: RDDM
+  metric: f1-pct
+  value: 2.18
+  location: Table 6
+  page: 13
+  quote: RDDM 1.13% 31.77% 2.18% 2016
+- id: r68
+  benchmark: aguiar2023-single-class-local
+  method: RDDM
+  metric: delay
+  value: 2016.0
+  location: Table 6
+  page: 13
+  quote: RDDM 1.13% 31.77% 2.18% 2016
+- id: r69
+  benchmark: aguiar2023-single-class-local
+  method: STEPD
+  metric: precision-pct
+  value: 0.02
+  location: Table 6
+  page: 13
+  quote: STEPD 0.02% 91.15% 0.04% 649
+- id: r70
+  benchmark: aguiar2023-single-class-local
+  method: STEPD
+  metric: recall-pct
+  value: 91.15
+  location: Table 6
+  page: 13
+  quote: STEPD 0.02% 91.15% 0.04% 649
+- id: r71
+  benchmark: aguiar2023-single-class-local
+  method: STEPD
+  metric: f1-pct
+  value: 0.04
+  location: Table 6
+  page: 13
+  quote: STEPD 0.02% 91.15% 0.04% 649
+- id: r72
+  benchmark: aguiar2023-single-class-local
+  method: STEPD
+  metric: delay
+  value: 649.0
+  location: Table 6
+  page: 13
+  quote: STEPD 0.02% 91.15% 0.04% 649
+- id: r73
+  benchmark: aguiar2023-single-class-global
+  method: ADWIN
+  metric: precision-pct
+  value: 8.15
+  location: Table 7
+  page: 13
+  quote: ADWIN 8.15% 39.06% 13.48% 1909
+- id: r74
+  benchmark: aguiar2023-single-class-global
+  method: ADWIN
+  metric: recall-pct
+  value: 39.06
+  location: Table 7
+  page: 13
+  quote: ADWIN 8.15% 39.06% 13.48% 1909
+- id: r75
+  benchmark: aguiar2023-single-class-global
+  method: ADWIN
+  metric: f1-pct
+  value: 13.48
+  location: Table 7
+  page: 13
+  quote: ADWIN 8.15% 39.06% 13.48% 1909
+- id: r76
+  benchmark: aguiar2023-single-class-global
+  method: ADWIN
+  metric: delay
+  value: 1909.0
+  location: Table 7
+  page: 13
+  quote: ADWIN 8.15% 39.06% 13.48% 1909
+- id: r77
+  benchmark: aguiar2023-single-class-global
+  method: DDM
+  metric: precision-pct
+  value: 2.21
+  location: Table 7
+  page: 13
+  quote: DDM 2.21% 6.25% 3.27% 2286
+- id: r78
+  benchmark: aguiar2023-single-class-global
+  method: DDM
+  metric: recall-pct
+  value: 6.25
+  location: Table 7
+  page: 13
+  quote: DDM 2.21% 6.25% 3.27% 2286
+- id: r79
+  benchmark: aguiar2023-single-class-global
+  method: DDM
+  metric: f1-pct
+  value: 3.27
+  location: Table 7
+  page: 13
+  quote: DDM 2.21% 6.25% 3.27% 2286
+- id: r80
+  benchmark: aguiar2023-single-class-global
+  method: DDM
+  metric: delay
+  value: 2286.0
+  location: Table 7
+  page: 13
+  quote: DDM 2.21% 6.25% 3.27% 2286
+- id: r81
+  benchmark: aguiar2023-single-class-global
+  method: ECDD
+  metric: precision-pct
+  value: 0.02
+  location: Table 7
+  page: 13
+  quote: ECDD 0.02% 26.30% 0.05% 315
+- id: r82
+  benchmark: aguiar2023-single-class-global
+  method: ECDD
+  metric: recall-pct
+  value: 26.3
+  location: Table 7
+  page: 13
+  quote: ECDD 0.02% 26.30% 0.05% 315
+- id: r83
+  benchmark: aguiar2023-single-class-global
+  method: ECDD
+  metric: f1-pct
+  value: 0.05
+  location: Table 7
+  page: 13
+  quote: ECDD 0.02% 26.30% 0.05% 315
+- id: r84
+  benchmark: aguiar2023-single-class-global
+  method: ECDD
+  metric: delay
+  value: 315.0
+  location: Table 7
+  page: 13
+  quote: ECDD 0.02% 26.30% 0.05% 315
+- id: r85
+  benchmark: aguiar2023-single-class-global
+  method: EDDM
+  metric: precision-pct
+  value: 0.0
+  location: Table 7
+  page: 13
+  quote: EDDM 0.00% 91.41% 0.00% 11
+- id: r86
+  benchmark: aguiar2023-single-class-global
+  method: EDDM
+  metric: recall-pct
+  value: 91.41
+  location: Table 7
+  page: 13
+  quote: EDDM 0.00% 91.41% 0.00% 11
+- id: r87
+  benchmark: aguiar2023-single-class-global
+  method: EDDM
+  metric: f1-pct
+  value: 0.0
+  location: Table 7
+  page: 13
+  quote: EDDM 0.00% 91.41% 0.00% 11
+- id: r88
+  benchmark: aguiar2023-single-class-global
+  method: EDDM
+  metric: delay
+  value: 11.0
+  location: Table 7
+  page: 13
+  quote: EDDM 0.00% 91.41% 0.00% 11
+- id: r89
+  benchmark: aguiar2023-single-class-global
+  method: HDDM
+  metric: precision-pct
+  value: 1.81
+  location: Table 7
+  page: 13
+  quote: HDDM 1.81% 69.01% 3.52% 1321
+- id: r90
+  benchmark: aguiar2023-single-class-global
+  method: HDDM
+  metric: recall-pct
+  value: 69.01
+  location: Table 7
+  page: 13
+  quote: HDDM 1.81% 69.01% 3.52% 1321
+- id: r91
+  benchmark: aguiar2023-single-class-global
+  method: HDDM
+  metric: f1-pct
+  value: 3.52
+  location: Table 7
+  page: 13
+  quote: HDDM 1.81% 69.01% 3.52% 1321
+- id: r92
+  benchmark: aguiar2023-single-class-global
+  method: HDDM
+  metric: delay
+  value: 1321.0
+  location: Table 7
+  page: 13
+  quote: HDDM 1.81% 69.01% 3.52% 1321
+- id: r93
+  benchmark: aguiar2023-single-class-global
+  method: KSWIN
+  metric: precision-pct
+  value: 3.3
+  location: Table 7
+  page: 13
+  quote: KSWIN 3.30% 34.11% 6.02% 1879
+- id: r94
+  benchmark: aguiar2023-single-class-global
+  method: KSWIN
+  metric: recall-pct
+  value: 34.11
+  location: Table 7
+  page: 13
+  quote: KSWIN 3.30% 34.11% 6.02% 1879
+- id: r95
+  benchmark: aguiar2023-single-class-global
+  method: KSWIN
+  metric: f1-pct
+  value: 6.02
+  location: Table 7
+  page: 13
+  quote: KSWIN 3.30% 34.11% 6.02% 1879
+- id: r96
+  benchmark: aguiar2023-single-class-global
+  method: KSWIN
+  metric: delay
+  value: 1879.0
+  location: Table 7
+  page: 13
+  quote: KSWIN 3.30% 34.11% 6.02% 1879
+- id: r97
+  benchmark: aguiar2023-single-class-global
+  method: PH
+  metric: precision-pct
+  value: 5.87
+  location: Table 7
+  page: 13
+  quote: PH 5.87% 75.78% 10.90% 1737
+- id: r98
+  benchmark: aguiar2023-single-class-global
+  method: PH
+  metric: recall-pct
+  value: 75.78
+  location: Table 7
+  page: 13
+  quote: PH 5.87% 75.78% 10.90% 1737
+- id: r99
+  benchmark: aguiar2023-single-class-global
+  method: PH
+  metric: f1-pct
+  value: 10.9
+  location: Table 7
+  page: 13
+  quote: PH 5.87% 75.78% 10.90% 1737
+- id: r100
+  benchmark: aguiar2023-single-class-global
+  method: PH
+  metric: delay
+  value: 1737.0
+  location: Table 7
+  page: 13
+  quote: PH 5.87% 75.78% 10.90% 1737
+- id: r101
+  benchmark: aguiar2023-single-class-global
+  method: RDDM
+  metric: precision-pct
+  value: 1.01
+  location: Table 7
+  page: 13
+  quote: RDDM 1.01% 28.39% 1.96% 1982
+- id: r102
+  benchmark: aguiar2023-single-class-global
+  method: RDDM
+  metric: recall-pct
+  value: 28.39
+  location: Table 7
+  page: 13
+  quote: RDDM 1.01% 28.39% 1.96% 1982
+- id: r103
+  benchmark: aguiar2023-single-class-global
+  method: RDDM
+  metric: f1-pct
+  value: 1.96
+  location: Table 7
+  page: 13
+  quote: RDDM 1.01% 28.39% 1.96% 1982
+- id: r104
+  benchmark: aguiar2023-single-class-global
+  method: RDDM
+  metric: delay
+  value: 1982.0
+  location: Table 7
+  page: 13
+  quote: RDDM 1.01% 28.39% 1.96% 1982
+- id: r105
+  benchmark: aguiar2023-single-class-global
+  method: STEPD
+  metric: precision-pct
+  value: 0.01
+  location: Table 7
+  page: 13
+  quote: STEPD 0.01% 93.75% 0.02% 517
+- id: r106
+  benchmark: aguiar2023-single-class-global
+  method: STEPD
+  metric: recall-pct
+  value: 93.75
+  location: Table 7
+  page: 13
+  quote: STEPD 0.01% 93.75% 0.02% 517
+- id: r107
+  benchmark: aguiar2023-single-class-global
+  method: STEPD
+  metric: f1-pct
+  value: 0.02
+  location: Table 7
+  page: 13
+  quote: STEPD 0.01% 93.75% 0.02% 517
+- id: r108
+  benchmark: aguiar2023-single-class-global
+  method: STEPD
+  metric: delay
+  value: 517.0
+  location: Table 7
+  page: 13
+  quote: STEPD 0.01% 93.75% 0.02% 517
+- id: r109
+  benchmark: aguiar2023-multi-class-local
+  method: ADWIN
+  metric: precision-pct
+  value: 7.19
+  location: Table 8
+  page: 14
+  quote: ADWIN 7.19% 30.40% 11.63% 2360
+- id: r110
+  benchmark: aguiar2023-multi-class-local
+  method: ADWIN
+  metric: recall-pct
+  value: 30.4
+  location: Table 8
+  page: 14
+  quote: ADWIN 7.19% 30.40% 11.63% 2360
+- id: r111
+  benchmark: aguiar2023-multi-class-local
+  method: ADWIN
+  metric: f1-pct
+  value: 11.63
+  location: Table 8
+  page: 14
+  quote: ADWIN 7.19% 30.40% 11.63% 2360
+- id: r112
+  benchmark: aguiar2023-multi-class-local
+  method: ADWIN
+  metric: delay
+  value: 2360.0
+  location: Table 8
+  page: 14
+  quote: ADWIN 7.19% 30.40% 11.63% 2360
+- id: r113
+  benchmark: aguiar2023-multi-class-local
+  method: DDM
+  metric: precision-pct
+  value: 1.58
+  location: Table 8
+  page: 14
+  quote: DDM 1.58% 4.67% 2.36% 2036
+- id: r114
+  benchmark: aguiar2023-multi-class-local
+  method: DDM
+  metric: recall-pct
+  value: 4.67
+  location: Table 8
+  page: 14
+  quote: DDM 1.58% 4.67% 2.36% 2036
+- id: r115
+  benchmark: aguiar2023-multi-class-local
+  method: DDM
+  metric: f1-pct
+  value: 2.36
+  location: Table 8
+  page: 14
+  quote: DDM 1.58% 4.67% 2.36% 2036
+- id: r116
+  benchmark: aguiar2023-multi-class-local
+  method: DDM
+  metric: delay
+  value: 2036.0
+  location: Table 8
+  page: 14
+  quote: DDM 1.58% 4.67% 2.36% 2036
+- id: r117
+  benchmark: aguiar2023-multi-class-local
+  method: ECDD
+  metric: precision-pct
+  value: 0.04
+  location: Table 8
+  page: 14
+  quote: ECDD 0.04% 40.29% 0.07% 192
+- id: r118
+  benchmark: aguiar2023-multi-class-local
+  method: ECDD
+  metric: recall-pct
+  value: 40.29
+  location: Table 8
+  page: 14
+  quote: ECDD 0.04% 40.29% 0.07% 192
+- id: r119
+  benchmark: aguiar2023-multi-class-local
+  method: ECDD
+  metric: f1-pct
+  value: 0.07
+  location: Table 8
+  page: 14
+  quote: ECDD 0.04% 40.29% 0.07% 192
+- id: r120
+  benchmark: aguiar2023-multi-class-local
+  method: ECDD
+  metric: delay
+  value: 192.0
+  location: Table 8
+  page: 14
+  quote: ECDD 0.04% 40.29% 0.07% 192
+- id: r121
+  benchmark: aguiar2023-multi-class-local
+  method: EDDM
+  metric: precision-pct
+  value: 0.0
+  location: Table 8
+  page: 14
+  quote: EDDM 0.00% 95.51% 0.00% 21
+- id: r122
+  benchmark: aguiar2023-multi-class-local
+  method: EDDM
+  metric: recall-pct
+  value: 95.51
+  location: Table 8
+  page: 14
+  quote: EDDM 0.00% 95.51% 0.00% 21
+- id: r123
+  benchmark: aguiar2023-multi-class-local
+  method: EDDM
+  metric: f1-pct
+  value: 0.0
+  location: Table 8
+  page: 14
+  quote: EDDM 0.00% 95.51% 0.00% 21
+- id: r124
+  benchmark: aguiar2023-multi-class-local
+  method: EDDM
+  metric: delay
+  value: 21.0
+  location: Table 8
+  page: 14
+  quote: EDDM 0.00% 95.51% 0.00% 21
+- id: r125
+  benchmark: aguiar2023-multi-class-local
+  method: HDDM
+  metric: precision-pct
+  value: 1.67
+  location: Table 8
+  page: 14
+  quote: HDDM 1.67% 80.68% 3.28% 1207
+- id: r126
+  benchmark: aguiar2023-multi-class-local
+  method: HDDM
+  metric: recall-pct
+  value: 80.68
+  location: Table 8
+  page: 14
+  quote: HDDM 1.67% 80.68% 3.28% 1207
+- id: r127
+  benchmark: aguiar2023-multi-class-local
+  method: HDDM
+  metric: f1-pct
+  value: 3.28
+  location: Table 8
+  page: 14
+  quote: HDDM 1.67% 80.68% 3.28% 1207
+- id: r128
+  benchmark: aguiar2023-multi-class-local
+  method: HDDM
+  metric: delay
+  value: 1207.0
+  location: Table 8
+  page: 14
+  quote: HDDM 1.67% 80.68% 3.28% 1207
+- id: r129
+  benchmark: aguiar2023-multi-class-local
+  method: KSWIN
+  metric: precision-pct
+  value: 3.31
+  location: Table 8
+  page: 14
+  quote: KSWIN 3.31% 44.32% 6.16% 1873
+- id: r130
+  benchmark: aguiar2023-multi-class-local
+  method: KSWIN
+  metric: recall-pct
+  value: 44.32
+  location: Table 8
+  page: 14
+  quote: KSWIN 3.31% 44.32% 6.16% 1873
+- id: r131
+  benchmark: aguiar2023-multi-class-local
+  method: KSWIN
+  metric: f1-pct
+  value: 6.16
+  location: Table 8
+  page: 14
+  quote: KSWIN 3.31% 44.32% 6.16% 1873
+- id: r132
+  benchmark: aguiar2023-multi-class-local
+  method: KSWIN
+  metric: delay
+  value: 1873.0
+  location: Table 8
+  page: 14
+  quote: KSWIN 3.31% 44.32% 6.16% 1873
+- id: r133
+  benchmark: aguiar2023-multi-class-local
+  method: PH
+  metric: precision-pct
+  value: 5.18
+  location: Table 8
+  page: 14
+  quote: PH 5.18% 70.88% 9.66% 1956
+- id: r134
+  benchmark: aguiar2023-multi-class-local
+  method: PH
+  metric: recall-pct
+  value: 70.88
+  location: Table 8
+  page: 14
+  quote: PH 5.18% 70.88% 9.66% 1956
+- id: r135
+  benchmark: aguiar2023-multi-class-local
+  method: PH
+  metric: f1-pct
+  value: 9.66
+  location: Table 8
+  page: 14
+  quote: PH 5.18% 70.88% 9.66% 1956
+- id: r136
+  benchmark: aguiar2023-multi-class-local
+  method: PH
+  metric: delay
+  value: 1956.0
+  location: Table 8
+  page: 14
+  quote: PH 5.18% 70.88% 9.66% 1956
+- id: r137
+  benchmark: aguiar2023-multi-class-local
+  method: RDDM
+  metric: precision-pct
+  value: 0.92
+  location: Table 8
+  page: 14
+  quote: RDDM 0.92% 26.37% 1.77% 2083
+- id: r138
+  benchmark: aguiar2023-multi-class-local
+  method: RDDM
+  metric: recall-pct
+  value: 26.37
+  location: Table 8
+  page: 14
+  quote: RDDM 0.92% 26.37% 1.77% 2083
+- id: r139
+  benchmark: aguiar2023-multi-class-local
+  method: RDDM
+  metric: f1-pct
+  value: 1.77
+  location: Table 8
+  page: 14
+  quote: RDDM 0.92% 26.37% 1.77% 2083
+- id: r140
+  benchmark: aguiar2023-multi-class-local
+  method: RDDM
+  metric: delay
+  value: 2083.0
+  location: Table 8
+  page: 14
+  quote: RDDM 0.92% 26.37% 1.77% 2083
+- id: r141
+  benchmark: aguiar2023-multi-class-local
+  method: STEPD
+  metric: precision-pct
+  value: 0.02
+  location: Table 8
+  page: 14
+  quote: STEPD 0.02% 96.70% 0.03% 508
+- id: r142
+  benchmark: aguiar2023-multi-class-local
+  method: STEPD
+  metric: recall-pct
+  value: 96.7
+  location: Table 8
+  page: 14
+  quote: STEPD 0.02% 96.70% 0.03% 508
+- id: r143
+  benchmark: aguiar2023-multi-class-local
+  method: STEPD
+  metric: f1-pct
+  value: 0.03
+  location: Table 8
+  page: 14
+  quote: STEPD 0.02% 96.70% 0.03% 508
+- id: r144
+  benchmark: aguiar2023-multi-class-local
+  method: STEPD
+  metric: delay
+  value: 508.0
+  location: Table 8
+  page: 14
+  quote: STEPD 0.02% 96.70% 0.03% 508
+- id: r145
+  benchmark: aguiar2023-multi-class-global
+  method: ADWIN
+  metric: precision-pct
+  value: 7.95
+  location: Table 9
+  page: 14
+  quote: ADWIN 7.95% 42.92% 13.41% 2033
+- id: r146
+  benchmark: aguiar2023-multi-class-global
+  method: ADWIN
+  metric: recall-pct
+  value: 42.92
+  location: Table 9
+  page: 14
+  quote: ADWIN 7.95% 42.92% 13.41% 2033
+- id: r147
+  benchmark: aguiar2023-multi-class-global
+  method: ADWIN
+  metric: f1-pct
+  value: 13.41
+  location: Table 9
+  page: 14
+  quote: ADWIN 7.95% 42.92% 13.41% 2033
+- id: r148
+  benchmark: aguiar2023-multi-class-global
+  method: ADWIN
+  metric: delay
+  value: 2033.0
+  location: Table 9
+  page: 14
+  quote: ADWIN 7.95% 42.92% 13.41% 2033
+- id: r149
+  benchmark: aguiar2023-multi-class-global
+  method: DDM
+  metric: precision-pct
+  value: 1.94
+  location: Table 9
+  page: 14
+  quote: DDM 1.94% 6.05% 2.93% 2195
+- id: r150
+  benchmark: aguiar2023-multi-class-global
+  method: DDM
+  metric: recall-pct
+  value: 6.05
+  location: Table 9
+  page: 14
+  quote: DDM 1.94% 6.05% 2.93% 2195
+- id: r151
+  benchmark: aguiar2023-multi-class-global
+  method: DDM
+  metric: f1-pct
+  value: 2.93
+  location: Table 9
+  page: 14
+  quote: DDM 1.94% 6.05% 2.93% 2195
+- id: r152
+  benchmark: aguiar2023-multi-class-global
+  method: DDM
+  metric: delay
+  value: 2195.0
+  location: Table 9
+  page: 14
+  quote: DDM 1.94% 6.05% 2.93% 2195
+- id: r153
+  benchmark: aguiar2023-multi-class-global
+  method: ECDD
+  metric: precision-pct
+  value: 0.03
+  location: Table 9
+  page: 14
+  quote: ECDD 0.03% 39.38% 0.06% 277
+- id: r154
+  benchmark: aguiar2023-multi-class-global
+  method: ECDD
+  metric: recall-pct
+  value: 39.38
+  location: Table 9
+  page: 14
+  quote: ECDD 0.03% 39.38% 0.06% 277
+- id: r155
+  benchmark: aguiar2023-multi-class-global
+  method: ECDD
+  metric: f1-pct
+  value: 0.06
+  location: Table 9
+  page: 14
+  quote: ECDD 0.03% 39.38% 0.06% 277
+- id: r156
+  benchmark: aguiar2023-multi-class-global
+  method: ECDD
+  metric: delay
+  value: 277.0
+  location: Table 9
+  page: 14
+  quote: ECDD 0.03% 39.38% 0.06% 277
+- id: r157
+  benchmark: aguiar2023-multi-class-global
+  method: EDDM
+  metric: precision-pct
+  value: 0.0
+  location: Table 9
+  page: 14
+  quote: EDDM 0.00% 95.43% 0.00% 14
+- id: r158
+  benchmark: aguiar2023-multi-class-global
+  method: EDDM
+  metric: recall-pct
+  value: 95.43
+  location: Table 9
+  page: 14
+  quote: EDDM 0.00% 95.43% 0.00% 14
+- id: r159
+  benchmark: aguiar2023-multi-class-global
+  method: EDDM
+  metric: f1-pct
+  value: 0.0
+  location: Table 9
+  page: 14
+  quote: EDDM 0.00% 95.43% 0.00% 14
+- id: r160
+  benchmark: aguiar2023-multi-class-global
+  method: EDDM
+  metric: delay
+  value: 14.0
+  location: Table 9
+  page: 14
+  quote: EDDM 0.00% 95.43% 0.00% 14
+- id: r161
+  benchmark: aguiar2023-multi-class-global
+  method: HDDM
+  metric: precision-pct
+  value: 1.56
+  location: Table 9
+  page: 14
+  quote: HDDM 1.56% 78.88% 3.06% 1299
+- id: r162
+  benchmark: aguiar2023-multi-class-global
+  method: HDDM
+  metric: recall-pct
+  value: 78.88
+  location: Table 9
+  page: 14
+  quote: HDDM 1.56% 78.88% 3.06% 1299
+- id: r163
+  benchmark: aguiar2023-multi-class-global
+  method: HDDM
+  metric: f1-pct
+  value: 3.06
+  location: Table 9
+  page: 14
+  quote: HDDM 1.56% 78.88% 3.06% 1299
+- id: r164
+  benchmark: aguiar2023-multi-class-global
+  method: HDDM
+  metric: delay
+  value: 1299.0
+  location: Table 9
+  page: 14
+  quote: HDDM 1.56% 78.88% 3.06% 1299
+- id: r165
+  benchmark: aguiar2023-multi-class-global
+  method: KSWIN
+  metric: precision-pct
+  value: 3.48
+  location: Table 9
+  page: 14
+  quote: KSWIN 3.48% 48.86% 6.49% 1819
+- id: r166
+  benchmark: aguiar2023-multi-class-global
+  method: KSWIN
+  metric: recall-pct
+  value: 48.86
+  location: Table 9
+  page: 14
+  quote: KSWIN 3.48% 48.86% 6.49% 1819
+- id: r167
+  benchmark: aguiar2023-multi-class-global
+  method: KSWIN
+  metric: f1-pct
+  value: 6.49
+  location: Table 9
+  page: 14
+  quote: KSWIN 3.48% 48.86% 6.49% 1819
+- id: r168
+  benchmark: aguiar2023-multi-class-global
+  method: KSWIN
+  metric: delay
+  value: 1819.0
+  location: Table 9
+  page: 14
+  quote: KSWIN 3.48% 48.86% 6.49% 1819
+- id: r169
+  benchmark: aguiar2023-multi-class-global
+  method: PH
+  metric: precision-pct
+  value: 4.91
+  location: Table 9
+  page: 14
+  quote: PH 4.91% 75.80% 9.22% 1706
+- id: r170
+  benchmark: aguiar2023-multi-class-global
+  method: PH
+  metric: recall-pct
+  value: 75.8
+  location: Table 9
+  page: 14
+  quote: PH 4.91% 75.80% 9.22% 1706
+- id: r171
+  benchmark: aguiar2023-multi-class-global
+  method: PH
+  metric: f1-pct
+  value: 9.22
+  location: Table 9
+  page: 14
+  quote: PH 4.91% 75.80% 9.22% 1706
+- id: r172
+  benchmark: aguiar2023-multi-class-global
+  method: PH
+  metric: delay
+  value: 1706.0
+  location: Table 9
+  page: 14
+  quote: PH 4.91% 75.80% 9.22% 1706
+- id: r173
+  benchmark: aguiar2023-multi-class-global
+  method: RDDM
+  metric: precision-pct
+  value: 0.72
+  location: Table 9
+  page: 14
+  quote: RDDM 0.72% 21.92% 1.39% 1977
+- id: r174
+  benchmark: aguiar2023-multi-class-global
+  method: RDDM
+  metric: recall-pct
+  value: 21.92
+  location: Table 9
+  page: 14
+  quote: RDDM 0.72% 21.92% 1.39% 1977
+- id: r175
+  benchmark: aguiar2023-multi-class-global
+  method: RDDM
+  metric: f1-pct
+  value: 1.39
+  location: Table 9
+  page: 14
+  quote: RDDM 0.72% 21.92% 1.39% 1977
+- id: r176
+  benchmark: aguiar2023-multi-class-global
+  method: RDDM
+  metric: delay
+  value: 1977.0
+  location: Table 9
+  page: 14
+  quote: RDDM 0.72% 21.92% 1.39% 1977
+- id: r177
+  benchmark: aguiar2023-multi-class-global
+  method: STEPD
+  metric: precision-pct
+  value: 0.01
+  location: Table 9
+  page: 14
+  quote: STEPD 0.01% 97.60% 0.03% 469
+- id: r178
+  benchmark: aguiar2023-multi-class-global
+  method: STEPD
+  metric: recall-pct
+  value: 97.6
+  location: Table 9
+  page: 14
+  quote: STEPD 0.01% 97.60% 0.03% 469
+- id: r179
+  benchmark: aguiar2023-multi-class-global
+  method: STEPD
+  metric: f1-pct
+  value: 0.03
+  location: Table 9
+  page: 14
+  quote: STEPD 0.01% 97.60% 0.03% 469
+- id: r180
+  benchmark: aguiar2023-multi-class-global
+  method: STEPD
+  metric: delay
+  value: 469.0
+  location: Table 9
+  page: 14
+  quote: STEPD 0.01% 97.60% 0.03% 469
+- id: r181
+  benchmark: aguiar2023-no-drift
+  method: ADWIN
+  metric: false-positives
+  value: 3.79
+  location: Table 4
+  page: 12
+  quote: ADWIN 0.00 3.79
+- id: r182
+  benchmark: aguiar2023-no-drift
+  method: DDM
+  metric: false-positives
+  value: 2.71
+  location: Table 4
+  page: 12
+  quote: DDM 0.17 2.71
+- id: r183
+  benchmark: aguiar2023-no-drift
+  method: ECDD
+  metric: false-positives
+  value: 904.58
+  location: Table 4
+  page: 12
+  quote: ECDD 0.46 904.58
+- id: r184
+  benchmark: aguiar2023-no-drift
+  method: EDDM
+  metric: false-positives
+  value: 62914.04
+  location: Table 4
+  page: 12
+  quote: EDDM 0.00 62914.04
+- id: r185
+  benchmark: aguiar2023-no-drift
+  method: HDDM
+  metric: false-positives
+  value: 41.83
+  location: Table 4
+  page: 12
+  quote: HDDM 0.00 41.83
+- id: r186
+  benchmark: aguiar2023-no-drift
+  method: KSWIN
+  metric: false-positives
+  value: 10.25
+  location: Table 4
+  page: 12
+  quote: KSWIN 0.08 10.25
+- id: r187
+  benchmark: aguiar2023-no-drift
+  method: PH
+  metric: false-positives
+  value: 12.46
+  location: Table 4
+  page: 12
+  quote: PH 0.00 12.46
+- id: r188
+  benchmark: aguiar2023-no-drift
+  method: RDDM
+  metric: false-positives
+  value: 27.96
+  location: Table 4
+  page: 12
+  quote: RDDM 0.00 27.96
+- id: r189
+  benchmark: aguiar2023-no-drift
+  method: STEPD
+  metric: false-positives
+  value: 4628.13
+  location: Table 4
+  page: 12
+  quote: STEPD 0.00 4628.13
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Tables 4-9 extracted mechanically. Precision/recall/F1 are percentages; delay is in instances. Detector hyperparameter settings were not checked in the text. Streams are synthetic (generated);
+    each stream has a single known drift. Page 24 repeats one paragraph verbatim (editorial duplication in the paper).

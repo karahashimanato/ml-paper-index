@@ -1,0 +1,2410 @@
+id: arxiv-2602.06456
+title: 'The Window Dilemma: Why Concept Drift Detection is Ill-Posed'
+authors:
+- Brandon Gower-Winter
+- Misja Groen
+- Georg Krempl
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2602.06456
+  code: https://github.com/BrandonGower-Winter/TheWindowDilemma
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f4b06990b504ec0dbefc451a6008c29460d5c36d690ace48ccab4c0d3a40f969
+tags:
+  tasks:
+  - concept-drift-detection
+  method_families:
+  - error-rate-drift-detectors
+  - window-based-drift-detectors
+  - random-forests
+  paradigms:
+  - streaming
+proposes:
+- The Window Dilemma (argument that drift detection is ill-posed)
+claims:
+- id: c1
+  statement: Traditional batch learning often performed better than drift-aware stream learners.
+  location: Abstract
+  page: 1
+  quote: is that traditional batch learning techniques often perform better than their drift-aware counterparts
+- id: c2
+  statement: 'The Window Dilemma: perceived drift is a product of how instances are windowed, not necessarily of the data-generating process.'
+  location: Abstract
+  page: 1
+  quote: perceived drift is a product of windowing and not necessarily the underlying data generating process.
+- id: c3
+  statement: Drift detection is ill-posed mainly because drift events can rarely be verified in practice.
+  location: Abstract
+  page: 1
+  quote: drift detection is ill-posed, primarily because verification of drift events are implausible in practice.
+- id: c4
+  statement: Better performance of a classifier with a drift detector does not prove that drift was detected (affirming the consequent).
+  location: Section 4
+  page: 4
+  quote: Performance improvement is neither necessary nor sufficient evidence of successful drift detection
+- id: c5
+  statement: Detectors that alarm more frequently tend to perform better (up to a point), likely because they retrain more often on recent data.
+  location: Section 4
+  page: 4
+  quote: concept drift detectors that detect more frequently, tend to perform better (up to a point).
+- id: c6
+  statement: The type of classifier often matters more than drift-awareness.
+  location: Introduction
+  page: 1
+  quote: indicates that the type of classifier is often more important than drift-awareness.
+- id: c7
+  statement: Among drift detectors, D3 with a Hoeffding Tree discriminator was best for both base models (consistent with Lukats et al.).
+  location: Section 5
+  page: 7
+  quote: Of the drift detectors, D3-HT performed the best for both the NB and HT base models.
+- id: c8
+  statement: The drift-unaware Aggregated Mondrian Forest was competitive with the drift-aware Adaptive Random Forest.
+  location: Section 5
+  page: 7
+  quote: the drift-unaware Aggregated Mondrian Forest (AMF) performed competitively with the drift-aware Adaptive Random Forest (ARF).
+- id: c9
+  statement: Keeping past data and periodically retraining on growing training sets is often effective.
+  location: Section 5
+  page: 7
+  quote: our results suggest that keeping past data is often useful and periodically retraining a model on increasingly large training sets is often an effective strategy.
+- id: c10
+  statement: Under the same update regime as batch random forests, drift-aware stream learners are often inferior to simple batch learning with a suitable classifier.
+  location: Section 5
+  page: 7
+  quote: drift-aware stream learners are often inferior to simple batch learning procedures provided an appropriate classifier is chosen.
+- id: c11
+  statement: The authors do not claim drift detection is pointless, but that its current purpose is misplaced.
+  location: Conclusion
+  page: 8
+  quote: Our findings do not mean that drift detection is pointless, rather that its current purpose is misplaced.
+- id: c12
+  statement: 'No per-stream tuning: default parameters of each library/implementation are used.'
+  location: Appendix A
+  page: 8
+  quote: We do not perform explicit parameter tuning for model on each data stream and instead use the default values
+- id: c13
+  statement: Evaluation uses 11 binary and multiclass real-world streams (no purely synthetic data).
+  location: Section 5
+  page: 5
+  quote: we evaluate each model across 11 binary and multiclass data streams
+- id: c14
+  statement: The Last Class baseline wins on Forest Covertype by exploiting autocorrelation.
+  location: Section 5 footnote
+  page: 7
+  quote: The Last Class classifier performed best on ForestCoverType because it abuses the known autocorrelation in the data stream.
+- id: c15
+  statement: Accuracy can be misleading for drifting streams (Cohen's kappa is reported in the appendix).
+  location: Section 5
+  page: 5
+  quote: We acknowledge that accuracy is a potentially misleading metric in Drift Research
+- id: c16
+  statement: Reset intervals of the periodic-reset models use domain knowledge for some datasets (e.g. one month, one season).
+  location: Appendix
+  page: 8
+  quote: For resetting, some datasets possess domain knowledge that we could exploit.
+results:
+- id: r1
+  benchmark: gowerwinter2026-el
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 84.8
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r2
+  benchmark: gowerwinter2026-fc
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 91.4
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r3
+  benchmark: gowerwinter2026-ia
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 25.0
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r4
+  benchmark: gowerwinter2026-ii
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 15.9
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r5
+  benchmark: gowerwinter2026-ks
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 6.7
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r6
+  benchmark: gowerwinter2026-lx
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 48.0
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r7
+  benchmark: gowerwinter2026-mr
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 49.8
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r8
+  benchmark: gowerwinter2026-nw
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 68.1
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r9
+  benchmark: gowerwinter2026-oz
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 90.2
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r10
+  benchmark: gowerwinter2026-rt
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 0.0
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r11
+  benchmark: gowerwinter2026-yg
+  method: LC
+  metric: mean-prequential-accuracy
+  value: 48.7
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r12
+  benchmark: gowerwinter2026-11-streams
+  method: LC
+  metric: median-rank
+  value: 22.0
+  location: Table 1
+  page: 6
+  quote: LC 84,8 91,4 25,0 15,9 6,7 48,0 49,8 68,1 90,2 0,0 48,7 22
+- id: r13
+  benchmark: gowerwinter2026-el
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 57.4
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r14
+  benchmark: gowerwinter2026-fc
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 56.6
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r15
+  benchmark: gowerwinter2026-ia
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 17.7
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r16
+  benchmark: gowerwinter2026-ii
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 11.0
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r17
+  benchmark: gowerwinter2026-ks
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 6.8
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r18
+  benchmark: gowerwinter2026-lx
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 52.3
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r19
+  benchmark: gowerwinter2026-mr
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 54.1
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r20
+  benchmark: gowerwinter2026-nw
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 69.8
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r21
+  benchmark: gowerwinter2026-oz
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 92.3
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r22
+  benchmark: gowerwinter2026-rt
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 10.0
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r23
+  benchmark: gowerwinter2026-yg
+  method: MC
+  metric: mean-prequential-accuracy
+  value: 52.0
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r24
+  benchmark: gowerwinter2026-11-streams
+  method: MC
+  metric: median-rank
+  value: 21.0
+  location: Table 1
+  page: 6
+  quote: MC 57,4 56,6 17,7 11,0 6,8 52,3 54,1 69,8 92,3 10,0 52,0 21
+- id: r25
+  benchmark: gowerwinter2026-el
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 76.3
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r26
+  benchmark: gowerwinter2026-fc
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 56.6
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r27
+  benchmark: gowerwinter2026-ia
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 53.6
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r28
+  benchmark: gowerwinter2026-ii
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 46.5
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r29
+  benchmark: gowerwinter2026-ks
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 69.9
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r30
+  benchmark: gowerwinter2026-lx
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 55.6
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r31
+  benchmark: gowerwinter2026-mr
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 63.8
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r32
+  benchmark: gowerwinter2026-nw
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 69.6
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r33
+  benchmark: gowerwinter2026-oz
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 73.8
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r34
+  benchmark: gowerwinter2026-rt
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 18.8
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r35
+  benchmark: gowerwinter2026-yg
+  method: NB
+  metric: mean-prequential-accuracy
+  value: 54.3
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r36
+  benchmark: gowerwinter2026-11-streams
+  method: NB
+  metric: median-rank
+  value: 17.0
+  location: Table 1
+  page: 6
+  quote: NB 76,3 56,6 53,6 46,5 69,9 55,6 63,8 69,6 73,8 18,8 54,3 17
+- id: r37
+  benchmark: gowerwinter2026-el
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 82.4
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r38
+  benchmark: gowerwinter2026-fc
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 79.3
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r39
+  benchmark: gowerwinter2026-ia
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 61.2
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r40
+  benchmark: gowerwinter2026-ii
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 52.5
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r41
+  benchmark: gowerwinter2026-ks
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 70.5
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r42
+  benchmark: gowerwinter2026-lx
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 55.6
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r43
+  benchmark: gowerwinter2026-mr
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 64.0
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r44
+  benchmark: gowerwinter2026-nw
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 71.1
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r45
+  benchmark: gowerwinter2026-oz
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 89.9
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r46
+  benchmark: gowerwinter2026-rt
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 25.0
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r47
+  benchmark: gowerwinter2026-yg
+  method: DDM-NB
+  metric: mean-prequential-accuracy
+  value: 54.3
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r48
+  benchmark: gowerwinter2026-11-streams
+  method: DDM-NB
+  metric: median-rank
+  value: 14.0
+  location: Table 1
+  page: 6
+  quote: DDM-NB 82,4 79,3 61,2 52,5 70,5 55,6 64,0 71,1 89,9 25,0 54,3 14
+- id: r49
+  benchmark: gowerwinter2026-el
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 82.3
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r50
+  benchmark: gowerwinter2026-fc
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 71.4
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r51
+  benchmark: gowerwinter2026-ia
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 63.2
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r52
+  benchmark: gowerwinter2026-ii
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 52.6
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r53
+  benchmark: gowerwinter2026-ks
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 69.9
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r54
+  benchmark: gowerwinter2026-lx
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 55.6
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r55
+  benchmark: gowerwinter2026-mr
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 64.2
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r56
+  benchmark: gowerwinter2026-nw
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 70.7
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r57
+  benchmark: gowerwinter2026-oz
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 85.7
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r58
+  benchmark: gowerwinter2026-rt
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 30.3
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r59
+  benchmark: gowerwinter2026-yg
+  method: ADWIN-NB
+  metric: mean-prequential-accuracy
+  value: 55.1
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r60
+  benchmark: gowerwinter2026-11-streams
+  method: ADWIN-NB
+  metric: median-rank
+  value: 16.0
+  location: Table 1
+  page: 6
+  quote: ADWIN-NB 82,3 71,4 63,2 52,6 69,9 55,6 64,2 70,7 85,7 30,3 55,1 16
+- id: r61
+  benchmark: gowerwinter2026-el
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 86.3
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r62
+  benchmark: gowerwinter2026-fc
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 81.5
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r63
+  benchmark: gowerwinter2026-ia
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 54.2
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r64
+  benchmark: gowerwinter2026-ii
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 39.2
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r65
+  benchmark: gowerwinter2026-ks
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 72.8
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r66
+  benchmark: gowerwinter2026-lx
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 56.3
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r67
+  benchmark: gowerwinter2026-mr
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 65.9
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r68
+  benchmark: gowerwinter2026-nw
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 73.2
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r69
+  benchmark: gowerwinter2026-oz
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 91.9
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r70
+  benchmark: gowerwinter2026-rt
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 34.9
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r71
+  benchmark: gowerwinter2026-yg
+  method: R-NB
+  metric: mean-prequential-accuracy
+  value: 54.6
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r72
+  benchmark: gowerwinter2026-11-streams
+  method: R-NB
+  metric: median-rank
+  value: 12.0
+  location: Table 1
+  page: 6
+  quote: R-NB 86,3 81,5 54,2 39,2 72,8 56,3 65,9 73,2 91,9 34,9 54,6 12
+- id: r73
+  benchmark: gowerwinter2026-el
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 82.3
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r74
+  benchmark: gowerwinter2026-fc
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 70.0
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r75
+  benchmark: gowerwinter2026-ia
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 58.6
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r76
+  benchmark: gowerwinter2026-ii
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 44.4
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r77
+  benchmark: gowerwinter2026-ks
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 75.6
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r78
+  benchmark: gowerwinter2026-lx
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 55.6
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r79
+  benchmark: gowerwinter2026-mr
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 66.9
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r80
+  benchmark: gowerwinter2026-nw
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 72.7
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r81
+  benchmark: gowerwinter2026-oz
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 89.6
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r82
+  benchmark: gowerwinter2026-rt
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 34.6
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r83
+  benchmark: gowerwinter2026-yg
+  method: D3-LR-NB
+  metric: mean-prequential-accuracy
+  value: 54.6
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r84
+  benchmark: gowerwinter2026-11-streams
+  method: D3-LR-NB
+  metric: median-rank
+  value: 15.0
+  location: Table 1
+  page: 6
+  quote: D3-LR-NB 82,3 70,0 58,6 44,4 75,6 55,6 66,9 72,7 89,6 34,6 54,6 15
+- id: r85
+  benchmark: gowerwinter2026-el
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 86.6
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r86
+  benchmark: gowerwinter2026-fc
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 76.2
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r87
+  benchmark: gowerwinter2026-ia
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 63.7
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r88
+  benchmark: gowerwinter2026-ii
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 52.4
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r89
+  benchmark: gowerwinter2026-ks
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 75.6
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r90
+  benchmark: gowerwinter2026-lx
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 61.2
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r91
+  benchmark: gowerwinter2026-mr
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 65.0
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r92
+  benchmark: gowerwinter2026-nw
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 73.0
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r93
+  benchmark: gowerwinter2026-oz
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 88.8
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r94
+  benchmark: gowerwinter2026-rt
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 37.9
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r95
+  benchmark: gowerwinter2026-yg
+  method: D3-HT-NB
+  metric: mean-prequential-accuracy
+  value: 55.9
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r96
+  benchmark: gowerwinter2026-11-streams
+  method: D3-HT-NB
+  metric: median-rank
+  value: 9.0
+  location: Table 1
+  page: 6
+  quote: D3-HT-NB 86,6 76,2 63,7 52,4 75,6 61,2 65,0 73,0 88,8 37,9 55,9 9
+- id: r97
+  benchmark: gowerwinter2026-el
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 86.7
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r98
+  benchmark: gowerwinter2026-fc
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 82.0
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r99
+  benchmark: gowerwinter2026-ia
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 59.8
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r100
+  benchmark: gowerwinter2026-ii
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 46.4
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r101
+  benchmark: gowerwinter2026-ks
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 72.5
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r102
+  benchmark: gowerwinter2026-lx
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 56.6
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r103
+  benchmark: gowerwinter2026-mr
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 66.1
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r104
+  benchmark: gowerwinter2026-nw
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 71.0
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r105
+  benchmark: gowerwinter2026-oz
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 88.1
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r106
+  benchmark: gowerwinter2026-rt
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 23.6
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r107
+  benchmark: gowerwinter2026-yg
+  method: IBDD-NB
+  metric: mean-prequential-accuracy
+  value: 56.8
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r108
+  benchmark: gowerwinter2026-11-streams
+  method: IBDD-NB
+  metric: median-rank
+  value: 10.0
+  location: Table 1
+  page: 6
+  quote: IBDD-NB 86,7 82,0 59,8 46,4 72,5 56,6 66,1 71,0 88,1 23,6 56,8 10
+- id: r109
+  benchmark: gowerwinter2026-el
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 80.2
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r110
+  benchmark: gowerwinter2026-fc
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 79.7
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r111
+  benchmark: gowerwinter2026-ia
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 54.9
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r112
+  benchmark: gowerwinter2026-ii
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 48.1
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r113
+  benchmark: gowerwinter2026-ks
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 70.0
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r114
+  benchmark: gowerwinter2026-lx
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 90.2
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r115
+  benchmark: gowerwinter2026-mr
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 63.6
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r116
+  benchmark: gowerwinter2026-nw
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 72.6
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r117
+  benchmark: gowerwinter2026-oz
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 92.3
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r118
+  benchmark: gowerwinter2026-rt
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 27.3
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r119
+  benchmark: gowerwinter2026-yg
+  method: HT
+  metric: mean-prequential-accuracy
+  value: 54.6
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r120
+  benchmark: gowerwinter2026-11-streams
+  method: HT
+  metric: median-rank
+  value: 13.0
+  location: Table 1
+  page: 6
+  quote: HT 80,2 79,7 54,9 48,1 70,0 90,2 63,6 72,6 92,3 27,3 54,6 13
+- id: r121
+  benchmark: gowerwinter2026-el
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 86.1
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r122
+  benchmark: gowerwinter2026-fc
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 85.3
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r123
+  benchmark: gowerwinter2026-ia
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 60.5
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r124
+  benchmark: gowerwinter2026-ii
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 52.5
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r125
+  benchmark: gowerwinter2026-ks
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 70.6
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r126
+  benchmark: gowerwinter2026-lx
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 90.2
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r127
+  benchmark: gowerwinter2026-mr
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 63.7
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r128
+  benchmark: gowerwinter2026-nw
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 71.4
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r129
+  benchmark: gowerwinter2026-oz
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 92.1
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r130
+  benchmark: gowerwinter2026-rt
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 41.5
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r131
+  benchmark: gowerwinter2026-yg
+  method: DDM-HT
+  metric: mean-prequential-accuracy
+  value: 54.6
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r132
+  benchmark: gowerwinter2026-11-streams
+  method: DDM-HT
+  metric: median-rank
+  value: 9.0
+  location: Table 1
+  page: 6
+  quote: DDM-HT 86,1 85,3 60,5 52,5 70,6 90,2 63,7 71,4 92,1 41,5 54,6 9
+- id: r133
+  benchmark: gowerwinter2026-el
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 83.9
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r134
+  benchmark: gowerwinter2026-fc
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 79.0
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r135
+  benchmark: gowerwinter2026-ia
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 61.3
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r136
+  benchmark: gowerwinter2026-ii
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 52.8
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r137
+  benchmark: gowerwinter2026-ks
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 70.0
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r138
+  benchmark: gowerwinter2026-lx
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 85.0
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r139
+  benchmark: gowerwinter2026-mr
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 63.8
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r140
+  benchmark: gowerwinter2026-nw
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 70.6
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r141
+  benchmark: gowerwinter2026-oz
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 92.2
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r142
+  benchmark: gowerwinter2026-rt
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 44.5
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r143
+  benchmark: gowerwinter2026-yg
+  method: ADWIN-HT
+  metric: mean-prequential-accuracy
+  value: 54.8
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r144
+  benchmark: gowerwinter2026-11-streams
+  method: ADWIN-HT
+  metric: median-rank
+  value: 12.0
+  location: Table 1
+  page: 6
+  quote: ADWIN-HT 83,9 79,0 61,3 52,8 70,0 85,0 63,8 70,6 92,2 44,5 54,8 12
+- id: r145
+  benchmark: gowerwinter2026-el
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 86.0
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r146
+  benchmark: gowerwinter2026-fc
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 87.3
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r147
+  benchmark: gowerwinter2026-ia
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 40.0
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r148
+  benchmark: gowerwinter2026-ii
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 33.3
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r149
+  benchmark: gowerwinter2026-ks
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 69.7
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r150
+  benchmark: gowerwinter2026-lx
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 64.0
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r151
+  benchmark: gowerwinter2026-mr
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 63.0
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r152
+  benchmark: gowerwinter2026-nw
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 72.6
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r153
+  benchmark: gowerwinter2026-oz
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 92.8
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r154
+  benchmark: gowerwinter2026-rt
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 53.9
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r155
+  benchmark: gowerwinter2026-yg
+  method: R-HT
+  metric: mean-prequential-accuracy
+  value: 52.5
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r156
+  benchmark: gowerwinter2026-11-streams
+  method: R-HT
+  metric: median-rank
+  value: 13.0
+  location: Table 1
+  page: 6
+  quote: R-HT 86,0 87,3 40,0 33,3 69,7 64,0 63,0 72,6 92,8 53,9 52,5 13
+- id: r157
+  benchmark: gowerwinter2026-el
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 84.3
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r158
+  benchmark: gowerwinter2026-fc
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 80.4
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r159
+  benchmark: gowerwinter2026-ia
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 46.7
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r160
+  benchmark: gowerwinter2026-ii
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 41.0
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r161
+  benchmark: gowerwinter2026-ks
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 77.5
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r162
+  benchmark: gowerwinter2026-lx
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 90.2
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r163
+  benchmark: gowerwinter2026-mr
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 65.3
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r164
+  benchmark: gowerwinter2026-nw
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 71.8
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r165
+  benchmark: gowerwinter2026-oz
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 92.4
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r166
+  benchmark: gowerwinter2026-rt
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 51.0
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r167
+  benchmark: gowerwinter2026-yg
+  method: D3-LR-HT
+  metric: mean-prequential-accuracy
+  value: 53.2
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r168
+  benchmark: gowerwinter2026-11-streams
+  method: D3-LR-HT
+  metric: median-rank
+  value: 10.0
+  location: Table 1
+  page: 6
+  quote: D3-LR-HT 84,3 80,4 46,7 41,0 77,5 90,2 65,3 71,8 92,4 51,0 53,2 10
+- id: r169
+  benchmark: gowerwinter2026-el
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 86.4
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r170
+  benchmark: gowerwinter2026-fc
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 85.7
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r171
+  benchmark: gowerwinter2026-ia
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 59.4
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r172
+  benchmark: gowerwinter2026-ii
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 51.8
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r173
+  benchmark: gowerwinter2026-ks
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 74.9
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r174
+  benchmark: gowerwinter2026-lx
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 87.5
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r175
+  benchmark: gowerwinter2026-mr
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 64.5
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r176
+  benchmark: gowerwinter2026-nw
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 72.2
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r177
+  benchmark: gowerwinter2026-oz
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 92.4
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r178
+  benchmark: gowerwinter2026-rt
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 55.8
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r179
+  benchmark: gowerwinter2026-yg
+  method: D3-HT-HT
+  metric: mean-prequential-accuracy
+  value: 55.4
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r180
+  benchmark: gowerwinter2026-11-streams
+  method: D3-HT-HT
+  metric: median-rank
+  value: 9.0
+  location: Table 1
+  page: 6
+  quote: D3-HT-HT 86,4 85,7 59,4 51,8 74,9 87,5 64,5 72,2 92,4 55,8 55,4 9
+- id: r181
+  benchmark: gowerwinter2026-el
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 86.1
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r182
+  benchmark: gowerwinter2026-fc
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 87.0
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r183
+  benchmark: gowerwinter2026-ia
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 50.7
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r184
+  benchmark: gowerwinter2026-ii
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 44.0
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r185
+  benchmark: gowerwinter2026-ks
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 71.8
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r186
+  benchmark: gowerwinter2026-lx
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 85.5
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r187
+  benchmark: gowerwinter2026-mr
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 65.2
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r188
+  benchmark: gowerwinter2026-nw
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 70.5
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r189
+  benchmark: gowerwinter2026-oz
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 92.0
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r190
+  benchmark: gowerwinter2026-rt
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 36.1
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r191
+  benchmark: gowerwinter2026-yg
+  method: IBDD-HT
+  metric: mean-prequential-accuracy
+  value: 55.8
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r192
+  benchmark: gowerwinter2026-11-streams
+  method: IBDD-HT
+  metric: median-rank
+  value: 11.0
+  location: Table 1
+  page: 6
+  quote: IBDD-HT 86,1 87,0 50,7 44,0 71,8 85,5 65,2 70,5 92,0 36,1 55,8 11
+- id: r193
+  benchmark: gowerwinter2026-el
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 84.6
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r194
+  benchmark: gowerwinter2026-fc
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 79.7
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r195
+  benchmark: gowerwinter2026-ia
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 57.7
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r196
+  benchmark: gowerwinter2026-ii
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 49.4
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r197
+  benchmark: gowerwinter2026-ks
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 70.5
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r198
+  benchmark: gowerwinter2026-lx
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 91.9
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r199
+  benchmark: gowerwinter2026-mr
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 63.7
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r200
+  benchmark: gowerwinter2026-nw
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 73.8
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r201
+  benchmark: gowerwinter2026-oz
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 92.3
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r202
+  benchmark: gowerwinter2026-rt
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 29.3
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r203
+  benchmark: gowerwinter2026-yg
+  method: HAT
+  metric: mean-prequential-accuracy
+  value: 55.1
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r204
+  benchmark: gowerwinter2026-11-streams
+  method: HAT
+  metric: median-rank
+  value: 11.0
+  location: Table 1
+  page: 6
+  quote: HAT 84,6 79,7 57,7 49,4 70,5 91,9 63,7 73,8 92,3 29,3 55,1 11
+- id: r205
+  benchmark: gowerwinter2026-el
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 85.0
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r206
+  benchmark: gowerwinter2026-fc
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 90.5
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r207
+  benchmark: gowerwinter2026-ia
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 67.2
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r208
+  benchmark: gowerwinter2026-ii
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 57.5
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r209
+  benchmark: gowerwinter2026-ks
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 88.7
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r210
+  benchmark: gowerwinter2026-lx
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 95.4
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r211
+  benchmark: gowerwinter2026-mr
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 73.7
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r212
+  benchmark: gowerwinter2026-nw
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 76.4
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r213
+  benchmark: gowerwinter2026-oz
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 92.0
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r214
+  benchmark: gowerwinter2026-rt
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 82.8
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r215
+  benchmark: gowerwinter2026-yg
+  method: AMF
+  metric: mean-prequential-accuracy
+  value: 75.5
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r216
+  benchmark: gowerwinter2026-11-streams
+  method: AMF
+  metric: median-rank
+  value: 3.0
+  location: Table 1
+  page: 6
+  quote: AMF 85,0 90,5 67,2 57,5 88,7 95,4 73,7 76,4 92,0 82,8 75,5 3
+- id: r217
+  benchmark: gowerwinter2026-el
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 88.3
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r218
+  benchmark: gowerwinter2026-fc
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 89.4
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r219
+  benchmark: gowerwinter2026-ia
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 71.4
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r220
+  benchmark: gowerwinter2026-ii
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 58.7
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r221
+  benchmark: gowerwinter2026-ks
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 87.4
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r222
+  benchmark: gowerwinter2026-lx
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 94.8
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r223
+  benchmark: gowerwinter2026-mr
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 76.5
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r224
+  benchmark: gowerwinter2026-nw
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 78.1
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r225
+  benchmark: gowerwinter2026-oz
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 92.3
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r226
+  benchmark: gowerwinter2026-rt
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 72.8
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r227
+  benchmark: gowerwinter2026-yg
+  method: ARF
+  metric: mean-prequential-accuracy
+  value: 68.8
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r228
+  benchmark: gowerwinter2026-11-streams
+  method: ARF
+  metric: median-rank
+  value: 2.0
+  location: Table 1
+  page: 6
+  quote: ARF 88,3 89,4 71,4 58,7 87,4 94,8 76,5 78,1 92,3 72,8 68,8 2
+- id: r229
+  benchmark: gowerwinter2026-el
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 62.6
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r230
+  benchmark: gowerwinter2026-fc
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 67.3
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r231
+  benchmark: gowerwinter2026-ia
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 55.8
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r232
+  benchmark: gowerwinter2026-ii
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 19.3
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r233
+  benchmark: gowerwinter2026-ks
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 51.9
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r234
+  benchmark: gowerwinter2026-lx
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 91.0
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r235
+  benchmark: gowerwinter2026-mr
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 69.7
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r236
+  benchmark: gowerwinter2026-nw
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 72.8
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r237
+  benchmark: gowerwinter2026-oz
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 92.3
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r238
+  benchmark: gowerwinter2026-rt
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 14.2
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r239
+  benchmark: gowerwinter2026-yg
+  method: S-RF
+  metric: mean-prequential-accuracy
+  value: 60.0
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r240
+  benchmark: gowerwinter2026-11-streams
+  method: S-RF
+  metric: median-rank
+  value: 14.0
+  location: Table 1
+  page: 6
+  quote: S-RF 62,6 67,3 55,8 19,3 51,9 91,0 69,7 72,8 92,3 14,2 60,0 14
+- id: r241
+  benchmark: gowerwinter2026-el
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 81.9
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r242
+  benchmark: gowerwinter2026-fc
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 78.1
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r243
+  benchmark: gowerwinter2026-ia
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 69.8
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r244
+  benchmark: gowerwinter2026-ii
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 58.4
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r245
+  benchmark: gowerwinter2026-ks
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 81.7
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r246
+  benchmark: gowerwinter2026-lx
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 93.9
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r247
+  benchmark: gowerwinter2026-mr
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 73.9
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r248
+  benchmark: gowerwinter2026-nw
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 72.1
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r249
+  benchmark: gowerwinter2026-oz
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 91.6
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r250
+  benchmark: gowerwinter2026-rt
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 80.3
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r251
+  benchmark: gowerwinter2026-yg
+  method: R-RF
+  metric: mean-prequential-accuracy
+  value: 62.9
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r252
+  benchmark: gowerwinter2026-11-streams
+  method: R-RF
+  metric: median-rank
+  value: 4.0
+  location: Table 1
+  page: 6
+  quote: R-RF 81,9 78,1 69,8 58,4 81,7 93,9 73,9 72,1 91,6 80,3 62,9 4
+- id: r253
+  benchmark: gowerwinter2026-el
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 78.2
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r254
+  benchmark: gowerwinter2026-fc
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 78.7
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r255
+  benchmark: gowerwinter2026-ia
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 63.2
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r256
+  benchmark: gowerwinter2026-ii
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 55.0
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r257
+  benchmark: gowerwinter2026-ks
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 82.3
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r258
+  benchmark: gowerwinter2026-lx
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 94.3
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r259
+  benchmark: gowerwinter2026-mr
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 78.9
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r260
+  benchmark: gowerwinter2026-nw
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 79.1
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r261
+  benchmark: gowerwinter2026-oz
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 92.6
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r262
+  benchmark: gowerwinter2026-rt
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 81.3
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r263
+  benchmark: gowerwinter2026-yg
+  method: I-RF
+  metric: mean-prequential-accuracy
+  value: 79.0
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r264
+  benchmark: gowerwinter2026-11-streams
+  method: I-RF
+  metric: median-rank
+  value: 3.0
+  location: Table 1
+  page: 6
+  quote: I-RF 78,2 78,7 63,2 55,0 82,3 94,3 78,9 79,1 92,6 81,3 79,0 3
+- id: r265
+  benchmark: gowerwinter2026-el
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 76.9
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r266
+  benchmark: gowerwinter2026-fc
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 75.6
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r267
+  benchmark: gowerwinter2026-ia
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 63.3
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r268
+  benchmark: gowerwinter2026-ii
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 55.7
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r269
+  benchmark: gowerwinter2026-ks
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 78.8
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r270
+  benchmark: gowerwinter2026-lx
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 91.6
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r271
+  benchmark: gowerwinter2026-mr
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 73.1
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r272
+  benchmark: gowerwinter2026-nw
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 76.5
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r273
+  benchmark: gowerwinter2026-oz
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 92.0
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r274
+  benchmark: gowerwinter2026-rt
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 74.7
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r275
+  benchmark: gowerwinter2026-yg
+  method: AMF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 75.2
+  location: Table 2
+  page: 6
+  quote: AMF 76,9 75,6 63,3 55,7 78,8 91,6 73,1 76,5 92,0 74,7 75,2
+- id: r276
+  benchmark: gowerwinter2026-el
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 81.1
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r277
+  benchmark: gowerwinter2026-fc
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 69.7
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r278
+  benchmark: gowerwinter2026-ia
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 66.7
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r279
+  benchmark: gowerwinter2026-ii
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 56.8
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r280
+  benchmark: gowerwinter2026-ks
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 77.0
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r281
+  benchmark: gowerwinter2026-lx
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 93.7
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r282
+  benchmark: gowerwinter2026-mr
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 74.1
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r283
+  benchmark: gowerwinter2026-nw
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 77.2
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r284
+  benchmark: gowerwinter2026-oz
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 92.2
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r285
+  benchmark: gowerwinter2026-rt
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 63.3
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+- id: r286
+  benchmark: gowerwinter2026-yg
+  method: ARF (batch update regime)
+  metric: mean-prequential-accuracy
+  value: 67.8
+  location: Table 2
+  page: 6
+  quote: ARF 81,1 69,7 66,7 56,8 77,0 93,7 74,1 77,2 92,2 63.3 67,8
+relations:
+- winner: AMF, ARF, R-RF, I-RF (forest-based learners)
+  loser: Naive Bayes and Hoeffding Tree variants with or without drift detectors
+  basis: Median rank over the 11 streams (Table 1); 'Adaptive Forest (tree-ensemble) techniques outperformed the single learner NB and HT variants'.
+  benchmark: gowerwinter2026-11-streams
+  location: Section 5
+  page: 7
+  quote: Adaptive Forest (tree-ensemble) techniques outperformed the single learner NB and HT variants.
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Table 1 and Table 2 extracted mechanically. The paper uses a decimal comma (84,8 = 84.8); one cell in Table 2 uses a dot (63.3). Accuracy values are percentages. Table 2 re-runs AMF/ARF with the
+    batch update regime ('(batch update regime)' in method names); its R-RF/I-RF rows duplicate Table 1 and were not re-recorded. Section numbers were inferred from the paper's own cross-references (Sections
+    3, 4, 5).

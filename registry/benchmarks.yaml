@@ -684,42 +684,11 @@ benchmarks:
   - name: rmse
     higher_is_better: false
   defined_in: arxiv-2410.24210
-- id: holzmuller2024-meta-train
-  scope: paper-private
-  task: tabular-classification
-  dataset: 'Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression)'
-  protocol: &id018
-    split: 10 random 60/20/20 train/validation/test splits per dataset; rows with missing numerical values removed (Sections 2.1-2.2).
-    preprocessing: Method-specific; RealMLP uses robust scaling + smooth clipping and one-hot for low-cardinality categoricals (Section 3).
-    tuning: Library defaults (D), tuned defaults from the meta-train benchmark (TD), or 50-step random-search HPO per split (Section 5).
-    repetitions: Shifted geometric mean of errors over datasets (eps = 0.01), with dataset weights on meta-train (Section 2.2).
-  metrics: &id019
-  - name: sgm-classification-error
-    higher_is_better: false
-    definition: Shifted geometric mean of classification error over datasets (Section 2.2).
-  - name: sgm-nrmse
-    higher_is_better: false
-    definition: Shifted geometric mean of normalized RMSE over datasets (Section 2.2).
-  defined_in: arxiv-2407.04491
-- id: holzmuller2024-meta-test
-  scope: paper-private
-  task: tabular-classification
-  dataset: 'Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression)'
-  protocol: *id018
-  metrics: *id019
-  defined_in: arxiv-2407.04491
-- id: holzmuller2024-grinsztajn
-  scope: paper-private
-  task: tabular-classification
-  dataset: Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol)
-  protocol: *id018
-  metrics: *id019
-  defined_in: arxiv-2407.04491
 - id: hollmann2025-amlb-small-classification
   scope: paper-private
   task: tabular-classification
   dataset: 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes
-  protocol: &id020
+  protocol: &id018
     split: 10 repetitions per dataset with different seeds and 90% train / 10% test splits (Results).
     preprocessing: Method-specific; TabPFN v2 handles categorical features and missing values natively (Results, Methods).
     tuning: 'Baselines: random search with 5-fold CV, budgets from 30 s to 4 h; TabPFN v2: default (no tuning), tuned, or PHE (post-hoc ensembled TabPFN v2 models, from 300 s).'
@@ -733,9 +702,390 @@ benchmarks:
   scope: paper-private
   task: tabular-regression
   dataset: 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features
-  protocol: *id020
+  protocol: *id018
   metrics:
   - name: normalized-rmse
     higher_is_better: true
     definition: Negative RMSE normalized per dataset over all baselines (1 = best), averaged.
   defined_in: doi-10.1038_s41586-024-08328-6
+- id: holzmuller2024-meta-train
+  scope: paper-private
+  task: tabular-classification
+  dataset: 'Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression)'
+  protocol: &id019
+    split: 10 random 60/20/20 train/validation/test splits per dataset; rows with missing numerical values removed (Sections 2.1-2.2).
+    preprocessing: Method-specific; RealMLP uses robust scaling + smooth clipping and one-hot for low-cardinality categoricals (Section 3).
+    tuning: Library defaults (D), tuned defaults from the meta-train benchmark (TD), or 50-step random-search HPO per split (Section 5).
+    repetitions: Shifted geometric mean of errors over datasets (eps = 0.01), with dataset weights on meta-train (Section 2.2).
+  metrics: &id020
+  - name: sgm-classification-error
+    higher_is_better: false
+    definition: Shifted geometric mean of classification error over datasets (Section 2.2).
+  - name: sgm-nrmse
+    higher_is_better: false
+    definition: Shifted geometric mean of normalized RMSE over datasets (Section 2.2).
+  defined_in: arxiv-2407.04491
+- id: holzmuller2024-meta-test
+  scope: paper-private
+  task: tabular-classification
+  dataset: 'Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression)'
+  protocol: *id019
+  metrics: *id020
+  defined_in: arxiv-2407.04491
+- id: holzmuller2024-grinsztajn
+  scope: paper-private
+  task: tabular-classification
+  dataset: Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol)
+  protocol: *id019
+  metrics: *id020
+  defined_in: arxiv-2407.04491
+- id: rabanser2019-shift-suite-n10
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 10 target samples
+  protocol: &id021
+    split: MNIST and CIFAR-10 split into train/validation/test; shifts applied to the test set only; 5 random splits (Section 5).
+    preprocessing: Dimensionality reduction to K=32 (PCA, SRP, UAE, TAE) or to class outputs (BBSDs, BBSDh, Classif), learned on training data (Section 5).
+    tuning: Not applicable (fixed architectures; ResNet-18 label/domain classifiers; significance level 0.05).
+    repetitions: Detection accuracy averaged over 5 random splits and all simulated shift types/intensities/fractions (Table 1a).
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: rabanser2019-shift-suite-n20
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 20 target samples
+  protocol: *id021
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: rabanser2019-shift-suite-n50
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 50 target samples
+  protocol: *id021
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: rabanser2019-shift-suite-n100
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 100 target samples
+  protocol: *id021
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: rabanser2019-shift-suite-n200
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 200 target samples
+  protocol: *id021
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: rabanser2019-shift-suite-n500
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 500 target samples
+  protocol: *id021
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: rabanser2019-shift-suite-n1000
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 1000 target samples
+  protocol: *id021
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: rabanser2019-shift-suite-n10000
+  scope: paper-private
+  task: dataset-shift-detection
+  dataset: MNIST and CIFAR-10 with the paper's simulated shifts, 10000 target samples
+  protocol: *id021
+  metrics:
+  - name: detection-accuracy
+    higher_is_better: true
+    definition: Fraction of runs in which shift was detected at alpha = 0.05, averaged over shift settings (Table 1a).
+  defined_in: arxiv-1810.11953
+- id: aguiar2023-all-drifts
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Aguiar & Cano locality benchmark streams: all evaluated drift difficulties'
+  protocol: &id022
+    split: Synthetic streams with one known drift point each; prequential evaluation with a Hoeffding Tree (Section 4).
+    preprocessing: Detectors monitor the binary error signal of the Hoeffding Tree (Section 4).
+    tuning: 'Not described as tuned per stream (implementation: river).'
+    repetitions: Averaged over all benchmark streams in the respective category (Tables 4-9).
+  metrics: &id023
+  - name: precision-pct
+    higher_is_better: true
+  - name: recall-pct
+    higher_is_better: true
+  - name: f1-pct
+    higher_is_better: true
+  - name: delay
+    higher_is_better: false
+  defined_in: arxiv-2311.06396
+- id: aguiar2023-single-class-local
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Aguiar & Cano locality benchmark streams: single-class local drifts'
+  protocol: *id022
+  metrics: *id023
+  defined_in: arxiv-2311.06396
+- id: aguiar2023-single-class-global
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Aguiar & Cano locality benchmark streams: single-class global drifts'
+  protocol: *id022
+  metrics: *id023
+  defined_in: arxiv-2311.06396
+- id: aguiar2023-multi-class-local
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Aguiar & Cano locality benchmark streams: multi-class local drifts'
+  protocol: *id022
+  metrics: *id023
+  defined_in: arxiv-2311.06396
+- id: aguiar2023-multi-class-global
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Aguiar & Cano locality benchmark streams: multi-class global drifts'
+  protocol: *id022
+  metrics: *id023
+  defined_in: arxiv-2311.06396
+- id: aguiar2023-no-drift
+  scope: public
+  task: concept-drift-detection
+  dataset: Aguiar & Cano locality benchmark streams without drift
+  protocol: *id022
+  metrics:
+  - name: false-positives
+    higher_is_better: false
+    definition: Average number of alarms on streams without drift (Table 4).
+  defined_in: arxiv-2311.06396
+- id: cerqueira2026-abrupt-feature-filtering
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt feature filtering drift'
+  protocol: &id024
+    split: 7 real-world streams (USP Data Stream Repository), shuffled, with one injected drift per Monte Carlo trial at a random point between 50% and 80% of the stream (drift simulation and experimental
+      setup sections).
+    preprocessing: Detectors monitor the Hoeffding Tree's error (ABCD(X) monitors features, STUDD a compression loss) (experimental setup).
+    tuning: Leave-one-dataset-out random search (30 iterations) maximizing F1 detection score (experimental setup).
+    repetitions: 50 Monte Carlo trials per dataset and drift type; average rank across the 7 datasets (Tables 1-2).
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: cerqueira2026-abrupt-feature-permutation
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt feature permutation drift'
+  protocol: *id024
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: cerqueira2026-abrupt-class-prior
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt class prior drift'
+  protocol: *id024
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: cerqueira2026-abrupt-class-swap
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected abrupt class swap drift'
+  protocol: *id024
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: cerqueira2026-gradual-feature-filtering
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual feature filtering drift'
+  protocol: *id024
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: cerqueira2026-gradual-feature-permutation
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual feature permutation drift'
+  protocol: *id024
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: cerqueira2026-gradual-class-prior
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual class prior drift'
+  protocol: *id024
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: cerqueira2026-gradual-class-swap
+  scope: public
+  task: concept-drift-detection
+  dataset: 'Cerqueira et al. framework: 7 real-world streams with injected gradual class swap drift'
+  protocol: *id024
+  metrics:
+  - name: avg-rank-f1
+    higher_is_better: false
+    definition: Average rank (among the 14 detectors) of the F1 detection score across datasets.
+  defined_in: arxiv-2606.07789
+- id: gowerwinter2026-el
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Electricity stream (USP Data Stream Repository) under the paper's protocol
+  protocol: &id025
+    split: Prequential (test-then-train) evaluation over the full real-world stream (Section 5).
+    preprocessing: Default parameters; periodic reset/retrain intervals per dataset, partly from domain knowledge (Appendix).
+    tuning: No per-stream tuning; library defaults (Appendix A).
+    repetitions: Mean prequential accuracy over the stream with fixed seeds (Section 5).
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-fc
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Forest Covertype stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-ia
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Insects-Abrupt (balanced) stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-ii
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Insects-Incremental (balanced) stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-ks
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Keystroke stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-lx
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Luxembourg stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-mr
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: MIRS stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-nw
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: NOAA Weather stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-oz
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Ozone stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-rt
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Rialto stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-yg
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: Yoga stream (USP Data Stream Repository) under the paper's protocol
+  protocol: *id025
+  metrics:
+  - name: mean-prequential-accuracy
+    higher_is_better: true
+    definition: Mean prequential accuracy in percent (Table 1).
+  defined_in: arxiv-2602.06456
+- id: gowerwinter2026-11-streams
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: 11 real-world streams of the paper (aggregate)
+  protocol: *id025
+  metrics:
+  - name: median-rank
+    higher_is_better: false
+    definition: Median rank across the 11 streams (Table 1, MedRank).
+  defined_in: arxiv-2602.06456

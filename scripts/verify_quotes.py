@@ -37,11 +37,15 @@ def variants(text: str) -> list[str]:
 
 
 def match(quote: str, pages: list[list[str]]) -> str | None:
-    """'exact' / 'loose' / None を返す。pages は各ページの正規化テキストの候補。"""
+    """'exact' / 'hyphen' / 'loose' / None を返す。pages は各ページの正規化テキストの候補。
+    'hyphen': ハイフンの有無だけが違う(1つの引用に「単語分割の行末ハイフン」と「複合語の行末ハイフン」が混在する場合)。"""
     q = normalize(quote, keep_hyphen=True)
-    q_loose = re.sub(r"\s", "", q)
     if any(q in v for page in pages for v in page):
         return "exact"
+    q_nohyphen = q.replace("-", "")
+    if any(q_nohyphen in v.replace("-", "") for page in pages for v in page):
+        return "hyphen"
+    q_loose = re.sub(r"\s", "", q)
     if any(q_loose in re.sub(r"\s", "", v) for page in pages for v in page):
         return "loose"
     return None
@@ -49,7 +53,7 @@ def match(quote: str, pages: list[list[str]]) -> str | None:
 
 def verify_card(root: Path, card: dict) -> tuple[list[str], dict[str, int]]:
     errors: list[str] = []
-    stats = {"exact": 0, "loose": 0, "missing": 0}
+    stats = {"exact": 0, "hyphen": 0, "loose": 0, "missing": 0}
     pdf = root / "cache" / "pdfs" / f"{card['id']}.pdf"
     sha = hashlib.sha256(pdf.read_bytes()).hexdigest()
     if sha != card["source"]["pdf_sha256"]:
@@ -96,7 +100,7 @@ def main() -> int:
         card_errors, stats = verify_card(args.root, card)
         errors += card_errors
         status = "FAIL" if card_errors else "OK  "
-        print(f"{status}  {path.stem}: exact={stats['exact']} loose={stats['loose']} missing={stats['missing']}")
+        print(f"{status}  {path.stem}: exact={stats['exact']} hyphen={stats['hyphen']} loose={stats['loose']} missing={stats['missing']}")
     for e in errors:
         print(f"ERROR {e}")
     return 1 if errors else 0

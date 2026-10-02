@@ -58,6 +58,8 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 |---|---|
 | 表データの分類・回帰(GBDT vs 深層学習 vs 基盤モデル) | パイロット: 論文カード9本(2021〜2025、TabArena上位モデルの原論文を含む)、記事 [articles/tasks/tabular-gbdt-vs-deep-learning.md](articles/tasks/tabular-gbdt-vs-deep-learning.md) |
 
+| ドリフト検出(概念ドリフト・データシフト、MLOps) | 論文カード5本(2019〜2026)、記事 [articles/tasks/drift-detection.md](articles/tasks/drift-detection.md) |
+
 生成物の入口: [generated/index.md](generated/index.md)
 
 ## 今後の実装予定
@@ -66,4 +68,5 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - 新着論文の候補検出(GitHub Actions の cron、AI不使用)
 - RealMLP 論文付録(Table D.1-D.12)のデータセット別数値の機械抽出
 - TabICL・ModernNCA・TabDPT などその他の TabArena 参加モデルの原論文
+- ドリフト検出: 教師なし検出器のベンチマーク、表データのデータシフト検出、ラベルシフト推定
 - 静的サイト化(GitHub Pages)

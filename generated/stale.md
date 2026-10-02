@@ -4,4 +4,5 @@
 
 記事の `depends_on` に入っていない、記事のタグと重なるカード(Q14)。
 
+- [articles/tasks/drift-detection.md](../articles/tasks/drift-detection.md): なし
 - [articles/tasks/tabular-gbdt-vs-deep-learning.md](../articles/tasks/tabular-gbdt-vs-deep-learning.md): なし

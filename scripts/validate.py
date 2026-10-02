@@ -120,7 +120,9 @@ def validate(root: Path) -> list[str]:
             errors.append(f"{where}: duplicate claim/result id '{d}'")
         for r in card.get("results") or []:
             check_result(r, f"{where}: result {r.get('id')}", path.stem, is_paper=True)
-            numbers = [float(n) for n in NUMBER.findall(r.get("quote", ""))]
+            quote = r.get("quote", "")
+            # 小数点にカンマを使う論文(84,8 = 84.8)もあるので、カンマを小数点と読んだ候補も加える
+            numbers = [float(n) for q in (quote, re.sub(r"(\d),(\d)", r"\1.\2", quote)) for n in NUMBER.findall(q)]
             for field in ("value", "std"):
                 if field in r and not any(abs(n - r[field]) < 1e-9 for n in numbers):
                     errors.append(f"{where}: result {r.get('id')}: {field} {r[field]} does not appear in its quote")

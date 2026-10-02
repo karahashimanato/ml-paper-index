@@ -28,7 +28,7 @@ class Paper:
     def page_of(self, quote: str, page: int | None = None) -> int:
         """引用がちょうど1ページで完全一致することを確認してページ番号を返す。
         本文と付録に同じ文があるときは page で明示する(そのページにあることは確認する)。"""
-        hits = [i + 1 for i, p in enumerate(self._pages) if match(quote, [p]) == "exact"]
+        hits = [i + 1 for i, p in enumerate(self._pages) if match(quote, [p]) in ("exact", "hyphen")]
         if page is not None:
             assert page in hits, (quote, page, hits)
             return page

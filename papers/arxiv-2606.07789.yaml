@@ -1,0 +1,1035 @@
+id: arxiv-2606.07789
+title: A Framework for Evaluating and Benchmarking Concept Drift Detection Methods
+authors:
+- Vitor Cerqueira
+- Heitor Murilo Gomes
+- Marco Heyden
+- Bernhard Pfahringer
+- Albert Bifet
+year: 2026
+venue: KDD 2026
+links:
+  arxiv: https://arxiv.org/abs/2606.07789
+  code: https://github.com/vcerqueira/experiments-drift_evaluation
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 152984564c2f255f073ef3d9d070fd9a1f16193cb2e04fdf92f999fd96341430
+  license: CC BY 4.0
+tags:
+  tasks:
+  - concept-drift-detection
+  method_families:
+  - error-rate-drift-detectors
+  - window-based-drift-detectors
+  paradigms:
+  - streaming
+proposes:
+- Semi-synthetic drift injection into real streams (Monte Carlo)
+- Timing-aware drift detection metrics
+- Leave-one-dataset-out HPO for detectors
+claims:
+- id: c1
+  statement: 'Drift detector evaluation is inconsistent: oversimplified synthetic generators, incompatible metrics, and opaque hyperparameter selection.'
+  location: Abstract
+  page: 1
+  quote: studies rely on oversimplified synthetic data generators, adopt incompatible metrics, and lack transparency in hyperparameter selection
+- id: c2
+  statement: 14 widely used detectors are benchmarked on 7 real-world datasets with 4 injected drift types, each abrupt and gradual.
+  location: Abstract
+  page: 1
+  quote: We benchmark 14 widely used drift detection methods on 7 real-world datasets across 4 drift types
+- id: c3
+  statement: SEED, STEPD and ABCD consistently outperformed the other detectors across drift types.
+  location: Introduction
+  page: 2
+  quote: Our results reveal that SEED [23], STEPD [25], and ABCD [22] consistently outperform other detectors across distinct drift types
+- id: c4
+  statement: Hyperparameter optimization with the proposed protocol significantly improved detection over default configurations.
+  location: Introduction
+  page: 2
+  quote: hyperparameter optimization using our proposed approach significantly improves detection performance over default configurations.
+- id: c5
+  statement: Classic metrics MTFA and MDT depend on stream length and drift spacing, preventing cross-dataset comparison.
+  location: Related work
+  page: 3
+  quote: MTFA and MDT are highly dependent on stream length and drift spacing
+- id: c6
+  statement: 'An F1 score for drift detection ignores timing: a detector with unacceptable delay can still get perfect F1.'
+  location: Related work
+  page: 3
+  quote: 'its formulation ignores the temporal aspect: a detector with unacceptable delay can still achieve perfect F1.'
+- id: c7
+  statement: Detector hyperparameters are tuned with leave-one-dataset-out cross-validation.
+  location: Section 3.3
+  page: 4
+  quote: we propose a leave-one-dataset-out cross-validation approach for optimizing the hyperparameters of drift detectors.
+- id: c8
+  statement: Tuning and evaluating detectors on the same dataset can overfit and make reported results overly optimistic.
+  location: Section 3.3
+  page: 4
+  quote: using the same dataset for optimizing and evaluating the detector can cause overfitting and lead to overly optimistic performance estimates reported in the respective papers.
+- id: c9
+  statement: Each dataset and drift type is evaluated with 50 Monte Carlo trials (random drift onset).
+  location: Experimental setup
+  page: 6
+  quote: For each dataset and drift type, we perform 50 Monte Carlo trials.
+- id: c10
+  statement: A Hoeffding Tree with default hyperparameters is the monitored classifier.
+  location: Experimental setup
+  page: 6
+  quote: We select the Hoeffding Tree [10] as the classifier in the experiments
+- id: c11
+  statement: PH and EWMA were ineffective regardless of configuration.
+  location: Main findings
+  page: 8
+  quote: PH and EWMA remain ineffective regardless of configuration, suggesting fundamental limitations
+- id: c12
+  statement: Unsupervised detectors (ABCD(X), STUDD) detect feature-space drifts but not label-only changes.
+  location: Main findings
+  page: 8
+  quote: Unsupervised detectors (ABCD(X) and STUDD) perform better on feature-space drifts (feature permutation, feature filtering) than on label-based changes (class prior, class swaps)
+- id: c13
+  statement: Gradual drifts are systematically harder to detect than abrupt ones.
+  location: Main findings
+  page: 8
+  quote: Gradual drifts are systematically harder to detect than abrupt ones.
+- id: c14
+  statement: STEPD's strong results are largely due to effective tuning.
+  location: Main findings
+  page: 8
+  quote: STEPD's strong performance is largely attributable to effective tuning.
+- id: c15
+  statement: 'Limitations: one classifier (Hoeffding tree), four drift types, seven datasets.'
+  location: Limitations
+  page: 8
+  quote: the experiments are limited to one classifier (Hoeffding tree) and four drift types simulated in 7 real-world datasets.
+- id: c16
+  statement: 'Limitation: labels are assumed to be available immediately after each prediction (no verification delay).'
+  location: Limitations
+  page: 8
+  quote: it assumes immediate feedback, with labels being readily available at each step after inference.
+- id: c17
+  statement: Shuffling the real streams before injecting drift removes their natural temporal structure.
+  location: Limitations
+  page: 8
+  quote: it also removes any inherent temporal structure.
+- id: c18
+  statement: 'Practical guidance: SEED and STEPD are robust defaults when drift characteristics are unknown.'
+  location: Main findings
+  page: 8
+  quote: SEED and STEPD are robust defaults when drift characteristics are unknown
+- id: c19
+  statement: Hyperparameters are searched with 30 iterations of random search.
+  location: Experimental setup
+  page: 6
+  quote: The optimization is conducted using 30 iterations of random search.
+- id: c20
+  statement: The main objective is a standardized evaluation protocol, not identifying the best detector.
+  location: Experimental setup
+  page: 6
+  quote: our main objective is to establish a standardized evaluation protocol rather than to identify the best performing detector.
+results:
+- id: r1
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: ABCD
+  metric: avg-rank-f1
+  value: 8.1
+  location: Table 1
+  page: 7
+  quote: ABCD 8.1 3.9 8.0 3.6
+- id: r2
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: ABCD
+  metric: avg-rank-f1
+  value: 3.9
+  location: Table 1
+  page: 7
+  quote: ABCD 8.1 3.9 8.0 3.6
+- id: r3
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: ABCD
+  metric: avg-rank-f1
+  value: 8.0
+  location: Table 1
+  page: 7
+  quote: ABCD 8.1 3.9 8.0 3.6
+- id: r4
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: ABCD
+  metric: avg-rank-f1
+  value: 3.6
+  location: Table 1
+  page: 7
+  quote: ABCD 8.1 3.9 8.0 3.6
+- id: r5
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 12.7
+  location: Table 1
+  page: 7
+  quote: ABCD(X) 12.7 1.0 13.1 13.1
+- id: r6
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 1.0
+  location: Table 1
+  page: 7
+  quote: ABCD(X) 12.7 1.0 13.1 13.1
+- id: r7
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 13.1
+  location: Table 1
+  page: 7
+  quote: ABCD(X) 12.7 1.0 13.1 13.1
+- id: r8
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 13.1
+  location: Table 1
+  page: 7
+  quote: ABCD(X) 12.7 1.0 13.1 13.1
+- id: r9
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 4.1
+  location: Table 1
+  page: 7
+  quote: ADWIN 4.1 7.6 4.1 7.1
+- id: r10
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 7.6
+  location: Table 1
+  page: 7
+  quote: ADWIN 4.1 7.6 4.1 7.1
+- id: r11
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 4.1
+  location: Table 1
+  page: 7
+  quote: ADWIN 4.1 7.6 4.1 7.1
+- id: r12
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 7.1
+  location: Table 1
+  page: 7
+  quote: ADWIN 4.1 7.6 4.1 7.1
+- id: r13
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 5.6
+  location: Table 1
+  page: 7
+  quote: CUSUM 5.6 11.9 6.1 9.2
+- id: r14
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 11.9
+  location: Table 1
+  page: 7
+  quote: CUSUM 5.6 11.9 6.1 9.2
+- id: r15
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 6.1
+  location: Table 1
+  page: 7
+  quote: CUSUM 5.6 11.9 6.1 9.2
+- id: r16
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 9.2
+  location: Table 1
+  page: 7
+  quote: CUSUM 5.6 11.9 6.1 9.2
+- id: r17
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: DDM
+  metric: avg-rank-f1
+  value: 7.3
+  location: Table 1
+  page: 7
+  quote: DDM 7.3 11.4 6.0 9.9
+- id: r18
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: DDM
+  metric: avg-rank-f1
+  value: 11.4
+  location: Table 1
+  page: 7
+  quote: DDM 7.3 11.4 6.0 9.9
+- id: r19
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: DDM
+  metric: avg-rank-f1
+  value: 6.0
+  location: Table 1
+  page: 7
+  quote: DDM 7.3 11.4 6.0 9.9
+- id: r20
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: DDM
+  metric: avg-rank-f1
+  value: 9.9
+  location: Table 1
+  page: 7
+  quote: DDM 7.3 11.4 6.0 9.9
+- id: r21
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: EWMA
+  metric: avg-rank-f1
+  value: 9.7
+  location: Table 1
+  page: 7
+  quote: EWMA 9.7 12.9 9.4 10.9
+- id: r22
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: EWMA
+  metric: avg-rank-f1
+  value: 12.9
+  location: Table 1
+  page: 7
+  quote: EWMA 9.7 12.9 9.4 10.9
+- id: r23
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: EWMA
+  metric: avg-rank-f1
+  value: 9.4
+  location: Table 1
+  page: 7
+  quote: EWMA 9.7 12.9 9.4 10.9
+- id: r24
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: EWMA
+  metric: avg-rank-f1
+  value: 10.9
+  location: Table 1
+  page: 7
+  quote: EWMA 9.7 12.9 9.4 10.9
+- id: r25
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: GMA
+  metric: avg-rank-f1
+  value: 9.0
+  location: Table 1
+  page: 7
+  quote: GMA 9.0 7.7 8.7 7.3
+- id: r26
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: GMA
+  metric: avg-rank-f1
+  value: 7.7
+  location: Table 1
+  page: 7
+  quote: GMA 9.0 7.7 8.7 7.3
+- id: r27
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: GMA
+  metric: avg-rank-f1
+  value: 8.7
+  location: Table 1
+  page: 7
+  quote: GMA 9.0 7.7 8.7 7.3
+- id: r28
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: GMA
+  metric: avg-rank-f1
+  value: 7.3
+  location: Table 1
+  page: 7
+  quote: GMA 9.0 7.7 8.7 7.3
+- id: r29
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 7.4
+  location: Table 1
+  page: 7
+  quote: HDDMA 7.4 5.6 6.3 5.4
+- id: r30
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 5.6
+  location: Table 1
+  page: 7
+  quote: HDDMA 7.4 5.6 6.3 5.4
+- id: r31
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 6.3
+  location: Table 1
+  page: 7
+  quote: HDDMA 7.4 5.6 6.3 5.4
+- id: r32
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 5.4
+  location: Table 1
+  page: 7
+  quote: HDDMA 7.4 5.6 6.3 5.4
+- id: r33
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 7.1
+  location: Table 1
+  page: 7
+  quote: HDDMW 7.1 6.9 5.8 6.0
+- id: r34
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 6.9
+  location: Table 1
+  page: 7
+  quote: HDDMW 7.1 6.9 5.8 6.0
+- id: r35
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 5.8
+  location: Table 1
+  page: 7
+  quote: HDDMW 7.1 6.9 5.8 6.0
+- id: r36
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 6.0
+  location: Table 1
+  page: 7
+  quote: HDDMW 7.1 6.9 5.8 6.0
+- id: r37
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: PH
+  metric: avg-rank-f1
+  value: 13.1
+  location: Table 1
+  page: 7
+  quote: PH 13.1 12.9 11.6 10.1
+- id: r38
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: PH
+  metric: avg-rank-f1
+  value: 12.9
+  location: Table 1
+  page: 7
+  quote: PH 13.1 12.9 11.6 10.1
+- id: r39
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: PH
+  metric: avg-rank-f1
+  value: 11.6
+  location: Table 1
+  page: 7
+  quote: PH 13.1 12.9 11.6 10.1
+- id: r40
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: PH
+  metric: avg-rank-f1
+  value: 10.1
+  location: Table 1
+  page: 7
+  quote: PH 13.1 12.9 11.6 10.1
+- id: r41
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: RDDM
+  metric: avg-rank-f1
+  value: 6.6
+  location: Table 1
+  page: 7
+  quote: RDDM 6.6 10.2 7.9 9.1
+- id: r42
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: RDDM
+  metric: avg-rank-f1
+  value: 10.2
+  location: Table 1
+  page: 7
+  quote: RDDM 6.6 10.2 7.9 9.1
+- id: r43
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: RDDM
+  metric: avg-rank-f1
+  value: 7.9
+  location: Table 1
+  page: 7
+  quote: RDDM 6.6 10.2 7.9 9.1
+- id: r44
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: RDDM
+  metric: avg-rank-f1
+  value: 9.1
+  location: Table 1
+  page: 7
+  quote: RDDM 6.6 10.2 7.9 9.1
+- id: r45
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: SEED
+  metric: avg-rank-f1
+  value: 4.4
+  location: Table 1
+  page: 7
+  quote: SEED 4.4 2.7 3.9 1.1
+- id: r46
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: SEED
+  metric: avg-rank-f1
+  value: 2.7
+  location: Table 1
+  page: 7
+  quote: SEED 4.4 2.7 3.9 1.1
+- id: r47
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: SEED
+  metric: avg-rank-f1
+  value: 3.9
+  location: Table 1
+  page: 7
+  quote: SEED 4.4 2.7 3.9 1.1
+- id: r48
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: SEED
+  metric: avg-rank-f1
+  value: 1.1
+  location: Table 1
+  page: 7
+  quote: SEED 4.4 2.7 3.9 1.1
+- id: r49
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: STEPD
+  metric: avg-rank-f1
+  value: 3.4
+  location: Table 1
+  page: 7
+  quote: STEPD 3.4 3.7 4.3 2.4
+- id: r50
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: STEPD
+  metric: avg-rank-f1
+  value: 3.7
+  location: Table 1
+  page: 7
+  quote: STEPD 3.4 3.7 4.3 2.4
+- id: r51
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: STEPD
+  metric: avg-rank-f1
+  value: 4.3
+  location: Table 1
+  page: 7
+  quote: STEPD 3.4 3.7 4.3 2.4
+- id: r52
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: STEPD
+  metric: avg-rank-f1
+  value: 2.4
+  location: Table 1
+  page: 7
+  quote: STEPD 3.4 3.7 4.3 2.4
+- id: r53
+  benchmark: cerqueira2026-abrupt-feature-filtering
+  method: STUDD
+  metric: avg-rank-f1
+  value: 6.4
+  location: Table 1
+  page: 7
+  quote: STUDD 6.4 6.8 9.9 9.6
+- id: r54
+  benchmark: cerqueira2026-abrupt-feature-permutation
+  method: STUDD
+  metric: avg-rank-f1
+  value: 6.8
+  location: Table 1
+  page: 7
+  quote: STUDD 6.4 6.8 9.9 9.6
+- id: r55
+  benchmark: cerqueira2026-abrupt-class-prior
+  method: STUDD
+  metric: avg-rank-f1
+  value: 9.9
+  location: Table 1
+  page: 7
+  quote: STUDD 6.4 6.8 9.9 9.6
+- id: r56
+  benchmark: cerqueira2026-abrupt-class-swap
+  method: STUDD
+  metric: avg-rank-f1
+  value: 9.6
+  location: Table 1
+  page: 7
+  quote: STUDD 6.4 6.8 9.9 9.6
+- id: r57
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: ABCD
+  metric: avg-rank-f1
+  value: 11.7
+  location: Table 2
+  page: 7
+  quote: ABCD 11.7 4.1 9.8 5.1
+- id: r58
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: ABCD
+  metric: avg-rank-f1
+  value: 4.1
+  location: Table 2
+  page: 7
+  quote: ABCD 11.7 4.1 9.8 5.1
+- id: r59
+  benchmark: cerqueira2026-gradual-class-prior
+  method: ABCD
+  metric: avg-rank-f1
+  value: 9.8
+  location: Table 2
+  page: 7
+  quote: ABCD 11.7 4.1 9.8 5.1
+- id: r60
+  benchmark: cerqueira2026-gradual-class-swap
+  method: ABCD
+  metric: avg-rank-f1
+  value: 5.1
+  location: Table 2
+  page: 7
+  quote: ABCD 11.7 4.1 9.8 5.1
+- id: r61
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 13.0
+  location: Table 2
+  page: 7
+  quote: ABCD(X) 13.0 3.3 13.0 13.1
+- id: r62
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 3.3
+  location: Table 2
+  page: 7
+  quote: ABCD(X) 13.0 3.3 13.0 13.1
+- id: r63
+  benchmark: cerqueira2026-gradual-class-prior
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 13.0
+  location: Table 2
+  page: 7
+  quote: ABCD(X) 13.0 3.3 13.0 13.1
+- id: r64
+  benchmark: cerqueira2026-gradual-class-swap
+  method: ABCD(X)
+  metric: avg-rank-f1
+  value: 13.1
+  location: Table 2
+  page: 7
+  quote: ABCD(X) 13.0 3.3 13.0 13.1
+- id: r65
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 6.0
+  location: Table 2
+  page: 7
+  quote: ADWIN 6.0 11.2 6.8 7.9
+- id: r66
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 11.2
+  location: Table 2
+  page: 7
+  quote: ADWIN 6.0 11.2 6.8 7.9
+- id: r67
+  benchmark: cerqueira2026-gradual-class-prior
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 6.8
+  location: Table 2
+  page: 7
+  quote: ADWIN 6.0 11.2 6.8 7.9
+- id: r68
+  benchmark: cerqueira2026-gradual-class-swap
+  method: ADWIN
+  metric: avg-rank-f1
+  value: 7.9
+  location: Table 2
+  page: 7
+  quote: ADWIN 6.0 11.2 6.8 7.9
+- id: r69
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 6.3
+  location: Table 2
+  page: 7
+  quote: CUSUM 6.3 11.9 7.3 9.7
+- id: r70
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 11.9
+  location: Table 2
+  page: 7
+  quote: CUSUM 6.3 11.9 7.3 9.7
+- id: r71
+  benchmark: cerqueira2026-gradual-class-prior
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 7.3
+  location: Table 2
+  page: 7
+  quote: CUSUM 6.3 11.9 7.3 9.7
+- id: r72
+  benchmark: cerqueira2026-gradual-class-swap
+  method: CUSUM
+  metric: avg-rank-f1
+  value: 9.7
+  location: Table 2
+  page: 7
+  quote: CUSUM 6.3 11.9 7.3 9.7
+- id: r73
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: DDM
+  metric: avg-rank-f1
+  value: 6.1
+  location: Table 2
+  page: 7
+  quote: DDM 6.1 9.4 4.7 8.1
+- id: r74
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: DDM
+  metric: avg-rank-f1
+  value: 9.4
+  location: Table 2
+  page: 7
+  quote: DDM 6.1 9.4 4.7 8.1
+- id: r75
+  benchmark: cerqueira2026-gradual-class-prior
+  method: DDM
+  metric: avg-rank-f1
+  value: 4.7
+  location: Table 2
+  page: 7
+  quote: DDM 6.1 9.4 4.7 8.1
+- id: r76
+  benchmark: cerqueira2026-gradual-class-swap
+  method: DDM
+  metric: avg-rank-f1
+  value: 8.1
+  location: Table 2
+  page: 7
+  quote: DDM 6.1 9.4 4.7 8.1
+- id: r77
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: EWMA
+  metric: avg-rank-f1
+  value: 11.7
+  location: Table 2
+  page: 7
+  quote: EWMA 11.7 12.4 10.6 12.0
+- id: r78
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: EWMA
+  metric: avg-rank-f1
+  value: 12.4
+  location: Table 2
+  page: 7
+  quote: EWMA 11.7 12.4 10.6 12.0
+- id: r79
+  benchmark: cerqueira2026-gradual-class-prior
+  method: EWMA
+  metric: avg-rank-f1
+  value: 10.6
+  location: Table 2
+  page: 7
+  quote: EWMA 11.7 12.4 10.6 12.0
+- id: r80
+  benchmark: cerqueira2026-gradual-class-swap
+  method: EWMA
+  metric: avg-rank-f1
+  value: 12.0
+  location: Table 2
+  page: 7
+  quote: EWMA 11.7 12.4 10.6 12.0
+- id: r81
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: GMA
+  metric: avg-rank-f1
+  value: 3.9
+  location: Table 2
+  page: 7
+  quote: GMA 3.9 6.6 6.1 4.7
+- id: r82
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: GMA
+  metric: avg-rank-f1
+  value: 6.6
+  location: Table 2
+  page: 7
+  quote: GMA 3.9 6.6 6.1 4.7
+- id: r83
+  benchmark: cerqueira2026-gradual-class-prior
+  method: GMA
+  metric: avg-rank-f1
+  value: 6.1
+  location: Table 2
+  page: 7
+  quote: GMA 3.9 6.6 6.1 4.7
+- id: r84
+  benchmark: cerqueira2026-gradual-class-swap
+  method: GMA
+  metric: avg-rank-f1
+  value: 4.7
+  location: Table 2
+  page: 7
+  quote: GMA 3.9 6.6 6.1 4.7
+- id: r85
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 9.7
+  location: Table 2
+  page: 7
+  quote: HDDMA 9.7 7.9 7.8 10.5
+- id: r86
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 7.9
+  location: Table 2
+  page: 7
+  quote: HDDMA 9.7 7.9 7.8 10.5
+- id: r87
+  benchmark: cerqueira2026-gradual-class-prior
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 7.8
+  location: Table 2
+  page: 7
+  quote: HDDMA 9.7 7.9 7.8 10.5
+- id: r88
+  benchmark: cerqueira2026-gradual-class-swap
+  method: HDDMA
+  metric: avg-rank-f1
+  value: 10.5
+  location: Table 2
+  page: 7
+  quote: HDDMA 9.7 7.9 7.8 10.5
+- id: r89
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 5.5
+  location: Table 2
+  page: 7
+  quote: HDDMW 5.5 6.3 5.2 5.4
+- id: r90
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 6.3
+  location: Table 2
+  page: 7
+  quote: HDDMW 5.5 6.3 5.2 5.4
+- id: r91
+  benchmark: cerqueira2026-gradual-class-prior
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 5.2
+  location: Table 2
+  page: 7
+  quote: HDDMW 5.5 6.3 5.2 5.4
+- id: r92
+  benchmark: cerqueira2026-gradual-class-swap
+  method: HDDMW
+  metric: avg-rank-f1
+  value: 5.4
+  location: Table 2
+  page: 7
+  quote: HDDMW 5.5 6.3 5.2 5.4
+- id: r93
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: PH
+  metric: avg-rank-f1
+  value: 10.9
+  location: Table 2
+  page: 7
+  quote: PH 10.9 12.4 9.7 11.1
+- id: r94
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: PH
+  metric: avg-rank-f1
+  value: 12.4
+  location: Table 2
+  page: 7
+  quote: PH 10.9 12.4 9.7 11.1
+- id: r95
+  benchmark: cerqueira2026-gradual-class-prior
+  method: PH
+  metric: avg-rank-f1
+  value: 9.7
+  location: Table 2
+  page: 7
+  quote: PH 10.9 12.4 9.7 11.1
+- id: r96
+  benchmark: cerqueira2026-gradual-class-swap
+  method: PH
+  metric: avg-rank-f1
+  value: 11.1
+  location: Table 2
+  page: 7
+  quote: PH 10.9 12.4 9.7 11.1
+- id: r97
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: RDDM
+  metric: avg-rank-f1
+  value: 4.7
+  location: Table 2
+  page: 7
+  quote: RDDM 4.7 6.4 6.6 5.3
+- id: r98
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: RDDM
+  metric: avg-rank-f1
+  value: 6.4
+  location: Table 2
+  page: 7
+  quote: RDDM 4.7 6.4 6.6 5.3
+- id: r99
+  benchmark: cerqueira2026-gradual-class-prior
+  method: RDDM
+  metric: avg-rank-f1
+  value: 6.6
+  location: Table 2
+  page: 7
+  quote: RDDM 4.7 6.4 6.6 5.3
+- id: r100
+  benchmark: cerqueira2026-gradual-class-swap
+  method: RDDM
+  metric: avg-rank-f1
+  value: 5.3
+  location: Table 2
+  page: 7
+  quote: RDDM 4.7 6.4 6.6 5.3
+- id: r101
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: SEED
+  metric: avg-rank-f1
+  value: 5.9
+  location: Table 2
+  page: 7
+  quote: SEED 5.9 2.7 5.0 1.9
+- id: r102
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: SEED
+  metric: avg-rank-f1
+  value: 2.7
+  location: Table 2
+  page: 7
+  quote: SEED 5.9 2.7 5.0 1.9
+- id: r103
+  benchmark: cerqueira2026-gradual-class-prior
+  method: SEED
+  metric: avg-rank-f1
+  value: 5.0
+  location: Table 2
+  page: 7
+  quote: SEED 5.9 2.7 5.0 1.9
+- id: r104
+  benchmark: cerqueira2026-gradual-class-swap
+  method: SEED
+  metric: avg-rank-f1
+  value: 1.9
+  location: Table 2
+  page: 7
+  quote: SEED 5.9 2.7 5.0 1.9
+- id: r105
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: STEPD
+  metric: avg-rank-f1
+  value: 5.4
+  location: Table 2
+  page: 7
+  quote: STEPD 5.4 2.8 5.2 2.0
+- id: r106
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: STEPD
+  metric: avg-rank-f1
+  value: 2.8
+  location: Table 2
+  page: 7
+  quote: STEPD 5.4 2.8 5.2 2.0
+- id: r107
+  benchmark: cerqueira2026-gradual-class-prior
+  method: STEPD
+  metric: avg-rank-f1
+  value: 5.2
+  location: Table 2
+  page: 7
+  quote: STEPD 5.4 2.8 5.2 2.0
+- id: r108
+  benchmark: cerqueira2026-gradual-class-swap
+  method: STEPD
+  metric: avg-rank-f1
+  value: 2.0
+  location: Table 2
+  page: 7
+  quote: STEPD 5.4 2.8 5.2 2.0
+- id: r109
+  benchmark: cerqueira2026-gradual-feature-filtering
+  method: STUDD
+  metric: avg-rank-f1
+  value: 4.2
+  location: Table 2
+  page: 7
+  quote: STUDD 4.2 7.6 7.1 8.1
+- id: r110
+  benchmark: cerqueira2026-gradual-feature-permutation
+  method: STUDD
+  metric: avg-rank-f1
+  value: 7.6
+  location: Table 2
+  page: 7
+  quote: STUDD 4.2 7.6 7.1 8.1
+- id: r111
+  benchmark: cerqueira2026-gradual-class-prior
+  method: STUDD
+  metric: avg-rank-f1
+  value: 7.1
+  location: Table 2
+  page: 7
+  quote: STUDD 4.2 7.6 7.1 8.1
+- id: r112
+  benchmark: cerqueira2026-gradual-class-swap
+  method: STUDD
+  metric: avg-rank-f1
+  value: 8.1
+  location: Table 2
+  page: 7
+  quote: STUDD 4.2 7.6 7.1 8.1
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Tables 1-2 (average rank by F1 detection score; lower is better) extracted mechanically. Raw F1/FAR/MDT values are in the appendix and were not recorded. Ranks are among the 14 detectors only.
+    Section numbers other than 3.3 were not verified, so descriptive locations are used.

@@ -1,0 +1,105 @@
+id: arxiv-2004.05785
+title: 'Learning under Concept Drift: A Review'
+authors:
+- Jie Lu
+- Anjin Liu
+- Fan Dong
+- Feng Gu
+- João Gama
+- Guangquan Zhang
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2004.05785
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b6ebe9f6072499112818b9f5fdc0557f413d487da3e167035c74d03a22a27509
+tags:
+  tasks:
+  - concept-drift-detection
+  method_families:
+  - error-rate-drift-detectors
+  - window-based-drift-detectors
+  - two-sample-tests
+  paradigms:
+  - streaming
+proposes:
+- Framework of learning under concept drift (detection, understanding, adaptation)
+claims:
+- id: c1
+  statement: The survey reviews over 130 publications on concept drift.
+  location: Abstract
+  page: 1
+  quote: This paper reviews over 130 high quality publications in concept drift related research areas
+- id: c2
+  statement: 'Learning under concept drift is organized into three components: drift detection, drift understanding and drift adaptation.'
+  location: Abstract
+  page: 1
+  quote: 'establishes a framework of learning under concept drift including three main components: concept drift detection, concept drift understanding, and concept drift adaptation.'
+- id: c3
+  statement: Concept drift is defined as a change of the joint distribution P(X, y) over time (covering covariate shift and changes in P(y|X)).
+  location: Concept drift definition
+  page: 3
+  quote: concept drift at time t can be defined as the change of joint probability of X and y at time t.
+- id: c4
+  statement: Drift in P(X) alone does not move the decision boundary and is called virtual drift.
+  location: Concept drift definition
+  page: 3
+  quote: drift does not affect the decision boundary, it has also been considered as virtual drift
+- id: c5
+  statement: Without the data-retrieval stage, drift detection can be viewed as a two-sample test problem.
+  location: Drift detection framework
+  page: 4
+  quote: the concept drift detection problem can be considered as a two-sample test problem which examines whether the population of two given sample sets are from the same distribution
+- id: c6
+  statement: 'Drift detectors are classified into three categories by their test statistic: error rate-based, data distribution-based, and multiple hypothesis test.'
+  location: Section 3.2
+  page: 4
+  quote: This section surveys drift detection methods and algorithms, which are classified into three categories in terms of the test statistics they apply.
+- id: c7
+  statement: Error rate-based detectors (tracking the online error rate of a base classifier) are the largest category.
+  location: Section 3.2.1
+  page: 4
+  quote: error rate-based drift detection algorithms form the largest category of algorithms.
+- id: c8
+  statement: DDM was the first algorithm to define warning and drift levels.
+  location: Section 3.2.1
+  page: 4
+  quote: the first algorithm to define the warning level and drift
+- id: c9
+  statement: Data distribution-based detectors address drift at its root (the distribution) and can locate it, but usually cost more computation and need predefined windows.
+  location: Data distribution-based drift detection
+  page: 5
+  quote: these algorithms are usually reported as incurring higher computational cost than the algorithms mentioned in Section 3.2.1
+- id: c10
+  statement: All drift detectors can answer 'when', but very few can answer 'how' and 'where'.
+  location: Conclusions
+  page: 14
+  quote: all drift detection methods can answer "When", but very few methods have the ability to answer "How" and "Where";
+- id: c11
+  statement: Most detection and adaptation algorithms assume true labels are available right after prediction; unsupervised/semi-supervised drift detection is rarely studied.
+  location: Conclusions
+  page: 14
+  quote: Most existing drift detection and adaptation algorithms assume the ground true label is available after classification/prediction, or extreme verification latency.
+- id: c12
+  statement: There is no comprehensive analysis of real-world streams in terms of drift time, severity and regions.
+  location: Conclusions
+  page: 14
+  quote: There is no comprehensive analysis on real-world data streams from the concept drift aspect
+- id: c13
+  statement: The survey lists 10 synthetic and 14 public real-world datasets used to evaluate drift handling.
+  location: Abstract
+  page: 1
+  quote: This paper lists and discusses 10 popular synthetic datasets and 14 publicly available benchmark datasets
+- id: c14
+  statement: Research on retraining models with explicit drift detection has slowed; adaptive models and ensembles have become more important.
+  location: Conclusions
+  page: 14
+  quote: research of retraining models with explicit drift detection has slowed;
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Survey without experiments. The arXiv v1 PDF does not state a publication venue; 'year' is the arXiv posting year (April 2020).

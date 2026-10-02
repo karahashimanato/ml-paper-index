@@ -8,11 +8,13 @@
 
 - **tabular-classification**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **tabular-regression**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
+- **concept-drift-detection**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
+- **dataset-shift-detection**: [arxiv-1810.11953](papers/arxiv-1810.11953.md)
 
 ### method_families
 
 - **gradient-boosted-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
-- **random-forests**: [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **random-forests**: [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md)
 - **tabular-mlp**: [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 - **tabular-attention**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md)
 - **differentiable-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md)
@@ -20,11 +22,16 @@
 - **tabular-foundation-model**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **heterogeneous-ensembles**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 - **automl-systems**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
+- **error-rate-drift-detectors**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
+- **window-based-drift-detectors**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
+- **two-sample-tests**: [arxiv-1810.11953](papers/arxiv-1810.11953.md), [arxiv-2004.05785](papers/arxiv-2004.05785.md)
+- **dimensionality-reduction-for-shift**: [arxiv-1810.11953](papers/arxiv-1810.11953.md)
 - **linear-models**: [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 
 ### paradigms
 
-- **supervised**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **supervised**: [arxiv-1810.11953](papers/arxiv-1810.11953.md), [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **streaming**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
 - **in-context-learning**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 
 ## 比較条件
@@ -80,8 +87,42 @@
 | `gorishniy2025-46-datasets` | paper-private | tabular-classification | 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression | arxiv-2410.24210 | 4 |
 | `gorishniy2025-maps-routing` | paper-private | tabular-regression | Maps Routing (6.5M objects, 986 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |
 | `gorishniy2025-weather` | paper-private | tabular-regression | Weather (13M objects, 103 features; large dataset of Table 2) | arxiv-2410.24210 | 5 |
+| `hollmann2025-amlb-small-classification` | paper-private | tabular-classification | 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes | doi-10.1038_s41586-024-08328-6 | 8 |
+| `hollmann2025-amlb-ctr23-small-regression` | paper-private | tabular-regression | 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features | doi-10.1038_s41586-024-08328-6 | 5 |
 | `holzmuller2024-meta-train` | paper-private | tabular-classification | Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression) | arxiv-2407.04491 | 1 |
 | `holzmuller2024-meta-test` | paper-private | tabular-classification | Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression) | arxiv-2407.04491 | 1 |
 | `holzmuller2024-grinsztajn` | paper-private | tabular-classification | Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol) | arxiv-2407.04491 | 2 |
-| `hollmann2025-amlb-small-classification` | paper-private | tabular-classification | 29 AutoML Benchmark classification datasets with <=10,000 samples, <=500 features, <=10 classes | doi-10.1038_s41586-024-08328-6 | 8 |
-| `hollmann2025-amlb-ctr23-small-regression` | paper-private | tabular-regression | 28 AutoML Benchmark and OpenML-CTR23 regression datasets with <=10,000 samples, <=500 features | doi-10.1038_s41586-024-08328-6 | 5 |
+| `rabanser2019-shift-suite-n10` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 10 target samples | arxiv-1810.11953 | 14 |
+| `rabanser2019-shift-suite-n20` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 20 target samples | arxiv-1810.11953 | 14 |
+| `rabanser2019-shift-suite-n50` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 50 target samples | arxiv-1810.11953 | 14 |
+| `rabanser2019-shift-suite-n100` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 100 target samples | arxiv-1810.11953 | 14 |
+| `rabanser2019-shift-suite-n200` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 200 target samples | arxiv-1810.11953 | 14 |
+| `rabanser2019-shift-suite-n500` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 500 target samples | arxiv-1810.11953 | 14 |
+| `rabanser2019-shift-suite-n1000` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 1000 target samples | arxiv-1810.11953 | 14 |
+| `rabanser2019-shift-suite-n10000` | paper-private | dataset-shift-detection | MNIST and CIFAR-10 with the paper's simulated shifts, 10000 target samples | arxiv-1810.11953 | 8 |
+| `aguiar2023-all-drifts` | public | concept-drift-detection | Aguiar & Cano locality benchmark streams: all evaluated drift difficulties | arxiv-2311.06396 | 36 |
+| `aguiar2023-single-class-local` | public | concept-drift-detection | Aguiar & Cano locality benchmark streams: single-class local drifts | arxiv-2311.06396 | 36 |
+| `aguiar2023-single-class-global` | public | concept-drift-detection | Aguiar & Cano locality benchmark streams: single-class global drifts | arxiv-2311.06396 | 36 |
+| `aguiar2023-multi-class-local` | public | concept-drift-detection | Aguiar & Cano locality benchmark streams: multi-class local drifts | arxiv-2311.06396 | 36 |
+| `aguiar2023-multi-class-global` | public | concept-drift-detection | Aguiar & Cano locality benchmark streams: multi-class global drifts | arxiv-2311.06396 | 36 |
+| `aguiar2023-no-drift` | public | concept-drift-detection | Aguiar & Cano locality benchmark streams without drift | arxiv-2311.06396 | 9 |
+| `cerqueira2026-abrupt-feature-filtering` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected abrupt feature filtering drift | arxiv-2606.07789 | 14 |
+| `cerqueira2026-abrupt-feature-permutation` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected abrupt feature permutation drift | arxiv-2606.07789 | 14 |
+| `cerqueira2026-abrupt-class-prior` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected abrupt class prior drift | arxiv-2606.07789 | 14 |
+| `cerqueira2026-abrupt-class-swap` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected abrupt class swap drift | arxiv-2606.07789 | 14 |
+| `cerqueira2026-gradual-feature-filtering` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected gradual feature filtering drift | arxiv-2606.07789 | 14 |
+| `cerqueira2026-gradual-feature-permutation` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected gradual feature permutation drift | arxiv-2606.07789 | 14 |
+| `cerqueira2026-gradual-class-prior` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected gradual class prior drift | arxiv-2606.07789 | 14 |
+| `cerqueira2026-gradual-class-swap` | public | concept-drift-detection | Cerqueira et al. framework: 7 real-world streams with injected gradual class swap drift | arxiv-2606.07789 | 14 |
+| `gowerwinter2026-el` | paper-private | concept-drift-detection | Electricity stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-fc` | paper-private | concept-drift-detection | Forest Covertype stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-ia` | paper-private | concept-drift-detection | Insects-Abrupt (balanced) stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-ii` | paper-private | concept-drift-detection | Insects-Incremental (balanced) stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-ks` | paper-private | concept-drift-detection | Keystroke stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-lx` | paper-private | concept-drift-detection | Luxembourg stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-mr` | paper-private | concept-drift-detection | MIRS stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-nw` | paper-private | concept-drift-detection | NOAA Weather stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-oz` | paper-private | concept-drift-detection | Ozone stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-rt` | paper-private | concept-drift-detection | Rialto stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-yg` | paper-private | concept-drift-detection | Yoga stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
+| `gowerwinter2026-11-streams` | paper-private | concept-drift-detection | 11 real-world streams of the paper (aggregate) | arxiv-2602.06456 | 23 |

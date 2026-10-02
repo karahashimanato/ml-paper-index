@@ -20,6 +20,9 @@
 - arXiv 以外の論文は DOI 形式のID(`doi-<DOIの/を_に置換>`)にし、オープンアクセス版のライセンスを `source.license` に記録する。
 - 表の数値は `scripts/cards/<id>.py` でPDFテキストから機械的に読み取る(共通処理は `scripts/cards/_common.py`)。手で転記しない。
 - 著者が評価対象のモデルの作者でもある場合(利益相反の開示)は、それも主張として記録する。
+- `location` の節番号は推測で書かない。本文の見出しか相互参照(「Section 3.3 で述べた」等)で確認できたものだけ使い、それ以外は節の名前(Introduction、Conclusions など)を書く。
+- 書誌情報(掲載誌・年)も、PDF本文か公式メタデータ(arXiv API、Crossref)で確認できたものだけを書く。記憶にある掲載誌は書かない。
+- 小数点にカンマを使う論文(84,8 = 84.8)は、引用はそのまま、`value` は小数点に直して記録する(validate.py が両方の読み方で照合する)。
 - 新しいタグが必要なら、`registry/tags.yaml` への追加をユーザーに提案してから使う。
 - `card.reviewed` は人が本文と照合するまで `false` のまま。
 - 作成後は `uv run python scripts/validate.py` がエラー0であることを確認する。

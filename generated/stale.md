@@ -6,3 +6,4 @@
 
 - [articles/tasks/drift-detection.md](../articles/tasks/drift-detection.md): なし
 - [articles/tasks/tabular-gbdt-vs-deep-learning.md](../articles/tasks/tabular-gbdt-vs-deep-learning.md): なし
+- [articles/tasks/time-series-anomaly-detection.md](../articles/tasks/time-series-anomaly-detection.md): なし

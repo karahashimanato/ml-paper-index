@@ -9,28 +9,34 @@
 - **tabular-classification**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **tabular-regression**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **concept-drift-detection**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
+- **time-series-anomaly-detection**: [arxiv-2009.13807](papers/arxiv-2009.13807.md), [arxiv-2109.05257](papers/arxiv-2109.05257.md), [arxiv-2211.05244](papers/arxiv-2211.05244.md), [arxiv-2308.13068](papers/arxiv-2308.13068.md), [arxiv-2506.18046](papers/arxiv-2506.18046.md)
 - **dataset-shift-detection**: [arxiv-1810.11953](papers/arxiv-1810.11953.md)
 
 ### method_families
 
 - **gradient-boosted-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **random-forests**: [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md)
+- **deep-learning**: [arxiv-2009.13807](papers/arxiv-2009.13807.md), [arxiv-2211.05244](papers/arxiv-2211.05244.md)
 - **tabular-mlp**: [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
-- **tabular-attention**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md)
+- **tabular-attention**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2308.13068](papers/arxiv-2308.13068.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md)
 - **differentiable-trees**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md)
 - **tabular-cnn**: [arxiv-2106.03253](papers/arxiv-2106.03253.md)
-- **tabular-foundation-model**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
+- **tabular-foundation-model**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [arxiv-2506.18046](papers/arxiv-2506.18046.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **heterogeneous-ensembles**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 - **automl-systems**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **error-rate-drift-detectors**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
 - **window-based-drift-detectors**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
 - **two-sample-tests**: [arxiv-1810.11953](papers/arxiv-1810.11953.md), [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
 - **dimensionality-reduction-for-shift**: [arxiv-1810.11953](papers/arxiv-1810.11953.md)
+- **reconstruction-based-detectors**: [arxiv-2109.05257](papers/arxiv-2109.05257.md), [arxiv-2211.05244](papers/arxiv-2211.05244.md), [arxiv-2308.13068](papers/arxiv-2308.13068.md), [arxiv-2506.18046](papers/arxiv-2506.18046.md)
+- **forecasting-based-detectors**: [arxiv-2109.05257](papers/arxiv-2109.05257.md), [arxiv-2211.05244](papers/arxiv-2211.05244.md), [arxiv-2308.13068](papers/arxiv-2308.13068.md), [arxiv-2506.18046](papers/arxiv-2506.18046.md)
+- **classical-outlier-detectors**: [arxiv-2009.13807](papers/arxiv-2009.13807.md), [arxiv-2308.13068](papers/arxiv-2308.13068.md), [arxiv-2506.18046](papers/arxiv-2506.18046.md)
 - **linear-models**: [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 
 ### paradigms
 
 - **supervised**: [arxiv-1810.11953](papers/arxiv-1810.11953.md), [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
+- **unsupervised**: [arxiv-2009.13807](papers/arxiv-2009.13807.md), [arxiv-2109.05257](papers/arxiv-2109.05257.md), [arxiv-2211.05244](papers/arxiv-2211.05244.md), [arxiv-2308.13068](papers/arxiv-2308.13068.md), [arxiv-2506.18046](papers/arxiv-2506.18046.md)
 - **streaming**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
 - **in-context-learning**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 
@@ -127,3 +133,18 @@
 | `gowerwinter2026-yg` | paper-private | concept-drift-detection | Yoga stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
 | `gowerwinter2026-11-streams` | paper-private | concept-drift-detection | 11 real-world streams of the paper (aggregate) | arxiv-2602.06456 | 23 |
 | `lukats2024-insects-abrupt-balanced` | paper-private | concept-drift-detection | INSECTS (abrupt balanced) stream (Souza et al.), the only stream in the study with drift ground truth for MTR | doi-10.1007_s41060-024-00620-y | 28 |
+| `kim2022-swat` | paper-private | time-series-anomaly-detection | SWaT | arxiv-2109.05257 | 20 |
+| `kim2022-wadi` | paper-private | time-series-anomaly-detection | WADI | arxiv-2109.05257 | 20 |
+| `kim2022-msl` | paper-private | time-series-anomaly-detection | MSL | arxiv-2109.05257 | 20 |
+| `kim2022-smap` | paper-private | time-series-anomaly-detection | SMAP | arxiv-2109.05257 | 20 |
+| `kim2022-smd` | paper-private | time-series-anomaly-detection | SMD | arxiv-2109.05257 | 20 |
+| `sehili2023-swat` | paper-private | time-series-anomaly-detection | SWaT | arxiv-2308.13068 | 12 |
+| `sehili2023-wadi` | paper-private | time-series-anomaly-detection | WADI (2017) | arxiv-2308.13068 | 12 |
+| `sehili2023-psm` | paper-private | time-series-anomaly-detection | PSM | arxiv-2308.13068 | 12 |
+| `tab2025-calit2` | public | time-series-anomaly-detection | CalIt2 (TAB multivariate) | arxiv-2506.18046 | 12 |
+| `tab2025-daphnet` | public | time-series-anomaly-detection | Daphnet (TAB multivariate) | arxiv-2506.18046 | 12 |
+| `tab2025-msl` | public | time-series-anomaly-detection | MSL (TAB multivariate) | arxiv-2506.18046 | 12 |
+| `tab2025-psm` | public | time-series-anomaly-detection | PSM (TAB multivariate) | arxiv-2506.18046 | 12 |
+| `tab2025-skab` | public | time-series-anomaly-detection | SKAB (TAB multivariate) | arxiv-2506.18046 | 12 |
+| `tab2025-smap` | public | time-series-anomaly-detection | SMAP (TAB multivariate) | arxiv-2506.18046 | 12 |
+| `tab2025-univariate` | public | time-series-anomaly-detection | TAB univariate collection (1,635 series) | arxiv-2506.18046 | 1 |

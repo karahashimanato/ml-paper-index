@@ -10,6 +10,8 @@ tasks:
   - id: concept-drift-detection
     description: Detecting changes in P(y|X) or the joint distribution in data streams, often from the model's error signal.
     parent: drift-detection
+  - id: time-series-anomaly-detection
+    description: Detecting anomalous points or segments in univariate or multivariate time series.
   - id: dataset-shift-detection
     description: Detecting distribution shift between training and deployment data (covariate, label, or general shift), typically with statistical tests.
     parent: drift-detection
@@ -52,12 +54,20 @@ method_families:
     description: Statistical two-sample tests for distribution shift (e.g. Kolmogorov-Smirnov, MMD, chi-squared).
   - id: dimensionality-reduction-for-shift
     description: Reducing representations (e.g. PCA, autoencoders, black-box predictor softmax) before testing for shift.
+  - id: reconstruction-based-detectors
+    description: Anomaly detectors scoring by reconstruction error (e.g. autoencoders, VAEs).
+  - id: forecasting-based-detectors
+    description: Anomaly detectors scoring by prediction/forecast error.
+  - id: classical-outlier-detectors
+    description: Non-deep outlier detectors (e.g. Isolation Forest, LOF, OC-SVM, PCA, distance/discord-based methods).
   - id: linear-models
     description: Linear / generalized linear models.
 
 paradigms:
   - id: supervised
     description: Supervised learning.
+  - id: unsupervised
+    description: Learning without labels.
   - id: streaming
     description: Online learning / processing of data streams.
   - id: in-context-learning

@@ -1,0 +1,996 @@
+id: arxiv-2109.05257
+title: Towards a Rigorous Evaluation of Time-series Anomaly Detection
+authors:
+- Siwon Kim
+- Kukjin Choi
+- Hyun-Soo Choi
+- Byunghan Lee
+- Sungroh Yoon
+year: 2022
+venue: AAAI 2022
+links:
+  arxiv: https://arxiv.org/abs/2109.05257
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f1f8a5bb461fc1c8456cddc161250b7c2a782370b1ea1d6baf7fd8bbbd45ba46
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  - forecasting-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- PA%K evaluation protocol
+- Untrained-model baseline for TAD
+claims:
+- id: c1
+  statement: 'Point adjustment (PA) can greatly overestimate detection performance: even a random anomaly score can look state of the art.'
+  location: Abstract
+  page: 1
+  quote: the PA protocol has a great possibility of overestimating the detection performance; that is, even a random anomaly score can easily turn into a state-of-the-art TAD method.
+- id: c2
+  statement: Even without PA, an untrained model performs comparably to existing methods.
+  location: Abstract
+  page: 1
+  quote: an untrained model obtains comparable detection performance to the existing methods even when PA is forbidden.
+- id: c3
+  statement: 'PA: if any point in a ground-truth anomaly segment is detected, the whole segment counts as detected.'
+  location: Introduction
+  page: 1
+  quote: if at least one moment in a contiguous anomaly segment is detected as an anomaly, the entire segment is then considered to be correctly predicted as anomaly.
+- id: c4
+  statement: PA can only increase precision, recall and F1.
+  location: Section 3
+  page: 3
+  quote: after the PA, the P, R and consequently F1 score can only increase.
+- id: c5
+  statement: With random scores, F1PA can be pushed close to 1 by choosing the threshold, unless anomaly segments are short.
+  location: Section 3
+  page: 3
+  quote: except for the case when the length of the anomaly segment is short.
+- id: c6
+  statement: The overestimation by PA depends on the test set and is weaker with shorter anomaly segments (e.g. SMD).
+  location: Section 5
+  page: 6
+  quote: the overestimation effect of PA depends on the test dataset distribution, and its effect becomes less conspicuous with shorter anomaly segments.
+- id: c7
+  statement: Only GDN consistently exceeded the untrained baselines on all datasets.
+  location: Section 5
+  page: 7
+  quote: Only the GDN consistently exceeded the baselines for all datasets.
+- id: c8
+  statement: Without PA, existing methods were mostly worse than the untrained baselines (Case 2 and 3).
+  location: Section 5
+  page: 7
+  quote: mostly inferior to Case 2 and 3, implying that the currently proposed methods may have obtained marginal or even no advancement against the baselines.
+- id: c9
+  statement: All thresholds were chosen to give the best score (optimistic for every method).
+  location: Section 5
+  page: 6
+  quote: All thresholds were obtained from those that yielded the best score.
+- id: c10
+  statement: Existing methods' numbers are the best reported in the original papers or official reproductions; missing ones were reproduced (†).
+  location: Section 5
+  page: 6
+  quote: For the existing methods, we used the best numbers reported in the original papers and officially reproduced results
+- id: c11
+  statement: MSL and SMAP contain unlabeled anomalies in the training data.
+  location: Section 5
+  page: 5
+  quote: Unlike other datasets, unlabeled anomalies are contained in the training data, which makes training difficult.
+- id: c12
+  statement: 'Proposed PA%K protocol: apply PA only if the fraction of detected points in a segment exceeds K, mitigating both over- and underestimation.'
+  location: Section 4
+  page: 4
+  quote: which can mitigate the overestimation effect of F1PA and the possibility of underestimation of F1.
+- id: c13
+  statement: 'Proposed baseline: the F1 of a randomly initialized simple reconstruction model (e.g. untrained single-layer LSTM autoencoder).'
+  location: Section 4
+  page: 4
+  quote: we suggest establishing a new baseline with the F1 measured from the prediction of a randomly initialized reconstruction model with simple architecture
+- id: c14
+  statement: Existing TAD methods set thresholds after looking at the test set or use the F1-optimal threshold.
+  location: Discussion (directions for evaluation)
+  page: 7
+  quote: existing TAD methods set the threshold after investigating the test dataset or simply use the optimal threshold that yields the best F1.
+- id: c15
+  statement: Threshold-independent metrics such as AUROC or AUPR are recommended in addition.
+  location: Discussion (directions for evaluation)
+  page: 7
+  quote: Additional metrics with the reduced dependency such as AUROC or area under precision-recall (AUPR) curve will help in rigorous evaluation.
+- id: c16
+  statement: 'Incomplete test labeling: some labeled anomalies look like normal data.'
+  location: Section 4
+  page: 4
+  quote: due to the incomplete test set labeling, some signals labeled as anomalies share more statistics with normal signals.
+- id: c17
+  statement: Reported F1PA and F1 are not reliably correlated on SWaT and WADI.
+  location: Section 5
+  page: 5
+  quote: these numbers are insufficient to assure the existence of correlation
+- id: c18
+  statement: Point anomalies are the dominant anomaly type in current TAD datasets.
+  location: Background
+  page: 2
+  quote: Point anomaly is the most dominant type in the current TAD datasets.
+results:
+- id: r1
+  benchmark: kim2022-swat
+  method: USAD
+  metric: f1-pa
+  value: 0.846
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r2
+  benchmark: kim2022-swat
+  method: USAD
+  metric: f1
+  value: 0.791
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r3
+  benchmark: kim2022-wadi
+  method: USAD
+  metric: f1-pa
+  value: 0.429
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r4
+  benchmark: kim2022-wadi
+  method: USAD
+  metric: f1
+  value: 0.232
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r5
+  benchmark: kim2022-msl
+  method: USAD
+  metric: f1-pa
+  value: 0.927
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r6
+  benchmark: kim2022-msl
+  method: USAD
+  metric: f1
+  value: 0.211
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r7
+  benchmark: kim2022-smap
+  method: USAD
+  metric: f1-pa
+  value: 0.818
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r8
+  benchmark: kim2022-smap
+  method: USAD
+  metric: f1
+  value: 0.228
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r9
+  benchmark: kim2022-smd
+  method: USAD
+  metric: f1-pa
+  value: 0.938
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r10
+  benchmark: kim2022-smd
+  method: USAD
+  metric: f1
+  value: 0.426
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: USAD 0.846 (↓) 0.791 (↑) 0.429 (↓) 0.232 (↓) 0.927 (↓) 0.211† (↓) 0.818 (↓) 0.228† (↓) 0.938(↑) 0.426† (↓)
+- id: r11
+  benchmark: kim2022-swat
+  method: DAGMM
+  metric: f1-pa
+  value: 0.853
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r12
+  benchmark: kim2022-swat
+  method: DAGMM
+  metric: f1
+  value: 0.55
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r13
+  benchmark: kim2022-wadi
+  method: DAGMM
+  metric: f1-pa
+  value: 0.209
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r14
+  benchmark: kim2022-wadi
+  method: DAGMM
+  metric: f1
+  value: 0.121
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r15
+  benchmark: kim2022-msl
+  method: DAGMM
+  metric: f1-pa
+  value: 0.701
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r16
+  benchmark: kim2022-msl
+  method: DAGMM
+  metric: f1
+  value: 0.199
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r17
+  benchmark: kim2022-smap
+  method: DAGMM
+  metric: f1-pa
+  value: 0.712
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r18
+  benchmark: kim2022-smap
+  method: DAGMM
+  metric: f1
+  value: 0.333
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r19
+  benchmark: kim2022-smd
+  method: DAGMM
+  metric: f1-pa
+  value: 0.723
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r20
+  benchmark: kim2022-smd
+  method: DAGMM
+  metric: f1
+  value: 0.238
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: DAGMM 0.853 (↓) 0.550 (↓) 0.209 (↓) 0.121 (↓) 0.701 (↓) 0.199† (↓) 0.712 (↓) 0.333† (↑) 0.723 (↓) 0.238† (↓)
+- id: r21
+  benchmark: kim2022-swat
+  method: LSTM-VAE
+  metric: f1-pa
+  value: 0.805
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r22
+  benchmark: kim2022-swat
+  method: LSTM-VAE
+  metric: f1
+  value: 0.775
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r23
+  benchmark: kim2022-wadi
+  method: LSTM-VAE
+  metric: f1-pa
+  value: 0.38
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r24
+  benchmark: kim2022-wadi
+  method: LSTM-VAE
+  metric: f1
+  value: 0.227
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r25
+  benchmark: kim2022-msl
+  method: LSTM-VAE
+  metric: f1-pa
+  value: 0.678
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r26
+  benchmark: kim2022-msl
+  method: LSTM-VAE
+  metric: f1
+  value: 0.212
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r27
+  benchmark: kim2022-smap
+  method: LSTM-VAE
+  metric: f1-pa
+  value: 0.756
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r28
+  benchmark: kim2022-smap
+  method: LSTM-VAE
+  metric: f1
+  value: 0.235
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r29
+  benchmark: kim2022-smd
+  method: LSTM-VAE
+  metric: f1-pa
+  value: 0.808
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r30
+  benchmark: kim2022-smd
+  method: LSTM-VAE
+  metric: f1
+  value: 0.435
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: LSTM-VAE 0.805 (↓) 0.775 (↓) 0.380 (↓) 0.227 (↓) 0.678 (↓) 0.212† (↓) 0.756 (↓) 0.235† (↑) 0.808 (↑) 0.435† (↓)
+- id: r31
+  benchmark: kim2022-swat
+  method: OmniAnomaly
+  metric: f1-pa
+  value: 0.866
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r32
+  benchmark: kim2022-swat
+  method: OmniAnomaly
+  metric: f1
+  value: 0.782
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r33
+  benchmark: kim2022-wadi
+  method: OmniAnomaly
+  metric: f1-pa
+  value: 0.417
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r34
+  benchmark: kim2022-wadi
+  method: OmniAnomaly
+  metric: f1
+  value: 0.223
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r35
+  benchmark: kim2022-msl
+  method: OmniAnomaly
+  metric: f1-pa
+  value: 0.899
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r36
+  benchmark: kim2022-msl
+  method: OmniAnomaly
+  metric: f1
+  value: 0.207
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r37
+  benchmark: kim2022-smap
+  method: OmniAnomaly
+  metric: f1-pa
+  value: 0.805
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r38
+  benchmark: kim2022-smap
+  method: OmniAnomaly
+  metric: f1
+  value: 0.227
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r39
+  benchmark: kim2022-smd
+  method: OmniAnomaly
+  metric: f1-pa
+  value: 0.944
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r40
+  benchmark: kim2022-smd
+  method: OmniAnomaly
+  metric: f1
+  value: 0.474
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: OmniAnomaly 0.866 (↓) 0.782 (↓) 0.417 (↓) 0.223 (↓) 0.899 (↓) 0.207† (↓) 0.805 (↓) 0.227† (↓) 0.944 (↑) 0.474† (↓)
+- id: r41
+  benchmark: kim2022-swat
+  method: MSCRED
+  metric: f1-pa
+  value: 0.868
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r42
+  benchmark: kim2022-swat
+  method: MSCRED
+  metric: f1
+  value: 0.662
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r43
+  benchmark: kim2022-wadi
+  method: MSCRED
+  metric: f1-pa
+  value: 0.346
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r44
+  benchmark: kim2022-wadi
+  method: MSCRED
+  metric: f1
+  value: 0.087
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r45
+  benchmark: kim2022-msl
+  method: MSCRED
+  metric: f1-pa
+  value: 0.775
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r46
+  benchmark: kim2022-msl
+  method: MSCRED
+  metric: f1
+  value: 0.199
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r47
+  benchmark: kim2022-smap
+  method: MSCRED
+  metric: f1-pa
+  value: 0.942
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r48
+  benchmark: kim2022-smap
+  method: MSCRED
+  metric: f1
+  value: 0.232
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r49
+  benchmark: kim2022-smd
+  method: MSCRED
+  metric: f1-pa
+  value: 0.389
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r50
+  benchmark: kim2022-smd
+  method: MSCRED
+  metric: f1
+  value: 0.097
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: MSCRED 0.868 (↓) 0.662† (↓) 0.346 (↓) 0.087† (↓) 0.775 (↓) 0.199† (↓) 0.942† (↓) 0.232† (↑) 0.389† (↓) 0.097† (↓)
+- id: r51
+  benchmark: kim2022-swat
+  method: THOC
+  metric: f1-pa
+  value: 0.88
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r52
+  benchmark: kim2022-swat
+  method: THOC
+  metric: f1
+  value: 0.612
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r53
+  benchmark: kim2022-wadi
+  method: THOC
+  metric: f1-pa
+  value: 0.506
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r54
+  benchmark: kim2022-wadi
+  method: THOC
+  metric: f1
+  value: 0.13
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r55
+  benchmark: kim2022-msl
+  method: THOC
+  metric: f1-pa
+  value: 0.891
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r56
+  benchmark: kim2022-msl
+  method: THOC
+  metric: f1
+  value: 0.19
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r57
+  benchmark: kim2022-smap
+  method: THOC
+  metric: f1-pa
+  value: 0.781
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r58
+  benchmark: kim2022-smap
+  method: THOC
+  metric: f1
+  value: 0.24
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r59
+  benchmark: kim2022-smd
+  method: THOC
+  metric: f1-pa
+  value: 0.541
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r60
+  benchmark: kim2022-smd
+  method: THOC
+  metric: f1
+  value: 0.168
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: THOC 0.880 (↓) 0.612† (↓) 0.506 (↓) 0.130† (↓) 0.891 (↓) 0.190† (↓) 0.781† (↓) 0.240† (↑) 0.541† (↓) 0.168† (↓)
+- id: r61
+  benchmark: kim2022-swat
+  method: GDN
+  metric: f1-pa
+  value: 0.935
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r62
+  benchmark: kim2022-swat
+  method: GDN
+  metric: f1
+  value: 0.81
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r63
+  benchmark: kim2022-wadi
+  method: GDN
+  metric: f1-pa
+  value: 0.855
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r64
+  benchmark: kim2022-wadi
+  method: GDN
+  metric: f1
+  value: 0.57
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r65
+  benchmark: kim2022-msl
+  method: GDN
+  metric: f1-pa
+  value: 0.903
+  note: Value reported in the original paper (best number).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r66
+  benchmark: kim2022-msl
+  method: GDN
+  metric: f1
+  value: 0.217
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r67
+  benchmark: kim2022-smap
+  method: GDN
+  metric: f1-pa
+  value: 0.708
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r68
+  benchmark: kim2022-smap
+  method: GDN
+  metric: f1
+  value: 0.252
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r69
+  benchmark: kim2022-smd
+  method: GDN
+  metric: f1-pa
+  value: 0.716
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r70
+  benchmark: kim2022-smd
+  method: GDN
+  metric: f1
+  value: 0.529
+  note: Reproduced by the authors (†).
+  location: Table 2
+  page: 6
+  quote: GDN 0.935 (↓) 0.81 (↑) 0.855 (↓) 0.57 (↑) 0.903 (↓) 0.217† (↓) 0.708† (↓) 0.252† (↑) 0.716† (↓) 0.529† (↑)
+- id: r71
+  benchmark: kim2022-swat
+  method: 'Case 1: random anomaly score'
+  metric: f1-pa
+  value: 0.969
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r72
+  benchmark: kim2022-swat
+  method: 'Case 1: random anomaly score'
+  metric: f1
+  value: 0.216
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r73
+  benchmark: kim2022-wadi
+  method: 'Case 1: random anomaly score'
+  metric: f1-pa
+  value: 0.965
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r74
+  benchmark: kim2022-wadi
+  method: 'Case 1: random anomaly score'
+  metric: f1
+  value: 0.109
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r75
+  benchmark: kim2022-msl
+  method: 'Case 1: random anomaly score'
+  metric: f1-pa
+  value: 0.931
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r76
+  benchmark: kim2022-msl
+  method: 'Case 1: random anomaly score'
+  metric: f1
+  value: 0.19
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r77
+  benchmark: kim2022-smap
+  method: 'Case 1: random anomaly score'
+  metric: f1-pa
+  value: 0.961
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r78
+  benchmark: kim2022-smap
+  method: 'Case 1: random anomaly score'
+  metric: f1
+  value: 0.227
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r79
+  benchmark: kim2022-smd
+  method: 'Case 1: random anomaly score'
+  metric: f1-pa
+  value: 0.804
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r80
+  benchmark: kim2022-smd
+  method: 'Case 1: random anomaly score'
+  metric: f1
+  value: 0.08
+  location: Table 2
+  page: 6
+  quote: Case 1 0.969 0.216 0.965 0.109 0.931 0.190 0.961 0.227 0.804 0.080
+- id: r81
+  benchmark: kim2022-swat
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1-pa
+  value: 0.873
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r82
+  benchmark: kim2022-swat
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1
+  value: 0.781
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r83
+  benchmark: kim2022-wadi
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1-pa
+  value: 0.694
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r84
+  benchmark: kim2022-wadi
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1
+  value: 0.353
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r85
+  benchmark: kim2022-msl
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1-pa
+  value: 0.812
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r86
+  benchmark: kim2022-msl
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1
+  value: 0.239
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r87
+  benchmark: kim2022-smap
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1-pa
+  value: 0.675
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r88
+  benchmark: kim2022-smap
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1
+  value: 0.229
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r89
+  benchmark: kim2022-smd
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1-pa
+  value: 0.896
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r90
+  benchmark: kim2022-smd
+  method: 'Case 2: input itself as anomaly score'
+  metric: f1
+  value: 0.494
+  location: Table 2
+  page: 6
+  quote: Case 2 0.873 0.781 0.694 0.353 0.812 0.239 0.675 0.229 0.896 0.494
+- id: r91
+  benchmark: kim2022-swat
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1-pa
+  value: 0.869
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r92
+  benchmark: kim2022-swat
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1
+  value: 0.789
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r93
+  benchmark: kim2022-wadi
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1-pa
+  value: 0.695
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r94
+  benchmark: kim2022-wadi
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1
+  value: 0.331
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r95
+  benchmark: kim2022-msl
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1-pa
+  value: 0.427
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r96
+  benchmark: kim2022-msl
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1
+  value: 0.236
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r97
+  benchmark: kim2022-smap
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1-pa
+  value: 0.699
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r98
+  benchmark: kim2022-smap
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1
+  value: 0.229
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r99
+  benchmark: kim2022-smd
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1-pa
+  value: 0.893
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+- id: r100
+  benchmark: kim2022-smd
+  method: 'Case 3: untrained (randomly initialized) LSTM encoder-decoder'
+  metric: f1
+  value: 0.466
+  location: Table 2
+  page: 6
+  quote: Case 3 0.869 0.789 0.695 0.331 0.427 0.236 0.699 0.229 0.893 0.466
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Table 2 extracted mechanically. Existing methods mix values reported in the original papers and values reproduced by the authors (see each result's note); thresholds are best-score thresholds for
+    all methods. Cases 1 and 3 are averages over five seeds; Case 2/3 window size 120. Section numbers follow the paper's own references (Sections 3-5).

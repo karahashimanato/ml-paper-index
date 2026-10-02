@@ -1,0 +1,720 @@
+id: arxiv-2506.18046
+title: 'TAB: Unified Benchmarking of Time Series Anomaly Detection Methods'
+authors:
+- Xiangfei Qiu
+- Zhe Li
+- Wanghui Qiu
+- Shiyan Hu
+- Lekui Zhou
+- Xingjian Wu
+- Zhengyu Li
+- Chenjuan Guo
+- Aoying Zhou
+- Zhenli Sheng
+- Jilin Hu
+- Christian S. Jensen
+- Bin Yang
+year: 2025
+venue: PVLDB 18(9)
+links:
+  arxiv: https://arxiv.org/abs/2506.18046
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 27a027972858d5bd4265b1d7f5a888809ee304d22f00552dfdc8fca686c8e633
+  license: CC BY-NC-ND 4.0
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - reconstruction-based-detectors
+  - forecasting-based-detectors
+  - tabular-foundation-model
+  paradigms:
+  - unsupervised
+proposes:
+- TAB benchmark (datasets, unified pipeline, leaderboard)
+claims:
+- id: c1
+  statement: TAB covers 29 public multivariate datasets and 1,635 univariate time series from different domains.
+  location: Abstract
+  page: 1
+  quote: TAB encompasses 29 public multivariate datasets and 1,635 univariate time series from different domains
+- id: c2
+  statement: It covers non-learning, machine learning, deep learning, LLM-based and time-series pre-trained methods.
+  location: Abstract
+  page: 1
+  quote: TAB covers a variety of TSAD methods, including Non-learning, Machine learning, Deep learning, LLM-based, and Time-series pre-trained methods.
+- id: c3
+  statement: Among 100 surveyed studies, more than half use at most four multivariate datasets.
+  location: Introduction
+  page: 2
+  quote: more than half of the studies include at most four datasets, and only one study covers 17 datasets.
+- id: c4
+  statement: 'Inconsistent splitting: some methods take the validation set from the test set.'
+  location: Introduction
+  page: 2
+  quote: Some methods use a validation set from the testing set
+- id: c5
+  statement: 'Drop-last issue: discarding the last incomplete test batch makes comparisons unfair unless batch sizes match.'
+  location: Introduction
+  page: 2
+  quote: discarding the last incomplete batch with fewer sample instances than the batch size is unfair
+- id: c6
+  statement: With point adjustment, even random methods likely hit at least one point in long anomaly windows.
+  location: Introduction
+  page: 2
+  quote: even random methods have a good chance to predict at least one point in larger anomaly windows
+- id: c7
+  statement: Threshold-independent metrics like AUC-ROC should not be recomputed after point adjustment.
+  location: Introduction
+  page: 2
+  quote: should not be recalculated after point adjustment.
+- id: c8
+  statement: Label-based metrics change considerably with the threshold.
+  location: Introduction
+  page: 2
+  quote: when the threshold changes, the performance can change considerably.
+- id: c9
+  statement: TAB computes metrics at all thresholds and reports the best.
+  location: Experimental settings
+  page: 8
+  quote: we conduct metric calculations at all thresholds and report the best results.
+- id: c10
+  statement: Each method is run with its original hyperparameters plus a search over several sets; the best result is reported.
+  location: Experimental settings
+  page: 8
+  quote: We then select the best results from these evaluations
+- id: c11
+  statement: On univariate series, machine learning and non-learning methods had the best average V-PR and Aff-F1.
+  location: Section 5.2.1
+  page: 10
+  quote: Machine learning (ML) and non-learning (NL) methods exhibit the best average performance in terms of the V-PR and Aff-F metrics.
+- id: c12
+  statement: Classic methods should not be overlooked while pursuing novel ones.
+  location: Section 5.2.1
+  page: 10
+  quote: while pursuing novel methods, we should not overlook the classic methods.
+- id: c13
+  statement: On multivariate data some deep models (TsNet, CATCH) appear best in full-shot settings.
+  location: Multivariate results
+  page: 10
+  quote: Some deep learning models, such as TsNet and CATCH, appear to achieve the best performance in full-shot settings.
+- id: c14
+  statement: Strong non-learning/ML results on multivariate data suggest significant room for improving deep learning approaches.
+  location: Multivariate results
+  page: 11
+  quote: This suggests that there is still significant room for improvement in current deep learning approaches.
+- id: c15
+  statement: For multivariate data, pre-trained time-series models do much better with full-shot or few-shot than zero-shot.
+  location: Multivariate results
+  page: 10
+  quote: time series pre-trained models demonstrate significantly better performance compared to zero-shot learning approaches.
+- id: c16
+  statement: No single TSAD method is universally best for all time series and anomaly types.
+  location: Introduction
+  page: 2
+  quote: no single TSAD method is universally best for all time series and anomaly types.
+- id: c17
+  statement: Overlapping vs non-overlapping window post-processing usually does not change performance (with a few exceptions).
+  location: Performance comparison of post-processing methods
+  page: 10
+  quote: in most cases, the two post-processing methods do not affect the performance of the method
+- id: c18
+  statement: In critical difference diagrams on univariate data, OCSVM, HOBS and DWT ranked best.
+  location: Statistical validation
+  page: 11
+  quote: with OCSVM, HOBS, and DWT achieving the excellent results.
+results:
+- id: r1
+  benchmark: tab2025-calit2
+  method: ATrans (overlap windows)
+  metric: auc-roc
+  value: 0.483
+  location: Table 7
+  page: 10
+  quote: Overlap 0.483 0.499 0.761 0.694 0.791 0.798
+- id: r2
+  benchmark: tab2025-calit2
+  method: DC (overlap windows)
+  metric: auc-roc
+  value: 0.499
+  location: Table 7
+  page: 10
+  quote: Overlap 0.483 0.499 0.761 0.694 0.791 0.798
+- id: r3
+  benchmark: tab2025-calit2
+  method: DLin (overlap windows)
+  metric: auc-roc
+  value: 0.761
+  location: Table 7
+  page: 10
+  quote: Overlap 0.483 0.499 0.761 0.694 0.791 0.798
+- id: r4
+  benchmark: tab2025-calit2
+  method: NLin (overlap windows)
+  metric: auc-roc
+  value: 0.694
+  location: Table 7
+  page: 10
+  quote: Overlap 0.483 0.499 0.761 0.694 0.791 0.798
+- id: r5
+  benchmark: tab2025-calit2
+  method: Patch (overlap windows)
+  metric: auc-roc
+  value: 0.791
+  location: Table 7
+  page: 10
+  quote: Overlap 0.483 0.499 0.761 0.694 0.791 0.798
+- id: r6
+  benchmark: tab2025-calit2
+  method: TsNet (overlap windows)
+  metric: auc-roc
+  value: 0.798
+  location: Table 7
+  page: 10
+  quote: Overlap 0.483 0.499 0.761 0.694 0.791 0.798
+- id: r7
+  benchmark: tab2025-calit2
+  method: ATrans (non-overlap windows)
+  metric: auc-roc
+  value: 0.491
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.491 0.527 0.752 0.695 0.808 0.771
+- id: r8
+  benchmark: tab2025-calit2
+  method: DC (non-overlap windows)
+  metric: auc-roc
+  value: 0.527
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.491 0.527 0.752 0.695 0.808 0.771
+- id: r9
+  benchmark: tab2025-calit2
+  method: DLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.752
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.491 0.527 0.752 0.695 0.808 0.771
+- id: r10
+  benchmark: tab2025-calit2
+  method: NLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.695
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.491 0.527 0.752 0.695 0.808 0.771
+- id: r11
+  benchmark: tab2025-calit2
+  method: Patch (non-overlap windows)
+  metric: auc-roc
+  value: 0.808
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.491 0.527 0.752 0.695 0.808 0.771
+- id: r12
+  benchmark: tab2025-calit2
+  method: TsNet (non-overlap windows)
+  metric: auc-roc
+  value: 0.771
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.491 0.527 0.752 0.695 0.808 0.771
+- id: r13
+  benchmark: tab2025-daphnet
+  method: ATrans (overlap windows)
+  metric: auc-roc
+  value: 0.469
+  location: Table 7
+  page: 10
+  quote: Overlap 0.469 0.486 0.727 0.715 0.739 0.773
+- id: r14
+  benchmark: tab2025-daphnet
+  method: DC (overlap windows)
+  metric: auc-roc
+  value: 0.486
+  location: Table 7
+  page: 10
+  quote: Overlap 0.469 0.486 0.727 0.715 0.739 0.773
+- id: r15
+  benchmark: tab2025-daphnet
+  method: DLin (overlap windows)
+  metric: auc-roc
+  value: 0.727
+  location: Table 7
+  page: 10
+  quote: Overlap 0.469 0.486 0.727 0.715 0.739 0.773
+- id: r16
+  benchmark: tab2025-daphnet
+  method: NLin (overlap windows)
+  metric: auc-roc
+  value: 0.715
+  location: Table 7
+  page: 10
+  quote: Overlap 0.469 0.486 0.727 0.715 0.739 0.773
+- id: r17
+  benchmark: tab2025-daphnet
+  method: Patch (overlap windows)
+  metric: auc-roc
+  value: 0.739
+  location: Table 7
+  page: 10
+  quote: Overlap 0.469 0.486 0.727 0.715 0.739 0.773
+- id: r18
+  benchmark: tab2025-daphnet
+  method: TsNet (overlap windows)
+  metric: auc-roc
+  value: 0.773
+  location: Table 7
+  page: 10
+  quote: Overlap 0.469 0.486 0.727 0.715 0.739 0.773
+- id: r19
+  benchmark: tab2025-daphnet
+  method: ATrans (non-overlap windows)
+  metric: auc-roc
+  value: 0.489
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.489 0.501 0.728 0.715 0.741 0.754
+- id: r20
+  benchmark: tab2025-daphnet
+  method: DC (non-overlap windows)
+  metric: auc-roc
+  value: 0.501
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.489 0.501 0.728 0.715 0.741 0.754
+- id: r21
+  benchmark: tab2025-daphnet
+  method: DLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.728
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.489 0.501 0.728 0.715 0.741 0.754
+- id: r22
+  benchmark: tab2025-daphnet
+  method: NLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.715
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.489 0.501 0.728 0.715 0.741 0.754
+- id: r23
+  benchmark: tab2025-daphnet
+  method: Patch (non-overlap windows)
+  metric: auc-roc
+  value: 0.741
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.489 0.501 0.728 0.715 0.741 0.754
+- id: r24
+  benchmark: tab2025-daphnet
+  method: TsNet (non-overlap windows)
+  metric: auc-roc
+  value: 0.754
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.489 0.501 0.728 0.715 0.741 0.754
+- id: r25
+  benchmark: tab2025-msl
+  method: ATrans (overlap windows)
+  metric: auc-roc
+  value: 0.494
+  location: Table 7
+  page: 10
+  quote: Overlap 0.494 0.502 0.626 0.594 0.637 0.615
+- id: r26
+  benchmark: tab2025-msl
+  method: DC (overlap windows)
+  metric: auc-roc
+  value: 0.502
+  location: Table 7
+  page: 10
+  quote: Overlap 0.494 0.502 0.626 0.594 0.637 0.615
+- id: r27
+  benchmark: tab2025-msl
+  method: DLin (overlap windows)
+  metric: auc-roc
+  value: 0.626
+  location: Table 7
+  page: 10
+  quote: Overlap 0.494 0.502 0.626 0.594 0.637 0.615
+- id: r28
+  benchmark: tab2025-msl
+  method: NLin (overlap windows)
+  metric: auc-roc
+  value: 0.594
+  location: Table 7
+  page: 10
+  quote: Overlap 0.494 0.502 0.626 0.594 0.637 0.615
+- id: r29
+  benchmark: tab2025-msl
+  method: Patch (overlap windows)
+  metric: auc-roc
+  value: 0.637
+  location: Table 7
+  page: 10
+  quote: Overlap 0.494 0.502 0.626 0.594 0.637 0.615
+- id: r30
+  benchmark: tab2025-msl
+  method: TsNet (overlap windows)
+  metric: auc-roc
+  value: 0.615
+  location: Table 7
+  page: 10
+  quote: Overlap 0.494 0.502 0.626 0.594 0.637 0.615
+- id: r31
+  benchmark: tab2025-msl
+  method: ATrans (non-overlap windows)
+  metric: auc-roc
+  value: 0.508
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.508 0.504 0.624 0.592 0.637 0.613
+- id: r32
+  benchmark: tab2025-msl
+  method: DC (non-overlap windows)
+  metric: auc-roc
+  value: 0.504
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.508 0.504 0.624 0.592 0.637 0.613
+- id: r33
+  benchmark: tab2025-msl
+  method: DLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.624
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.508 0.504 0.624 0.592 0.637 0.613
+- id: r34
+  benchmark: tab2025-msl
+  method: NLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.592
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.508 0.504 0.624 0.592 0.637 0.613
+- id: r35
+  benchmark: tab2025-msl
+  method: Patch (non-overlap windows)
+  metric: auc-roc
+  value: 0.637
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.508 0.504 0.624 0.592 0.637 0.613
+- id: r36
+  benchmark: tab2025-msl
+  method: TsNet (non-overlap windows)
+  metric: auc-roc
+  value: 0.613
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.508 0.504 0.624 0.592 0.637 0.613
+- id: r37
+  benchmark: tab2025-psm
+  method: ATrans (overlap windows)
+  metric: auc-roc
+  value: 0.496
+  location: Table 7
+  page: 10
+  quote: Overlap 0.496 0.499 0.581 0.586 0.578 0.589
+- id: r38
+  benchmark: tab2025-psm
+  method: DC (overlap windows)
+  metric: auc-roc
+  value: 0.499
+  location: Table 7
+  page: 10
+  quote: Overlap 0.496 0.499 0.581 0.586 0.578 0.589
+- id: r39
+  benchmark: tab2025-psm
+  method: DLin (overlap windows)
+  metric: auc-roc
+  value: 0.581
+  location: Table 7
+  page: 10
+  quote: Overlap 0.496 0.499 0.581 0.586 0.578 0.589
+- id: r40
+  benchmark: tab2025-psm
+  method: NLin (overlap windows)
+  metric: auc-roc
+  value: 0.586
+  location: Table 7
+  page: 10
+  quote: Overlap 0.496 0.499 0.581 0.586 0.578 0.589
+- id: r41
+  benchmark: tab2025-psm
+  method: Patch (overlap windows)
+  metric: auc-roc
+  value: 0.578
+  location: Table 7
+  page: 10
+  quote: Overlap 0.496 0.499 0.581 0.586 0.578 0.589
+- id: r42
+  benchmark: tab2025-psm
+  method: TsNet (overlap windows)
+  metric: auc-roc
+  value: 0.589
+  location: Table 7
+  page: 10
+  quote: Overlap 0.496 0.499 0.581 0.586 0.578 0.589
+- id: r43
+  benchmark: tab2025-psm
+  method: ATrans (non-overlap windows)
+  metric: auc-roc
+  value: 0.498
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.498 0.499 0.580 0.585 0.586 0.592
+- id: r44
+  benchmark: tab2025-psm
+  method: DC (non-overlap windows)
+  metric: auc-roc
+  value: 0.499
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.498 0.499 0.580 0.585 0.586 0.592
+- id: r45
+  benchmark: tab2025-psm
+  method: DLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.58
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.498 0.499 0.580 0.585 0.586 0.592
+- id: r46
+  benchmark: tab2025-psm
+  method: NLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.585
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.498 0.499 0.580 0.585 0.586 0.592
+- id: r47
+  benchmark: tab2025-psm
+  method: Patch (non-overlap windows)
+  metric: auc-roc
+  value: 0.586
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.498 0.499 0.580 0.585 0.586 0.592
+- id: r48
+  benchmark: tab2025-psm
+  method: TsNet (non-overlap windows)
+  metric: auc-roc
+  value: 0.592
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.498 0.499 0.580 0.585 0.586 0.592
+- id: r49
+  benchmark: tab2025-skab
+  method: ATrans (overlap windows)
+  metric: auc-roc
+  value: 0.495
+  location: Table 7
+  page: 10
+  quote: Overlap 0.495 0.532 0.563 0.558 0.555 0.592
+- id: r50
+  benchmark: tab2025-skab
+  method: DC (overlap windows)
+  metric: auc-roc
+  value: 0.532
+  location: Table 7
+  page: 10
+  quote: Overlap 0.495 0.532 0.563 0.558 0.555 0.592
+- id: r51
+  benchmark: tab2025-skab
+  method: DLin (overlap windows)
+  metric: auc-roc
+  value: 0.563
+  location: Table 7
+  page: 10
+  quote: Overlap 0.495 0.532 0.563 0.558 0.555 0.592
+- id: r52
+  benchmark: tab2025-skab
+  method: NLin (overlap windows)
+  metric: auc-roc
+  value: 0.558
+  location: Table 7
+  page: 10
+  quote: Overlap 0.495 0.532 0.563 0.558 0.555 0.592
+- id: r53
+  benchmark: tab2025-skab
+  method: Patch (overlap windows)
+  metric: auc-roc
+  value: 0.555
+  location: Table 7
+  page: 10
+  quote: Overlap 0.495 0.532 0.563 0.558 0.555 0.592
+- id: r54
+  benchmark: tab2025-skab
+  method: TsNet (overlap windows)
+  metric: auc-roc
+  value: 0.592
+  location: Table 7
+  page: 10
+  quote: Overlap 0.495 0.532 0.563 0.558 0.555 0.592
+- id: r55
+  benchmark: tab2025-skab
+  method: ATrans (non-overlap windows)
+  metric: auc-roc
+  value: 0.513
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.513 0.522 0.593 0.583 0.597 0.620
+- id: r56
+  benchmark: tab2025-skab
+  method: DC (non-overlap windows)
+  metric: auc-roc
+  value: 0.522
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.513 0.522 0.593 0.583 0.597 0.620
+- id: r57
+  benchmark: tab2025-skab
+  method: DLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.593
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.513 0.522 0.593 0.583 0.597 0.620
+- id: r58
+  benchmark: tab2025-skab
+  method: NLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.583
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.513 0.522 0.593 0.583 0.597 0.620
+- id: r59
+  benchmark: tab2025-skab
+  method: Patch (non-overlap windows)
+  metric: auc-roc
+  value: 0.597
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.513 0.522 0.593 0.583 0.597 0.620
+- id: r60
+  benchmark: tab2025-skab
+  method: TsNet (non-overlap windows)
+  metric: auc-roc
+  value: 0.62
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.513 0.522 0.593 0.583 0.597 0.620
+- id: r61
+  benchmark: tab2025-smap
+  method: ATrans (overlap windows)
+  metric: auc-roc
+  value: 0.504
+  location: Table 7
+  page: 10
+  quote: Overlap 0.504 0.499 0.398 0.434 0.449 0.455
+- id: r62
+  benchmark: tab2025-smap
+  method: DC (overlap windows)
+  metric: auc-roc
+  value: 0.499
+  location: Table 7
+  page: 10
+  quote: Overlap 0.504 0.499 0.398 0.434 0.449 0.455
+- id: r63
+  benchmark: tab2025-smap
+  method: DLin (overlap windows)
+  metric: auc-roc
+  value: 0.398
+  location: Table 7
+  page: 10
+  quote: Overlap 0.504 0.499 0.398 0.434 0.449 0.455
+- id: r64
+  benchmark: tab2025-smap
+  method: NLin (overlap windows)
+  metric: auc-roc
+  value: 0.434
+  location: Table 7
+  page: 10
+  quote: Overlap 0.504 0.499 0.398 0.434 0.449 0.455
+- id: r65
+  benchmark: tab2025-smap
+  method: Patch (overlap windows)
+  metric: auc-roc
+  value: 0.449
+  location: Table 7
+  page: 10
+  quote: Overlap 0.504 0.499 0.398 0.434 0.449 0.455
+- id: r66
+  benchmark: tab2025-smap
+  method: TsNet (overlap windows)
+  metric: auc-roc
+  value: 0.455
+  location: Table 7
+  page: 10
+  quote: Overlap 0.504 0.499 0.398 0.434 0.449 0.455
+- id: r67
+  benchmark: tab2025-smap
+  method: ATrans (non-overlap windows)
+  metric: auc-roc
+  value: 0.504
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.504 0.516 0.397 0.434 0.448 0.453
+- id: r68
+  benchmark: tab2025-smap
+  method: DC (non-overlap windows)
+  metric: auc-roc
+  value: 0.516
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.504 0.516 0.397 0.434 0.448 0.453
+- id: r69
+  benchmark: tab2025-smap
+  method: DLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.397
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.504 0.516 0.397 0.434 0.448 0.453
+- id: r70
+  benchmark: tab2025-smap
+  method: NLin (non-overlap windows)
+  metric: auc-roc
+  value: 0.434
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.504 0.516 0.397 0.434 0.448 0.453
+- id: r71
+  benchmark: tab2025-smap
+  method: Patch (non-overlap windows)
+  metric: auc-roc
+  value: 0.448
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.504 0.516 0.397 0.434 0.448 0.453
+- id: r72
+  benchmark: tab2025-smap
+  method: TsNet (non-overlap windows)
+  metric: auc-roc
+  value: 0.453
+  location: Table 7
+  page: 10
+  quote: Non-overlap 0.504 0.516 0.397 0.434 0.448 0.453
+relations:
+- winner: Machine learning and non-learning methods
+  loser: Deep learning, LLM-based and time-series pre-trained methods
+  basis: Average V-PR (VUS-PR) and Aff-F1 over 1,635 univariate series (Table 6, box plots).
+  benchmark: tab2025-univariate
+  location: Section 5.2.1
+  page: 10
+  quote: Machine learning (ML) and non-learning (NL) methods exhibit the best average performance in terms of the V-PR and Aff-F metrics.
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Main results (Table 6) are box plots; only the explicit univariate statement is recorded as a relation. Table 7 (AUC-ROC with overlapping vs non-overlapping window post-processing, 6 methods x
+    6 multivariate datasets) extracted mechanically. Best-threshold and best-hyperparameter reporting (c9, c10) makes all numbers optimistic. 'tabular-foundation-model' tag is used as the closest tag for
+    time-series pre-trained models. Section 5.2.1 is verified from the PDF heading; other locations are topic names.

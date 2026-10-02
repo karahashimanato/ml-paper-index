@@ -1,0 +1,74 @@
+id: arxiv-2211.05244
+title: 'Deep Learning for Time Series Anomaly Detection: A Survey'
+authors:
+- Zahra Zamanzadeh Darban
+- Geoffrey I. Webb
+- Shirui Pan
+- Charu C. Aggarwal
+- Mahsa Salehi
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2211.05244
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 48af84ac0965f5814258259562d53170bed89ea58aca4b8b59975a83f32c7c45
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  - forecasting-based-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- Taxonomy of deep TSAD models (forecasting, reconstruction, representation, hybrid)
+claims:
+- id: c1
+  statement: 'Deep TSAD models are classified into four categories: forecasting-based, reconstruction-based, representation-based and hybrid.'
+  location: Introduction (contributions)
+  page: 2
+  quote: 'These models are broadly classified into four categories: forecasting-based, reconstruction-based, representation-based and hybrid methods.'
+- id: c2
+  statement: 64 recent deep models are discussed and categorized.
+  location: Discussion and conclusion
+  page: 28
+  quote: 64 recent deep models were comprehensively discussed and categorised.
+- id: c3
+  statement: Real-world time series are non-stationary, so deep models need online or incremental training.
+  location: Discussion and conclusion
+  page: 27
+  quote: This non-stationary nature necessitates the adaptation of deep learning models through online or incremental training approaches
+- id: c4
+  statement: Without labeled anomalies, many normal instances are flagged; reducing false positives is a key challenge.
+  location: Discussion and conclusion
+  page: 27
+  quote: one of the key challenges is to find a mechanism for minimising false positives and improve recall rates of detection.
+- id: c5
+  statement: Research focuses on detection precision and neglects interpretability, which diagnostics require.
+  location: Discussion and conclusion
+  page: 28
+  quote: anomaly detection research focuses primarily on detection precision, failing to address the issue of interpretability.
+- id: c6
+  statement: Multivariate high-dimensional series are particularly challenging (sparsity, temporal and inter-dimension dependencies).
+  location: Discussion and conclusion
+  page: 27
+  quote: The detection of anomalies in multivariate high-dimensional time series data presents a particular challenge
+- id: c7
+  statement: Models are vulnerable to noise in the input data.
+  location: Discussion and conclusion
+  page: 27
+  quote: models are vulnerable, and their performance is compromised by noise in the input data.
+- id: c8
+  statement: The anomaly score is mostly defined from a loss function (e.g. reconstruction error).
+  location: Deep anomaly detection methods
+  page: 9
+  quote: An anomaly score is mostly defined based on a loss function.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Survey without experiments. The PDF shows only an ACM template placeholder ('1, 1 (May 2023)') and no venue, so 'venue' is empty.

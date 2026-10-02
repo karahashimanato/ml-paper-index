@@ -49,7 +49,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | スクリプト | 確認・生成するもの |
 |---|---|
 | `validate.py` | スキーマ、ファイル名とIDの一致、未登録のタグ・比較条件・指標、他論文の paper-private 条件の使用、結果の値が引用中に現れるか、記事の `depends_on` と `[card-id#c1]` 参照の実在 |
-| `verify_quotes.py` | キャッシュしたPDFのsha256がカードと一致するか、各引用が(指定ページの)本文に存在するか |
+| `verify_quotes.py` | キャッシュしたPDFのsha256がカードと一致するか、各引用が(指定ページの)本文に存在するか、`location` の節番号がPDFに見出しか参照として実在するか |
 | `generate.py` | 論文ごとの結果表(比較条件ごとの列)、論文内の勝敗(結果からの導出+本文の記述)、タグ別索引、未反映カード |
 
 ## 現在のテーマ
@@ -58,7 +58,8 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 |---|---|
 | 表データの分類・回帰(GBDT vs 深層学習 vs 基盤モデル) | パイロット: 論文カード9本(2021〜2025、TabArena上位モデルの原論文を含む)、記事 [articles/tasks/tabular-gbdt-vs-deep-learning.md](articles/tasks/tabular-gbdt-vs-deep-learning.md) |
 
-| ドリフト検出(概念ドリフト・データシフト、MLOps) | 論文カード5本(2019〜2026)、記事 [articles/tasks/drift-detection.md](articles/tasks/drift-detection.md) |
+| ドリフト検出(概念ドリフト・データシフト、MLOps) | 論文カード7本(2019〜2026、教師なし検出器を含む)、記事 [articles/tasks/drift-detection.md](articles/tasks/drift-detection.md) |
+| 時系列の異常検知 | 論文カード5本(2020〜2025、評価方法の批判とベンチマーク)、記事 [articles/tasks/time-series-anomaly-detection.md](articles/tasks/time-series-anomaly-detection.md) |
 
 生成物の入口: [generated/index.md](generated/index.md)
 
@@ -68,5 +69,6 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - 新着論文の候補検出(GitHub Actions の cron、AI不使用)
 - RealMLP 論文付録(Table D.1-D.12)のデータセット別数値の機械抽出
 - TabICL・ModernNCA・TabDPT などその他の TabArena 参加モデルの原論文
-- ドリフト検出: 教師なし検出器のベンチマーク、表データのデータシフト検出、ラベルシフト推定
+- ドリフト検出: 表データのデータシフト検出、ラベルシフト推定
+- 時系列の異常検知: TSB-AD などの他のベンチマーク、個々の手法の原論文
 - 静的サイト化(GitHub Pages)

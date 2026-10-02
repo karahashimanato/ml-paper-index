@@ -1112,3 +1112,189 @@ benchmarks:
     higher_is_better: false
     definition: Missed Detection Rate.
   defined_in: doi-10.1007_s41060-024-00620-y
+- id: kim2022-swat
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: SWaT
+  protocol: &id026
+    split: Standard train/test split of each benchmark; no preprocessing such as early time step removal or downsampling (Section 5).
+    preprocessing: Normalization and sliding windows (stride 1) (Section 3.1).
+    tuning: Best numbers from original papers or reproduction with hyperparameters searched in the suggested ranges; best-score thresholds (Section 5).
+    repetitions: Cases 1 and 3 averaged over five seeds (Section 5).
+  metrics:
+  - name: f1-pa
+    higher_is_better: true
+    definition: F1 after point adjustment.
+  - name: f1
+    higher_is_better: true
+    definition: Point-wise F1 without point adjustment.
+  defined_in: arxiv-2109.05257
+- id: kim2022-wadi
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: WADI
+  protocol: *id026
+  metrics:
+  - name: f1-pa
+    higher_is_better: true
+    definition: F1 after point adjustment.
+  - name: f1
+    higher_is_better: true
+    definition: Point-wise F1 without point adjustment.
+  defined_in: arxiv-2109.05257
+- id: kim2022-msl
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: MSL
+  protocol: *id026
+  metrics:
+  - name: f1-pa
+    higher_is_better: true
+    definition: F1 after point adjustment.
+  - name: f1
+    higher_is_better: true
+    definition: Point-wise F1 without point adjustment.
+  defined_in: arxiv-2109.05257
+- id: kim2022-smap
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: SMAP
+  protocol: *id026
+  metrics:
+  - name: f1-pa
+    higher_is_better: true
+    definition: F1 after point adjustment.
+  - name: f1
+    higher_is_better: true
+    definition: Point-wise F1 without point adjustment.
+  defined_in: arxiv-2109.05257
+- id: kim2022-smd
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: SMD
+  protocol: *id026
+  metrics:
+  - name: f1-pa
+    higher_is_better: true
+    definition: F1 after point adjustment.
+  - name: f1
+    higher_is_better: true
+    definition: Point-wise F1 without point adjustment.
+  defined_in: arxiv-2109.05257
+- id: sehili2023-swat
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: SWaT
+  protocol: &id027
+    split: Benchmark train/test splits; SWaT labels from attack start/end (Section 5).
+    preprocessing: Method-specific; PCA with input scaling, clipping and score smoothing (Section 5).
+    tuning: Official implementations; threshold chosen to maximize point-wise F1 (Table 1 caption).
+    repetitions: Not stated.
+  metrics:
+  - name: f1-pointwise
+    higher_is_better: true
+  - name: f1-composite
+    higher_is_better: true
+  - name: f1-event
+    higher_is_better: true
+    definition: Event-wise F1 including a false alarm rate term (Section 3).
+  defined_in: arxiv-2308.13068
+- id: sehili2023-wadi
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: WADI (2017)
+  protocol: *id027
+  metrics:
+  - name: f1-pointwise
+    higher_is_better: true
+  - name: f1-composite
+    higher_is_better: true
+  - name: f1-event
+    higher_is_better: true
+    definition: Event-wise F1 including a false alarm rate term (Section 3).
+  defined_in: arxiv-2308.13068
+- id: sehili2023-psm
+  scope: paper-private
+  task: time-series-anomaly-detection
+  dataset: PSM
+  protocol: *id027
+  metrics:
+  - name: f1-pointwise
+    higher_is_better: true
+  - name: f1-composite
+    higher_is_better: true
+  - name: f1-event
+    higher_is_better: true
+    definition: Event-wise F1 including a false alarm rate term (Section 3).
+  defined_in: arxiv-2308.13068
+- id: tab2025-calit2
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: CalIt2 (TAB multivariate)
+  protocol: &id028
+    split: TAB's unified split (validation from training data); non-overlapping test windows by default (experimental settings).
+    preprocessing: Unified pipeline; drop-last disabled (Introduction, experimental settings).
+    tuning: Original hyperparameters plus a search over several sets; best result reported; metrics computed at all thresholds and the best reported.
+    repetitions: Not stated in the main text.
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-daphnet
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: Daphnet (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-msl
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: MSL (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-psm
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: PSM (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-skab
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: SKAB (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-smap
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: SMAP (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-univariate
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: TAB univariate collection (1,635 series)
+  protocol: *id028
+  metrics:
+  - name: v-pr
+    higher_is_better: true
+    definition: VUS-PR.
+  - name: aff-f1
+    higher_is_better: true
+    definition: Affiliation F1.
+  defined_in: arxiv-2506.18046

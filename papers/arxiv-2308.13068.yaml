@@ -1,0 +1,388 @@
+id: arxiv-2308.13068
+title: 'Multivariate Time Series Anomaly Detection: Fancy Algorithms and Flawed Evaluation Methodology'
+authors:
+- Mohamed El Amine Sehili
+- Zonghua Zhang
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2308.13068
+  code: https://github.com/amsehili/MVTSEvalPaper
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0af82e3a00c61887589958c500d1a5b940e65b6a7d62030c4a07ec529889337a
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - reconstruction-based-detectors
+  - forecasting-based-detectors
+  - tabular-attention
+  paradigms:
+  - unsupervised
+proposes:
+- Event-wise evaluation protocol
+- PCA baseline with simple pre/post-processing
+claims:
+- id: c1
+  statement: Most MVTS anomaly detection methods are evaluated with inappropriate or highly flawed protocols.
+  location: Abstract
+  page: 1
+  quote: most proposed solutions are evaluated using either inappropriate or highly flawed protocols, with an apparent lack of scientific foundation.
+- id: c2
+  statement: Under the point-adjust protocol a random guess can systematically outperform all algorithms developed so far.
+  location: Abstract
+  page: 1
+  quote: So flawed is one very popular protocol, the so-called point-adjust protocol, that a random guess can be shown to systematically outperform all algorithms developed so far.
+- id: c3
+  statement: A simple PCA baseline outperforms many recent deep learning approaches on popular benchmarks.
+  location: Abstract
+  page: 1
+  quote: we propose a simple, yet challenging, baseline based on Principal Components Analysis (PCA) that surprisingly outperforms many recent Deep Learning (DL) based approaches on popular benchmark datasets.
+- id: c4
+  statement: Algorithms developed with point-adjust as the sole target fail to beat a random guess under other protocols (AnomalyTransformer, NCAD).
+  location: Section 5
+  page: 13
+  quote: Algorithms that were developed using point-adjust as the sole target fail to reach any score better than a random guess when evaluated with other
+- id: c5
+  statement: Untrained versions of these models reached essentially the same high point-adjust scores.
+  location: Section 5
+  page: 14
+  quote: we also achieved essentially the same high scores using untrained versions of these models.
+- id: c6
+  statement: GDN, developed with the point-wise protocol, was more resilient under other protocols.
+  location: Section 5
+  page: 14
+  quote: GDN, however, which was developed based on the more realistic point-wise protocol, shows more resilience when evaluated with other protocols.
+- id: c7
+  statement: On datasets with very high contamination such as PSM, point-wise F1 can be misleading.
+  location: Section 5
+  page: 14
+  quote: Datasets that have a very high contamination rate, such as PSM, yield point-wise F1 scores that can be misleading.
+- id: c8
+  statement: All Table 1 metrics use the threshold that gives the best point-wise F1.
+  location: Table 1 caption
+  page: 13
+  quote: All metrics are computed based on the detection threshold that yields the best point-wise performance.
+- id: c9
+  statement: At its best point-adjust threshold, AnomalyTransformer raises an alarm about every 110 seconds on SWaT - barely useful in deployment.
+  location: Section 5
+  page: 15
+  quote: On average, it raises an alarm every 110 seconds, making it, in our opinion, barely useful for deployment.
+- id: c10
+  statement: The PCA pipeline uses simple pre- and post-processing (scaling, clipping, score smoothing) that significantly improves its score.
+  location: Section 5
+  page: 14
+  quote: we use simple pre-processing and post-processing blocks (input scaling, clipping and score smoothing) that significantly improve the score.
+- id: c11
+  statement: The point-wise protocol is not appropriate for all datasets and use cases; an event-wise protocol is proposed.
+  location: Introduction
+  page: 2
+  quote: We also review the more objective point-wise protocol and show that it is not appropriate for all kinds of datasets and use-cases.
+- id: c12
+  statement: Many works were developed without a simple but sufficiently challenging baseline.
+  location: Section 5
+  page: 14
+  quote: many works have been developed without establishing a simple but enough challenging baseline.
+- id: c13
+  statement: The authors urge more effort on data, experiment design and evaluation instead of increasingly complex algorithms.
+  location: Abstract
+  page: 1
+  quote: instead of putting the highest weight on the design of increasingly more complex
+results:
+- id: r1
+  benchmark: sehili2023-swat
+  method: AnomalyTransformer
+  metric: f1-pointwise
+  value: 0.214
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r2
+  benchmark: sehili2023-swat
+  method: AnomalyTransformer
+  metric: f1-composite
+  value: 0.214
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r3
+  benchmark: sehili2023-swat
+  method: AnomalyTransformer
+  metric: f1-event
+  value: 0.0
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r4
+  benchmark: sehili2023-wadi
+  method: AnomalyTransformer
+  metric: f1-pointwise
+  value: 0.108
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r5
+  benchmark: sehili2023-wadi
+  method: AnomalyTransformer
+  metric: f1-composite
+  value: 0.108
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r6
+  benchmark: sehili2023-wadi
+  method: AnomalyTransformer
+  metric: f1-event
+  value: 0.0
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r7
+  benchmark: sehili2023-psm
+  method: AnomalyTransformer
+  metric: f1-pointwise
+  value: 0.434
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r8
+  benchmark: sehili2023-psm
+  method: AnomalyTransformer
+  metric: f1-composite
+  value: 0.434
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r9
+  benchmark: sehili2023-psm
+  method: AnomalyTransformer
+  metric: f1-event
+  value: 0.0
+  location: Table 1
+  page: 13
+  quote: AT 0.214 0.214 0.000 35/0 0.108 0.108 0.000 14/0 0.434 0.434 0.000 72/0
+- id: r10
+  benchmark: sehili2023-swat
+  method: NCAD
+  metric: f1-pointwise
+  value: 0.217
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r11
+  benchmark: sehili2023-swat
+  method: NCAD
+  metric: f1-composite
+  value: 0.217
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r12
+  benchmark: sehili2023-swat
+  method: NCAD
+  metric: f1-event
+  value: 0.002
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r13
+  benchmark: sehili2023-wadi
+  method: NCAD
+  metric: f1-pointwise
+  value: 0.114
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r14
+  benchmark: sehili2023-wadi
+  method: NCAD
+  metric: f1-composite
+  value: 0.115
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r15
+  benchmark: sehili2023-wadi
+  method: NCAD
+  metric: f1-event
+  value: 0.003
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r16
+  benchmark: sehili2023-psm
+  method: NCAD
+  metric: f1-pointwise
+  value: 0.429
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r17
+  benchmark: sehili2023-psm
+  method: NCAD
+  metric: f1-composite
+  value: 0.429
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r18
+  benchmark: sehili2023-psm
+  method: NCAD
+  metric: f1-event
+  value: 0.0
+  location: Table 1
+  page: 13
+  quote: NCAD 0.217 0.217 0.002 35/694 0.114 0.115 0.003 14/1394 0.429 0.429 0.000 72/0
+- id: r19
+  benchmark: sehili2023-swat
+  method: GDN
+  metric: f1-pointwise
+  value: 0.821
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r20
+  benchmark: sehili2023-swat
+  method: GDN
+  metric: f1-composite
+  value: 0.488
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r21
+  benchmark: sehili2023-swat
+  method: GDN
+  metric: f1-event
+  value: 0.478
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r22
+  benchmark: sehili2023-wadi
+  method: GDN
+  metric: f1-pointwise
+  value: 0.567
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r23
+  benchmark: sehili2023-wadi
+  method: GDN
+  metric: f1-composite
+  value: 0.764
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r24
+  benchmark: sehili2023-wadi
+  method: GDN
+  metric: f1-event
+  value: 0.485
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r25
+  benchmark: sehili2023-psm
+  method: GDN
+  metric: f1-pointwise
+  value: 0.594
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r26
+  benchmark: sehili2023-psm
+  method: GDN
+  metric: f1-composite
+  value: 0.64
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r27
+  benchmark: sehili2023-psm
+  method: GDN
+  metric: f1-event
+  value: 0.096
+  location: Table 1
+  page: 13
+  quote: GDN 0.821 0.488 0.478 11/0 0.567 0.764 0.485 9/14 0.594 0.640 0.096 63/843
+- id: r28
+  benchmark: sehili2023-swat
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-pointwise
+  value: 0.81
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r29
+  benchmark: sehili2023-swat
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-composite
+  value: 0.596
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r30
+  benchmark: sehili2023-swat
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-event
+  value: 0.555
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r31
+  benchmark: sehili2023-wadi
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-pointwise
+  value: 0.374
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r32
+  benchmark: sehili2023-wadi
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-composite
+  value: 0.655
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r33
+  benchmark: sehili2023-wadi
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-event
+  value: 0.608
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r34
+  benchmark: sehili2023-psm
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-pointwise
+  value: 0.538
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r35
+  benchmark: sehili2023-psm
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-composite
+  value: 0.484
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+- id: r36
+  benchmark: sehili2023-psm
+  method: PCA (with scaling, clipping, score smoothing)
+  metric: f1-event
+  value: 0.2
+  location: Table 1
+  page: 13
+  quote: PCA 0.810 0.596 0.555 15/4 0.374 0.655 0.608 7/2 0.538 0.484 0.200 32/170
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Table 1 extracted mechanically (TPE/FPE event counts not recorded). Thresholds maximize point-wise F1 for every method (c8). The 'tabular-attention' tag is used for AnomalyTransformer as the closest
+    existing attention-based family tag. No venue is stated in the PDF.

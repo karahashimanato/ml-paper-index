@@ -1,0 +1,90 @@
+id: arxiv-2009.13807
+title: Current Time Series Anomaly Detection Benchmarks are Flawed and are Creating the Illusion of Progress
+authors:
+- Renjie Wu
+- Eamonn J. Keogh
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2009.13807
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 5d60584e5880cc81b1415dda7e8d46124ad1573e1e9d46c72625660b197535cf
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- UCR Time Series Anomaly Archive
+claims:
+- id: c1
+  statement: 'Most exemplars of popular TSAD benchmarks (Yahoo, Numenta, NASA, ...) have one or more of four flaws: triviality, unrealistic anomaly density, mislabeled ground truth, run-to-failure bias.'
+  location: Introduction
+  page: 1
+  quote: These flaws are triviality, unrealistic anomaly density, mislabeled ground truth and run-to-failure bias.
+- id: c2
+  statement: Because of these flaws, most published comparisons of anomaly detectors may be unreliable and apparent progress may be illusory.
+  location: Introduction
+  page: 1
+  quote: we believe that most published comparisons of anomaly detection algorithms may be unreliable
+- id: c3
+  statement: 'Triviality: 316 of the 367 Yahoo time series can be solved by a ''one-liner'' (a single line of basic code).'
+  location: 'Flaw: triviality'
+  page: 3
+  quote: 316 out of 367 (86.1%) can be easily solved with a one-liner
+- id: c4
+  statement: Ideally each test time series should contain exactly one anomaly, communicated with the dataset.
+  location: 'Flaw: unrealistic anomaly density'
+  page: 4
+  quote: We believe that the ideal number of anomalies in a single testing time series is exactly one.
+- id: c5
+  statement: All benchmark datasets appear to contain mislabeled data (false positives and false negatives).
+  location: 'Flaw: mislabeled ground truth'
+  page: 4
+  quote: All of the benchmark datasets appear to have mislabeled data, both false positives and false negatives.
+- id: c6
+  statement: 'Run-to-failure bias: anomalies cluster near the end, so naively flagging the last point scores well.'
+  location: 'Flaw: run-to-failure bias'
+  page: 6
+  quote: A naïve algorithm that simply labels the last point as an anomaly
+- id: c7
+  statement: The classic TSAD archives are irretrievably flawed.
+  location: Summary of the flaws
+  page: 6
+  quote: the classic time series anomaly detection archives are irretrievably flawed.
+- id: c8
+  statement: On these datasets no level of reported performance can demonstrate an algorithm's utility.
+  location: Summary of the flaws
+  page: 6
+  quote: Thus, there is simply no level of performance that would suggest the utility of a
+- id: c9
+  statement: The paper introduces the UCR Time Series Anomaly Archive as a benchmark for meaningful comparisons.
+  location: Abstract
+  page: 1
+  quote: with this paper we introduce the UCR Time Series Anomaly Archive.
+- id: c10
+  statement: Some researchers seem to rarely look at the time series and only at F1 scores; the flaws are visible by plotting.
+  location: Recommendations
+  page: 8
+  quote: We suspect that some researchers rarely view the time series, they simply pass objects to a black box and look at the F1 scores
+- id: c11
+  statement: Scoring without tolerance can systematically penalize an algorithm that places its anomaly peak at a different position in the subsequence.
+  location: Recommendations
+  page: 8
+  quote: we run the risk of a systemic bias against an algorithm that simply formats its output differently to its rival.
+- id: c12
+  statement: Many recent papers presuppose that deep learning is the answer to anomaly detection.
+  location: Recommendations
+  page: 8
+  quote: Many recent papers seem to pose their research question as
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Critique of benchmark datasets; no method comparison table recorded. The PDF does not state a venue; 'year' is the arXiv posting year. Locations are given by topic, not section number.

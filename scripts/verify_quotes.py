@@ -61,7 +61,17 @@ def verify_card(root: Path, card: dict) -> tuple[list[str], dict[str, int]]:
         return errors, stats
 
     with pymupdf.open(pdf) as doc:
-        pages = [variants(p.get_text()) for p in doc]
+        raw = [p.get_text() for p in doc]
+    pages = [variants(t) for t in raw]
+    full = "\n".join(raw)
+
+    # location の節番号("Section 3.2" 等)が本文に見出しか参照として実在するか。推測で書いた節番号を見つけるための警告。
+    for sec in sorted({m for i in (card.get("claims") or []) + (card.get("relations") or []) + (card.get("results") or [])
+                       for m in re.findall(r"Sections? (\d+(?:\.\d+)*)", i.get("location", ""))}):
+        heading = re.search(rf"(?m)^{re.escape(sec)}\.?(?:\s|$)", full)
+        reference = re.search(rf"(?:Section|Sec\.|§)\s*{re.escape(sec)}\b", full)
+        if not (heading or reference):
+            errors.append(f"{card['id']}: location 'Section {sec}' not found in the PDF as a heading or reference (guessed section number?)")
 
     items = [("claim", c) for c in card.get("claims") or []]
     items += [("result", r) for r in card.get("results") or []]

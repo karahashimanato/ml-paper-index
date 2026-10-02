@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tags.schema.json",
+  "title": "Tag vocabulary",
+  "description": "Controlled vocabulary for card/article tags. Cards may only use tags listed here, so spelling variants cannot split the index.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tasks", "method_families", "paradigms"],
+  "properties": {
+    "tasks": {"$ref": "#/$defs/taglist"},
+    "method_families": {"$ref": "#/$defs/taglist"},
+    "paradigms": {"$ref": "#/$defs/taglist"}
+  },
+  "$defs": {
+    "taglist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+          "description": {"type": "string"},
+          "parent": {"description": "Optional parent tag id in the same list (for the method-family hierarchy).", "type": "string"}
+        }
+      }
+    }
+  }
+}

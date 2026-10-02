@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "experiment-card.schema.json",
+  "title": "Experiment card",
+  "description": "Results from our own experiments (Q12-D/Q13). Kept separate from paper cards. Every value is pinned to a commit and checked against the file at that commit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "repo", "commit", "tags", "results", "card"],
+  "properties": {
+    "id": {"description": "Must equal the file name (experiments/<id>.yaml).", "type": "string", "pattern": "^exp-[a-z0-9]+(-[a-z0-9]+)*$"},
+    "title": {"type": "string"},
+    "repo": {"type": "string", "format": "uri"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "tags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tasks", "method_families"],
+      "properties": {
+        "tasks": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "method_families": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "paradigms": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "benchmark", "method", "metric", "value", "path"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^r[0-9]+$"},
+          "benchmark": {"type": "string"},
+          "method": {"type": "string"},
+          "metric": {"type": "string"},
+          "value": {"type": "number"},
+          "std": {"type": "number"},
+          "note": {"type": "string"},
+          "path": {"description": "File in the repo at 'commit' (results.json for new experiments, README/notebook for legacy ones).", "type": "string"},
+          "json_pointer": {"description": "For results.json: RFC 6901 pointer to the value, e.g. '/models/catboost/pr_auc'.", "type": "string"},
+          "locator": {"description": "For legacy text files: verbatim text that contains the value, e.g. '| CatBoost(重みなし) | snapshot+timeseries | 0.385'.", "type": "string"}
+        },
+        "oneOf": [
+          {"required": ["json_pointer"]},
+          {"required": ["locator"]}
+        ]
+      }
+    },
+    "card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["created_at", "created_by", "reviewed"],
+      "properties": {
+        "created_at": {"type": "string", "format": "date"},
+        "created_by": {"type": "string"},
+        "reviewed": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

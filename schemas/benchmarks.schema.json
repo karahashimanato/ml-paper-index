@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "benchmarks.schema.json",
+  "title": "Benchmark (comparison-condition) registry",
+  "description": "Results are comparable only when they share the same ID here. Adding an ID is an explicit, reviewed decision that the conditions are identical.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["benchmarks"],
+  "properties": {
+    "benchmarks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "scope", "task", "dataset", "protocol", "metrics", "defined_in"],
+        "properties": {
+          "id": {"description": "kebab-case, e.g. '<suite>-<dataset>-<split>'.", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+          "scope": {
+            "description": "'public': any paper/experiment using exactly this protocol may report on it. 'paper-private': only the paper in 'defined_in' (private data or a one-off protocol); used for within-paper comparison only.",
+            "enum": ["public", "paper-private"]
+          },
+          "task": {"description": "Task tag from registry/tags.yaml.", "type": "string"},
+          "dataset": {"type": "string"},
+          "protocol": {
+            "description": "Everything that must match for numbers to be comparable.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["split", "preprocessing", "tuning"],
+            "properties": {
+              "split": {"type": "string"},
+              "preprocessing": {"type": "string"},
+              "tuning": {"description": "Hyperparameter search budget / defaults.", "type": "string"},
+              "repetitions": {"type": "string"},
+              "other": {"type": "string"}
+            }
+          },
+          "metrics": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "higher_is_better"],
+              "properties": {
+                "name": {"type": "string"},
+                "higher_is_better": {"type": "boolean"},
+                "definition": {"type": "string"}
+              }
+            }
+          },
+          "defined_in": {"description": "Card ID of the paper that defines this protocol.", "type": "string"},
+          "external_ids": {
+            "description": "Reference only (Q7-D); never used as the comparison key.",
+            "type": "object",
+            "additionalProperties": {"type": "string"}
+          },
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}

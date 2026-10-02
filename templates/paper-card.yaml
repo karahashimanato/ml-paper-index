@@ -1,0 +1,38 @@
+# papers/<id>.yaml のテンプレート。<...> を埋める。スキーマ: schemas/paper-card.schema.json
+# ルール(CLAUDE.md参照): 本文PDFを cache/pdfs/<id>.pdf に取得して読んだうえで書く。記憶や検索スニペットから書かない。
+id: arxiv-<yymm.nnnnn>
+title: <exact title>
+authors: [<First Author>, <Second Author>]
+year: <yyyy>
+venue: <venue, omit if preprint>
+links:
+  arxiv: https://arxiv.org/abs/<yymm.nnnnn>
+  code: <repository url, omit if none>
+source:
+  version: arXiv v<n>
+  retrieved_at: <yyyy-mm-dd>
+  pdf_sha256: <sha256sum cache/pdfs/<id>.pdf>
+  license: <license if stated, omit if unknown>
+tags:
+  tasks: [<registry/tags.yaml tasks>]
+  method_families: [<registry/tags.yaml method_families>]
+  paradigms: [<registry/tags.yaml paradigms>]
+proposes: [<method name>]
+claims:
+  - id: c1
+    statement: <our own wording>
+    location: <Section x.y>
+    quote: "<one verbatim sentence at most>"
+results:
+  - id: r1
+    benchmark: <registry/benchmarks.yaml id>
+    method: <method name as in the table>
+    metric: <metric name of that benchmark>
+    value: <number>
+    location: <Table n>
+    quote: "<row/cell text as printed>"
+relations: []   # results から導出できない論文内の勝敗のみ
+card:
+  created_at: <yyyy-mm-dd>
+  created_by: <model via Claude Code>
+  reviewed: false

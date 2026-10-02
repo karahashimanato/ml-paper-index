@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paper-card.schema.json",
+  "title": "Paper card",
+  "description": "One paper = one card. The single source of truth for facts taken from a paper. Every claim/result must carry a location and a short verbatim quote so it can be checked against the PDF.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "authors", "year", "links", "source", "tags", "claims", "results", "card"],
+  "properties": {
+    "id": {
+      "description": "Card ID. Must equal the file name (papers/<id>.yaml). arXiv: 'arxiv-2401.01234' (version suffix not included; the version goes in source.version). DOI only: 'doi-' + DOI with '/' replaced by '_'.",
+      "type": "string",
+      "pattern": "^(arxiv-[0-9]{4}\\.[0-9]{4,5}|doi-[A-Za-z0-9._;()-]+(_[A-Za-z0-9._;()-]+)*)$"
+    },
+    "title": {"type": "string", "minLength": 1},
+    "authors": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "year": {"type": "integer", "minimum": 1950},
+    "venue": {"description": "e.g. 'NeurIPS 2022 (Datasets and Benchmarks)'. Omit if preprint only.", "type": "string"},
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "arxiv": {"type": "string", "format": "uri"},
+        "doi": {"type": "string", "format": "uri"},
+        "code": {"type": "string", "format": "uri"},
+        "url": {"type": "string", "format": "uri"}
+      }
+    },
+    "source": {
+      "description": "Exactly which document the card was written from. Quotes are only guaranteed to match this version.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "retrieved_at", "pdf_sha256"],
+      "properties": {
+        "version": {"description": "e.g. 'arXiv v2' or 'camera-ready'.", "type": "string"},
+        "retrieved_at": {"type": "string", "format": "date"},
+        "pdf_sha256": {"description": "SHA-256 of cache/pdfs/<id>.pdf (the PDF itself is never committed).", "type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "license": {"description": "Paper license if stated (e.g. 'CC BY 4.0', 'arXiv non-exclusive'). Omit if unknown.", "type": "string"}
+      }
+    },
+    "tags": {
+      "description": "All values must exist in registry/tags.yaml.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tasks", "method_families"],
+      "properties": {
+        "tasks": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "method_families": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "paradigms": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "proposes": {
+      "description": "Method(s) newly proposed in this paper. Empty for surveys/benchmark papers.",
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "claims": {
+      "description": "Qualitative claims, summarised in our own words, each backed by a quote.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement", "location", "quote"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^c[0-9]+$"},
+          "statement": {"description": "Our own wording (English).", "type": "string"},
+          "location": {"$ref": "#/$defs/location"},
+          "quote": {"$ref": "#/$defs/quote"}
+        }
+      }
+    },
+    "results": {
+      "description": "Numeric results. Only these numbers may appear in generated comparison tables.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "benchmark", "method", "metric", "value", "location", "quote"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^r[0-9]+$"},
+          "benchmark": {"description": "Comparison-condition ID from registry/benchmarks.yaml.", "type": "string"},
+          "method": {"description": "Method name exactly as used in the paper's table.", "type": "string"},
+          "metric": {"description": "Must be one of the benchmark's metrics.", "type": "string"},
+          "value": {"type": "number"},
+          "std": {"description": "Reported spread, if any (state which kind in 'note').", "type": "number"},
+          "note": {"type": "string"},
+          "location": {"$ref": "#/$defs/location"},
+          "quote": {"description": "For tables: the row text or cell as it appears, e.g. 'XGBoost 0.873'.", "$ref": "#/$defs/quote"}
+        }
+      }
+    },
+    "relations": {
+      "description": "Within-paper win/loss relations (Q12) that cannot be derived from 'results' (e.g. average rank over a suite). Relations between results on the same benchmark are derived automatically and must NOT be repeated here.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["winner", "loser", "basis", "location", "quote"],
+        "properties": {
+          "winner": {"type": "string"},
+          "loser": {"type": "string"},
+          "basis": {"description": "What the comparison is on, e.g. 'average rank over 45 datasets, default hyperparameters'.", "type": "string"},
+          "benchmark": {"description": "Registry ID, if the relation is on a registered condition.", "type": "string"},
+          "location": {"$ref": "#/$defs/location"},
+          "quote": {"$ref": "#/$defs/quote"}
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["created_at", "created_by", "reviewed"],
+      "properties": {
+        "created_at": {"type": "string", "format": "date"},
+        "created_by": {"description": "e.g. 'claude-opus-5-5 via Claude Code' or a person's name.", "type": "string"},
+        "reviewed": {"description": "true only after a human checked the claims/results against the PDF.", "type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "location": {
+      "description": "Where in the paper, e.g. 'Table 2', 'Section 4.1', 'Figure 3 caption', 'Appendix B.2'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "quote": {
+      "description": "Short verbatim excerpt (one sentence at most) from the PDF in source.pdf_sha256. Kept short to stay within quotation.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    }
+  }
+}

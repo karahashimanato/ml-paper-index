@@ -1,0 +1,22 @@
+# experiments/<id>.yaml のテンプレート。スキーマ: schemas/experiment-card.schema.json
+# 値は必ず commit 時点のファイルから転記し、json_pointer(新規実験の results.json)か
+# locator(既存READMEなどの逐語テキスト)のどちらかで位置を示す。
+id: exp-<short-name>
+title: <what was compared>
+repo: https://github.com/<owner>/<repo>
+commit: <40-char commit hash>
+tags:
+  tasks: [<task tag>]
+  method_families: [<method family tag>]
+results:
+  - id: r1
+    benchmark: <registry id>
+    method: <method>
+    metric: <metric>
+    value: <number>
+    path: results.json
+    json_pointer: /<path>/<to>/<value>
+card:
+  created_at: <yyyy-mm-dd>
+  created_by: <name>
+  reviewed: false

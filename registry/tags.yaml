@@ -1,0 +1,36 @@
+# タグの統制語彙。カード・記事はここに登録されたIDしか使えない(表記揺れ防止、Q7と同じ考え方)。
+# 追加は「既存タグで表せないか」を確認してから行う。パイロット(表データ)に必要な最小限から始める。
+tasks:
+  - id: tabular-classification
+    description: Classification on tabular (heterogeneous-column) data.
+  - id: tabular-regression
+    description: Regression on tabular (heterogeneous-column) data.
+
+method_families:
+  - id: tree-ensembles
+    description: Ensembles of decision trees.
+  - id: gradient-boosted-trees
+    description: Gradient-boosted decision trees (e.g. XGBoost, LightGBM, CatBoost).
+    parent: tree-ensembles
+  - id: random-forests
+    description: Bagged / randomized decision-tree ensembles.
+    parent: tree-ensembles
+  - id: deep-learning
+    description: Neural-network-based methods.
+  - id: tabular-mlp
+    description: MLP / ResNet-style networks for tabular data.
+    parent: deep-learning
+  - id: tabular-transformer
+    description: Attention-based architectures for tabular data.
+    parent: deep-learning
+  - id: tabular-foundation-model
+    description: Models pretrained across many tables and applied to new tables (e.g. via in-context learning).
+    parent: deep-learning
+  - id: linear-models
+    description: Linear / generalized linear models.
+
+paradigms:
+  - id: supervised
+    description: Supervised learning.
+  - id: in-context-learning
+    description: Prediction by conditioning a pretrained model on training examples without gradient updates.

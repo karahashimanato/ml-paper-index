@@ -1,0 +1,17 @@
+# registry/benchmarks.yaml の benchmarks: に追加する1エントリのテンプレート。スキーマ: schemas/benchmarks.schema.json
+- id: <suite>-<dataset>-<split>
+  scope: public            # 非公開データや一回限りのプロトコルなら paper-private
+  task: <registry/tags.yaml tasks>
+  dataset: <dataset name>
+  protocol:
+    split: <how train/val/test are formed>
+    preprocessing: <encoding, scaling, missing values, ...>
+    tuning: <HPO budget, or 'default hyperparameters'>
+    repetitions: <seeds / folds>
+  metrics:
+    - name: <metric>
+      higher_is_better: true
+      definition: <exact definition if ambiguous>
+  defined_in: <paper card id>
+  external_ids:
+    openml: <id, optional>

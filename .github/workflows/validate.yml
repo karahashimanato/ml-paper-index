@@ -1,0 +1,17 @@
+name: validate
+
+# カード・登録簿・記事の整合性と、generated/ が最新であることを確認する。
+# 引用の照合(scripts/verify_quotes.py)はPDFが必要なためローカルでのみ実行する。
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - run: uv run python scripts/validate.py
+      - run: uv run python scripts/generate.py --check

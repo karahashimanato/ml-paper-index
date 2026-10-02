@@ -1,0 +1,152 @@
+id: arxiv-2207.08815
+title: Why do tree-based models still outperform deep learning on tabular data?
+authors:
+- Léo Grinsztajn
+- Edouard Oyallon
+- Gaël Varoquaux
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2207.08815
+  code: https://github.com/LeoGrin/tabular-benchmark
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 3baeb241e4f50981deb6e8e81f29192b1a84f1abde990d5fe8df4e594d993d6f
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  - tabular-mlp
+  - tabular-attention
+  paradigms:
+  - supervised
+proposes:
+- Tabular benchmark of 45 OpenML datasets with random-search-budget-aware evaluation
+claims:
+- id: c1
+  statement: Tree-based models remained state-of-the-art on medium-sized data (~10K training samples), even without counting their faster training.
+  location: Abstract
+  page: 1
+  quote: Results show that tree-based models remain state-of-the-art on medium-sized data
+- id: c2
+  statement: 'Authors derive three challenges for tabular NNs: robustness to uninformative features, preserving data orientation, and learning irregular functions.'
+  location: Abstract
+  page: 1
+  quote: be robust to uninformative features, 2. preserve the orientation of the data, and 3. be able to easily learn irregular functions.
+- id: c3
+  statement: 'Categorical variables are not the main weakness of NNs: most of the gap remains with numerical features only.'
+  location: Section 4.2
+  page: 6
+  quote: Still, most of this gap subsists when learning on numerical features only.
+- id: c4
+  statement: Smoothing the training targets hurt tree-based models markedly but barely affected NNs, suggesting NNs are biased towards smooth solutions.
+  location: Section 5.2
+  page: 6
+  quote: For small lengthscales, smoothing the target function on the train set decreases markedly the accuracy of tree-based models, but barely impacts that of NNs.
+- id: c5
+  statement: 'MLP-like NNs (Resnet) were less robust to uninformative features: removing them narrowed the gap, adding them widened it.'
+  location: Section 5.3
+  page: 7
+  quote: This shows that MLPs are less robust to uninformative features
+- id: c6
+  statement: Under random rotation of the features, only Resnet was rotationally invariant (its accuracy was unaffected), unlike the other models.
+  location: Section 5.4
+  page: 7
+  quote: only Resnets are rotationally invariant
+- id: c7
+  statement: Hyperparameters were tuned by random search of about 400 iterations per dataset.
+  location: Section 3.3
+  page: 4
+  quote: We run a random search of ≈400 iterations per dataset
+- id: c8
+  statement: Training sets of bigger datasets were truncated to 10,000 samples (medium-sized regime).
+  location: Section 3.2
+  page: 3
+  quote: We truncate the training set to 10,000 samples for bigger datasets.
+- id: c9
+  statement: Multiclass targets were binarised to the two most frequent classes and balanced.
+  location: Section 3.2
+  page: 3
+  quote: For classification, the target is binarised if there are several classes, by taking the two most numerous classes, and we keep half of samples in each class.
+- id: c10
+  statement: Datasets where a default linear model scores within 5% of both a default Resnet and a default HistGradientBoosting were removed as too easy.
+  location: Section 3.1
+  page: 3
+  quote: Specifically, we remove a dataset if a default Logistic Regression (or Linear Regression for regression) reach a score whose relative difference
+- id: c11
+  statement: All missing data were removed, so missing-value handling is out of scope.
+  location: Section 3.2
+  page: 3
+  quote: We remove all missing data from the datasets.
+- id: c12
+  statement: With a 50,000-sample training set (few eligible datasets), the gap between NNs and tree-based models seemed to shrink in most cases.
+  location: Appendix A.2
+  page: 16
+  quote: it seems that, in most cases, increasing the train set size reduces the gap between neural networks and tree-based models.
+- id: c13
+  statement: Per unit of random-search time (rather than iterations), tree-based models were always well above NNs (hardware differs, so not a rigorous speed comparison).
+  location: Appendix A.2
+  page: 14
+  quote: for the same amount of time spent on random search, tree-based models scores are always high above neural networks.
+- id: c14
+  statement: The benchmark consists of 45 datasets from varied domains.
+  location: Abstract
+  page: 1
+  quote: We define a standard set of 45 datasets from varied domains
+- id: c15
+  statement: Scores for a given search budget are averaged over 15 shuffles of the random-search order (bootstrap-like estimate).
+  location: Section 3.3
+  page: 4
+  quote: We do this 15 times while shuffling the random search order at each time.
+results: []
+relations:
+- winner: Tree-based models (RandomForest, GradientBoostingTrees, XGBoost)
+  loser: Neural networks (MLP, Resnet, FT_Transformer, SAINT)
+  benchmark: grinsztajn2022-medium-num-clf
+  basis: Normalized test score averaged over the benchmark's datasets, at every random-search budget (Figure 1).
+  location: Section 4.2
+  page: 6
+  quote: Tree-based models are superior for every random search budget, and the performance gap stays wide even after a large number of random search iterations.
+- winner: Tree-based models (RandomForest, GradientBoostingTrees, XGBoost)
+  loser: Neural networks (MLP, Resnet, FT_Transformer, SAINT)
+  benchmark: grinsztajn2022-medium-num-reg
+  basis: Normalized test score averaged over the benchmark's datasets, at every random-search budget (Figure 1).
+  location: Section 4.2
+  page: 6
+  quote: Tree-based models are superior for every random search budget, and the performance gap stays wide even after a large number of random search iterations.
+- winner: Tree-based models (RandomForest, GradientBoostingTrees, XGBoost)
+  loser: Neural networks (MLP, Resnet, FT_Transformer, SAINT)
+  benchmark: grinsztajn2022-medium-cat-clf
+  basis: Normalized test score averaged over the benchmark's datasets, at every random-search budget (Figure 2).
+  location: Section 4.2
+  page: 6
+  quote: Tree-based models are superior for every random search budget, and the performance gap stays wide even after a large number of random search iterations.
+- winner: Tree-based models (RandomForest, GradientBoostingTrees, XGBoost)
+  loser: Neural networks (MLP, Resnet, FT_Transformer, SAINT)
+  benchmark: grinsztajn2022-medium-cat-reg
+  basis: Normalized test score averaged over the benchmark's datasets, at every random-search budget (Figure 2).
+  location: Section 4.2
+  page: 6
+  quote: Tree-based models are superior for every random search budget, and the performance gap stays wide even after a large number of random search iterations.
+- winner: Neural networks (MLP, Resnet, FT_Transformer, SAINT)
+  loser: Tree-based models (RandomForest, GradientBoostingTrees, XGBoost)
+  basis: After randomly rotating the features of the numerical classification benchmark (Figure 6a); not the original benchmark condition.
+  location: Section 5.4
+  page: 7
+  quote: 'More striking, random rotations reverse the performance order: NNs are now above tree-based models and Resnets above FT Transformers.'
+- winner: Resnet
+  loser: FT_Transformer
+  basis: After randomly rotating the features of the numerical classification benchmark (Figure 6a); not the original benchmark condition.
+  location: Section 5.4
+  page: 7
+  quote: 'More striking, random rotations reverse the performance order: NNs are now above tree-based models and Resnets above FT Transformers.'
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Main results are only given as curves (Figures 1-2, 7-12); no numeric result table in v1, so no ''results'' were recorded (reading values off figures would not be checkable against the text).
+    Win/loss is recorded as ''relations'' from explicit statements. Version: arXiv v1 (preprint, ''Under review''); later versions may differ. Dataset selection used default Resnet and HistGradientBoosting
+    scores (''not too easy'', c10), which the reader may want to keep in mind when interpreting the benchmark.'

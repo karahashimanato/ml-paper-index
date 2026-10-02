@@ -502,3 +502,61 @@ benchmarks:
     higher_is_better: false
     definition: Average rank across datasets among the 9 DL models of Table 2.
   defined_in: arxiv-2106.11959
+- id: grinsztajn2022-medium-num-clf
+  scope: public
+  task: tabular-classification
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical features, classification (15 datasets)
+  protocol: &id012
+    split: 70% train (capped at 10,000 samples), remaining 30% split 30/70 into validation/test (each capped at 50,000); 1-5 folds depending on test size (Appendix A).
+    preprocessing: No missing data; multiclass binarised to two balanced classes; categorical features with >20 levels removed; numerical features with <10 unique values removed; QuantileTransformer for
+      NNs; heavy-tailed regression targets log-transformed; one-hot for models without native categorical support (Sections 3.2, 3.5).
+    tuning: Random search of ~400 iterations per model and dataset starting from defaults; scores for budget n are the test score of the best-on-validation configuration among n iterations, averaged over
+      15 shuffles of the search order (Section 3.3).
+    repetitions: 15 shuffles of the random-search order (Section 3.3).
+  metrics:
+  - name: normalized-accuracy
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '298'
+- id: grinsztajn2022-medium-num-reg
+  scope: public
+  task: tabular-regression
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical features, regression (19 datasets)
+  protocol: *id012
+  metrics:
+  - name: normalized-r2
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '297'
+- id: grinsztajn2022-medium-cat-clf
+  scope: public
+  task: tabular-classification
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, classification (7 datasets)
+  protocol: *id012
+  metrics:
+  - name: normalized-accuracy
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '300'
+- id: grinsztajn2022-medium-cat-reg
+  scope: public
+  task: tabular-regression
+  dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, regression (14 datasets)
+  protocol: *id012
+  metrics:
+  - name: normalized-r2
+    higher_is_better: true
+    definition: Test accuracy (classification) or R2 (regression) affinely rescaled per dataset between the top model (1) and the 10% (classification) / 50% (regression) test-error quantile model (0), negative
+      values clipped to 0 for regression, then averaged over datasets (Section 3.4).
+  defined_in: arxiv-2207.08815
+  external_ids:
+    openml_benchmark_suite: '299'

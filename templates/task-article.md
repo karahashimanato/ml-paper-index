@@ -9,6 +9,9 @@ written_by: <model via Claude Code>
 
 # <課題名>の手法比較
 
+<!-- generated:stale -->
+<!-- /generated:stale -->
+
 <!-- 地の文は日本語。数値は書かない(比較表は scripts/ が生成する)。
      主張には根拠カードを [arxiv-xxxx.xxxxx#c1] の形で添える。 -->
 

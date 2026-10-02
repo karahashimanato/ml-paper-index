@@ -16,8 +16,8 @@
 2. **同一条件の数値だけを比較する**。比較できる条件は [registry/benchmarks.yaml](registry/benchmarks.yaml) に明示的に登録したものだけ。条件の違う数値は表に並べない。
 3. **論文をまたいで比較できないときは、論文内の勝敗の関係で語る**。数値ではなく「論文Xの中でAがBに勝った」という向きを集める。
 4. **自分の実験は論文と混ぜない**。`experiments/` に別のカードとして置き、コミットハッシュで固定する。
-5. **数値はAIに書かせない**。比較表はカードからスクリプトで生成する(予定)。記事の地の文に数値を書かない。
-6. **古さを隠さない**。記事は執筆時に依存したカードと執筆日を記録し、その後に追加されたカードを「未反映」として表示する(予定)。
+5. **数値はAIに書かせない**。表の数値はPDFのテキストから機械的に読み取ってカードに入れ、比較表はカードからスクリプトで生成する。記事の地の文に結果の数値を書かない。
+6. **古さを隠さない**。記事は執筆時に依存したカードと執筆日を記録し、その後に追加されたカードを「未反映」として記事冒頭に自動表示する。
 
 ## 構成
 
@@ -30,6 +30,7 @@ registry/
 articles/
   tasks/           課題別の比較記事(日本語)
   methods/         手法ファミリー別の解説・系譜記事(日本語)
+generated/         カードから生成した結果表・勝敗・索引・未反映一覧(手で編集しない)
 schemas/           上記すべてのJSON Schema
 templates/         カード・登録簿エントリ・記事のテンプレート
 scripts/           検証・生成スクリプト
@@ -40,22 +41,28 @@ cache/pdfs/        論文PDFのローカルキャッシュ(gitignore、公開し
 
 ```bash
 uv sync
-uv run python scripts/validate.py   # スキーマ・参照整合性のチェック
+uv run python scripts/validate.py        # スキーマ・参照整合性のチェック(CIでも実行)
+uv run python scripts/verify_quotes.py   # 引用がPDFに実在するかの照合(ローカルのみ、cache/pdfs/ が必要)
+uv run python scripts/generate.py        # generated/ と記事の未反映ブロックを更新(CIでは --check)
 ```
 
-`validate.py` が確認すること: スキーマ、ファイル名とIDの一致、未登録のタグ・比較条件・指標の使用、
-他論文の paper-private 条件の使用、記事の `depends_on` と本文中の `[card-id#c1]` 参照の実在。
+| スクリプト | 確認・生成するもの |
+|---|---|
+| `validate.py` | スキーマ、ファイル名とIDの一致、未登録のタグ・比較条件・指標、他論文の paper-private 条件の使用、結果の値が引用中に現れるか、記事の `depends_on` と `[card-id#c1]` 参照の実在 |
+| `verify_quotes.py` | キャッシュしたPDFのsha256がカードと一致するか、各引用が(指定ページの)本文に存在するか |
+| `generate.py` | 論文ごとの結果表(比較条件ごとの列)、論文内の勝敗(結果からの導出+本文の記述)、タグ別索引、未反映カード |
 
 ## 現在のテーマ
 
 | テーマ | 状態 |
 |---|---|
-| 表データの分類・回帰(GBDT vs 深層学習) | パイロット(準備中) |
+| 表データの分類・回帰(GBDT vs 深層学習) | パイロット: 論文カード3本、記事 [articles/tasks/tabular-gbdt-vs-deep-learning.md](articles/tasks/tabular-gbdt-vs-deep-learning.md) |
+
+生成物の入口: [generated/index.md](generated/index.md)
 
 ## 今後の実装予定
 
-- 原文引用の照合(`cache/pdfs/` のPDFに引用文が存在するか、sha256が一致するか)
 - 実験カードの照合(指定コミットのファイルに値が存在するか)
-- 比較表・勝敗表・タグ別索引・「未反映カード」一覧の生成
 - 新着論文の候補検出(GitHub Actions の cron、AI不使用)
+- パイロットの2巡目: TabPFN、TabZilla(McElfresh et al. 2023)、TabArena のカード化
 - 静的サイト化(GitHub Pages)

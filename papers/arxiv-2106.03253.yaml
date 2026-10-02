@@ -85,6 +85,21 @@ claims:
   location: Table 2 caption
   page: 6
   quote: MSE is presented for the YearPrediction and Rossman datasets
+- id: c13
+  statement: The 11 datasets are nine taken from the TabNet, DNF-Net and NODE papers (three each) plus two Kaggle datasets not used by any of them.
+  location: Section 3.1.1
+  page: 4
+  quote: We use nine datasets from the TabNet, DNF-Net, and NODE papers, drawing three datasets from each paper.
+- id: c14
+  statement: Table 2 values are averages of four training runs with the standard error of the mean.
+  location: Table 2 caption
+  page: 6
+  quote: The values are the averages of four training runs (lower value is better), along with the standard error of the mean (SEM)
+- id: c15
+  statement: Each dataset was preprocessed and trained as described in its original paper.
+  location: Section 3.1.1
+  page: 4
+  quote: Each dataset was preprocessed and trained as described in the original paper.
 results:
 - id: r1
   benchmark: shwartzziv2021-rossmann

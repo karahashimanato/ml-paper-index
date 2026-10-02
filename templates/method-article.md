@@ -9,6 +9,9 @@ written_by: <model via Claude Code>
 
 # <手法ファミリー名>
 
+<!-- generated:stale -->
+<!-- /generated:stale -->
+
 <!-- 地の文は日本語。主張には根拠カードを [arxiv-xxxx.xxxxx#c1] の形で添える。 -->
 
 ## 仕組み

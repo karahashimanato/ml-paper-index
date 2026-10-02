@@ -104,6 +104,16 @@ claims:
   location: Section 5.3
   page: 10
   quote: we conclude that the simple averaging of attention maps can be a good choice in terms of cost-effectiveness.
+- id: c16
+  statement: Dataset sizes (#objects) range from 20,640 (California Housing) to 1,200,192 (Microsoft); the 11 datasets include multiclass problems with 100 (Helena) and 1000 (ALOI) classes.
+  location: Table 1
+  page: 6
+  quote: '#objects 20640 48842 65196 83733 98050 108000 500000 515345 581012 709877 1200192'
+- id: c17
+  statement: Most models were tuned with Optuna's TPE (Bayesian optimization); the rest used predefined configurations from their papers. The test set was never used for tuning.
+  location: Section 4.3
+  page: 6
+  quote: we use the Optuna library (Akiba et al., 2019) to run Bayesian optimization (the Tree-Structured Parzen Estimator algorithm)
 results:
 - id: r1
   benchmark: gorishniy2021-ca-single

@@ -1,5 +1,7 @@
 # ml-paper-index
 
+**サイト**: https://karahashimanato.github.io/ml-paper-index/ (記事・論文ページ・索引を検索付きで閲覧できる)
+
 機械学習アルゴリズム(MLOpsのアルゴリズムを含む)の研究動向と手法比較を、**論文を一次情報として**整理するインデックス。
 
 姉妹プロジェクトとの役割分担:
@@ -85,4 +87,3 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - TabICL・ModernNCA・TabDPT などその他の TabArena 参加モデルの原論文
 - ドリフト検出: 表データのデータシフト検出、ラベルシフト推定
 - 時系列の異常検知: TSB-AD などの他のベンチマーク、個々の手法の原論文
-- 静的サイト化(GitHub Pages)

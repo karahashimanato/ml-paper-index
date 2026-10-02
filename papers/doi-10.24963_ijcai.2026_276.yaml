@@ -1,0 +1,45 @@
+id: doi-10.24963_ijcai.2026_276
+title: 'AnoMamba: Aligning Reconstruction with Time Series Anomaly Detection via Selective Global Dependency Modeling'
+authors:
+- Junqi Chen
+- Xu Tan
+- Jie Chen
+- Susanto Rahardja
+year: 2026
+venue: IJCAI 2026
+links:
+  doi: https://doi.org/10.24963/ijcai.2026/276
+source:
+  version: IJCAI proceedings PDF
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 25bf8df061b9553bdd8ad33ffb93a3eb4cb50a241d8dd22ccf87aa6d20204edc
+  pdf_url: https://www.ijcai.org/proceedings/2026/0276.pdf
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'AnoMamba: Mamba variant with global step-size reweighting'
+claims:
+- id: c1
+  statement: Minimizing reconstruction loss alone lets models reconstruct anomalies well by overfitting local patterns (misalignment between reconstruction and detection).
+  location: Abstract
+  page: 1
+  quote: Consequently, anomalies that violate global de- pendencies can also be reconstructed well, leading to a misalignment between reconstruction and detection.
+- id: c2
+  statement: Citing Kim et al., it avoids point-adjustment metrics and uses affiliation F1 and VUS-ROC.
+  location: Implemented details
+  page: 5
+  quote: As noted by [Kim et al., 2022], point-adjustment metrics can lead to misleading rankings
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

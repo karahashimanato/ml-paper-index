@@ -1,0 +1,54 @@
+id: arxiv-2610.01168
+title: 'Detect, Explain, Interpret: An End-to-End Benchmark for Time Series Anomaly Detection, Explainability and Interpretability'
+authors:
+- Roberto Stanzione
+- Jules Barbe
+- Magali Parrino
+- Jérémie Fourmann
+- Paul Boniol
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2610.01168
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 950499f77e6d3c4976ea430054e3e207f7cf4f14f0301010165cdbe8be0fc56a
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- SHAD benchmark (detection, explainability, interpretability)
+claims:
+- id: c1
+  statement: Current benchmarks focus on detection accuracy; few evaluate explainability and none provides rich semantic annotations.
+  location: Abstract
+  page: 1
+  quote: One of the main reasons for this gap is that current benchmarks primarily focus on detection accuracy, and only few of them evaluate spatial explainability.
+- id: c2
+  statement: SHAD has 215 multivariate high-dimensional series from real distributed cloud storage systems, with per-dimension labels and textual annotations.
+  location: Abstract
+  page: 1
+  quote: a fully annotated benchmark composed of 215 multivariate, high-dimensional time series collected from real-world distributed cloud storage systems operated by Scality.
+- id: c3
+  statement: Detection is evaluated with threshold-independent VUS-PR.
+  location: Experimental setup
+  page: 7
+  quote: Performance is evaluated using VUS- PR (a robust, threshold-independent metric) with a 25-point buffer
+- id: c4
+  statement: State-of-the-art detectors are accurate but not perfect; explainability is not solved by existing methods; frozen LLMs cannot correctly interpret anomalies.
+  location: Conclusion
+  page: 10
+  quote: (ii) Explanability on SHAD cannot be natively solved with existing TSAD methods, and (iii) frozen LLMs are not able to provide correct interpretations of anomalies.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

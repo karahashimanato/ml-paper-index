@@ -84,7 +84,7 @@ write_card({
   "links": {"arxiv": "https://arxiv.org/abs/2506.18046"},
   "source": {"version": "arXiv v2", "retrieved_at": "2026-10-02", "pdf_sha256": P.sha256(), "license": "CC BY-NC-ND 4.0"},
   "tags": {"tasks": ["time-series-anomaly-detection"],
-           "method_families": ["classical-outlier-detectors", "reconstruction-based-detectors", "forecasting-based-detectors", "tabular-foundation-model"],
+           "method_families": ["classical-outlier-detectors", "reconstruction-based-detectors", "forecasting-based-detectors", "time-series-foundation-model"],
            "paradigms": ["unsupervised"]},
   "proposes": ["TAB benchmark (datasets, unified pipeline, leaderboard)"],
   "claims": claims,
@@ -94,7 +94,7 @@ write_card({
            "notes": ("Main results (Table 6) are box plots; only the explicit univariate statement is recorded as a relation. "
                      "Table 7 (AUC-ROC with overlapping vs non-overlapping window post-processing, 6 methods x 6 multivariate datasets) extracted mechanically. "
                      "Best-threshold and best-hyperparameter reporting (c9, c10) makes all numbers optimistic. "
-                     "'tabular-foundation-model' tag is used as the closest tag for time-series pre-trained models. "
+                     
                      "Section 5.2.1 is verified from the PDF heading; other locations are topic names.")},
 })
 

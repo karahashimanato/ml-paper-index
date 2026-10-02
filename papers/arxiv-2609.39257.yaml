@@ -1,0 +1,50 @@
+id: arxiv-2609.39257
+title: 'From Benchmarks to Production: Transferring Time Series Anomaly Detection Methods for Electricity Production Monitoring'
+authors:
+- Nicolas Vautier
+- Paul Caron
+- Nardi Xhepi
+- Félicie Bizeul
+- Manel Boumghar
+- Christophe Degouy
+- Paul Boniol
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.39257
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f600ee839548bb1e1e6b05b7aca231bf77adfe6d2961b7887ef4b0abc755b7fe
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'TAMIS: anomaly detection in daily production forecasts at EDF'
+claims:
+- id: c1
+  statement: TAMIS detects anomalous days in electricity production forecasts and surfaces top-ranked anomalies for human review.
+  location: Abstract
+  page: 1
+  quote: TAMIS surfaces top-ranked anomalies through an automated daily newsletter, enabling efficient expert review and continuous monitoring.
+- id: c2
+  statement: AUC-ROC overestimates accuracy for rare anomalies, so AUC-PR (plus throughput) is used.
+  location: Evaluation measures
+  page: 9
+  quote: the Area Under the ROC curve (AUC-ROC) tends to overestimate the accuracy of detectors [30].
+- id: c3
+  statement: On real industrial data TAMIS gives the best accuracy-efficiency trade-off among baselines.
+  location: Abstract
+  page: 1
+  quote: TAMIS achieves the best accuracy–efficiency trade-off compared to baseline methods.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

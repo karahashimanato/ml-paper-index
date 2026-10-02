@@ -1,0 +1,41 @@
+id: arxiv-2504.06643
+title: 'AMAD: AutoMasked Attention for Unsupervised Multivariate Time Series Anomaly Detection'
+authors:
+- Tiange Huang
+- Yongjun Li
+year: 2025
+links:
+  arxiv: https://arxiv.org/abs/2504.06643
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 73999b5f7466cd6d7c2758765441a3706a4d67b94cad33ca7b1f7e3f0335758d
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'AMAD: AutoMasked attention with Max-Min training and contrastive learning'
+claims:
+- id: c1
+  statement: Existing attention-based detectors assume specific anomaly patterns (e.g. concentrated or peak anomalies), limiting generalization.
+  location: Abstract
+  page: 1
+  quote: the sequence anomaly association assumptions underlying these models are of- ten limited to specific predefined patterns and scenarios
+- id: c2
+  statement: It reports precision, recall and F1; the text we checked does not state whether point adjustment is applied or how the threshold is chosen.
+  location: Experiments
+  page: 10
+  quote: We report P (Precision), R (Recall), and F1 (F1-score)
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers. The journal version is DOI 10.1016/j.knosys.2026.117110 (closed access); this card uses the arXiv v3 preprint.'

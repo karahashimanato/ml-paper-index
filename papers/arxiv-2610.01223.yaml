@@ -1,0 +1,44 @@
+id: arxiv-2610.01223
+title: 'Have an LLM Write Your Anomaly Detector: Autonomous Discovery of Compact, Interpretable Detectors for Time Series'
+authors:
+- David Berghaus
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2610.01223
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b66832ebe9453ceb194f231385db0e3a021a2494f97f0441e0fdce8d1ea64ecf
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- LLM-driven program search for compact, interpretable detectors
+claims:
+- id: c1
+  statement: 'An LLM is used as the author of a detector: it repeatedly edits a short NumPy program under a leakage-free objective.'
+  location: Abstract
+  page: 1
+  quote: We use a large language model not as the detector but as the author of one
+- id: c2
+  statement: The discovered compact detectors lead TSB-AD across metrics, ahead of classical, deep and foundation-model baselines, without training a network or using a GPU.
+  location: Abstract
+  page: 1
+  quote: yet they train no network and use no GPU
+- id: c3
+  statement: On TSB-AD it reports affiliation F-measure, temporal F1, point-wise F1 and VUS-PR.
+  location: Metrics
+  page: 4
+  quote: On TSB-AD we follow the Time-RCD protocol and re- port the affiliation F-measure [11]
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

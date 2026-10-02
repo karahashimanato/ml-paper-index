@@ -42,6 +42,9 @@ method_families:
   - id: tabular-foundation-model
     description: Models pretrained across many tables and applied to new tables (e.g. via in-context learning).
     parent: deep-learning
+  - id: time-series-foundation-model
+    description: Models pre-trained on many time series and applied to new series (zero/few-shot or fine-tuned).
+    parent: deep-learning
   - id: heterogeneous-ensembles
     description: Ensembles combining different model types (e.g. averaging deep models with GBDT).
   - id: automl-systems

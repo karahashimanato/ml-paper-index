@@ -1,0 +1,47 @@
+id: arxiv-2609.39489
+title: Towards Robust Time Series Learning via Capacity-Centric Modulation
+authors:
+- Siru Zhong
+- Senzhang Wang
+- James T. Kwok
+- Yuxuan Liang
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.39489
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: cd8a8d0dbc5b16c22704932695e4946a577ee1fcf410b26f69c461d3217255f2
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'SACM: sample-adaptive capacity modulation (adaptive dropout)'
+claims:
+- id: c1
+  statement: SACM assigns sample-wise dropout probabilities using spectral sparsity and plugs into existing backbones.
+  location: Abstract
+  page: 1
+  quote: a task-agnostic frame- work that exploits spectral sparsity to assign sample-wise dropout probabilities along internal activation paths.
+- id: c2
+  statement: Its anomaly detection gains are reported as point-adjusted F1.
+  location: Abstract
+  page: 1
+  quote: improves classification accuracy and point-adjusted F1 by 3.04% and 17.05%, respectively
+- id: c3
+  statement: Anomaly detection comparisons use the benchmark point-adjusted (PA) protocol.
+  location: Anomaly detection experiments
+  page: 10
+  quote: Raw and +SACM share the benchmark point-adjusted (PA) protocol [37, 39] for paired comparison
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

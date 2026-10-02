@@ -1,0 +1,45 @@
+id: arxiv-2609.28022
+title: 'PISCES: Physics-Informed Solar-wind Convolutional autoEncoder for Space-weather Anomaly Detection and Early Warning'
+authors:
+- Kevin Lee
+- Alison J. March
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.28022
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 64b37393611a7592de060fdd925f4f590b8f2c15b66577c51b425787f3fb3eb4
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'PISCES: physics-informed convolutional autoencoder for solar-wind anomaly detection'
+claims:
+- id: c1
+  statement: PISCES is trained without catalog labels under physics constraints and decomposes the anomaly score into physical contributions.
+  location: Abstract
+  page: 1
+  quote: At inference, PISCES separates the anomaly score into magnetic and plasma reconstruction errors, physics relations, and resid- ual corrections
+- id: c2
+  statement: Evaluation uses PR-AUC because point-adjusted F1 can make random scores look competitive.
+  location: Evaluation
+  page: 10
+  quote: Point-adjusted F1 can make random anomaly scores appear competitive [41]
+- id: c3
+  statement: Attenuating skip connections improves average precision of trained models while untrained scores stay nearly the same.
+  location: Abstract
+  page: 1
+  quote: Attenuation of the skip connections, selected on validation data, improves average precision for the trained models, while the untrained scores remain nearly the same.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

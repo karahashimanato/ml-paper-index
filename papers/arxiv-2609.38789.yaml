@@ -1,0 +1,48 @@
+id: arxiv-2609.38789
+title: 'LEARN-TS: LLM-Enhanced Alignment and Reconstruction with Normality Guidance for Multivariate Time-Series Anomaly Detection'
+authors:
+- Jahyeob Koo
+- Kio Yun
+- Byoungmo Koo
+- Jun-Geol Baek
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.38789
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: cd32c4b2963f2ea6d0b1af96d7f66d72e2df1520b508d5d2b70a7eff164f1e0a
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'LEARN-TS: LLM-derived semantics for masked reconstruction'
+claims:
+- id: c1
+  statement: LEARN-TS uses a frozen language model to build semantic references without paired text.
+  location: Abstract
+  page: 1
+  quote: uses a frozen language model to construct two role separated semantic representations without requiring tempo- rally paired external text.
+- id: c2
+  statement: Across four benchmarks it achieves the highest mean performance in 13 of 16 dataset-metric comparisons.
+  location: Abstract
+  page: 1
+  quote: Across four benchmarks, LEARN-TS achieves the highest mean performance in 13 of 16 dataset–metric comparisons.
+- id: c3
+  statement: No point adjustment is applied to any metric.
+  location: Evaluation
+  page: 13
+  quote: No point adjustment is applied to any metric.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

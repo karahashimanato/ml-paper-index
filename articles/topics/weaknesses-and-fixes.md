@@ -2,7 +2,7 @@
 title: モデルと評価方法の弱点、それを改善した研究
 kind: topic
 tags: [tabular-classification, tabular-regression, drift-detection, concept-drift-detection, dataset-shift-detection, time-series-anomaly-detection]
-depends_on: [arxiv-2106.03253, arxiv-2106.11959, arxiv-2207.08815, arxiv-2207.01848, arxiv-2305.02997, arxiv-2506.16791, doi-10.1038_s41586-024-08328-6, arxiv-2410.24210, arxiv-2407.04491, arxiv-2004.05785, arxiv-1810.11953, arxiv-2311.06396, arxiv-2606.07789, arxiv-2602.06456, doi-10.1007_s41060-024-00620-y, arxiv-2310.15826, arxiv-2109.05257, arxiv-2009.13807, arxiv-2308.13068, arxiv-2506.18046, arxiv-2211.05244]
+depends_on: [arxiv-2106.03253, arxiv-2106.11959, arxiv-2207.08815, arxiv-2207.01848, arxiv-2305.02997, arxiv-2506.16791, doi-10.1038_s41586-024-08328-6, arxiv-2410.24210, arxiv-2407.04491, arxiv-2004.05785, arxiv-1810.11953, arxiv-2311.06396, arxiv-2606.07789, arxiv-2602.06456, doi-10.1007_s41060-024-00620-y, arxiv-2310.15826, arxiv-2109.05257, arxiv-2009.13807, arxiv-2308.13068, arxiv-2506.18046, arxiv-2211.05244, arxiv-2608.02821, arxiv-2609.39215, arxiv-2610.01168, arxiv-2609.38004, arxiv-2609.31470, arxiv-2609.28022, arxiv-2608.01885, arxiv-2609.39489, arxiv-2609.38789, arxiv-2610.01223, arxiv-2610.00978, arxiv-2609.39337, arxiv-2609.39257, arxiv-2609.36765, arxiv-2609.29194, arxiv-2504.06643, doi-10.24963_ijcai.2026_276, doi-10.24963_ijcai.2026_332]
 written_at: 2026-10-02
 written_by: claude-opus-5-5 via Claude Code
 ---
@@ -30,7 +30,7 @@ written_by: claude-opus-5-5 via Claude Code
 | MLP の過学習と最適化の難しさ | 重みを共有した効率的なアンサンブル(TabM) | TabM の著者自身 | TabArena(著者の重なりなし) |
 | 初期の TabPFN は小規模・数値特徴のみ | TabPFN v2 | TabPFN v2 の著者自身 | TabArena(著者が重なる) |
 | 論文ごとのデータセット選択とチューニングの偏り | チューニング用と評価用のデータを分ける | 表データとドリフト検出の両分野で、別々の著者 | 発想として一致 |
-| 時系列異常検知の point-adjust による過大評価 | PA%K、イベント単位の評価、単純な基準線 | 提案した著者自身 | 指摘そのものは3本で一致 |
+| 時系列異常検知の point-adjust による過大評価 | PA%K、イベント単位の評価、単純な基準線、閾値に依存しない指標 | 提案した著者自身 | 指摘は3本で一致し、2026年の論文の多くが採用 |
 | ドリフト検出器の評価の不統一 | 実データへのドリフト注入、時間を考慮した指標 | 提案した著者自身 | 未確認 |
 | ドリフト検出が正解ラベルに依存 | 教師なし検出器 | 比較研究 | D3 の強さは2本で一致 |
 
@@ -101,7 +101,9 @@ TabM の著者も、表データの MLP は過学習と最適化の問題を抑�
 
 **検証と独立した確認**: 改善策の検証は、それぞれ提案者自身によるものである。ただし、Sehili らの結果は Kim らの指摘と同じ方向を示している。point-adjust を前提に開発された手法が、他の評価方法ではランダムな推測と区別できなかった [arxiv-2308.13068#c4](https://arxiv.org/pdf/2308.13068v2#page=13 "Algorithms that were developed using point-adjust as the sole target fail to reach any score better than a random guess when evaluated with other")。この点で、問題点の指摘は独立に確認されている。
 
-**改善策自身の限界**: 統一された評価パイプラインを作った TAB でも、すべての閾値のうち最良の値を報告している [arxiv-2506.18046#c9](https://arxiv.org/pdf/2506.18046v2#page=8 "we conduct metric calculations at all thresholds and report the best results.")。閾値をテストデータで選ぶという、より根本的な問題 [arxiv-2109.05257#c14](https://arxiv.org/pdf/2109.05257v2#page=7 "existing TAD methods set the threshold after investigating the test dataset or simply use the optimal threshold that yields the best F1.") は残っている。また、ベンチマークのデータ自体に欠陥があるという指摘 [arxiv-2009.13807#c1](https://arxiv.org/pdf/2009.13807v5#page=1 "These flaws are triviality, unrealistic anomaly density, mislabeled ground truth and run-to-failure bias.") に対しては、新しいアーカイブが作られた [arxiv-2009.13807#c9](https://arxiv.org/pdf/2009.13807v5#page=1 "with this paper we introduce the UCR Time Series Anomaly Archive.")。しかし、その上での比較はこのリポジトリにはまだない。
+**改善策の普及**: 2026年10月に承認した18本では、point-adjust を主な評価に使っていたのは2本(SACM、WinoTS)だけだった [arxiv-2609.39489#c3](https://arxiv.org/pdf/2609.39489v1#page=10 "Raw and +SACM share the benchmark point-adjusted (PA) protocol [37, 39] for paired comparison") [arxiv-2609.39337#c2](https://arxiv.org/pdf/2609.39337v1#page=6 "TSLib evaluation protocol and report point-adjusted precision, recall, and F1")。多くは VUS-PR や affiliation F1 などを使い、Kim らを引用して point-adjust を避けると明記する論文もある [doi-10.24963_ijcai.2026_276#c2](https://www.ijcai.org/proceedings/2026/0276.pdf#page=5 "As noted by [Kim et al., 2022], point-adjustment metrics can lead to misleading rankings")。ただし、この18本は既存カードを引用していることで選ばれており、評価の問題を意識した論文に偏っている可能性がある。詳しくは[時系列異常検知の記事](../tasks/time-series-anomaly-detection.md)を参照。
+
+**改善策自身の限界**: 統一された評価パイプラインを作った TAB でも、すべての閾値のうち最良の値を報告している [arxiv-2506.18046#c9](https://arxiv.org/pdf/2506.18046v2#page=8 "we conduct metric calculations at all thresholds and report the best results.")。閾値をテストデータで選ぶという、より根本的な問題 [arxiv-2109.05257#c14](https://arxiv.org/pdf/2109.05257v2#page=7 "existing TAD methods set the threshold after investigating the test dataset or simply use the optimal threshold that yields the best F1.") は残っている。2026年の論文にも、F1 が最大になる閾値での F1 を使うものがある [arxiv-2609.36765#c2](https://arxiv.org/pdf/2609.36765v1#page=8 "The Best-F1 score measures point-wise detection performance with the threshold that maximizes the")。閾値に依存しない評価は、この問題への新しい対応である [arxiv-2608.02821#c2](https://arxiv.org/pdf/2608.02821v1#page=1 "Instead of scoring only the final alarms, we evaluate Stage 1 directly using normalized residual energy")。また、ベンチマークのデータ自体に欠陥があるという指摘 [arxiv-2009.13807#c1](https://arxiv.org/pdf/2009.13807v5#page=1 "These flaws are triviality, unrealistic anomaly density, mislabeled ground truth and run-to-failure bias.") に対しては、新しいアーカイブが作られた [arxiv-2009.13807#c9](https://arxiv.org/pdf/2009.13807v5#page=1 "with this paper we introduce the UCR Time Series Anomaly Archive.")。しかし、その上での比較はこのリポジトリにはまだない。
 
 ### ドリフト検出器の評価
 
@@ -139,4 +141,4 @@ TabM の著者も、表データの MLP は過学習と最適化の問題を抑�
 
 ## 参照カード
 
-この記事は、このリポジトリの21本すべてのカードを対象にしている。個々の根拠は本文のリンクから原論文の該当ページを開ける。カードの一覧は [generated/index.md](../../generated/index.md) を参照。
+この記事は、このリポジトリの39本すべてのカードを対象にしている。個々の根拠は本文のリンクから原論文の該当ページを開ける。カードの一覧は [generated/index.md](../../generated/index.md) を参照。

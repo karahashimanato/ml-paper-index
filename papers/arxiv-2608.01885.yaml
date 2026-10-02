@@ -1,0 +1,46 @@
+id: arxiv-2608.01885
+title: 'CARE: A Cascaded Framework for Efficient and Reliable Time Series Anomaly Detection'
+authors:
+- Zemin Chao
+- Qianhui Xu
+- Jianhe Cen
+- Guangzhi Ge
+- Xiao Chen
+- Hoangzhi Wang
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2608.01885
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 181027aaf164c0cd0791fd66bcdf9bffd70ca7e4afcd0b162f657fcb4eef7a1f
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'CARE: cascaded inference with a lightweight pre-filter'
+claims:
+- id: c1
+  statement: CARE routes only uncertain samples to the expensive detector, giving 2.7x-4.8x inference speedup while keeping competitive quality.
+  location: Abstract
+  page: 1
+  quote: By routing only uncertain samples to the CDM, our framework achieves 2.7× to 4.8× inference speedup compared to the most accurate SOTA approaches, while still maintaining competitive detection
+    quality.
+- id: c2
+  statement: Detection quality is reported with Affiliated-F1 and AUC-PR.
+  location: Experiments (Table 1 caption)
+  page: 8
+  quote: 'Table 1: Average Aff-F (Affiliated-F1), A-P (AUC-PR) and Inference time across 8 real-world'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

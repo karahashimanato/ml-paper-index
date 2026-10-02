@@ -1,0 +1,52 @@
+id: doi-10.24963_ijcai.2026_332
+title: Multi-View Ensemble for Time Series Anomaly Detection via Coupling Flows
+authors:
+- Wanghui Qiu
+- Chenxi Liu
+- Shiyan Hu
+- Zhengyu Li
+- Chenjuan Guo
+- Bin Yang
+year: 2026
+venue: IJCAI 2026
+links:
+  doi: https://doi.org/10.24963/ijcai.2026/332
+source:
+  version: IJCAI proceedings PDF
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7e998d107c7addc51ae8aadc37173d4b769c1614ac69fb0f1b1375e41fcea497
+  pdf_url: https://www.ijcai.org/proceedings/2026/0332.pdf
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - heterogeneous-ensembles
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'FlowFuse: coupling-flow fusion of multi-view anomaly scores'
+claims:
+- id: c1
+  statement: Different anomaly types need different detection mechanisms; FlowFuse fuses four complementary detectors with coupling flows.
+  location: Abstract
+  page: 1
+  quote: Time series anomaly detection faces a critical chal- lenge that different anomaly types require differ- ent detection mechanisms
+- id: c2
+  statement: Across 18 benchmarks it reports state-of-the-art performance.
+  location: Abstract
+  page: 1
+  quote: Ex- tensive experiments across 18 diverse benchmarks show that FlowFuse achieves state-of-the-art per- formance
+- id: c3
+  statement: Main metrics are AUC-ROC and Affiliated-F1.
+  location: Experiments (Table 3 caption)
+  page: 6
+  quote: 'Table 3: Average AUC-ROC (A-R) and Affiliated-F1 (Aff-F) accuracy measures for all datasets.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers. Five of the six authors are also authors of the TAB benchmark (arxiv-2506.18046).'

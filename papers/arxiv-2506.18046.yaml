@@ -30,7 +30,7 @@ tags:
   - classical-outlier-detectors
   - reconstruction-based-detectors
   - forecasting-based-detectors
-  - tabular-foundation-model
+  - time-series-foundation-model
   paradigms:
   - unsupervised
 proposes:
@@ -716,5 +716,5 @@ card:
   created_by: claude-opus-5-5 via Claude Code
   reviewed: false
   notes: Main results (Table 6) are box plots; only the explicit univariate statement is recorded as a relation. Table 7 (AUC-ROC with overlapping vs non-overlapping window post-processing, 6 methods x
-    6 multivariate datasets) extracted mechanically. Best-threshold and best-hyperparameter reporting (c9, c10) makes all numbers optimistic. 'tabular-foundation-model' tag is used as the closest tag for
-    time-series pre-trained models. Section 5.2.1 is verified from the PDF heading; other locations are topic names.
+    6 multivariate datasets) extracted mechanically. Best-threshold and best-hyperparameter reporting (c9, c10) makes all numbers optimistic. Section 5.2.1 is verified from the PDF heading; other locations
+    are topic names.

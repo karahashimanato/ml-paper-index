@@ -2,7 +2,7 @@
 title: 時系列異常検知の手法比較と評価方法の問題
 kind: task
 tags: [time-series-anomaly-detection]
-depends_on: [arxiv-2109.05257, arxiv-2009.13807, arxiv-2308.13068, arxiv-2506.18046, arxiv-2211.05244]
+depends_on: [arxiv-2109.05257, arxiv-2009.13807, arxiv-2308.13068, arxiv-2506.18046, arxiv-2211.05244, arxiv-2608.02821, arxiv-2609.39215, arxiv-2610.01168, arxiv-2609.38004, arxiv-2609.31470, arxiv-2609.28022, arxiv-2608.01885, arxiv-2609.39489, arxiv-2609.38789, arxiv-2610.01223, arxiv-2610.00978, arxiv-2609.39337, arxiv-2609.39257, arxiv-2609.36765, arxiv-2609.29194, arxiv-2504.06643, doi-10.24963_ijcai.2026_276, doi-10.24963_ijcai.2026_332]
 written_at: 2026-10-02
 written_by: claude-opus-5-5 via Claude Code
 ---
@@ -115,6 +115,40 @@ TAB の多変量データでは、データセットごとに学習した一部�
 一方で、古典的な手法が多変量でも強いことから、深層学習の手法には改善の余地が大きいとも述べている [arxiv-2506.18046#c14](https://arxiv.org/pdf/2506.18046v2#page=11 "This suggests that there is still significant room for improvement in current deep learning approaches.")。
 TAB の著者は、すべての系列と異常の種類で最良の手法はないとしている [arxiv-2506.18046#c16](https://arxiv.org/pdf/2506.18046v2#page=2 "no single TSAD method is universally best for all time series and anomaly types.")。
 
+## 2025〜2026年の論文は評価方法を改善したか
+
+2026年10月の候補 Issue で承認された18本について、主な結果をどの評価方法で報告しているかを確かめた。
+
+**注意**: この18本は無作為に選んだものではない。候補は「このリポジトリの既存カードを2本以上引用している」か「キーワードに一致した」ことで選ばれている。既存カードには point-adjust を批判した Kim らの論文が含まれるため、評価の問題を意識した論文に偏っている可能性がある。
+
+| 論文 | 種類 | 主な評価方法 | 根拠 |
+|---|---|---|---|
+| SACM | 汎用の正則化手法 | **point-adjust 付き F1** | [arxiv-2609.39489#c2](https://arxiv.org/pdf/2609.39489v1#page=1 "improves classification accuracy and point-adjusted F1 by 3.04% and 17.05%, respectively") [arxiv-2609.39489#c3](https://arxiv.org/pdf/2609.39489v1#page=10 "Raw and +SACM share the benchmark point-adjusted (PA) protocol [37, 39] for paired comparison") |
+| WinoTS | 事前学習手法 | **point-adjust 付きの適合率・再現率・F1** | [arxiv-2609.39337#c2](https://arxiv.org/pdf/2609.39337v1#page=6 "TSLib evaluation protocol and report point-adjusted precision, recall, and F1") |
+| AMAD | 手法 | 適合率・再現率・F1(point-adjust の有無と閾値の選び方の記載を確認できず) | [arxiv-2504.06643#c2](https://arxiv.org/pdf/2504.06643v3#page=10 "We report P (Precision), R (Recall), and F1 (F1-score)") |
+| GRASP | 手法 | ROC、PRC と、F1 が最大になる閾値での F1 | [arxiv-2609.36765#c2](https://arxiv.org/pdf/2609.36765v1#page=8 "The Best-F1 score measures point-wise detection performance with the threshold that maximizes the") |
+| MSCAD | 手法 | VUS-PR(point-adjust は乱数で水増しできるとして主指標にしない) | [arxiv-2609.38004#c3](https://arxiv.org/pdf/2609.38004v1#page=6 "unlike Point-Adjusted F1 (PA-F1) it is threshold-free and not gameable by random scores.") |
+| AnoMamba | 手法 | Kim らを引用して point-adjust を避け、affiliation F1 と VUS-ROC | [doi-10.24963_ijcai.2026_276#c2](https://www.ijcai.org/proceedings/2026/0276.pdf#page=5 "As noted by [Kim et al., 2022], point-adjustment metrics can lead to misleading rankings") |
+| LEARN-TS | 手法 | どの指標にも point-adjust を使わない | [arxiv-2609.38789#c3](https://arxiv.org/pdf/2609.38789v1#page=13 "No point adjustment is applied to any metric.") |
+| SBOG | 外れ値生成 | point-adjust なしの点単位の評価 | [arxiv-2609.31470#c2](https://arxiv.org/pdf/2609.31470v1#page=7 "our main tables use the stricter point-wise evaluation without Point Adjustment.") |
+| PISCES | 応用(宇宙天気) | PR-AUC(point-adjust の問題を理由に) | [arxiv-2609.28022#c2](https://arxiv.org/pdf/2609.28022v1#page=10 "Point-adjusted F1 can make random anomaly scores appear competitive [41]") |
+| CARE | 推論の高速化 | Affiliated-F1 と AUC-PR | [arxiv-2608.01885#c2](https://arxiv.org/pdf/2608.01885v1#page=8 "Table 1: Average Aff-F (Affiliated-F1), A-P (AUC-PR) and Inference time across 8 real-world") |
+| LLM による検出器の自動設計 | 手法 | affiliation F、時間を考慮した F1、点単位 F1、VUS-PR | [arxiv-2610.01223#c3](https://arxiv.org/pdf/2610.01223v1#page=4 "On TSB-AD we follow the Time-RCD protocol and re- port the affiliation F-measure [11]") |
+| TS-Router | 手法(基盤モデル) | VUS-PR、Affiliation-F1 など4指標 | [arxiv-2610.00978#c3](https://arxiv.org/pdf/2610.00978v1#page=7 "we report VUS-PR, Affiliation-F1, F1T, and Standard-F1") |
+| FlowFuse | 手法 | AUC-ROC と Affiliated-F1 | [doi-10.24963_ijcai.2026_332#c3](https://www.ijcai.org/proceedings/2026/0332.pdf#page=6 "Table 3: Average AUC-ROC (A-R) and Affiliated-F1 (Aff-F) accuracy measures for all datasets.") |
+| ロボットの故障検知 | 応用 | VUS-PR | [arxiv-2609.29194#c2](https://arxiv.org/pdf/2609.29194v1#page=4 "Unlike standard point-wise metrics, VUS-PR is explicitly designed for range-based time series") |
+| TAMIS | 応用(電力) | AUC-PR(AUC-ROC は楽観的すぎるとして) | [arxiv-2609.39257#c2](https://arxiv.org/pdf/2609.39257v1#page=9 "the Area Under the ROC curve (AUC-ROC) tends to overestimate the accuracy of detectors [30].") |
+| StrAD | ベンチマーク | AUC-PR | [arxiv-2609.39215#c3](https://arxiv.org/pdf/2609.39215v1#page=6 "Consequently, the Area Under the Precision- Recall Curve (AUC-PR) is preferred in this study.") |
+| SHAD | ベンチマーク | VUS-PR | [arxiv-2610.01168#c3](https://arxiv.org/pdf/2610.01168v1#page=7 "Performance is evaluated using VUS- PR (a robust, threshold-independent metric) with a 25-point buffer") |
+| What the Detector Can See | 評価方法 | 閾値に依存しない残差の評価 | [arxiv-2608.02821#c2](https://arxiv.org/pdf/2608.02821v1#page=1 "Instead of scoring only the final alarms, we evaluate Stage 1 directly using normalized residual energy") |
+
+**読み取れること**:
+
+- 18本のうち、**point-adjust を主な評価に使っているのは2本**(SACM、WinoTS)だった。どちらも時系列の汎用手法(正則化、事前学習)で、異常検知は複数の課題の1つとして扱われている。
+- 多くの論文は、VUS-PR、AUC-PR、affiliation F1 などの指標を使っている。Kim らを引用して point-adjust を避けると明記する論文もある [doi-10.24963_ijcai.2026_276#c2](https://www.ijcai.org/proceedings/2026/0276.pdf#page=5 "As noted by [Kim et al., 2022], point-adjustment metrics can lead to misleading rankings") [arxiv-2609.38004#c3](https://arxiv.org/pdf/2609.38004v1#page=6 "unlike Point-Adjusted F1 (PA-F1) it is threshold-free and not gameable by random scores.")。上記の注意(選び方の偏り)はあるが、point-adjust 批判は少なくともこの範囲では広く受け入れられている。
+- 一方で、**閾値の問題は残っている**。F1 が最大になる閾値を使う論文がある [arxiv-2609.36765#c2](https://arxiv.org/pdf/2609.36765v1#page=8 "The Best-F1 score measures point-wise detection performance with the threshold that maximizes the")。TSB-AD の実装の閾値つき F1 も、最良の閾値での値である [arxiv-2609.38004#c4](https://arxiv.org/pdf/2609.38004v1#page=19 "These metrics are useful for diagnosing detector behavior but can be sensitive to threshold selection and, in some cases, to point-adjustment effects.")。
+- 評価方法そのものについても新しい指摘がある。ROC-AUC が同程度でも、同じ誤報率で比べると性能が桁違いに違うこと [arxiv-2608.02821#c3](https://arxiv.org/pdf/2608.02821v1#page=1 "Although the detectors have similar ROC-AUC values on SWaT, their performance differs by more than an order of magnitude at a common false-alarm rate.")、ベンチマークによって順位が入れ替わること [arxiv-2608.02821#c4](https://arxiv.org/pdf/2608.02821v1#page=1 "Rankings also change across testbeds: TranAD ranks first on HAI but last on SWaT, while NSIBF ranks first on WADI but last on HAI.") が示された。ストリーミング向けの手法が、実は静的な手法に劣るという結果もある [arxiv-2609.39215#c2](https://arxiv.org/pdf/2609.39215v1#page=1 "Our results show that, contrary to common assumptions, static TSAD methods significantly outperform streaming approaches in most streaming settings.")。
+
 ## 現時点での整理
 
 - **point-adjust の数値は比較に使わない**: ランダムなスコアでも高い値が出るため、PA を使った比較だけで手法の優劣を判断してはいけない [arxiv-2109.05257#c1](https://arxiv.org/pdf/2109.05257v2#page=1 "the PA protocol has a great possibility of overestimating the detection performance; that is, even a random anomaly score can easily turn into a state-of-the-art TAD method.") [arxiv-2308.13068#c2](https://arxiv.org/pdf/2308.13068v2#page=1 "So flawed is one very popular protocol, the so-called point-adjust protocol, that a random guess can be shown to systematically outperform all algorithms developed so far.")。
@@ -123,7 +157,7 @@ TAB の著者は、すべての系列と異常の種類で最良の手法はな�
 - **データの質を確認する**: よく使われるベンチマークには、自明すぎる例や誤ったラベルが多い [arxiv-2009.13807#c1](https://arxiv.org/pdf/2009.13807v5#page=1 "These flaws are triviality, unrealistic anomaly density, mislabeled ground truth and run-to-failure bias.")。系列を実際に描画して確認することが勧められている [arxiv-2009.13807#c10](https://arxiv.org/pdf/2009.13807v5#page=8 "We suspect that some researchers rarely view the time series, they simply pass objects to a black box and look at the F1 scores")。
 - **実運用の課題**: 誤検知の削減 [arxiv-2211.05244#c4](https://arxiv.org/pdf/2211.05244v3#page=27 "one of the key challenges is to find a mechanism for minimising false positives and improve recall rates of detection.")、解釈性 [arxiv-2211.05244#c5](https://arxiv.org/pdf/2211.05244v3#page=28 "anomaly detection research focuses primarily on detection precision, failing to address the issue of interpretability.")、データの非定常性への対応 [arxiv-2211.05244#c3](https://arxiv.org/pdf/2211.05244v3#page=27 "This non-stationary nature necessitates the adaptation of deep learning models through online or incremental training approaches") は未解決の課題として残っている。非定常性への対応は、[ドリフト検出の記事](drift-detection.md)の問題とつながる。
 
-**この整理に含まれていないもの**: TSB-AD などの他の大規模ベンチマーク(arXiv で確認できず未取得)、UCR Time Series Anomaly Archive での手法比較、AnomalyTransformer や GDN などの個々の手法の原論文、時系列の基盤モデルの原論文。
+**この整理に含まれていないもの**: TSB-AD などの他の大規模ベンチマーク(arXiv で確認できず未取得。ただし2026年の論文の多くが TSB-AD で評価している [arxiv-2609.38004#c2](https://arxiv.org/pdf/2609.38004v1#page=1 "MSCAD achieves large performance gains against 50 baselines across multiple metrics") [arxiv-2610.01223#c2](https://arxiv.org/pdf/2610.01223v1#page=1 "yet they train no network and use no GPU"))、UCR Time Series Anomaly Archive での手法比較、AnomalyTransformer や GDN などの個々の手法の原論文、時系列の基盤モデルの原論文。
 
 ## 参照カード
 

@@ -1,0 +1,42 @@
+id: arxiv-2609.36765
+title: Graph-Spectral Flow Matching for Multivariate Time Series Anomaly Detection
+authors:
+- Zepeng Zhang
+- Jhony H. Giraldo
+- Wenbin Wang
+- Olga Fink
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.36765
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 1b9e48e68d57ca8466099d0515ac67b2c3309b75cf9445ac58f5fd6ec39583fd
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'GRASP: flow matching with a graph-spectral path'
+claims:
+- id: c1
+  statement: GRASP builds graph structure into the flow-matching probability path for multivariate TSAD.
+  location: Abstract
+  page: 1
+  quote: we propose GRASP, a flow matching framework with a graph-spectral path for multivariate time series anomaly detec- tion.
+- id: c2
+  statement: Evaluation uses ROC, PRC and Best-F1, where Best-F1 uses the threshold that maximizes F1.
+  location: Experimental setup
+  page: 8
+  quote: The Best-F1 score measures point-wise detection performance with the threshold that maximizes the
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

@@ -1,0 +1,44 @@
+id: arxiv-2609.29194
+title: Continuous Online Fault Detection for Mobile Robots via Adaptive Edge Models
+authors:
+- Jordan Levy
+- Nicolas Verstaevel
+- Vincent Talon
+- Benoit Gaudou
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.29194
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b1e7e9f5a0781cbd74de5ca5b50707d36663a6e0cafa0ff5e46f4c5831b8fda7
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - time-series-foundation-model
+  - classical-outlier-detectors
+  paradigms:
+  - unsupervised
+  - streaming
+proposes:
+- Teacher-student distillation from a time-series foundation model to an online MiniRocket student
+claims:
+- id: c1
+  statement: A foundation-model teacher (TSPulse) labels data offline and a lightweight student runs online on the robot.
+  location: Abstract
+  page: 1
+  quote: An offline foundation model (TSPulse) generates pseudo-labels from unlabeled time series augmented with fault injections.
+- id: c2
+  statement: Evaluation uses VUS-PR, which penalizes late detections and prolonged false alarms.
+  location: Evaluation
+  page: 4
+  quote: Unlike standard point-wise metrics, VUS-PR is explicitly designed for range-based time series
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

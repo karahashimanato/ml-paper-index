@@ -1,0 +1,57 @@
+id: arxiv-2609.39215
+title: In a Streaming World, Should You Stand Still? A Comprehensive Benchmark of Anomaly Detection in Streams
+authors:
+- Magali Parrino
+- Antoine Ajenjo
+- Emmanuel Remy
+- Pierre Stephan
+- Pierre Senellart
+- Paul Boniol
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.39215
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: bb53ca55128753c0ab3f4ab93e81d6c607f9b919579f1ccdafe2346a19785074
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+  - streaming
+proposes:
+- StrAD streaming TSAD benchmark
+- TSB-drift dataset
+claims:
+- id: c1
+  statement: Most streaming anomaly detection methods come from streaming outlier detection and ignore core characteristics of time-series anomalies; they are evaluated on synthetic or small benchmarks.
+  location: Abstract
+  page: 1
+  quote: most of these approaches originate from the streaming outlier detection litera- ture and largely ignore core characteristics of time series anomalies.
+- id: c2
+  statement: Contrary to common assumptions, static TSAD methods significantly outperform streaming approaches in most streaming settings.
+  location: Abstract
+  page: 1
+  quote: Our results show that, contrary to common assumptions, static TSAD methods significantly outperform streaming approaches in most streaming settings.
+- id: c3
+  statement: AUC-ROC is overly optimistic on imbalanced data, so AUC-PR is used.
+  location: Evaluation measures
+  page: 6
+  quote: Consequently, the Area Under the Precision- Recall Curve (AUC-PR) is preferred in this study.
+- id: c4
+  statement: The main limitation of streaming TSAD is its focus on point-wise outliers rather than collective anomalies.
+  location: Conclusion
+  page: 9
+  quote: The most significant limitation is the legacy focus on point-wise outliers.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

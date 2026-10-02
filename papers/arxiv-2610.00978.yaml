@@ -1,0 +1,53 @@
+id: arxiv-2610.00978
+title: 'Generalist Representation, Specialist Detection: TS-Router for Time-Series Anomaly Detection'
+authors:
+- Tian Lan
+- Yifei Gao
+- Yimeng Lu
+- Xuming An
+- Meng Wang
+- Yue Pan
+- Wenjun He
+- Chenghao Liu
+- Chen Zhang
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2610.00978
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0a13a07fb31bcf89fbf711a56560d71d4b022adcf8f83034a81e1d587a63c901
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - time-series-foundation-model
+  - classical-outlier-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'TS-Router: routing to specialist detectors with foundation-model representations'
+claims:
+- id: c1
+  statement: Different datasets favor different detection criteria; TS-Router uses foundation-model representations to select specialist detectors per series.
+  location: Abstract
+  page: 1
+  quote: estimates the relative competence of heterogeneous anomaly de- tectors from pretrained temporal representations and selects suitable specialists for each target series.
+- id: c2
+  statement: Across 16 benchmarks and four metrics it achieves the best overall average rank.
+  location: Abstract
+  page: 1
+  quote: Across 16 real-world benchmarks and four complementary evaluation metrics, TS-Router achieves the best overall aver- age rank.
+- id: c3
+  statement: It reports VUS-PR, Affiliation-F1, F1T and Standard-F1.
+  location: Metrics
+  page: 7
+  quote: we report VUS-PR, Affiliation-F1, F1T, and Standard-F1
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

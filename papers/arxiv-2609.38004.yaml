@@ -1,0 +1,55 @@
+id: arxiv-2609.38004
+title: 'No Scale Left Behind: Multi-Scale Autoencoder with Bi-directional Attention for Time Series Anomaly Detection'
+authors:
+- Jiaheng Guo
+- Haochen Zhang
+- Yu-Chao Huang
+- Jinhao Duan
+- Nicholas Konz
+- Tianlong Chen
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.38004
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f293428b4851acce5e4119c4b982be82887fa2a3b19b857d3dd53b90355445d8
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - reconstruction-based-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- MSCAD (multi-scale autoencoder with bidirectional cross-scale attention)
+claims:
+- id: c1
+  statement: Most TSAD methods use a single temporal granularity; MSCAD exchanges information among parallel autoencoders at different patch sizes.
+  location: Abstract
+  page: 1
+  quote: most existing TSAD methods commit to a single temporal granularity
+- id: c2
+  statement: On TSB-AD, MSCAD reports large gains over 50 baselines (VUS-PR on univariate and multivariate splits).
+  location: Abstract
+  page: 1
+  quote: MSCAD achieves large performance gains against 50 baselines across multiple metrics
+- id: c3
+  statement: VUS-PR is the primary metric because, unlike point-adjusted F1, it is threshold-free and not gameable by random scores.
+  location: Evaluation
+  page: 6
+  quote: unlike Point-Adjusted F1 (PA-F1) it is threshold-free and not gameable by random scores.
+- id: c4
+  statement: Thresholded F1 variants in the TSB-AD implementation are reported at the best threshold and can be sensitive to threshold selection and point adjustment.
+  location: Evaluation metrics (appendix)
+  page: 19
+  quote: These metrics are useful for diagnosing detector behavior but can be sensitive to threshold selection and, in some cases, to point-adjustment effects.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

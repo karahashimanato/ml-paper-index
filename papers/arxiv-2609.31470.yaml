@@ -1,0 +1,40 @@
+id: arxiv-2609.31470
+title: 'Beyond Empirical Support: Structured Outlier Generation via Sinkhorn Optimal Transport'
+authors:
+- Haixiang Sun
+- Andrew L. Liu
+year: 2026
+links:
+  arxiv: https://arxiv.org/abs/2609.31470
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 20f1325105ae630e064dd09cf1e8c7dd0a9ea7001a29245885973b4f8f2c6e97
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'SBOG: Sinkhorn boundary outlier generation'
+claims:
+- id: c1
+  statement: SBOG generates boundary outliers in latent space using Sinkhorn optimal transport and distributionally robust boundary modeling.
+  location: Abstract
+  page: 1
+  quote: We therefore propose Sinkhorn Boundary Outlier Generation (SBOG), a structured framework for latent-space outlier generation
+- id: c2
+  statement: For time-series anomaly detection, main tables use point-wise evaluation without point adjustment to avoid overestimation.
+  location: Experiments
+  page: 7
+  quote: our main tables use the stricter point-wise evaluation without Point Adjustment.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Approved from candidate issue #3 (2026-10-02). Results tables were not recorded; only claims, including how the paper evaluates (point-adjust or not, metrics, thresholds). Locations are topic
+    names, not section numbers.'

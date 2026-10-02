@@ -1107,82 +1107,11 @@ benchmarks:
     higher_is_better: true
     definition: Event-wise F1 including a false alarm rate term (Section 3).
   defined_in: arxiv-2308.13068
-- id: tab2025-calit2
-  scope: public
-  task: time-series-anomaly-detection
-  dataset: CalIt2 (TAB multivariate)
-  protocol: &id024
-    split: TAB's unified split (validation from training data); non-overlapping test windows by default (experimental settings).
-    preprocessing: Unified pipeline; drop-last disabled (Introduction, experimental settings).
-    tuning: Original hyperparameters plus a search over several sets; best result reported; metrics computed at all thresholds and the best reported.
-    repetitions: Not stated in the main text.
-  metrics:
-  - name: auc-roc
-    higher_is_better: true
-  defined_in: arxiv-2506.18046
-- id: tab2025-daphnet
-  scope: public
-  task: time-series-anomaly-detection
-  dataset: Daphnet (TAB multivariate)
-  protocol: *id024
-  metrics:
-  - name: auc-roc
-    higher_is_better: true
-  defined_in: arxiv-2506.18046
-- id: tab2025-msl
-  scope: public
-  task: time-series-anomaly-detection
-  dataset: MSL (TAB multivariate)
-  protocol: *id024
-  metrics:
-  - name: auc-roc
-    higher_is_better: true
-  defined_in: arxiv-2506.18046
-- id: tab2025-psm
-  scope: public
-  task: time-series-anomaly-detection
-  dataset: PSM (TAB multivariate)
-  protocol: *id024
-  metrics:
-  - name: auc-roc
-    higher_is_better: true
-  defined_in: arxiv-2506.18046
-- id: tab2025-skab
-  scope: public
-  task: time-series-anomaly-detection
-  dataset: SKAB (TAB multivariate)
-  protocol: *id024
-  metrics:
-  - name: auc-roc
-    higher_is_better: true
-  defined_in: arxiv-2506.18046
-- id: tab2025-smap
-  scope: public
-  task: time-series-anomaly-detection
-  dataset: SMAP (TAB multivariate)
-  protocol: *id024
-  metrics:
-  - name: auc-roc
-    higher_is_better: true
-  defined_in: arxiv-2506.18046
-- id: tab2025-univariate
-  scope: public
-  task: time-series-anomaly-detection
-  dataset: TAB univariate collection (1,635 series)
-  protocol: *id024
-  metrics:
-  - name: v-pr
-    higher_is_better: true
-    definition: VUS-PR.
-  - name: aff-f1
-    higher_is_better: true
-    definition: Affiliation F1.
-  defined_in: arxiv-2506.18046
 - id: grinsztajn2022-medium-num-clf
   scope: public
   task: tabular-classification
   dataset: Grinsztajn et al. medium-sized benchmark, numerical features, classification (15 datasets)
-  protocol: &id025
+  protocol: &id024
     split: 70% train (capped at 10,000 samples), remaining 30% split 30/70 into validation/test (each capped at 50,000); 1-5 folds depending on test size (Appendix A).
     preprocessing: No missing data; multiclass binarised to two balanced classes; categorical features with >20 levels removed; numerical features with <10 unique values removed; QuantileTransformer for
       NNs; heavy-tailed regression targets log-transformed; one-hot for models without native categorical support (Sections 3.2, 3.5).
@@ -1201,7 +1130,7 @@ benchmarks:
   scope: public
   task: tabular-regression
   dataset: Grinsztajn et al. medium-sized benchmark, numerical features, regression (19 datasets)
-  protocol: *id025
+  protocol: *id024
   metrics:
   - name: normalized-r2
     higher_is_better: true
@@ -1214,7 +1143,7 @@ benchmarks:
   scope: public
   task: tabular-classification
   dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, classification (7 datasets)
-  protocol: *id025
+  protocol: *id024
   metrics:
   - name: normalized-accuracy
     higher_is_better: true
@@ -1227,7 +1156,7 @@ benchmarks:
   scope: public
   task: tabular-regression
   dataset: Grinsztajn et al. medium-sized benchmark, numerical + categorical features, regression (14 datasets)
-  protocol: *id025
+  protocol: *id024
   metrics:
   - name: normalized-r2
     higher_is_better: true
@@ -1240,12 +1169,12 @@ benchmarks:
   scope: paper-private
   task: tabular-classification
   dataset: 'Meta-train benchmark: 118 medium-sized UCI-derived datasets (classification and regression)'
-  protocol: &id026
+  protocol: &id025
     split: 10 random 60/20/20 train/validation/test splits per dataset; rows with missing numerical values removed (Sections 2.1-2.2).
     preprocessing: Method-specific; RealMLP uses robust scaling + smooth clipping and one-hot for low-cardinality categoricals (Section 3).
     tuning: Library defaults (D), tuned defaults from the meta-train benchmark (TD), or 50-step random-search HPO per split (Section 5).
     repetitions: Shifted geometric mean of errors over datasets (eps = 0.01), with dataset weights on meta-train (Section 2.2).
-  metrics: &id027
+  metrics: &id026
   - name: sgm-classification-error
     higher_is_better: false
     definition: Shifted geometric mean of classification error over datasets (Section 2.2).
@@ -1257,21 +1186,21 @@ benchmarks:
   scope: paper-private
   task: tabular-classification
   dataset: 'Meta-test benchmark: 90 datasets from the AutoML Benchmark and OpenML-CTR23 (classification and regression)'
-  protocol: *id026
-  metrics: *id027
+  protocol: *id025
+  metrics: *id026
   defined_in: arxiv-2407.04491
 - id: holzmuller2024-grinsztajn
   scope: paper-private
   task: tabular-classification
   dataset: Grinsztajn et al. benchmark datasets evaluated under this paper's protocol (not the original Grinsztajn protocol)
-  protocol: *id026
-  metrics: *id027
+  protocol: *id025
+  metrics: *id026
   defined_in: arxiv-2407.04491
 - id: gorishniy2025-46-datasets
   scope: paper-private
   task: tabular-classification
   dataset: 46 public datasets (Grinsztajn et al., Gorishniy et al. 2024, TabReD, Microsoft); classification and regression
-  protocol: &id028
+  protocol: &id027
     split: Splits inherited from prior work; domain-aware (e.g. time-based) splits for TabReD datasets and Microsoft (Section 3.1).
     preprocessing: Model-specific; feature embeddings for models marked † or ‡ (Section 4.1, Appendix D).
     tuning: Hyperparameter tuning on the validation set following Gorishniy et al. (2024) (Appendix D.2).
@@ -1284,7 +1213,7 @@ benchmarks:
   scope: paper-private
   task: tabular-regression
   dataset: Maps Routing (6.5M objects, 986 features; large dataset of Table 2)
-  protocol: *id028
+  protocol: *id027
   metrics:
   - name: rmse
     higher_is_better: false
@@ -1293,8 +1222,79 @@ benchmarks:
   scope: paper-private
   task: tabular-regression
   dataset: Weather (13M objects, 103 features; large dataset of Table 2)
-  protocol: *id028
+  protocol: *id027
   metrics:
   - name: rmse
     higher_is_better: false
   defined_in: arxiv-2410.24210
+- id: tab2025-calit2
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: CalIt2 (TAB multivariate)
+  protocol: &id028
+    split: TAB's unified split (validation from training data); non-overlapping test windows by default (experimental settings).
+    preprocessing: Unified pipeline; drop-last disabled (Introduction, experimental settings).
+    tuning: Original hyperparameters plus a search over several sets; best result reported; metrics computed at all thresholds and the best reported.
+    repetitions: Not stated in the main text.
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-daphnet
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: Daphnet (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-msl
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: MSL (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-psm
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: PSM (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-skab
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: SKAB (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-smap
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: SMAP (TAB multivariate)
+  protocol: *id028
+  metrics:
+  - name: auc-roc
+    higher_is_better: true
+  defined_in: arxiv-2506.18046
+- id: tab2025-univariate
+  scope: public
+  task: time-series-anomaly-detection
+  dataset: TAB univariate collection (1,635 series)
+  protocol: *id028
+  metrics:
+  - name: v-pr
+    higher_is_better: true
+    definition: VUS-PR.
+  - name: aff-f1
+    higher_is_better: true
+    definition: Affiliation F1.
+  defined_in: arxiv-2506.18046

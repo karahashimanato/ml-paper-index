@@ -6,7 +6,7 @@
 - 著者: Xiangfei Qiu, Zhe Li, Wanghui Qiu, Shiyan Hu, Lekui Zhou, Xingjian Wu, Zhengyu Li, Chenjuan Guo, Aoying Zhou, Zhenli Sheng, Jilin Hu, Christian S. Jensen, Bin Yang
 - 年・掲載: 2025 PVLDB 18(9)
 - 原論文: [PDF](https://arxiv.org/pdf/2506.18046v2)(arXiv v2、カード作成時に読んだ版)
-- タグ: classical-outlier-detectors, forecasting-based-detectors, reconstruction-based-detectors, tabular-foundation-model, time-series-anomaly-detection, unsupervised
+- タグ: classical-outlier-detectors, forecasting-based-detectors, reconstruction-based-detectors, time-series-anomaly-detection, time-series-foundation-model, unsupervised
 - 人手レビュー: 未
 
 ## 主張

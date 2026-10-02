@@ -2,4 +2,179 @@
 # 新しいIDの追加 = 「これらの条件は同一である」という明示的な判断。カード作成時に既存IDへ当てはまらなければ、
 # 黙って近いIDを使わず、新しいIDとして提案すること。
 # 書式は templates/benchmark-entry.yaml を参照。パイロット論文のカード化と同時に登録していく。
-benchmarks: []
+benchmarks:
+- id: shwartzziv2021-rossmann
+  scope: paper-private
+  task: tabular-regression
+  dataset: Rossmann Store Sales
+  protocol:
+    split: 2014 for train/validation (100k validation samples), 2015 for test; retrain on full training data after tuning (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: table2-mse
+    higher_is_better: false
+    definition: Value in Table 2. Caption says MSE; Section 3.1.2 says RMSE - the paper is inconsistent.
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-covertype
+  scope: paper-private
+  task: tabular-classification
+  dataset: Forest Cover Type
+  protocol:
+    split: Train/val/test split provided by the dataset authors (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-higgs
+  scope: paper-private
+  task: tabular-classification
+  dataset: Higgs Boson
+  protocol:
+    split: 500k validation samples split from training data; retrain on full training data after tuning (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-gas-concentrations
+  scope: paper-private
+  task: tabular-classification
+  dataset: Gas Concentrations (OpenML 1477)
+  protocol:
+    split: Split as in the DNF-Net paper; Appendix B does not describe it.
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+  external_ids:
+    openml: '1477'
+- id: shwartzziv2021-eye-movements
+  scope: paper-private
+  task: tabular-classification
+  dataset: Eye Movements (OpenML 1044)
+  protocol:
+    split: 70% train / 10% validation / 20% test (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+  external_ids:
+    openml: '1044'
+- id: shwartzziv2021-gesture-phase
+  scope: paper-private
+  task: tabular-classification
+  dataset: Gesture Phase (OpenML 4538)
+  protocol:
+    split: 70% train / 10% validation / 20% test (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+  external_ids:
+    openml: '4538'
+- id: shwartzziv2021-yearprediction
+  scope: paper-private
+  task: tabular-regression
+  dataset: YearPrediction MSD
+  protocol:
+    split: Appendix B lists it under both the 80/20 train/validation split and the 70/10/20 split (ambiguous).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: table2-mse
+    higher_is_better: false
+    definition: Value in Table 2. Caption says MSE; Section 3.1.2 says RMSE - the paper is inconsistent.
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-mslr-web10k
+  scope: paper-private
+  task: tabular-classification
+  dataset: Microsoft MSLR-WEB10K
+  protocol:
+    split: Random stratified 80% train / 20% validation split of the full training data (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-epsilon
+  scope: paper-private
+  task: tabular-classification
+  dataset: Epsilon (PASCAL 2008)
+  protocol:
+    split: Random stratified 80% train / 20% validation split of the full training data (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-shrutime
+  scope: paper-private
+  task: tabular-classification
+  dataset: Shrutime (Kaggle churn modelling)
+  protocol:
+    split: Random stratified 80% train / 20% validation split of the full training data (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-blastchar
+  scope: paper-private
+  task: tabular-classification
+  dataset: Blastchar (Telco customer churn)
+  protocol:
+    split: Random stratified 80% train / 20% validation split of the full training data (Appendix B).
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+  metrics:
+  - name: cross-entropy-x100
+    higher_is_better: false
+    definition: Test cross-entropy loss multiplied by 100 (Table 2 caption).
+  defined_in: arxiv-2106.03253
+- id: shwartzziv2021-unseen-average
+  scope: paper-private
+  task: tabular-classification
+  dataset: Aggregate over each model's unseen datasets (the 11 datasets minus those in the model's original paper)
+  protocol:
+    split: Per-dataset splits as in the other shwartzziv2021-* entries.
+    preprocessing: Each dataset preprocessed as in its original paper; features standardized with training-set statistics (Section 3.1.1).
+    tuning: HyperOpt (Bayesian optimization), 1,000 steps per model per dataset, initial hyperparameters from the original papers; early stopping on validation (Section 3.1.2, Appendix B).
+    repetitions: Three random partitions if the original split was random, otherwise four seeds on the same partition; Table 2 reports mean and SEM of four runs.
+    other: Per dataset, relative performance vs. the best model on that dataset; averaged with a geometric mean over the model's unseen datasets (Section 3.2). Mixes classification and regression datasets.
+  metrics:
+  - name: avg-relative-deterioration-pct
+    higher_is_better: false
+    definition: 'Table 3: average relative performance deterioration (%).'
+  defined_in: arxiv-2106.03253

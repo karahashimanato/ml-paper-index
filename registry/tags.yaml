@@ -20,12 +20,20 @@ method_families:
   - id: tabular-mlp
     description: MLP / ResNet-style networks for tabular data.
     parent: deep-learning
-  - id: tabular-transformer
-    description: Attention-based architectures for tabular data.
+  - id: tabular-attention
+    description: Attention-based architectures for tabular data (Transformers, TabNet-style attentive feature selection).
+    parent: deep-learning
+  - id: differentiable-trees
+    description: Neural models built from soft/differentiable decision trees (e.g. NODE).
+    parent: deep-learning
+  - id: tabular-cnn
+    description: Convolutional networks applied to tabular features.
     parent: deep-learning
   - id: tabular-foundation-model
     description: Models pretrained across many tables and applied to new tables (e.g. via in-context learning).
     parent: deep-learning
+  - id: heterogeneous-ensembles
+    description: Ensembles combining different model types (e.g. averaging deep models with GBDT).
   - id: linear-models
     description: Linear / generalized linear models.
 

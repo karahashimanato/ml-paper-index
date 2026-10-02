@@ -8,7 +8,7 @@
 
 - **tabular-classification**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **tabular-regression**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
-- **concept-drift-detection**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
+- **concept-drift-detection**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
 - **dataset-shift-detection**: [arxiv-1810.11953](papers/arxiv-1810.11953.md)
 
 ### method_families
@@ -23,15 +23,15 @@
 - **heterogeneous-ensembles**: [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 - **automl-systems**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 - **error-rate-drift-detectors**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
-- **window-based-drift-detectors**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
-- **two-sample-tests**: [arxiv-1810.11953](papers/arxiv-1810.11953.md), [arxiv-2004.05785](papers/arxiv-2004.05785.md)
+- **window-based-drift-detectors**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
+- **two-sample-tests**: [arxiv-1810.11953](papers/arxiv-1810.11953.md), [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
 - **dimensionality-reduction-for-shift**: [arxiv-1810.11953](papers/arxiv-1810.11953.md)
 - **linear-models**: [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
 
 ### paradigms
 
 - **supervised**: [arxiv-1810.11953](papers/arxiv-1810.11953.md), [arxiv-2106.03253](papers/arxiv-2106.03253.md), [arxiv-2106.11959](papers/arxiv-2106.11959.md), [arxiv-2207.08815](papers/arxiv-2207.08815.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2407.04491](papers/arxiv-2407.04491.md), [arxiv-2410.24210](papers/arxiv-2410.24210.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md)
-- **streaming**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md)
+- **streaming**: [arxiv-2004.05785](papers/arxiv-2004.05785.md), [arxiv-2310.15826](papers/arxiv-2310.15826.md), [arxiv-2311.06396](papers/arxiv-2311.06396.md), [arxiv-2602.06456](papers/arxiv-2602.06456.md), [arxiv-2606.07789](papers/arxiv-2606.07789.md), [doi-10.1007_s41060-024-00620-y](papers/doi-10.1007_s41060-024-00620-y.md)
 - **in-context-learning**: [arxiv-2207.01848](papers/arxiv-2207.01848.md), [arxiv-2305.02997](papers/arxiv-2305.02997.md), [arxiv-2506.16791](papers/arxiv-2506.16791.md), [doi-10.1038_s41586-024-08328-6](papers/doi-10.1038_s41586-024-08328-6.md)
 
 ## 比較条件
@@ -126,3 +126,4 @@
 | `gowerwinter2026-rt` | paper-private | concept-drift-detection | Rialto stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
 | `gowerwinter2026-yg` | paper-private | concept-drift-detection | Yoga stream (USP Data Stream Repository) under the paper's protocol | arxiv-2602.06456 | 24 |
 | `gowerwinter2026-11-streams` | paper-private | concept-drift-detection | 11 real-world streams of the paper (aggregate) | arxiv-2602.06456 | 23 |
+| `lukats2024-insects-abrupt-balanced` | paper-private | concept-drift-detection | INSECTS (abrupt balanced) stream (Souza et al.), the only stream in the study with drift ground truth for MTR | doi-10.1007_s41060-024-00620-y | 28 |

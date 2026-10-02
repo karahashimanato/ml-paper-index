@@ -1089,3 +1089,26 @@ benchmarks:
     higher_is_better: false
     definition: Median rank across the 11 streams (Table 1, MedRank).
   defined_in: arxiv-2602.06456
+- id: lukats2024-insects-abrupt-balanced
+  scope: paper-private
+  task: concept-drift-detection
+  dataset: INSECTS (abrupt balanced) stream (Souza et al.), the only stream in the study with drift ground truth for MTR
+  protocol:
+    split: Full stream, prequential with Hoeffding tree; detectors see only features (fully unsupervised) (Section 5).
+    preprocessing: Detector-specific; reset mechanism added where the original description had none (Section 5.3).
+    tuning: Grid search over configuration parameters; Table 8 reports each detector's best configuration (Section 5.3, Table 8).
+    repetitions: Non-deterministic detectors averaged (Section 6).
+  metrics:
+  - name: mtr
+    higher_is_better: true
+    definition: Mean Time Ratio (Section 5.2).
+  - name: mtfa
+    higher_is_better: true
+    definition: Mean Time between False Alarms.
+  - name: mtd
+    higher_is_better: false
+    definition: Mean Time to Detection.
+  - name: mdr
+    higher_is_better: false
+    definition: Missed Detection Rate.
+  defined_in: doi-10.1007_s41060-024-00620-y

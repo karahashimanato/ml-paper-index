@@ -1,0 +1,363 @@
+id: doi-10.1007_s41060-024-00620-y
+title: A benchmark and survey of fully unsupervised concept drift detectors on real-world data streams
+authors:
+- Daniel Lukats
+- Oliver Zielinski
+- Axel Hahn
+- Frederic Stahl
+year: 2024
+venue: International Journal of Data Science and Analytics
+links:
+  doi: https://doi.org/10.1007/s41060-024-00620-y
+  code: https://github.com/DFKI-NI/unsupervised-concept-drift-detection
+source:
+  version: DLR elib repository copy (OpenAlex labels it acceptedVersion; the PDF has the journal layout)
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 91771ae311db2f7148f5050a32e92f803418c00e1769042bd2a963e3fc5765a0
+  license: CC BY-NC-ND 4.0
+  pdf_url: https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf
+tags:
+  tasks:
+  - concept-drift-detection
+  method_families:
+  - window-based-drift-detectors
+  - two-sample-tests
+  paradigms:
+  - streaming
+proposes:
+- Benchmark of fully unsupervised concept drift detectors on real-world streams
+claims:
+- id: c1
+  statement: Most drift detectors in the literature require immediately available true labels, which is unrealistic in many applications.
+  location: Abstract
+  page: 1
+  quote: Most algorithms proposed in the literature depend on the immediate availability of ground truth class labels.
+- id: c2
+  statement: Ten fully unsupervised detectors are analyzed (architecture, core ideas, assumptions about data).
+  location: Abstract
+  page: 1
+  quote: Ten algorithms are analyzed in terms of architectural choices, core ideas and assumptions about data
+- id: c3
+  statement: Seven detectors are evaluated on eleven real-world data streams; three were too slow or depended on chance.
+  location: Abstract
+  page: 1
+  quote: Seven of these algorithms are evaluated with common concept drift detection metrics on eleven real-world data streams
+- id: c4
+  statement: Depending on the target metric, D3, IBDD and SPLL are recommended.
+  location: Abstract
+  page: 1
+  quote: three concept drift detectors—Discriminative Drift Detector, Image-Based Drift Detector and Semi-Parametric Log-Likelihood—can be recommended depending on the desired target metric.
+- id: c5
+  statement: The evaluation metrics Mean Time Ratio and lift-per-drift have issues.
+  location: Abstract
+  page: 1
+  quote: This study further reveals issues with the evaluation metrics Mean Time Ratio and lift-per-drift.
+- id: c6
+  statement: Only one stream (INSECTS abrupt balanced) allows computing MTR, which needs ground-truth drift times.
+  location: Section 6.2
+  page: 12
+  quote: INSECTS (abrupt balanced) is the only data stream in this study which can be used to determine MTR.
+- id: c7
+  statement: In MTR, D3 outperformed the other detectors by a large margin.
+  location: Section 6.2
+  page: 13
+  quote: In these experiments, D3 outperforms other detectors by a large margin
+- id: c8
+  statement: IBDD was among the worst in MTR despite having the most tested configurations.
+  location: Section 6.2
+  page: 13
+  quote: IBDD is among the worst performers, despite being the least filtered detector
+- id: c9
+  statement: Classifier accuracy as a proxy metric is biased toward detectors that detect (and adapt) more often.
+  location: Section 8
+  page: 18
+  quote: classifier predictive performance is biased in favor of a higher number of detected concept drifts and adaptations.
+- id: c10
+  statement: The lift-per-drift metric is biased the other way, favoring fewer detections.
+  location: Section 8
+  page: 18
+  quote: lpdr=1 is likewise biased, as the version used in this study evidently favors fewer detected concept drifts.
+- id: c11
+  statement: IBDD gave strong classifier accuracy on many streams but did worse in lpd and MTR.
+  location: Section 8
+  page: 18
+  quote: Image-Based Drift Detector (IBDD) [46] achieves great classifier predictive performance on many data streams, although it does not perform as well when assessed with lpd and MTR.
+- id: c12
+  statement: D3 and SPLL gave the best results on most streams while also giving good classifier accuracy.
+  location: Section 8
+  page: 18
+  quote: Discriminative Drift Detector (D3) [45] and Semi-Parametric Log Likelihood (SPLL) [39] showed the best results on most data streams
+- id: c13
+  statement: All configuration permutations were tried by grid search.
+  location: Section 5.3
+  page: 10
+  quote: A simple grid search is performed to test all permutations of the configuration parameters
+- id: c14
+  statement: Several original publications describe no reset after a detection, so the authors added one where needed.
+  location: Section 5.3
+  page: 10
+  quote: several publications do not mention any reset mechanism to adapt to the new concept after the detection of a concept drift.
+- id: c15
+  statement: 61 publications on unsupervised drift detection were examined.
+  location: Section 8
+  page: 17
+  quote: This study examined 61 publications related to unsupervised concept drift detection.
+- id: c16
+  statement: Configurations with no detection or periodic detection were filtered out before analysis.
+  location: Section 6.1
+  page: 11
+  quote: the experimental results were filtered to remove those results which featured no detection or periodic concept drift detection
+- id: c17
+  statement: Real-world streams with known drift ground truth (which drifts, start and end) are hard to obtain.
+  location: Section 5.1
+  page: 8
+  quote: data with known concept drift ground truth information—which concept drifts are present, when do they begin and end—are difficult to obtain.
+results:
+- id: r1
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: BNDM
+  metric: mtr
+  value: 33.7
+  location: Table 8
+  page: 13
+  quote: BNDM 33.7 4927.0 146.4 0.0
+- id: r2
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: BNDM
+  metric: mtfa
+  value: 4927.0
+  location: Table 8
+  page: 13
+  quote: BNDM 33.7 4927.0 146.4 0.0
+- id: r3
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: BNDM
+  metric: mtd
+  value: 146.4
+  location: Table 8
+  page: 13
+  quote: BNDM 33.7 4927.0 146.4 0.0
+- id: r4
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: BNDM
+  metric: mdr
+  value: 0.0
+  location: Table 8
+  page: 13
+  quote: BNDM 33.7 4927.0 146.4 0.0
+- id: r5
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: CSDDM
+  metric: mtr
+  value: 10.6
+  std: 1.2
+  location: Table 8
+  page: 13
+  quote: CSDDM 10.6 ±1.2 2327.7 ±298.2 219.6 ±9.2 0.0 ±0
+- id: r6
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: CSDDM
+  metric: mtfa
+  value: 2327.7
+  std: 298.2
+  location: Table 8
+  page: 13
+  quote: CSDDM 10.6 ±1.2 2327.7 ±298.2 219.6 ±9.2 0.0 ±0
+- id: r7
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: CSDDM
+  metric: mtd
+  value: 219.6
+  std: 9.2
+  location: Table 8
+  page: 13
+  quote: CSDDM 10.6 ±1.2 2327.7 ±298.2 219.6 ±9.2 0.0 ±0
+- id: r8
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: CSDDM
+  metric: mdr
+  value: 0.0
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: CSDDM 10.6 ±1.2 2327.7 ±298.2 219.6 ±9.2 0.0 ±0
+- id: r9
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: D3
+  metric: mtr
+  value: 104.6
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: D3 104.6 ±0.0 20664.0 ±0.0 91.6 ±28.2 0.6 ±0
+- id: r10
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: D3
+  metric: mtfa
+  value: 20664.0
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: D3 104.6 ±0.0 20664.0 ±0.0 91.6 ±28.2 0.6 ±0
+- id: r11
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: D3
+  metric: mtd
+  value: 91.6
+  std: 28.2
+  location: Table 8
+  page: 13
+  quote: D3 104.6 ±0.0 20664.0 ±0.0 91.6 ±28.2 0.6 ±0
+- id: r12
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: D3
+  metric: mdr
+  value: 0.6
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: D3 104.6 ±0.0 20664.0 ±0.0 91.6 ±28.2 0.6 ±0
+- id: r13
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: IBDD
+  metric: mtr
+  value: 7.0
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: IBDD 7.0 ±0.0 2450.6 ±0.0 210.7 ±0.0 0.4 ±0
+- id: r14
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: IBDD
+  metric: mtfa
+  value: 2450.6
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: IBDD 7.0 ±0.0 2450.6 ±0.0 210.7 ±0.0 0.4 ±0
+- id: r15
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: IBDD
+  metric: mtd
+  value: 210.7
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: IBDD 7.0 ±0.0 2450.6 ±0.0 210.7 ±0.0 0.4 ±0
+- id: r16
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: IBDD
+  metric: mdr
+  value: 0.4
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: IBDD 7.0 ±0.0 2450.6 ±0.0 210.7 ±0.0 0.4 ±0
+- id: r17
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: OCDD
+  metric: mtr
+  value: 7.9
+  location: Table 8
+  page: 13
+  quote: OCDD 7.9 3348.3 340.0 0.2
+- id: r18
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: OCDD
+  metric: mtfa
+  value: 3348.3
+  location: Table 8
+  page: 13
+  quote: OCDD 7.9 3348.3 340.0 0.2
+- id: r19
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: OCDD
+  metric: mtd
+  value: 340.0
+  location: Table 8
+  page: 13
+  quote: OCDD 7.9 3348.3 340.0 0.2
+- id: r20
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: OCDD
+  metric: mdr
+  value: 0.2
+  location: Table 8
+  page: 13
+  quote: OCDD 7.9 3348.3 340.0 0.2
+- id: r21
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: SPLL
+  metric: mtr
+  value: 31.2
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: SPLL 31.2 ±0.0 5185.0 ±0.0 132.8 ±0.0 0.2 ±0
+- id: r22
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: SPLL
+  metric: mtfa
+  value: 5185.0
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: SPLL 31.2 ±0.0 5185.0 ±0.0 132.8 ±0.0 0.2 ±0
+- id: r23
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: SPLL
+  metric: mtd
+  value: 132.8
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: SPLL 31.2 ±0.0 5185.0 ±0.0 132.8 ±0.0 0.2 ±0
+- id: r24
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: SPLL
+  metric: mdr
+  value: 0.2
+  std: 0.0
+  location: Table 8
+  page: 13
+  quote: SPLL 31.2 ±0.0 5185.0 ±0.0 132.8 ±0.0 0.2 ±0
+- id: r25
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: UDetect
+  metric: mtr
+  value: 4.7
+  location: Table 8
+  page: 13
+  quote: UDetect 4.7 1445.7 247.8 0.2
+- id: r26
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: UDetect
+  metric: mtfa
+  value: 1445.7
+  location: Table 8
+  page: 13
+  quote: UDetect 4.7 1445.7 247.8 0.2
+- id: r27
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: UDetect
+  metric: mtd
+  value: 247.8
+  location: Table 8
+  page: 13
+  quote: UDetect 4.7 1445.7 247.8 0.2
+- id: r28
+  benchmark: lukats2024-insects-abrupt-balanced
+  method: UDetect
+  metric: mdr
+  value: 0.2
+  location: Table 8
+  page: 13
+  quote: UDetect 4.7 1445.7 247.8 0.2
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Table 8 extracted mechanically; values are each detector's BEST configuration (grid search) on the same stream, so they are optimistic. Rows without σ in the table have no std recorded. Tables
+    10-14 (accuracy, lpd, synthetic verification) were not recorded. The publisher PDF is behind a JavaScript bot check, so the open-access copy in the DLR repository was used. 'year' is the acceptance/publication
+    year on the PDF (2024); Window Dilemma cites it as 2025 (journal issue).

@@ -1,0 +1,82 @@
+id: arxiv-2310.15826
+title: One or Two Things We know about Concept Drift -- A Survey on Monitoring Evolving Environments
+authors:
+- Fabian Hinder
+- Valerie Vaquet
+- Barbara Hammer
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2310.15826
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: bde8e78e434435f5eaa2bdb6d92f24cf713b4d36350b13c476d03dab51804d1d
+tags:
+  tasks:
+  - concept-drift-detection
+  method_families:
+  - window-based-drift-detectors
+  - two-sample-tests
+  paradigms:
+  - streaming
+proposes:
+- Taxonomy of unsupervised drift detection and localization
+- Guidelines for choosing detection strategies
+claims:
+- id: c1
+  statement: Most surveys cover supervised streams; this survey reviews drift in unsupervised data streams, relevant for monitoring and anomaly detection.
+  location: Abstract
+  page: 1
+  quote: While many surveys focus on supervised data streams, so far, there is no work reviewing the unsupervised setting.
+- id: c2
+  statement: It provides a taxonomy of drift detection and a systematic review of drift localization.
+  location: Abstract
+  page: 1
+  quote: This survey provides a taxonomy of existing work on drift detection.
+- id: c3
+  statement: It includes standardized experiments on parametric artificial datasets to compare detection and localization strategies directly.
+  location: Abstract
+  page: 1
+  quote: contains standardized experiments on parametric artificial datasets allowing for a direct comparison of different strategies for detection and localization.
+- id: c4
+  statement: 'Guideline: incorporate as much domain knowledge as possible (preprocessing, features, descriptors).'
+  location: Conclusion and Guidelines for Drift Detection
+  page: 27
+  quote: A main finding is that as much domain knowledge as possible should be incorporated when designing drift detection schemes.
+- id: c5
+  statement: Meta or block-based detection methods are advisable overall; choosing good split points is crucial.
+  location: Conclusion and Guidelines for Drift Detection
+  page: 27
+  quote: Over all experiments, we found that it is advisable to use meta or block-based methods.
+- id: c6
+  statement: Feature-wise analysis only if the drift is not expected to show up in correlations; otherwise ensemble-based techniques are better.
+  location: Conclusion and Guidelines for Drift Detection
+  page: 27
+  quote: A feature-wise analysis should only be performed if it is expected that the drift does not inflict itself in correlations.
+- id: c7
+  statement: For high-dimensional data avoid dimension-wise methods, especially when false alarms are costly.
+  location: Conclusion and Guidelines for Drift Detection
+  page: 27
+  quote: When working with high dimensional data, one should avoid using dimension-wise methodologies, especially if false alarms are costly in the considered application.
+- id: c8
+  statement: Loss-based strategies should be avoided when the goal is monitoring for anomalous behavior.
+  location: Conclusion and Guidelines for Drift Detection
+  page: 27
+  quote: loss-based strategies should be avoided when the target of the drift detection is monitoring for anomalous behavior.
+- id: c9
+  statement: Detecting the time of a drift is not sufficient for monitoring; one must also localize where it happens.
+  location: Drift Localization and Segmentation
+  page: 27
+  quote: Solely detecting and determining the time point of the drift is not sufficient in many monitoring settings.
+- id: c10
+  statement: More research is needed especially on drift localization and explanation.
+  location: Conclusion
+  page: 39
+  quote: Finally, we found that more research is required, in particular focusing on the localization and explanation tasks.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: Survey; its experiments use parametric artificial datasets and are reported as figures, so no results were recorded. Section numbers are not used (headings only).

@@ -2,7 +2,7 @@
 title: 概念ドリフトとデータシフトの検出手法の比較
 kind: task
 tags: [drift-detection, concept-drift-detection, dataset-shift-detection]
-depends_on: [arxiv-2004.05785, arxiv-1810.11953, arxiv-2311.06396, arxiv-2606.07789, arxiv-2602.06456]
+depends_on: [arxiv-2004.05785, arxiv-1810.11953, arxiv-2311.06396, arxiv-2606.07789, arxiv-2602.06456, doi-10.1007_s41060-024-00620-y, arxiv-2310.15826]
 written_at: 2026-10-02
 written_by: claude-opus-5-5 via Claude Code
 ---
@@ -57,6 +57,7 @@ written_by: claude-opus-5-5 via Claude Code
 - [Cerqueira et al. 2026 の結果表と勝敗](../../generated/papers/arxiv-2606.07789.md)
 - [Gower-Winter et al. 2026 の結果表と勝敗](../../generated/papers/arxiv-2602.06456.md)
 - [Rabanser et al. 2019 の結果表と勝敗](../../generated/papers/arxiv-1810.11953.md)
+- [Lukats et al. 2024 の結果表と勝敗](../../generated/papers/doi-10.1007_s41060-024-00620-y.md)
 
 ### Aguiar & Cano 2023: 局所的なドリフトほど難しい
 
@@ -109,6 +110,26 @@ PH と EWMA は、どう設定しても効果が出なかった [arxiv-2606.0778
 精度は誤解を招きうる指標であることも著者が認めている [arxiv-2602.06456#c15](https://arxiv.org/pdf/2602.06456v1#page=5 "We acknowledge that accuracy is a potentially misleading metric in Drift Research")。
 著者自身は「検出が無意味」とまでは言っておらず、「目的の置き方が誤っている」としている [arxiv-2602.06456#c11](https://arxiv.org/pdf/2602.06456v1#page=8 "Our findings do not mean that drift detection is pointless, rather that its current purpose is misplaced.")。
 
+### Lukats et al. 2024 と Hinder et al. 2023: 正解ラベルを使わない検出
+
+正解ラベルがすぐには得られない運用環境では、入力だけを見る**教師なし**の検出器が必要になる。
+Lukats らは、多くの検出器が即時のラベルを前提にしていることを問題にし [doi-10.1007_s41060-024-00620-y#c1](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=1 "Most algorithms proposed in the literature depend on the immediate availability of ground truth class labels.")、
+完全に教師なしの検出器10個を整理して、7個を実データのストリーム11本で比べた [doi-10.1007_s41060-024-00620-y#c2](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=1 "Ten algorithms are analyzed in terms of architectural choices, core ideas and assumptions about data") [doi-10.1007_s41060-024-00620-y#c3](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=1 "Seven of these algorithms are evaluated with common concept drift detection metrics on eleven real-world data streams")。
+
+正解のドリフト時点がわかる唯一のストリームで直接評価すると、D3 が大差で最良だった [doi-10.1007_s41060-024-00620-y#c7](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=13 "In these experiments, D3 outperforms other detectors by a large margin")。
+一方、分類器の精度で間接的に評価すると、IBDD が良く見えた [doi-10.1007_s41060-024-00620-y#c11](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=18 "Image-Based Drift Detector (IBDD) [46] achieves great classifier predictive performance on many data streams, although it does not perform as well when assessed with lpd and MTR.")。
+著者は、**精度による評価は検出の回数が多い検出器に有利に偏り**、別の指標(lift-per-drift)は逆に少ない検出器に偏ると指摘している [doi-10.1007_s41060-024-00620-y#c9](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=18 "classifier predictive performance is biased in favor of a higher number of detected concept drifts and adaptations.") [doi-10.1007_s41060-024-00620-y#c10](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=18 "lpdr=1 is likewise biased, as the version used in this study evidently favors fewer detected concept drifts.")。
+これは、Window Dilemma の「頻繁に警報を出す検出器ほど良く見える」という指摘 [arxiv-2602.06456#c5](https://arxiv.org/pdf/2602.06456v1#page=4 "concept drift detectors that detect more frequently, tend to perform better (up to a point).") と同じ現象を、別の著者が別の実験で示したものである。
+また D3 が最良という点も、Window Dilemma の結果 [arxiv-2602.06456#c7](https://arxiv.org/pdf/2602.06456v1#page=7 "Of the drift detectors, D3-HT performed the best for both the NB and HT base models.") と一致している。
+ただし Lukats らの表の値は、同じストリーム上での各検出器の最良の設定であり、楽観的に出ている [doi-10.1007_s41060-024-00620-y#c13](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=10 "A simple grid search is performed to test all permutations of the configuration parameters")。
+
+Hinder らのサーベイは、監視の目的では「いつ」だけでなく「どこで」変化したかが重要だとする [arxiv-2310.15826#c9](https://arxiv.org/pdf/2310.15826v1#page=27 "Solely detecting and determining the time point of the drift is not sufficient in many monitoring settings.")。
+使い分けの指針として、次の点を挙げている。
+
+- ドメイン知識をできるだけ取り込む [arxiv-2310.15826#c4](https://arxiv.org/pdf/2310.15826v1#page=27 "A main finding is that as much domain knowledge as possible should be incorporated when designing drift detection schemes.")
+- 高次元のデータでは次元ごとの手法を避ける [arxiv-2310.15826#c7](https://arxiv.org/pdf/2310.15826v1#page=27 "When working with high dimensional data, one should avoid using dimension-wise methodologies, especially if false alarms are costly in the considered application.")
+- 異常の監視が目的なら損失(誤差)ベースの手法を避ける [arxiv-2310.15826#c8](https://arxiv.org/pdf/2310.15826v1#page=27 "loss-based strategies should be avoided when the target of the drift detection is monitoring for anomalous behavior.")
+
 ### Rabanser et al. 2019: 運用データのシフトをどう検出するか
 
 学習済みの分類器の出力(ソフトマックス)を低次元の表現として使い、二標本検定をかける方法(BBSD)が最も良かった [arxiv-1810.11953#c1](https://arxiv.org/pdf/1810.11953v4#page=1 "a two-sample-testing-based approach, using pre-trained classifiers for dimensionality reduction, performs best.") [arxiv-1810.11953#c4](https://arxiv.org/pdf/1810.11953v4#page=6 "In the multivariate-testing case, UAE performed best.")。
@@ -121,12 +142,13 @@ PH と EWMA は、どう設定しても効果が出なかった [arxiv-2606.0778
 ## 現時点での整理
 
 - **評価方法が未成熟**: 合成データへの依存、指標の不統一、チューニングの不透明さが指摘されている [arxiv-2606.07789#c1](https://arxiv.org/pdf/2606.07789v1#page=1 "studies rely on oversimplified synthetic data generators, adopt incompatible metrics, and lack transparency in hyperparameter selection")。実データではドリフトの有無自体を確かめにくい [arxiv-2602.06456#c3](https://arxiv.org/pdf/2602.06456v1#page=1 "drift detection is ill-posed, primarily because verification of drift events are implausible in practice.")。その結果、検出器の順位は論文によって正反対にもなる(上の食い違いを参照)。どれか1つの論文の「最良の検出器」を一般論として受け取るのは危険である。
-- **監視する信号の選択**: 誤り率ベースの検出器は誤検知が多くなりやすい [arxiv-2311.06396#c10](https://arxiv.org/pdf/2311.06396v2#page=24 "Drift detectors that rely on error rates often generate numerous false alarms.")。ラベルを使わない検出器は、正解だけの変化を捉えられない [arxiv-2606.07789#c12](https://arxiv.org/pdf/2606.07789v1#page=8 "Unsupervised detectors (ABCD(X) and STUDD) perform better on feature-space drifts (feature permutation, feature filtering) than on label-based changes (class prior, class swaps)")。現実には正解ラベルがすぐ得られない場面も多い [arxiv-2004.05785#c11](https://arxiv.org/pdf/2004.05785v1#page=14 "Most existing drift detection and adaptation algorithms assume the ground true label is available after classification/prediction, or extreme verification latency.")。
+- **監視する信号の選択**: 誤り率ベースの検出器は誤検知が多くなりやすい [arxiv-2311.06396#c10](https://arxiv.org/pdf/2311.06396v2#page=24 "Drift detectors that rely on error rates often generate numerous false alarms.")。ラベルを使わない検出器は、正解だけの変化を捉えられない [arxiv-2606.07789#c12](https://arxiv.org/pdf/2606.07789v1#page=8 "Unsupervised detectors (ABCD(X) and STUDD) perform better on feature-space drifts (feature permutation, feature filtering) than on label-based changes (class prior, class swaps)")。現実には正解ラベルがすぐ得られない場面も多い [arxiv-2004.05785#c11](https://arxiv.org/pdf/2004.05785v1#page=14 "Most existing drift detection and adaptation algorithms assume the ground true label is available after classification/prediction, or extreme verification latency.") [doi-10.1007_s41060-024-00620-y#c1](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=1 "Most algorithms proposed in the literature depend on the immediate availability of ground truth class labels.")。教師なしの検出器では、D3 が2本の独立した研究で良い結果を出している [doi-10.1007_s41060-024-00620-y#c7](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=13 "In these experiments, D3 outperforms other detectors by a large margin") [arxiv-2602.06456#c7](https://arxiv.org/pdf/2602.06456v1#page=7 "Of the drift detectors, D3-HT performed the best for both the NB and HT base models.")。
+- **間接的な評価指標の偏り**: 分類器の精度でドリフト検出器を評価すると、警報の多い検出器が有利になる [doi-10.1007_s41060-024-00620-y#c9](https://elib.dlr.de/206088/1/Lukats_et_al-2024-International_Journal_of_Data_Science_and_Analytics.pdf#page=18 "classifier predictive performance is biased in favor of a higher number of detected concept drifts and adaptations.") [arxiv-2602.06456#c5](https://arxiv.org/pdf/2602.06456v1#page=4 "concept drift detectors that detect more frequently, tend to perform better (up to a point).")。検出器の比較では、正解のドリフト時点を使った直接の評価かどうかを確認する必要がある。
 - **検出の後の対応**: 検出のたびに作り直すのが最善とは限らない [arxiv-2311.06396#c8](https://arxiv.org/pdf/2311.06396v2#page=21 "completely retraining the classifier resulted in decreased accuracy across all evaluated scenarios.")。過去のデータを残して定期的に学習し直す単純な方法が強いという報告もある [arxiv-2602.06456#c9](https://arxiv.org/pdf/2602.06456v1#page=7 "our results suggest that keeping past data is often useful and periodically retraining a model on increasingly large training sets is often an effective strategy.")。
 - **データシフトの監視(MLOps)**: 運用中のモデル自身の出力に単純な単変量検定をかける方法が、扱いやすく強い [arxiv-1810.11953#c1](https://arxiv.org/pdf/1810.11953v4#page=1 "a two-sample-testing-based approach, using pre-trained classifiers for dimensionality reduction, performs best.") [arxiv-1810.11953#c3](https://arxiv.org/pdf/1810.11953v4#page=6 "despite the heavy correction, multiple univariate testing seem to offer comparable performance to multivariate testing")。ただし検出は「有害かどうか」とは別の問題である [arxiv-1810.11953#c13](https://arxiv.org/pdf/1810.11953v4#page=9 "this shift does not harm the classifier's performance")。実際の機械学習パイプラインでは、入力のシフトの確認自体がほとんど行われていないという指摘もある [arxiv-1810.11953#c8](https://arxiv.org/pdf/1810.11953v4#page=1 "in practice, ML pipelines rarely inspect incoming data for signs of distribution shift.")。
 - **答えられることの範囲**: 既存の検出器が答えられるのは「いつ」までで、「どこで」「どのように」はほとんど答えられない [arxiv-2004.05785#c10](https://arxiv.org/pdf/2004.05785v1#page=14 "all drift detection methods can answer 'When', but very few methods have the ability to answer 'How' and 'Where';")。
 
-**この整理に含まれていないもの**: DDM・ADWIN・Page-Hinkley などの原論文(arXiv にないため未取得)、表データでのデータシフト検出のベンチマーク、ラベルシフト推定の手法、教師なし検出器の専用ベンチマーク。
+**この整理に含まれていないもの**: DDM・ADWIN・Page-Hinkley などの原論文(arXiv にないため未取得)、表データでのデータシフト検出のベンチマーク、ラベルシフト推定の手法。
 
 ## 参照カード
 
@@ -135,3 +157,5 @@ PH と EWMA は、どう設定しても効果が出なかった [arxiv-2606.0778
 - [arxiv-2311.06396](../../papers/arxiv-2311.06396.yaml) Aguiar & Cano, "A comprehensive analysis of concept drift locality in data streams"
 - [arxiv-2606.07789](../../papers/arxiv-2606.07789.yaml) Cerqueira et al., "A Framework for Evaluating and Benchmarking Concept Drift Detection Methods" (KDD 2026)
 - [arxiv-2602.06456](../../papers/arxiv-2602.06456.yaml) Gower-Winter et al., "The Window Dilemma: Why Concept Drift Detection is Ill-Posed"
+- [doi-10.1007_s41060-024-00620-y](../../papers/doi-10.1007_s41060-024-00620-y.yaml) Lukats et al., "A benchmark and survey of fully unsupervised concept drift detectors on real-world data streams" (Int. J. Data Sci. Anal.)
+- [arxiv-2310.15826](../../papers/arxiv-2310.15826.yaml) Hinder et al., "One or Two Things We know about Concept Drift -- A Survey on Monitoring Evolving Environments"

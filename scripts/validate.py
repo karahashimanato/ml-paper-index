@@ -57,6 +57,23 @@ def duplicates(values) -> set:
     return dup
 
 
+SUSPECT_NUMBER = re.compile(r"(?<![\w.])\d+(?:[.,]\d+)?\s*(?:%|秒|分(?!割)|時間|倍|ポイント)|(?<![\w.v/])\d+\.\d+(?![\w.])")
+LINKS = re.compile(r"\[[a-z0-9._-]+#[cr][0-9]+\]\([^)\s]*(?: \"[^\"]*\")?\)|\]\([^)]*\)|\[[a-z0-9._-]+(?:#[cr][0-9]+)?\]")
+
+
+def number_warnings(root: Path) -> list[str]:
+    """記事の地の文で結果の数値に見える表記(%、秒、倍、小数など)を警告する。条件の数値(チューニング予算など)も拾うので、エラーにはしない。"""
+    out = []
+    for path in sorted((root / "articles").glob("*/*.md")):
+        text = path.read_text(encoding="utf-8")
+        m = FRONT_MATTER.match(text)
+        body = text[m.end():] if m else text
+        for i, line in enumerate(body.splitlines(), 1):
+            for hit in SUSPECT_NUMBER.finditer(LINKS.sub("", line)):
+                out.append(f"{path.relative_to(root)}: '{hit.group(0).strip()}' looks like a result number (body line {i}); allowed only for conditions")
+    return out
+
+
 def validate(root: Path) -> list[str]:
     errors: list[str] = []
 
@@ -189,6 +206,8 @@ def main() -> int:
     args = parser.parse_args()
 
     errors = validate(args.root)
+    for w in number_warnings(args.root):
+        print(f"WARN  {w}")
     for e in errors:
         print(f"ERROR {e}")
     print(f"{len(errors)} error(s)")

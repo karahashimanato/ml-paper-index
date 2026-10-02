@@ -1,0 +1,34 @@
+name: paper candidates
+
+# 新着論文の候補を週1回集めて、テーマごとに Issue を作る(AIは使わない。Q8-D / Q9-C)。
+# チェックを付けた候補だけを、ローカルの Claude Code で scripts/list_approved.py を使ってカード化する。
+on:
+  schedule:
+    - cron: "0 0 * * 1"   # 毎週月曜 00:00 UTC(日本時間 9:00)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  candidates:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --locked
+      - name: Ensure label exists
+        run: gh label create paper-candidates --color 0E8A16 --description "Automatically collected paper candidates" 2>/dev/null || true
+      - name: Collect candidates
+        run: uv run python scripts/find_candidates.py --seen-from-gh --out-dir candidates
+      - name: Create one issue per theme
+        run: |
+          shopt -s nullglob
+          for f in candidates/*.md; do
+            theme=$(head -1 "$f" | sed -E 's/<!-- theme: (.*) -->/\1/')
+            [ "$theme" = "$(head -1 "$f")" ] && theme="取得エラー"
+            gh issue create --label paper-candidates --title "論文候補 $(date -u +%Y-%m-%d): ${theme}" --body-file "$f"
+          done

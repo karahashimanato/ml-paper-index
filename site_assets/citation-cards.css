@@ -1,0 +1,63 @@
+/* 引用のホバーカード(citation-cards.js)。色は Material のテーマ変数を使い、ダークモードにも追従する。 */
+.md-typeset a.cite-link {
+  font-size: 0.85em;
+  border-bottom: 1px dotted currentColor;
+  white-space: nowrap;
+}
+
+.cite-card {
+  position: absolute;
+  z-index: 10;
+  display: none;
+  width: min(30rem, calc(100vw - 16px));
+  max-height: min(60vh, 26rem);
+  overflow-y: auto;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.4rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  box-shadow: var(--md-shadow-z2);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+.cite-card.is-open { display: block; }
+
+.cite-card__title { font-weight: 700; font-size: 0.78rem; margin-bottom: 0.15rem; }
+.cite-card__title a { color: var(--md-typeset-a-color); }
+.cite-card__meta,
+.cite-card__where { color: var(--md-default-fg-color--light); }
+.cite-card__where { margin-bottom: 0.4rem; }
+.cite-card__summary { margin-bottom: 0.45rem; }
+
+.cite-card__quote {
+  margin: 0 0 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-left: 0.2rem solid var(--md-accent-fg-color);
+  background: var(--md-code-bg-color);
+  font-style: italic;
+}
+.cite-card__quote-label {
+  display: block;
+  font-style: normal;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 0.15rem;
+}
+
+.cite-card__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.cite-card__id { font-family: var(--md-code-font-family); font-size: 0.62rem; color: var(--md-default-fg-color--light); }
+.cite-card__open {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.2rem;
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color) !important;
+  font-weight: 700;
+}

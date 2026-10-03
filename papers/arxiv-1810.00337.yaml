@@ -1,0 +1,82 @@
+id: arxiv-1810.00337
+title: Learning to Perform Local Rewriting for Combinatorial Optimization
+authors:
+- Xinyun Chen
+- Yuandong Tian
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1810.00337
+  code: https://github.com/facebookresearch/neural-rewriter
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 210f7c0f179a1b74496984afa1021b9788c4719eabb2f5ce806e381593929d36
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - local-search
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'NeuRewriter: an improvement policy that starts from a feasible solution and repeatedly picks a region (region-picking policy) and a rewriting rule (rule-picking policy) to rewrite it locally, trained
+  with Q-Actor-Critic RL; applied to Halide expression simplification, online job scheduling and capacitated VRP'
+claims:
+- id: c1
+  statement: 'Contribution: NeuRewriter learns a policy that picks heuristics and rewrites local components of the current solution, iteratively improving it until convergence (instead of constructing a
+    solution from scratch).'
+  location: Abstract
+  page: 1
+  quote: In this paper, we propose NeuRewriter that learns a policy to pick heuristics and rewrite the local components of the current solution to iteratively improve it until convergence.
+- id: c2
+  statement: 'Training: the policy factorizes into a region-picking and a rule-picking component, each a neural network trained with actor-critic reinforcement learning (reward = cost reduction per rewriting
+    step).'
+  location: Abstract
+  page: 1
+  quote: The policy factorizes into a region-picking and a rule-picking component, each parameterized by a neural network trained with actor-critic methods in reinforcement learning.
+- id: c3
+  statement: 'Relation to local search: the authors describe the framework as closely connected to the local search pipeline, with the learned RL policy guiding the local search by deciding which neighbour
+    solution to move to.'
+  location: Related Work
+  page: 2
+  quote: Speciﬁcally, we can leverage our learned RL policy to guide the local search, i.e., to decide which neighbor solution to move to.
+- id: c4
+  statement: 'Protocol (time budgets and hardware): all algorithms run on the same server; neural networks use 1 GPU while search algorithms use 4 CPU cores, and search algorithms get a 10-second timeout
+    per instance; no wall-clock limit is stated for the neural networks, so hardware (GPU vs CPU) and budgets are not matched.'
+  location: Experiments
+  page: 6
+  quote: We set the timeout of search algorithms to be 10 seconds per instance.
+- id: c5
+  statement: 'Runtime caveat stated by the authors: OR-Tools'' VRP solver is highly tuned and implemented in C++, while the RL approaches are in Python and their runtimes are measured decoding one instance
+    at a time; the authors note potential room for speed-up by batching.'
+  location: Vehicle Routing Problem
+  page: 9
+  quote: Note that the OR-Tools solver for vehicle routing problems is highly tuned and implemented in C++, while the RL-based approaches in comparison are implemented in Python.
+- id: c6
+  statement: 'Job-scheduling baseline setting: OR-Tools (offline setting) gets a 10-second timeout per workload; the authors state it cannot reach good performance even with a larger timeout (Appendix E
+    attributes this to schedules that prioritize long jobs).'
+  location: Job Scheduling Problem
+  page: 8
+  quote: For OR-tools, we set the timeout to be 10 seconds per workload, but we ﬁnd that it can not achieve a good performance even with a larger timeout, and we defer the discussion to Appendix E.
+- id: c7
+  statement: 'Limitation: because the approach rewrites locally it can become time-consuming when large changes are needed per iteration; in extreme cases where each step must change the global structure,
+    starting from scratch becomes preferable.'
+  location: Conclusion
+  page: 9
+  quote: In extreme cases where each rewriting step needs to change the global structure, starting from scratch becomes preferrable.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: NeurIPS 2019. Affiliations: UC Berkeley and Facebook AI Research (first author''s work partially done while interning at FAIR). No
+    TSP experiments; routing experiments are CVRP with 20/50/100 customers (VRP20 Cap30, VRP50 Cap40, VRP100 Cap50), uniformly random in the unit square, following the setups of Nazari et al. and Kool et
+    al. (AM). Baselines for VRP: AM, Nazari et al., OR-Tools, Clarke-Wright and sweep heuristics; Gurobi optimal is reported only for VRP20 (Table 6). Initial VRP routes are built by a nearest-feasible-node
+    heuristic that the authors note is worse than the classic heuristics (Appendix F). Generalization: models trained on one VRP size are tested on other sizes (Figure 5b); expression models trained on
+    short expressions are tested on longer ones (Test>100). No LKH or Concorde baseline. Rewriting steps: T_iter = 50 (expression, scheduling) and 200 (VRP) (Appendix D, hyper-parameters of Algorithm 2);
+    at evaluation, inference also terminates early when the predicted Q falls below epsilon or the chosen rule does not apply (Appendix D). VRP rule set: each node can swap with another node in the route
+    (problem setup section). Appendix F compares the VRP50-trained model''s VRP100 result with a number reported in Nazari et al. (not rerun). Table 1c gives per-instance OR-Tools VRP runtimes well below
+    the 10-second timeout. No optimality or approximation guarantee is claimed; the method is a heuristic. Results not recorded.'

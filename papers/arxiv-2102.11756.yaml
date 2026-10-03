@@ -1,0 +1,85 @@
+id: arxiv-2102.11756
+title: Deep Policy Dynamic Programming for Vehicle Routing Problems
+authors:
+- Wouter Kool
+- Herke van Hoof
+- Joaquim Gromicho
+- Max Welling
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2102.11756
+  code: https://github.com/wouterkool/dpdp
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 436ade1876f100035f5274f9c23949967810bb18422f7b0c9434cb2693fe343e
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - dynamic-programming
+  - graph-neural-networks
+  paradigms:
+  - supervised
+proposes:
+- 'DPDP: restricted (beam) dynamic programming over DP states for TSP, CVRP and TSPTW, where a GNN-predicted edge heatmap defines the score (heat plus heat-to-go potential) used to keep the B best partial
+  solutions and, via a threshold, a sparse graph of allowed expansions'
+claims:
+- id: c1
+  statement: 'Contribution: DPDP restricts and prioritizes the DP state space with a policy derived from a neural network trained to predict edges from example solutions (ML used to improve the DP, not
+    DP inside the network).'
+  location: Abstract
+  page: 1
+  quote: DPDP prioritizes and restricts the DP state space using a policy derived from a deep neural network, which is trained to predict edges from example solutions.
+- id: c2
+  statement: 'Guarantees: the algorithm is a beam search over DP states (dominated partial solutions removed per DP state, B best kept by the heatmap score); the authors call it asymptotically optimal because
+    a beam B = n * 2^n for an n-node TSP (i.e. keeping all DP states) guarantees optimal results; with the smaller beams used in practice (e.g. 10K, 100K) no optimality guarantee is stated, and B trades
+    solution quality for computation. The sparse graph (c3) may additionally exclude optimal tours.'
+  location: Deep Policy Dynamic Programming
+  page: 4
+  quote: DPDP is asymptotically optimal as using B = n · 2n for a TSP with n nodes guarantees optimal results, but choosing smaller B allows to trade performance for computational cost.
+- id: c3
+  statement: 'Graph sparsity: the DP runs on a sparse graph defined either by thresholding the heatmap (default 10^-5; a second use of the network that the authors say can be seen as learned problem reduction)
+    or by a kNN graph; the authors state that using a sparse graph significantly reduces runtime but may sacrifice the possibility to find good or optimal tours.'
+  location: Graph sparsity
+  page: 7
+  quote: As our problems are deﬁned on sets of nodes rather than graphs, the use of a sparse graph is an artiﬁcial design choice, which allows to signiﬁcantly reduce the runtime but may sacriﬁce the possibility
+    to ﬁnd good or optimal tours.
+- id: c4
+  statement: 'Tuning: the heatmap threshold and the functional form of the scoring policy are educated guesses or manually tuned on a few validation instances, as are runtime-related implementation choices.'
+  location: Implementation & hyperparameters
+  page: 7
+  quote: DPDP has very few hyperparameters, but the heatmap threshold of 10−5 and details like the functional form of e.g. the scoring policy are ‘educated guesses’ or manually tuned on a few validation
+    instances and can likely be improved.
+- id: c5
+  statement: 'Protocol (TSP): 100-node TSP on a commonly used test set of 10000 instances, with optimality gaps computed using Concorde, LKH and Gurobi and comparison to published neural approaches; the
+    authors caution that running times are rough indications since some come from different machines (typically 1 GPU or an 8-32 core CPU). VRP and TSPTW experiments also use 100-node instances.'
+  location: Experiments
+  page: 7
+  quote: In Table 1 we report our main results for DPDP with beam sizes of 10K (10 thousand) and 100K, for the TSP with 100 nodes on a commonly used test set of 10000 instances [31].
+- id: c6
+  statement: 'Evaluation practice: for VRP the authors compare against HGS and multiple LKH runs, stressing that most related neural work uses a single LKH run as the strongest baseline, and state that
+    their goal is reasonable performance from a flexible framework rather than beating HGS or LKH.'
+  location: Experiments
+  page: 10
+  quote: We emphasize that in most related work (e.g. [31]), the strongest baseline considered is one run of LKH, so we compare against a much stronger baseline.
+- id: c7
+  statement: 'Limitations: the authors state DPDP is not yet a practical alternative in general and list scalability to larger instances (mainly the fully connected O(n^2) GNN), dependence on example solutions
+    from an existing solver, and the heuristic, manually designed scoring function.'
+  location: Discussion
+  page: 11
+  quote: 'We believe such research could yield signiﬁcant further improvement by addressing key current limitations: (1) the scalability to larger instances, (2) the dependency on example solutions and
+    (3) the heuristic nature of the scoring function.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. Affiliations: University of Amsterdam; Kool and Gromicho also ORTEC (company). Venue not stated in the PDF. Training data: for TSP a pretrained
+    heatmap model from prior work trained to predict optimal solutions; for VRP 1 million 100-node instances solved with one LKH run (not optimal), checkpoint chosen by validation loss; for TSPTW example
+    solutions from heuristic DP with a large beam. Test data: TSP/VRP validation and test sets of prior work, plus a ''more realistic'' VRP distribution where LKH by default failed on two instances and
+    was rerun with unlimited routes; TSPTW instances from prior work with small time windows were solved optimally by the DP even with very small beam sizes, ''eliminating the need for a policy'', so a
+    larger-time-window distribution was added; TSPTW is compared to GVNS (30 runs), LKH and BaB-DQN*/ILDS-DQN* (the latter not rerun for the larger windows). Hardware: DPDP on 4 GPUs with estimated 1-GPU
+    (1080Ti) times vs 16 or 32 CPUs for HGS/LKH; the authors note GPU vs CPU comparison is hard. Heatmap threshold strategy compared against kNN sparsification. Results tables not recorded.'

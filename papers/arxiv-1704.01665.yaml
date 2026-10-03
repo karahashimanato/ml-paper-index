@@ -1,0 +1,87 @@
+id: arxiv-1704.01665
+title: Learning Combinatorial Optimization Algorithms over Graphs
+authors:
+- Hanjun Dai
+- Elias B. Khalil
+- Yuyu Zhang
+- Bistra Dilkina
+- Le Song
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1704.01665
+  code: https://github.com/Hanjun-Dai/graph_comb_opt
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 082f060048c4acbad07d1af2f53870d7c241a6cc4853e5d8a2a295cf8fad6af6
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - greedy-methods
+  - graph-neural-networks
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'S2V-DQN: a greedy construction meta-algorithm whose node-evaluation function Q is a structure2vec graph embedding network trained with n-step fitted Q-learning; applied to Minimum Vertex Cover, Max Cut,
+  TSP (and Set Cover in the appendix)'
+claims:
+- id: c1
+  statement: 'Relation to greedy algorithms: the learned algorithm keeps the classical greedy pattern (build a feasible solution by successively adding nodes, maintained to satisfy the problem''s constraints);
+    only the node-evaluation function is learned instead of hand-crafted.'
+  location: Introduction
+  page: 2
+  quote: We will adopt a greedy meta-algorithm design, whereby a feasible solution is constructed by successive addition of nodes based on the graph structure, and is maintained so as to satisfy the problem’s
+    graph constraints.
+- id: c2
+  statement: 'Training: the greedy policy is learned with fitted Q-learning (n-step Q-learning with experience replay), parametrized by the structure2vec graph embedding network, optimizing the original
+    objective directly.'
+  location: Introduction
+  page: 2
+  quote: We will use ﬁtted Q-learning to learn a greedy policy that is parametrized by the graph embedding network.
+- id: c3
+  statement: 'Framing on guarantees: the authors describe heuristics as fast and effective but lacking theoretical guarantees; no approximation guarantee for the learned heuristic is stated in the text
+    (the MVC baselines are 2-approximations).'
+  location: Introduction
+  page: 1
+  quote: Heuristics are often fast, effective algorithms that lack theoretical guarantees, and may also require substantial problem-speciﬁc research and trial-and-error on the part of algorithm designers.
+- id: c4
+  statement: 'Protocol: instances are synthetic (Erdos-Renyi and Barabasi-Albert graphs for MVC/MaxCut; DIMACS-generator uniform or clustered points for TSP); 100 validation and 1000 test graphs; approximation
+    ratios are relative to the best solution found by CPLEX (MVC, MaxCut) or Concorde (TSP) within 1 hour, which may not be optimal.'
+  location: Experimental Evaluation
+  page: 7
+  quote: All approximation ratios reported in the paper are with respect to the best (possibly optimal) solution found by the solvers within 1 hour.
+- id: c5
+  statement: 'Train vs test sizes: to test size generalization, S2V-DQN is trained on graphs with 50-100 nodes and tested on graphs of up to 1200 nodes.'
+  location: Generalization to larger instances
+  page: 8
+  quote: To investigate this, we train S2V-DQN on graphs with 50–100 nodes, and test its generalization ability on graphs with up to 1200 nodes.
+- id: c6
+  statement: 'TSP caveat: on synthetic random TSP the hand-designed Farthest insertion and 2-opt perform as well as S2V-DQN and slightly better in some cases (the authors add that S2V-DQN still performs
+    better on real-world TSP data; that TSPLIB comparison uses per-instance Active Search rather than the greedy policy used on synthetic test sets, see c7).'
+  location: Comparison of solution quality
+  page: 8
+  quote: For TSP, The Farthest and 2-opt algorithm perform as well as S2V-DQN, and slightly better in some cases.
+- id: c7
+  statement: 'TSPLIB protocol differs from the synthetic one: on 38 TSPLIB instances (51-318 cities) S2V-DQN is run in ''Active Search'' mode, i.e. RL is applied on the fly to each instance without upfront
+    training, keeping the best tour found; larger instances were not attempted due to single-GPU memory.'
+  location: Appendix C.3
+  page: 14
+  quote: 'We apply S2V-DQN in “Active Search" mode, similarly to [6]: no upfront training phase is required, and the reinforcement learning algorithm 1 is applied on-the-ﬂy on each instance.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: NIPS 2017. Affiliations: Georgia Institute of Technology; Le Song also Ant Financial. Training sizes: MVC trained up to 400-500 nodes
+    (with ''pre-training'' on smaller graphs); MaxCut and TSP trained up to 200-300 nodes ''due to the limited computation resource''; tests up to 1000-1200 nodes. Baselines: PN-AC (pointer network actor-critic,
+    reimplemented; for graph problems nodes are described by rank-8 SVD of the adjacency matrix), MVCApprox / MVCApprox-Greedy, MaxcutApprox, SDP (Goemans-Williamson, best of 100), TSP heuristics (MST,
+    Farthest/Cheapest/Closest insertion, Christofides, 2-opt, Nearest Neighbor); CPLEX 12.6.1 and Concorde with 1-hour cutoffs as references. At test time the greedy policy is used (no Active Search) on
+    synthetic data. Running-time comparison: S2V-DQN runs on GPU; the authors note the comparison with MaxcutApprox is ''not exactly fair, since we use GPUs''. Hyperparameters selected via preliminary results
+    on small graphs, then fixed. Real-world sets: MemeTracker (MVC, SCP), Physics (MaxCut), TSPLIB. LKH and Gurobi are not used. Reference solutions: CPLEX/Concorde 1-hour best solutions are reported as
+    ''optimal'' when optimality is not proven (Appendix D.1); the authors note the ''optimal'' value may not be truly optimal, CPLEX''s solutions typically get worse as size grows, and S2V-DQN sometimes
+    beats 1-hour CPLEX, giving ratios below 1.0. TSPLIB ratios are against the known optima listed in Table C.2. The number of Active Search episodes or running time on TSPLIB was not found in Appendix
+    C.3, so per-instance compute is not matched with the one-shot TSP heuristics. Hyperparameters tuned on graphs with fewer than 50 nodes (Appendix D.4). Family tag local-search not used: the method is
+    greedy construction (MaxcutApprox baseline is a local-search heuristic). Results not recorded.'

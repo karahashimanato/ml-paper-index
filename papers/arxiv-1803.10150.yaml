@@ -1,0 +1,86 @@
+id: arxiv-1803.10150
+title: Learning to Branch
+authors:
+- Maria-Florina Balcan
+- Travis Dick
+- Tuomas Sandholm
+- Ellen Vitercik
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1803.10150
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 30b197656ad377d384d02a525a9936045ef45e659acbf848f75105bf384e7dad
+tags:
+  tasks:
+  - combinatorial-optimization
+  - algorithm-learning
+  method_families:
+  - branch-and-bound
+  paradigms:
+  - supervised
+proposes:
+- 'Data-driven configuration of branch-and-bound variable selection: learn a convex combination of existing scoring rules from samples of an instance distribution by ERM over an adaptive partition of the
+  parameter space, with pseudo-dimension / Rademacher sample complexity guarantees'
+claims:
+- id: c1
+  statement: 'Relation to B&B: ML is used to configure B&B, learning a weighting of existing partitioning (variable selection) procedures for the instance distribution at hand from sample instances; B&B
+    itself is unchanged.'
+  location: Abstract
+  page: 1
+  quote: We show how to use machine learning to determine an optimal weighting of any set of partitioning procedures for the instance distribution at hand using samples from the distribution.
+- id: c2
+  statement: 'Guarantee type: sample complexity bounds ensuring that empirical performance (e.g. tree size) over sampled instances nearly matches expected performance on the unknown instance distribution;
+    the authors call these the first such guarantees for tree search configuration.'
+  location: Abstract
+  page: 1
+  quote: These guarantees bound the number of samples sufficient to ensure that the empirical performance of an algorithm over the samples nearly matches its expected performance on the unknown instance
+    distribution.
+- id: c3
+  statement: 'Assumptions: an unknown distribution over MILPs with sample access, a cap on the cost range (e.g. tree size capped at kappa), instances over n binary variables, a tree-constant cost function,
+    and everything in tree search except variable selection (e.g. node selection) held fixed.'
+  location: Section 3
+  page: 8
+  quote: Throughout the remainder of this paper, we assume that all aspects of the tree search algorithm except the variable selection policy, such as the node selection policy, are fixed.
+- id: c4
+  statement: 'Worst-case bound for path-wise scoring rules (a class including the most fractional, product and linear scoring rules but not pseudo-cost or reliability branching): for a convex combination
+    of two path-wise rules with a tree-constant cost, over instances with n binary variables and a cost range capped at kappa, the number of samples sufficient for (epsilon, delta)-learning grows only quadratically
+    with the number of variables (pseudo-dimension O(n^2), Theorem 3.7); for d arbitrary scoring rules (Section 3.3.2) the bound instead depends on the tree-size limit imposed on B&B.'
+  location: Section 3.3
+  page: 11
+  quote: 'In this case, the number of samples is surprisingly small given the complexity of these problems: it grows only quadratically with the number of variables.'
+- id: c5
+  statement: 'Impossibility result for data-independent tuning (Theorem 3.1): for the mixing parameter mu in [0, 1] of two specific scoring rules (the min and the max of the objective-value changes of the
+    two children), with cost = B&B tree size, for any discretization of [0, 1] there exists an infinite family of distributions over MILPs with n variables (n even, n >= 6) such that every parameter in
+    the discretization gives expected tree size exponential in n, while infinitely many other parameters (an interval (a, b) with 1/3 < a < b < 1/2) give constant-size trees with probability 1; the authors
+    prove it holds for any node selection policy.'
+  location: Section 3.2
+  page: 9
+  quote: We show that for any discretization of the parameter space [0, 1], there exists an infinite family of distributions over MILP problem instances such that for any parameter in the discretization,
+    the expected tree size is exponential in n.
+- id: c6
+  statement: 'Experimental setup: the variable selection rule of CPLEX 12.8.0.0 is overridden via a branch callback that enumerates all parameter values giving distinct trees; CPLEX cuts, primal heuristics
+    and root-node preprocessing are disabled and node selection is best bound; the measure is average B&B tree size.'
+  location: Experiments
+  page: 17
+  quote: We use the C API of IBM ILOG CPLEX 12.8.0.0 to override the default variable selection rule using a branch callback.
+- id: c7
+  statement: 'Empirical finding: across synthetic distributions (combinatorial auctions from CATS, facility location, clustering, agnostic linear separators) the relationship between the linear scoring
+    rule''s parameter and average tree size varies greatly by application, so the authors conclude parameters should be tuned per application and no value is universally effective.'
+  location: Experiments
+  page: 19
+  quote: This implies that the parameters should be tuned on a per-application basis, and that no parameter value is universally effective.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. Exactness (our reading, not a statement of the paper): only the variable selection scoring rule changes, so a B&B run to completion remains exact
+    and what is learned affects tree size; note that the theory assumes the cost is capped at kappa (e.g. terminating B&B when the tree grows beyond a bound), so capped runs need not finish. Cited worst
+    case (Liberatore 2000): finding an approximately optimal branching variable, even at the root, is NP-hard (Introduction). The authors contrast their results with SCIP fixing the product/linear mixing
+    parameter at 5/6 (Achterberg 2009) regardless of input (Introduction). Data-dependent Rademacher bounds are given as tighter alternatives when the number of parameter intervals is small. Experiments:
+    m = 100 combinatorial auction instances (CATS ''arbitrary'' 200 bids/100 goods, ''regions'' 400 bids/200 goods), m = 500 facility location (70x70), clustering (35 points, k = 5), linear separator (50
+    points) instances; run on 64 AWS c3.large instances. No train/test generalization experiment in the main text figures (tree size vs parameter averaged over samples). Results not recorded.'

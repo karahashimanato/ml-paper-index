@@ -1,0 +1,84 @@
+id: arxiv-1703.01541
+title: 'Soft-DTW: a Differentiable Loss Function for Time-Series'
+authors:
+- Marco Cuturi
+- Mathieu Blondel
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1703.01541
+  code: https://github.com/mblondel/soft-dtw
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 969523835865e67d3ac6003b5f87b3107229c956968d050eccc0f014682d0d62
+tags:
+  tasks:
+  - time-series-classification
+  - time-series-forecasting
+  method_families:
+  - dynamic-programming
+  - deep-learning
+  paradigms:
+  - supervised
+  - unsupervised
+proposes:
+- 'Soft-DTW: dynamic time warping with the min of the Bellman recursion replaced by a soft-minimum (-gamma log-sum-exp) with smoothing parameter gamma, used as a differentiable loss for barycenters, k-means
+  clustering, nearest-centroid classification and training networks that output time series'
+claims:
+- id: c1
+  statement: 'Contribution: a differentiable loss between time series built on DTW, using a smoothed formulation (soft-DTW) that takes the soft-minimum over the costs of all alignments rather than the minimum.'
+  location: Abstract
+  page: 1
+  quote: Our work takes advantage of a smoothed formulation of DTW, called soft-DTW, that computes the soft-minimum of all alignment costs.
+- id: c2
+  statement: 'Relation to the DP: soft-DTW is computed by a minor modification of Bellman''s recursion for DTW (all (min, +) operations replaced by (+, x); the authors attribute such smoothed modifications
+    of Bellman''s recursion to prior work on smoothed DP distances and kernels), even though it considers all alignments instead of only the optimal one; setting gamma = 0 recovers the original DTW.'
+  location: Introduction
+  page: 2
+  quote: Despite considering all alignments and not just the optimal one, soft-DTW can be computed with a minor modification of Bellman’s recursion, in which all (min, +) operations are replaced with (+,
+    ×).
+- id: c3
+  statement: 'Complexity: value and gradient of soft-DTW are computed in quadratic time and space; the authors contrast this with DTW''s quadratic time but linear space (the gradient''s backward pass needs
+    the full matrix of intermediate costs, while the naive recursion for the expected alignment would be quartic).'
+  location: Abstract
+  page: 1
+  quote: We show in this paper that soft-DTW is a differentiable loss function, and that both its value and gradient can be computed with quadratic time/space complexity (DTW has quadratic time but linear
+    space complexity).
+- id: c4
+  statement: 'What hard DTW lacks: the gradient of hard DTW (the optimal alignment) is defined almost everywhere for continuous data but is discontinuous where a small change switches the optimal alignment,
+    which the authors say is likely to hamper gradient descent.'
+  location: The DTW and soft-DTW loss functions
+  page: 3
+  quote: However, that gradient, when it exists, will be discontinuous around those values x where a small change in x causes a change in A⋆, which is likely to hamper the performance of gradient descent
+    methods.
+- id: c5
+  statement: 'No optimality guarantee: the soft-DTW barycenter objective is non-convex (a soft minimum of convex functions for squared Euclidean cost), so the authors state that barycenter computations
+    come with no way of ensuring optimality; they argue informally that smoothing gives a better (though slightly different from DTW) optimization landscape.'
+  location: Learning with the soft-DTW loss
+  page: 5
+  quote: all of the computations involving barycenters should be taken with a grain of salt, since we have no way of ensuring optimality when approximating Eq. (4).
+- id: c6
+  statement: 'Protocol: experiments use a 79-dataset subset of the UCR time series classification archive; barycenters (10 series of a random class, 10 repetitions, at most 100 iterations, L-BFGS) and k-means
+    are compared with DBA and a subgradient method in terms of the hard DTW loss; nearest-centroid classification uses a 50/25/25 train/validation/test split with gamma chosen from 15 log-spaced values;
+    multistep-ahead prediction uses an MLP with one hidden layer predicting the last 40% of each series.'
+  location: Experimental results
+  page: 6
+  quote: We use a subset containing 79 datasets encompassing a wide variety of fields (astronomy, geology, medical imaging) and lengths.
+- id: c7
+  statement: 'Trade-off of the training loss: in the prediction experiment, training with soft-DTW gives lower DTW loss and training with the Euclidean loss gives lower Euclidean loss; the authors argue
+    that DTW-robust errors may be the more judicious choice for many applications.'
+  location: Experimental results
+  page: 8
+  quote: Unsurprisingly, we achieve lower DTW loss when training with the soft-DTW loss, and lower Euclidean loss when training with the Euclidean loss.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 34th International Conference on Machine Learning (ICML), Sydney, 2017. Affiliations: CREST, ENSAE, Universite
+    Paris-Saclay (Cuturi); NTT Communication Science Laboratories (Blondel). The intro says both DTW and soft-DTW have quadratic time and linear space for the value only, while the abstract''s ''quadratic
+    time/space'' refers to value plus gradient (the backward pass requires the full matrix R). Gradient of soft-DTW is 2/gamma-Lipschitz for squared Euclidean cost (Section 2.3 text). Soft-DTW with gamma
+    > 0 equals -gamma log of the Global Alignment kernel. A custom backward pass in Chainer was implemented instead of autodiff because the forward DP is element-wise. Experiments with gamma below 0.001
+    were not run since dtw_0.001 is very close to dtw_0 in practice. Results (percentages of datasets, ranks) not recorded.'

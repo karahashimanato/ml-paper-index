@@ -1,0 +1,86 @@
+id: arxiv-2107.10201
+title: Learning a Large Neighborhood Search Algorithm for Mixed Integer Programs
+authors:
+- Nicolas Sonnerat
+- Pengming Wang
+- Ira Ktena
+- Sergey Bartunov
+- Vinod Nair
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2107.10201
+  code: https://github.com/deepmind/neural_lns
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a320d5992c99f1893a0730fdf6da6ad0f82cf359f2f0fbb397124a0d95af5def
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - local-search
+  - graph-neural-networks
+  paradigms:
+  - supervised
+proposes:
+- 'Learned LNS for MIPs: Neural Diving for the initial assignment plus a Neural Neighborhood Selection (NNS) GCN policy that chooses which integer variables to unassign at each LNS step, trained by imitation
+  of a local-branching expert; the resulting sub-MIP is solved with SCIP'
+claims:
+- id: c1
+  statement: 'Contribution and relation to local search: a learned LNS for MIPs where a Neural Neighborhood Selection policy chooses the search neighbourhood (variables to unassign) at each step, and the
+    neighbourhood itself is searched with a MIP solver (SCIP 7.0.1).'
+  location: Abstract
+  page: 1
+  quote: Formulating the subsequent search steps as a Markov Decision Process, we train a Neural Neighborhood Selection policy to select a search neighborhood at each step, which is searched using a MIP
+    solver to ﬁnd the next assignment.
+- id: c2
+  statement: 'Training (imitation, not RL): the imitation target is an expert that, under certain assumptions, is guaranteed to pick the neighbourhood containing the optimal next assignment (local branching
+    within a Hamming ball); the expert is too slow for use at test time and is only used offline to generate data.'
+  location: Introduction
+  page: 2
+  quote: We propose an imitation learning approach to train the neighborhood selection policy using as the imitation target an expert policy that, under certain assumptions, is guaranteed to select the
+    neighborhood containing the optimal next assignment at a given LNS step.
+- id: c3
+  statement: 'Guarantees given up: the method is a primal heuristic (it seeks a good feasible assignment, not a proof of optimality or a lower bound), motivated by production applications.'
+  location: Background
+  page: 3
+  quote: This work focuses on primal heuristics as production applications often only require ﬁnding a good feasible assignment quickly.
+- id: c4
+  statement: 'Baseline tuning: SCIP''s metaparameters (presolve, cuts, heuristics) are tuned per dataset by grid search to give the best validation average primal gap curves, to make it behave more like
+    a primal heuristic; other baselines are random neighbourhood selection (with Neural Diving start) and Neural Diving alone. Gurobi is not used.'
+  location: Baselines
+  page: 6
+  quote: for each dataset separately using grid search to achieve the best validation set average primal gap curves.
+- id: c5
+  statement: 'Compute is not matched across all methods: the learned heuristics and random-LNS baselines get the same parallel resources, but SCIP is run single-core only.'
+  location: Baselines
+  page: 6
+  quote: SCIP is evaluated only in the single core setting, as the main focus of this work is to evaluate the beneﬁt of easily parallelizable primal heuristics.
+- id: c6
+  statement: 'Datasets and affiliation: five datasets (Neural Network Verification, Electric Grid Optimization, Production Packing, Production Planning, MIPLIB), each split 70/15/15 with a separate model
+    per dataset; two come from the production systems of a large technology company, which the text does not name (author affiliations: DeepMind, Charm Therapeutics, Google Research).'
+  location: Datasets
+  page: 5
+  quote: In particular, Production Packing and Planning datasets are obtained from a large technology company’s production systems.
+- id: c7
+  statement: 'Limitations: models are not trained end-to-end on the final metric (average primal gap), and the conditionally independent policy does not approximate the expert perfectly; the authors suggest
+    RL/offline RL and autoregressive models as possible remedies.'
+  location: Discussion
+  page: 8
+  quote: Our approach does not currently train models in an end-to-end fashion to directly optimize a ﬁnal performance metric such as the average primal gap.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: affiliations DeepMind (London), Charm Therapeutics, Google Research (Bangalore); work done at DeepMind. Metrics: average primal gap
+    vs a precomputed best-known objective and survival curves with dataset-specific gap thresholds, both against ''calibrated time'' (a time measure on a shared heterogeneous cluster normalized by repeatedly
+    solving MIPLIB2003 vpm2; reference machine Intel Xeon 3.50GHz). Expert guarantee conditions (Section 3.2): the expert finds the best assignment within a Hamming ball of radius eta_t around the current
+    assignment (a neighbourhood of a specified number of unassigned integer variables), and the policy reaches that assignment only if the sub-MIP is solved optimally. Parallel setting: the number of parallel
+    workers and the test-time inference hardware were not found in the text (searched ''cores'', ''workers'', ''CPU'', ''GPU''); training used one V100 GPU per dataset (Appendix A.2). Expert data: 10 local-branching
+    steps per training instance using SCIP with default parameters and a 3-hour time limit per step (Appendix A.1). Training/test from the same dataset distribution (no cross-size generalization test).
+    Evaluation: 50 LNS steps, sub-MIP time limit per step 60-300 s tuned on validation (Appendix A.3). Appendix A.7 (preliminary, limited tuning) on NeurIPS''21 ML4CO datasets: NNS gives no benefit over
+    random neighbourhood selection on Anonymous, and NNS and RNS both fail to improve over Neural Diving on Load Balancing (''However, NNS and RNS both fail to provide any improvements over ND.''). The
+    sub-MIP solve is optimal within its neighbourhood only if SCIP finishes; no global optimality certificate. Tag ''supervised'' used for imitation learning. Results not recorded.'

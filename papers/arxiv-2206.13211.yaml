@@ -1,0 +1,80 @@
+id: arxiv-2206.13211
+title: Modern graph neural networks do worse than classical greedy algorithms in solving combinatorial optimization problems like maximum independent set
+authors:
+- Maria Chiara Angelini
+- Federico Ricci-Tersenghi
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2206.13211
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 12935de6f3a89c9cd1c65bbde6cc90c755544c0d314b50a95fdfa3e4595190e6
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - graph-neural-networks
+  - greedy-methods
+  paradigms:
+  - unsupervised
+proposes:
+- Comment (matters arising) comparing the physics-inspired unsupervised GNN of Schuetz et al. (Nature Machine Intelligence 2022) against a degree-based greedy algorithm (DGA) for MIS on random regular graphs,
+  and proposing MIS on d-regular random graphs with d > 16 as a hard benchmark
+claims:
+- id: c1
+  statement: 'Paper evaluated: the comment targets the physics-inspired unsupervised GNN of Schuetz, Brubaker and Katzgraber (''Combinatorial Optimization with Physics-Inspired Graph Neural Networks'',
+    Nat Mach Intell 2022), which was tested on maximum cut and MIS on sparse graphs.'
+  location: Introduction
+  page: 1
+  quote: The recent work “Combinatorial Optimization with Physics-Inspired Graph Neural Networks” [Nat Mach Intell 4 (2022) 367] introduces a physics-inspired unsupervised Graph Neural Network (GNN) to
+    solve combinatorial optimization problems on sparse graphs.
+- id: c2
+  statement: 'Main claim (instance setting: MIS on random regular graphs of fixed degree d, with d = 3 and 5 in Fig. 1): a simple greedy algorithm running in almost linear time finds MIS solutions of much
+    better quality than the Schuetz et al. GNN in a much shorter time; the GNN numbers are taken from the original paper, not re-run.'
+  location: Introduction
+  page: 1
+  quote: In this comment, we show that a simple greedy algorithm, running in almost linear time, can ﬁnd solutions for the MIS problem of much better quality than the GNN in a much shorter time.
+- id: c3
+  statement: 'Instance setting: the comparison is on d-regular random graphs with d = 3 and 5; the greedy baseline (DGA) repeatedly picks a node of smallest degree in the residual graph; quality is reported
+    as approximation ratio to the current best theoretical upper bounds, which the authors note are likely not strict.'
+  location: Comparison with simple greedy algorithms
+  page: 2
+  quote: In Fig. 1 we compare the performances of the GNN of Ref. [4] (empty symbols) and DGA (full symbols) in ﬁnding MIS on d-RRG with d = 3, 5.
+- id: c4
+  statement: 'Critique of the original baselines: according to the comment, Schuetz et al. compared only against the Boppana-Halldorsson approximation algorithm, while many faster MIS algorithms exist.'
+  location: Introduction
+  page: 2
+  quote: The authors of Ref. [4] consider only the Boppana-Halldorsson (BH) approximated algorithm [8]
+- id: c5
+  statement: 'Run-time comparison caveat: DGA times were measured on a 2.3 GHz MacBook Pro, while GNN times were extracted from Fig. 5 of the original paper and include post-processing, since the original
+    authors give no per-step timing; the commenters argue the post-processing (checking the output is an IS) should be linear in n, so most of that time should be GNN computation.'
+  location: Comparison with simple greedy algorithms
+  page: 2
+  quote: The latter correspond to the aggregated run-time that includes the post-processing, because the authors furnish no additional information on the time needed for the diﬀerent steps of the computation.
+- id: c6
+  statement: 'Recommendation: such a simple greedy algorithm should be considered a minimal benchmark that any new algorithm must beat to be taken seriously.'
+  location: Discussion
+  page: 3
+  quote: We have reported in detail the performances of DGA because we believe that such a simple greedy algorithm should be considered as a minimal benchmark and any new algorithm must perform at least
+    better than DGA to be taken into serious consideration.
+- id: c7
+  statement: 'Benchmark hardness: the authors argue MIS on d-regular random graphs (d-RRG) with d < 16 is likely easy (citing a statistical-physics study of the independent-set space) and propose d > 16
+    as a harder benchmark, starting from results in their earlier work for d = 20 and d = 100.'
+  location: Discussion
+  page: 3
+  quote: So, a possible answer to the fundamental question above is to study MIS on d-RRG with d > 16.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. Short comment arising from Schuetz et al., Nature Machine Intelligence (doi 10.1038/s42256-022-00468-6); the evaluated GNN paper is not carded
+    here. The authors declare no competing interests. Affiliations: Sapienza University of Rome, INFN, CNR-NANOTEC. The GNN numbers are taken from the original paper''s figures (not re-run). The comment
+    also quotes MCMC (simulated annealing, parallel tempering) and belief propagation with reinforcement approximation ratios from the authors'' earlier work (Ref. [13]) as doing better than DGA, and says
+    the same conclusion holds for Max-Cut per a concurrent comment by Boettcher. It also mentions that in planted clique on dense graphs, a cited NN does not reach message passing or parallel tempering
+    performance. In the Discussion the authors give as their opinion that, at present, NN-based optimizers (like Schuetz et al.''s) do not meet their requirements and cannot compete with simple standard
+    algorithms on hard optimization problems; this is an opinion beyond their d = 3, 5 MIS experiment. The paradigm tag ''unsupervised'' refers to the evaluated GNN. Numeric results (approximation ratios,
+    speedups) not recorded.'

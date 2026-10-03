@@ -1,0 +1,102 @@
+id: arxiv-2201.10494
+title: What's Wrong with Deep Learning in Tree Search for Combinatorial Optimization
+authors:
+- Maximilian Böther
+- Otto Kißig
+- Martin Taraz
+- Sarel Cohen
+- Karen Seidel
+- Tobias Friedrich
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2201.10494
+  code: https://github.com/MaxiBoether/mis-benchmark-framework
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: dce631906ee52fdba1acf1918833d09efab84ee2f34b1609ea470762a652bcb9
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - graph-neural-networks
+  - branch-and-bound
+  - local-search
+  paradigms:
+  - supervised
+  - reinforcement-learning
+proposes:
+- Open-source benchmark suite for maximum (weighted) independent set with a unified interface to Gurobi, KaMIS, Intel-TreeSearch (Li et al. 2018), Learning What To Defer, and DGL-TreeSearch (a re-implementation
+  of Li et al.'s tree search); re-evaluation of the GCN-guided tree search
+claims:
+- id: c1
+  statement: 'Main finding on Li et al. (2018), per Boether et al.: after re-implementing Li et al.''s algorithm and testing various configurations on small and large synthetic and real-world MIS graphs,
+    they report that the GCN in the guided tree search does not learn a meaningful representation of the solution structure and can be replaced by random values; they state the tree search instead relies
+    on algorithmic techniques like graph kernelization and conclude that the original publication''s results are not reproducible.'
+  location: Abstract
+  page: 1
+  quote: By re-implementing their algorithm with a focus on code quality and extensibility, we show that the graph convolution network used in the tree search does not learn a meaningful representation
+    of the solution structure, and can in fact be replaced by random values.
+- id: c2
+  statement: 'Attribution of performance (Boether et al.''s conclusion): the GCN guidance does not help their tree search (randomness beats the GCN on some datasets, no difference on others); in what they
+    consider the production configuration (reduction and local search enabled) random outputs give identical performance with very minor differences in time to the final solution; overall they name KaMIS''s
+    reduction and local search as the major contributors to solution quality and call the tree search a ''smarter brute-force'' approach that does not gain performance from ML guidance (they recall the
+    default version cannot solve SATLIB without reduction and local search).'
+  location: Analysis of the tree search
+  page: 8
+  quote: Overall, major contributing factors to solution quality are the reduction and local search by KAMIS, and in fact, the tree search algorithm is a “smarter brute-force” approach that does not gain
+    any performance by being guided by a machine learning model.
+- id: c3
+  statement: 'Reproducibility (Boether et al.): on SATLIB, with the default configuration (no reduction, no local search) and their time limits (30 s for SATLIB in Tables 1/2), both implementations rarely
+    find solutions; they state their results contradict Li et al.''s claimed SATLIB average MIS of 426 and Ahn et al. (2020)''s 418, that testing the official Intel-TreeSearch weights made no difference,
+    and that neither the original code with the original weights, nor the original code with newly trained weights, nor their re-implementation perform as originally claimed; they contacted Li et al. unsuccessfully
+    (their suspicion of an undocumented modification refers to Ahn et al.''s default-configuration results).'
+  location: Analysis of the tree search
+  page: 7
+  quote: Overall, neither the original code with the original weights, nor the original code with newly trained weights, nor our reimplementation are performing as originally claimed.
+- id: c4
+  statement: 'Undocumented implementation details of the original code (Appendix C, per Boether et al.): the multi-threaded variant uses just one randomly chosen probability map instead of all, which is
+    not documented in the paper; also one ''epoch'' iterates over only 2000 random samples of the 38000 training samples although the paper states 200 epochs.'
+  location: Appendix
+  page: 20
+  quote: Third, the multi-threaded variant of the algorithm (demo parallel.py) uses just one randomly chosen probability map of the GCN outputs instead of all.
+- id: c5
+  statement: 'Comparison with classical solvers (Boether et al., on their main benchmark datasets before the separate large-scale analysis): they find state-of-the-art algorithmic techniques are required
+    for the tree searches to find good solutions; because the fully configured tree searches use KaMIS-internal routines, they argue (''one can argue'') purely algorithmic solvers are the better choice,
+    as the quality difference is negligible and KaMIS is faster; they say this is in line with Joshi et al. (2021) (arxiv-2006.07054), who in their description observe DL-based TSP solutions are often outperformed,
+    especially on larger instances.'
+  location: Comparing tree search solvers to other solvers
+  page: 8
+  quote: As the fully-conﬁgured versions of the tree searches employ these KAMIS-internal routines, one can argue that the purely algorithmic solvers are the better choice, because the quality difference
+    is negligible, while KAMIS is faster than the tree searches.
+- id: c6
+  statement: 'Contrast with an RL solver (Boether et al.): for Learning What To Defer (Ahn et al. 2020), trained by them for 20,000 PPO iterations on SATLIB with Ahn et al.''s SATLIB hyperparameters and
+    run without local search or reduction, replacing the network output with a random tensor degrades solution quality noticeably, unlike for the tree searches, so they conclude the GNN is responsible for
+    its competitive solution quality.'
+  location: Abstract
+  page: 1
+  quote: Additionally, we analyze a recent solver based on reinforcement learning and observe that for this solver, the GNN is responsible for the competitive solution quality.
+- id: c7
+  statement: 'Hardware fairness: Gurobi and KaMIS run on CPU while the tree search uses one or more GPUs; even with eight V100 GPUs the tree search does not outperform the other solvers, which the authors
+    read as the workload not being GPU-bound.'
+  location: Comparing tree search solvers to other solvers
+  page: 8
+  quote: Evening when assigning eight V100 GPUs to the multithreaded tree search, the computational advantage of the tree search does not help to outperform the other solvers, showing that the workload
+    is not GPU-bound.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at ICLR 2022. Ethics statement: the authors declare no conflicts of interest. Affiliations: Hasso
+    Plattner Institute / University of Potsdam, Academic College of Tel Aviv-Yaffo. Setup: NVIDIA DGX-1 (2x 20-core Xeon E5-2698, 8 V100 GPUs). GCNs trained on SATLIB for 20 epochs with Adam and hindsight
+    loss, 32 probability maps ''to enable comparison with Li et al. (2018)''. Time limits: 15 s for random graphs of 50-100 nodes, 30 s for SATLIB and PPI, 5 min for VC-BM and DIMACS (Table 1 caption);
+    multithreaded runs use 8 threads sharing one GPU. Datasets: ER, BA, HK, WS, hyperbolic random graphs; SATLIB, VC-BM, DIMACS, PPI, citation, reddit; large-scale graphs 500,000 to 5,000,000 vertices;
+    weighted graphs and Amazon MWIS. Further findings: with reduction enabled the reductions often single-handedly solve random-graph instances; without reduction/local search vanilla tree searches rarely
+    find solutions on SATLIB within the limit; on reddit graphs randomness increased performance. On large graphs KaMIS performed best; the authors could not verify LWD''s reported scalability to 2,000,000
+    vertices. On weighted ER graphs DGL-TreeSearch with queue pruning found the best result and Gurobi was the only solver handling the large Amazon MWIS instances. Appendix D tunes Gurobi with grbtune.
+    Conclusion states the LWD results ''indicate that reinforcement learning is superior to supervised approaches'' (authors'' reading). KaMIS uses graph kernelization and branch and bound (hence the branch-and-bound
+    tag). Re-evaluates arxiv-1810.10659. Reviewer cross-check (not stated by Boether et al.): Li et al. report a 10-minute SATLIB time limit with 16 threads (arxiv-1810.10659 c5), while Boether et al.''s
+    tables use 30 s for SATLIB; no discussion of this difference was found in Boether et al.''s text. Results tables not recorded.'

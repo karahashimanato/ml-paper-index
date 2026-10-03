@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Deep Policy Dynamic Programming for Vehicle Routing Problems
+
+- カード: [`arxiv-2102.11756`](../../papers/arxiv-2102.11756.yaml)
+- 著者: Wouter Kool, Herke van Hoof, Joaquim Gromicho, Max Welling
+- 年・掲載: 2021
+- 原論文: [PDF](https://arxiv.org/pdf/2102.11756v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: combinatorial-optimization, dynamic-programming, graph-neural-networks, supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Contribution: DPDP restricts and prioritizes the DP state space with a policy derived from a neural network trained to predict edges from example solutions (ML used to improve the DP, not DP inside the network).([Abstract, p.1](https://arxiv.org/pdf/2102.11756v2#page=1 "DPDP prioritizes and restricts the DP state space using a policy derived from a deep neural network, which is trained to predict edges from example solutions."))
+- **c2** Guarantees: the algorithm is a beam search over DP states (dominated partial solutions removed per DP state, B best kept by the heatmap score); the authors call it asymptotically optimal because a beam B = n * 2^n for an n-node TSP (i.e. keeping all DP states) guarantees optimal results; with the smaller beams used in practice (e.g. 10K, 100K) no optimality guarantee is stated, and B trades solution quality for computation. The sparse graph (c3) may additionally exclude optimal tours.([Deep Policy Dynamic Programming, p.4](https://arxiv.org/pdf/2102.11756v2#page=4 "DPDP is asymptotically optimal as using B = n · 2n for a TSP with n nodes guarantees optimal results, but choosing smaller B allows to trade performance for computational cost."))
+- **c3** Graph sparsity: the DP runs on a sparse graph defined either by thresholding the heatmap (default 10^-5; a second use of the network that the authors say can be seen as learned problem reduction) or by a kNN graph; the authors state that using a sparse graph significantly reduces runtime but may sacrifice the possibility to find good or optimal tours.([Graph sparsity, p.7](https://arxiv.org/pdf/2102.11756v2#page=7 "As our problems are deﬁned on sets of nodes rather than graphs, the use of a sparse graph is an artiﬁcial design choice, which allows to signiﬁcantly reduce the runtime but may sacriﬁce the possibility to ﬁnd good or optimal tours."))
+- **c4** Tuning: the heatmap threshold and the functional form of the scoring policy are educated guesses or manually tuned on a few validation instances, as are runtime-related implementation choices.([Implementation & hyperparameters, p.7](https://arxiv.org/pdf/2102.11756v2#page=7 "DPDP has very few hyperparameters, but the heatmap threshold of 10−5 and details like the functional form of e.g. the scoring policy are ‘educated guesses’ or manually tuned on a few validation instances and can likely be improved."))
+- **c5** Protocol (TSP): 100-node TSP on a commonly used test set of 10000 instances, with optimality gaps computed using Concorde, LKH and Gurobi and comparison to published neural approaches; the authors caution that running times are rough indications since some come from different machines (typically 1 GPU or an 8-32 core CPU). VRP and TSPTW experiments also use 100-node instances.([Experiments, p.7](https://arxiv.org/pdf/2102.11756v2#page=7 "In Table 1 we report our main results for DPDP with beam sizes of 10K (10 thousand) and 100K, for the TSP with 100 nodes on a commonly used test set of 10000 instances [31]."))
+- **c6** Evaluation practice: for VRP the authors compare against HGS and multiple LKH runs, stressing that most related neural work uses a single LKH run as the strongest baseline, and state that their goal is reasonable performance from a flexible framework rather than beating HGS or LKH.([Experiments, p.10](https://arxiv.org/pdf/2102.11756v2#page=10 "We emphasize that in most related work (e.g. [31]), the strongest baseline considered is one run of LKH, so we compare against a much stronger baseline."))
+- **c7** Limitations: the authors state DPDP is not yet a practical alternative in general and list scalability to larger instances (mainly the fully connected O(n^2) GNN), dependence on example solutions from an existing solver, and the heuristic, manually designed scoring function.([Discussion, p.11](https://arxiv.org/pdf/2102.11756v2#page=11 "We believe such research could yield signiﬁcant further improvement by addressing key current limitations: (1) the scalability to larger instances, (2) the dependency on example solutions and (3) the heuristic nature of the scoring function."))
+

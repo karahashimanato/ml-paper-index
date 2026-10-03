@@ -1,0 +1,87 @@
+id: arxiv-1611.02401
+title: Divide and Conquer Networks
+authors:
+- Alex Nowak-Vila
+- David Folqué
+- Joan Bruna
+year: 2016
+links:
+  arxiv: https://arxiv.org/abs/1611.02401
+  code: https://github.com/alexnowakvila/DiCoNet
+source:
+  version: arXiv v7
+  retrieved_at: '2026-10-02'
+  pdf_sha256: ad850c9e9bc361e736c879baa2f259f3b4739e9b6a77c30ccc489c0c52755605
+tags:
+  tasks:
+  - algorithm-learning
+  - combinatorial-optimization
+  method_families:
+  - divide-and-conquer
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+  - reinforcement-learning
+proposes:
+- 'Divide-and-Conquer Networks (DiCoNet): a split network (set/graph neural network producing binary partition probabilities) applied recursively to build a partition tree, and a merge network (Pointer
+  Network or GNN) applied fine-to-coarse to combine partial solutions; split trained by policy gradient, merge by backpropagation, with an optional computational-complexity regularizer'
+claims:
+- id: c1
+  statement: 'Both division and merging are learned: the architecture learns two scale-invariant operations, how to split an input into smaller sets and how to merge two partial solutions, each a single
+    network applied recursively with shared parameters across scales.'
+  location: Abstract
+  page: 1
+  quote: 'by learning two scale-invariant atomic operations: how to split a given input into smaller sets, and how to merge two partially solved tasks into a larger partial solution.'
+- id: c2
+  statement: 'Training: because the split is discrete, its parameters are trained with policy gradient (REINFORCE), while the merge is trained by standard backpropagation; the model can learn from input-output
+    pairs only or from a non-differentiable reward.'
+  location: Introduction
+  page: 2
+  quote: Since our split block is inherently discrete, we resort to policy gradient to train the split parameters, while using standard backpropagation for the merge phase
+- id: c3
+  statement: 'Heuristic, not exact: optimizing the cost over set partitions is described as intractable in general; if the cost is subadditive, the recursive splitting can be used as an efficient greedy
+    strategy because the sum over the two halves is a surrogate upper bound that depends only on smaller sets (the paper presents this as a greedy surrogate, not as an optimality guarantee).'
+  location: Learning from non-differentiable rewards
+  page: 4
+  quote: then the hierarchical splitting from (3) can be used as an efﬁcient greedy strategy, since the right hand side acts as a surrogate upper bound that depends only on smaller sets.
+- id: c4
+  statement: 'Size generalization protocol (knapsack): the model is trained on 20000 instances with n = 50 and evaluated on new instances with n = 50, 100 and 200 (uniform weights/values, capacity uniform
+    in [0.2n, 0.3n]).'
+  location: Knapsack
+  page: 9
+  quote: We generate 20000 problem instances of size n = 50 to train the model, and evaluate its performance on new instances of size n = 50, 100, 200.
+- id: c5
+  statement: 'Limitation: Dantzig''s greedy algorithm eventually outperforms DiCoNet at n = 200, which the authors say suggests relaxing the scale-invariance assumption or adding task-specific prior knowledge.'
+  location: Knapsack
+  page: 9
+  quote: However, we observe that the Dantzig greedy algorithm eventually outperforms the DiCoNet for sufﬁciently large input n = 200, suggesting that further improvements may come from relaxing the scale
+    invariance assumption, or by incorporating extra prior knowledge of the task.
+- id: c6
+  statement: 'Comparison with prior learned knapsack work: the authors state their knapsack approach does not match Bello et al. (2016) in best approximation, while arguing it uses a simpler GNN with lower
+    complexity and generalizes to larger n than trained on.'
+  location: Knapsack
+  page: 9
+  quote: This approach of the knapsack problem does not perform as good as (Bello et al., 2016) in obtaining the best approximation.
+- id: c7
+  statement: 'TSP (appendix, preliminary): scale invariance is weaker for TSP since it is not straightforward to build a tour from two partial tours, but the authors observe some degree of it suffices to
+    improve scalability when testing beyond the training size.'
+  location: Appendix C (Travelling Salesman Problem)
+  page: 14
+  quote: Although the scale invariance of the TSP is not as clear as in the previous problems (it is not straightforward how to use two TSP partial solutions to build a larger one), we observe that some
+    degree of scale invariance it is enough in order to improve on scalability.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at ICLR 2018. Tasks: planar convex hull (train sizes 6-50 in the unit square as in Vinyals et al.
+    2015; test n=25, 50, 100, 200; baseline Pointer Network; merge initialized from the trained baseline), k-means clustering (split only, GNN, reward = k-means cost; compared to Lloyd''s and recursive
+    binary Lloyd''s on Gaussian mixtures and CIFAR-10 3x3x3 patches), 0-1 knapsack (GNN split filling a fraction alpha=0.5 of the capacity recursively; baselines: non-recursive GNN trained with REINFORCE,
+    Dantzig greedy, optimum), and Euclidean TSP (appendix C: trained on n=20 with J=1, tested n=10-80; ground-truth tours from LKH (Helsgaun 2006); baseline = QAP-GNN of Nowak et al. 2017; beam search width
+    40). The abstract states the computational complexity can be used as a regularization term optimized by backpropagation (Appendix A); for convex hull the recursion depth is fixed by input size range
+    rather than learned dynamically. The authors relate the convex-hull divide and conquer to its Theta(n log n) classical algorithm. Clustering: the non-recursive baseline beats DiCoNet when k is small
+    (Table 2 caption). TSP results described as preliminary; future work mentions more splits and other NP-hard tasks. The extracted text also contains pages of an earlier version marked ''Under review
+    as a conference paper at ICLR 2016''. Results not recorded.'

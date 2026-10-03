@@ -1,0 +1,84 @@
+id: arxiv-1810.10659
+title: Combinatorial Optimization with Graph Convolutional Networks and Guided Tree Search
+authors:
+- Zhuwen Li
+- Qifeng Chen
+- Vladlen Koltun
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1810.10659
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 4d1afd0199be8eb0687917c826fe34cc46cf5dfff2a66e0dee85ccb59760d747
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - graph-neural-networks
+  - local-search
+  - greedy-methods
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- GCN trained with a hindsight (min-over-M-maps) loss to output multiple per-vertex probability maps for MIS, used to guide a parallelized breadth-first-like tree search of greedy labellings, combined with
+  graph reduction and 2-improvement local search; MVC, MC and SAT solved by reduction to MIS
+claims:
+- id: c1
+  statement: 'Core idea: a graph convolutional network is trained (supervised) to estimate, for each vertex, the likelihood that it belongs to the optimal solution.'
+  location: Abstract
+  page: 1
+  quote: The central component is a graph convolutional network that is trained to estimate the likelihood, for each vertex in a graph, of whether this vertex is part of the optimal solution.
+- id: c2
+  statement: 'Relation to search: the trained GCN guides a parallelized tree search that generates many candidate solutions, one of which is chosen after refinement (the basic variant uses the GCN output
+    as the heuristic in a greedy procedure).'
+  location: Introduction
+  page: 2
+  quote: This trained GCN is used to guide a parallelized tree search procedure that rapidly generates a large number of candidate solutions, one of which is chosen after subsequent reﬁnement.
+- id: c3
+  statement: 'Classical components: two ideas adopted from classic heuristics are added, described as complementary to learning: 2-improvement local search to refine candidates and graph reduction that
+    shrinks the graph while preserving the optimal MIS size.'
+  location: Method
+  page: 3
+  quote: Finally, Section 4.3 describes two ideas adopted from classic heuristics that are complementary to the application of learning and are useful in accelerating computation and reﬁning candidate solutions.
+- id: c4
+  statement: 'Protocol (training): a single network is trained on SATLIB 3-SAT instances converted to MIS graphs (about 1,200 vertices each; 38,000/1,000/1,000 split) and applied to all other problems and
+    datasets (SAT Competition 2017, BUAA-MC, SNAP social networks, citation networks).'
+  location: Experimental setup
+  page: 5
+  quote: The network trained on this training set will be applied to all other problems and datasets described below.
+- id: c5
+  statement: 'Protocol (baselines and time): baselines are S2V-DQN, a classic greedy heuristic (also with graph reduction + local search), Z3, ReduMIS and Gurobi; the tree search runs with 16 threads and
+    the other methods get 16x the running time (time limits 10 minutes on SAT datasets, 30 minutes on large graphs), on one desktop with an i7-5960X CPU and Titan X GPU.'
+  location: Results
+  page: 6
+  quote: For fair comparison, we give the other methods 16× running time, though we don’t reboot them if they terminate earlier based on their stopping criteria.
+- id: c6
+  statement: 'Ablation (SATLIB validation set, single-threaded): Basic, Basic+Tree, no local search and no reduction variants are compared, and the authors state that all components contribute to the results.'
+  location: Results
+  page: 8
+  quote: This experiment demonstrates that all components presented in this paper contribute to the results.
+- id: c7
+  statement: 'Generalization claim (Li et al.''s own reading of their MIS/MVC results on SNAP and citation graphs; see notes for the re-evaluation arxiv-2201.10494): the authors state the approach generalizes
+    from synthetic to real graphs, from SAT graphs to social networks, and from about 1,000-node to about 100,000-node graphs; they add ReduMIS works as well, presumably because both find optimal solutions
+    on those graphs.'
+  location: Results
+  page: 8
+  quote: In particular, it generalizes from synthetic graphs to real ones, from SAT graphs to real-world social networks, and from graphs with roughly 1,000 to graphs with roughly 100,000 nodes and more
+    than 10 million edges.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: 32nd Conference on Neural Information Processing Systems (NIPS 2018). Affiliations: Intel Labs (Li, Koltun) and HKUST (Chen). The
+    paper states the authors ''will release code'' but gives no URL in the PDF. Limitation (Conclusion): Maximal Clique was not solved on large SNAP/citation graphs because complement graphs are very dense;
+    the authors call the approach ''not a universal solution''. No optimality guarantee is claimed; the method is a heuristic search. Re-evaluated by arxiv-2201.10494 (Boether et al., ICLR 2022); the following
+    are Boether et al.''s statements, not this paper''s: using the original Intel code (with the original weights and with newly trained weights) and their DGL re-implementation, the default configuration
+    (no reduction, no local search) rarely finds solutions on SATLIB within their 30 s SATLIB time limit (this paper used 10 minutes with 16 threads), so they report the claimed SATLIB results as not reproduced;
+    replacing the GCN output with random values gave identical performance in the configuration with reduction and local search (randomness beat the GCN on some datasets); they attribute solution quality
+    mainly to KaMIS''s reduction and local search, and report undocumented code details (the parallel variant uses one randomly chosen probability map; an ''epoch'' iterates over 2000 of the 38000 training
+    samples). The ablation statement in c6 and the generalization statement in c7 are this paper''s own claims. Results tables not recorded.'

@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Machine Learning for Combinatorial Optimization: a Methodological Tour d'Horizon
+
+- カード: [`arxiv-1811.06128`](../../papers/arxiv-1811.06128.yaml)
+- 著者: Yoshua Bengio, Andrea Lodi, Antoine Prouvost
+- 年・掲載: 2018
+- 原論文: [PDF](https://arxiv.org/pdf/1811.06128v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: branch-and-bound, combinatorial-optimization, deep-learning, reinforcement-learning, supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Taxonomy (1) end-to-end learning: the ML model is trained to output solutions directly from the input instance (the survey's examples are mostly Euclidean TSP: pointer networks, RL-trained pointer networks, GNN encoders).([End to end learning, p.20](https://arxiv.org/pdf/1811.06128v2#page=20 "A ﬁrst idea to leverage machine learning to solve discrete optimization problems is to train the ML model to output solutions directly from the input instance, as shown in Figure 7."))
+- **c2** Taxonomy (2) learning to configure algorithms: rather than using ML alone, ML provides additional information to a CO algorithm, e.g. a parametrization of the algorithm in a broad sense (algorithm configuration, deciding whether to apply a decomposition or a linearization).([Learning to configure algorithms, p.21](https://arxiv.org/pdf/1811.06128v2#page=21 "Instead, ML can be applied to provide additional pieces of information to a CO algorithm as illustrated in Figure 8."))
+- **c3** Taxonomy (3) ML alongside optimization algorithms: a master CO algorithm repeatedly queries the same ML model for low-level decisions; for learned branching in MILP branch and bound, the authors note the framework keeps the same guarantees on lower and upper bounds while only the branching decisions are learned.([Machine learning alongside optimization algorithms, p.24](https://arxiv.org/pdf/1811.06128v2#page=24 "In this case, the general algorithm remains a branch-and-bound framework, with the same software architecture and the same guarantees on lower and upper bounds, but the branching decisions made at every node are left to be learned."))
+- **c4** Guarantees: using only ML (end-to-end) gives no optimality guarantee and only weak feasibility guarantees; ML that selects or parametrizes a CO algorithm keeps exactness if all choices lead to complete algorithms; in repeated interactions all possible decisions must be valid (the authors give Hottung et al. 2017, where an ML bound can overestimate lower bounds and prune invalidly, as a non-exact counter-example).([Exactness and approximation, p.36](https://arxiv.org/pdf/1811.06128v2#page=36 "Using only ML as surveyed in Section 3.2.1 cannot give any optimality guarantee, and only weak feasibility guarantees (see Section 6.1)."))
+- **c5** Generalization caveat: current ML generalizes within the training distribution but tends to have more difficulty out of distribution, so the authors expect ML-based CO algorithms may fail on unseen instances too far from the training instances; they also note traditional CO algorithms tend to be adapted to particular problem structures.([Introduction, p.4](https://arxiv.org/pdf/1811.06128v2#page=4 "we may expect CO algorithms that leverage ML models to fail when evaluated on unseen problem instances that are too far from what has been used for training the ML predictor"))
+- **c6** Scaling caveat: according to the survey, all the cited papers that tackle TSP with ML and attempt larger instances (Vinyals et al., Bello et al., Khalil et al., Kool and Welling) see degrading performance as size increases much beyond the training sizes; learning on larger instances may itself be a computational and generalization issue.([Scaling, p.38](https://arxiv.org/pdf/1811.06128v2#page=38 "Indeed, all of the papers tackling TSP through ML and attempting to solve larger instances see degrading performance as size increases much beyond the sizes seen during training (Vinyals et al., 2015; Bello et al., 2017; Khalil et al., 2017a; Kool and Welling, 2018)."))
+- **c7** Conclusion (authors' belief): end-to-end ML approaches can be improved by combining ML with current CO algorithms to benefit from their theoretical guarantees and state-of-the-art algorithms; the authors also recommend learning on a distribution small enough for the policy to exploit the problem structure.([Conclusions, p.40](https://arxiv.org/pdf/1811.06128v2#page=40 "We believe end-to-end machine learning approaches to combinatorial optimization can be improved by using machine learning in combination with current combinatorial optimization algorithms to beneﬁt from the theoretical guarantees and state-of-the-art algorithms already available."))
+

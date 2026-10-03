@@ -1,0 +1,90 @@
+id: arxiv-1906.01629
+title: Exact Combinatorial Optimization with Graph Convolutional Neural Networks
+authors:
+- Maxime Gasse
+- Didier Chételat
+- Nicola Ferroni
+- Laurent Charlin
+- Andrea Lodi
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1906.01629
+  code: https://github.com/ds4dm/learn2branch
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0a2e92e58ee5056ee709fb6bf9f93f340fe06a5a41b75adddf99bf81428e6381
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - branch-and-bound
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'GCNN branching policy: a bipartite (variable-constraint) graph convolutional network that selects the branching variable in MILP branch-and-bound, trained by behavioral cloning (cross-entropy) of strong
+  branching decisions'
+claims:
+- id: c1
+  statement: 'Relation to B&B: the paper uses ML to improve branch-and-bound, specifically learning the variable selection (branching) policy, with a graph convolutional network over the variable-constraint
+    bipartite graph of the MILP.'
+  location: Abstract
+  page: 1
+  quote: We propose a new graph convolutional neural network model for learning branch-and-bound variable selection policies, which leverages the natural variable-constraint bipartite graph representation
+    of mixed-integer linear programs.
+- id: c2
+  statement: 'Learned decision and training target: the policy imitates strong branching via behavioral cloning with a cross-entropy loss, which the authors describe as an easier task than predicting strong
+    branching scores or rankings (as done in earlier works they cite).'
+  location: Introduction
+  page: 2
+  quote: Second, we approximate strong branching decisions by using behavioral cloning with a cross-entropy loss, a less difficult task than predicting strong branching scores [4] or rankings [30; 24].
+- id: c3
+  statement: 'Exactness: in the B&B framework described, the solving process stops when upper and lower bounds are equal (or the feasible regions no longer decompose), giving a certificate of optimality
+    or infeasibility. The learned policy replaces only the choice of the fractional variable to branch on, so B&B keeps this stopping rule (our reading; the paper calls B&B ''the exact method of choice''
+    for MILPs but does not separately prove or state that the learned policy preserves exactness, and instances can remain unsolved within the 1-hour time limit).'
+  location: Background
+  page: 3
+  quote: The solving process stops whenever both the upper and lower bounds are equal or when the feasible regions do not decompose anymore, thereby providing a certificate of optimality or infeasibility,
+    respectively.
+- id: c4
+  statement: 'Solver settings: SCIP 6.0.1 is the backend with a 1-hour time limit; cutting planes are allowed at the root node only and solver restarts are deactivated (following prior work), with all other
+    SCIP parameters at default.'
+  location: Experiments
+  page: 6
+  quote: Throughout all experiments we use SCIP 6.0.1 as the backend solver, with a time limit of 1 hour.
+- id: c5
+  statement: 'Train vs test sizes: models are trained on small (Easy) instances and evaluated on Easy, Medium and Hard instances; e.g. for set covering (1,000 columns) training uses 500 rows and evaluation
+    uses 500, 1,000 and 2,000 rows. The other benchmarks (combinatorial auction, capacitated facility location, maximum independent set) are scaled analogously.'
+  location: Experiments
+  page: 6
+  quote: We train and test on instances with 500 rows, and we evaluate on instances with 500 (Easy), 1,000 (Medium) and 2,000 (Hard) rows.
+- id: c6
+  statement: 'Critique of prior learned-branching work (Khalil et al., Alvarez et al., Hansknecht et al.): those works evaluated on a simplified solver, whereas this paper compares against a full-fledged
+    solver with primal heuristics, cuts and presolving activated (the authors also note those works did not evaluate generalization to larger instances).'
+  location: Related work
+  page: 2
+  quote: Finally, in each case performance was evaluated on a simplified solver, whereas we compare, for the first time and favorably, against a full-fledged solver with primal heuristics, cuts and presolving
+    activated.
+- id: c7
+  statement: 'Limitation (size generalization): the authors expect the improvement to decrease on progressively larger problems, and in early experiments on even larger (''huge'') instances observed a performance
+    drop for the model trained on small instances (a model trained on medium instances did perform well there).'
+  location: Discussion
+  page: 9
+  quote: In early experiments with even larger instances (huge), we observed a performance drop for the model trained on our small instances.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: NeurIPS 2019. Baselines: SCIP default reliability pseudocost branching (RPB), full strong branching (FSB, the expert), and re-implementations
+    of TREES (Alvarez et al., ExtraTrees), SVMRANK (Khalil et al.) and LMART (Hansknecht et al.) within SCIP. Training data per benchmark: 100,000 branching samples from 10,000 random instances; evaluation
+    on 20 new instances per difficulty with five seeds (100 solves per method). Metrics: imitation accuracy (acc@1/5/10), 1-shifted geometric mean of solving time (unsolved instances counted at their running
+    time without extra penalization), wins, and hardware-independent node counts on instances solved by all methods. All instances are synthetic generator families (set covering after Balas and Ho, combinatorial
+    auctions after Leyton-Brown et al., capacitated facility location after Cornuejols et al., maximum independent set on Erdos-Renyi graphs); no MIPLIB evaluation. The authors state maximum independent
+    set is particularly challenging for generalization (all ML approaches solve fewer instances than RPB). Hardware (supplement): Intel Xeon Gold 6126 CPU and an Nvidia Tesla V100 GPU; the text does not
+    state whether GCNN inference during evaluation ran on the GPU, nor discuss GPU-vs-CPU fairness against RPB (searched ''GPU'', ''CPU''). Supplement: ML competitors could not be trained on the full dataset
+    due to computational limitations. Results tables not recorded.'

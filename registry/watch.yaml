@@ -41,3 +41,7 @@ themes:
     tags: [learned-indexes, learning-augmented-algorithms, algorithm-learning, differentiable-sorting]
     arxiv_queries:
       - '(abs:"learned index" OR abs:"learning-augmented" OR abs:"algorithms with predictions" OR abs:"differentiable sorting" OR abs:"algorithmic reasoning") AND (cat:cs.LG OR cat:cs.DS OR cat:cs.DB)'
+  - name: アルゴリズム設計技法と機械学習
+    tags: [combinatorial-optimization, divide-and-conquer, dynamic-programming, branch-and-bound, local-search]
+    arxiv_queries:
+      - '(abs:"combinatorial optimization" OR abs:"branch and bound" OR abs:"branch-and-bound" OR abs:"local search" OR abs:"dynamic programming") AND (abs:learning OR abs:neural) AND (cat:cs.LG OR cat:cs.AI OR cat:math.OC)'

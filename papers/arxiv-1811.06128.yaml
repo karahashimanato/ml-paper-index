@@ -1,0 +1,84 @@
+id: arxiv-1811.06128
+title: 'Machine Learning for Combinatorial Optimization: a Methodological Tour d''Horizon'
+authors:
+- Yoshua Bengio
+- Andrea Lodi
+- Antoine Prouvost
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1811.06128
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c7839cf585e879fe835da0a4b8c268ff98b5febe334bb9482a7a00014d533411
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - branch-and-bound
+  - deep-learning
+  paradigms:
+  - supervised
+  - reinforcement-learning
+proposes:
+- Survey and methodology for integrating machine learning into combinatorial optimization algorithms, organized by how ML and the CO algorithm interact (end-to-end learning, learning to configure algorithms,
+  ML alongside optimization algorithms), with optimization problems viewed as data points drawn from a distribution of instances
+claims:
+- id: c1
+  statement: 'Taxonomy (1) end-to-end learning: the ML model is trained to output solutions directly from the input instance (the survey''s examples are mostly Euclidean TSP: pointer networks, RL-trained
+    pointer networks, GNN encoders).'
+  location: End to end learning
+  page: 20
+  quote: A ﬁrst idea to leverage machine learning to solve discrete optimization problems is to train the ML model to output solutions directly from the input instance, as shown in Figure 7.
+- id: c2
+  statement: 'Taxonomy (2) learning to configure algorithms: rather than using ML alone, ML provides additional information to a CO algorithm, e.g. a parametrization of the algorithm in a broad sense (algorithm
+    configuration, deciding whether to apply a decomposition or a linearization).'
+  location: Learning to configure algorithms
+  page: 21
+  quote: Instead, ML can be applied to provide additional pieces of information to a CO algorithm as illustrated in Figure 8.
+- id: c3
+  statement: 'Taxonomy (3) ML alongside optimization algorithms: a master CO algorithm repeatedly queries the same ML model for low-level decisions; for learned branching in MILP branch and bound, the authors
+    note the framework keeps the same guarantees on lower and upper bounds while only the branching decisions are learned.'
+  location: Machine learning alongside optimization algorithms
+  page: 24
+  quote: In this case, the general algorithm remains a branch-and-bound framework, with the same software architecture and the same guarantees on lower and upper bounds, but the branching decisions made
+    at every node are left to be learned.
+- id: c4
+  statement: 'Guarantees: using only ML (end-to-end) gives no optimality guarantee and only weak feasibility guarantees; ML that selects or parametrizes a CO algorithm keeps exactness if all choices lead
+    to complete algorithms; in repeated interactions all possible decisions must be valid (the authors give Hottung et al. 2017, where an ML bound can overestimate lower bounds and prune invalidly, as a
+    non-exact counter-example).'
+  location: Exactness and approximation
+  page: 36
+  quote: Using only ML as surveyed in Section 3.2.1 cannot give any optimality guarantee, and only weak feasibility guarantees (see Section 6.1).
+- id: c5
+  statement: 'Generalization caveat: current ML generalizes within the training distribution but tends to have more difficulty out of distribution, so the authors expect ML-based CO algorithms may fail
+    on unseen instances too far from the training instances; they also note traditional CO algorithms tend to be adapted to particular problem structures.'
+  location: Introduction
+  page: 4
+  quote: we may expect CO algorithms that leverage ML models to fail when evaluated on unseen problem instances that are too far from what has been used for training the ML predictor
+- id: c6
+  statement: 'Scaling caveat: according to the survey, all the cited papers that tackle TSP with ML and attempt larger instances (Vinyals et al., Bello et al., Khalil et al., Kool and Welling) see degrading
+    performance as size increases much beyond the training sizes; learning on larger instances may itself be a computational and generalization issue.'
+  location: Scaling
+  page: 38
+  quote: Indeed, all of the papers tackling TSP through ML and attempting to solve larger instances see degrading performance as size increases much beyond the sizes seen during training (Vinyals et al.,
+    2015; Bello et al., 2017; Khalil et al., 2017a; Kool and Welling, 2018).
+- id: c7
+  statement: 'Conclusion (authors'' belief): end-to-end ML approaches can be improved by combining ML with current CO algorithms to benefit from their theoretical guarantees and state-of-the-art algorithms;
+    the authors also recommend learning on a distribution small enough for the policy to exploit the problem structure.'
+  location: Conclusions
+  page: 40
+  quote: We believe end-to-end machine learning approaches to combinatorial optimization can be improved by using machine learning in combination with current combinatorial optimization algorithms to beneﬁt
+    from the theoretical guarantees and state-of-the-art algorithms already available.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: Accepted to the European Journal of Operations Research. Survey; no experiments of its own. Affiliations: Canada Excellence Research
+    Chair in Data Science for Decision Making (Ecole Polytechnique de Montreal), Universite de Montreal, Mila. The survey states the literature it covers is exploratory rather than mature algorithms (Introduction).
+    Evaluation/data-generation remarks (Data generation section) quote Smith-Miles and Bowly (2015): confidence in an algorithm ''depends on how carefully we select test instances'' and new algorithms are
+    too often claimed superior on well-studied instances. On generalization to larger sizes it reports Gasse et al. (2019) pushing test distributions to larger sizes with a ''largely affirmative'' answer
+    (Section 4.3 discussion). Tag note: no exact family tag for ''survey''; branch-and-bound chosen because learned branching/cut selection inside B&B is a central example.'

@@ -1,0 +1,102 @@
+id: arxiv-2012.13349
+title: Solving Mixed Integer Programs Using Neural Networks
+authors:
+- Vinod Nair
+- Sergey Bartunov
+- Felix Gimeno
+- Ingrid von Glehn
+- Pawel Lichocki
+- Ivan Lobov
+- Brendan O'Donoghue
+- Nicolas Sonnerat
+- Christian Tjandraatmadja
+- Pengming Wang
+- Ravichandra Addanki
+- Tharindi Hapuarachchi
+- Thomas Keck
+- James Keeling
+- Pushmeet Kohli
+- Ira Ktena
+- Yujia Li
+- Oriol Vinyals
+- Yori Zwols
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2012.13349
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 18b54831b9eb410f14378b920e0476463262769e109329815defb48415dc1c57
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - branch-and-bound
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Neural Diving: a generative GNN that produces partial integer assignments whose remaining sub-MIPs are solved by SCIP (primal heuristic)'
+- 'Neural Branching: a GNN branching policy imitating an ADMM-based, GPU-batched variant of Full Strong Branching, integrated in SCIP'
+claims:
+- id: c1
+  statement: 'Relation to B&B: two learned components are plugged into a base MIP solver (SCIP): Neural Diving for finding high-quality assignments (primal side) and Neural Branching for variable selection
+    in branch-and-bound (bounding the gap).'
+  location: Abstract
+  page: 1
+  quote: Our approach constructs two corresponding neural network-based components, Neural Diving and Neural Branching, to use in a base MIP solver such as SCIP.
+- id: c2
+  statement: 'Neural Branching''s expert: because a CPU-based Full Strong Branching implementation can be too expensive on large-scale MIPs even for offline data generation, the authors build an FSB variant
+    using ADMM that batches the LP computations on GPU (solving the LPs approximately) to generate imitation data.'
+  location: Introduction
+  page: 3
+  quote: We develop a variant of FSB using the alternating directions method of multipliers (ADMM) (Boyd et al. 2011) that scales to large-scale MIPs by performing the required computation in a batch manner
+    on GPU.
+- id: c3
+  statement: 'Exactness / metric: B&B tracks global primal and dual bounds; a zero primal-dual gap certifies optimality, but in practice B&B is terminated at an application-dependent relative gap, and evaluation
+    reports average primal, dual or primal-dual gap over time plus survival plots.'
+  location: Background
+  page: 7
+  quote: The gap is always nonnegative by construction, and if it is zero then we have solved the problem, the feasible point that corresponds to the primal bound is optimal and the dual bound is a certificate
+    of optimality.
+- id: c4
+  statement: 'Baseline and tuning: the main baseline is SCIP 7.0.1 with its presolving, primal heuristics and cuts emphasis settings tuned per dataset by exhaustive grid search on 200 validation MIPs with
+    a 3-hour limit (''Tuned SCIP'').'
+  location: Evaluation
+  page: 13
+  quote: The main baseline we compare against is SCIP 7.0.1 with its parameters tuned for each test dataset.
+- id: c5
+  statement: 'Hardware fairness: in the joint comparison (only the sequential version of Neural Diving), Neural Diving (Sequential) and Neural Branching each use a CPU core and a GPU, so their combination
+    uses two cores and two GPUs; Tuned SCIP is given two cores, used as two independent solves with different seeds (best bounds across the two runs), and GPU use is explicitly not controlled for.'
+  location: Joint evaluation
+  page: 31
+  quote: Since SCIP does not use GPUs, we do not control for that resource when comparing Tuned SCIP and Neural Solvers.
+- id: c6
+  statement: 'Data splits: all datasets except MIPLIB are split randomly into disjoint 70/15/15% train/validation/test subsets (so, in our reading, test instances come from the same dataset rather than
+    from a larger size class); for MIPLIB the 2017 Benchmark Set is the test set, and the 2017 Collection Set and the 2010 set (after removing overlaps with the Benchmark Set) are the training and validation
+    sets, respectively.'
+  location: Datasets
+  page: 12
+  quote: For MIPLIB, we use instances from the MIPLIB 2017 Benchmark Set as the test set, since that is the set on which solvers are evaluated.
+- id: c7
+  statement: 'Limitation (Neural Diving): the authors believe its strength is finding good solutions quickly but that it sometimes fails to find optimal or near-optimal solutions, e.g. losing to SCIP at
+    the end on Electric Grid Optimization and MIPLIB survival plots.'
+  location: Neural Diving results
+  page: 21
+  quote: We believe that the strength of our approach is in quickly finding good solutions, but it sometimes fails to find an optimal or near-optimal solution.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. Affiliations: DeepMind and Google Research (two datasets are Google production datasets). Datasets: CORLAT, NN Verification, Google Production
+    Packing, Google Production Planning, Electric Grid Optimization, MIPLIB; most instances have 10^3-10^6 variables and constraints after SCIP presolve. Commercial solvers: the authors state lack of access
+    to solver internals makes a fair comparison to commercial solvers infeasible; a partial Gurobi comparison (Neural Diving with Gurobi as sub-MIP solver, non-calibrated time) is reported on two datasets.
+    Time is ''calibrated time'' measured via periodic calibration-MIP solves on a heterogeneous shared cluster (>160,000 MIP solves, nearly a million CPU and GPU hours). Best known primal bound p* precomputed
+    by SCIP default with a 24-hour limit. SCIP relative gap set to 0 in Neural Diving experiments to avoid premature stopping. When Neural Diving is used inside SCIP, SCIP''s built-in primal heuristics
+    are disabled. Imitation learning variant (behavioral cloning, distillation with random moves, one DAgger iteration) chosen per dataset on validation dual gap. Exactness (our reading, not stated as such
+    by the paper): Neural Branching only selects the branching variable inside SCIP''s B&B; Neural Diving solves sub-MIPs with fixed variables, so on its own it gives primal solutions without an optimality
+    proof. Results not recorded.'

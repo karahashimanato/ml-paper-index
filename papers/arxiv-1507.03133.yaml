@@ -1,0 +1,86 @@
+id: arxiv-1507.03133
+title: Best Subset Selection via a Modern Optimization Lens
+authors:
+- Dimitris Bertsimas
+- Angela King
+- Rahul Mazumder
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1507.03133
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7e7c90d2cd9c9a9e034f454ca1ff3d6e5301634dd13a175c204075d86dc38cbd
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - branch-and-bound
+  - linear-models
+  paradigms:
+  - supervised
+proposes:
+- Best subset selection (cardinality-constrained least squares or least absolute deviation) solved as a mixed integer quadratic/linear program with Gurobi, warm-started by discrete first-order (projected-gradient/hard-thresholding)
+  solutions and strengthened by data-driven bounds on coefficients
+claims:
+- id: c1
+  statement: 'Method: discrete first-order methods produce high-quality feasible solutions that warm-start an MIO solver, which finds provably optimal solutions; the resulting algorithm gives a suboptimality
+    guarantee even if stopped early and accommodates side constraints and LAD loss.'
+  location: Abstract
+  page: 1
+  quote: We develop a discrete extension of modern ﬁrst order continuous optimization methods to ﬁnd high quality feasible solutions that we use as warm starts to a MIO solver that ﬁnds provably optimal
+    solutions.
+- id: c2
+  statement: 'Guarantee vs heuristics: MIO solvers provide feasible solutions together with lower bounds on the optimal value, so the gap certifies suboptimality when stopped early; heuristic methods give
+    no such certificate.'
+  location: Brief Background on MIO
+  page: 8
+  quote: In contrast, heuristic methods do not provide such a certiﬁcate of suboptimality.
+- id: c3
+  statement: 'Finding vs proving optimality: for high-dimensional problems (n in {50, 100}, p in {1000, 2000}) the approach finds near-optimal solutions in minutes, with warm starts and problem-specific
+    information, but takes hours to prove optimality.'
+  location: Introduction
+  page: 6
+  quote: For high-dimensional problems with n ∈{50, 100} and p ∈{1000, 2000}, with the aid of warm starts and further problem-speciﬁc information, our approach ﬁnds near optimal solutions in minutes but
+    takes hours to prove optimality.
+- id: c4
+  statement: 'Warm starts: on the Diabetes data (n = 350, p = 64), warm starts from the discrete first-order algorithm plus problem-specific bounds let the MIO close the optimality gap significantly faster
+    than a cold start.'
+  location: Improving MIO Performance via Warm Starts
+  page: 28
+  quote: The ﬁgure shows that in the presence of warm starts and problem speciﬁc side information, the MIO closes the optimality gap signiﬁcantly faster.
+- id: c5
+  statement: 'Solver settings: the authors observed 2-4x speedups from tuning the solver to a problem but used default solver parameters for generality, and say the reported times are not meant as best-possible
+    benchmarks.'
+  location: MIO model training
+  page: 32
+  quote: We observed that it was possible to obtain speedups of a factor of 2-4 by carefully tuning the optimization solver for a particular problem, but chose to maintain generality by solving with default
+    parameters.
+- id: c6
+  statement: 'Comparison with Lasso / Sparsenet / stepwise (n > p regime, synthetic Example 1 with n = 500, p = 100, k0 = 10, averaged over ten random instances; each method''s tuning parameter chosen on
+    a held-out validation set): MIO performs best, followed by Sparsenet and Lasso, with stepwise regression worst, though Sparsenet marginally outperforms MIO in prediction error in a few instances. In
+    this experiment the MIO for each k was stopped at a 1% optimality gap or a 15-minute time limit (MIO model training subsection), so the ''MIO'' models are not necessarily certified optimal.'
+  location: Statistical Performance
+  page: 30
+  quote: Among the methods, MIO performs the best, followed by Sparsenet, Lasso with Step(wise) exhibiting the worst performance.
+- id: c7
+  statement: 'Qualification in the high-dimensional regime (synthetic p >> n designs; competitors Lasso, Sparsenet and the discrete first-order method alone, models selected on validation sets): for Examples
+    2 and 3, MIO gives predictive models similar to Lasso but much sparser, and Lasso seems to perform marginally better than MIO as a predictive model for small SNR.'
+  location: The High-Dimensional Regime
+  page: 39
+  quote: In fact, Lasso seems to perform marginally better than MIO, as a predictive model for small values of SNR.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. Software/hardware: Gurobi 5.5 (Matlab and Python interfaces); discrete first-order methods in Matlab; 8-core Xeon 1.8GHz 16GB for n > p, 16-core
+    Xeon 3.1GHz 128GB for p >> n. Upper-bound experiments: 50 random initializations of Algorithm 2 vs MIO cold start vs MIO warm start, each with a 500-second limit; Leukemia data runs 4000 s per k. Sequence-of-k
+    training stops at a 1% optimality gap or 15 minutes per k, using solver callbacks to add cardinality cuts. On Diabetes the optimum is found in seconds but certifying it takes 10-20 minutes (Figure 2
+    caption). In p >> n, lower bounds evolve slowly even with warm starts; a bounding-box formulation around a local solution certifies optimality only inside that box. The discrete first-order algorithm
+    converges to a first-order stationary point (Proposition 6), not necessarily the global optimum. Introduction: the problem is NP-hard and leaps in R does not scale beyond p = 30; the authors relate
+    prior leaps-and-bounds and tailored branch-and-bound work. Baselines: Lasso (glmnet), Sparsenet (MCP family), stepwise regression (R stats), debiased Lasso variants (appendix). The authors argue Lasso
+    brings in many shrunken noise variables under correlation and noise. Branch-and-bound tag: the MIO solver (Gurobi) is used as the exact engine; the paper itself does not design a branching scheme. greedy-methods
+    not tagged: stepwise regression is a baseline only. Results not recorded.'

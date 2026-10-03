@@ -1,0 +1,88 @@
+id: arxiv-2006.07054
+title: Learning the Travelling Salesperson Problem Requires Rethinking Generalization
+authors:
+- Chaitanya K. Joshi
+- Quentin Cappart
+- Louis-Martin Rousseau
+- Thomas Laurent
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.07054
+  code: https://github.com/chaitjo/learning-tsp
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e550e448bb0b51d8f53e4a7e416ed1d357bdc71f8261bae593c46e75e60a3340
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+  - reinforcement-learning
+proposes:
+- Unified end-to-end neural combinatorial optimization pipeline for TSP (problem definition, graph embedding, solution decoding, solution search, policy learning) used for controlled experiments on zero-shot
+  generalization from small training sizes to larger TSPs
+claims:
+- id: c1
+  statement: 'Main claim: learning-driven TSP approaches perform close to classical solvers when trained on trivially small sizes but cannot generalize the learnt policy to larger instances at practical
+    scales.'
+  location: Abstract
+  page: 1
+  quote: While state-of-the-art learning-driven approaches for TSP perform closely to classical solvers when trained on trivially small sizes, they are unable to generalize the learnt policy to larger instances
+    at practical scales.
+- id: c2
+  statement: 'Protocol (training): ablations train on variable-size TSP20-50 (compared with fixed sizes up to TSP100); nodes uniform in the unit square; SL uses 1,280,000 instances with Concorde tours as
+    labels for 10 epochs, RL uses 128,000 freshly generated unlabelled instances per epoch for 100 epochs, so both see 12,800,000 samples in total; models have approximately 350,000 parameters.'
+  location: Experimental setup
+  page: 7
+  quote: We perform ablation studies of each component of the pipeline by training on variable TSP20-50 graphs for rapid experimentation.
+- id: c3
+  statement: 'Protocol (evaluation): test set of 1,280 instances for each size TSP10 to TSP200, metric is optimality gap w.r.t. Concorde, beam search width 128; a non-learnt furthest insertion heuristic
+    is used as the reference for ''good'' generalization.'
+  location: Experimental setup
+  page: 7
+  quote: We compare models on a held-out test set of 25,600 TSPs, consisting of 1,280 samples each of TSP10, TSP20, . . . , TSP200.
+- id: c4
+  statement: 'Critique of evaluation practice: the authors state that the prevalent paradigm of measuring on fixed or trivially small sizes hides poor generalization.'
+  location: Introduction
+  page: 2
+  quote: The prevalent evaluation paradigm overshadows models’ poor generalization capabilities by measuring performance on ﬁxed or trivially small TSP sizes.
+- id: c5
+  statement: 'Train/test size result: variable-size training helps within the training range but does not improve generalization to larger problems over training on TSP50; TSP20-trained models fail to generalize
+    to large sizes and TSP100-trained models do poorly on small sizes, which the authors take as evidence that evaluation on training sizes (citing Kool et al. and Joshi et al.) hides brittle out-of-distribution
+    performance.'
+  location: Results
+  page: 7
+  quote: Learning from small TSP20 is unable to generalize to large sizes while TSP100 models generalize poorly to trivially easy sizes, suggesting that the prevalent protocol of evaluation on training
+    sizes [42, 37] overshadows brittle out-of-distribution performance.
+- id: c6
+  statement: 'Classical baseline (Figure 1 setting: three identical autoregressive GNN models trained via RL on 12.8 million instances - from scratch on TSP200, on TSP20-50 zero-shot, and pretrained then
+    fine-tuned on 1.28 million TSP200 - plus Active Search, evaluated on 1,280 held-out TSP200 instances): within the authors'' computational budget a simple non-learnt furthest insertion heuristic still
+    outperforms all models.'
+  location: Introduction
+  page: 2
+  quote: Within our computational budget, a simple non-learnt furthest insertion heuristic still outperforms all models.
+- id: c7
+  statement: 'Recommendation: GNN layers, normalization schemes, graph sparsification and learning paradigms need to be explicitly re-designed with out-of-distribution generalization in mind; the authors
+    advocate training on small instances and transferring zero-shot or via fast fine-tuning rather than expensive large-scale training.'
+  location: Conclusion
+  page: 12
+  quote: Our ﬁndings suggest that key design choices such as GNN layers, normalization schemes, graph sparsiﬁcation, and learning paradigms need to be explicitly re-designed to consider out-of-distribution
+    generalization.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. Affiliations: University of Cambridge, Ecole Polytechnique de Montreal, Loyola Marymount University; no company funding found in the text. Further
+    findings listed in the Introduction: autoregressive decoding improves generalization over non-autoregressive models but costs more inference time; models trained with expert supervision are more amenable
+    to post-hoc search, while RL scales better with more computation as it does not rely on labelled data. Section 6 (Recent case studies) reports that learning within local search (e.g. NeuroLKH improving
+    LKH) implicitly gives better zero-shot generalization than constructive approaches, but names as a limitation the need for hand-designed local search heuristics; it also describes GNN + dynamic programming
+    / MCTS search replacing the decoder search. The paper cites Bengio et al.''s three-way taxonomy (arxiv-1811.06128). Compute: the Introduction says it is difficult to outperform a simple insertion heuristic
+    when directly training on 12.8 million TSP200 samples for 500 hours on university-scale hardware; Appendix B: PyTorch on an Intel Xeon E5-2690 v4 server with four 1080Ti GPUs, one GPU per experiment,
+    lowest training time across runs reported. Footnote: the largest TSP solved by Concorde has 109,399 nodes with 7.5 months running time. Results not recorded.'

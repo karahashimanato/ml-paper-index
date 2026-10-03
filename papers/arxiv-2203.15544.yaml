@@ -1,0 +1,80 @@
+id: arxiv-2203.15544
+title: Graph Neural Networks are Dynamic Programmers
+authors:
+- Andrew Dudzik
+- Petar Veličković
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2203.15544
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9f1a4d7b021d8ee30c352dd9076c6dbf75874552f6f64625ac192aa7f751de70
+tags:
+  tasks:
+  - algorithm-learning
+  method_families:
+  - graph-neural-networks
+  - dynamic-programming
+  paradigms:
+  - supervised
+proposes:
+- A category-theoretic framing (integral transform over a 'polynomial span' of finite sets, with values in a semiring) that describes both DP recursions such as Bellman-Ford and message-passing GNNs, and
+  a GNN variant with order-3 (V^3) messages for edge-centric algorithms
+claims:
+- id: c1
+  statement: 'Contribution: using category theory and abstract algebra, the authors argue for a connection between GNNs and DP that goes beyond prior observations on single algorithms such as Bellman-Ford,
+    and report CLRS experiments.'
+  location: Abstract
+  page: 1
+  quote: Here we show, using methods from category theory and abstract algebra, that there exists an intricate connection between GNNs and DP, going well beyond the initial observations over individual
+    algorithms such as Bellman-Ford.
+- id: c2
+  statement: 'Critique of prior work: the authors state that the original algorithmic-alignment paper (their reference [37]) only mentioned in passing that DP seems to align with GNNs and demonstrated one
+    example, Bellman-Ford, and that they found no concrete follow-up.'
+  location: Introduction
+  page: 2
+  quote: Indeed, the original work of [37] merely mentions in passing that the formulation of DP algorithms seems to align with GNNs, and demonstrates one example (Bellman-Ford).
+- id: c3
+  statement: 'Status of the formal claim: the integral transform (pullback, argument pushforward, message pushforward) is a construction; that it can be described as a polynomial functor is stated as a
+    conjecture. No statement labelled as a theorem, proposition or lemma was found in the text (the only ''can be proved'' refers to prior work''s NTK-regime sample-complexity result), so the GNN-DP correspondence
+    is a framework plus a conjecture, not a proven result.'
+  location: The integral transform
+  page: 4
+  quote: Taken together, they form an integral transform—and we conjecture that this transform can be described as a polynomial functor, where p⊗and o⊕correspond to the dependent product and dependent sum
+    from type theory (cf. Appendix D for details).
+- id: c4
+  statement: 'Framework rather than theorem: in the conclusion the authors describe their work as deriving a generic integral-transform diagram and arguing that it is general enough to cover both GNN and
+    DP computations (Bellman-Ford is derived over the min-plus semiring; MPNN as the same transform over the reals plus an MLP).'
+  location: Conclusions
+  page: 9
+  quote: We derived a generic diagram of an integral transform (based on standard categorical concepts like pullback, pushforward and commutative monoids), and argued why it is general enough to support
+    both GNN and DP computations.
+- id: c5
+  statement: 'Protocol: six CLRS Algorithmic Reasoning Benchmark tasks with the CLRS data generation and base model code reused exactly (small MLPs, embedding dimension 24), test results out-of-distribution;
+    then 27 CLRS tasks with the PGN processor and 96-dimensional embeddings, comparing V^2 (edge updates without the polynomial-span correction) against the proposed V^3 messages.'
+  location: Improving GNNs with edge updates, with experimental evaluation
+  page: 8
+  quote: We reuse exactly the data generation and base model implementations in the publicly available code for the CLRS benchmark.
+- id: c6
+  statement: 'Empirical claim: the V^3 architecture matched or outperformed V^2 on all edge-centric algorithms up to standard error, with smaller and less consistent gains on other tasks; the authors read
+    this as directly validating their theory''s predictions (an empirical reading on CLRS, not a proof).'
+  location: Improving GNNs with edge updates, with experimental evaluation
+  page: 9
+  quote: We found that the V 3 architecture was equivalent to, or outperformed, the non-polynomial (V 2) one in all edge-centric algorithms (up to standard error).
+- id: c7
+  statement: 'Affiliation and funding: both authors are at DeepMind and the research was funded by DeepMind.'
+  location: Acknowledgments and Disclosure of Funding
+  page: 10
+  quote: This research was funded by DeepMind.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: 36th Conference on Neural Information Processing Systems (NeurIPS 2022). The value space R is required to be a semiring: reals with
+    (x, +) for GNNs and tropical numbers with (+, min) for DP. The authors say max aggregation in GNNs aligns with the min of Bellman-Ford and that the corrected V^3 span targets algorithms like Floyd-Warshall
+    that reduce over an intermediate node. The six tasks: Dijkstra, Find Maximum Subarray, Floyd-Warshall, Insertion Sort, Matrix Chain Order, Optimal BST. Baselines use fully connected graphs (E = V^2).
+    Results tables not recorded.'

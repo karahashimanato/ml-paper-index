@@ -1,0 +1,84 @@
+id: arxiv-1602.02867
+title: Value Iteration Networks
+authors:
+- Aviv Tamar
+- Yi Wu
+- Garrett Thomas
+- Sergey Levine
+- Pieter Abbeel
+year: 2016
+links:
+  arxiv: https://arxiv.org/abs/1602.02867
+  code: https://github.com/avivt/VIN
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 788379edc59bfa78e9c67b3f71665fd7cb6042115e477d7155aede6933f64fe8
+tags:
+  tasks:
+  - algorithm-learning
+  method_families:
+  - dynamic-programming
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+  - supervised
+proposes:
+- 'Value Iteration Network (VIN): a policy network containing a differentiable VI module that runs K iterations of value iteration as convolution (per-action Q channels, kernels as discounted transitions)
+  plus max-pooling over actions on a learned planning MDP, followed by attention and a reactive policy, trained end-to-end by IL or RL'
+claims:
+- id: c1
+  statement: 'Contribution: a neural network with an embedded planning module, based on a differentiable approximation of value iteration that is represented as a CNN and trained end-to-end by backpropagation.'
+  location: Abstract
+  page: 1
+  quote: Key to our approach is a novel differentiable approximation of the value-iteration algorithm, which can be represented as a convolutional neural network, and trained end-to-end using standard backpropagation.
+- id: c2
+  statement: 'How VI is embedded: one VI iteration is seen as a convolution layer (each channel a per-action Q function, kernel weights the discounted transition probabilities) followed by max-pooling over
+    actions; recurrently applying it K times performs K VI iterations on a planning MDP whose reward and transitions are learned from the observation.'
+  location: The Value Iteration Network Model
+  page: 4
+  quote: Thus by recurrently applying a convolution layer K times, K iterations of VI are effectively performed.
+- id: c3
+  statement: 'Guarantees: the planning MDP is not assumed known and its learned rewards/transitions need not match the true task; the authors describe the VI module only as an architecture capable of approximate
+    VI (the convergence of exact VI to V* is cited in the background, not claimed for VIN).'
+  location: The Value Iteration Network Model
+  page: 4
+  quote: The VI module is simply a NN architecture that has the capability of performing an approximate VI computation.
+- id: c4
+  statement: 'Generalization claim (authors'' abstract): learning an explicit planning computation makes VIN policies generalize better to new, unseen domains. In the grid-world, ''unseen domains'' are
+    new random maps (obstacles, goal, start) of the same size as in training, evaluated per size (8x8, 16x16, 28x28, K set per size); in continuous control, 40 test instances from the same distribution
+    as the 200 training instances. No evaluation on grids larger than those trained on was found.'
+  location: Abstract
+  page: 1
+  quote: We show that by learning an explicit planning computation, VIN policies generalize better to new, unseen domains.
+- id: c5
+  statement: 'Protocol (grid-world): policies are trained by imitation learning on random grid-worlds (5000 instances with 7 shortest-path trajectories each per the appendix) and evaluated on a held-out
+    test set of maps with random obstacles, goals and start states, separately for 8x8, 16x16 and 28x28 sizes (K set per size); baselines are a DQN-inspired CNN and an FCN; metrics are 0-1 action prediction
+    loss, trajectory success rate and path-length difference to the optimal trajectory.'
+  location: Experiments
+  page: 5
+  quote: In Table 1 we present the average 0 −1 prediction loss of each model, evaluated on a held-out test-set of maps with random obstacles, goals, and initial states, for different problem sizes.
+- id: c6
+  statement: 'Finding on reactive baselines: their prediction loss is comparable to VIN''s while their success rate is much worse, which the authors interpret as VIN focusing errors on less important parts
+    of the trajectory rather than ordinary over- or underfitting.'
+  location: Experiments
+  page: 6
+  quote: Importantly, note that the prediction loss for the reactive policies is comparable to the VINs, although their success rate is signiﬁcantly worse.
+- id: c7
+  statement: 'Ablation and limitation of the planning prior: untying the weights of the K recurrent layers degrades performance, more so with less training data; in WebNav, VIN was only mildly better than
+    the reactive baseline when starting from the root node (the authors conclude a reactive policy is sufficient there) and significantly better when starting from a random position in the graph.'
+  location: Experiments
+  page: 6
+  quote: Our results, reported in the supplementary material, show that untying the weights degrades performance, with a stronger effect for smaller sizes of training data.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: 30th Conference on Neural Information Processing Systems (NIPS 2016), Barcelona. Affiliation: Dept. of EECS, UC Berkeley; funded
+    in part by Siemens, ONR, the Army Research Office and NSF. Other domains: Mars rover navigation from terrain images (16x16 grid on 128x128 patches; compared with a planner using a CNN obstacle classifier
+    trained with elevation labels), a 2D continuous-control domain trained with guided policy search (200 training and 40 test instances from the same distribution; VIN pre-trained with grid-world transition
+    weights), and WebNav on Wikipedia for Schools (VIN plans on a small graph of 1st/2nd level categories). Appendix reports RL training on grid-worlds and hierarchical VINs. ''Unseen domains'' in the grid-world
+    are new maps from the same random distribution, with results reported per grid size; I did not find an experiment evaluating on grid sizes larger than those used in training. Results tables not recorded.'

@@ -1,0 +1,83 @@
+id: arxiv-1803.08475
+title: Attention, Learn to Solve Routing Problems!
+authors:
+- Wouter Kool
+- Herke van Hoof
+- Max Welling
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1803.08475
+  code: https://github.com/wouterkool/attention-learn-to-route
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: fa783d096ff3986d5e9745acf75152cecb4ec7b3d1d0798ba765449e9eace4fd
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - deep-learning
+  - graph-neural-networks
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'Attention Model (AM): attention-based encoder-decoder that constructs routing solutions node by node, trained with REINFORCE using a deterministic greedy-rollout baseline; applied with one hyperparameter
+  set to TSP, CVRP, SDVRP, OP and (stochastic) PCTSP'
+claims:
+- id: c1
+  statement: 'Contribution: an attention-layer model with stated benefits over the Pointer Network, trained with REINFORCE and a greedy-rollout baseline that the authors find more efficient than a value
+    function.'
+  location: Abstract
+  page: 1
+  quote: we propose a model based on attention layers with beneﬁts over the Pointer Network and we show how to train this model using REINFORCE with a simple baseline based on a deterministic greedy rollout,
+    which we ﬁnd is more efﬁcient than using a value function
+- id: c2
+  statement: 'Scope of the claim: the stated goal is not to beat a specialized non-learned TSP solver such as Concorde, but to show flexibility across several routing problems of reasonable size with a
+    single set of hyperparameters.'
+  location: Introduction
+  page: 2
+  quote: specialized TSP algorithm such as Concorde (Applegate et al., 2006)
+- id: c3
+  statement: 'TSP baselines: optimal results by Gurobi and by Concorde (faster, TSP-specialized), LKH3 as a state-of-the-art heuristic, plus nearest/random/farthest insertion and nearest neighbor, and previously
+    reported learned heuristics (Bello et al., OR Tools as reported by Bello et al., Christofides + 2OPT as reported by Vinyals et al.).'
+  location: Experiments
+  page: 6
+  quote: For the TSP, we report optimal results by Gurobi, as well as by Concorde (Applegate et al., 2006) (faster than Gurobi as it is specialized for TSP) and LKH3 (Helsgaun, 2017), a state-of-the-art
+    heuristic solver that empirically also ﬁnds optimal solutions in time comparable to Gurobi.
+- id: c4
+  statement: 'Run-time comparison protocol: the authors note run times can differ by two orders of magnitude due to implementation and hardware; they report time to solve the 10000-instance test set on
+    a single GPU (1080Ti) or 32 instances in parallel on a 32 virtual CPU system, and call this conservative because most baselines are single-thread CPU implementations.'
+  location: Experiments
+  page: 6
+  quote: 'Run times are important but hard to compare: they can vary by two orders of magnitude as a result of implementation (Python vs C++) and hardware (GPU vs CPU).'
+- id: c5
+  statement: 'Size generalization (appendix): models tested on sizes other than trained for generalize, but quality degrades as the size difference grows; the authors read this as models specializing to
+    the trained sizes and suggest selecting the trained model with best validation performance per size.'
+  location: Appendix
+  page: 15
+  quote: The models generalize when tested on different sizes, although quality degrades as the difference becomes bigger, which can be expected as there is no free lunch (Wolpert & Macready, 1997).
+- id: c6
+  statement: 'Limitation / future work: scaling to larger instances is named as an important direction; the authors also note that many practical feasibility constraints cannot be satisfied by simple masking
+    and suggest combining heuristic learning with backtracking.'
+  location: Discussion
+  page: 9
+  quote: Scaling to larger problem instances is an important direction for future research, where we think we have made an important ﬁrst step by using a graph based method, which can be sparsiﬁed for improved
+    computational efﬁciency.
+- id: c7
+  statement: 'Funding / affiliation: the research was funded by ORTEC Optimization Technology (first author affiliated with University of Amsterdam and ORTEC).'
+  location: Acknowledgements
+  page: 10
+  quote: This research was funded by ORTEC Optimization Technology.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at ICLR 2019. Instances: TSP node locations sampled uniformly at random in the unit square (Appendix);
+    models trained on n = 20, 50 and 100; 10000 test instances per problem; greedy decoding vs sampling 1280 solutions and reporting the best. Gurobi is used as the ''best possible solution'' (intractable
+    for n > 20 except TSP) and also with time limits as a heuristic baseline; the authors state they picked reasonable runtime/performance trade-off points rather than full curves. CVRP compared against
+    Nazari et al. RL and LKH3. Hardware: training on 1080Ti GPUs (TSP100 on 2 GPUs). The text reports the AM outperforms the Pointer Network under any baseline, and that the authors could not reproduce
+    Bello et al.''s 1.5% with a critic baseline. Relation to classical techniques: the AM is a learned construction heuristic (end-to-end); no local search is used for its results (2OPT appears only with
+    the Deudon et al. comparison). Results tables not recorded.'

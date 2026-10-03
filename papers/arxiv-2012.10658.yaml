@@ -1,0 +1,92 @@
+id: arxiv-2012.10658
+title: Generalize a Small Pre-trained Model to Arbitrarily Large TSP Instances
+authors:
+- Zhang-Hua Fu
+- Kai-Bin Qiu
+- Hongyuan Zha
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2012.10658
+  code: https://github.com/Spider-scnu/TSP
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a366ae3cca927dcc13af3e4455604facf538aac54814b45df568e1dbd4d5589a
+tags:
+  tasks:
+  - combinatorial-optimization
+  method_families:
+  - divide-and-conquer
+  - local-search
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+  - reinforcement-learning
+proposes:
+- 'Att-GCRN+MCTS: a small supervised graph convolutional residual network with attention (trained on fixed-size instances with Concorde labels) is applied to overlapping k-nearest-neighbour sub-graphs that
+  are rescaled to the unit square; the sub heat maps are merged into an edge heat map that prunes edges and guides a Monte Carlo tree search over k-opt moves on complete tours'
+claims:
+- id: c1
+  statement: 'Proposal: train a small fixed-size model in a supervised way and reuse it repeatedly to build heat maps for TSP instances of arbitrary size via graph sampling, graph converting and heat-map
+    merging, aimed at the lack of size generalization of supervised TSP models.'
+  location: Abstract
+  page: 1
+  quote: this paper tries to train (in supervised manner) a small-scale model, which could be repetitively used to build heat maps for TSP instances of arbitrarily large size, based on a series of techniques
+    such as graph sampling, graph converting and heat maps merging.
+- id: c2
+  statement: 'The division is not learned: sub-graphs of exactly m vertices are extracted by repeatedly taking the least-covered vertex as a centre and its k nearest neighbours (sub-graphs may overlap);
+    only the sub heat-map predictor is learned, and merging uses a fixed formula over the sub-graphs containing each edge.'
+  location: Building and merging heat maps
+  page: 3
+  quote: use the k-nearest neighbors algorithm [10] to extract a sub-graph G′ which consists of exactly m vertices (including the clustering center).
+- id: c3
+  statement: 'Relation to local search: the search operates on complete tours, and every action is a k-opt move that deletes k edges and adds k new ones; 2-opt improvements are applied first, then MCTS
+    samples larger k-opt moves guided by the heat map.'
+  location: Reinforcement learning for solutions optimization
+  page: 4
+  quote: Since each TSP solution consists of a subset of n edges, any action could be viewed as a k-opt (2 ≤k ≤n) transformation, which deletes k edges at ﬁrst, and then adds k different edges to form a
+    new tour.
+- id: c4
+  statement: 'Baseline protocol: learning-based baselines were not retrained; their public source code and pre-trained models were downloaded and rerun (some baselines'' parameters such as beam width were
+    adapted to prolong running time).'
+  location: Experiments
+  page: 5
+  quote: Notice that, for the baselines, we just directly download and rerun the source codes, based on the pre-trained models (only for learning based baselines) which are publicly available.
+- id: c5
+  statement: 'Hardware asymmetry and scope: learning-based methods run on one GTX 1080 Ti GPU, while Concorde, Gurobi and LKH3 run on an 8-core CPU and are listed for indicative purposes only; the authors
+    do not aim to strictly outperform the non-learning algorithms.'
+  location: Experiments
+  page: 5
+  quote: Notice that our method is a learning based algorithm, thus we do not aim to strictly outperform the non-learning algorithms.
+- id: c6
+  statement: 'Main empirical claim: on instances with up to 10,000 vertices the approach is reported to clearly outperform existing machine-learning TSP algorithms and to significantly improve the trained
+    model''s generalization (the learning baselines were rerun from their public pre-trained models on the same GPU; the non-learning solvers Concorde, Gurobi and LKH3 are listed only as indicative CPU
+    references).'
+  location: Abstract
+  page: 1
+  quote: Experimental results based on a large number of instances (with up to 10,000 vertices) show that, this new approach clearly outperforms the existing machine learning based TSP algorithms, and signiﬁcantly
+    improves the generalization ability of the trained model.
+- id: c7
+  statement: 'Copied baseline numbers: two MCTS-based TSP methods ([36] Shimomura and Takashima; [43] Xing and Tu) could not be rerun because their code is not publicly available; for [43] the authors compare
+    against the average gaps that paper reports, evaluated on different platforms, and describe their method as roughly producing overall better results within reasonable time.'
+  location: Results on data set 2
+  page: 6
+  quote: The source codes of these two papers are both not publicly available, thus we cannot evaluate them uniformly on the same platform to make strictly fair comparisons.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: Copyright 2021, Association for the Advancement of Artificial Intelligence (AAAI). Training: 990,000 random instances of size m with
+    Concorde solutions as labels; m=20 for data set 1 (10,000 instances each of n=20, 50, 100, a set widely used by prior learning work) and m=50 for data set 2 (128 instances each of n=200, 500, 1000 and
+    16 of n=10,000), all uniform in the unit square. Merge: P_ij averages the sub-graph probabilities over the O_ij sub-graphs containing edge (i,j); edges with P_ij < 1e-4 are eliminated. Hyperparameters
+    omega=5, alpha=1, beta=10, H=10n set as defaults; time budget T=10n ms (set 1) and 40n ms (set 2), chosen so the method uses no more time than the best learning algorithm of each reference paper. Gaps
+    are w.r.t. Concorde for n <= 1000 and w.r.t. LKH3 for n = 10,000, where Concorde, Gurobi and two GAT models exceeded the 5-hour limit and the three GCN models of Joshi et al. ran out of memory. No optimality
+    guarantee is claimed: MCTS returns the best tour found when the time limit T elapses. The comparison with the MCTS method of Xing et al. [43] uses that paper''s reported gaps on different platforms
+    (code unavailable), which the authors acknowledge. The method avoids hand-crafted rules such as LKH''s alpha-nearness and POPMUSIC to keep generality. End-to-end ML models without post-optimization
+    were omitted as producing very poor results. Ablation (Table 4): giving every edge equal probability and running MCTS alone degrades performance drastically, with a huge gap to optimality on each data
+    set. For data set 1 some learning baselines'' parameters (e.g. beam-search width) were adapted to prolong their running time, marked in blue in Table 1. Paradigm tag reinforcement-learning follows the
+    paper''s description of MCTS as an RL method. Results not recorded.'

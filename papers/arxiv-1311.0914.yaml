@@ -1,0 +1,86 @@
+id: arxiv-1311.0914
+title: A Divide-and-Conquer Solver for Kernel Support Vector Machines
+authors:
+- Cho-Jui Hsieh
+- Si Si
+- Inderjit S. Dhillon
+year: 2013
+links:
+  arxiv: https://arxiv.org/abs/1311.0914
+  code: http://www.cs.utexas.edu/~cjhsieh/dcsvm
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 75e93c649177dab205e5b0da85d52078d47e228e4fc5fc3824af675d5c70ca9d
+tags:
+  tasks:
+  - tabular-classification
+  - image-classification
+  method_families:
+  - divide-and-conquer
+  - kernel-methods
+  paradigms:
+  - supervised
+proposes:
+- 'DC-SVM: partition the kernel SVM dual by (two-step) kernel k-means, solve the per-cluster subproblems independently, and use the concatenated solution to warm-start a global coordinate descent solver;
+  multilevel version with adaptive clustering on support vectors and an early-prediction mode that predicts with the nearest cluster''s model'
+claims:
+- id: c1
+  statement: 'Partition scheme and its justification: the paper shows that kernel k-means clustering minimizes the difference between the subproblem solution and the whole-problem solution, and that support
+    vectors found in the subproblems are very likely to be support vectors of the whole problem.'
+  location: Introduction
+  page: 1
+  quote: We theoretically show that the kernel kmeans algorithm is able to minimize the diﬀerence between the solution of subproblems and of the whole problem, and support vectors identiﬁed by subproblems
+    are very likely to be support vectors of the whole problem.
+- id: c2
+  statement: 'Conquer step: the local subproblem solutions are not just combined but used to initialize a global coordinate descent solver on the full problem, which the analysis suggests converges quickly
+    from that start.'
+  location: Abstract
+  page: 1
+  quote: In the conquer step, the local solutions from the subproblems are used to initialize a global coordinate descent solver, which converges quickly as suggested by our analysis.
+- id: c3
+  statement: 'Exactness (top level only): the authors state that, unlike model-combination approaches such as BCM, DC-SVM solves the original SVM problem, not just an approximated one; this holds when the
+    global coordinate descent is run at the top level on the whole problem, not for the DC-SVM (early) prediction mode, which uses the lower-level (approximate-kernel) models.'
+  location: Related Work
+  page: 2
+  quote: More importantly, DC-SVM solves the original SVM problem, not just an approximated one.
+- id: c4
+  statement: 'Assumption behind the guarantee: the approximation bound (Theorem 1) depends on D(pi), the sum of absolute between-cluster kernel values, which is strongly related to the kernel parameters
+    (for the RBF kernel, small gamma makes D(pi) larger and the subproblem solution may not be close to the optimum).'
+  location: Experimental Results
+  page: 12
+  quote: As shown in Theorem 1 the quality of approximation depends on D(π), which is strongly related to the kernel parameters.
+- id: c5
+  statement: 'What is traded for speed in early prediction: DC-SVM (early) stops at a lower level and classifies a test point with the model trained on its nearest cluster only, i.e. it uses the block-diagonal
+    approximate kernel instead of the exact SVM solution.'
+  location: Divide and Conquer SVM with multiple levels
+  page: 8
+  quote: 'Therefore, the testing procedure for early prediction is: (1) ﬁnd the nearest cluster that x belongs to, and then (2) use the model trained by data within that cluster to compute the decision
+    value.'
+- id: c6
+  statement: 'Main empirical claim: DC-SVM reduces the SVM objective faster than state-of-the-art exact SVM solvers (relative error measured against LIBSVM run to 1e-8 accuracy); online and approximate
+    solvers are excluded from this objective comparison because they do not solve the exact problem.'
+  location: Experimental Results
+  page: 12
+  quote: We observe that DC-SVM achieves faster convergence in objective function compared with the state-of-the-art exact SVM solvers.
+- id: c7
+  statement: 'Protocol: C and the kernel parameter gamma are chosen by 5-fold cross-validation on a grid (2^-10..2^10 for most datasets; smaller gammas for the unscaled image datasets cifar and mnist8m).'
+  location: Experimental Results
+  page: 10
+  quote: We chose the balancing parameter C and kernel parameter γ by 5-fold cross validation on a grid of points
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. Single-level cost: k equal subproblems take O(n^3/k^2) time and O(n^2/k^2) memory instead of O(n^3)/O(n^2). Theorem 1: 0 <= f(alpha_bar) - f(alpha*)
+    <= (1/2) C^2 D(pi); Theorem 2 gives a sufficient condition under which a non-support vector of the subproblem is not a support vector of the whole problem; Theorem 3 refines the bound to the support-vector
+    set. Kernel k-means is O(n^2 d), so a two-step kernel k-means on m=1000 sampled points is used (later levels sample from current support vectors). Multilevel: 5 levels with k=4 (1, 4, 16, 64, 256 clusters);
+    DC-SVM (early) stops at 64 clusters. Hardware: Intel Xeon X5355 2.66GHz, 8GB RAM. Datasets: ijcnn1, cifar (animals vs non-animals), census, covtype, webspam, kddcup99, mnist8m (round vs non-round digits);
+    random 80/20 splits for covtype/webspam/kddcup99. Baselines: LIBSVM (modified to drop the bias term), CascadeSVM, LaSVM (1 pass), SpSVM (200 basis vectors), LLSVM (rank 3000), FastFood (about 3000 Fourier
+    features), LTPU (3000 clusters); stopping tolerance 1e-3 (LIBSVM default) for LIBSVM and DC-SVM; baselines'' rank/feature counts are varied in Figure 3. A grid of 25 (C, gamma) settings per dataset
+    (Tables 7-10, appendix) reports DC-SVM faster than LIBSVM on 96/100 settings. Polynomial-kernel experiments on covtype and webspam exclude LLSVM/FastFood/LTPU (developed for shift-invariant kernels).
+    The paper criticises Cascade SVM for not identifying support vectors accurately (no kernel k-means; cannot correct false negatives from lower levels). Task tags: tabular-classification for the UCI/LIBSVM
+    sets, image-classification for cifar/mnist8m binary tasks. Results not recorded.'

@@ -1,0 +1,82 @@
+id: arxiv-2005.02960
+title: Exploring the Loss Landscape in Neural Architecture Search
+authors:
+- Colin White
+- Sam Nolen
+- Yash Savani
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2005.02960
+  code: https://github.com/naszilla/naszilla
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9d85c6d752292ea2b9f5664c85f5ec89b7f833e17628719badf74141efc6f6c7
+tags:
+  tasks:
+  - neural-architecture-search
+  method_families:
+  - local-search
+proposes:
+- Using simple local search (hill-climbing over architectures differing by one operation or edge) as a NAS baseline, an analysis of how evaluation noise changes the number of local minima on NAS benchmarks,
+  and a probabilistic theoretical characterization of local search performance
+claims:
+- id: c1
+  statement: 'Main claim: the simplest hill-climbing algorithm is a powerful NAS baseline, and when noise in popular NAS benchmark datasets is reduced to a minimum, hill-climbing outperforms many popular
+    state-of-the-art algorithms.'
+  location: Abstract
+  page: 1
+  quote: In this work, we show that (1) the simplest hill-climbing algorithm is a powerful baseline for NAS, and (2), when the noise in popular NAS benchmark datasets is reduced to a minimum, hill-climbing
+    to outperforms many popular state-of-the-art algorithms.
+- id: c2
+  statement: 'Protocol: NASBench-101, NASBench-201 (CIFAR-10, CIFAR-100, ImageNet16-120) and NASBench-301 (DARTS space); local search is compared with random search, regularized evolution, Bayesian optimization
+    and BANANAS, each with a budget of 300 evaluations and 200 trials; ''denoising'' is done artificially by averaging the three seeds (101/201) or the surrogate ensemble (301).'
+  location: Experiments
+  page: 4
+  quote: However, for each architecture, we can average all three validation accuracies to obtain a less noisy estimate.
+- id: c3
+  statement: 'Result depends on noise: on NASBench-101 and 301 local search beats all other algorithms when noise is minimal but performs similarly to Bayesian optimization in the standard (noisy) setting.'
+  location: Experiments
+  page: 4
+  quote: On both NASBench-101 and 301, local search outperforms all other algorithms when the noise is minimal, amd performs similarly to Bayesian optimization in the standard setting.
+- id: c4
+  statement: 'Exception: on NASBench-201 ImageNet16-120, the initial noise is so high that all NAS algorithms perform worse in the reduced-noise version.'
+  location: Appendix A
+  page: 12
+  quote: Note that for the case of ImageNet16-120, the initial level of noise is so high that all NAS algorithms actually perform worse in the reduced noise version of the problem.
+- id: c5
+  statement: 'Theory and its assumptions: validation losses are modelled as drawn from a global distribution, with neighbours'' losses drawn from a local distribution conditioned on the current loss; with
+    fixed neighbourhood size s and a vertex-transitive neighbourhood graph, Theorem 5.1 gives the expected number of local minima and of starting points converging within epsilon of the global optimum (the
+    authors say this makes local search similar to a Markov process and that their experiments in Figure 4.2 suggest this is a reasonable assumption in practice).'
+  location: Theoretical Characterization
+  page: 6
+  quote: Therefore, we assume that the validation loss for a trained architecture is sampled from a global probability distribution, and for each architecture, the validation losses of its neighbors are
+    sampled from a local probability distribution.
+- id: c6
+  statement: 'Limits of the theory: estimating the required distributions is not feasible for large search spaces; the theory is meant only to give understanding; in the simulation, it exactly predicts
+    the uniform-random NASBench-201 variant, and on the three NASBench-201 image datasets predicts performance fairly accurately but not perfectly, which the authors attribute to their assumption that the
+    accuracy distribution is unimodal.'
+  location: Theoretical Characterization
+  page: 7
+  quote: We note that approximating these distributions are not feasible for large search spaces; the purpose of our theoretical results are meant only to provide a deeper understanding of local search
+    and lay the groundwork for future studies.
+- id: c7
+  statement: 'Affiliation: the work was done while all authors were employed at Abacus.AI.'
+  location: Acknowledgments
+  page: 8
+  quote: This work done while all authors were employed at Abacus.AI.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): algorithm design techniques (divide and conquer, dynamic programming, branch and bound, local search) and machine learning; carded
+    by a subagent. Results tables not recorded; claims only. PDF states: UAI 2021. Baselines run from their open-source code; regularized evolution population size changed from 50 to 30, other baselines''
+    hyperparameters unchanged; local search has two boolean hyperparameters and was not tuned (Appendix A). Local search variant differs by benchmark: query_until_lower on NASBench-101/301, continue_at_min
+    on NASBench-201. Possible conflict of interest not stated as such in the text: the baseline BANANAS is by the same first and third authors (White, Neiswanger, Savani, AAAI 2021, per the reference list).
+    Critiques/independent confirmation: the paper says a prior work (Wang et al., 2018) suggested local search performs poorly due to many local minima and killed runs at a local minimum instead of restarting;
+    concurrent work (Ottelander et al., 2020) independently found local search a strong baseline on NASBench-101 for multi-objective NAS. Lemma 5.3 gives a closed form under uniform local/global distributions;
+    the authors state that Theorem 5.1 and Lemma 5.2 hold without any assumptions on the local and global distributions (the fixed neighbourhood size, vertex-transitivity and neighbour-loss model still
+    apply); Lemma B.3 additionally assumes n large relative to s. Corollary B.1 (Appendix B): with Gaussian noise on each architecture''s accuracy, the expected number of local minima is bounded in terms
+    of the noise standard deviation. Budgets: all algorithms get 300 queries on tabular/surrogate benchmarks (matched by number of evaluations). Results are figures only; not recorded.'

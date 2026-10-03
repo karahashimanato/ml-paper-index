@@ -12,6 +12,7 @@ source:
   pdf_sha256: 7dba4be284ef5bb5f49379ee228f252bacc38688d35009762b22f4161230698d
 tags:
   tasks:
+  - structured-prediction
   - language-modeling
   method_families:
   - dynamic-programming
@@ -78,6 +79,5 @@ card:
     Science Laboratories) and NTT Communication Science Laboratories (Blondel). The paper identifies its negentropy DTW instance with soft-DTW (arxiv-1703.01541, same second author); the squared-l2 case
     and Hessian products are stated as new. In Bach10, training uses the smoothed DTW and test-time alignment uses non-regularized DTW; the baseline is a multinomial classifier pretrained without end-to-end
     training. For translation, the authors state attention variants were within a small BLEU margin of softmax attention on newstest2014 (numbers not recorded). The DTW layer was implemented in Cython on
-    CPU. Task tag ''language-modeling'' covers only the translation experiment (LSTM encoder-decoder with structured attention on WMT14 FR-EN, evaluated by BLEU, i.e. a conditional language model on text);
-    NER and audio-to-score alignment are not covered. No existing task tag fits structured prediction (sequence labelling, alignment); the schema requires at least one task tag, so the closest existing
-    tag is kept. Results tables not recorded.'
+    CPU. Task tag ''structured-prediction'' covers the NER (sequence labelling) and audio-to-score alignment experiments; ''language-modeling'' covers only the translation experiment (LSTM encoder-decoder
+    with structured attention on WMT14 FR-EN, evaluated by BLEU). Results tables not recorded.'

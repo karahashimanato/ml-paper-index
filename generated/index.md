@@ -32,6 +32,7 @@
 - **data-subset-selection**: [arxiv-1409.7938](papers/arxiv-1409.7938.md), [arxiv-1906.01827](papers/arxiv-1906.01827.md)
 - **combinatorial-optimization**: [arxiv-1611.02401](papers/arxiv-1611.02401.md), [arxiv-1704.01665](papers/arxiv-1704.01665.md), [arxiv-1803.08475](papers/arxiv-1803.08475.md), [arxiv-1803.10150](papers/arxiv-1803.10150.md), [arxiv-1810.00337](papers/arxiv-1810.00337.md), [arxiv-1810.10659](papers/arxiv-1810.10659.md), [arxiv-1811.06128](papers/arxiv-1811.06128.md), [arxiv-1906.01629](papers/arxiv-1906.01629.md), [arxiv-2004.01608](papers/arxiv-2004.01608.md), [arxiv-2006.07054](papers/arxiv-2006.07054.md), [arxiv-2012.10658](papers/arxiv-2012.10658.md), [arxiv-2012.13349](papers/arxiv-2012.13349.md), [arxiv-2102.11756](papers/arxiv-2102.11756.md), [arxiv-2107.10201](papers/arxiv-2107.10201.md), [arxiv-2201.10494](papers/arxiv-2201.10494.md), [arxiv-2206.13211](papers/arxiv-2206.13211.md)
 - **neural-architecture-search**: [arxiv-2005.02960](papers/arxiv-2005.02960.md)
+- **structured-prediction**: [arxiv-1802.03676](papers/arxiv-1802.03676.md)
 
 ### method_families
 

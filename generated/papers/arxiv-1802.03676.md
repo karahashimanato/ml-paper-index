@@ -6,7 +6,7 @@
 - 著者: Arthur Mensch, Mathieu Blondel
 - 年・掲載: 2018
 - 原論文: [PDF](https://arxiv.org/pdf/1802.03676v2)(arXiv v2、カード作成時に読んだ版)
-- タグ: deep-learning, dynamic-programming, language-modeling, supervised
+- タグ: deep-learning, dynamic-programming, language-modeling, structured-prediction, supervised
 - 人手レビュー: 未
 
 ## 主張

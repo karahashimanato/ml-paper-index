@@ -57,6 +57,8 @@ tasks:
     description: Solving, or speeding up solvers for, combinatorial optimization problems (TSP, vehicle routing, maximum independent set, mixed integer programs).
   - id: neural-architecture-search
     description: Automatically searching for neural network architectures.
+  - id: structured-prediction
+    description: Predicting structured outputs such as label sequences, alignments or trees (e.g. sequence labelling, time-series alignment).
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.

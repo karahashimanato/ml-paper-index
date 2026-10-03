@@ -42,7 +42,7 @@ SPECS = [
      "authors": ["Arthur Mensch", "Mathieu Blondel"],
      "year": 2018, "version": "arXiv v2",
      "links": {"arxiv": "https://arxiv.org/abs/1802.03676"},
-     "tasks": ["language-modeling"],
+     "tasks": ["structured-prediction", "language-modeling"],
      "fam": ["dynamic-programming", "deep-learning"], "par": ["supervised"],
      "proposes": ["DP_Omega: a general framework that replaces max in a DAG dynamic programming recursion by a max smoothed with a strongly convex regularizer Omega (negentropy or squared l2), giving differentiable value and gradient layers; instantiated as smoothed Viterbi and smoothed DTW"],
      "claims": [
@@ -68,7 +68,7 @@ SPECS = [
           "Experiments",
           "With proper parameter selections, all losses perform within 1% F1-score of each other, although entropy-regularized losses perform slightly better on 3/4 languages."),
      ],
-     "notes": "Venue not stated in the PDF (dated February 21, 2018). Affiliations: Inria Parietal (Mensch; work done during an internship at NTT Communication Science Laboratories) and NTT Communication Science Laboratories (Blondel). The paper identifies its negentropy DTW instance with soft-DTW (arxiv-1703.01541, same second author); the squared-l2 case and Hessian products are stated as new. In Bach10, training uses the smoothed DTW and test-time alignment uses non-regularized DTW; the baseline is a multinomial classifier pretrained without end-to-end training. For translation, the authors state attention variants were within a small BLEU margin of softmax attention on newstest2014 (numbers not recorded). The DTW layer was implemented in Cython on CPU. Task tag 'language-modeling' covers only the translation experiment (LSTM encoder-decoder with structured attention on WMT14 FR-EN, evaluated by BLEU, i.e. a conditional language model on text); NER and audio-to-score alignment are not covered. No existing task tag fits structured prediction (sequence labelling, alignment); the schema requires at least one task tag, so the closest existing tag is kept. Results tables not recorded."},
+     "notes": "Venue not stated in the PDF (dated February 21, 2018). Affiliations: Inria Parietal (Mensch; work done during an internship at NTT Communication Science Laboratories) and NTT Communication Science Laboratories (Blondel). The paper identifies its negentropy DTW instance with soft-DTW (arxiv-1703.01541, same second author); the squared-l2 case and Hessian products are stated as new. In Bach10, training uses the smoothed DTW and test-time alignment uses non-regularized DTW; the baseline is a multinomial classifier pretrained without end-to-end training. For translation, the authors state attention variants were within a small BLEU margin of softmax attention on newstest2014 (numbers not recorded). The DTW layer was implemented in Cython on CPU. Task tag 'structured-prediction' covers the NER (sequence labelling) and audio-to-score alignment experiments; 'language-modeling' covers only the translation experiment (LSTM encoder-decoder with structured attention on WMT14 FR-EN, evaluated by BLEU). Results tables not recorded."},
 
     {"id": "arxiv-2203.15544",
      "title": "Graph Neural Networks are Dynamic Programmers",

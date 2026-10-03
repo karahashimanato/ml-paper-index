@@ -65,8 +65,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | モデルの解釈可能性 | 論文カード15本(LIME・SHAP・Integrated Gradients・その検証と批判)、記事 [articles/topics/model-interpretability.md](articles/topics/model-interpretability.md) |
 | 量子化・モデル圧縮 | 論文カード20本(LLM の量子化手法・その影響の評価・表データ基盤モデルの圧縮)、記事 [articles/topics/quantization-effects.md](articles/topics/quantization-effects.md) |
 | 時系列基盤モデルと時系列予測 | 論文カード22本(Chronos・TimesFM・Moirai などの原論文、LLM 転用の検証、GIFT-Eval)、記事 [articles/topics/time-series-foundation-models.md](articles/topics/time-series-foundation-models.md) |
+| 学習モデルと計算量 | 論文カード24本(スケーリング則、計算最適な学習とその再検証、創発と逆スケーリング、推論時の計算、計算コストの測り方、効率化アーキテクチャ)、記事 [articles/topics/compute-and-scaling.md](articles/topics/compute-and-scaling.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では200本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では223本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -79,6 +80,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [モデルの解釈可能性 — 説明手法は何を前提にし、どう評価されてきたか](articles/topics/model-interpretability.md)
 - [量子化による影響 — 何が失われ、何で測ると見えるのか](articles/topics/quantization-effects.md)
 - [時系列基盤モデルと時系列予測 — 「ゼロショット」は何を意味するか](articles/topics/time-series-foundation-models.md)
+- [学習モデルと計算量 — スケーリング則、計算の配分、コストの測り方](articles/topics/compute-and-scaling.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

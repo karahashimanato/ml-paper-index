@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Inverse Scaling: When Bigger Isn't Better
+
+- カード: [`arxiv-2306.09479`](../../papers/arxiv-2306.09479.yaml)
+- 著者: Ian R. McKenzie, Alexander Lyzhov, Michael Pieler, Alicia Parrish, Aaron Mueller, Ameya Prabhu, Euan McLean, Aaron Kirtland, Alexis Ross, Alisa Liu, Andrew Gritsevskiy, Daniel Wurgaft, Derik Kauffman, Gabriel Recchia, Jiacheng Liu, Joe Cavanagh, Max Weiss, Sicong Huang, The Floating Droid, Tom Tseng, Tomasz Korbak, Xudong Shen, Yuhui Zhang, Zhengping Zhou, Najoung Kim, Samuel R. Bowman, Ethan Perez
+- 年・掲載: 2023
+- 原論文: [PDF](https://arxiv.org/pdf/2306.09479v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: in-context-learning, large-language-models, scaling-laws
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Main claim: the paper presents evidence that LMs may show inverse scaling (worse task performance with increased scale), e.g. due to flaws in the training objective and data, based on 11 datasets collected through a public contest.([Abstract, p.1](https://arxiv.org/pdf/2306.09479v2#page=1 "Here, we present evidence for the claim that LMs may show inverse scaling, or worse task performance with increased scale, e.g., due to flaws in the training objective and data."))
+- **c2** Experimental range: submissions were evaluated zero-shot and few-shot on model series from OpenAI, Anthropic and DeepMind spanning 10^18 to 10^23 training FLOPs (the paper says 'over 5 orders of magnitude'), with and without instruction tuning; GPT-4 and PaLM results were added after the contest (PaLM results taken from Wei et al. 2022a).([Introduction, p.2](https://arxiv.org/pdf/2306.09479v2#page=2 "We evaluated submissions in zero-shot (no examples provided in the input) and few-shot (a few examples provided) settings across model series from OpenAI, Anthropic, and DeepMind, covering over 5 orders of magnitude: 1018 to 1023 training FLOPs."))
+- **c3** Compute counting: where training-FLOP estimates were unavailable, they used the 6ND approximation (N parameters, D training tokens); fine-tuning FLOPs (Context Distilled, FeedME, RLHF) were not counted, as hard to estimate and a small fraction of pretraining.([Appendix C (FLOP Computation), p.32](https://arxiv.org/pdf/2306.09479v2#page=32 "Where an estimate of training FLOPs was not available, we estimate them using the 6ND approximation from Kaplan et al. (2020), where N is the number of model parameters and D is the number of training tokens."))
+- **c4** Caveat on the x-axis: training FLOPs are used rather than parameters (citing Hoffmann et al. as a better proxy), but the authors warn that FLOP-based comparisons between model families can be misleading because families differ in model-size-to-data ratios.([Introduction (footnote), p.2](https://arxiv.org/pdf/2306.09479v2#page=2 "However, since different model families have different ratios of model size to data quantity, comparisons based on FLOPs between model families can be misleading."))
+- **c5** U-shaped and inverted-U scaling: trends can reverse at larger scale (U-shaped, e.g. several tasks on PaLM; inverted-U, e.g. Prompt Injection), which the authors say shows that even the direction of scaling trends found with smaller models may not hold for larger ones.([Introduction, p.3](https://arxiv.org/pdf/2306.09479v2#page=3 "Such results show that even the direction of scaling trends found with smaller models may not hold with larger models, making it challenging to predict the novel capabilities and failures of future LMs."))
+- **c6** Attribution of the U-shaped finding: the paper states that Wei et al. (2022a), evaluating PaLM up to 540B parameters, found performance started to improve for 7 of the 11 winning tasks; this paper notes that for Resisting Correction, Memo Trap and NeQA the larger PaLM sizes are still below the small PaLM sizes.([Discussion (U-Shaped Scaling), p.23](https://arxiv.org/pdf/2306.09479v2#page=23 "count Resisting Correction, Memo Trap, and NeQA, among the U-shaped tasks, though we note that performance on larger PaLM sizes is still below performance on small PaLM sizes on these tasks"))
+- **c7** Model access / affiliations: held-out private model series were provided by Anthropic and DeepMind; several authors list Anthropic, Google or Stability AI affiliations (Bowman and Perez list Anthropic, Parrish and Kim list Google, Pieler lists Stability AI; the footnote says Pieler's work was done at FAR AI, Bowman's at NYU, Perez's at FAR AI and NYU).([Models Evaluated, p.4](https://arxiv.org/pdf/2306.09479v2#page=4 "Private models were provided by Anthropic (models trained in Bai et al., 2022)2 and DeepMind (Gopher: Rae et al. 2021, and Chinchilla: Hoffmann et al. 2022)."))
+

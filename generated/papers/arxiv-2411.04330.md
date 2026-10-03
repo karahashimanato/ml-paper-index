@@ -6,7 +6,7 @@
 - 著者: Tanishq Kumar, Zachary Ankner, Benjamin F. Spector, Blake Bordelon, Niklas Muennighoff, Mansheej Paul, Cengiz Pehlevan, Christopher Ré, Aditi Raghunathan
 - 年・掲載: 2024
 - 原論文: [PDF](https://arxiv.org/pdf/2411.04330v2)(arXiv v2、カード作成時に読んだ版)
-- タグ: large-language-models, model-compression, post-training-quantization, quantization, quantization-aware-training
+- タグ: language-modeling, large-language-models, model-compression, post-training-quantization, quantization, quantization-aware-training, scaling-laws
 - 人手レビュー: 未
 
 ## 主張

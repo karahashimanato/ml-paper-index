@@ -1,0 +1,77 @@
+id: arxiv-2106.04560
+title: Scaling Vision Transformers
+authors:
+- Xiaohua Zhai
+- Alexander Kolesnikov
+- Neil Houlsby
+- Lucas Beyer
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2106.04560
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9b621bbde887861f32185a466bb18208ca486fd650461af3eab4b54433566e18
+tags:
+  tasks:
+  - scaling-laws
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- characterization of the error-rate vs compute frontier of ViT as a double-saturating power law
+- improved large-scale ViT training recipe and the ~2B-parameter ViT-G/14
+claims:
+- id: c1
+  statement: 'Experimental range: models from five million to two billion parameters, datasets from one million to three billion training images, and compute from below one to beyond 10,000 TPUv3 core-days;
+    the frontier is characterized on two datasets (the paper names public ImageNet-21k and proprietary JFT-3B elsewhere).'
+  location: Introduction
+  page: 1
+  quote: In particular, we experiment with models ranging from ﬁve million to two billion parameters, datasets ranging from one million to three billion training images and com-pute budgets ranging from
+    below one TPUv3 core-day to beyond 10 000 core-days.
+- id: c2
+  statement: 'Cost measurement: since all models were trained on TPUv3, total compute is measured in TPUv3 core-days (not FLOPs).'
+  location: Core Results
+  page: 2
+  quote: All models are trained on TPUv3, thus total compute is measured in TPUv3 core-days.
+- id: c3
+  statement: 'Main claim: with enough training data, the ViT performance-compute frontier roughly follows a saturating power law.'
+  location: Conclusion
+  page: 8
+  quote: We demonstrate that the performance-compute frontier for ViT models with enough training data roughly follows a (saturating) power law.
+- id: c4
+  statement: 'Compute allocation: for ViT within the studied range, staying on the frontier requires scaling compute and model size together; not increasing model size when extra compute is available is
+    suboptimal.'
+  location: Conclusion
+  page: 8
+  quote: Crucially, in order to stay on this frontier one has to simultaneously scale compute and model size; that is, not increasing a model’s size when extra com-pute becomes available is suboptimal.
+- id: c5
+  statement: 'Sample efficiency: bigger models reach the same error with fewer seen images, and the authors suggest that with sufficient data, training a larger model for fewer steps is preferable, mirroring
+    results in language modeling and machine translation.'
+  location: Big models are more sample efficient
+  page: 3
+  quote: Our results suggest that with sufﬁcient data, training a larger model for fewer steps is preferable.
+- id: c6
+  statement: 'Data limitation: the scaling-law study uses the proprietary JFT-3B dataset; to make the insights more reliable, the authors verify that the scaling laws also apply on public ImageNet-21k.'
+  location: Discussion (Limitations)
+  page: 8
+  quote: This work uses the proprietary JFT-3B dataset for the scaling laws study.
+- id: c7
+  statement: 'Scope caveat: the conclusions may not generalize beyond the studied scale or beyond the ViT model family.'
+  location: Conclusion
+  page: 8
+  quote: Note, that our conclusions may not necessarily generalize beyond the scale we have studied and they may not generalize beyond the ViT family of models.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Affiliation: Google Research, Brain Team, Zürich (title page). Evaluation: representation quality measured by few-shot linear transfer on frozen weights and by full
+    fine-tuning (ImageNet; Pets, CIFAR-100, Birds in the appendix). The paper observes that at the largest size the models appear to start to saturate and fall behind the power-law frontier (Section 2.1).
+    Societal impact paragraph mentions the energy cost of the scaling study but gives no energy figure. Broken Neural Scaling Laws (arxiv-2210.14891, Appendix A.9) reuses data from Figure 2 of this paper
+    and describes the upstream task as ViT pretraining on subsets of JFT-300M; this paper''s Figure 2 caption does not name the dataset, while its text discusses dataset sizes from 30M up to 3B images for
+    that figure (Section 2.1) and says the scaling-law study uses the proprietary JFT-3B (Section 3.3, Discussion). The two descriptions appear to differ; not resolved here.'

@@ -1,0 +1,83 @@
+id: arxiv-2305.16264
+title: Scaling Data-Constrained Language Models
+authors:
+- Niklas Muennighoff
+- Alexander M. Rush
+- Boaz Barak
+- Teven Le Scao
+- Aleksandra Piktus
+- Nouamane Tazi
+- Sampo Pyysalo
+- Thomas Wolf
+- Colin Raffel
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2305.16264
+  code: https://github.com/huggingface/datablations
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 4935b8dc51e0f4183bc7e66d87cbf5e0a776f6d97b44e992ff9c675b8ea5f3ec
+tags:
+  tasks:
+  - scaling-laws
+  - language-modeling
+  method_families:
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'data-constrained scaling law: Chinchilla-form loss with effective data D'' and effective parameters N'' that decay in value with repetition (learned constants R*_D, R*_N)'
+claims:
+- id: c1
+  statement: 'Proposal: a scaling law for compute optimality that accounts for the decreasing value of repeated tokens and of excess parameters, which the authors propose and empirically validate.'
+  location: Abstract
+  page: 1
+  quote: We propose and empirically validate a scaling law for compute optimality that accounts for the decreasing value of repeated tokens and excess parameters.
+- id: c2
+  statement: 'Main empirical claim (in experiments the abstract describes as ranging up to 900 billion training tokens and 9 billion parameter models): with constrained data and a fixed compute budget,
+    training for up to 4 epochs of repeated data gives negligible changes in loss compared with unique data; with more repetition the value of added compute eventually decays to zero.'
+  location: Abstract
+  page: 1
+  quote: We find that with constrained data for a fixed compute budget, training with up to 4 epochs of repeated data yields negligible changes to loss compared to having unique data.
+- id: c3
+  statement: 'Experimental range and setup: GPT-2 architecture and tokenizer, models up to 8.7B parameters trained for up to 900B total tokens on subsets of C4, cosine schedules decaying 10x following Chinchilla,
+    no early stopping, other hyperparameters from prior work; loss is reported on a held-out test set unless otherwise specified (unlike the training loss used by Chinchilla).'
+  location: Experimental Setup
+  page: 5
+  quote: Models have up to 8.7 billion parameters and are trained for up to 900 billion total tokens.
+- id: c4
+  statement: 'Compute counting: the paper uses Kaplan et al.''s approximation FLOPs(N, D) ≈ 6ND, with D the number of tokens processed.'
+  location: Background (footnote)
+  page: 3
+  quote: 'In this work we use [46]’s approximation for the compute cost: FLOPs(N, D) ≈6ND, where N denotes the number of model parameters and D denotes the number of tokens processed.'
+- id: c5
+  statement: 'Disagreement with Chinchilla, as stated by this paper: when data are repeated, its fit suggests allocating most additional compute to more epochs rather than more parameters, which contrasts
+    with the Chinchilla scaling laws'' equal scaling; the paper notes that Chinchilla does not repeat the entire training data and its parametric fit assumes single-epoch training, so there is no guarantee
+    its predictions hold for repeated data.'
+  location: 'Results: Resource Allocation for Data-Constrained Scaling'
+  page: 6
+  quote: However, note that they do not repeat the entire training data and their parametric fit explicitly relies on the assumption that models are trained for a single epoch only.
+- id: c6
+  statement: 'Model limitation: the paper states that adding parameters and epochs causes loss to decrease and eventually increase again (suggesting too much compute can hurt), but the proposed formula
+    and its predicted isoLoss contours do not model the possibility that excess epochs or parameters hurt performance (the authors expect appropriate regularization could prevent this).'
+  location: 'Results: Resource Allocation for Data-Constrained Scaling'
+  page: 7
+  quote: Thus, our formula presented in §3 and its predicted isoLoss contours in Figure 3 do not model the possibility that excess epochs or parameters could hurt performance.
+- id: c7
+  statement: 'Stated limitation: the returns from additional epochs may depend heavily on hyperparameters such as learning rate, dropout or optimizer; most hyperparameters were fixed to commonly used values.'
+  location: Appendix Q (Limitations and Future Work)
+  page: 41
+  quote: The returns from additional epochs may heavily depend on hyperparameters such as learning rate, dropout, or the optimizer choice.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. PDF states: 37th Conference on Neural Information Processing Systems (NeurIPS 2023). Affiliations on the title page: Hugging Face, Harvard University, University of
+    Turku. Compute: LUMI supercomputer (AMD), per the acknowledgments. Other stated limitations (Appendix, Limitations and Future Work): only whole-dataset repetition is studied; text only with the GPT
+    architecture; filtering recommendations are dataset-dependent (C4 and OSCAR). The paper also reports (Section 7, 4.2B-parameter models, 84B-token budget) that filling up to 50% of the data with Python
+    code showed no deterioration on its natural-language benchmark and that perplexity filtering was effective while deduplication did not help; it recommends reserving filtering for noisy datasets.'

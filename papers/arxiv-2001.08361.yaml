@@ -1,0 +1,88 @@
+id: arxiv-2001.08361
+title: Scaling Laws for Neural Language Models
+authors:
+- Jared Kaplan
+- Sam McCandlish
+- Tom Henighan
+- Tom B. Brown
+- Benjamin Chess
+- Rewon Child
+- Scott Gray
+- Alec Radford
+- Jeffrey Wu
+- Dario Amodei
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2001.08361
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: a41bd7877fd1a6bcbba096b2619618bd2f90e02488f2365644903eb2f7c6a494
+tags:
+  tasks:
+  - scaling-laws
+  - language-modeling
+  - efficiency-evaluation
+  method_families:
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- power-law scaling laws for Transformer LM cross-entropy loss in non-embedding parameters N, dataset size D and compute C, a joint L(N, D) form, and a compute-optimal allocation that favors larger models
+  trained short of convergence
+claims:
+- id: c1
+  statement: 'Main claim: language-model cross-entropy loss scales as a power law with model size, dataset size and training compute, with some trends spanning more than seven orders of magnitude.'
+  location: Abstract
+  page: 1
+  quote: The loss scales as a power-law with model size, dataset size, and the amount of compute used for training, with some trends spanning more than seven orders of magnitude.
+- id: c2
+  statement: 'Experimental range: the relations are stated to hold across eight orders of magnitude in minimum compute, six in model size and over two in dataset size; the fitted numerical values are tied
+    to the WebText2 training set (next sentence).'
+  location: Summary of Scaling Laws
+  page: 5
+  quote: These relations hold across eight orders of magnitude in Cmin, six orders of magnitude in N, and over two orders of magnitude in D.
+- id: c3
+  statement: 'Compute counting: training compute is estimated as about 6N floating point operations per training token (forward pass about 2N, backward about twice that), excluding embedding parameters
+    and context-dependent terms.'
+  location: Parameter and Compute Scaling of Transformers
+  page: 7
+  quote: Accounting for the backwards pass (approximately twice the compute as the forwards pass), we then deﬁne the estimated non-embedding compute as C ≈6N ﬂoating point operators per training token.
+- id: c4
+  statement: 'Compute-optimal allocation: as the compute budget increases it should be spent primarily on larger models, without dramatic increases in training time or dataset size (a conclusion drawn from
+    the paper''s power-law fits on WebText2 Transformer LMs within the studied range).'
+  location: Summary of Scaling Laws
+  page: 5
+  quote: As the computational budget C increases, it should be spent primarily on larger models, without dramatic increases in training time or dataset size (see Figure 3).
+- id: c5
+  statement: 'Training protocol: unless otherwise noted, all training runs used a learning-rate schedule with a 3000-step linear warmup followed by cosine decay to zero (models were trained for a fixed
+    number of steps unless otherwise noted).'
+  location: Training Procedures
+  page: 7
+  quote: Unless otherwise noted, all training runs included in our data used a learning rate schedule with a 3000 step linear warmup followed by a cosine decay to zero.
+- id: c6
+  statement: 'Stated limit: far beyond the studied scales, the L(Cmin) and L(D) trends contradict each other, so the authors say the scaling laws must break down before that point (they conjecture the intersection
+    marks maximal Transformer LM performance; values are highly uncertain).'
+  location: Contradictions and a Conjecture
+  page: 17
+  quote: 'This implies that our scaling laws must break down before this point, but we conjecture that the intersection point has a deeper meaning: it provides an estimate of the point at which Transformer
+    language models reach maximal performance.'
+- id: c7
+  statement: 'Disagreement with prior work: the paper states that Hestness et al. ([HNA+17]) found super-linear scaling of dataset size with model size (i.e. data growing faster than model size), whereas
+    this paper finds sub-linear scaling (data growing more slowly than model size; in Section 4 this is the dataset size needed to avoid overfitting as model size grows).'
+  location: Related Work
+  page: 18
+  quote: Note, however, that [HNA+17] found super-linear scaling of dataset size with model size, whereas we ﬁnd a sub-linear scaling.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Affiliation: all authors list OpenAI (Kaplan also Johns Hopkins University). Range (Section 3 list): model size from 768 to 1.5 billion non-embedding parameters, dataset
+    size from 22 million to 23 billion tokens; WebText2 with BPE vocabulary 50257 and 1024-token context. N excludes vocabulary and positional embeddings, which the authors say gives cleaner scaling laws.
+    Appendix C (Caveats) lists: no solid theoretical understanding; low confidence in Bcrit far outside the explored range; small-data regime not thoroughly investigated and no regularization/data augmentation
+    experiments; C ≈ 6NBS omits n_ctx terms; learning rates tuned but other hyperparameters (e.g. initialization scale, momentum) may not have been; no experiments with higher learning rates for runs not
+    trained to convergence.'

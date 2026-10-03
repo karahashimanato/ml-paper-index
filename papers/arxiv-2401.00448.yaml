@@ -1,0 +1,82 @@
+id: arxiv-2401.00448
+title: 'Beyond Chinchilla-Optimal: Accounting for Inference in Language Model Scaling Laws'
+authors:
+- Nikhil Sardana
+- Jacob Portes
+- Sasha Doubov
+- Jonathan Frankle
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2401.00448
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 284809fbaa8a3d5185a6da7748ad2ba14fa55541f5d9ce579b0f03d6700fe8db
+tags:
+  tasks:
+  - scaling-laws
+  - efficiency-evaluation
+  - language-modeling
+  method_families:
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'inference-aware modification of the Chinchilla scaling laws: minimize training + inference FLOPs (and a real-world cost variant with MFU and cost per FLOP) subject to a target pre-training loss'
+claims:
+- id: c1
+  statement: 'Main claim: modifying the Chinchilla scaling laws to include inference, in both compute and real-world cost terms, the paper finds that researchers expecting reasonably large inference demand
+    (about 1B requests) should train models smaller and longer than Chinchilla-optimal.'
+  location: Abstract
+  page: 1
+  quote: We conduct our analysis both in terms of a compute budget and real-world costs and find that LLM researchers expecting reasonably large inference demand (~1B requests) should train models smaller
+    and longer than Chinchilla-optimal.
+- id: c2
+  statement: 'Compute counting: the standard approximation of 6N FLOPs per training token and 2N per inference token (Kaplan et al., 2020); the analysis uses the Chinchilla paper''s fitted coefficients,
+    uses pre-training loss as the quality proxy, and assumes inference demand can be estimated before training.'
+  location: Computational Optimality
+  page: 3
+  quote: 'We use the standard approximation of FLOPs for transformer models with N parameters: 6N per training token and 2N per inference token (Kaplan et al., 2020).'
+- id: c3
+  statement: 'Experimental range: 47 MPT-architecture models from 150M to 6B parameters, data budgets from 10 to 10,000 tokens per parameter, trained for a single epoch on web text and code; the sweep was
+    not complete for all sizes due to resource constraints, and models are also evaluated on the MosaicML Evaluation Gauntlet.'
+  location: Experiments
+  page: 4
+  quote: Our models range from 150M to 6B parameters, and our data budgets from 10 to 10,000 tokens per parameter.
+- id: c4
+  statement: 'Result at extreme ratios: although exponentially more tokens are needed to reduce loss at large ratios, loss does not plateau up to 10,000 tokens per parameter for the 150M model (larger models
+    were tested only up to 1,000); the authors find no evidence for the critical-model-size hypothesis of De Vries (2023), while noting behavior may change beyond 10,000 tokens per parameter.'
+  location: Results
+  page: 5
+  quote: Although it takes exponentially more tokens to reduce loss at large ratios, loss does not plateau as we scale to 10,000 tokens per parameter for our 150M model.
+- id: c5
+  statement: 'Disagreement with the Chinchilla fitting range, as stated by this paper: fitting the Chinchilla parametric form on progressively more extreme runs gives flatter curves, which suggests that
+    coefficients fit only on typical token ratios overestimate the benefit of additional data at long data ratios; the paper notes Hoffmann et al. trained almost exclusively at about 100 tokens per parameter
+    or less, and that no fit described the 150M long-ratio runs well.'
+  location: Parametric Fitting
+  page: 6
+  quote: This trend suggests that if we only use data from typical token ratios to determine our scaling law coefficients, we will overestimate the impact of additional training data as we move towards
+    the long-data-ratio regime.
+- id: c6
+  statement: 'Real-world cost model: the cost variant adds training/inference-input/inference-output MFU and cost per FLOP, motivated by inference MFU being much lower than training MFU; it is a simplified
+    model that ignores latency and assumes MFU and cost per FLOP do not depend on model size, configuration or sequence length.'
+  location: Estimating Real-World Cost Optimality
+  page: 7
+  quote: 'Eq. 6 is a simplified model of real-world costs: we leave aside latency requirements and assume MFU and cost per FLOP do not depend on model size, configuration, or sequence length.'
+- id: c7
+  statement: 'Stated limitation: due to resource constraints the data are collected at a smaller scale than the Chinchilla paper, both in model size (up to 6B vs. 16B) and number of training runs (47 vs.
+    400); the Related Work also acknowledges that the confidence-interval critique of Besiroglu et al. (2024) may apply to its 47 experiments.'
+  location: Parametric Fitting
+  page: 7
+  quote: Due to resource constraints, we do not collect data at the same scale as the Chinchilla paper—both in terms of model size (we only test up to 6B vs. 16B), and number of training runs (47 vs. 400).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. PDF states: Proceedings of the 41st International Conference on Machine Learning, Vienna, Austria. PMLR 235, 2024. Affiliation: all authors Databricks MosaicML (title
+    page); the models use the MosaicML MPT architecture and Evaluation Gauntlet. The paper cites Besiroglu et al. (2024) (arxiv-2404.10102) as noting that the rounded Chinchilla coefficients bias predictions.
+    Real-world cost scenario (Figure 6 caption) assumes 50% training MFU, 50% inference-input MFU, 1% generation MFU, A100-80GB training and A100-40GB INT8 inference.'

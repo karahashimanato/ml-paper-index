@@ -20,6 +20,8 @@ source:
 tags:
   tasks:
   - model-compression
+  - scaling-laws
+  - language-modeling
   method_families:
   - quantization
   - post-training-quantization

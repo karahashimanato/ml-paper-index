@@ -33,3 +33,7 @@ themes:
     tags: [time-series-forecasting, time-series-foundation-model]
     arxiv_queries:
       - 'abs:"time series" AND abs:forecasting AND (abs:"foundation model" OR abs:"zero-shot" OR abs:benchmark OR abs:pretrained) AND (cat:cs.LG OR cat:stat.ML)'
+  - name: 学習モデルと計算量
+    tags: [scaling-laws, efficiency-evaluation]
+    arxiv_queries:
+      - '(abs:"scaling law" OR abs:"scaling laws" OR abs:"compute-optimal" OR abs:"test-time compute") AND (cat:cs.LG OR cat:cs.CL OR cat:stat.ML)'

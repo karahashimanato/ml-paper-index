@@ -1,0 +1,77 @@
+id: arxiv-1906.02243
+title: Energy and Policy Considerations for Deep Learning in NLP
+authors:
+- Emma Strubell
+- Ananya Ganesh
+- Andrew McCallum
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1906.02243
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0af70b6db33650b01829bd3a59c1f3659f45e301300ec711f264e48735e5e8b7
+tags:
+  tasks:
+  - efficiency-evaluation
+  method_families:
+  - deep-learning
+proposes:
+- energy / CO2e / cloud-cost estimates for training popular NLP models (measured power draw x training time reported in the original papers x PUE, converted with the U.S. EPA average)
+- 'recommendations: report training time and hyperparameter sensitivity, equitable academic compute access, prioritize efficient hardware and algorithms'
+claims:
+- id: c1
+  statement: 'Contribution: the paper quantifies the approximate financial and environmental costs of training a variety of recently successful neural NLP models, and proposes recommendations to reduce
+    costs and improve equity.'
+  location: Abstract
+  page: 1
+  quote: In this paper we bring this issue to the attention of NLP researchers by quantifying the approximate ﬁnancial and environmental costs of training a variety of recently successful neural network
+    models for NLP.
+- id: c2
+  statement: 'Measurement: the off-the-shelf models are trained with the default settings provided (each for a maximum of 1 day, on a single NVIDIA Titan X GPU except ELMo on 3 GTX 1080 Ti GPUs) while GPU
+    power is sampled via nvidia-smi (averaged over samples) and CPU power via Intel''s RAPL interface; the full training runs are not performed.'
+  location: Methods
+  page: 2
+  quote: We train the models described in §2.1 using the default settings provided, and sample GPU and CPU power consumption during training.
+- id: c3
+  statement: 'Extrapolation: the total training time to completion is not measured but estimated from the training times and hardware reported in the original papers; energy is then the combined GPU, CPU
+    and DRAM power draw multiplied by that time.'
+  location: Methods
+  page: 2
+  quote: We estimate the total time expected for models to train to completion using training times and hardware reported in the original papers.
+- id: c4
+  statement: 'Assumption: data-center overhead (mainly cooling) is accounted for with a fixed Power Usage Effectiveness coefficient equal to the 2018 global data-center average.'
+  location: Methods
+  page: 2
+  quote: We use a PUE coefﬁcient of 1.58, the 2018 global average for data centers (Ascierto, 2018).
+- id: c5
+  statement: 'Assumption: energy is converted to CO2e using the U.S. EPA average CO2 per kWh; the authors justify this by the U.S. energy mix being comparable to that of Amazon Web Services.'
+  location: Methods
+  page: 3
+  quote: The U.S. breakdown of energy is comparable to that of the most popular cloud compute service, Amazon Web Services, so we believe this conversion to provide a reasonable estimate of CO2 emissions
+    per kilowatt hour of compute energy used.
+- id: c6
+  statement: 'Limitation: for TPU-trained models only cloud compute cost is estimated; power and carbon footprint are omitted because TPU power draw is not publicly available.'
+  location: Experimental results (Table 3 caption)
+  page: 4
+  quote: Power and carbon footprint are omitted for TPUs due to lack of public information on power draw for this hardware.
+- id: c7
+  statement: 'Recommendations: report time to retrain and sensitivity to hyperparameters, give academic researchers equitable access to compute, and prioritize efficient models and hardware.'
+  location: Introduction
+  page: 2
+  quote: (1) Time to retrain and sensitivity to hyperparameters should be reported for NLP machine learning models; (2) academic researchers need equitable access to computational resources; and (3) researchers
+    should prioritize developing efﬁcient models and hardware.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Estimate sources: training hours and hardware for the cost table are those reported by others, not measured - e.g. BERT GPU time is NVIDIA''s reported 79.2 hours on
+    64 V100s, GPT-2''s 1 week on 32 TPUv3 chips is ''Via the authors on Reddit'' (footnote 6), and the NAS hours are converted by the authors from So et al.''s reported steps and TPU base-model time. Cloud
+    compute cost ranges use pre-emptible (lower bound) and on-demand (upper bound) U.S. GPU/TPU prices (footnote 7); electricity cost uses the average U.S. price per kWh (footnote 9). Case study (Cost of
+    development): the authors use the logs of all training for their own earlier LISA model (Strubell et al., 2018) - 4789 jobs from 123 small grid searches over 172 days on Titan X / M40 GPUs, with cloud
+    cost approximated using P100 pricing, and the cost of tuning for a new dataset assumed (''we estimate here'') to require 24 jobs - to estimate the cost of R&D and tuning, i.e. the case-study model is
+    the authors'' own. In the Conclusions they also call for a standard hardware-independent measure of training time (e.g. gigaflops to convergence) and for random/Bayesian hyperparameter search APIs instead
+    of grid search. Cited for its cost methodology by arxiv-2007.05558 (reference [53]) and by arxiv-1907.10597 (reference [40]).'

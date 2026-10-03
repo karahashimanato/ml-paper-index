@@ -1,0 +1,80 @@
+id: arxiv-2206.14486
+title: 'Beyond neural scaling laws: beating power law scaling via data pruning'
+authors:
+- Ben Sorscher
+- Robert Geirhos
+- Shashank Shekhar
+- Surya Ganguli
+- Ari S. Morcos
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2206.14486
+  code: https://github.com/rgeirhos/dataset-pruning-metrics
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-02'
+  pdf_sha256: ed12a79cc3c5b47d988d18ffe801d4de1b03ff36755da8717e8f504769979f90
+tags:
+  tasks:
+  - scaling-laws
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- statistical-mechanics (replica) theory of margin-based data pruning for the perceptron in the student-teacher setting
+- self-supervised prototypicality pruning metric (k-means in SwAV embedding space, distance to nearest prototype)
+claims:
+- id: c1
+  statement: 'Theory claim (perceptron student-teacher setting): exponential scaling of error with pruned dataset size is possible if the pruning fraction is chosen Pareto-optimally, pruning more aggressively
+    as the initial dataset grows.'
+  location: Introduction (contributions)
+  page: 3
+  quote: (b) Exponential scaling is possible with respect to pruned dataset size provided one chooses an increasing Pareto optimal pruning fraction as a function of initial dataset size.
+- id: c2
+  statement: 'Theory prediction (perceptron student-teacher setting): the optimal pruning strategy depends on the amount of initial data; with abundant data keep only hard examples, with scarce data keep
+    easy examples. The paper''s next contribution states that both theoretical predictions also hold in practice in more general settings (ResNets, ViT fine-tuning).'
+  location: Introduction (contributions)
+  page: 3
+  quote: (a) The optimal pruning strategy changes depending on the amount of initial data; with abundant (scarce) initial data, one should retain only hard (easy) examples.
+- id: c3
+  statement: 'Empirical claim: better than power law scaling with pruned dataset size is observed for ResNets trained on CIFAR-10, SVHN and ImageNet (the paper''s contribution list also mentions ViTs fine-tuned
+    on CIFAR-10).'
+  location: Abstract
+  page: 1
+  quote: We then test this improved scaling prediction with pruned dataset size empirically, and indeed observe better than power law scaling in practice on ResNets trained on CIFAR-10, SVHN, and ImageNet.
+- id: c4
+  statement: 'Benchmark of ten pruning metrics on ImageNet: most existing high-performing metrics scale poorly to ImageNet and the best are computationally intensive and need labels; the proposed self-supervised
+    metric is reported comparable to the best supervised metrics.'
+  location: Abstract
+  page: 1
+  quote: We ﬁnd most existing high performing metrics scale poorly to ImageNet, while the best are computationally intensive and require labels for every image.
+- id: c5
+  statement: 'Compute accounting (preliminary): for ResNets, compute is measured as FLOPs in a fixed-epoch setting, so a model on 60% of the data uses 60% of the iterations and compute (previous work fixed
+    iterations); for the perceptron, compute is clock time to convergence on a CPU. The authors describe the ResNet evidence as preliminary.'
+  location: Appendix C (Breaking compute scaling laws via data pruning)
+  page: 33
+  quote: While previous works have ﬁxed the number of iterations [10], here we ﬁx the number of epochs, so that the model trained on 60% of the full dataset is trained for only 60% the iterations of the
+    model trained on the full dataset, using only 60% the compute.
+- id: c6
+  statement: 'Main stated limitation: exponential scaling requires a high-quality pruning metric; the authors note that most metrics developed for smaller datasets scale poorly to ImageNet.'
+  location: Discussion (Limitations)
+  page: 10
+  quote: The most notable limitation is that achieving exponential scaling requires a high quality data pruning metric.
+- id: c7
+  statement: 'Accuracy vs. training-time trade-off: performance often increased when training on pruned data for the same number of iterations as the full data (more epochs), with gains saturating before
+    matching full training time; the authors say this trade-off must be considered when evaluating gains from pruning, and also found class balancing essential.'
+  location: Discussion (Limitations)
+  page: 10
+  quote: Overall this tradeoff between accuracy and training time on pruned data is important to consider in evaluating potential gains due to data pruning.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. PDF states: 36th Conference on Neural Information Processing Systems (NeurIPS 2022). Affiliations: Stanford University, University of Tübingen, Meta AI (FAIR); first
+    two authors'' work done during an internship at Meta AI (FAIR). The paper cites Hoffmann et al. ([8], Chinchilla) as prior work on joint scaling of model and data. Paradigm tag ''supervised'' reflects
+    the trained classifiers; the proposed pruning metric itself is self-supervised. The cost of computing the pruning metric is discussed as amortizable across many models (Outlook).'

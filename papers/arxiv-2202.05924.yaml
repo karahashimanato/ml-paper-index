@@ -1,0 +1,79 @@
+id: arxiv-2202.05924
+title: Compute Trends Across Three Eras of Machine Learning
+authors:
+- Jaime Sevilla
+- Lennart Heim
+- Anson Ho
+- Tamay Besiroglu
+- Marius Hobbhahn
+- Pablo Villalobos
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2202.05924
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e9fa16ea47877d43981541d946ec5a1fb35e8aea5dd60e4389beed254eb375ae
+tags:
+  tasks:
+  - efficiency-evaluation
+  method_families:
+  - deep-learning
+proposes:
+- dataset of training compute for milestone ML systems
+- three-era framing (Pre Deep Learning, Deep Learning, Large-Scale) with log-linear doubling-time estimates
+claims:
+- id: c1
+  statement: 'Main claim: training compute doubled roughly every 20 months before 2010 (in line with Moore''s law) and accelerated to roughly every 6 months since the advent of Deep Learning in the early
+    2010s; a separate large-scale trend emerged in late 2015.'
+  location: Abstract
+  page: 1
+  quote: Since the advent of Deep Learning in the early 2010s, the scaling of training compute has accelerated, doubling approximately every 6 months.
+- id: c2
+  statement: 'Data: the analysis is based on a curated dataset of 123 milestone ML systems (selected by necessary and notability criteria, with a subjective selection for models from 2020 onward) annotated
+    with training compute.'
+  location: Introduction
+  page: 1
+  quote: We curate a dataset of 123 milestone Machine Learning systems, annotated with the compute it took to train them.
+- id: c3
+  statement: 'Estimation method: when a paper does not report training compute, it is estimated with the AI and Compute appendix techniques (from forward-pass compute or from GPU time), with the reasoning
+    annotated per dataset cell.'
+  location: Appendix A (Methods)
+  page: 16
+  quote: When the training compute is not shared in the paper, we follow the techniques in AI and Compute’s appendix to estimate the training compute of our models (Amodei & Hernandez, 2018).
+- id: c4
+  statement: 'Scope: only the final training run is counted; hyperparameter-search runs are not, as they are often unreported.'
+  location: Appendix A (Methods)
+  page: 16
+  quote: Our dataset only annotates the compute used for the ﬁnal training run.
+- id: c5
+  statement: 'Uncertainty: the authors expect most compute estimates to be accurate within about a factor of two (based on comparing estimation methods) and add noise when bootstrapping to account for it.'
+  location: Appendix H (Limitations)
+  page: 24
+  quote: We expect most of the compute estimates to be accurate within a factor of about two based on some comparisons we did between different estimation methods (Sevilla et al., 2022).
+- id: c6
+  statement: 'Caveat: assignment of systems to the large-scale trend was an intuitive decision, justified post hoc with a Z-value threshold, and the authors state there is room for alternative interpretations.'
+  location: Trends in the Large-Scale era
+  page: 5
+  quote: Note that we made an intuitive decision in deciding which systems belong to this new large-scale trend.
+- id: c7
+  statement: 'Disagreement with prior work: the results contrast with Amodei & Hernandez (3.4-month doubling, 2012-2018) and Lyzhov (>2-year doubling, 2018-2020); the authors attribute this to small samples
+    and single-trend assumptions in those analyses.'
+  location: Trends in the Large-Scale era
+  page: 5
+  quote: Our results contrast with Amodei & Hernandez (2018), who ﬁnd a much faster doubling period of 3.4 months between 2012 and 2018, and with Lyzhov (2021), who ﬁnds a much longer doubling period of
+    >2 years between 2018 and 2020.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Training compute for systems whose papers do not report it is estimated by the authors (see c3, c5). The Abstract states roughly 20-month doubling before 2010, while
+    the Conclusion states an 18-month doubling time between 1952 and 2010; estimates differ across fits and tables. Doubling times come from log-linear fits with bootstrap (B = 1000) confidence intervals;
+    each estimate is randomly multiplied by a log-uniform factor between 1/2 and 2 during bootstrapping (Appendix A). Low-compute outliers (Z < -2 relative to models published within 1.5 years per the Appendix
+    A text; the Table 5 caption says within 2 years) are excluded (5 of 123 models); large-scale models are those with Z >= 0.76 after 2016, with thresholds chosen after visual inspection. Appendix H also
+    lists non-sampling errors (incorrect calculations) and selection biases (academic publications, English, subjectively ''notable'' models, which the authors say makes doubling-time estimates higher).
+    The Conclusion states the authors are not confident in the large-scale vs regular-scale distinction. Funding: Jaime Sevilla is funded by the Open Philanthropy Project (Acknowledgments); affiliations
+    are universities and the Centre for the Governance of AI.'

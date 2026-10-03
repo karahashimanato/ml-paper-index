@@ -1,0 +1,78 @@
+id: arxiv-2210.14891
+title: Broken Neural Scaling Laws
+authors:
+- Ethan Caballero
+- Kshitij Gupta
+- Irina Rish
+- David Krueger
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2210.14891
+source:
+  version: arXiv v17
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0af99a54cca76219e311b09265a111d6e34acd7b8be4aeb29f8810ecbf1d5afb
+tags:
+  tasks:
+  - scaling-laws
+  method_families:
+  - deep-learning
+proposes:
+- 'broken neural scaling law (BNSL): a smoothly broken power-law functional form for scaling behavior'
+claims:
+- id: c1
+  statement: 'Contribution: a smoothly broken power-law functional form (BNSL) that the authors say accurately models and extrapolates how evaluation metrics vary with compute, parameters, dataset size,
+    input size, training steps or upstream performance.'
+  location: Abstract
+  page: 1
+  quote: We present a smoothly broken power law functional form (referred to by us as a broken neural scaling law (BNSL)) that accurately models and extrapolates the scaling behaviors of deep neural networks
+- id: c2
+  statement: 'Evaluation protocol: the functional form is fit to smaller-x points and evaluated on held-out larger-x points for extrapolation; tabulated extrapolation errors are RMSLE.'
+  location: 'Empirical results: fits & extrapolations of functional forms'
+  page: 5
+  quote: black points are points used for fitting a functional form, green (gray if color blind) points are held-out points used for evaluating extrapolation of functional form fit to the black points,
+    & a red line is BNSL that has been fit to black points.
+- id: c3
+  statement: 'Baseline provenance: the percentages of tasks won by the competing functional forms M1-M4 in the benchmark comparison were obtained via correspondence with the authors of Alabdulmohsin et
+    al. (2022), not recomputed in this paper.'
+  location: Empirical results (Table 2 caption)
+  page: 5
+  quote: Numbers for M1, M2, M3, and M4 were obtained via correspondence with authors of Alabdulmohsin et al. (2022).
+- id: c4
+  statement: 'Data provenance: much of the scaling data is taken from other papers; e.g. the compute-on-x-axis vision experiment uses data from Figure 2 of Zhai et al. (2021) and compares BNSL with M3,
+    the form proposed there.'
+  location: Appendix A.9
+  page: 15
+  quote: The experimental scaling data was obtained from Figure 2 of Zhai et al. (2021), and as a result in Table 6 we compare extrapolation of BNSL to the extrapolation of M3 (which was proposed in Zhai
+    et al. (2021))
+- id: c5
+  statement: 'Emergence framing: the authors define the ''emergent'' / ''breakthrough'' / ''phase transition'' behaviors advertised in recent papers as any scaling behavior with more than zero breaks in
+    BNSL.'
+  location: The limit of the predictability of scaling behavior
+  page: 10
+  quote: We define all these quoted phrases as any scaling behaviors with greater than 0 breaks
+- id: c6
+  statement: 'Limit of predictability: if a sufficiently sharp break occurs at a scale sufficiently larger than the largest fitted point, there is currently no way to extrapolate past that break.'
+  location: The limit of the predictability of scaling behavior
+  page: 11
+  quote: 2) If an additional break of sufficient sharpness happens at a scale that is sufficiently larger than the maximum (along the x-axis) of the points used for fitting, there does not (currently) exist
+    a way to extrapolate the scaling behavior after that additional break.
+- id: c7
+  statement: 'Stated limitation: a small number of (x, y) samples sometimes may not suffice to fit and extrapolate BNSL, and collecting many samples can be costly; the authors suggest entities with more
+    compute may get more accurate extrapolations.'
+  location: Ethics statement
+  page: 11
+  quote: A small number of samples sometimes may not be sufficient to accurately fit and extrapolate the BNSL functional form, and obtaining a large number of such samples can sometimes be costly.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. PDF states: Published as a conference paper at ICLR 2023. Affiliations: Mila (McGill, University of Montreal) and University of Cambridge. Fitting (Appendix A.6): scipy.optimize.brute
+    grid search then scipy.optimize.curve_fit minimizing MSLE; the number of breaks can be chosen by holding out the largest fitting points (not the extrapolation points) as a validation set. The abstract
+    gives a code location written in the text as ''github.com/ethancaballero/broken neural scaling laws'' (underscores lost in text extraction), so no code link was recorded. No paradigm tag was assigned
+    because the paper fits curves to results from many settings (supervised, self-supervised, RL). A.9 describes the Zhai et al. (2021) data as ViT pretrained on subsets of JFT-300M; Zhai et al. (arxiv-2106.04560)
+    say their scaling-law study uses the proprietary JFT-3B, although their Figure 2 caption does not name the dataset (see that card''s notes). A.9 also describes the x-axis as compute (FLOPs), whereas
+    Zhai et al. measure compute in TPUv3 core-days.'

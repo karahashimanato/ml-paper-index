@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness
+
+- カード: [`arxiv-2205.14135`](../../papers/arxiv-2205.14135.yaml)
+- 著者: Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré
+- 年・掲載: 2022
+- 原論文: [PDF](https://arxiv.org/pdf/2205.14135v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: deep-learning, efficiency-evaluation, efficient-attention, language-modeling, self-supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Method: FlashAttention is an IO-aware exact attention algorithm that uses tiling to reduce reads/writes between GPU HBM and on-chip SRAM; the paper analyzes its IO complexity and claims fewer HBM accesses than standard attention and optimality for a range of SRAM sizes.([Abstract, p.1](https://arxiv.org/pdf/2205.14135v2#page=1 "We propose FlashAttention, an IO-aware exact attention algorithm that uses tiling to reduce the number of memory reads/writes between GPU high bandwidth memory (HBM) and GPU on-chip SRAM."))
+- **c2** Critique of FLOP-based efficiency: the authors argue that many approximate attention methods reduce compute to linear or near-linear in sequence length but do not show wall-clock speedups, mainly because they focus on FLOP reduction, which may not correlate with wall-clock speed, and ignore memory-access overheads.([Introduction, p.1](https://arxiv.org/pdf/2205.14135v2#page=1 "One main reason is that they focus on FLOP reduction (which may not correlate with wall-clock speed) and tend to ignore overheads from memory access (IO)."))
+- **c3** Complexity/memory claim: despite more FLOPs from recomputation in the backward pass, FlashAttention runs faster than standard attention and uses memory linear in sequence length, attributed to much less HBM access (the paper proves O(N^2 d^2 / M) HBM accesses vs Omega(Nd + N^2) for standard attention, and says that for typical d and M this means many times fewer accesses). The 'up to 7.6x' in the quote is, per the Figure 1 caption, the speedup on the attention computation over the PyTorch attention implementation on GPT-2, not an end-to-end training speedup.([Introduction, p.2](https://arxiv.org/pdf/2205.14135v2#page=2 "Even with the increased FLOPs due to recomputation, our algorithm both runs faster (up to 7.6x on GPT-2 [67], Figure 1 right) and uses less memory—linear in sequence length—than standard attention, thanks to the massively reduced amount of HBM access."))
+- **c4** Quality at matched model: in GPT-2 small and medium training on OpenWebText, FlashAttention reaches the same perplexity as the HuggingFace and Megatron-LM implementations because the model definition is unchanged (the reported speedups, up to 3x vs HuggingFace and up to 1.7x vs Megatron-LM, are end-to-end training time; Table 2 reports training time on 8xA100 GPUs).([Experiments (GPT-2), p.8](https://arxiv.org/pdf/2205.14135v2#page=8 "achieves the same perplexity as the other two implementations, as we do not change the model deﬁnition."))
+- **c5** Benchmark protocol: attention runtime and memory are measured while varying sequence length on one A100 GPU with 40 GB HBM, with dropout and a padding mask, against reference implementations of exact, approximate and sparse attention; the paper reports that FlashAttention is faster than approximate and sparse attention for short sequences and that approximate attention runtimes begin to cross over with FlashAttention at sequence lengths between 512 and 1024 (in this single-GPU benchmark).([Benchmarking Attention, p.9](https://arxiv.org/pdf/2205.14135v2#page=9 "We vary sequence length and measure runtime and memory usage of FlashAttention and block-sparse FlashAttention against various attention baselines on one A100 GPU with 40 GB HBM, with dropout and a padding mask."))
+- **c6** Hardware dependence: the appendix states that speedup differs across GPU types and generations depending on HBM bandwidth and SRAM size, and profiles A100, RTX 3090 and T4 (less speedup on T4 with its smaller SRAM).([Appendix (Speedup on different hardware), p.28](https://arxiv.org/pdf/2205.14135v2#page=28 "Speedup varies between diﬀerent types of GPU types and generations depending on HBM bandwidth and SRAM size."))
+- **c7** Limitations: each new attention variant needs a new hand-written CUDA kernel, requiring significant engineering effort, implementations may not transfer across GPU architectures, and the IO analysis/optimality covers a single GPU (multi-GPU left to future work).([Limitations and Future Directions, p.10](https://arxiv.org/pdf/2205.14135v2#page=10 "Implementations may also not be transferrable across GPU architectures."))
+

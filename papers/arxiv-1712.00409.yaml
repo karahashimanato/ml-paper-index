@@ -1,0 +1,84 @@
+id: arxiv-1712.00409
+title: Deep Learning Scaling is Predictable, Empirically
+authors:
+- Joel Hestness
+- Sharan Narang
+- Newsha Ardalani
+- Gregory Diamos
+- Heewoo Jun
+- Hassan Kianinejad
+- Md. Mostofa Ali Patwary
+- Yang Yang
+- Yanqi Zhou
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1712.00409
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 4cc7cacb63fcd85586d27f6e8032e085b03f3040997c31a444e52607d69c26e9
+tags:
+  tasks:
+  - scaling-laws
+  - language-modeling
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- methodology for measuring learning curves (generalization error vs training set size) and best-fit model size vs training set size on training-set shards
+claims:
+- id: c1
+  statement: 'Contribution: the paper presents a large-scale empirical characterization of how generalization error and model size grow as training sets grow, tested on machine translation, language modeling,
+    image processing and speech recognition.'
+  location: Abstract
+  page: 1
+  quote: This paper presents a large scale empirical characterization of generalization error and model size growth as training sets grow.
+- id: c2
+  statement: 'Main empirical claim: in real applications the authors find the learning-curve exponent usually settles in a range that is shallower than the exponents predicted by prior theory and is unexplained
+    by that theory.'
+  location: Introduction
+  page: 2
+  quote: Unfortunately, in real applications, we ﬁnd empirically that βg usually settles between −0.07 and −0.35, exponents that are unexplained by prior theoretical work.
+- id: c3
+  statement: 'Architecture vs exponent: model improvements only shift the error and do not appear to affect the power-law exponent (hedged as ''do not appear'').'
+  location: Abstract
+  page: 1
+  quote: Further, model improvements only shift the error but do not appear to affect the power-law exponent.
+- id: c4
+  statement: 'Experimental range (protocol): each training set is randomly shuffled and split into shards spanning 2-3 orders of magnitude in steps of roughly 2x, all scored on a single validation set disjoint
+    from every shard.'
+  location: Measuring model accuracy and size scaling with training data size
+  page: 4
+  quote: We then subdivide T into shard sizes that span 2-3 orders of magnitude in steps of roughly 2×
+- id: c5
+  statement: 'Model size vs data: the best-fit model size grows sublinearly with training set size (equivalently, the data set grows faster than linearly with best-fit model size).'
+  location: Abstract
+  page: 1
+  quote: We also show that model size scales sublinearly with data size.
+- id: c6
+  statement: 'Caveat: as training set sizes grow, optimization becomes harder and models run out of capacity, so the empirical error tends away from the power-law trend; the authors say a more exhaustive
+    hyperparameter search would be needed to get closer to the trend.'
+  location: Neural machine translation
+  page: 6
+  quote: We also note that as training set sizes grow, optimization becomes more difﬁcult and models run out of capacity, so the empirical error tends away from the power-law trend.
+- id: c7
+  statement: 'Limitation: the authors report running into compute limitations (most frequently GPU memory) for the largest data sets of each application domain.'
+  location: Operational implications
+  page: 12
+  quote: After reviewing the tests performed for this work, we ﬁnd that we have run into compute limitations for the largest data sets of each application domain.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Affiliation: all authors list Baidu Research (title page). Compute: a footnote states the data were collected from roughly 50 years worth of GPU time; the longest training
+    sessions took up to 6 weeks (Operational implications). Domains/data as stated: WMT''16 German-English NMT, Billion Word word and character LMs (word LMs on shards from 0.1% up to 40%), ResNets on ImageNet
+    shards from 1 to 800 images per class, Deep Speech 2 and attention models on 11,940 hours of speech. Speech is not covered by an existing task tag. Model setup (Section 3): after replicating SOTA results,
+    the authors remove regularization that might reduce effective capacity (e.g. weight decay) and grid-search reduced model sizes to find the best-fit model per shard; ''model size'' here is that best-fit
+    size, e.g. word/character LMs grow with exponent about 0.7 in training set size (Section 4.2). Kaplan et al. (arxiv-2001.08361, Related Work) characterize this paper as finding super-linear scaling
+    of dataset size with model size; this is the same direction as this paper''s own statement that model size scales sublinearly with data size, and Kaplan et al. contrast it with their own sub-linear
+    data-vs-model-size finding (which concerns the data needed to avoid overfitting).'

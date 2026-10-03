@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Training Compute-Optimal Large Language Models
+
+- カード: [`arxiv-2203.15556`](../../papers/arxiv-2203.15556.yaml)
+- 著者: Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom Hennigan, Eric Noland, Katie Millican, George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karen Simonyan, Erich Elsen, Jack W. Rae, Oriol Vinyals, Laurent Sifre
+- 年・掲載: 2022
+- 原論文: [PDF](https://arxiv.org/pdf/2203.15556v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: deep-learning, language-modeling, large-language-models, scaling-laws, self-supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Main claim: from over 400 language models (70M to over 16B parameters, 5B to 500B tokens), the paper finds that for compute-optimal training model size and training tokens should be scaled equally, i.e. doubling the model size should go with doubling the training tokens.([Abstract, p.1](https://arxiv.org/pdf/2203.15556v1#page=1 "we ﬁnd that for compute-optimal training, the model size and the number of training tokens should be scaled equally: for every doubling of model size the number of training tokens should also be doubled."))
+- **c2** Experimental range as stated in the Introduction: losses of over 400 models from under 70M to over 16B parameters trained on 5B to over 400B tokens, each configuration trained for several training horizons (the abstract says 5 to 500 billion tokens).([Introduction, p.2](https://arxiv.org/pdf/2203.15556v1#page=2 "We empirically estimate these functions based on the losses of over 400 models, ranging from under 70M to over 16B parameters, and trained on 5B to over 400B tokens – with each model conﬁguration trained for several diﬀerent training horizons."))
+- **c3** Agreement of the three approaches: all three suggest scaling model size and data in approximately equal proportions; the paper notes that Approach 3 (parametric fit) predicts even smaller optimal models at larger budgets, which it attributes to the Huber loss treating low-compute points as outliers together with the observed negative curvature of the frontier.([Section 3.4 (Optimal model scaling), p.7](https://arxiv.org/pdf/2203.15556v1#page=7 "The third approach predicts even smaller models being optimal at larger compute budgets."))
+- **c4** Disagreement with Kaplan et al. (2020), as stated by this paper: Kaplan et al. used a fixed number of training tokens and learning-rate schedule for all models; this paper argues that using intermediate losses of such runs underestimates training on less data and contributes to Kaplan et al.'s conclusion that model size should grow faster than data. It also notes that most of its models exceed 500M parameters whereas many of Kaplan et al.'s runs are below 100M.([Related Work, p.3](https://arxiv.org/pdf/2203.15556v1#page=3 "Using these intermediate losses results in underestimating the eﬀectiveness of training models on less data than 130B tokens, and eventually contributes to the conclusion that model size should increase faster than training data size as compute budget increases."))
+- **c5** Compute counting: training FLOPs include those of the embedding matrices, and embedding matrices are also counted in the parameter count (the paper states the embedding contribution is small for large models); the appendix compares its detailed FLOP count with the 6ND approximation and reports the differences as very small.([Appendix F (FLOPs computation), p.27](https://arxiv.org/pdf/2203.15556v1#page=27 "We include all training FLOPs, including those contributed to by the embedding matrices, in our analysis."))
+- **c6** Limitation on the power-law assumption: the paper assumes the compute-optimal frontier is a power law in compute, model size and tokens, but observes some concavity in log N_opt at high compute, which it says suggests it may still be overestimating the optimal size of large models.([Discussion & Conclusion, p.15](https://arxiv.org/pdf/2203.15556v1#page=15 "This suggests that we may still be overestimating the optimal size of large models."))
+- **c7** Limitations on scale and epochs: due to cost there are only two comparable large-scale runs (Chinchilla and Gopher) and no tests at intermediate scales, and all analysis runs used less than one epoch of data, with the multi-epoch regime left to future work.([Discussion & Conclusion, p.15](https://arxiv.org/pdf/2203.15556v1#page=15 "Finally, the training runs for our analysis have all been trained on less than an epoch of data; future work may consider the multiple epoch regime."))
+

@@ -1,0 +1,81 @@
+id: arxiv-2009.06732
+title: 'Efficient Transformers: A Survey'
+authors:
+- Yi Tay
+- Mostafa Dehghani
+- Dara Bahri
+- Donald Metzler
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2009.06732
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d4f2425d4487fa3097d1c0f274df161901748a40f10877cdc5447d711ea2ef35
+tags:
+  tasks:
+  - efficiency-evaluation
+  method_families:
+  - efficient-attention
+  - mixture-of-experts
+  - deep-learning
+proposes:
+- taxonomy of efficient Transformer ("X-former") models by core technique and primary use case
+claims:
+- id: c1
+  statement: 'Scope: the survey characterizes a selection of efficiency-oriented "X-former" Transformer variants (e.g. Reformer, Linformer, Performer, Longformer), many of which target computational and
+    memory efficiency, across multiple domains.'
+  location: Abstract
+  page: 1
+  quote: With the aim of helping the avid researcher navigate this ﬂurry, this paper characterizes a large and thoughtful selection of recent eﬃciency-ﬂavored “X-former” models, providing an organized and
+    comprehensive overview of existing work and models across multiple domains.
+- id: c2
+  statement: 'Contribution: the paper proposes a taxonomy of efficient Transformer models organized by technical innovation and primary use case.'
+  location: Introduction
+  page: 2
+  quote: We propose a taxonomy of eﬃcient Transformer models, characterizing them by their technical innovation and primary use case.
+- id: c3
+  statement: 'Definition of efficiency used: the survey says efficiency can mean memory footprint (relevant when accelerator memory is limited) or computational cost such as FLOPs in training and inference,
+    and it uses both senses, with particular interest in large inputs.'
+  location: Introduction
+  page: 2
+  quote: Throughout this survey, we refer to the eﬃciency of Transformers both in terms of memory and computation.
+- id: c4
+  statement: 'Cost composition: the survey notes that self-attention is only part of a Transformer''s compute; the survey states that the two-layer feed-forward layers account for approximately half the
+    compute time and/or FLOPs and notes that much recent work (citing Lepikhin et al., 2020; Fedus et al., 2021) has explored sparsity to scale up the FFN without incurring compute costs; it calls efficiency
+    and computational cost a complicated affair and refers readers to Dehghani et al. (2021).'
+  location: Background on Transformers
+  page: 5
+  quote: A non-trivial amount of compute still stems from the two layer feed-forward layers at every Transformer block (approximately half the compute time and/or FLOPs).
+- id: c5
+  statement: 'Evaluation caveat: there is no easy way to compare efficient Transformers side by side; papers choose their own benchmarks and differ in model sizes and configurations (and some conflate with
+    pretraining), making it difficult to attribute performance gains.'
+  location: Discussion (On Evaluation)
+  page: 25
+  quote: This is also coupled with diﬀerent hyperparameter set-tings like model sizes and conﬁgurations which can make it diﬃcult to correctly attribute the reason for the performance gains.
+- id: c6
+  statement: 'Benchmark caveat: the survey notes that Long Range Arena (an attempt to unify evaluation that benchmarked 10 xformer variants) was designed for encoder-only mode and does not cover autoregressive
+    tasks that need causal masking.'
+  location: Discussion (On Evaluation)
+  page: 26
+  quote: It is good to note that LRA was designed for evalu-ating Transformers in encoder-only mode and do not consider generative (or autoregressive tasks) that require causal masking.
+- id: c7
+  statement: '''Efficiency misnomer'' caveat: in the retrospective of the updated version (Section 4.4), the authors state that efficient attention models do not always make the Transformer fast; many may
+    make the model much slower, many linear attention models observe no speed or memory gain at all when the sequence length is short, and many have painful requirements for causal masking (or TPU packing)
+    (citing Choromanski et al., 2020b; Peng et al., 2021; Wang et al., 2020c), often substantially trading off throughput for linear complexity. They refer to Dehghani et al. (2021) for more on this efficiency
+    misnomer.'
+  location: Retrospective (Discussion)
+  page: 30
+  quote: Moreover, many linear attention models do not observe any speed or memory gain at all if the sequence length is short.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Survey; no experiments of its own. Taxonomy categories (Section 3.1 bullets): Fixed Patterns, Combination of Patterns, Learnable Patterns, Neural Memory, Low-Rank Methods,
+    Kernels, Recurrence, Downsampling, Sparse Models and Conditional Computation; orthogonal directions listed separately (weight sharing, quantization/mixed precision, pruning, distillation, NAS, task
+    adapters, alternative architectures). The retrospective also says (citing other work) that linear attention models struggle to be competitive on common benchmarks and that local attention can be a tough
+    baseline; it refers readers to Dehghani et al. (2021) for the efficiency misnomer. Affiliation: all four authors list Google Research on the title page. PDF header states ''Preprint, Version 2, Updated
+    Mar 2022''.'

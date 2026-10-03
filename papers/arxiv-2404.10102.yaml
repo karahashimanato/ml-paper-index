@@ -1,0 +1,86 @@
+id: arxiv-2404.10102
+title: 'Chinchilla Scaling: A replication attempt'
+authors:
+- Tamay Besiroglu
+- Ege Erdil
+- Matthew Barnett
+- Josh You
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2404.10102
+  code: https://epochai.org/code/analyzing-chinchilla-repo
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 740f66a4055f9297d7725cfaa271a1307aa45dd522fd5cb681a9e566ba6b8342
+tags:
+  tasks:
+  - scaling-laws
+  - language-modeling
+  method_families:
+  - large-language-models
+  paradigms:
+  - self-supervised
+proposes:
+- replication of Hoffmann et al. (2022) Approach 3 (parametric loss fit) on data reconstructed from their Figure 4
+claims:
+- id: c1
+  statement: 'Scope: the paper replicates only the third of Hoffmann et al.''s three estimation procedures (fitting a parametric loss function), using data reconstructed from Hoffmann et al.''s plots; Approaches
+    1 and 2 are not re-estimated.'
+  location: Abstract
+  page: 1
+  quote: We attempt to replicate their third estimation procedure, which involves fitting a parametric loss function to a reconstruction of data from their plots.
+- id: c2
+  statement: 'Data protocol: the data are reconstructed from Figure 4 of Hoffmann et al. by parsing the SVG of the arXiv PDF (positions give model size and training FLOP, fill colors give loss via the color
+    scale); the authors note digitization may introduce noise (e.g. loss precision of about 0.01 due to the 256-color scale) and they obtain 240 points (245 with five outliers) versus over 400 in the original.'
+  location: Section 2 (Extracting data from Hoffmann et al.'s Figure 4)
+  page: 1
+  quote: We reconstruct the data from Figure 4 in Hoffmann et al.
+- id: c3
+  statement: 'Main findings (this paper''s claims about Hoffmann et al.''s Approach 3): the reported estimates are inconsistent with Hoffmann et al.''s first two approaches, fail to fit the extracted data,
+    and have confidence intervals so narrow that, by the authors'' calculation, they would require over 600,000 experiments rather than the fewer than 500 likely run.'
+  location: Abstract
+  page: 1
+  quote: However, we find that their reported estimates are inconsistent with their first two estimation methods, fail at fitting the extracted data, and report implausibly narrow confidence intervals—intervals
+    this narrow would require over 600,000 experiments, while they likely only ran fewer than 500.
+- id: c4
+  statement: 'The poor-fit conclusion is conditional on the reconstruction: the authors state that if their data reconstruction is correct, the scaling law reported by Hoffmann et al. fails to fit the data.
+    This sentence refers to Hoffmann et al.''s rounded parameter values as printed in the paper body; with the more precise TeX-source values the gap narrows but, per the authors, remains significant.'
+  location: Section 3.1 (Our estimates fit the data better compared to the reported and non-rounded values)
+  page: 3
+  quote: In other words, if our data reconstruction is correct, the Hoffmann et al. reported scaling law fails to fit the data.
+- id: c5
+  statement: 'Causes: the paper states that most of the poor fit is due to rounding of the parameters reported in the body of Hoffmann et al. (more precise values are in TeX source comments), but that even
+    the unrounded parameters remain significantly worse than the replication''s best fit (on the reconstructed data).'
+  location: Section 4 (Discussion)
+  page: 5
+  quote: Most of this poor fit is due to the rounding of the parameters reported in the paper, but even after correcting for this the Hoffmann et al. parameters remain significantly worse than the best
+    fit parameters we find.
+- id: c6
+  statement: 'Attribution of the optimizer explanation: this is the original authors'' account as reported by the replication, not something the replication independently established. The paper states that,
+    according to Hoffmann et al.''s authors (cited as Borgeaud, 2024, a Twitter thread), all three issues arise from an optimizer problem that halted before convergence. In Section 3.2 it reports, again
+    citing one of Hoffmann et al.''s lead authors (Borgeaud, 2024) and as clarified after its first version, that Hoffmann et al. averaged rather than summed Huber losses, giving a high loss scale in their
+    L-BFGS-B minimizer and early termination in both the original fit and the bootstrap, which produced the narrow intervals.'
+  location: Section 4 (Discussion)
+  page: 6
+  quote: 'According to the authors, all of these issues arise because of a problem with their optimizer which led to early stopping: the optimizer halted before it converged to the true optimal parameter
+    values Borgeaud (2024).'
+- id: c7
+  statement: 'Which approaches disagree: the paper states that Hoffmann et al.''s reported Approach 3 parameters imply about 70 tokens per parameter, inconsistent with the 20 tokens per parameter used for
+    Chinchilla 70B and with Approaches 1 and 2; the replication''s refit of Approach 3 implies about 20 tokens per parameter, consistent with Chinchilla''s training and with Approaches 1 and 2, so the replication
+    argues the inconsistency is an artifact of the early optimizer stopping rather than of the functional form (which, it says, fits badly only for the five excluded outliers).'
+  location: Section 3.3 (Hoffmann et al.'s Approach 3 scaling policy is inconsistent with Chinchilla and our estimates)
+  page: 5
+  quote: By contrast, our fitted model implies an optimal ratio of around 20 tokens per parameter, which is consistent with both how the Chinchilla model was trained and the findings from Approaches 1 and
+    2 in Hoffmann et al. (see Figure 5).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Affiliation: Epoch AI (title page). Remaining uncertainty stated in the Discussion: the fitted model is consistent with a tokens-to-parameters ratio between 4 and 40
+    at 1e26 FLOP or more. Per a footnote, the paper does not use the initialization grid for its bootstraps and uses BFGS rather than Hoffmann et al.''s L-BFGS. The explanations of rounding and of the optimizer
+    issue were added after the first version (v2 text). The paper''s main estimates exclude the five lowest tokens-to-parameters points (''five outliers''); Appendix A.1 reports conclusions unchanged when
+    they are included.'

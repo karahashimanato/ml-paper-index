@@ -158,7 +158,7 @@ SPECS = [
                "Mansheej Paul", "Cengiz Pehlevan", "Christopher Ré", "Aditi Raghunathan"],
    "year": 2024, "version": "arXiv v2",
    "links": {"arxiv": "https://arxiv.org/abs/2411.04330"},
-   "tasks": ["model-compression"],
+   "tasks": ["model-compression", "scaling-laws", "language-modeling"],
    "fam": ["quantization", "post-training-quantization", "quantization-aware-training", "large-language-models"],
    "proposes": ["Precision-aware scaling laws: an effective parameter count N_eff for low-precision training and a post-training-quantization degradation term delta_PTQ that grows with data"],
    "claims": [

@@ -1,0 +1,75 @@
+id: arxiv-1907.10597
+title: Green AI
+authors:
+- Roy Schwartz
+- Jesse Dodge
+- Noah A. Smith
+- Oren Etzioni
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1907.10597
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9530867b0c63506c76ee1d23a35817d89e137f783b2d873ec2f57daf728828ab
+tags:
+  tasks:
+  - efficiency-evaluation
+  method_families:
+  - deep-learning
+proposes:
+- 'Green AI: efficiency as an evaluation criterion alongside accuracy'
+- Cost(R) proportional to E x D x H (per-example cost x dataset size x number of hyperparameter experiments)
+- report total floating point operations (FPO) required to generate a result
+claims:
+- id: c1
+  statement: 'Position: the paper advocates making efficiency an evaluation criterion for research alongside accuracy, and reporting the financial cost (''price tag'') of developing, training and running
+    models.'
+  location: Abstract
+  page: 1
+  quote: This position paper advocates a practical solution by making efﬁciency an evaluation criterion for research alongside accuracy and related measures.
+- id: c2
+  statement: 'Cost model: the cost of producing a result is described as growing linearly with the cost of processing one example, the training-set size and the number of hyperparameter experiments.'
+  location: Red AI
+  page: 3
+  quote: The total cost of producing a (R)esult in machine learning increases linearly with each of these quantities.
+- id: c3
+  statement: 'Caveat: the authors state that this equation is a simplification and that it ignores other factors such as the number of training epochs.'
+  location: Red AI
+  page: 3
+  quote: Equation 1 is a simpliﬁcation (e.g., different hyperparameter assignments can lead to different costs for processing a single example).
+- id: c4
+  statement: 'Survey method: for a sample of 60 papers from ACL, NeurIPS and CVPR, the authors classified whether the claimed main contribution is accuracy, efficiency, both, or other.'
+  location: Red AI
+  page: 3
+  quote: For each paper we noted whether the authors claim their main contribution to be (a) an improvement to accuracy or some related measure, (b) an improvement to efﬁciency, (c) both, or (d) other.
+- id: c5
+  statement: 'Drawbacks of alternative measures: carbon emission, though described as appealing, is described as impractical to measure exactly and not comparable across locations or times because it depends
+    on the local electricity infrastructure (electricity use, run time and parameter count are also discussed and judged hardware-dependent or not reflecting work done).'
+  location: Measures of Efficiency
+  page: 6
+  quote: As a result, it is not comparable between researchers in different locations or even the same location at different times.
+- id: c6
+  statement: 'Recommendation: report the total number of floating point operations (FPO) required to generate a result; the authors argue FPO is hardware-agnostic, tied to the amount of energy consumed,
+    and (citing Canziani et al.) strongly correlated with running time.'
+  location: Measures of Efficiency
+  page: 6
+  quote: As a concrete measure, we suggest reporting the total number of ﬂoating point operations (FPO) required to generate a result
+- id: c7
+  statement: 'Limitations of FPO stated by the authors: it ignores memory consumption, and the amount of work largely depends on the model implementation.'
+  location: Measures of Efficiency (Discussion)
+  page: 7
+  quote: First, it targets the electricity consumption of a model, while ignoring other potential limiting factors for researchers such as the memory consumption by the model, which can often lead to additional
+    energy and monetary costs [24].
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Affiliation: the research was done at the Allen Institute for AI (title page footnote); when discussing large models the paper cites Grover, released by ''AI2, our
+    home organization'', with an estimated training cost of $25,000 (an estimate not derived in this paper); some XLNet cost estimates of $250,000 are cited from a tweet (footnote 7). The compute-growth
+    figure (Figure 1) is reproduced from Amodei & Hernandez''s ''AI and Compute'' (reference [2]) and the carbon estimates are attributed to Strubell et al. (reference [40], card arxiv-1906.02243); these
+    are prior work, not this paper''s measurements. The FPO numbers in Figure 4 are per-inference FPO taken from the flops-counter.pytorch repository (footnotes 18-19), not measured by the authors. The
+    paper also recommends reporting budget/accuracy curves (expected validation performance as a function of budget, from the authors'' earlier work [9]) and releasing pretrained models.'

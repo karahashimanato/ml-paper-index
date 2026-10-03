@@ -1,0 +1,81 @@
+id: arxiv-2101.03961
+title: 'Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity'
+authors:
+- William Fedus
+- Barret Zoph
+- Noam Shazeer
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2101.03961
+  code: https://github.com/google-research/t5x
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f340f6ace31abf7d0730ef461404279f40d3c890e9cc2daeb7068b3304afdbd6
+tags:
+  tasks:
+  - scaling-laws
+  - efficiency-evaluation
+  - language-modeling
+  method_families:
+  - mixture-of-experts
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- Switch Transformer (top-1 expert routing MoE replacing the FFN layer)
+- training techniques for sparse models (selective bfloat16 precision, reduced initialization scale)
+claims:
+- id: c1
+  statement: 'Motivation/method: MoE models select different parameters per example, giving a sparsely-activated model with very many parameters but constant computational cost; Switch Transformer simplifies
+    MoE routing to reduce complexity, communication cost and instability.'
+  location: Abstract
+  page: 1
+  quote: The result is a sparsely-activated model—with an outrageous number of parameters—but a constant computational cost.
+- id: c2
+  statement: 'Main claim: models built from T5-Base and T5-Large obtain up to 7x increases in pre-training speed with the same computational resources; pre-training up to trillion-parameter models on C4
+    achieves a 4x speedup over T5-XXL (the Table 9 caption specifies the 1.6T Switch-C as 4x faster to a fixed perplexity with the same compute budget; footnote 10 says the T5-XXL quality gap is a lower
+    bound because T5-XXL was pretrained on an easier C4 version). The contributions list phrases the 7x+ speedup as using the same FLOPS per token.'
+  location: Abstract
+  page: 1
+  quote: We design models based oﬀT5-Base and T5-Large (Raﬀel et al., 2019) to obtain up to 7x increases in pre-training speed with the same computational resources.
+- id: c3
+  statement: 'Scaling regime: following Kaplan et al., the scaling study considers a regime not bottlenecked by compute or data, using C4 with over 180B target tokens and training until diminishing returns.'
+  location: Scaling Properties
+  page: 11
+  quote: To avoid the data bottleneck, we use the large C4 corpus with over 180B target tokens (Raﬀel et al., 2019) and we train until diminishing returns are observed.
+- id: c4
+  statement: 'Step-basis vs wall-clock: since Switch models have roughly the same FLOPs per token as the baseline but add cross-device communication and routing computation, the authors caution that higher
+    sample efficiency per step does not necessarily translate to better quality per wall-clock time, and therefore also compare on a time basis.'
+  location: Scaling Results on a Time-Basis
+  page: 13
+  quote: Therefore, the increased sample eﬃciency observed on a step-basis doesn’t necessarily translate to a better model quality as measured by wall-clock.
+- id: c5
+  statement: 'Time-basis protocol: in the time comparison all models are trained on 32 TPUv3 cores with equal FLOPs per example, and, for a fixed amount of computation and training time, the 64-expert Switch-Base
+    reaches the same quality as T5-Base in one-seventh of the time.'
+  location: Scaling Results on a Time-Basis (Figure 5)
+  page: 13
+  quote: All models trained on 32 TPUv3 cores with equal FLOPs per example.
+- id: c6
+  statement: 'Versus a larger dense model: Switch-Base (64 experts) is compared to T5-Large, which applies 3.5x more FLOPs per token, and on a wall-clock basis Switch-Base is still faster (2.5x speedup).'
+  location: Scaling Versus a Larger Dense Model (Figure 6)
+  page: 14
+  quote: 'Right Plot: As before, on a wall-clock basis, we ﬁnd that Switch-Base is still faster, and yields a 2.5x speedup over T5-Large.'
+- id: c7
+  statement: 'Limitation: despite similar C4 perplexities, the 1.6T-parameter Switch-C scores lower on SQuAD than the smaller Switch-XXL, which uses about 10x the FLOPs per token; the authors say this suggests
+    a poorly understood dependence between fine-tuning quality, FLOPs per token and parameter count (they also report Switch-XXL training instability as unsolved).'
+  location: Future Work
+  page: 26
+  quote: This suggests a poorly understood dependence between ﬁne-tuning quality, FLOPS per token and number of parameters.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. PDF states: Journal of Machine Learning Research 23 (2022) 1-40. Affiliation: all authors list Google, Mountain View (title page); reported hardware is TPUv3 (Table
+    1 setup: 32 cores; Figure 5: 32 TPUv3 cores). In the Table 1 Switch-vs-MoE benchmark, Switch is FLOP-matched to T5-Base (same computation per token) and all models were trained for the same number of
+    steps on identical hardware. Footnote 10 caveat: the T5-XXL comparison gap is described as a lower bound because T5-XXL was pre-trained on an easier C4 version with duplicated snippets. Distillation
+    into dense models preserves about 30% of the quality gain (Discussion). Results tables not recorded.'

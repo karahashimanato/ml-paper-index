@@ -1,0 +1,81 @@
+id: arxiv-2007.05558
+title: The Computational Limits of Deep Learning
+authors:
+- Neil C. Thompson
+- Kristjan Greenewald
+- Keeheon Lee
+- Gabriel F. Manso
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2007.05558
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 434bff67e716bd4228ff526905d06b4a2d23ee364888cf7b895ddf147d5c755b
+tags:
+  tasks:
+  - efficiency-evaluation
+  - scaling-laws
+  - image-classification
+  method_families:
+  - deep-learning
+proposes:
+- meta-analysis of performance vs training computation across deep-learning benchmarks (log(1/error) regressed on log(computation))
+- 'two computation measures: network operations and hardware burden'
+claims:
+- id: c1
+  statement: 'Main claim: progress across a wide variety of deep-learning applications is strongly reliant on increases in computing power, and the authors state that extrapolating this reliance forward
+    reveals that progress along current lines is rapidly becoming economically, technically and environmentally unsustainable.'
+  location: Abstract
+  page: 1
+  quote: This article catalogs the extent of this dependency, showing that progress across a wide variety of applications is strongly reliant on increases in computing power.
+- id: c2
+  statement: 'Data: performance and computation data were extracted by manual review of deep-learning papers (from arXiv and benchmark sources) on established benchmarks; most papers do not report computational
+    requirements, so analyses are limited to the benchmarks with enough data.'
+  location: Present
+  page: 6
+  quote: In total, we gathered 1,526 deep learning papers, for which we did a detailed manual review for their performance and computation burden data.
+- id: c3
+  statement: 'Computation measure: where network operations (FLOPs per pass x passes) cannot be computed, the paper uses hardware burden (processors x computation rate x time), which the authors say also
+    estimates the computation needed but is less precise because it depends on hardware implementation efficiency.'
+  location: Present
+  page: 7
+  quote: This also estimates the computation needed, but is less precise since it depends on hardware implementation efficiency.
+- id: c4
+  statement: 'Data sources: hardware performance values are mostly taken from hardware designers'' official platforms (e.g. NVIDIA, Google) or public databases such as Wikipedia; models with missing details
+    such as training time cannot be estimated.'
+  location: Supplemental Materials (Data collection)
+  page: 25
+  quote: Hardware performance data are mostly gathered from external sources such as ofﬁcial hardware designers plataforms (e.g. NVIDIA, Google) or publicly-available databases (e.g. Wikipedia).
+- id: c5
+  statement: 'Cost conversion: projected economic and environmental costs follow Strubell et al.''s methodology for V100 GPU training, with 2022 cloud pricing and updated carbon estimates (geometric mean)
+    from Dodge et al.'
+  location: Future (footnote)
+  page: 10
+  quote: Economic and environmental costs are measured using the methodology provided by [53] for V100 GPU training.
+- id: c6
+  statement: 'Disagreement with within-model scaling studies: the authors hypothesize that inconsistencies with other scaling studies arise from measurement approach - ''scaling up'' measures improvements
+    to the state of the art while ''scaling down'' measures performance deterioration and can yield artificially rosy estimates; they suggest the faster scaling reported for ResNet and NASNet seems to reflect
+    this.'
+  location: Comparison to other scaling studies
+  page: 12
+  quote: Put simply, the ‘scaling up’ approach measures improvements to the state of the art, whereas the ‘scaling down’ approach measures performance deterioration.
+- id: c7
+  statement: 'Limitation: only training costs are analysed (deployment costs depend on usage data that is not available), so the analysis is a lower bound on total computation.'
+  location: Lessening the Computational Burden
+  page: 13
+  quote: Since total costs must necessarily be higher than just training costs, our analysis provides a lower bound on the total computation needed for any given level of performance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. The Introduction and Table 1 total state 1,527 papers while the Present section states 1,526 papers. Network operations count multiply-adds as 2 FLOPs (footnote 10)
+    and include pre-training, training and fine-tuning; neural architecture search cost is included in training cost (footnote 9). For MS COCO and ImageNet models with only network operations, hardware
+    burden is imputed from a regression fitted on ImageNet models (Supplemental Materials, Model Analysis); the imputed values are thus regression-based estimates (for MS COCO the ImageNet regression is
+    reused, footnote 16). The supplement notes that training time is sometimes not reported precisely, that authors generally do not report computing precision (leaving ''some residual uncertainty'') and
+    sometimes conflate multiply-adds and FLOPs. Analysis is restricted to benchmarks with exact right/wrong answers (generative language/audio models excluded). Projected CO2 and dollar costs (Table 3)
+    are extrapolations, not measurements. The authors present polynomial and exponential extrapolations as having roughly equivalent fits and state they do not anticipate the extrapolated targets will be
+    hit. Affiliations include MIT and the MIT-IBM Watson AI Lab; funding includes the U.S. Air Force Research Laboratory (Acknowledgments). Uses Strubell et al. (card arxiv-1906.02243) for the cost methodology.'

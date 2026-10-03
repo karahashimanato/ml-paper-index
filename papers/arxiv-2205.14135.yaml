@@ -1,0 +1,85 @@
+id: arxiv-2205.14135
+title: 'FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness'
+authors:
+- Tri Dao
+- Daniel Y. Fu
+- Stefano Ermon
+- Atri Rudra
+- Christopher Ré
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2205.14135
+  code: https://github.com/HazyResearch/flash-attention
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: ca7f9fda10b90fc05dd291a3accc85e9c1a4a860b99b31928dab03ed3fcb14e4
+tags:
+  tasks:
+  - efficiency-evaluation
+  - language-modeling
+  method_families:
+  - efficient-attention
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- FlashAttention (IO-aware exact attention using tiling and recomputation in a fused CUDA kernel)
+- block-sparse FlashAttention (approximate attention)
+claims:
+- id: c1
+  statement: 'Method: FlashAttention is an IO-aware exact attention algorithm that uses tiling to reduce reads/writes between GPU HBM and on-chip SRAM; the paper analyzes its IO complexity and claims fewer
+    HBM accesses than standard attention and optimality for a range of SRAM sizes.'
+  location: Abstract
+  page: 1
+  quote: We propose FlashAttention, an IO-aware exact attention algorithm that uses tiling to reduce the number of memory reads/writes between GPU high bandwidth memory (HBM) and GPU on-chip SRAM.
+- id: c2
+  statement: 'Critique of FLOP-based efficiency: the authors argue that many approximate attention methods reduce compute to linear or near-linear in sequence length but do not show wall-clock speedups,
+    mainly because they focus on FLOP reduction, which may not correlate with wall-clock speed, and ignore memory-access overheads.'
+  location: Introduction
+  page: 1
+  quote: One main reason is that they focus on FLOP reduction (which may not correlate with wall-clock speed) and tend to ignore overheads from memory access (IO).
+- id: c3
+  statement: 'Complexity/memory claim: despite more FLOPs from recomputation in the backward pass, FlashAttention runs faster than standard attention and uses memory linear in sequence length, attributed
+    to much less HBM access (the paper proves O(N^2 d^2 / M) HBM accesses vs Omega(Nd + N^2) for standard attention, and says that for typical d and M this means many times fewer accesses). The ''up to
+    7.6x'' in the quote is, per the Figure 1 caption, the speedup on the attention computation over the PyTorch attention implementation on GPT-2, not an end-to-end training speedup.'
+  location: Introduction
+  page: 2
+  quote: Even with the increased FLOPs due to recomputation, our algorithm both runs faster (up to 7.6x on GPT-2 [67], Figure 1 right) and uses less memory—linear in sequence length—than standard attention,
+    thanks to the massively reduced amount of HBM access.
+- id: c4
+  statement: 'Quality at matched model: in GPT-2 small and medium training on OpenWebText, FlashAttention reaches the same perplexity as the HuggingFace and Megatron-LM implementations because the model
+    definition is unchanged (the reported speedups, up to 3x vs HuggingFace and up to 1.7x vs Megatron-LM, are end-to-end training time; Table 2 reports training time on 8xA100 GPUs).'
+  location: Experiments (GPT-2)
+  page: 8
+  quote: achieves the same perplexity as the other two implementations, as we do not change the model deﬁnition.
+- id: c5
+  statement: 'Benchmark protocol: attention runtime and memory are measured while varying sequence length on one A100 GPU with 40 GB HBM, with dropout and a padding mask, against reference implementations
+    of exact, approximate and sparse attention; the paper reports that FlashAttention is faster than approximate and sparse attention for short sequences and that approximate attention runtimes begin to
+    cross over with FlashAttention at sequence lengths between 512 and 1024 (in this single-GPU benchmark).'
+  location: Benchmarking Attention
+  page: 9
+  quote: We vary sequence length and measure runtime and memory usage of FlashAttention and block-sparse FlashAttention against various attention baselines on one A100 GPU with 40 GB HBM, with dropout and
+    a padding mask.
+- id: c6
+  statement: 'Hardware dependence: the appendix states that speedup differs across GPU types and generations depending on HBM bandwidth and SRAM size, and profiles A100, RTX 3090 and T4 (less speedup on
+    T4 with its smaller SRAM).'
+  location: Appendix (Speedup on different hardware)
+  page: 28
+  quote: Speedup varies between diﬀerent types of GPU types and generations depending on HBM bandwidth and SRAM size.
+- id: c7
+  statement: 'Limitations: each new attention variant needs a new hand-written CUDA kernel, requiring significant engineering effort, implementations may not transfer across GPU architectures, and the IO
+    analysis/optimality covers a single GPU (multi-GPU left to future work).'
+  location: Limitations and Future Directions
+  page: 10
+  quote: Implementations may also not be transferrable across GPU architectures.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. Affiliations: Stanford University and University at Buffalo, SUNY. Acknowledgments list funding including cloud-credit programs and members of the Stanford DAWN project
+    (e.g. Facebook, Google). End-to-end speedups reported in the abstract: BERT-large vs MLPerf 1.1 record (seq. 512), GPT-2 (seq. 1K), LRA (seq. 1K-4K); BERT timing is to a target MLM accuracy averaged
+    over 10 runs on 8xA100 (appendix: 8xA100-80GB). The Experiments overview says 1.8x over Megatron for GPT-2 while Table 2 and its text say 1.7x. Results tables not recorded.'

@@ -37,6 +37,14 @@ tasks:
     description: Explaining or interpreting a model's predictions (local or global), and evaluating whether explanations are faithful.
   - id: model-compression
     description: Reducing a model's memory or compute (quantization, pruning, distillation) and measuring what changes in its behaviour.
+  - id: scaling-laws
+    description: How performance changes with parameter count, data size and compute, and how to allocate compute optimally.
+  - id: efficiency-evaluation
+    description: Measuring and reporting the training / inference cost of models (FLOPs, time, energy, memory).
+  - id: language-modeling
+    description: Training and evaluating language models.
+  - id: image-classification
+    description: Image classification.
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -118,6 +126,12 @@ method_families:
     description: Neural networks operating on graphs (e.g. GCN, GraphSAGE).
   - id: imbalance-resampling
     description: Over- or under-sampling methods for class imbalance (e.g. SMOTE).
+  - id: efficient-attention
+    description: Attention mechanisms that reduce compute or memory (e.g. FlashAttention, linear / sparse attention).
+  - id: mixture-of-experts
+    description: Sparse models that route each input to a subset of the parameters (experts).
+  - id: state-space-models
+    description: State space sequence models such as S4 and Mamba.
 paradigms:
   - id: supervised
     description: Supervised learning.

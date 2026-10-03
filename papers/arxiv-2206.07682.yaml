@@ -1,0 +1,94 @@
+id: arxiv-2206.07682
+title: Emergent Abilities of Large Language Models
+authors:
+- Jason Wei
+- Yi Tay
+- Rishi Bommasani
+- Colin Raffel
+- Barret Zoph
+- Sebastian Borgeaud
+- Dani Yogatama
+- Maarten Bosma
+- Denny Zhou
+- Donald Metzler
+- Ed H. Chi
+- Tatsunori Hashimoto
+- Oriol Vinyals
+- Percy Liang
+- Jeff Dean
+- William Fedus
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2206.07682
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f457f08102eb381f2300e1653bf4c82a9aa5dce0eb8dba8fe744ccc2500c3755
+tags:
+  tasks:
+  - scaling-laws
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- definition of 'emergent abilities' of large language models (not present in smaller models, present in larger ones) and a survey of examples from prior work
+claims:
+- id: c1
+  statement: 'Definition used by this paper: an ability is emergent if it is not present in smaller models but is present in larger models; the paper says such abilities therefore cannot be predicted simply
+    by extrapolating smaller models'' performance.'
+  location: Abstract
+  page: 1
+  quote: We consider an ability to be emergent if it is not present in smaller models but is present in larger models.
+- id: c2
+  statement: 'Operational pattern: on a scaling curve (model scale vs performance), the paper describes emergent abilities as near-random performance until a critical threshold of scale, after which performance
+    rises substantially above random (it calls this a phase transition).'
+  location: Emergent Abilities Definition
+  page: 2
+  quote: 'When visualized via a scaling curve (x-axis: model scale, y-axis: performance), emergent abilities show a clear pattern—performance is near-random until a certain critical threshold of scale is
+    reached, after which performance increases to substantially above random.'
+- id: c3
+  statement: 'Scale measure: scaling curves use training compute in FLOPs on the x-axis (parameter-count plots are given in an appendix); the paper says training dataset size is not plotted because many
+    model families use a fixed number of training examples for all sizes, and that no single proxy captures all aspects of scale.'
+  location: Emergent Abilities Definition
+  page: 2
+  quote: In this paper, we will analyze scaling curves by plotting the performance of diﬀerent models where training compute for each model is measured in FLOPs on the x-axis (Hoﬀmann et al., 2022).
+- id: c4
+  statement: 'Nature of the evidence: the paper is a survey of results in the existing literature and does not propose new methods or models (the surveyed examples include model families such as GPT-3,
+    LaMDA, Gopher, Chinchilla and PaLM; the paper adds its own cross-entropy re-analysis of six BIG-Bench tasks, see c7).'
+  location: Broader Impact Statement
+  page: 11
+  quote: In this paper, we surveyed results in the existing literature, without proposing new methods or models.
+- id: c5
+  statement: 'Scope caveat: the authors state that the scale at which an ability emerges is not an immutable property (e.g. emergence may occur with less training compute or fewer parameters for models
+    trained on higher-quality data; today''s models are likely not trained optimally), and that they do not claim a specific scale is required.'
+  location: Emergent Abilities Definition
+  page: 3
+  quote: Our goal in this paper is not to characterize or claim that a speciﬁc scale is required to observe emergent abilities, but rather, we aim to discuss examples of emergent behavior in prior work.
+- id: c6
+  statement: 'Metric caveat stated by the authors themselves (citing BIG-Bench): exact string match on long targets may disguise compounding incremental improvements as emergence; but they argue metrics
+    without partial credit are at best an incomplete explanation because emergence is also observed on many classification tasks.'
+  location: Potential explanations of emergence (Discussion)
+  page: 7
+  quote: using evaluation metrics that do not give partial credit are at best an incomplete explanation, because emergent abilities are still observed on many classiﬁcation tasks (e.g., the tasks in Figure
+    2D–H)
+- id: c7
+  statement: 'Cross-entropy analysis on six emergent BIG-Bench tasks, which the paper says follows the BIG-Bench (2022) setup and affirms BIG-Bench''s conclusions (i.e. the observation originates with BIG-Bench):
+    cross-entropy loss improves even at scales where exact match / BLEU / accuracy stay near random, i.e. log-likelihood improvements can be masked by downstream metrics; the authors add that this does
+    not explain why downstream metrics are emergent or predict the emergence scale.'
+  location: Potential explanations of emergence (Discussion)
+  page: 7
+  quote: Namely, cross-entropy loss improves even for small model scales where the downstream metrics (exact match, BLEU, and accuracy) are close to random and do not improve, which shows that improvements
+    in the log-likelihood of the target sequence can be masked by such downstream metrics.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model size, data, compute and performance (scaling laws, compute-optimal training, cost measurement); carded by a subagent. Results
+    tables not recorded; claims only. PDF states: Published in Transactions on Machine Learning Research (08/2022). Affiliations on the title page: Google Research, Stanford University, UNC Chapel Hill,
+    DeepMind (several surveyed model families, e.g. LaMDA, PaLM, Gopher, Chinchilla, come from these organizations). Appendix A.1 specifies that the cross-entropy analysis uses six few-shot BIG-Bench tasks
+    considered emergent for LaMDA models and concludes that all six fall under ''Outcome 2'' (loss improves while EM/BLEU/acc is random), while the tasks ''are still considered emergent''. The paper (footnote
+    1) says the survey focuses on pre-trained Transformer language models. Augmented prompting strategies (chain of thought, instruction tuning, scratchpad, calibration) are counted as emergent if they
+    show no improvement or harm until a large-enough scale. Critiqued by arxiv-2304.15004 (metric-choice explanation).'

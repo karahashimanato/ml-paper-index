@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Beyond Chinchilla-Optimal: Accounting for Inference in Language Model Scaling Laws
+
+- カード: [`arxiv-2401.00448`](../../papers/arxiv-2401.00448.yaml)
+- 著者: Nikhil Sardana, Jacob Portes, Sasha Doubov, Jonathan Frankle
+- 年・掲載: 2023
+- 原論文: [PDF](https://arxiv.org/pdf/2401.00448v3)(arXiv v3、カード作成時に読んだ版)
+- タグ: deep-learning, efficiency-evaluation, language-modeling, large-language-models, scaling-laws, self-supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Main claim: modifying the Chinchilla scaling laws to include inference, in both compute and real-world cost terms, the paper finds that researchers expecting reasonably large inference demand (about 1B requests) should train models smaller and longer than Chinchilla-optimal.([Abstract, p.1](https://arxiv.org/pdf/2401.00448v3#page=1 "We conduct our analysis both in terms of a compute budget and real-world costs and find that LLM researchers expecting reasonably large inference demand (~1B requests) should train models smaller and longer than Chinchilla-optimal."))
+- **c2** Compute counting: the standard approximation of 6N FLOPs per training token and 2N per inference token (Kaplan et al., 2020); the analysis uses the Chinchilla paper's fitted coefficients, uses pre-training loss as the quality proxy, and assumes inference demand can be estimated before training.([Computational Optimality, p.3](https://arxiv.org/pdf/2401.00448v3#page=3 "We use the standard approximation of FLOPs for transformer models with N parameters: 6N per training token and 2N per inference token (Kaplan et al., 2020)."))
+- **c3** Experimental range: 47 MPT-architecture models from 150M to 6B parameters, data budgets from 10 to 10,000 tokens per parameter, trained for a single epoch on web text and code; the sweep was not complete for all sizes due to resource constraints, and models are also evaluated on the MosaicML Evaluation Gauntlet.([Experiments, p.4](https://arxiv.org/pdf/2401.00448v3#page=4 "Our models range from 150M to 6B parameters, and our data budgets from 10 to 10,000 tokens per parameter."))
+- **c4** Result at extreme ratios: although exponentially more tokens are needed to reduce loss at large ratios, loss does not plateau up to 10,000 tokens per parameter for the 150M model (larger models were tested only up to 1,000); the authors find no evidence for the critical-model-size hypothesis of De Vries (2023), while noting behavior may change beyond 10,000 tokens per parameter.([Results, p.5](https://arxiv.org/pdf/2401.00448v3#page=5 "Although it takes exponentially more tokens to reduce loss at large ratios, loss does not plateau as we scale to 10,000 tokens per parameter for our 150M model."))
+- **c5** Disagreement with the Chinchilla fitting range, as stated by this paper: fitting the Chinchilla parametric form on progressively more extreme runs gives flatter curves, which suggests that coefficients fit only on typical token ratios overestimate the benefit of additional data at long data ratios; the paper notes Hoffmann et al. trained almost exclusively at about 100 tokens per parameter or less, and that no fit described the 150M long-ratio runs well.([Parametric Fitting, p.6](https://arxiv.org/pdf/2401.00448v3#page=6 "This trend suggests that if we only use data from typical token ratios to determine our scaling law coefficients, we will overestimate the impact of additional training data as we move towards the long-data-ratio regime."))
+- **c6** Real-world cost model: the cost variant adds training/inference-input/inference-output MFU and cost per FLOP, motivated by inference MFU being much lower than training MFU; it is a simplified model that ignores latency and assumes MFU and cost per FLOP do not depend on model size, configuration or sequence length.([Estimating Real-World Cost Optimality, p.7](https://arxiv.org/pdf/2401.00448v3#page=7 "Eq. 6 is a simplified model of real-world costs: we leave aside latency requirements and assume MFU and cost per FLOP do not depend on model size, configuration, or sequence length."))
+- **c7** Stated limitation: due to resource constraints the data are collected at a smaller scale than the Chinchilla paper, both in model size (up to 6B vs. 16B) and number of training runs (47 vs. 400); the Related Work also acknowledges that the confidence-interval critique of Besiroglu et al. (2024) may apply to its 47 experiments.([Parametric Fitting, p.7](https://arxiv.org/pdf/2401.00448v3#page=7 "Due to resource constraints, we do not collect data at the same scale as the Chinchilla paper—both in terms of model size (we only test up to 6B vs. 16B), and number of training runs (47 vs. 400)."))
+

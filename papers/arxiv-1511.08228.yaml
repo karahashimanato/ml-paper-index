@@ -1,0 +1,83 @@
+id: arxiv-1511.08228
+title: Neural GPUs Learn Algorithms
+authors:
+- Łukasz Kaiser
+- Ilya Sutskever
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1511.08228
+  code: https://github.com/tensorflow/models/tree/master/neural_gpu
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 9bc9b63e985a663420ad6dd172ec9353a79a90b16bbf3f15148a6c182dc8aefc
+tags:
+  tasks:
+  - algorithm-learning
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Neural GPU: a highly parallel convolutional gated recurrent architecture trained on short instances of algorithmic tasks (binary addition/multiplication, copying, reversing, duplicating, sorting bits)
+  and tested on much longer ones; training techniques incl. parameter sharing relaxation, curriculum, small dropout and gradient noise'
+claims:
+- id: c1
+  statement: 'Contribution: the paper proposes the Neural GPU, built on a convolutional gated recurrent unit, presented as computationally universal like the Neural Turing Machine but highly parallel, which
+    the authors say makes it easier to train and efficient to run.'
+  location: Abstract
+  page: 1
+  quote: 'We present a neural network architecture to address this problem: the Neural GPU.'
+- id: c2
+  statement: 'Main empirical claim (length generalization): trained on binary numbers of up to 20 bits, the Neural GPU shows no errors at test time even on much longer numbers (tasks include long binary
+    addition and multiplication).'
+  location: Abstract
+  page: 1
+  quote: We train the Neural GPU on numbers with up-to 20 bits and observe no errors whatsoever while testing it, even on much longer numbers.
+- id: c3
+  statement: 'Test input sizes: for binary multiplication, trained on numbers of up to 20 bits, the authors report no error on any inputs they tested, with tests on numbers up to 2000 bits long; they also
+    say technical limits of their implementation prevented testing much above 2000 bits (Results paragraph).'
+  location: Introduction
+  page: 2
+  quote: Trained on up-to 20-bit numbers, we see no single error on any inputs we tested, and we tested on numbers up-to 2000 bits long.
+- id: c4
+  statement: 'Success metric: Table 1 reports the fraction of test cases in which every bit of the model''s output is correct (whole-sequence exact match), not per-bit accuracy.'
+  location: Experiments (Table 1 caption)
+  page: 5
+  quote: The table shows the fraction of test cases for which every single bit of the model’s output is correct.
+- id: c5
+  statement: 'Relation to sorting: one of the simpler tasks is sorting a bit sequence; the authors note that with only two symbols this is a counting task (count the 0s). For the simpler tasks of Section
+    3.2 the authors state that, after training on sequences of length up to 41, they found no error on any length tested (up to 4001); for duplication, however, the same section states training on inputs
+    of up to 20 bits and testing on inputs of up to 2000 bits.'
+  location: Other algorithmic tasks
+  page: 6
+  quote: Since there are only 2 symbols to sort, this is a counting tasks – the network must count how many 0s are in the input and produce the output accordingly, as in the example below.
+- id: c6
+  statement: 'Baseline protocol: the stack-RNN baseline was not trained with the authors'' training regime but with its released source code (n_max = 41); to match the authors'' procedure it was run 729
+    times with different seeds and the best result is reported. The LSTM+attention baseline (about 200k parameters vs about 30k for the Neural GPU) was trained with the same techniques as the Neural GPU,
+    including curriculum training and gradient noise.'
+  location: Addition and multiplication (Models)
+  page: 5
+  quote: To match our training procedure, we ran it 729 times (cf. Section 3.3) with different random seeds and we report the best obtained result.
+- id: c7
+  statement: 'Failure modes: often only a few of the 729 grid-search models generalize to very long unseen instances (usually many generalize to 40 or even 200 bits, but only a few work without error for
+    2000-bit numbers); dropout and gradient noise improve reliability, and the authors suggest another technique might help more.'
+  location: Discussion
+  page: 7
+  quote: Another problem is that often only a few models in a 729 grid search generalize to very long unseen instances.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliation: both authors Google Brain (title page). PDF states: Published as a conference paper at ICLR 2016. Training data: 10k random examples per training length (about 200k total for
+    up to 20-bit numbers). Curriculum: train on longer numbers only after crossing a progress threshold on shorter ones, with 20% random-length minibatches. Dropout was stated to be necessary for multiplication
+    models that generalize to 2000 bits, and parameter sharing relaxation ''crucial for learning multiplication''. Ensembles of 5 models are said to ''almost always generalize perfectly on binary tasks''.
+    Model selection: Section 3.3 states ''Each result we report is obtained by running a grid search over 3^6 = 729 instances'' (3 settings each of learning rate, initial parameter scale, relaxation pull
+    factor, curriculum progress threshold, gradient noise scale, dropout); for the stack-RNN baseline the text says the best of 729 seeded runs is reported; for the Neural GPU the text does not spell out
+    the selection rule among the 729 runs. Loss: softmax over output logits with negative log probability of the target (output symbols only); no supervision on intermediate algorithm steps is described.
+    Data efficiency: with only about 100 examples per length, some binary addition models generalized to 200-bit numbers, but the authors never managed to train a good binary multiplication model with that
+    little data. Additional failure mode from the text (Discussion): decimal inputs degrade performance; long decimal multiplication was not learned, while m=128 allows learning all other tasks in decimal.
+    CLRS algorithms are not used (paper predates CLRS).'

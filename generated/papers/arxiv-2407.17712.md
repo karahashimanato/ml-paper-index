@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Improving Online Algorithms via ML Predictions
+
+- カード: [`arxiv-2407.17712`](../../papers/arxiv-2407.17712.yaml)
+- 著者: Ravi Kumar, Manish Purohit, Zoya Svitkina
+- 年・掲載: 2024
+- 原論文: [PDF](https://arxiv.org/pdf/2407.17712v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: greedy-methods, learning-augmented-algorithms
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Contribution: prediction-using online algorithms for two classical problems, ski rental (rent-or-buy) and non-clairvoyant single-machine job scheduling; the algorithms are oblivious to the predictor's performance, improve with better predictions and do not degrade much with poor ones.([Abstract, p.1](https://arxiv.org/pdf/2407.17712v1#page=1 "We consider two classical problems, ski rental and non-clairvoyant job scheduling, and obtain new online algorithms that use predictions to make their decisions."))
+- **c2** Deterministic ski rental guarantee (theoretical, Theorem 2.2): with lambda in (0,1), buying on day ceil(lambda b) if the predicted days y >= b and on day ceil(b/lambda) otherwise gives competitive ratio at most min((1+lambda)/lambda, (1+lambda) + eta/((1-lambda)OPT)), where eta = |y - x| is the absolute error of the predicted number of skiing days, with no assumption on its distribution (the paper also states it assumes nothing about the input or the predictor).([Ski rental with prediction, p.3](https://arxiv.org/pdf/2407.17712v1#page=3 "In particular, Algorithm 2 is (1 + 1/λ)-robust and (1 + λ)- consistent."))
+- **c3** Naive use is not robust: buying on day 1 if the prediction is at least b and renting otherwise is 1-consistent (cost at most OPT + eta) but its competitive ratio can be unbounded when the prediction is small and the true number of days is much larger than b.([Warmup: A simple consistent, non-robust algorithm, p.3](https://arxiv.org/pdf/2407.17712v1#page=3 "A major drawback of Algorithm 1 is its lack of robustness."))
+- **c4** Randomized ski rental and erratum (Theorem 2.3): for lambda in (1/b, 1), the randomized algorithm, analyzed against an oblivious adversary (bounds on expected cost), is ((1+1/b)/(1-e^{-(lambda-1/b)}))-robust and (lambda/(1-e^{-lambda}))-consistent, with competitive ratio at most min{(1+1/b)/(1-e^{-(lambda-1/b)}), (lambda/(1-e^{-lambda}))(1 + eta/OPT)}; a footnote states that the conference version incorrectly claimed a slightly stronger robustness of 1/(1-e^{-(lambda-1/b)}).([A randomized robust and consistent algorithm (footnote), p.4](https://arxiv.org/pdf/2407.17712v1#page=4 "The conference version [18] of this paper incorrectly claimed a slightly stronger robustness of"))
+- **c5** Scheduling guarantee (theoretical, Theorem 3.3): for preemptive single-machine scheduling of n jobs with no release dates, minimizing total completion time, with eta the L1 norm of the job-length prediction errors, Preferential Round-Robin runs Shortest Predicted Job First at rate lambda and round-robin at rate 1-lambda, giving competitive ratio min((1/lambda)(1 + 2 eta/n), 2/(1-lambda)) (assuming no zero-length jobs and units normalized so the shortest job has length at least 1); lambda > 0.5 beats round-robin's ratio of 2 in the case of sufficiently good predictions.([A preferential round-robin algorithm, p.8](https://arxiv.org/pdf/2407.17712v1#page=8 "Setting λ > 0.5 gives an algorithm that beats the round-robin ratio of 2 in the case of sufficiently good predictions."))
+- **c6** Ski rental simulation (empirical, synthetic prediction noise): b = 100, true days uniform on [1, 4b], predictions y = x + Gaussian noise with standard deviation sigma; average competitive ratio over 10000 trials with lambda = 0.5 (deterministic) and lambda = ln(3/2) (randomized), chosen for the same worst-case ratio of 3; the authors observe their algorithms perform significantly better than their classical counterparts even for rather large prediction errors.([Experimental results, p.9](https://arxiv.org/pdf/2407.17712v1#page=9 "The predicted number of days y is simulated as y = x + ϵ where ϵ is drawn from a normal distribution with mean 0 and standard deviation σ."))
+- **c7** Scheduling simulation (empirical, one synthetic dataset of 50 Pareto-distributed jobs with Gaussian prediction noise): SPJF performs very well with low errors but quickly deteriorates as errors increase, whereas Preferential Round-Robin with lambda = 0.5 performs no worse than round-robin even when the predictions have very large error.([Non-clairvoyant scheduling, p.9](https://arxiv.org/pdf/2407.17712v1#page=9 "In contrast, our preferential round-robin algorithm (with λ = 0.5) performs no worse than round-robin even when the predictions have very large error."))
+

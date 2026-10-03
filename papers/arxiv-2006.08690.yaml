@@ -1,0 +1,82 @@
+id: arxiv-2006.08690
+title: Generalized and Scalable Optimal Sparse Decision Trees
+authors:
+- Jimmy Lin
+- Chudi Zhong
+- Diane Hu
+- Cynthia Rudin
+- Margo Seltzer
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.08690
+  code: https://github.com/Jimmy-Lin/GeneralizedOptimalSparseDecisionTrees
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 001a3fa0a8e9f975cb7da5dc2cba04c6dc83805316c862b4fea0edd54fbe56f9
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - decision-trees
+  - interpretable-models
+  paradigms:
+  - supervised
+proposes:
+- 'GOSDT: dynamic programming with bounds (DPB) for provably optimal sparse decision trees over many objectives (accuracy, balanced/weighted accuracy, F-score, AUC of the ROC convex hull, partial AUC),
+  keyed by support-set bit vectors, with an incremental similar support bound that makes all-threshold encodings of continuous features tractable'
+claims:
+- id: c1
+  statement: 'Motivation: new optimal-tree techniques could allow sparse trees to be built for various objectives without the greedy splitting and pruning heuristics that, in the authors'' words, often
+    lead to suboptimal solutions.'
+  location: Abstract
+  page: 1
+  quote: without relying on greedy splitting and pruning heuristics that often lead to suboptimal solutions.
+- id: c2
+  statement: 'Theory cited from prior work (Laurent & Rivest, 1976): full decision tree optimization is NP-hard with no polynomial-time approximation, which makes proving optimality or bounding the optimality
+    gap hard even for small datasets.'
+  location: Introduction
+  page: 1
+  quote: Full decision tree optimization is NP-hard, with no polynomial-time approximation (Laurent & Rivest, 1976), leading to challenges in proving optimality or bounding the optimality gap in a reasonable
+    amount of time, even for small datasets.
+- id: c3
+  statement: 'Optimization approach: for additive loss functions GOSDT uses dynamic programming with bounds (DPB); non-additive losses use PyGOSDT, a variant closer to OSDT''s branch and bound.'
+  location: GOSDT's DPB Algorithm
+  page: 5
+  quote: For optimizing additive loss functions we use GOSDT which uses dynamic programming with bounds (DPB) to provides a dramatic run time improvement.
+- id: c4
+  statement: 'Critique of other optimal-tree methods: the ''bucketization'' preprocessing used by DL8.5 and BinOCT to handle continuous variables is proven (by construction) to possibly lower the maximum
+    attainable training accuracy.'
+  location: Section 3
+  page: 4
+  quote: The maximum training accuracy for a decision tree on a dataset preprocessed with bucketization can be lower (worse) than the maximum accuracy for the same dataset without bucketization.
+- id: c5
+  statement: 'Baseline role of greedy CART: CART (scikit-learn, with depth and leaf count constrained to vary tree size) is run as a reference for what a greedy algorithm without optimality guarantee achieves.'
+  location: Appendix I
+  page: 30
+  quote: We run CART as a reference point for what is achievable with a greedy algorithm that makes no optimality guarantee.
+- id: c6
+  statement: 'Protocol: a 5-minute time limit is used on all experiments unless otherwise stated (30 minutes for the rank-statistic experiments), and multi-threaded algorithms are run sequentially.'
+  location: Appendix I
+  page: 31
+  quote: We set a 5-minute time limit on all experiments, unless otherwise stated.
+- id: c7
+  statement: 'Limitation (scalability): GOSDT is stated to be most effective for datasets with a small or medium number of features, while scaling well in the number of observations (tens of thousands).'
+  location: Discussion and Future Work
+  page: 9
+  quote: GOSDT is most effective for datasets with a small or medium number of features.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: Proceedings of the 37th International Conference on Machine Learning (ICML 2020), PMLR 119. Objective: loss plus lambda times number of leaves (Eq. 1). All features are binarized
+    prior to running the algorithm; continuous features get one split point between every pair of adjacent unique values (Section 2 and Section 4.5). Datasets (Appendix I.1): monk1-3, tic-tac-toe, balance
+    scale, car evaluation, iris (UCI), FourClass (LIBSVM), COMPAS (N = 5,020), FICO, coupon (bar-7). Accuracy-vs-sparsity experiment: 5-fold CV; runs over the 5-minute limit are discarded; CART/BinOCT/DL8.5
+    run with depth limits 1-6, OSDT/GOSDT with 29 regularization values; medians with 25th/75th percentiles. Appendix I.6 notes that if CART achieves an almost optimal training solution it tends to achieve
+    high test accuracy as well, and that without methods like GOSDT/OSDT one could not tell whether CART is close to optimal. Scalability experiment (Appendix I.7): BinOCT never completed at max depth log2(32)
+    within 5 minutes and was excluded. The paper notes BinOCT and DL8.5 use hard depth constraints whereas OSDT/GOSDT use soft (penalty) constraints. Early stopping returns an optimality gap (Discussion).
+    Family tag greedy-methods not used because GOSDT itself is not greedy (it extracts the optimal tree from the dependency graph by greedily choosing the lowest-objective split after optimization). Results
+    not recorded.'

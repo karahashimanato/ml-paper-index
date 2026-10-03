@@ -1,0 +1,97 @@
+id: arxiv-2207.04901
+title: Exploring Length Generalization in Large Language Models
+authors:
+- Cem Anil
+- Yuhuai Wu
+- Anders Andreassen
+- Aitor Lewkowycz
+- Vedant Misra
+- Vinay Ramasesh
+- Ambrose Slone
+- Guy Gur-Ari
+- Ethan Dyer
+- Behnam Neyshabur
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2207.04901
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: e9c1684f83a0e7cb8e50b3bad4bd1f64e211cc602fda0e18e1494b8a214fbf3d
+tags:
+  tasks:
+  - algorithm-learning
+  method_families:
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - in-context-learning
+  - supervised
+proposes:
+- empirical study of length generalization in pretrained transformer LMs (LaMDA) on parity and Boolean variable assignment, comparing finetuning, few-shot prompting and scratchpad (chain-of-thought) and
+  their combinations, with failure analyses (non-sequential shortcuts, distractor tokens)
+claims:
+- id: c1
+  statement: 'Main claim (finetuning): naively finetuning transformers on length generalization tasks shows significant generalization deficiencies independent of model scale (Section 3.1: finetuned LaMDA
+    models of 244m to 64b parameters, on parity and variable assignment).'
+  location: Abstract
+  page: 1
+  quote: We ﬁrst establish that naively ﬁnetuning transformers on length generalization tasks shows signiﬁcant generalization deﬁciencies independent of model scale.
+- id: c2
+  statement: 'Main claim (prompting): combining pretrained LLMs'' in-context learning with scratchpad prompting (outputting solution steps before the answer) gives a dramatic improvement in length generalization
+    (prompting experiments in Section 5 use the pretrained LaMDA 128b model without finetuning; parity phrased as coin flips, evaluated up to 20 flips).'
+  location: Abstract
+  page: 1
+  quote: We then show that combining pretrained large language models’ in-context learning abilities with scratchpad prompting (asking the model to output solution steps before producing an answer) results
+    in a dramatic improvement in length generalization.
+- id: c3
+  statement: 'Scope (tasks): the study focuses on two simple algorithmic tasks, parity and Boolean variable assignment, chosen because the model must track a state to extrapolate to longer lengths.'
+  location: Introduction
+  page: 2
+  quote: In particular, we focus on two simple algorithmic tasks, parity and variable assignment, in which the model needs to keep track of a state in order to extrapolate to longer lengths (see Figure
+    1).
+- id: c4
+  statement: 'Scope (models and lengths): four pretrained LaMDA decoder-only models (244m, 422m, 1b, 64b parameters) are finetuned on parity with training bitstrings of length 10 to 21 and evaluated on
+    lengths 3 to 40; on chain-like variable assignment, training lengths are 3 to 8 and test lengths 3 to 19. Model scale is reported to have little effect on length generalization.'
+  location: Scale doesn't improve length generalization
+  page: 4
+  quote: We ﬁnetuned four pretrained LaMDA models with 244m, 422m, 1b and 64b parameters on the parity task, where the training distribution included randomly sampled bitstrings of length 10 to 21.
+- id: c5
+  statement: 'Disagreement with prior work: finetuning with a scratchpad (step-by-step targets) also fails to generalize to longer problems, which the authors say contrasts with what previous work [3] (Nye
+    et al., scratchpads) suggests; among positional encoding, distractors and end-of-sequence prediction, they conclude distractors are the main culprit.'
+  location: Introduction (contributions)
+  page: 2
+  quote: We establish ﬁnetuning with scratchpad also fails to generalize to longer problems, in contrast to what is suggested by previous works [3].
+- id: c6
+  statement: 'Failure mode: transformers finetuned on sequential length generalization problems are biased toward non-sequential ''shortcut'' solutions that fail on longer instances (e.g. on parity with
+    fixed length and varied number of ones, in-distribution accuracy was 100% while OOD was roughly random, suggesting counting-and-thresholding).'
+  location: Transformers prefer parallel strategies over sequential ones
+  page: 5
+  quote: The results presented in Section 3.1 establish that, when presented with sequential length generalization problems, transformers are biased toward learning non-sequential “shortcut” solutions that
+    fail at longer problem instances.
+- id: c7
+  statement: 'Evaluation practice: different finetuning hyperparameters had a large effect on length generalization while barely changing in-distribution performance, which the authors call surprising;
+    in-distribution performance therefore did not indicate OOD length generalization in these finetuning experiments.'
+  location: Introduction (contributions)
+  page: 2
+  quote: Surprisingly, different hyperparameter choices for ﬁnetuning have a large effect on length generalization performance, while having minimal effect on the ﬁnal in-distribution performance (Section
+    3.3).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliation: Google Research (Blueshift Team), Google Research, University of Toronto/Vector Institute; first author interning at Google Research. LaMDA models are Google models, and a
+    footnote says the model name was omitted for anonymization (yet LaMDA is named in this version). PDF states: 36th Conference on Neural Information Processing Systems (NeurIPS 2022). Prompting experiments
+    use the pretrained LaMDA 128b model (parity phrased as a coin-flip task, prompts with short exemplars, tested up to 20 flips); OpenAI Codex is also evaluated on variable assignment (Figure 7). Few-shot
+    finetuning with scratchpad helped on parity but not on variable assignment; the authors hypothesise this depends on the base model''s non-finetuned performance and leave rigorous evaluation to future
+    work (Section 5.1; prompt-style sanity check in Appendix E). Model scope: finetuning uses LaMDA 244m/422m/1b/64b (Section 3.1; a 255m model on the diverse variable-assignment split in Section 3.2),
+    prompting uses LaMDA 128b; all decoder-only; tasks are only parity and Boolean variable assignment (synthetic). Conclusion scope statement: length generalization ''is a challenge for language models
+    at least up to the 100B parameter scale''. Appendix F: masking all distractor tokens gives perfect length generalization in their parity scratchpad experiments; input distractors hurt more. Hyperparameters
+    (Appendix C): learning-rate sweep per model size, preferring the largest stable learning rate because larger rates gave the best length generalization; AdaFactor; greedy decoding. Inconsistency: Section
+    3.1 gives parity training lengths 10 to 21, while Appendix A.1 gives 3 to 20 for training and 3 to 40 for validation/test; the card follows Section 3.1 in claim c4 and flags this here. Author overlap:
+    reference [3] (Nye et al., ''Show your work: Scratchpads...''), whose length-generalization suggestion this paper disputes, lists Anders Johan Andreassen, Guy Gur-Ari and Aitor Lewkowycz, who are also
+    authors of this paper; the entry is truncated with ''et al.'', so further overlap cannot be checked from this PDF. Only parity and variable assignment are studied; no sorting, binary search or greedy
+    tasks.'

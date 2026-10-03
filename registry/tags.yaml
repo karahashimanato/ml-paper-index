@@ -45,6 +45,14 @@ tasks:
     description: Training and evaluating language models.
   - id: image-classification
     description: Image classification.
+  - id: learned-indexes
+    description: Replacing index structures (B-trees, binary search over sorted data) with models that predict a key's position.
+  - id: learning-augmented-algorithms
+    description: Classical algorithms and data structures that use ML predictions, judged by performance with good predictions and worst-case guarantees with bad ones.
+  - id: algorithm-learning
+    description: Training neural networks to execute or imitate classical algorithms (sorting, search, graph algorithms) and testing generalization to larger inputs.
+  - id: data-subset-selection
+    description: Selecting a subset of training data (coresets, greedy submodular maximization, data pruning).
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -132,6 +140,12 @@ method_families:
     description: Sparse models that route each input to a subset of the parameters (experts).
   - id: state-space-models
     description: State space sequence models such as S4 and Mamba.
+  - id: differentiable-sorting
+    description: Continuous relaxations of sorting and ranking that make them usable with gradient-based learning.
+  - id: decision-trees
+    description: Single decision trees, whether grown greedily (e.g. CART) or optimized globally.
+  - id: greedy-methods
+    description: Methods based on greedy choices (greedy tree splitting, greedy decoding, greedy subset selection).
 paradigms:
   - id: supervised
     description: Supervised learning.

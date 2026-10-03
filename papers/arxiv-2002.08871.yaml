@@ -1,0 +1,87 @@
+id: arxiv-2002.08871
+title: Fast Differentiable Sorting and Ranking
+authors:
+- Mathieu Blondel
+- Olivier Teboul
+- Quentin Berthet
+- Josip Djolonga
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2002.08871
+  code: https://github.com/google-research/fast-soft-sort/
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 620c2569a37afe8da794d2de58809ab1cd6fa1803103764c923660b46f5a35ac
+tags:
+  tasks:
+  - image-classification
+  - tabular-regression
+  method_families:
+  - differentiable-sorting
+  - deep-learning
+  - linear-models
+  paradigms:
+  - supervised
+proposes:
+- soft sorting and ranking operators defined as regularized (quadratic or entropic) projections onto the permutahedron, computed exactly via reduction to isotonic optimization (pool adjacent violators)
+  in O(n log n) time and differentiated in O(n)
+claims:
+- id: c1
+  statement: 'Problem statement: sorting is piecewise linear (differentiable almost everywhere but with many kinks), while ranking is piecewise constant, so its derivatives are null or undefined and block
+    backpropagation.'
+  location: Introduction
+  page: 1
+  quote: 'As piecewise constant functions, ranks are unfortunately much more problematic than sorting: their derivatives are null or undeﬁned, preventing gradient backpropagation.'
+- id: c2
+  statement: 'Contribution and stated complexity: the paper claims the first differentiable sorting and ranking operators with O(n log n) time and O(n) space complexity, and says prior differentiable proxies
+    do not achieve O(n log n).'
+  location: Abstract
+  page: 1
+  quote: In this paper, we propose the ﬁrst differentiable sorting and ranking operators with O(n log n) time and O(n) space complexity.
+- id: c3
+  statement: 'Relaxation used: sorting and ranking are written as linear programs over the permutahedron (convex hull of permutations); adding strongly convex regularization turns them into projections,
+    which reduce to isotonic optimization.'
+  location: Abstract
+  page: 1
+  quote: We achieve this feat by constructing differentiable operators as projections onto the permutahedron, the convex hull of permutations, and using a reduction to isotonic optimization.
+- id: c4
+  statement: 'Exactness and where the O(n log n) comes from: the isotonic subproblems are solved exactly by pool adjacent violators in O(n) time, so no iteration count or precision level must be chosen
+    (unlike Sinkhorn); the overall O(n log n) is due to first sorting the input vector, which the projection requires.'
+  location: Fast computation and differentiation
+  page: 5
+  quote: This means that we do not need to choose a number of iterations or a level of precision, unlike with Sinkhorn.
+- id: c5
+  statement: 'Comparison with prior relaxations as stated by this paper: Taylor et al. take O(n^3), Qin et al. O(n^2) (refined by Grover et al. with unimodal row-stochastic matrices), and Cuturi et al.''s
+    optimal transport method differentiates through Sinkhorn iterates at O(Tmn) cost, where T is the number of Sinkhorn iterations and m a hyperparameter trading cost for precision (Blondel et al. state
+    that convergence to hard sort/ranks is only guaranteed if m = n).'
+  location: Introduction
+  page: 1
+  quote: Their method is based on differentiating through the iterates of the Sinkhorn algorithm (Sinkhorn & Knopp, 1967) and costs O(Tmn) time, where T is the number of Sinkhorn iterations
+- id: c6
+  statement: 'Top-k classification (reproducing Cuturi et al.''s CIFAR-10/CIFAR-100 experiment with the same vanilla CNN, Adam step 1e-4, k = 1, 12 runs): the proposed soft ranks reach accuracy comparable
+    to the OT formulation while being significantly faster.'
+  location: Experiments (Top-k classification loss function)
+  page: 6
+  quote: On both CIFAR-10 and CIFAR-100, our soft rank formulations achieve comparable accuracy to the OT formulation, though signiﬁcantly faster, as we elaborate below.
+- id: c7
+  statement: 'Caveat on runtime: in the 600-epoch CIFAR-100 training, the proposed operators were faster than OT but slower than the O(n^2) All-pairs baseline, which the authors attribute to All-pairs being
+    efficient on GPU at n = 100 while their PAV implementation runs on CPU.'
+  location: Experiments (Top-k classification loss function)
+  page: 7
+  quote: While our soft operators are several hours faster than OT, they are slower than All-pairs, despite its O(n2) complexity.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: Proceedings of the 37th International Conference on Machine Learning, PMLR 119, 2020. Affiliation: Google Research, Brain team (all authors). Asymptotics (Proposition 2): soft
+    operators are differentiable a.e. and order-preserving for every epsilon > 0, converge to hard sort/rank as epsilon -> 0 for inputs without ties, and collapse to a constant vector as epsilon -> infinity;
+    Appendix B.3 gives an epsilon below which they equal the hard operators exactly. On tuning epsilon: not necessary for label ranking, but for top-k classification squashing scores to [0,1] and tuning
+    epsilon ''is important, confirming the empirical finding of Cuturi et al. (2019)''. Runtime experiment: random N(0,1) score vectors, n from 100 to 5000, batch of 128, Intel Xeon W-2135 + GTX 1080 Ti;
+    OT and All-pairs run out of GPU memory for large n. Label ranking: 21 datasets (Hullermeier et al. 2008; Cheng et al. 2009), linear models, two 10-fold runs with internal 5-fold CV grid search; ablation
+    drops the soft rank layer. Soft least trimmed squares: LIBSVM datasets, synthetic label outliers on training labels only, 5-fold CV for k, epsilon (and Huber tau), 10 train-test splits; hard LTS ''worked
+    well on all datasets''. Petersen et al. (arxiv-2105.04019) evaluate this method (''Fast Sort & Rank'') on four-digit MNIST/SVHN sorting with an MSE loss on ranks because it does not produce permutation
+    matrices, and confirm it is the fastest method for large n in their runtime table.'

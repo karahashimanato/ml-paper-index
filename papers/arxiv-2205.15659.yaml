@@ -1,0 +1,92 @@
+id: arxiv-2205.15659
+title: The CLRS Algorithmic Reasoning Benchmark
+authors:
+- Petar Veličković
+- Adrià Puigdomènech Badia
+- David Budden
+- Razvan Pascanu
+- Andrea Banino
+- Misha Dashevskiy
+- Raia Hadsell
+- Charles Blundell
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2205.15659
+  code: https://github.com/deepmind/clrs
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 091130434e0dd34648d1994a8fff5e4982431ea9adfcfaa3cb072fbf5a2f156d
+tags:
+  tasks:
+  - algorithm-learning
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'CLRS-30 benchmark: input/output and intermediate ''hint'' trajectories for 30 algorithms from the CLRS textbook (sorting, searching, divide and conquer, greedy, dynamic programming, graphs, strings,
+  geometry) in a graph encoding, with a fixed in-distribution validation (16 nodes) and out-of-distribution test (64 nodes) protocol; baseline processors Deep Sets, GAT, Memory Networks, MPNN, PGN'
+claims:
+- id: c1
+  statement: 'Contribution: CLRS-30 is a dataset of trajectories (inputs, outputs and optional intermediate targets) for 30 classical algorithms covering sorting, searching, dynamic programming, geometry,
+    graphs and strings, proposed to unify evaluation that prior work did on bespoke data.'
+  location: Introduction
+  page: 2
+  quote: 'we propose and evaluate on CLRS-30: a dataset containing trajectories—a trajectory is formed of inputs, the corresponding outputs and optional intermediary targets—of 30 classical algorithms'
+- id: c2
+  statement: 'Sorting algorithms included: insertion sort, bubble sort, heapsort and quicksort. (Searching includes minimum, binary search and quickselect; merge sort is excluded because it needs memory
+    not attached to input objects.)'
+  location: CLRS Algorithmic Reasoning Benchmark
+  page: 4
+  quote: 'Sorting: Insertion sort, bubble sort, heapsort (Williams, 1964), quicksort (Hoare, 1962).'
+- id: c3
+  statement: 'Greedy algorithms included: activity selection and task scheduling.'
+  location: CLRS Algorithmic Reasoning Benchmark
+  page: 4
+  quote: 'Greedy: Activity selection (Gavril, 1972), task scheduling (Lawler, 1985).'
+- id: c4
+  statement: 'Train vs test sizes: training and validation inputs have 16 nodes (1,000 training and 32 validation trajectories; validation measures in-distribution generalisation), and the test set measures
+    out-of-distribution generalisation with 32 trajectories on inputs of 64 nodes (more for graph-level outputs). Most graph-algorithm inputs are Erdos-Renyi graphs; scalar inputs are U(0,1).'
+  location: Dataset statistics
+  page: 8
+  quote: For testing, we measure out-of-distribution generalisation, and sample 32 trajectories for inputs of 64 nodes.
+- id: c5
+  statement: 'Supervision with hints: baselines both decode hints (in the loss) and encode them as inputs, with noisy teacher forcing at training time (ground-truth hints fed back with probability 0.5);
+    at evaluation the number of processor steps is set by the number of ground-truth hints, a requirement the authors say could be lifted, e.g., with termination networks.'
+  location: Baseline models
+  page: 7
+  quote: The quantity of hints is still used to determine the number of processor steps to perform at evaluation time.
+- id: c6
+  statement: 'Out-of-distribution failure: MPNNs, which appear to dominate in-distribution for most tasks (Section 4.3: over 90% F1 for nearly all of them on validation), do not transfer their gains to
+    graphs four times larger (64 vs 16 nodes); PGN becomes the most performant model when averaged across task types, which the authors say aligns with prior research (Veličković et al., 2020).'
+  location: Test (out-of-distribution) performance
+  page: 9
+  quote: MPNNs are unable to transfer their impressive gains to graphs that are four times larger
+- id: c7
+  statement: 'Stated failure modes: the authors say the OOD version of CLRS-30 is highly challenging and far from solved for most tasks; PGNs struggled on tasks requiring long-range rollouts (e.g. DFS)
+    or recursive reasoning (e.g. Quicksort, Quickselect); string matching (e.g. KMP) may need more specialised inductive biases; the processor tended to do best on tasks with favourable (sublinear) hint
+    counts such as BFS, Bellman-Ford and task scheduling.'
+  location: Test (out-of-distribution) performance
+  page: 9
+  quote: In particular, PGNs struggled on tasks requiring long-range rollouts (such as DFS), or recursive reasoning (such as Quicksort and Quickselect).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliation: all authors DeepMind (title page). PDF states: Proceedings of the 39th International Conference on Machine Learning (ICML 2022), PMLR 162. Full algorithm list (Section 3):
+    Sorting (insertion, bubble, heapsort, quicksort); Searching (minimum, binary search, quickselect); D&C (maximum subarray, Kadane''s variant: one algorithm); Greedy (activity selection, task scheduling);
+    DP (matrix chain multiplication, LCS, optimal BST); Graphs (DFS, BFS, topological sort, articulation points, bridges, Kosaraju SCC, Kruskal, Prim, Bellman-Ford, Dijkstra, DAG shortest paths, Floyd-Warshall);
+    Strings (naive matching, KMP); Geometry (segment intersection, Graham scan, Jarvis'' march). Exclusions: NP-hard tasks and approximation algorithms, tasks needing numerical outputs, standalone data
+    structures, algorithms needing dynamically allocated memory (merge sort, Hierholzer, finite-automaton string matching). Sorting is encoded as predicting predecessor pointers (no value swapping); insertion
+    sort''s inner backward scan is compressed into one step. Metric: test micro-F1 averaged per algorithm class (Table 1), plus a win/tie/loss count across 30 algorithms (Appendix C: model A outperforms
+    B on an algorithm if mean(A) - std(A) > mean(B)); validation curves averaged over three seeds. Training: batch 32, Adam lr 0.001, 10,000 steps, early stopping on in-distribution validation, one V100.
+    Hyperparameters: ''We provide all implementations and hyperparameters within our codebase''; no per-model tuning procedure is described in the text. Authors cite Xu et al. (arxiv-1905.13211) on algorithmic
+    alignment and Veličković et al. 2019 (arxiv-1910.10593) for the MPNN max aggregator. The first author is also first author of the cited works that introduced baseline components used here (Veličković
+    et al., 2019 for the max-aggregator MPNN executor; Veličković et al., 2020 for PGN; he is also first author of the GAT paper used as a baseline processor); Hadsell and Blundell are co-authors of arxiv-1910.10593
+    too (reference list). CLRS''s statement that better-aligned architectures ''can be proven to have better sample complexity'' (Xu et al.) should be read with the assumptions of that proof (arxiv-1905.13211
+    c3: sequential training with auxiliary labels).'

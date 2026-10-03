@@ -1,0 +1,90 @@
+id: arxiv-1905.08898
+title: 'ALEX: An Updatable Adaptive Learned Index'
+authors:
+- Jialin Ding
+- Umar Farooq Minhas
+- Jia Yu
+- Chi Wang
+- Jaeyoung Do
+- Yinan Li
+- Hantian Zhang
+- Badrish Chandramouli
+- Johannes Gehrke
+- Donald Kossmann
+- David Lomet
+- Tim Kraska
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1905.08898
+  code: https://github.com/microsoft/ALEX
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 223decd891792f5ab634cb889703db7292fe2c9a855973cadfa65584243e9bec
+tags:
+  tasks:
+  - learned-indexes
+  method_families:
+  - linear-models
+proposes:
+- 'ALEX: an updatable in-memory learned index with an adaptive RMI of linear models, Gapped Array data nodes with model-based inserts, exponential search from the predicted position, and cost-model-driven
+  node expansion/splitting'
+claims:
+- id: c1
+  statement: 'Relation to B+Trees: like a B+Tree, ALEX builds a tree, but lets different nodes grow and shrink at different rates; data nodes use a Gapped Array so that gaps absorb inserts and records can
+    be placed near their predicted positions.'
+  location: Introduction
+  page: 1
+  quote: Similar to a B+Tree, ALEX builds a tree, but allows diﬀerent nodes to grow and shrink at diﬀerent rates.
+- id: c2
+  statement: 'Critique of prior work (attributed): the authors characterize the original Learned Index of Kraska et al. as limited to static, read-only workloads.'
+  location: Abstract
+  page: 1
+  quote: However, it is limited to static, read-only workloads.
+- id: c3
+  statement: 'Main empirical claim (abstract, for the authors'' evaluated datasets and workloads): across the spectrum of read-write workloads ALEX beats B+Trees by up to 4.1x while never performing worse,
+    with up to 2000x smaller index size.'
+  location: Abstract
+  page: 1
+  quote: Across the spectrum of read-write workloads, ALEX beats B+Trees by up to 4.1× while never performing worse, with up to 2000× smaller index size.
+- id: c4
+  statement: 'Guarantee and its scope: Theorem 5.1 bounds RMI depth by the density of the densest subregion of the key space (B+Trees bound depth by the number of keys) (m = max node size, p = minimum number
+    of equal-width partitions each holding at most m*d_u keys), and maximal depth can be maintained under inserts; the authors add that this analysis gives intuition about RMI depth but does not reflect
+    worst-case guarantees in practice.'
+  location: Bound on RMI depth
+  page: 8
+  quote: We can construct an RMI that satisﬁes the max node size and upper density limit constraints whose depth is no larger than ⌈logmp⌉—we call this the maximal depth.
+- id: c5
+  statement: 'Baseline tuning: for each dataset and workload, grid search tunes the page size of B+Tree and Model B+Tree and the number of models of the Learned Index for best throughput, whereas ALEX itself
+    is not tuned (unless users add constraints). The B+Tree is the STX B+Tree and the Learned Index is the authors'' best-effort reimplementation (two-level RMI, linear models, binary search).'
+  location: Experimental Setup
+  page: 9
+  quote: For each dataset and workload, we use grid search to tune the page size for B+Tree and Model B+Tree and the number of models for Learned Index to achieve the best throughput.
+- id: c6
+  statement: 'Reimplementation detail (attributed): in private communication the authors of the original Learned Index told the ALEX authors that a neural-net root model usually does not justify its added
+    complexity given minor performance gains, which the ALEX authors say they verified independently.'
+  location: Experimental Setup
+  page: 9
+  quote: Inprivatecommunicationwiththeauthorsof[19], welearnedthattheadded complexity of using a neural net for the root model usually is not justiﬁed by theresultingminorperformancegains, whichwealsoindependentlyveriﬁed.
+- id: c7
+  statement: 'Limitations / future work stated: open theoretical problems about ALEX performance, support for secondary storage for larger-than-memory datasets, and concurrency control tailored to ALEX.'
+  location: Conclusion
+  page: 14
+  quote: We intend to pursue open theoretical problems about ALEX performance, supporting secondary storage for larger than memory datasets, and new concurrency control techniques tailored to the ALEX design.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliations (title page): MIT, Microsoft Research, Arizona State University, Georgia Institute of Technology; Tim Kraska is also a co-author of the original Learned Index (arxiv-1712.01208).
+    Acknowledgements: supported by Google, Intel and Microsoft as part of MIT DSAIL, among others. Code link: the PDF text shows ''htps://github.com/microsof/ALEX'' (ligature loss in extraction); recorded
+    as https://github.com/microsoft/ALEX. Protocol (Experimental Setup / Datasets / Workloads): single-threaded, Intel Core i9-9900K, 64GB RAM; 8-byte keys with random fixed-size payloads; 4 datasets: longitudes
+    and longlat (real, OpenStreetMap; longlat is a transformed compound key), lognormal (synthetic, mu=0, sigma=2) and YCSB (synthetic user IDs uniform over the 64-bit domain, 80-byte payload); datasets
+    are randomly shuffled; index initialized with 100M keys and run for 60 seconds while inserting the remaining keys; lookup keys drawn from existing keys by a Zipfian distribution; workloads: read-only,
+    read-heavy (95/5), write-heavy (50/50), short range (95/5, scan up to 100 keys), write-only. Primary metric: average throughput; index size definitions differ per structure (Experimental Setup). Baselines
+    also include Model B+Tree (linear model per node, Gapped Array, built on STX) and ART (C implementation); hash tables excluded because they cannot efficiently support range queries. Bulk load (Section
+    6.2.4 text): ALEX takes on average 50% more time than B+Tree to bulk load. Distribution shift experiments initialize with the 50M smallest keys and insert the rest randomly or in ascending order. Complexity
+    analysis (Section 5.2): TraverseToLeaf takes ceil(log_m p) time, exponential search within a data node is O(log m) in the worst case, and the worst-case insert into a full node is O(m * ceil(log_m p)).
+    Lookups: exponential search from the predicted position; the paper says this ''always beats binary search when models are accurate'' (Introduction).'

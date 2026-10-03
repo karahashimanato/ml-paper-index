@@ -1,0 +1,84 @@
+id: arxiv-2206.12110
+title: Learning Augmented Binary Search Trees
+authors:
+- Honghao Lin
+- Tian Luo
+- David P. Woodruff
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2206.12110
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c90aeba7f91c9eb14017aaf178be48d39f20056cf78296904cc3c61c2420229c
+tags:
+  tasks:
+  - learning-augmented-algorithms
+  method_families:
+  - deep-learning
+proposes:
+- 'learned Treap: treap whose node priorities are predicted frequency ranks/frequencies from a frequency estimation oracle'
+claims:
+- id: c1
+  statement: 'Contribution (classical structure: treap / binary search tree): node priorities of a treap are set from a frequency-estimation (rank-prediction) oracle instead of random draws, so frequently
+    accessed keys sit near the root while BST operations such as range queries and successor remain supported.'
+  location: Abstract
+  page: 1
+  quote: Given recent advances in algorithms with predictions, we propose pairing treaps with machine advice to form a learning-augmented treap.
+- id: c2
+  statement: 'Guarantee with a perfect oracle (Theorem 3.1): the expected depth of the i-th most frequent key is 2H_i - 1; the analysis assumes a perfect rank oracle, that the rank order of the keys is
+    a random permutation, that the input distribution is the same throughout the query sequence and that observed frequencies exactly reflect it, and unique frequencies (ties broken randomly). Section 3.6
+    removes the random-order assumption by remapping keys to random reals (with a 4-wise independent hash version giving expected depth O(log i) rather than 2H_i - 1).'
+  location: Access
+  page: 4
+  quote: The expected depth of ei in a learned Treap is 2Hi−1, where Hi is the i-th Harmonic number.
+- id: c3
+  statement: 'Zipfian inputs (theoretical, under the perfect-oracle and random-rank-order assumptions of Section 3): for Zipf parameter alpha >= 1 the learned treap is statically optimal in expectation,
+    i.e. within a constant factor of the entropy lower bound; for alpha > 1 the expected access cost is constant, and for alpha = 1 it is approximately a factor 2 less than for a random treap (Corollary
+    3.9).'
+  location: Zipfian Distributions
+  page: 8
+  quote: Theorem 3.11. The learned Treap is statically optimal in expectation for α ≥1.
+- id: c4
+  statement: 'Robustness to noisy ranks (theoretical, Theorem 3.12): if predicted ranks satisfy r_hat <= eps*r + delta for constants eps, delta >= 1 (a ''noisy'' oracle), the learned treap''s expected access
+    cost is at most an additive constant (2(1 + ln(eps + delta))) worse than with a perfect oracle, still under the Section 3 assumptions.'
+  location: Noisy Oracles and Robustness to Errors
+  page: 8
+  quote: Therefore, under a noisy oracle, the learned Treap is at most an additive constant worse than a learned Treap with a perfect oracle.
+- id: c5
+  statement: 'Worst case is conditional (Theorem 3.13): with an inaccurate but non-adversarial oracle (defined as one that, for a distribution with a random rank ordering, outputs a random rank ordering)
+    the learned treap''s expected performance is no worse than a random treap''s, up to a small additive constant. The guarantee does not cover adversarial oracles; the paper motivates the random-remapping
+    modification of Section 3.6 partly by the possibility that the oracle is adversarial.'
+  location: Noisy Oracles and Robustness to Errors
+  page: 9
+  quote: A learned Treap based on an inaccurate but non-adversarial oracle has expected performance no worse than that of a random Treap, up to a small additive constant.
+- id: c6
+  statement: 'Protocol (empirical): baselines are Red-Black Trees, AVL Trees, Splay Trees, B-Trees of order 3 and random Treaps; only query operations are considered and the total number of comparisons
+    (not runtime) is reported; insertion-order-sensitive trees get keys in random order. The authors note comparisons are not a precise runtime measure (for Splay Trees they expect a constant factor more
+    runtime due to rotations).'
+  location: Experiments
+  page: 11
+  quote: For these experiments, we only consider query operations and report the total number of comparisons made by each data structure.
+- id: c7
+  statement: 'Real-data limitation (empirical): on CAIDA internet traffic with the learned frequency oracle of Hsu et al. [HIKV19], the authors were unable to beat Red-Black Trees, although the shuffled
+    learned treap (keys remapped to a random permutation) was comparable; they say that with a better oracle it could be possible to outperform a Red-Black Tree.'
+  location: Internet Traffic Data
+  page: 13
+  quote: We note that using the oracle from [HIKV19], we are unable to beat Red-Black Trees; however, the shuﬄed learned Treap with the learned oracle is comparable and with a better oracle, it could be
+    possible to outperform a Red-Black Tree.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Family tag deep-learning is a PLACEHOLDER pending the user''s decision on a new tag (no existing family tag fits a learned treap); it reflects only the oracles reused from Hsu et al. [HIKV19]
+    (RNNs for CAIDA flows; RNN with LSTM cells encoding AOL queries character by character), not a method of this paper. Affiliation: Carnegie Mellon University (all authors); NSF grant support stated.
+    No venue stated in the PDF. Note: the contribution list and Conclusion phrase the inaccurate-oracle result more broadly (''no worse than a random Treap ... for any input distribution'' / ''regardless
+    of the accuracy of the oracle and the underlying input distribution'', the latter ''under modifications'') than Theorem 3.13, which is stated for non-adversarial oracles. Synthetic: Zipfian access sequences
+    of length 10^5 with random rank order; reported in text: about 25% fewer comparisons than Splay Trees and a bit over 30% fewer than AVL/Red-Black Trees (alpha = 1 and 1.25), and 27%-51% fewer than Splay
+    Trees when varying alpha with 10^4 keys. Real data: CAIDA Chicago-Seattle 2016-01-21 trace (first 7 minutes train, next 2 validation; results shown for the 20th test minute) and AOL search queries (~21M
+    queries over 90 days; first 5 days train, 6th day validation; results for the 50th day), where the shuffled learned treap is comparable to Red-Black Trees and better than random treaps. Prediction error
+    experiments use frequency predictions with f_hat <= Delta*f (Figure 7, graceful degradation). Authors report attempts at a learning-augmented Splay Tree were unfruitful. Related work contrasts with
+    Kraska et al. learned indexes: this paper keeps the search tree rather than replacing it.'

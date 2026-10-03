@@ -1,0 +1,84 @@
+id: arxiv-1906.01827
+title: Coresets for Data-efficient Training of Machine Learning Models
+authors:
+- Baharan Mirzasoleiman
+- Jeff Bilmes
+- Jure Leskovec
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1906.01827
+  code: https://github.com/baharanm/craig
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 0b1d7d169887b38223bd294ebc6618de562aae2d8cacf707a16b6ac626f43819
+tags:
+  tasks:
+  - data-subset-selection
+  - tabular-classification
+  - image-classification
+  method_families:
+  - greedy-methods
+  - linear-models
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'CRAIG: select a weighted subset (coreset) whose weighted gradient approximates the full gradient by greedily maximizing a submodular facility-location function on (upper bounds of) gradient differences,
+  then run incremental gradient methods on it'
+claims:
+- id: c1
+  statement: 'Contribution: CRAIG selects a weighted training subset (coreset) that closely estimates the full gradient, found by maximizing a submodular function.'
+  location: Abstract
+  page: 1
+  quote: Here we develop CRAIG, a method to select a weighted subset (or coreset) of training data that closely estimates the full gradient by maximizing a submodular function.
+- id: c2
+  statement: 'Greedy guarantee (classical greedy results applied, not new theory): the subset problem is NP-hard; turned into a monotone submodular facility-location surrogate F, the budgeted version (|S|
+    <= r) is approximated by greedy within (1-1/e) of the optimal F value, and the cover version gets a logarithmic approximation on subset size (Wolsey 1982). The approximation is for the surrogate (an
+    upper bound on gradient-estimation error), not directly for the gradient error.'
+  location: CRAIG with Limited Budget
+  page: 5
+  quote: For the above submodular maximization problem, the greedy algorithm discussed in Section 3.2 provides a (1 − 1/e)-approximation to the optimal solution.
+- id: c3
+  statement: 'Convergence guarantee and its assumptions: IG on the subset is proved to converge to a (near)optimal solution at the same rate as IG for convex optimization (Theorems 1-2 assume a strongly
+    convex f and a subset whose weighted gradient is within epsilon of the full gradient over the parameter domain; Theorem 2 additionally assumes convex, twice-differentiable components with Lipschitz
+    gradients; both leave an extra epsilon-dependent error term).'
+  location: Abstract
+  page: 1
+  quote: We prove that applying IG to this subset is guaranteed to converge to the (near)optimal solution with the same convergence rate as that of IG for convex optimization.
+- id: c4
+  statement: 'Main empirical claim: while reaching practically the same solution, CRAIG speeds up various IG methods by up to 6x for logistic regression and 3x for deep neural networks.'
+  location: Abstract
+  page: 1
+  quote: Our extensive set of experiments show that CRAIG, while achieving practically the same solution, speeds up various IG methods by up to 6x for logistic regression and 3x for training deep neural
+    networks
+- id: c5
+  statement: 'Speedup measurement: run time is wall-clock time for CRAIG''s subset selection plus loss minimization with IG or other optimizers.'
+  location: Experiments
+  page: 7
+  quote: In our experiments, we report the run-time as the wall-clock time for subset selection with CRAIG, plus minimizing the loss using IG or other optimizers with the specified learning rates.
+- id: c6
+  statement: 'Tuning: each method is tuned separately to perform at its best (for the convex experiments, learning rates for each method including the random baseline were tuned by preferring smaller training
+    loss).'
+  location: Experiments
+  page: 7
+  quote: We separately tune each method so that it performs at its best.
+- id: c7
+  statement: 'Limitation for deep networks: the gradient-difference bound depends on the changing parameters, so the subset must be reselected after a number of parameter updates rather than once as preprocessing.'
+  location: Application of CRAIG to Deep Networks
+  page: 5
+  quote: Thus, we need to use CRAIG to update the subset S after a number of parameter updates.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: Proceedings of the 37th International Conference on Machine Learning, Vienna, Austria, PMLR 119, 2020. Convex experiments: L2-regularized logistic regression with SGD, SVRG
+    and SAGA on LIBSVM covtype.binary (581,012 points, 54 dims; random half split for test) and Ijcnn1 (49,990 train / 91,701 test, 22 dims); learning rates tuned by preferring smaller training loss over
+    many combinations of exponential-decay and k-inverse schedules; lambda = 1e-5. Non-convex: 2-layer MLP on MNIST (CRAIG subset of 50% reselected each epoch) and ResNet-20 on CIFAR10 (subsets of 1%-20%
+    reselected every epoch or every 5 epochs), average test accuracy across 10 trials. Baselines: random subsets of the same size and the full dataset. Subsets are selected per class keeping class ratios,
+    because the gradient-difference bounds hold only for points with similar labels. A footnote notes that in the worst case the subset may need to be nearly the whole dataset, though in practice a small
+    subset sufficed. The greedy step can be made O(|V|) with stochastic greedy (Mirzasoleiman et al. 2015a = arxiv-1409.7938) and lazy evaluation. Theorem 1/2 state the |V|/|S| speedup comes at the price
+    of an extra error term (neighborhood 2eps R/mu^2 or 2eps/mu). Results not recorded.'

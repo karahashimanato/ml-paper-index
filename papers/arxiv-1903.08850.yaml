@@ -1,0 +1,85 @@
+id: arxiv-1903.08850
+title: Stochastic Optimization of Sorting Networks via Continuous Relaxations
+authors:
+- Aditya Grover
+- Eric Wang
+- Aaron Zweig
+- Stefano Ermon
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1903.08850
+  code: https://github.com/ermongroup/neuralsort
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 22b6ec2248d7771c5e30a294eef7a95c1268664495ef0af3bedfb13f97bb73be
+tags:
+  tasks:
+  - image-classification
+  method_families:
+  - differentiable-sorting
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'NeuralSort: relaxation of the sort operator''s permutation-matrix output to unimodal row-stochastic matrices (softmax over a pairwise-difference construction, temperature tau)'
+- reparameterized gradient estimator for Plackett-Luce distributions over permutations (Gumbel-perturbed scores + NeuralSort)
+claims:
+- id: c1
+  statement: 'Problem statement: the sorting operator is non-differentiable with respect to its inputs, which prevents end-to-end gradient-based optimization of pipelines that contain a sort.'
+  location: Abstract
+  page: 1
+  quote: However, the sorting operator is non-differentiable with respect to its inputs, which prohibits end-to-end gradient-based optimization.
+- id: c2
+  statement: 'Contribution: NeuralSort relaxes the output of sorting from permutation matrices to unimodal row-stochastic matrices (rows sum to one, each row has a distinct argmax), so a hard permutation
+    can still be read off by a row-wise argmax.'
+  location: Abstract
+  page: 1
+  quote: In this work, we propose NeuralSort, a general-purpose continuous relaxation of the output of the sorting operator from permutation matrices to the set of unimodal row-stochastic matrices, where
+    every row sums to one and has a distinct arg max.
+- id: c3
+  statement: 'Complexity: the relaxation needs O(n^2) operations (pairwise absolute differences), versus O(n log n) for the best known sorting algorithms; the authors add that in practice it is highly parallelizable
+    on GPUs.'
+  location: 'NeuralSort: the relaxed sorting operator'
+  page: 5
+  quote: The relaxation requires O(n2) operations to compute As, as opposed to the O(n log n) overall complexity for the best known sorting algorithms.
+- id: c4
+  statement: 'Guarantee and its assumption: for every temperature the row-wise argmax of the relaxed matrix equals sort(s); convergence of the relaxed matrix to the exact permutation matrix as temperature
+    goes to 0 is stated almost surely under the assumption that the entries are drawn independently from an absolutely continuous distribution (so ties have probability zero).'
+  location: 'NeuralSort: the relaxed sorting operator (Theorem 4)'
+  page: 5
+  quote: 'If we assume that the entries of s are drawn independently from a distribution that is absolutely continuous w.r.t. the Lebesgue measure in R, then the following convergence holds almost surely:'
+- id: c5
+  statement: 'Approximation trade-off: lower temperature gives a tighter approximation, but the variance of the gradient estimates is typically lower at higher temperatures.'
+  location: 'NeuralSort: the relaxed sorting operator'
+  page: 5
+  quote: In practice however, the trade-off is in the variance of these estimates, which is typically lower for larger temperatures.
+- id: c6
+  statement: 'Evaluation protocol (large-MNIST sorting, n in {3, 5, 7, 9, 15}): the temperature of both the Sinkhorn-based baselines and NeuralSort was tuned over {1, 2, 4, 8, 16} by best validation accuracy
+    on predicting entire permutations; all methods share the same CNN and are trained with a cross-entropy loss against the ground-truth permutation matrix.'
+  location: Appendix D.1 (Sorting handwritten numbers, Hyperparameters)
+  page: 19
+  quote: We tuned this hyperparameter on the set {1, 2, 4, 8, 16} by picking the model with the best validation accuracy on predicting entire permutations
+- id: c7
+  statement: 'Main empirical claim (sorting large-MNIST sequences): both NeuralSort variants significantly outperform the vanilla row-stochastic, Sinkhorn and Gumbel-Sinkhorn baselines for all sequence
+    lengths n considered.'
+  location: Experiments (Sorting handwritten numbers)
+  page: 8
+  quote: Table 1 demonstrates that the approaches based on the proposed sorting relaxation signiﬁcantly outperform the baseline approaches for all n considered.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: Published as a conference paper at ICLR 2019. Affiliation: Stanford University (title page). Tasks as stated: (1) sorting sequences of ''large-MNIST'' images (main text: concatenations
+    of 4 MNIST digits; Appendix D.1 instead describes a ''5-digit large-MNIST image'' of 140x28 for the sorting experiment and D.2 says quantile regression used 4-digit ''instead of 5-digit'' numbers --
+    the text is internally inconsistent here) using only ground-truth permutations as supervision (metric: proportion of fully correct permutations, following Mena et al. 2018, plus proportion of correct
+    individual ranks); (2) median (50th quantile) regression over such sequences; (3) differentiable kNN on MNIST, Fashion-MNIST, CIFAR-10 (no augmentation) vs kNN in pixel/PCA/autoencoder spaces and a
+    plain CNN; kNN hyperparameters (temperature {1,16,64}, lr, k in {1,3,5,9}) chosen by best evaluation loss, and the authors ''suspect that accuracy improvements can be made by a more expensive hyperparameter
+    search''. The authors hedge that the poor performance of Sinkhorn baselines is ''partly because these methods were designed and evaluated for matchings'' (Experiments). REINFORCE-based estimators were
+    ''empirically observed to be worse than almost all baselines'' (Appendix D). Cross-paper (reviewer comparison of the tables, not stated in any of the texts): Cuturi et al. (arxiv-1905.11885, Table 1,
+    10 runs, the NeuralSort authors'' code, 100 epochs) report NeuralSort exact-match values below this paper''s own Table 1 at every n, with the gap growing with n; Petersen et al. (arxiv-2105.04019) copy
+    Cuturi''s rows. Neither later paper comments on the discrepancy, and training budgets/inputs may differ (see the digit-count inconsistency above), so the numbers should not be read as a failed reproduction.
+    Task tag image-classification covers only the kNN experiment; no existing task tag covers sorting supervision.'

@@ -1,0 +1,89 @@
+id: arxiv-1905.13211
+title: What Can Neural Networks Reason About?
+authors:
+- Keyulu Xu
+- Jingling Li
+- Mozhi Zhang
+- Simon S. Du
+- Ken-ichi Kawarabayashi
+- Stefanie Jegelka
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1905.13211
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 00342888edf1429c14a21e9ade52c666bfbccd8f9cb459cca58e33aed889b6bb
+tags:
+  tasks:
+  - algorithm-learning
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'algorithmic alignment: a PAC-style measure of how well a network''s computation structure matches a reasoning algorithm, with a sample complexity bound that decreases with better alignment; GNNs aligned
+  with dynamic programming (e.g. Bellman-Ford); Neural Exhaustive Search for subset sum'
+claims:
+- id: c1
+  statement: 'Contribution: the paper formally defines algorithmic alignment between a network''s computation structure and the algorithmic structure of a reasoning process, and derives a sample complexity
+    bound that decreases with better alignment.'
+  location: Abstract
+  page: 1
+  quote: We formally deﬁne this algorithmic alignment and derive a sample complexity bound that decreases with better alignment.
+- id: c2
+  statement: 'Definition (informal): a network aligns with an algorithm if it can simulate the algorithm with a limited number of modules, each of which is simple (low sample complexity); e.g. a GNN simulates
+    Bellman-Ford by learning only the relaxation step, whereas an MLP would have to learn the whole for-loop.'
+  location: Formalization of algorithmic alignment
+  page: 4
+  quote: Formally, a neural network aligns with an algorithm if it can simulate the algorithm via a limited number of modules, and each module is simple, i.e., has low sample complexity.
+- id: c3
+  statement: 'GUARANTEE and its assumptions: the theorem linking alignment to sample complexity holds only in a simplifying setting where the network''s modules are trained sequentially with auxiliary labels
+    (Theorem 3.6 additionally assumes i.i.d. samples with bounded universe size |S| < N, algorithm stability of the module learner, sequential learning, and Lipschitzness of the learned modules; the paper
+    illustrates module sample complexity with Theorem 3.5, an NTK-based result for overparameterized two-layer MLPs, and says other module bounds can be used). The same paragraph says auxiliary labels are
+    not available in practice, that the same pattern is observed for end-to-end learning in the experiments (empirical, not covered by the theorem), and leaves end-to-end sample complexity analysis to future
+    work.'
+  location: Better algorithmic alignment implies better generalization
+  page: 5
+  quote: Theorem 3.6 states that, in a simplifying setting where we sequentially train modules of a network with auxiliary labels, the sample complexity bound increases with algorithmic alignment value
+    M.
+- id: c4
+  statement: 'GNNs and dynamic programming: interpreting GNN aggregation as the DP update, the authors argue Theorem 3.6 suggests a GNN with enough iterations can sample-efficiently learn any DP algorithm
+    with a simple update function such as sum/min/max (shortest paths via Bellman-Ford as the example).'
+  location: Dynamic programming
+  page: 8
+  quote: Therefore, Theorem 3.6 suggests that a GNN with enough iterations can sample efﬁciently learn any DP algorithm with a simple DP-update function, e.g. sum/min/max.
+- id: c5
+  statement: 'Scope assumption: the framework is restricted to reasoning tasks whose underlying reasoning process is exact and has clear algorithmic structure; approximation algorithms and unknown structures
+    are left to future work.'
+  location: Theoretical framework
+  page: 4
+  quote: In this paper, we focus on reasoning tasks whose underlying reasoning process is exact and has clear algorithmic structure.
+- id: c6
+  statement: 'Evaluation protocol: for each task''s dataset (Appendix G), each model''s reported test accuracy uses the hyperparameter setting with the best validation accuracy; train, validation and test
+    sets are sampled from the same generator (e.g. 50,000/5,000/5,000 for maximum value difference with 25 treasures), so no larger-input test is described (searched: larger, extrapolat). Section 4 adds
+    that all models are made to perfectly fit their training sets through extensive hyperparameter tuning so test accuracy reflects generalization.'
+  location: Appendix G (Dataset generation)
+  page: 16
+  quote: For each model, we report the test accuracy with the hyperparameter setting that achieves the best validation accuracy.
+- id: c7
+  statement: 'Relation to sorting: on the maximum value difference task an MLP does not generalize, but if the treasures are sorted by value the MLP achieves perfect test accuracy, which the authors explain
+    as the algorithm reducing to a single subtraction.'
+  location: Summary statistics
+  page: 7
+  quote: Interestingly, if we sort the treasures by value (Sorted MLP in Fig. 3a), MLP achieves perfect test accuracy.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliations (title page): MIT, University of Maryland, IAS, National Institute of Informatics. PDF states: Published as a conference paper at ICLR 2020. Tasks (all synthetic, in-distribution
+    test): maximum value difference and furthest pair over 25 ''treasures'', monster trainer (a shortest-path variant with 10 monsters and an unknown cost function), subset sum over 6 numbers. Supervision:
+    final answers only (end-to-end). Hyperparameter grids per model are listed in Appendix G (learning rates, batch size, hidden sizes, layers). Monster trainer: GNNs with 4 iterations nearly match 7 iterations,
+    explained as aligning with a bidirectional Bellman-Ford needing half the iterations (Appendix G.3). The paper states subset sum ''is NP-hard (Karp, 1972) and cannot be solved by DP'' and that GNNs therefore
+    cannot sample-efficiently learn it; it proposes Neural Exhaustive Search (enumerating all subsets) instead. Proposition 3.1/3.2: GNNs and MLPs are universal approximators for the relevant functions,
+    so the authors attribute performance differences to generalization rather than expressiveness. CLRS (arxiv-2205.15659) cites this paper for the claim that architectures better aligned with the algorithm
+    ''can be proven to have better sample complexity'' and motivates its graph encoding with it.'

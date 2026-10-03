@@ -1,0 +1,87 @@
+id: arxiv-2006.12804
+title: Benchmarking Learned Indexes
+authors:
+- Ryan Marcus
+- Andreas Kipf
+- Alexander van Renen
+- Mihail Stoian
+- Sanchit Misra
+- Alfons Kemper
+- Thomas Neumann
+- Tim Kraska
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.12804
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 1359161c5eb45d5cef4094e447c69415fbb0f44e0942c847f5d0d7e13e8e2e69
+tags:
+  tasks:
+  - learned-indexes
+  - efficiency-evaluation
+  method_families:
+  - linear-models
+proposes:
+- unified benchmark (SOSD-based) comparing author-tuned RMI, RadixSpline and PGM implementations with tree, trie, hash and binary-search baselines on four real datasets, including Pareto (size vs lookup
+  time), performance-counter, cold-cache, memory-fence, multithreading and build-time analyses
+claims:
+- id: c1
+  statement: 'Critique of earlier evaluations: the authors summarize criticisms of learned indexes as stemming from the lack of an efficient open-source implementation, inadequate datasets, and no standardized
+    benchmark for fair comparison.'
+  location: Introduction
+  page: 1
+  quote: The main reasons for these criticisms were the lack of an eﬃcient open-source implementation of the learned index structure, inadequate data-sets, and the lack of a standardized benchmark suite
+    to ensure a fair comparison between the diﬀerent approaches.
+- id: c2
+  statement: 'Weak-baseline risk: because researchers had to re-implement the original learned index (or use back-of-the-envelope calculations), the authors say it is easy to leave baselines unoptimized
+    or make unrealistic assumptions, potentially voiding the main takeaways.'
+  location: Introduction
+  page: 1
+  quote: While not a bad thing per se, it is easy to leave the baseline unoptimized, or make other unrealistic assumptions, even with the best of intentions, potentially rendering the main takeaways void.
+- id: c3
+  statement: 'Synthetic-data critique: learned structures have an ''unfair'' advantage on synthetic datasets because these are often surprisingly easy to learn; the benchmark therefore uses only four real-world
+    datasets (amzn, face, osm, wiki; 200M 64-bit keys each).'
+  location: Introduction
+  page: 1
+  quote: Further complicating matters, learned structures have an “unfair” advantage on synthetic datasets, as synthetic datasets are often surprisingly easy to learn.
+- id: c4
+  statement: 'Re-evaluation of the PGM-index paper: contrary to that paper''s claim that the PGM-index dominates RMI, the authors found PGM significantly slower than RMI on 3 of the 4 datasets and slightly
+    slower on osm.'
+  location: Pareto analysis
+  page: 6
+  quote: Indeed, in our experimental evaluation we found that the PGM index performs signiﬁcantly worse than RMI on 3 out of the 4 datasets and slightly worse on osm.
+- id: c5
+  statement: 'Stated cause of the disagreement: after contacting the PGM authors, they report the PGM paper''s RMI implementation used only linear models instead of tuning model types and omitted some optimizations
+    for linear-only RMIs; they stress theirs is the first comparison of RMI and PGM implementations each tuned by their own authors.'
+  location: Pareto analysis
+  page: 6
+  quote: 'After contacting the authors of [13], we found that their RMI implementation was missing several key optimizations: their RMI only used linear models rather than tuning diﬀerent type of models
+    as proposed in [19,22], and omitted some optimizations for RMIs with only linear models.'
+- id: c6
+  statement: 'Tuning protocol: implementations tuned by each structure''s original authors are used; RMIs are tuned with the CDFShop optimizer, RS and PGM by varying the model error tolerance, and tree
+    structures'' size/accuracy trade-off is varied by inserting a subset of keys (a simple technique the authors note may not be ideal for each tree).'
+  location: Setup
+  page: 5
+  quote: We use implementations tuned by each structure’s original authors.
+- id: c7
+  statement: 'Limitations: only read-only workloads were studied and each index was tested in isolation in a lookup loop rather than inside a broader application.'
+  location: Introduction
+  page: 2
+  quote: We focused only on read-only workloads, and we tested each index structure in isolation (e.g., a lookup loop, not with integration into any broader application).
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliations (title page): MIT CSAIL, TUM, Intel Labs. Conflict of interest: co-author Tim Kraska is an author of the original RMI paper (arxiv-1712.01208, ref. [19]) and the RMI implementation
+    evaluated comes from the authors'' group; the introduction states the PGM result ''surprised the authors of [19]''. Footnote 2 (p.6): the authors shared their RMI implementation with Ferragina and Vinciguerra
+    before publication of the PGM paper, who kept their own; all PGM results use the PGM authors'' tuned code as of May 18th, 2020. Not compared: other learned indexes (e.g. ALEX) ''because tuned implementations
+    could not be made publicly available'' (Learned Index Structures). Baselines: STX B-Tree, interpolating BTree, ART, FAST, FST, Wormhole, RobinHash and SIMD CuckooMap (hash tables only at full size),
+    binary search and radix binary search. Hardware: Intel Xeon Gold 6230, 256 GB RAM; 10M random lookup keys per dataset. Other findings stated: learned structures are Pareto optimal up to about 100MB
+    on amzn/wiki and throughout on face, while no structure beats RBS on osm; branch misses do not explain the advantage of learned indexes ''as originally claimed in [19]'' (p.1) and cache misses had the
+    largest explanatory power, though no single metric suffices; RMI and RS lose the most under memory fences and the authors recommend future work test with fences; RMIs build slowest among learned structures
+    and no learned structure builds as fast as insert-optimized trees (Build times, Conclusion). Scaling (Section 4.2.1, amzn 200M-800M keys): all three learned structures scale with only a logarithmic
+    slowdown, which the authors say is expected from the final binary search step. Earlier SOSD extended abstract: arxiv-1911.13014.'

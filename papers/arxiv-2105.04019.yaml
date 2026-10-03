@@ -1,0 +1,87 @@
+id: arxiv-2105.04019
+title: Differentiable Sorting Networks for Scalable Sorting and Ranking Supervision
+authors:
+- Felix Petersen
+- Christian Borgelt
+- Hilde Kuehne
+- Oliver Deussen
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2105.04019
+  code: https://github.com/Felix-Petersen/diffsort
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 571703433bfc3018405b9c1de805233c15b09bc6e8380f3db21e872d4ba02cfe
+tags:
+  tasks:
+  - image-classification
+  method_families:
+  - differentiable-sorting
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- differentiable odd-even and bitonic sorting networks (min/max conditional swaps relaxed with logistic-sigmoid softmin/softmax) producing a relaxed permutation matrix
+- activation replacement trick (ART) against vanishing gradients and blurring in deep relaxed sorting networks
+claims:
+- id: c1
+  statement: 'Contribution and relation to classical sorting: classical sorting networks (fixed, data-oblivious compare-and-swap structures; odd-even and Batcher''s bitonic sorter) are made differentiable
+    by relaxing their pairwise conditional swap operations.'
+  location: Abstract
+  page: 1
+  quote: For that, we propose differentiable sorting networks by relaxing their pairwise conditional swap operations.
+- id: c2
+  statement: 'Why sorting networks are non-differentiable: they use min and max operators for the conditional swaps, which the paper relaxes with softmin/softmax.'
+  location: Introduction
+  page: 1
+  quote: Sorting networks are conventionally non-differentiable as they use min and max operators for conditionally swapping elements.
+- id: c3
+  statement: 'Stated complexity: the differentiable odd-even network runs in O(n^3) and the differentiable bitonic network in O(n^2 (log n)^2), with the layer-wise permutation-matrix product computed as
+    a sparse multiplication.'
+  location: 5.5 Runtime and Memory Analysis
+  page: 9
+  quote: The asymptotic runtime of differentiable odd-even sort is in O(n3) and for bitonic sort the runtime is in O(n2(log n)2).
+- id: c4
+  statement: 'Runtime comparison with other relaxations: for large n the authors empirically confirm FastRank (Blondel et al.) is the fastest method, partly because it outputs only ranks/sorted values rather
+    than differentiable permutation matrices, which they say are necessary for their cross-entropy objective.'
+  location: 5.5 Runtime and Memory Analysis
+  page: 9
+  quote: For large n, we empirically conﬁrm that FastRank (Blondel et al., 2020) is the fastest method, i.a., because it produces only output ranks / sorted output values and not differentiable permutation
+    matrices.
+- id: c5
+  statement: 'Evaluation protocol caveat: in the four-digit MNIST comparison, the NeuralSort and Optimal Transport rows are copied from Cuturi et al. rather than rerun (same CNN architecture; averaged over
+    5 runs for the new rows).'
+  location: 5.1 Sorting and Ranking Supervision (Table 1 caption)
+  page: 6
+  quote: The ﬁrst three rows are duplicated from Cuturi et al. (2019).
+- id: c6
+  statement: 'Evaluation protocol caveat: Blondel et al.''s Fast Sort & Rank was trained with a mean-squared-error loss on ranks, because it does not produce differentiable permutation matrices (the proposed
+    method uses a cross-entropy loss on relaxed permutation matrices).'
+  location: Appendix B.3 (Fast Sort & Rank)
+  page: 12
+  quote: To evaluate the fast sorting and ranking method by Blondel et al. (2020), we used the mean-squared-error loss between predicted and ground truth ranks as this method does not produce differentiable
+    permutation matrices.
+- id: c7
+  statement: 'Main empirical claim (four-digit MNIST sorting benchmark of Grover et al. / Cuturi et al., n in {3, 5, 7, 9, 15}): the authors state the odd-even network outperforms current methods on all
+    metrics and input set sizes; the NeuralSort and OT figures it is compared with are the rows copied from Cuturi et al.'
+  location: 5.1.1 Results (Comparison to State-of-the-Art (MNIST))
+  page: 7
+  quote: Our approach outperforms current methods on all metrics and input set sizes.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: Proceedings of the 38th International Conference on Machine Learning, PMLR 139, 2021. Affiliations: University of Konstanz, University of Salzburg, University of Frankfurt,
+    MIT-IBM Watson AI Lab (title page). Benchmarks: four-digit MNIST sorting supervision (following Grover et al. and Cuturi et al.) and SVHN multi-digit images; metrics exact match (EM), element-wise correct
+    ranks (EW), and EM at n = 5 (EM5) because EM becomes unreliable as n grows. Training: Adam lr 10^-3.5, up to 10^6 steps, lambda = 0.25 fixed for all n (authors note higher accuracy is possible by optimizing
+    lambda per n), steepness tied to the number of layers. Scalability: bitonic networks trained on up to n = 1024 (10^4 steps, steepness values {30,...,40}, lambda 0.4); the abstract claims stable training
+    on input sets of up to 1024 elements, and the authors suggest prioritizing larger n over larger batch size. ART: without it, networks up to 21 layers (bitonic n <= 64) work with moderate steepness;
+    for more layers ART becomes necessary (Section 4.1 text). Top-k (k = 1) on CIFAR-10/100 with ResNet18 and a vanilla CNN: Softmax CE and the differentiable top-k operator ''perform similar''. Related
+    work notes that learned sorters (NTM, Vinyals et al. set2seq, Gumbel-Sinkhorn) ''learn to sort, while sorting networks and differentiable sorting functions sort provably correct''. Sorting networks
+    background: bitonic O(log^2 n) layers; AKS O(log n) parallel time, but its constants are unknown and ''optimistic approximations'' put it faster than bitonic only for n >> 10^80 (Related work). Reviewer
+    comparison (not stated in this paper): Grover et al.''s own Table 1 (arxiv-1903.08850) reports NeuralSort exact-match values higher than the copied rows, and at n = 15 higher than the odd-even network''s
+    value here, so the ''outperforms on all metrics'' claim depends on the copied baseline numbers; setups may differ.'

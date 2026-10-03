@@ -1,0 +1,87 @@
+id: arxiv-2311.00749
+title: Sorting with Predictions
+authors:
+- Xingjian Bai
+- Christian Coester
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2311.00749
+  code: https://github.com/xingjian-bai/learning-augmented-sorting
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 10b8daac16e3d83f64ec2dce0a032acbcc6fd61ce5aa6cbdac81e4fcdaaea971
+tags:
+  tasks:
+  - learning-augmented-algorithms
+  method_families:
+  - greedy-methods
+proposes:
+- Dirty-Clean Sort (randomized BST insertion guided by dirty comparisons, verified by clean comparisons)
+- Displacement Sort (bucket sort by predicted position + finger-tree insertion)
+- Double-Hoover Sort (positional predictions, one-sided error measures)
+claims:
+- id: c1
+  statement: 'Contribution: the paper studies comparison sorting as a learning-augmented problem in two settings, (i) a prediction of each item''s position in the sorted list and (ii) cheap but possibly
+    wrong ''dirty'' comparisons alongside slow exact ''clean'' comparisons, with algorithms using O(sum_i log eta_i) exact comparisons, where eta_i is a suitably defined element-wise prediction error (the
+    abstract''s wording).'
+  location: Abstract
+  page: 1
+  quote: We explore the fundamental problem of sorting through the lens of learning-augmented algorithms, where algorithms can leverage possibly erroneous predictions to improve their efficiency.
+- id: c2
+  statement: 'Guarantees (theoretical, counted in exact comparisons): all three algorithms need only O(n) exact comparisons with accurate predictions (consistency), never more than O(n log n) regardless
+    of prediction quality (robustness), and degrade slowly with the prediction error (smoothness). The bounds have the form O(sum_i log(eta_i + 2)) for a different error measure per algorithm: displacement
+    |p_hat(i) - p(i)| and one-sided errors for the two deterministic positional-prediction algorithms, and the number of incorrect dirty comparisons involving item i for the randomized dirty-comparison
+    algorithm, whose clean-comparison bound holds in expectation (Theorem 1.1).'
+  location: Introduction
+  page: 2
+  quote: In particular, all three proposed algorithms only require O(n) exact comparisons if predictions are accurate (consistency), never use more than O(n log n) comparison regardless of prediction quality
+    (robustness), and their performance degrades slowly as a function of prediction error (smoothness).
+- id: c3
+  statement: 'Lower bound (theoretical): the comparison complexity is proven optimal with respect to the error measures examined; Theorem 1.5 states that no sorting algorithm uses o(sum_i log(eta_i + 2))
+    clean comparisons for the dirty-comparison error, nor asymptotically fewer comparisons than the displacement or one-sided (min of left/right) error bounds with a positional predictor.'
+  location: Abstract
+  page: 1
+  quote: We prove that this comparison complexity is theoretically optimal with respect to the examined error measures.
+- id: c4
+  statement: 'Relation to classical sorting (Remark 2.6): with a modified verification step (geometrically increasing step sizes, then binary search), the dirty-clean algorithm can be implemented so that
+    its clean comparisons are at most those of quicksort plus O(n log log n) regardless of prediction error (the O(log log n) per verification step holds in expectation); in the worst case where all dirty
+    comparisons are incorrect, the clean searches perform exactly the same set of comparisons as quicksort, so the algorithm matches quicksort up to a factor tending to 1 as n grows.'
+  location: Complexity Analysis
+  page: 7
+  quote: Thus, even with terrible predictions our algorithm matches the performance of quicksort up to a factor that tends to 1 as n →∞.
+- id: c5
+  statement: 'Baselines (protocol): five baselines are Quick Sort, Merge Sort, Tim Sort, and two adaptive sorts (Odd-Even Straight Merge Sort, Cook-Kim division); for positional predictions the adaptive
+    baselines receive the array bucket-sorted by predicted ranking.'
+  location: Experiments
+  page: 13
+  quote: We assess the performance of our proposed sorting algorithms against five well-established baselines.
+- id: c6
+  statement: 'Metric (protocol): the plots report the number of comparisons used against prediction quality (not wall-clock time); experiments are repeated 30 times with standard deviation shaded; inputs
+    are synthetic (class and decay settings) plus one real-world population-ranking dataset (details in notes).'
+  location: Experiments
+  page: 13
+  quote: In all the plots, the X-axis indicates the quality of predictions, and the Y-axis indicates the number of comparisons used.
+- id: c7
+  statement: 'Limitation: in the dirty-clean setting the algorithm still needs O(n log n) time to process O(n log n) dirty comparisons, so it suits settings where exact comparisons are expensive rather
+    than fast; Double-Hoover Sort''s bound holds only for comparisons, not time, and predictions might not be learnable in some sorting settings.'
+  location: Limitations and Future Work
+  page: 14
+  quote: Consequently, the algorithm is more appropriate for situations where exact comparisons are expensive than for those where comparisons are fast.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Family tag greedy-methods is a PLACEHOLDER pending the user''s decision on a new tag (no existing family tag fits; the paper''s algorithms are not greedy methods). Affiliation: University
+    of Oxford (both authors). No venue stated in the PDF; the acknowledgments thank ''the anonymous reviewers at NeurIPS''. Data: synthetic ''class setting'' (items in c random classes, predicted position
+    uniform within the class) and ''decay setting'' (an outdated ranking perturbed by random adjacent shifts), n from 1,000 to 1,000,000; real data = World Bank country population rankings 1960-2010 (n
+    = 261) with year-x ranking as prediction for 2010; dirty comparisons: ''Good-Dominating''/''Bad-Dominating'' settings where a ratio r of items is damaged and perturbed comparisons are uniformly random.
+    For dirty comparisons, baselines get a positional prediction built by the Ailon et al. (2008) 3-approximation feedback arc set algorithm. Reported (text, empirical; the authors write that their algorithms
+    ''consistently outperform the baselines in all settings'' for positional predictions): Displacement/Double-Hoover outperform baselines in the class setting when the number of classes exceeds 0.05n (n
+    = 1,000,000); Dirty-Clean Sort outperforms baselines only up to certain damage ratios and otherwise performs essentially no worse than Quick Sort. Uses learning-augmented binary search (citing Lykouris
+    and Vassilvitskii; Mitzenmacher and Vassilvitskii) as a building block for one-sided error insertion. Related work: contrasts with Kristo et al. (2020) learned sorting (not well-defined for non-numeric
+    inputs without a monotone numeric mapping; a footnote says its theoretical guarantee is O(n^2) although Kristo et al. observe much better empirical performance) and with Lu et al. (2021) generalized
+    sorting whose O(nw) bound has exponentially worse error dependence.'

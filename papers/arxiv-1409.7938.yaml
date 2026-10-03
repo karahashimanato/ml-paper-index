@@ -1,0 +1,78 @@
+id: arxiv-1409.7938
+title: Lazier Than Lazy Greedy
+authors:
+- Baharan Mirzasoleiman
+- Ashwinkumar Badanidiyuru
+- Amin Karbasi
+- Jan Vondrak
+- Andreas Krause
+year: 2014
+links:
+  arxiv: https://arxiv.org/abs/1409.7938
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: ad10595b737ccc27a6d4d3f7d0e58c8f97feffbd46ae393965dbaeb537a653e9
+tags:
+  tasks:
+  - data-subset-selection
+  method_families:
+  - greedy-methods
+proposes:
+- 'STOCHASTIC-GREEDY: at each of k steps, evaluate marginal gains only on a random sample of (n/k) log(1/epsilon) elements, giving (1-1/e-epsilon) in expectation with O(n log(1/epsilon)) function evaluations
+  independent of k'
+claims:
+- id: c1
+  statement: 'Classical guarantee cited (Nemhauser, Wolsey and Fisher 1978): for maximizing a non-negative monotone submodular function under a cardinality constraint (|A| <= k), the simple greedy algorithm
+    (add the element with largest marginal gain, k times; O(n k) evaluations) achieves a (1-1/e) approximation to the optimal (intractable) solution.'
+  location: Introduction
+  page: 1
+  quote: states that for non-negative monotone submodular functions a simple greedy algorithm provides a solution with (1−1/e) approximation guarantee to the optimal (intractable) solution.
+- id: c2
+  statement: 'Prior accelerated greedy (LAZY-GREEDY, Minoux 1978): its exact cost in function evaluations is unknown, although it gives orders-of-magnitude speedups in practice.'
+  location: Introduction
+  page: 2
+  quote: Even though the exact cost (i.e., number of function evaluations) of LAZY-GREEDY is unknown, this algorithm leads to orders of magnitude speedups in practice.
+- id: c3
+  statement: 'Guarantee of the proposed method (theoretical; for monotone submodular maximization under a cardinality constraint): the randomized STOCHASTIC-GREEDY achieves a (1-1/e-epsilon) approximation
+    in expectation, in time linear in the data size and independent of the cardinality constraint.'
+  location: Abstract
+  page: 1
+  quote: We show that our randomized algorithm, STOCHASTIC-GREEDY, can achieve a (1 −1/e −ε) approximation guarantee, in expectation, to the optimum solution in time linear in the size of the data and independent
+    of the cardinality constraint.
+- id: c4
+  statement: 'Assumptions of the guarantee (Theorem 1): f non-negative, monotone and submodular, problem (1) with a cardinality constraint, and sample size s = (n/k) log(1/epsilon) per step; the bound is
+    in expectation and uses O(n log(1/epsilon)) function evaluations.'
+  location: STOCHASTIC-GREEDY Algorithm
+  page: 3
+  quote: Let f be a non-negative monotone submoduar function.
+- id: c5
+  statement: 'Cost measurement: computational cost is measured as the number of function evaluations, to be independent of implementation and platform; baselines are random selection, LAZY-GREEDY, SAMPLE-GREEDY
+    (lazy greedy on a random subsample) and THRESHOLD-GREEDY.'
+  location: Experimental Results
+  page: 3
+  quote: In order to compare the computational cost of different methods independently of the concrete implementation and platform, in our experiments we measure the computational cost in terms of the number
+    of function evaluations used.
+- id: c6
+  statement: 'Data subset selection setting: active set selection for Gaussian Process regression (information gain, Informative Vector Machine) on the Parkinsons Telemonitoring dataset.'
+  location: Experimental Results
+  page: 4
+  quote: We used the Parkinsons Telemonitoring dataset (Tsanas et al. 2010) consisting of 5,875 bio-medical voice measurements with 22 attributes from people with early-stage Parkinsons disease.
+- id: c7
+  statement: 'Empirical claim: STOCHASTIC-GREEDY practically reaches the same utility as lazy greedy while running much faster.'
+  location: Abstract
+  page: 1
+  quote: We observe that STOCHASTIC-GREEDY practically achieves the same utility value as lazy greedy but runs much faster.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: In Proc. Conference on Artificial Intelligence (AAAI), 2015. Affiliation: Ashwinkumar Badanidiyuru lists Google Research Mountain View (title page). Other experiments: exemplar-based
+    clustering (k-medoid as a monotone submodular function) on 10,000 Tiny Images, and on 50,000 Tiny Images where LAZY-GREEDY and THRESHOLD-GREEDY could not be run (compared only with RANDOM-SELECTION
+    / SAMPLE-GREEDY); sensor placement on the 12,527-node BWSN water network. Fixed k = 200 for the utility-vs-cost plots. Fairness: the authors implemented an accelerated (lazy) THRESHOLD-GREEDY not specified
+    in the original paper and report its best results; SAMPLE-GREEDY''s p was chosen so its cost roughly matches STOCHASTIC-GREEDY. Speedup is reported via function-evaluation counts (figures only), not
+    wall-clock time. The guarantee is in expectation (randomized). STOCHASTIC-GREEDY is reused as a subroutine reference by CRAIG (arxiv-1906.01827, cited there as Mirzasoleiman et al. 2015a). Results not
+    recorded.'

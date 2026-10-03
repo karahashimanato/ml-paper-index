@@ -1,0 +1,86 @@
+id: arxiv-1905.11885
+title: Differentiable Ranks and Sorting using Optimal Transport
+authors:
+- Marco Cuturi
+- Olivier Teboul
+- Jean-Philippe Vert
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1905.11885
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 73b8039da755f32d69ddbeda388fc9f62a74d31ba9e0eb2e6a22396aed81a923
+tags:
+  tasks:
+  - image-classification
+  - tabular-regression
+  method_families:
+  - differentiable-sorting
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Kantorovich (K-) and Sinkhorn (S-) rank and sort operators: sorting cast as optimal transport to an increasing target measure with m (possibly != n) weighted points, made differentiable by entropic regularization
+  and Sinkhorn iterations'
+- soft top-k/0-1 classification loss and soft quantile operator for least quantile regression
+claims:
+- id: c1
+  statement: 'Problem statement: sorting outputs the sorted values (piecewise linear) and the permutation/ranks (integer-valued), neither of which is differentiable.'
+  location: Abstract
+  page: 1
+  quote: 'Indeed, sorting procedures output two vectors, neither of which is differentiable: the vector of sorted values is piecewise linear, while the sorting permutation itself (or its inverse, the vector
+    of ranks) has no differentiable properties to speak of, since it is integer-valued.'
+- id: c2
+  statement: 'Relation to sorting: sorting is viewed as an optimal assignment of the n values to any increasing family of n target values (the introduction notes this OT result holds ''pending a simple
+    condition on the matching cost''); the paper generalizes this to optimal transport targets with m weighted points.'
+  location: Abstract
+  page: 1
+  quote: Our proxy builds upon the fact that sorting can be seen as an optimal assignment problem, one in which the n values to be sorted are matched to an auxiliary probability measure supported on any
+    increasing family of n target values.
+- id: c3
+  statement: 'Relaxation and cost: the OT problem is entropically regularized and solved by Sinkhorn iterations at O(nm l) operations, l being the number of iterations to converge (the paper adds that m
+    can be as small as 3 in some applications and l rarely exceeds 100 in its settings).'
+  location: Introduction
+  page: 2
+  quote: To recover tractable and differentiable operators, we regularize the OT problem and solve it using the Sinkhorn algorithm [10], at a cost of O(nmℓ) operations, where ℓis the number of Sinkhorn
+    iterations needed for the algorithm to converge.
+- id: c4
+  statement: 'Approximation trade-off: smaller regularization epsilon brings the outputs closer to the true ranks and sorted values (larger epsilon collapses them toward averages); the authors caution that
+    very small epsilon brings back the differentiability problems of hard sorting.'
+  location: The Sinkhorn Ranking and Sorting Operators
+  page: 5
+  quote: the smaller ε is, the closer the Sinkhorn operator’s output is to the original vectors of ranks and sorted values
+- id: c5
+  statement: 'Evaluation protocol for top-k (k = 1) classification on CIFAR-10/CIFAR-100 with a vanilla CNN and ResNet18: fixed epsilon and tolerance, squared-distance cost, Adam with step 1e-4; the comparison
+    is against cross-entropy (Figures 4-5, 12 runs).'
+  location: Learning with Smoothed Ranks and Sorts
+  page: 8
+  quote: We used ε = 10−3, η = 10−3, a squared distance cost h(u) = u2 and a stepsize of 10−4 with the ADAM optimizer.
+- id: c6
+  statement: 'Comparison with NeuralSort on its large-MNIST sorting benchmark (same network architecture, the NeuralSort authors'' code, 100 epochs, epsilon = 0.005, Table 1 averaged over 10 runs): the
+    table caption states the OT method performs better than NeuralSort for all sorting tasks, while the running text says it performs on par.'
+  location: Learning with Smoothed Ranks and Sorts (Table 1)
+  page: 8
+  quote: Our method performs better than the method presented in [18] for all the sorting tasks, with the exact same network architecture.
+- id: c7
+  statement: 'Least quantile regression: the soft quantile operator gives overall better quantile errors on the training set (the stated main goal) but comparable test/MSE errors; the caption hedges that
+    the training gain may be due to a smoothed optimization landscape.'
+  location: Learning with Smoothed Ranks and Sorts
+  page: 9
+  quote: We notice that our algorithm reaches overall better quantile errors on the training set—this is our main goal—but comparable test/MSE errors.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: 33rd Conference on Neural Information Processing Systems (NeurIPS 2019). Affiliation: Google Research, Brain Team (all authors). Unregularized Kantorovich operators are said
+    to be costly (O(nm(n+m) log(nm))) and still non-differentiable (Section 2 text). The paper relates prior soft ranks: Taylor et al. O(n^3), Qin et al. O(n^2) pairwise logistic, Grover et al. (NeuralSort)
+    unimodal row-stochastic on the same pairwise matrix, and says its m != n targets are a departure from methods requiring pairwise comparisons. The MNIST sorting text says ''We use 100 epochs, and confirm
+    experimentally that S-sort performs on par with their neural-sort function'' (epsilon = 0.005), which is weaker than the Table 1 caption. Reviewer comparison (not stated in this paper): the NeuralSort
+    rows in this paper''s Table 1 are lower than those in Grover et al.''s own Table 1 (arxiv-1903.08850) at every n, with the gap growing with n, and Grover et al.''s own NeuralSort values for n >= 5 are
+    also higher than this paper''s OT row; the text says only that the NeuralSort authors'' code was used with 100 epochs, and does not discuss the difference, so setups may differ. Least quantile regression
+    uses datasets from Romano et al. (conformalized quantile regression) with a 2-hidden-layer NN, baseline = gradient step on the empirical quantile point. Conclusion (open questions): cost function, target
+    vector and squashing strongly shape differentiability for epsilon > 0; ''empirical findings suggest'' whitening and squashing into [0,1] is crucial for numerical stability and consistent gradients.'

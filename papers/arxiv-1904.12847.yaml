@@ -1,0 +1,81 @@
+id: arxiv-1904.12847
+title: Optimal Sparse Decision Trees
+authors:
+- Xiyang Hu
+- Cynthia Rudin
+- Margo Seltzer
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1904.12847
+  code: https://github.com/xiyanghu/OSDT
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-02'
+  pdf_sha256: f2d74bd8c921f7fda9202218569841238a3a684f93647007ccc7fcc4c61ba16a
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - decision-trees
+  - interpretable-models
+  paradigms:
+  - supervised
+proposes:
+- 'OSDT: branch-and-bound search for provably optimal sparse binary-split decision trees over binary features, minimizing misclassification error plus a per-leaf penalty, with analytical bounds and a bit-vector
+  implementation'
+claims:
+- id: c1
+  statement: 'Critique of greedy induction: CART and C4.5 grow trees top-down without backtracking, so if a suboptimal split is introduced near the top the algorithm could spend many extra splits trying
+    to undo it, leading to less accurate and less interpretable trees.'
+  location: Introduction
+  page: 1
+  quote: CART and C4.5 grow decision trees from the top down without backtracking, which means that if a suboptimal split was introduced near the top of the tree, the algorithm could spend many extra splits
+    trying to undo the mistake it made at the top, leading to less-accurate and less-interpretable trees.
+- id: c2
+  statement: 'Contribution: the paper presents what it calls the first practical algorithm for optimal decision trees, restricted to binary variables.'
+  location: Abstract
+  page: 1
+  quote: This work introduces the first practical algorithm for optimal decision trees for binary variables.
+- id: c3
+  statement: 'Objective: optimal trees are defined by a regularized loss that trades off accuracy against the number of leaves (misclassification error plus lambda times the number of leaves), rather than
+    a fixed tree topology.'
+  location: Introduction
+  page: 2
+  quote: We find optimal trees according to a regularized loss function that balances accuracy and the number of leaves.
+- id: c4
+  statement: 'Optimization approach: the objective is minimized with branch and bound, using a series of specialized bounds that eliminate a large part of the search space (the hierarchical objective lower
+    bound and the equivalent points bound adapted directly from CORELS, several others adapted from CORELS with minor changes; proofs in the supplement).'
+  location: Optimization Framework
+  page: 4
+  quote: We minimize the objective function based on a branch-and-bound framework.
+- id: c5
+  statement: 'Protocol: OSDT is compared against CART and BinOCT on 7 datasets (5 UCI datasets plus ProPublica COMPAS and FICO); both BinOCT and OSDT get a 30-minute time limit.'
+  location: Experiments
+  page: 7
+  quote: The time limits for both BinOCT and our algorithm are set to be 30 minutes.
+- id: c6
+  statement: 'Finding on baselines (training accuracy, Figure 1): with provably optimal trees as reference, the authors state that other methods are often close to optimal or optimal, though sometimes the
+    baselines are not optimal.'
+  location: Experiments
+  page: 7
+  quote: (i) We can now evaluate how close to optimal other methods are (and they are often close to optimal or optimal).
+- id: c7
+  statement: 'Limitation (scalability): runtime can in theory grow exponentially with the number of features (the authors add that, empirically, extra features not in the optimal tree let the search prune
+    faster).'
+  location: Experiments
+  page: 7
+  quote: Runtime can theoretically grow exponentially with the number of features.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. PDF states: NeurIPS 2019. Datasets: Tic Tac Toe, Car Evaluation, Monk1, Monk2, Monk3 (UCI), ProPublica recidivism (N = 7,215) and FICO. OSDT is warm-started with the objective value of
+    CART''s solution, so the authors state its models can never be worse than CART''s even when stopped early (Experiments). OSDT runs single-threaded while BinOCT uses eight threads (Experiments). Hardware:
+    personal laptop (i5-8259U, 16GB RAM); ablation on AWS m5a.4xlarge single-threaded. Ablation (Appendix I): lookahead and equivalent points bounds are by far the most significant. Scalability experiment
+    (Figure 3) duplicates the ProPublica data set to increase sample size. Appendix L: 10-fold cross-validation; the authors write that higher training accuracy at the same sparsity tends to yield higher
+    test accuracy in general, but not always. Comparison to BinOCT: BinOCT is restricted to complete binary trees of a given depth and the authors show it producing useless splits. Formulation: binary classification
+    over binary features (x_n in {0,1}^M); the paper does not discuss continuous features (the follow-up GOSDT, arxiv-2006.08690, targets continuous variables via threshold binarization). Family tag greedy-methods
+    not used because OSDT itself is not greedy; CART is the greedy baseline. Results (accuracy figures) not recorded.'

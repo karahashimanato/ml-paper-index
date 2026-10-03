@@ -1,0 +1,77 @@
+id: arxiv-1910.06169
+title: 'The PGM-index: a multicriteria, compressed and learned approach to data indexing'
+authors:
+- Paolo Ferragina
+- Giorgio Vinciguerra
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1910.06169
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 428461a75241438ecd1ea101e805acf06f6549ae48ec8cc8f01b8fe8af60439e
+tags:
+  tasks:
+  - learned-indexes
+  method_families:
+  - linear-models
+proposes:
+- 'PGM-index: a recursive index built from optimal (minimum-count) piecewise linear epsilon-approximations of the key-to-rank mapping, with binary searches within +-epsilon at each level; plus compressed,
+  distribution-aware and multicriteria (auto-tuned) variants'
+claims:
+- id: c1
+  statement: 'Critique of prior learned indexes (attributed to these authors): they describe earlier learned indexes as heuristic and lacking guarantees on time and space.'
+  location: Abstract
+  page: 1
+  quote: However, these novel approaches are based on heuristics, thus they lack any guarantees both in their time and space requirements.
+- id: c2
+  statement: 'Relation to binary search: the epsilon-approximate positions from the optimal piecewise linear model are turned into exact positions by binary search within +-epsilon keys, so this step costs
+    time logarithmic in epsilon rather than in the array size.'
+  location: The PGM-index
+  page: 3
+  quote: can be turned into exact positions via a binary search within a range of ±ε keys in A, thus taking time logarithmic in the parameter ε, not in the size of A.
+- id: c3
+  statement: 'Guarantee: citing a known external-memory lower bound for predecessor search, the authors state the PGM-index solves the fully indexable dictionary problem I/O-optimally (Theorem 1: Theta(m)
+    space, O(log m) time and O((log_c m) log(epsilon/B)) I/Os, for fixed integer epsilon >= 1, fan-out c >= 2epsilon and block size B of the External Memory model, m = minimum number of epsilon-approximate
+    segments); they also state it cannot be asymptotically worse in space and time than a 2epsilon-way tree such as a FITing-tree, B+-tree or CSS-tree. These are theoretical bounds, separate from the experiments.'
+  location: The PGM-index
+  page: 6
+  quote: According to the lower bound proved by [30], we can state that the PGM-index solves I/O-optimally the fully indexable dictionary problem with predecessor search, meaning that it can potentially
+    replace any existing index with virtually no performance degradation.
+- id: c4
+  statement: 'Main empirical claim: the PGM-index improves the space of the FITing-tree (described as the best known learned index) by 63.3% and of the B-tree by more than four orders of magnitude, with
+    the same or better query time (the abstract''s continuation).'
+  location: Abstract
+  page: 1
+  quote: We show experimentally that the PGM-index improves the space of the best known learned index, i.e. FITing-tree, by 63.3% and of the B-tree by more than four orders of magnitude
+- id: c5
+  statement: 'Evaluation protocol: three real datasets (Web logs, about 715M timestamps; Longitude, about 166M OpenStreetMap points; IoT, about 26M timestamps) plus synthetic uniform, Zipf and lognormal
+    datasets; query experiments use the Web logs dataset with 8-byte keys and 128-byte payloads and 10M randomly generated queries. CSS-tree is the authors'' own implementation and the B+-tree a well-known
+    library.'
+  location: Experiments
+  page: 8
+  quote: 'We used the following three standard datasets, each having diﬀerent data distributions, regularities and patterns:'
+- id: c6
+  statement: 'Comparison with RMI (Kraska et al.): the authors report that the PGM-index dominates a 2-stage RMI (which they describe as using a combination of linear and other models) and argue it has
+    better latency guarantees; the text does not say whose RMI implementation was used or how it was tuned beyond varying second-stage sizes (searched ''RMI'' and ''implementation'').'
+  location: Query performance of the PGM-index
+  page: 10
+  quote: Figure 6 shows that the PGM-index dominates RMI, it has indeed better latency guarantees
+- id: c7
+  statement: 'Limitation: insertions and deletions are not evaluated in this version; the authors list experimenting with insertion and deletion performance as a research direction.'
+  location: Conclusions and future work
+  page: 12
+  quote: A possible research direction is to experiment with the performance of insertion and deletion of keys in a PGM-index.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliation (title page): University of Pisa; the PGM-index authors evaluate their own method. Funding: Italian MIUR PRIN project ''Multicriteria Data Structures and Algorithms'' and Regione
+    Toscana. Hardware: 2.3 GHz Intel Xeon Gold, 192 GiB memory; C++ implementation, to be released on GitHub upon acceptance (footnote; no URL in the text). The FITing-tree computes segments with a greedy
+    algorithm (shrinking cone), which the authors call suboptimal; Table 1 lists m_opt <= m_greedy and omits RMI ''because it lacks of guaranteed bounds''. The FITing-tree comparison was dropped from the
+    query experiments ''because of the evident structural superiority'' of the recursive PGM-index (Query performance section). Disagreement: Benchmarking Learned Indexes (arxiv-2006.12804#c4, #c5) reports
+    PGM slower than an author-tuned RMI on 3 of 4 datasets and states, after contacting these authors, that their RMI used only linear models and omitted some optimizations; this paper itself describes
+    its RMI as using ''a combination of linear and other models in its two stages'' (p.10).'

@@ -1,0 +1,89 @@
+id: arxiv-1712.01208
+title: The Case for Learned Index Structures
+authors:
+- Tim Kraska
+- Alex Beutel
+- Ed H. Chi
+- Jeffrey Dean
+- Neoklis Polyzotis
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1712.01208
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 392f604ddcdf26dc4905fc7649dc6e68aa843d50cddcc4fcb5f1b0eed23679a0
+tags:
+  tasks:
+  - learned-indexes
+  method_families:
+  - deep-learning
+  - linear-models
+  paradigms:
+  - supervised
+proposes:
+- 'learned indexes: recursive model index (RMI), a staged hierarchy of small models (neural nets / linear regression, optionally B-Trees at the last stage) that predicts a key''s position in a sorted array,
+  followed by a local search within stored min/max error bounds; also learned hash functions and learned Bloom filters'
+claims:
+- id: c1
+  statement: 'Relation to classical structures: the paper frames existing indexes as models; a B-Tree maps a key to the position of a record in a sorted array, a hash index maps a key to a position in an
+    unsorted array, and a bitmap index indicates whether a record exists.'
+  location: Abstract
+  page: 1
+  quote: 'Indexes are models: a B-Tree-Index can be seen as a model to map a key to the position of a record within a sorted array, a Hash-Index as a model to map a key to a position of a record within
+    an unsorted array, and a BitMap-Index as a model to indicate if a data record exists or not.'
+- id: c2
+  statement: 'Main empirical claim (initial results): using neural nets the authors outperform cache-optimized B-Trees by up to 70% in speed while saving an order of magnitude in memory over several real-world
+    data sets.'
+  location: Abstract
+  page: 1
+  quote: Our initial results show, that by using neural nets we are able to outperform cache-optimized B-Trees by up to 70% in speed while saving an order-of-magnitude in memory over several real-world
+    data sets.
+- id: c3
+  statement: 'Evaluation protocol (integer datasets): two real-world datasets (Weblogs request timestamps, Maps longitudes) and one synthetic dataset (Lognormal, mu=0, sigma=2) were used; the paragraph
+    describes Weblogs as almost a worst case for learned indexes and all B-Tree experiments use 64-bit keys and 64-bit payloads.'
+  location: Integer Datasets
+  page: 11
+  quote: For the data we used 2 real-world datasets, (1) Weblogs and (2) Maps [56], and (3) a synthetic dataset, Lognormal.
+- id: c4
+  statement: 'Baseline implementation and tuning: the B-Tree baseline is a production-quality implementation similar to stx::btree with further cache-line optimization and dense pages; in the same paragraph
+    the 2-stage learned indexes are tuned by simple grid search over neural nets with zero to two hidden layers and widths 4 to 32. B-Tree page size 128 is used as the fixed reference point because it gave
+    the best B-Tree lookup performance.'
+  location: Integer Datasets
+  page: 11
+  quote: As our baseline, we used a production quality B-Tree implementation which is similar to the stx::btree but with further cache-line optimization, dense pages (i.e., ﬁll factor of 100%), and very
+    competitive performance.
+- id: c5
+  statement: 'Guarantee (hybrid indexes): replacing last-stage models whose absolute min/max error exceeds a threshold by B-Trees lets the authors bound the worst-case performance of learned indexes to
+    that of B-Trees; for an extremely hard-to-learn distribution the index would become virtually an entire B-Tree.'
+  location: Hybrid Indexes
+  page: 9
+  quote: Note, that hybrid indexes allow us to bound the worst case performance of learned indexes to the performance of B-Trees.
+- id: c6
+  statement: 'Theoretical scaling (assumes N i.i.d. keys from a known distribution F): the average error in predicted positions of a constant-sized model grows as O(sqrt(N)), which the authors contrast
+    with the linear scaling of a constant-sized B-Tree; they describe this as preliminary understanding.'
+  location: Theoretical Analysis of Scaling Learned Range Indexes
+  page: 26
+  quote: Note that this sub-linear scaling in error for a constant-sized model is an improvement over the linear scaling achieved by a constant-sized B-Tree.
+- id: c7
+  statement: 'Limitations: the evaluation covers read-only analytical workloads, and the authors state that open challenges remain, such as handling write-heavy workloads.'
+  location: Introduction
+  page: 2
+  quote: However, many open challenges still remain, such as how to handle write-heavy workloads, and we outline many possible directions for future work.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliations (title page): Kraska MIT (footnote: work done while affiliated with Google); Beutel, Chi, Dean, Polyzotis Google, Inc. Relation to binary search: the default ''model biased
+    search'' differs from binary search only in that the first middle point is the model prediction (Search Strategies and Monotonicity); errors are corrected by local search, e.g. exponential search (Range
+    Index, p.4). The search area is the stored min/max error per last-stage model, which guarantees finding existing keys; for non-existing keys a non-monotonic RMI may return a wrong bound unless the area
+    is adjusted (p.9). Framework caveat (p.7): LIF has extra overhead (counters, virtual calls) and no SIMD intrinsics; the authors say comparisons stay fair because both sides use the framework, but reported
+    numbers should account for it when compared with other implementations. Alternative baselines on Lognormal (Figure 5): 3-stage lookup table with AVX search, FAST (code from a third party), fixed-size
+    B-Tree with interpolation search; the learned index there was implemented outside the benchmarking framework. The authors state they ''by no means claim that learned indexes will always be the best
+    choice in terms of size or speed'' (p.12). String keys: a 10M Google document-id dataset with hybrid indexes and biased quaternary search; speedups described as ''not as prominent''. Inserts/updates
+    (Appendix D.1) are discussed only as future work (appends, delta-index). Later papers: SOSD (arxiv-1911.13014#c1) and Benchmarking Learned Indexes (arxiv-2006.12804#c1) state this paper lacked an open-source
+    implementation; ALEX (arxiv-1905.08898#c2) characterizes it as limited to static read-only workloads; Benchmarking Learned Indexes reports branch misses do not explain the advantage ''as originally
+    claimed in [19]'' (p.1).'

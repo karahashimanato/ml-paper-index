@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Exploring Length Generalization in Large Language Models
+
+- カード: [`arxiv-2207.04901`](../../papers/arxiv-2207.04901.yaml)
+- 著者: Cem Anil, Yuhuai Wu, Anders Andreassen, Aitor Lewkowycz, Vedant Misra, Vinay Ramasesh, Ambrose Slone, Guy Gur-Ari, Ethan Dyer, Behnam Neyshabur
+- 年・掲載: 2022
+- 原論文: [PDF](https://arxiv.org/pdf/2207.04901v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: algorithm-learning, deep-learning, in-context-learning, large-language-models, supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Main claim (finetuning): naively finetuning transformers on length generalization tasks shows significant generalization deficiencies independent of model scale (Section 3.1: finetuned LaMDA models of 244m to 64b parameters, on parity and variable assignment).([Abstract, p.1](https://arxiv.org/pdf/2207.04901v2#page=1 "We ﬁrst establish that naively ﬁnetuning transformers on length generalization tasks shows signiﬁcant generalization deﬁciencies independent of model scale."))
+- **c2** Main claim (prompting): combining pretrained LLMs' in-context learning with scratchpad prompting (outputting solution steps before the answer) gives a dramatic improvement in length generalization (prompting experiments in Section 5 use the pretrained LaMDA 128b model without finetuning; parity phrased as coin flips, evaluated up to 20 flips).([Abstract, p.1](https://arxiv.org/pdf/2207.04901v2#page=1 "We then show that combining pretrained large language models’ in-context learning abilities with scratchpad prompting (asking the model to output solution steps before producing an answer) results in a dramatic improvement in length generalization."))
+- **c3** Scope (tasks): the study focuses on two simple algorithmic tasks, parity and Boolean variable assignment, chosen because the model must track a state to extrapolate to longer lengths.([Introduction, p.2](https://arxiv.org/pdf/2207.04901v2#page=2 "In particular, we focus on two simple algorithmic tasks, parity and variable assignment, in which the model needs to keep track of a state in order to extrapolate to longer lengths (see Figure 1)."))
+- **c4** Scope (models and lengths): four pretrained LaMDA decoder-only models (244m, 422m, 1b, 64b parameters) are finetuned on parity with training bitstrings of length 10 to 21 and evaluated on lengths 3 to 40; on chain-like variable assignment, training lengths are 3 to 8 and test lengths 3 to 19. Model scale is reported to have little effect on length generalization.([Scale doesn't improve length generalization, p.4](https://arxiv.org/pdf/2207.04901v2#page=4 "We ﬁnetuned four pretrained LaMDA models with 244m, 422m, 1b and 64b parameters on the parity task, where the training distribution included randomly sampled bitstrings of length 10 to 21."))
+- **c5** Disagreement with prior work: finetuning with a scratchpad (step-by-step targets) also fails to generalize to longer problems, which the authors say contrasts with what previous work [3] (Nye et al., scratchpads) suggests; among positional encoding, distractors and end-of-sequence prediction, they conclude distractors are the main culprit.([Introduction (contributions), p.2](https://arxiv.org/pdf/2207.04901v2#page=2 "We establish ﬁnetuning with scratchpad also fails to generalize to longer problems, in contrast to what is suggested by previous works [3]."))
+- **c6** Failure mode: transformers finetuned on sequential length generalization problems are biased toward non-sequential 'shortcut' solutions that fail on longer instances (e.g. on parity with fixed length and varied number of ones, in-distribution accuracy was 100% while OOD was roughly random, suggesting counting-and-thresholding).([Transformers prefer parallel strategies over sequential ones, p.5](https://arxiv.org/pdf/2207.04901v2#page=5 "The results presented in Section 3.1 establish that, when presented with sequential length generalization problems, transformers are biased toward learning non-sequential “shortcut” solutions that fail at longer problem instances."))
+- **c7** Evaluation practice: different finetuning hyperparameters had a large effect on length generalization while barely changing in-distribution performance, which the authors call surprising; in-distribution performance therefore did not indicate OOD length generalization in these finetuning experiments.([Introduction (contributions), p.2](https://arxiv.org/pdf/2207.04901v2#page=2 "Surprisingly, different hyperparameter choices for ﬁnetuning have a large effect on length generalization performance, while having minimal effect on the ﬁnal in-distribution performance (Section 3.3)."))
+

@@ -1,0 +1,78 @@
+id: arxiv-1506.03134
+title: Pointer Networks
+authors:
+- Oriol Vinyals
+- Meire Fortunato
+- Navdeep Jaitly
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1506.03134
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 640bb2150dbc2d711538daf127003e960a3432b0330e22a0131d472891f76353
+tags:
+  tasks:
+  - algorithm-learning
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Pointer Network (Ptr-Net): LSTM encoder-decoder whose content-based attention distribution over input positions is used directly as the output (a pointer), giving an output dictionary whose size equals
+  the input length'
+claims:
+- id: c1
+  statement: 'Contribution: instead of using attention to blend encoder states into a context vector, Ptr-Net uses the attention distribution itself as a pointer that selects an input element as the output,
+    so outputs are positions in the input (e.g. permutations or subsets of the input).'
+  location: Abstract
+  page: 1
+  quote: It differs from the previous attention attempts in that, instead of using attention to blend hidden units of an encoder to a context vector at each decoder step, it uses attention as a pointer
+    to select a member of the input sequence as the output.
+- id: c2
+  statement: 'Motivation: problems whose output dictionary size depends on the input length, such as sorting variable-sized sequences and various combinatorial optimization problems, cannot be trivially
+    handled by sequence-to-sequence models or Neural Turing Machines.'
+  location: Abstract
+  page: 1
+  quote: Problems such as sorting variable sized sequences, and various combinatorial optimization problems belong to this class.
+- id: c3
+  statement: 'Sorting is not among the evaluated tasks: the paper lists applying Ptr-Net to sorting as future work.'
+  location: Conclusions
+  page: 8
+  quote: Future work will try and show its applicability to other problems such as sorting where the outputs are chosen from the inputs.
+- id: c4
+  statement: 'Evaluated tasks: learning approximate solutions, from input-output examples alone, to planar convex hull, Delaunay triangulation and planar symmetric TSP.'
+  location: Abstract
+  page: 1
+  quote: We show Ptr-Nets can be used to learn approximate solutions to three challenging geometric problems – ﬁnding planar convex hulls, computing Delaunay triangulations, and the planar Travelling Salesman
+    Problem – using training examples alone.
+- id: c5
+  statement: 'Length generalization (convex hull): a single model trained on lengths 5 to 50 extrapolates to lengths never seen in training (tested up to n = 500), whereas the LSTM baselines must be retrained
+    for each n.'
+  location: Empirical Results (Convex Hull)
+  page: 6
+  quote: More impressive is the fact that the model does extrapolate to lengths that it has never seen during training.
+- id: c6
+  statement: 'Limitation of length generalization (TSP): trained on optimal tours with 5 to 20 cities, the model is near perfect at n = 25 and good at n = 30 but appears to break at 40 and beyond; the authors
+    contrast this with the factor-of-10 generalization on convex hull and suggest that the underlying algorithms being of far greater complexity than O(n log n) could explain it.'
+  location: Empirical Results (Travelling Salesman Problem)
+  page: 8
+  quote: The results are virtually perfect for n = 25, and good for n = 30, but it seems to break for 40 and beyond (still, the results are far better than chance).
+- id: c7
+  statement: 'Evaluation protocol: no extensive architecture or hyperparameter search was done for Ptr-Net; virtually the same architecture was used for all experiments and datasets.'
+  location: Empirical Results (Architecture and Hyperparameters)
+  page: 6
+  quote: No extensive architecture or hyperparameter search of the Ptr-Net was done in the work presented here, and we used virtually the same architecture throughout all the experiments and datasets.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Affiliations: Google Brain (Vinyals, Jaitly) and UC Berkeley Department of Mathematics (Fortunato) (title page). Data: planar point sets sampled uniformly in [0,1]^2, 1M training pairs;
+    single-layer LSTM with 256 or 512 hidden units, SGD lr 1.0, batch 128. TSP labels: exact Held-Karp O(2^n n^2) up to n = 20; for larger n approximate solvers A1, A2 (O(n^2)) and A3 (Christofides, within
+    1.5x of optimal) are used as training targets; Ptr-Net trained on the worst solver''s (A1) outputs outperforms A1. For TSP, beam search was constrained to valid tours because for n > 20 at least 10%
+    of instances would otherwise produce no valid tour. The paper states attention-based decoding costs O(n^2) at inference and that Ptr-Net ''implements an O(n^2) algorithm''. Convex hull errors mostly
+    come from aligned points; input order at inference affects performance (Empirical Results). Delaunay triangulation: no exactly correct triangulation at n = 50 (triangle coverage only). Baselines: LSTM
+    seq2seq and LSTM with input attention, which must be trained on the same n they are tested on.'

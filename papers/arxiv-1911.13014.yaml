@@ -1,0 +1,82 @@
+id: arxiv-1911.13014
+title: 'SOSD: A Benchmark for Learned Indexes'
+authors:
+- Andreas Kipf
+- Ryan Marcus
+- Alexander van Renen
+- Mihail Stoian
+- Alfons Kemper
+- Tim Kraska
+- Thomas Neumann
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1911.13014
+  code: https://github.com/learnedsystems/SOSD
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 691db15f8029fb53fa522d6444395ef85923b529a22e1b231f1436e8508714fe
+tags:
+  tasks:
+  - learned-indexes
+  - efficiency-evaluation
+  method_families:
+  - linear-models
+proposes:
+- 'SOSD (Search On Sorted Data) benchmark: open-source C++ framework with synthetic and real-world 200M-key datasets and optimized baselines (binary/interpolation search, radix binary search, B-tree, ART,
+  FAST) plus an open RMI implementation and RadixSpline'
+claims:
+- id: c1
+  statement: 'Critique of earlier evaluation (attributed): the original learned index paper lacked an open-source implementation, which left many in the community skeptical that learned models could beat
+    optimized in-memory data structures.'
+  location: Introduction
+  page: 1
+  quote: However, [14] lacked an open-source implementation and thus left many in the community skeptical that learned models could outperform optimized in-memory data structures [11, 15].
+- id: c2
+  statement: 'Proposal: SOSD, a framework for comparing new (learned) index structures on both synthetic and real-world datasets, released as open-source code with highly optimized baselines; the authors
+    state it includes the first performant public RMI implementation (a new implementation, not the one used in the original paper).'
+  location: Introduction
+  page: 1
+  quote: Thus, we introduce the Search On Sorted Data Benchmark (SOSD), a framework that allows researchers to compare their new (learned) index structures on both synthetic and real-world datasets.
+- id: c3
+  statement: 'Datasets: eight datasets of 200M 64-bit unsigned integer keys; amzn (book sale popularity), face (upsampled Facebook user IDs), osmc (OpenStreetMap locations as S2 CellIds) and wiki (edit
+    timestamps) are real-derived, while logn, norm, uden (dense) and uspr (uniform sparse) are synthetic; 32-bit versions exist for all except osmc and wiki.'
+  location: Search on Sorted Data Benchmark
+  page: 3
+  quote: SOSD currently includes eight different datasets.
+- id: c4
+  statement: 'Query protocol: 10M equality lookups with keys drawn uniformly from the stored keys, hashing excluded to support range-based (lower bound) lookups, at most 100 matches per key, executed one
+    at a time in a single thread on an AWS c5.4xlarge machine.'
+  location: Search on Sorted Data Benchmark
+  page: 3
+  quote: Lookups are performed one-at-a-time in a single thread.
+- id: c5
+  statement: 'Main empirical claim (preliminary, on SOSD''s tested datasets): the CDF approximators RMI and RadixSpline both have very low lookup latencies, which the authors attribute to fitting a model
+    to the data distribution; B-tree, binary search and FAST are hardly affected by the data distribution while interpolation search is heavily affected by skew.'
+  location: Results
+  page: 3
+  quote: The CDF approximators RMI and RadixSpline both have very low lookup latencies, highlighting the beneﬁt learned index structures receive from ﬁtting a model to the data distribution.
+- id: c6
+  statement: 'Tuning caveat: both RMI and RadixSpline require dataset-specific tuning, and the authors recommend them only if users can afford this step (if users cannot afford the training time, they recommend
+    ART or FAST for 32-bit keys and ART or RBS for 64-bit keys).'
+  location: Takeaways
+  page: 4
+  quote: Otherwise, the optimal search strategy depends on whether a user can afford to manually tune and ﬁt a CDF model, as both RMI and RS require dataset-speciﬁc tuning.
+- id: c7
+  statement: 'Limitation: learned indexes currently lack support for efficient updates; the authors note that several benchmarked non-learned methods (e.g. RBS, FAST) also lack efficient updates, and SOSD
+    does not yet measure updates or multi-threaded lookups.'
+  location: Takeaways
+  page: 4
+  quote: A current drawback of learned indexes is the lack of support for efﬁcient updates, an arguably important feature for index structures.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
+    claims only. Extended abstract; PDF states: 33rd Conference on Neural Information Processing Systems (NeurIPS 2019), Vancouver, Canada (footer, p.1). Affiliations: TUM and MIT CSAIL; co-author Tim Kraska
+    is an author of the original Learned Index (arxiv-1712.01208), so this benchmark is partly by the proposers of RMI. Baselines (Techniques): B-tree is the STX B+-tree v0.9, ART (radix tree), FAST (cache-optimized
+    binary search tree, 32-bit keys only), binary search, interpolation search, TIP, RadixBinarySearch; all used as in-memory secondary indexes mapping keys to 64-bit TIDs. Framework overhead stated as
+    8 instructions and 1 cache miss per lookup. Build times (Figure 2) are explicitly not optimized (e.g. ART without bulk loading, RMI not trained on samples). Performance counters (amzn, Xeon E5-2680
+    v4): the authors conclude cache misses alone, instructions or branch mispredictions do not fully explain search time. Size overhead relative to the data array is reported per technique (Table 2).'

@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Neural Execution of Graph Algorithms
+
+- カード: [`arxiv-1910.10593`](../../papers/arxiv-1910.10593.yaml)
+- 著者: Petar Veličković, Rex Ying, Matilde Padovano, Raia Hadsell, Charles Blundell
+- 年・掲載: 2019
+- 原論文: [PDF](https://arxiv.org/pdf/1910.10593v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: algorithm-learning, deep-learning, graph-neural-networks, supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Contribution and algorithms: GNN architectures are trained to imitate individual steps of classical graph algorithms, both parallel (breadth-first search, Bellman-Ford) and sequential (Prim's algorithm for minimum spanning trees).([Abstract, p.1](https://arxiv.org/pdf/1910.10593v2#page=1 "Here, instead, we focus on learning in the space of algorithms: we train several state-of-the-art GNN architectures to imitate individual steps of classical graph algorithms, parallel (breadth-ﬁrst search, Bellman-Ford) as well as sequential (Prim’s algorithm)."))
+- **c2** Architecture hypothesis: because graph algorithms usually make discrete decisions within neighbourhoods, the authors hypothesise that maximisation-based message passing networks are best suited, and report validating this empirically (MPNN-max vs mean/sum MPNNs, GAT variants and an LSTM on serialised edge lists).([Abstract, p.1](https://arxiv.org/pdf/1910.10593v2#page=1 "As graph algorithms usually rely on making discrete decisions within neighbourhoods, we hypothesise that maximisation-based message passing neural networks are best-suited for such objectives, and validate this claim empirically."))
+- **c3** Supervision: the training signal follows how the classical algorithm processes the input, including relevant intermediate outputs (step-wise supervision, i.e. hints), rather than only the final solution.([Introduction, p.1](https://arxiv.org/pdf/1910.10593v2#page=1 "The supervision signal is driven by how a known classical algorithm would process such inputs (including any relevant intermediate outputs), providing explicit (and reusable) guidance on how to tackle graph-structured problems."))
+- **c4** Train vs test sizes: for each of seven synthetic graph categories (ladder, 2D grid, trees, Erdos-Renyi, Barabasi-Albert, 4-Community, 4-Caveman), 100 training and 5 validation graphs of only 20 nodes are generated; test graphs have 20, 50 and 100 nodes (5 per category). The stated motivation is a 'programmer' perspective: inspect small graphs, apply to arbitrarily large ones.([Experimental setup, p.4](https://arxiv.org/pdf/1910.10593v2#page=4 "For each category, we generate 100 training and 5 validation graphs of only 20 nodes."))
+- **c5** Larger-input generalization: the authors state that the desirable properties of MPNN-max persist on graphs up to 75x larger than training graphs; Table 4 covers shortest-path predecessor accuracy of MPNN-max trained jointly with reachability on 20-node graphs, tested at 20 to 1500 nodes.([Results and discussion, p.7](https://arxiv.org/pdf/1910.10593v2#page=7 "Desirable properties of the MPNN-max as an algorithm executor persist when generalising to even larger graphs, as we demonstrate in Table 4—demonstrating favourable generalisation on graphs up to 75× as large as the graphs originally trained on."))
+- **c6** Intermediate-step supervision vs outputs only: in the no-algo ablation (predicting predecessors and termination directly from inputs, which the authors call the primary approach of prior GNN work), they conclude there is a clear benefit to supervising on the intermediate distance information, giving an additional improvement over only supervising on final downstream outputs (shortest-path task).([Results and discussion, p.7](https://arxiv.org/pdf/1910.10593v2#page=7 "Similarly, considering the no-algo experiment, we conclude that there is a clear beneﬁt to supervising on the distance information—giving an additional performance improvement compared to the standard approach of only supervising on the ﬁnal downstream outputs."))
+- **c7** Metric limitation stated by the authors: accuracy is reported both averaged over all steps and at the last step, but the last-step metric says nothing about faithfulness to the algorithm and the mean-step metric can be inflated by terminating later; they add per-step plots and leave a better single-number metric to future work.([Additional metrics, p.8](https://arxiv.org/pdf/1910.10593v2#page=8 "the last-step performance provides no indication of faithfulness to the original algorithm, while the mean-step performance may be artiﬁcially improved by terminating the algorithm at a latter point"))
+

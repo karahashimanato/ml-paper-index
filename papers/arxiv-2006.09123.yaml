@@ -14,7 +14,7 @@ tags:
   tasks:
   - learning-augmented-algorithms
   method_families:
-  - greedy-methods
+  - online-algorithms
 proposes:
 - 'survey/framework of algorithms with predictions: predictor abstracted as a black-box function h, performance tied to prediction error, alpha-consistency and beta-robustness'
 claims:
@@ -76,13 +76,11 @@ card:
   created_by: claude-opus-5-5 via Claude Code (subagent)
   reviewed: false
   notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
-    claims only. Family tag greedy-methods is a PLACEHOLDER pending the user''s decision on a new tag (no existing family tag fits a predictor-agnostic survey). Survey chapter; PDF states (title-page footnote):
-    to appear as a chapter in ''Beyond the Worst-Case Analysis of Algorithms'', edited by Tim Roughgarden. Affiliations: Harvard University (Mitzenmacher), Google Research (Vassilvitskii). The placeholder
-    greedy-methods was chosen only because the scheduling section calls SRPT ''the simple greedy algorithm'' and discusses shortest-predicted-job-first. Other content: naive Predicted Furthest-In-Future
-    (PFIF) for caching is consistent but has competitive ratio Omega(eta(h)/opt) (Section 4.1 ''What to Predict?''); the survey says the PredictiveMarker analysis it presents is due to Rohatgi (2020) and
-    that Lykouris and Vassilvitskii (2018) introduced alpha-consistency/beta-robustness and first analyzed caching (Bibliographic Notes; see arxiv-1802.05399); it also cites Lykouris and Vassilvitskii (2018)
-    for the empirical claim that PredictiveMarker with off-the-shelf predictors consistently outperformed LRU. Counting sketches with predicted heavy hitters (Hsu et al. 2019; Aamand et al. 2019) and learned/sandwiched
-    Bloom filters (Kraska et al. 2018; Mitzenmacher 2018) are summarized from prior work. Queue simulation setup: lambda = 0.95, exponential and Weibull service times with mean 1, averaged over 1000 trials
-    over 1 million time units. Price of misprediction is defined following Mitzenmacher (2019). Sorting as a problem is not covered in this survey (the text mentions sorting only as the ''sorted array''
-    of the binary-search example). The survey also states (Summary of Caching) that even with very large error, performance within a constant factor of the standard marking algorithm can be guaranteed (left
-    as Exercise 2).'
+    claims only. Survey chapter; PDF states (title-page footnote): to appear as a chapter in ''Beyond the Worst-Case Analysis of Algorithms'', edited by Tim Roughgarden. Affiliations: Harvard University
+    (Mitzenmacher), Google Research (Vassilvitskii). Other content: naive Predicted Furthest-In-Future (PFIF) for caching is consistent but has competitive ratio Omega(eta(h)/opt) (Section 4.1 ''What to
+    Predict?''); the survey says the PredictiveMarker analysis it presents is due to Rohatgi (2020) and that Lykouris and Vassilvitskii (2018) introduced alpha-consistency/beta-robustness and first analyzed
+    caching (Bibliographic Notes; see arxiv-1802.05399); it also cites Lykouris and Vassilvitskii (2018) for the empirical claim that PredictiveMarker with off-the-shelf predictors consistently outperformed
+    LRU. Counting sketches with predicted heavy hitters (Hsu et al. 2019; Aamand et al. 2019) and learned/sandwiched Bloom filters (Kraska et al. 2018; Mitzenmacher 2018) are summarized from prior work.
+    Queue simulation setup: lambda = 0.95, exponential and Weibull service times with mean 1, averaged over 1000 trials over 1 million time units. Price of misprediction is defined following Mitzenmacher
+    (2019). Sorting as a problem is not covered in this survey (the text mentions sorting only as the ''sorted array'' of the binary-search example). The survey also states (Summary of Caching) that even
+    with very large error, performance within a constant factor of the standard marking algorithm can be guaranteed (left as Exercise 2).'

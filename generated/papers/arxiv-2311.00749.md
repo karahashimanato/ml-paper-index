@@ -6,7 +6,7 @@
 - 著者: Xingjian Bai, Christian Coester
 - 年・掲載: 2023
 - 原論文: [PDF](https://arxiv.org/pdf/2311.00749v1)(arXiv v1、カード作成時に読んだ版)
-- タグ: greedy-methods, learning-augmented-algorithms
+- タグ: learning-augmented-algorithms, online-algorithms
 - 人手レビュー: 未
 
 ## 主張

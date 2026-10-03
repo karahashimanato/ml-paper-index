@@ -15,7 +15,7 @@ tags:
   tasks:
   - learning-augmented-algorithms
   method_families:
-  - greedy-methods
+  - online-algorithms
 proposes:
 - robust and consistent ski-rental algorithms with predictions (deterministic and randomized, trade-off parameter lambda)
 - Preferential Round-Robin for non-clairvoyant scheduling (SPJF combined with round-robin)
@@ -73,10 +73,9 @@ card:
   created_by: claude-opus-5-5 via Claude Code (subagent)
   reviewed: false
   notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
-    claims only. Family tag greedy-methods is a PLACEHOLDER pending the user''s decision on a new tag (no existing family tag fits; chosen only because SPJF is a shortest-first ordering rule). PDF states:
-    the conference version [18] appeared in NeurIPS 2018 (the 2024 arXiv posting is a later version); acknowledgments thank Chenyang Xu for pointing out a bug in the conference version. Affiliation: all
-    three authors list Google. Prediction error eta is the L1 norm of the error in both problems. Scheduling simulation: synthetic dataset of 50 jobs with Pareto(alpha = 1.1) processing times (motivated
-    by prior work), predictions y_i = x_i + Gaussian noise, average over 1000 trials. Experiments use lambda = 0.5 (deterministic, worst-case ratio 3) and lambda = ln(3/2) (randomized) for ski rental. Theorem
-    3.4: with zero prediction error PRR achieves (1+lambda)/(2 lambda). The introduction describes the scheduling algorithm as ''a randomized algorithm'', while Section 3.1 describes Preferential Round-Robin
-    as running SPJF and round-robin concurrently at fixed rates; the card follows Section 3.1. Related work: says Kraska et al. empirically show better learned indexes but provide no provable guarantees;
-    builds on the consistency/robustness framework of Lykouris and Vassilvitskii (arxiv-1802.05399).'
+    claims only. PDF states: the conference version [18] appeared in NeurIPS 2018 (the 2024 arXiv posting is a later version); acknowledgments thank Chenyang Xu for pointing out a bug in the conference
+    version. Affiliation: all three authors list Google. Prediction error eta is the L1 norm of the error in both problems. Scheduling simulation: synthetic dataset of 50 jobs with Pareto(alpha = 1.1) processing
+    times (motivated by prior work), predictions y_i = x_i + Gaussian noise, average over 1000 trials. Experiments use lambda = 0.5 (deterministic, worst-case ratio 3) and lambda = ln(3/2) (randomized)
+    for ski rental. Theorem 3.4: with zero prediction error PRR achieves (1+lambda)/(2 lambda). The introduction describes the scheduling algorithm as ''a randomized algorithm'', while Section 3.1 describes
+    Preferential Round-Robin as running SPJF and round-robin concurrently at fixed rates; the card follows Section 3.1. Related work: says Kraska et al. empirically show better learned indexes but provide
+    no provable guarantees; builds on the consistency/robustness framework of Lykouris and Vassilvitskii (arxiv-1802.05399).'

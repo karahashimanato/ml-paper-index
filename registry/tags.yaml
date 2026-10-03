@@ -53,6 +53,10 @@ tasks:
     description: Training neural networks to execute or imitate classical algorithms (sorting, search, graph algorithms) and testing generalization to larger inputs.
   - id: data-subset-selection
     description: Selecting a subset of training data (coresets, greedy submodular maximization, data pruning).
+  - id: combinatorial-optimization
+    description: Solving, or speeding up solvers for, combinatorial optimization problems (TSP, vehicle routing, maximum independent set, mixed integer programs).
+  - id: neural-architecture-search
+    description: Automatically searching for neural network architectures.
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -146,6 +150,16 @@ method_families:
     description: Single decision trees, whether grown greedily (e.g. CART) or optimized globally.
   - id: greedy-methods
     description: Methods based on greedy choices (greedy tree splitting, greedy decoding, greedy subset selection).
+  - id: online-algorithms
+    description: Algorithms that decide without knowing future input, analysed by competitive ratio or consistency / robustness (caching, ski rental, scheduling, prediction-augmented sorting and search trees).
+  - id: divide-and-conquer
+    description: Splitting the problem or the data, solving the parts, and combining the results.
+  - id: dynamic-programming
+    description: Dynamic programming (reusing solutions of subproblems) and its differentiable relaxations.
+  - id: branch-and-bound
+    description: Branch and bound and exact optimization built on it (including mixed integer programming solvers).
+  - id: local-search
+    description: Local and neighbourhood search (e.g. 2-opt, large neighbourhood search).
 paradigms:
   - id: supervised
     description: Supervised learning.
@@ -159,3 +173,5 @@ paradigms:
     description: Learning representations from unlabeled data with pretext tasks.
   - id: post-hoc
     description: Applied to an already trained model without changing it.
+  - id: reinforcement-learning
+    description: Reinforcement learning.

@@ -6,7 +6,7 @@
 - 著者: Thodoris Lykouris, Sergei Vassilvitskii
 - 年・掲載: 2018
 - 原論文: [PDF](https://arxiv.org/pdf/1802.05399v4)(arXiv v4、カード作成時に読んだ版)
-- タグ: greedy-methods, learning-augmented-algorithms
+- タグ: learning-augmented-algorithms, online-algorithms
 - 人手レビュー: 未
 
 ## 主張

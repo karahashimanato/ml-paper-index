@@ -15,7 +15,7 @@ tags:
   tasks:
   - learning-augmented-algorithms
   method_families:
-  - greedy-methods
+  - online-algorithms
 proposes:
 - Dirty-Clean Sort (randomized BST insertion guided by dirty comparisons, verified by clean comparisons)
 - Displacement Sort (bucket sort by predicted position + finger-tree insertion)
@@ -75,13 +75,12 @@ card:
   created_by: claude-opus-5-5 via Claude Code (subagent)
   reviewed: false
   notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
-    claims only. Family tag greedy-methods is a PLACEHOLDER pending the user''s decision on a new tag (no existing family tag fits; the paper''s algorithms are not greedy methods). Affiliation: University
-    of Oxford (both authors). No venue stated in the PDF; the acknowledgments thank ''the anonymous reviewers at NeurIPS''. Data: synthetic ''class setting'' (items in c random classes, predicted position
-    uniform within the class) and ''decay setting'' (an outdated ranking perturbed by random adjacent shifts), n from 1,000 to 1,000,000; real data = World Bank country population rankings 1960-2010 (n
-    = 261) with year-x ranking as prediction for 2010; dirty comparisons: ''Good-Dominating''/''Bad-Dominating'' settings where a ratio r of items is damaged and perturbed comparisons are uniformly random.
-    For dirty comparisons, baselines get a positional prediction built by the Ailon et al. (2008) 3-approximation feedback arc set algorithm. Reported (text, empirical; the authors write that their algorithms
-    ''consistently outperform the baselines in all settings'' for positional predictions): Displacement/Double-Hoover outperform baselines in the class setting when the number of classes exceeds 0.05n (n
-    = 1,000,000); Dirty-Clean Sort outperforms baselines only up to certain damage ratios and otherwise performs essentially no worse than Quick Sort. Uses learning-augmented binary search (citing Lykouris
-    and Vassilvitskii; Mitzenmacher and Vassilvitskii) as a building block for one-sided error insertion. Related work: contrasts with Kristo et al. (2020) learned sorting (not well-defined for non-numeric
-    inputs without a monotone numeric mapping; a footnote says its theoretical guarantee is O(n^2) although Kristo et al. observe much better empirical performance) and with Lu et al. (2021) generalized
-    sorting whose O(nw) bound has exponentially worse error dependence.'
+    claims only. Affiliation: University of Oxford (both authors). No venue stated in the PDF; the acknowledgments thank ''the anonymous reviewers at NeurIPS''. Data: synthetic ''class setting'' (items
+    in c random classes, predicted position uniform within the class) and ''decay setting'' (an outdated ranking perturbed by random adjacent shifts), n from 1,000 to 1,000,000; real data = World Bank country
+    population rankings 1960-2010 (n = 261) with year-x ranking as prediction for 2010; dirty comparisons: ''Good-Dominating''/''Bad-Dominating'' settings where a ratio r of items is damaged and perturbed
+    comparisons are uniformly random. For dirty comparisons, baselines get a positional prediction built by the Ailon et al. (2008) 3-approximation feedback arc set algorithm. Reported (text, empirical;
+    the authors write that their algorithms ''consistently outperform the baselines in all settings'' for positional predictions): Displacement/Double-Hoover outperform baselines in the class setting when
+    the number of classes exceeds 0.05n (n = 1,000,000); Dirty-Clean Sort outperforms baselines only up to certain damage ratios and otherwise performs essentially no worse than Quick Sort. Uses learning-augmented
+    binary search (citing Lykouris and Vassilvitskii; Mitzenmacher and Vassilvitskii) as a building block for one-sided error insertion. Related work: contrasts with Kristo et al. (2020) learned sorting
+    (not well-defined for non-numeric inputs without a monotone numeric mapping; a footnote says its theoretical guarantee is O(n^2) although Kristo et al. observe much better empirical performance) and
+    with Lu et al. (2021) generalized sorting whose O(nw) bound has exponentially worse error dependence.'

@@ -6,7 +6,7 @@
 - 著者: Honghao Lin, Tian Luo, David P. Woodruff
 - 年・掲載: 2022
 - 原論文: [PDF](https://arxiv.org/pdf/2206.12110v1)(arXiv v1、カード作成時に読んだ版)
-- タグ: deep-learning, learning-augmented-algorithms
+- タグ: learning-augmented-algorithms, online-algorithms
 - 人手レビュー: 未
 
 ## 主張

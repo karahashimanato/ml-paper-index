@@ -15,7 +15,7 @@ tags:
   tasks:
   - learning-augmented-algorithms
   method_families:
-  - deep-learning
+  - online-algorithms
 proposes:
 - 'learned Treap: treap whose node priorities are predicted frequency ranks/frequencies from a frequency estimation oracle'
 claims:
@@ -73,12 +73,11 @@ card:
   created_by: claude-opus-5-5 via Claude Code (subagent)
   reviewed: false
   notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
-    claims only. Family tag deep-learning is a PLACEHOLDER pending the user''s decision on a new tag (no existing family tag fits a learned treap); it reflects only the oracles reused from Hsu et al. [HIKV19]
-    (RNNs for CAIDA flows; RNN with LSTM cells encoding AOL queries character by character), not a method of this paper. Affiliation: Carnegie Mellon University (all authors); NSF grant support stated.
-    No venue stated in the PDF. Note: the contribution list and Conclusion phrase the inaccurate-oracle result more broadly (''no worse than a random Treap ... for any input distribution'' / ''regardless
-    of the accuracy of the oracle and the underlying input distribution'', the latter ''under modifications'') than Theorem 3.13, which is stated for non-adversarial oracles. Synthetic: Zipfian access sequences
-    of length 10^5 with random rank order; reported in text: about 25% fewer comparisons than Splay Trees and a bit over 30% fewer than AVL/Red-Black Trees (alpha = 1 and 1.25), and 27%-51% fewer than Splay
-    Trees when varying alpha with 10^4 keys. Real data: CAIDA Chicago-Seattle 2016-01-21 trace (first 7 minutes train, next 2 validation; results shown for the 20th test minute) and AOL search queries (~21M
-    queries over 90 days; first 5 days train, 6th day validation; results for the 50th day), where the shuffled learned treap is comparable to Red-Black Trees and better than random treaps. Prediction error
-    experiments use frequency predictions with f_hat <= Delta*f (Figure 7, graceful degradation). Authors report attempts at a learning-augmented Splay Tree were unfruitful. Related work contrasts with
-    Kraska et al. learned indexes: this paper keeps the search tree rather than replacing it.'
+    claims only. The oracles are reused from Hsu et al. [HIKV19] (RNNs for CAIDA flows; RNN with LSTM cells encoding AOL queries character by character); they are not a method of this paper. Affiliation:
+    Carnegie Mellon University (all authors); NSF grant support stated. No venue stated in the PDF. Note: the contribution list and Conclusion phrase the inaccurate-oracle result more broadly (''no worse
+    than a random Treap ... for any input distribution'' / ''regardless of the accuracy of the oracle and the underlying input distribution'', the latter ''under modifications'') than Theorem 3.13, which
+    is stated for non-adversarial oracles. Synthetic: Zipfian access sequences of length 10^5 with random rank order; reported in text: about 25% fewer comparisons than Splay Trees and a bit over 30% fewer
+    than AVL/Red-Black Trees (alpha = 1 and 1.25), and 27%-51% fewer than Splay Trees when varying alpha with 10^4 keys. Real data: CAIDA Chicago-Seattle 2016-01-21 trace (first 7 minutes train, next 2
+    validation; results shown for the 20th test minute) and AOL search queries (~21M queries over 90 days; first 5 days train, 6th day validation; results for the 50th day), where the shuffled learned treap
+    is comparable to Red-Black Trees and better than random treaps. Prediction error experiments use frequency predictions with f_hat <= Delta*f (Figure 7, graceful degradation). Authors report attempts
+    at a learning-augmented Splay Tree were unfruitful. Related work contrasts with Kraska et al. learned indexes: this paper keeps the search tree rather than replacing it.'

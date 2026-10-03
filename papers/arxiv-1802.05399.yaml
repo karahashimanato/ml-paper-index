@@ -14,7 +14,7 @@ tags:
   tasks:
   - learning-augmented-algorithms
   method_families:
-  - greedy-methods
+  - online-algorithms
 proposes:
 - Online with Machine Learned Advice (OMLA) framework with consistency/robustness/competitiveness desiderata
 - Predictive Marker caching algorithm
@@ -78,11 +78,10 @@ card:
   created_by: claude-opus-5-5 via Claude Code (subagent)
   reviewed: false
   notes: 'Selected for the topic article requested by the user (2026-10-03): classical algorithms (sorting, binary search, greedy) and machine learning; carded by a subagent. Results tables not recorded;
-    claims only. Family tag greedy-methods is a PLACEHOLDER pending the user''s decision on a new tag (no existing family tag fits; Predictive Marker is a randomized marking algorithm, not a greedy method).
-    PDF states: preliminary version appeared at the 35th International Conference on Machine Learning (ICML 2018); this v4 (August 2020) revises the framework presentation. Affiliations: Microsoft Research
-    (Lykouris; work done as a Cornell PhD student, started while interning at Google) and Google Research (Vassilvitskii). Datasets: BrightKite check-in sequences (BK: top 100 users with non-trivial sequences
-    where the optimum has at least 50 misses) and CitiBike 2017 NYC trip start stations (first 25,000 events per file); note an internal inconsistency in the PDF: the text says 12 sequences (one per month)
-    while Table 1 lists 24 Citi sequences. Cache size k = 10 (BK) and k = 100 (Citi) for PLECO; synthetic results on BK with k = 10. Predictive Marker in experiments uses switching cost k (never switches
-    to random evictions). The paper shows LRU can be expressed as a predictor within Predictive Marker, giving a robustified LRU with logarithmic worst case, and a black-box combination of a robust and
-    a competitive algorithm (9alpha-robust, 9gamma-competitive). Includes the binary-search-with-predicted-position example (cost on a query at most 2 log of its absolute error; if queries come from a distribution,
-    expected cost at most 2 log of the expected absolute error), citing Kraska et al. for the empirical advantage of predicting positions.'
+    claims only. PDF states: preliminary version appeared at the 35th International Conference on Machine Learning (ICML 2018); this v4 (August 2020) revises the framework presentation. Affiliations: Microsoft
+    Research (Lykouris; work done as a Cornell PhD student, started while interning at Google) and Google Research (Vassilvitskii). Datasets: BrightKite check-in sequences (BK: top 100 users with non-trivial
+    sequences where the optimum has at least 50 misses) and CitiBike 2017 NYC trip start stations (first 25,000 events per file); note an internal inconsistency in the PDF: the text says 12 sequences (one
+    per month) while Table 1 lists 24 Citi sequences. Cache size k = 10 (BK) and k = 100 (Citi) for PLECO; synthetic results on BK with k = 10. Predictive Marker in experiments uses switching cost k (never
+    switches to random evictions). The paper shows LRU can be expressed as a predictor within Predictive Marker, giving a robustified LRU with logarithmic worst case, and a black-box combination of a robust
+    and a competitive algorithm (9alpha-robust, 9gamma-competitive). Includes the binary-search-with-predicted-position example (cost on a query at most 2 log of its absolute error; if queries come from
+    a distribution, expected cost at most 2 log of the expected absolute error), citing Kraska et al. for the empirical advantage of predicting positions.'

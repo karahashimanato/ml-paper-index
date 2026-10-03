@@ -6,7 +6,7 @@
 - 著者: Michael Mitzenmacher, Sergei Vassilvitskii
 - 年・掲載: 2020
 - 原論文: [PDF](https://arxiv.org/pdf/2006.09123v1)(arXiv v1、カード作成時に読んだ版)
-- タグ: greedy-methods, learning-augmented-algorithms
+- タグ: learning-augmented-algorithms, online-algorithms
 - 人手レビュー: 未
 
 ## 主張

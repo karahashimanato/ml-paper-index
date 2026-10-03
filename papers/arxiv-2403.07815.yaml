@@ -1,0 +1,96 @@
+id: arxiv-2403.07815
+title: 'Chronos: Learning the Language of Time Series'
+authors:
+- Abdul Fatir Ansari
+- Lorenzo Stella
+- Caner Turkmen
+- Xiyuan Zhang
+- Pedro Mercado
+- Huibin Shen
+- Oleksandr Shchur
+- Syama Sundar Rangapuram
+- Sebastian Pineda Arango
+- Shubham Kapoor
+- Jasper Zschiegner
+- Danielle C. Maddix
+- Hao Wang
+- Michael W. Mahoney
+- Kari Torkkola
+- Andrew Gordon Wilson
+- Michael Bohlke-Schneider
+- Yuyang Wang
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2403.07815
+  code: https://github.com/amazon-science/chronos-forecasting
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 46fb566d9e70ea63487babe197a036e3522919dddcd776d673257ad32fcd7df7
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- Chronos (time series tokenized by mean scaling + quantization, trained with existing T5/GPT-2 language-model architectures via cross-entropy)
+- KernelSynth synthetic data (Gaussian processes) and TSMixup augmentation
+claims:
+- id: c1
+  statement: 'Method: Chronos scales and quantizes time series values into a fixed vocabulary and trains existing transformer language-model architectures on these tokens with the cross-entropy loss.'
+  location: Abstract
+  page: 1
+  quote: Chronos tokenizes time series values using scaling and quantization into a fixed vocabulary and trains existing transformer-based language model architectures on these tokenized time series via
+    the cross-entropy loss.
+- id: c2
+  statement: 'Zero-shot definition: datasets are split into pretraining-only (13), Benchmark I (15; used for both training and in-domain evaluation) and Benchmark II (27; used only for evaluation, i.e.
+    zero-shot).'
+  location: Datasets
+  page: 9
+  quote: (b) Benchmark I datasets, employed for both training and evaluation, representing an in-domain evaluation (15 datasets); and (c) Bench-mark II datasets, used solely for evaluation, constituting
+    a zero-shot evaluation (27 datasets).
+- id: c3
+  statement: 'Leakage caveat (footnote): the authors acknowledge that strictly preventing leakage would require Benchmark II data to start after the last pretraining observation, but they consider the risk
+    minimal because the datasets share no overlap beyond high-level conceptual categorization.'
+  location: Results (Benchmark II footnote)
+  page: 12
+  quote: From a rigorous standpoint, to prevent information leakage, the start time of any dataset within this category must be after the timestamp of the last observation from the pretraining dataset and
+    Benchmark I.
+- id: c4
+  statement: 'Evaluation protocol: probabilistic forecasts are scored with WQL on 9 quantile levels and point forecasts with MASE (median forecast); per-dataset scores are divided by Seasonal Naive and
+    aggregated with a geometric mean, and failed/timed-out models get relative score 1.'
+  location: Evaluation Metrics
+  page: 10
+  quote: For each dataset, we compute the relative score of each model as the model’s score divided by the score of a baseline model (here, Seasonal Naive).
+- id: c5
+  statement: 'Baseline tuning: statistical baselines used StatsForecast defaults (with frequency-implied season lengths), and unless otherwise specified baseline implementations kept their default hyperparameters
+    with no dataset-specific or global hyperparameter tuning.'
+  location: Appendix (Baselines)
+  page: 34
+  quote: Unless otherwise specified, the default hyperparameter configurations provided in baseline implementations were kept as is, and no dataset specific or global hyperparameter tuning was performed.
+- id: c6
+  statement: 'Cross-model leakage remark: the authors note that the evaluation setup may have favored Moirai-1.0-R on Benchmark II because many Benchmark II datasets were in Moirai''s pretraining corpus.'
+  location: Results (Benchmark II)
+  page: 12
+  quote: Moirai-1.0-R obtains the best performance after Chronos, although the evaluation setup may have been advantageous for Moirai-1.0-R as many datasets in Benchmark II were part of its pretraining
+    corpus.
+- id: c7
+  statement: 'Affiliation: the title page lists AWS AI Labs and Amazon Supply Chain Optimization Technologies (some authors also list universities; two contributed as AWS interns), and the footnote states
+    that three authors hold concurrent Amazon/university appointments and that the paper describes work performed at Amazon.'
+  location: Title page (footnote)
+  page: 1
+  quote: Hao Wang, Michael W. Mahoney, and Andrew Gordon Wilson hold concurrent appointments at Amazon and their corresponding universities, and this paper describes work performed at Amazon.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. PDF states: Published
+    in Transactions on Machine Learning Research (10/2024). Chronos uses LM architectures (T5, GPT-2) but the paper reports random initialization works as well as LLM weights, so the large-language-models
+    family tag was not used. Pretraining data (Datasets section): 28 training datasets, about 890K univariate series, approximately 84B observations, plus KernelSynth Gaussian-process synthetic data. Ablation
+    (Analysis of Hyperparameters): the authors report that LLM-weight initialization offers relatively little advantage over random initialization, which they suggest may be preferable. Stated limitations
+    include the bounded tokenization range [-15s, 15s] (overflow / loss of precision) and, as a potential limitation, the inference speed of the larger models compared to task-specific deep learning models.'

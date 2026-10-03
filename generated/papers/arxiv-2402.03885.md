@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# MOMENT: A Family of Open Time-series Foundation Models
+
+- カード: [`arxiv-2402.03885`](../../papers/arxiv-2402.03885.yaml)
+- 著者: Mononito Goswami, Konrad Szafer, Arjun Choudhry, Yifu Cai, Shuo Li, Artur Dubrawski
+- 年・掲載: 2024
+- 原論文: [PDF](https://arxiv.org/pdf/2402.03885v3)(arXiv v3、カード作成時に読んだ版)
+- タグ: deep-learning, self-supervised, time-series-anomaly-detection, time-series-classification, time-series-forecasting, time-series-foundation-model
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** MOMENT is a family of high-capacity transformer models pre-trained with a masked time series prediction task on large amounts of time series from diverse domains; the authors present it as the first family of open-source large pre-trained time series models.([Introduction, p.1](https://arxiv.org/pdf/2402.03885v3#page=1 "MOMENT is a family of high-capacity transformer models, pre-trained using a masked time series prediction task on large amounts of time series data drawn from diverse domains."))
+- **c2** Pre-training data and contamination control: the Time Series Pile collates the Informer long-horizon forecasting datasets, the Monash archive, the UCR/UEA classification archive and TSB-UAD; every dataset is split into disjoint train/validation/test splits (creators' splits, otherwise a random 60/10/30 split) and only the training splits are used for pre-training. The Informer collection listed as part of the Pile comprises ETT, Electricity, Traffic, Weather, ILI and Exchange-rate.([Methodology (Figure 2 caption), p.3](https://arxiv.org/pdf/2402.03885v3#page=3 "We only use the training splits of all datasets for pre-training."))
+- **c3** Zero-shot short-horizon forecasting follows the setting of Oreshkin et al. (2021): MOMENT is fine-tuned on a source dataset and evaluated on a target dataset of the same temporal resolution. Results are reported only on the portion of M3 and M4 unseen during pre-training and on the frequencies with the most data; the authors say daily, hourly and weekly frequencies had very little data and they could not get promising zero-shot performance for any of the deep learning models.([Appendix (Zero-shot short-horizon forecasting), p.25](https://arxiv.org/pdf/2402.03885v3#page=25 "our results are reported only (1) on 40% of the M3 and M4 datasets that were unseen during pre-training, (2) a subset of frequencies with largest support in the datasets."))
+- **c4** Tuning protocol: the main text states that no hyper-parameter tuning is performed (the appendix says no 'extensive' tuning); MOMENT-Large is fine-tuned with a fixed batch size and a one-cycle schedule, and baselines use the recommended settings from their papers and public repositories. Long-horizon forecasting uses linear probing (only the forecasting head is trained).([Experimental Setup and Results, p.7](https://arxiv.org/pdf/2402.03885v3#page=7 "We do not perform hyper-parameter tuning."))
+- **c5** Long-horizon forecasting: linearly probed MOMENT is near state-of-the-art on most datasets and horizons but second to PatchTST, which generally achieves the lowest MSE; LLM-based forecasters (Time-LLM, GPT4TS) perform worse than MOMENT on many datasets and horizons, and N-BEATS outperforms several recent methods.([Results (Long-horizon forecasting), p.7](https://arxiv.org/pdf/2402.03885v3#page=7 "Linearly probing MOMENT achieves near state-of-the-art performance on most datasets and horizons, and is only second to PatchTST which generally achieves the lowest MSE (Tab. 2)."))
+- **c6** Zero-shot short-horizon forecasting is where the authors see the largest scope for improvement: statistical methods such as Theta and ETS outperformed the deep models, although on some datasets MOMENT had lower sMAPE than ARIMA.([Results (Zero-shot short-horizon forecasting), p.7](https://arxiv.org/pdf/2402.03885v3#page=7 "Statistical methods such as Theta and ETS outperformed their deeper counterparts."))
+- **c7** Negative finding across tasks: the authors found that statistical and non-transformer approaches (ARIMA for short-horizon forecasting, N-BEATS for long-horizon forecasting, k-nearest neighbors for anomaly detection) outperform many deep and transformer-based models, and argue such baselines are needed to assess practical utility.([Experimental Setup and Results (Baselines), p.7](https://arxiv.org/pdf/2402.03885v3#page=7 "We found that statistical and non-transformer-based approaches like ARIMA for short-horizon forecasting, N-BEATS for long-horizon forecasting, and k-nearest neighbors for anomaly detection outperform many deep and transformer-based models."))
+

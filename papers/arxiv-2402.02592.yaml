@@ -1,0 +1,82 @@
+id: arxiv-2402.02592
+title: Unified Training of Universal Time Series Forecasting Transformers
+authors:
+- Gerald Woo
+- Chenghao Liu
+- Akshat Kumar
+- Caiming Xiong
+- Silvio Savarese
+- Doyen Sahoo
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2402.02592
+  code: https://github.com/SalesforceAIResearch/uni2ts
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 36b9156218e2bb35e382329de55bc3291eb06ef9f14696e67fa7f8c1de07ad4c
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- Moirai (masked encoder-based universal forecasting Transformer with multi patch sizes and any-variate attention)
+- LOTSA (Large-scale Open Time Series Archive)
+claims:
+- id: c1
+  statement: 'Method: Moirai modifies the time series Transformer to address cross-frequency learning, arbitrary numbers of variates and varying distributional properties.'
+  location: Abstract
+  page: 1
+  quote: To address these challenges, we present novel enhancements to the conventional time series Transformer architecture, resulting in our proposed Masked EncOder-based UnIveRsAl TIme Series Forecasting
+    Transformer (MOIRAI).
+- id: c2
+  statement: 'Pretraining data: LOTSA, over 27B observations across nine domains; the authors report competitive or superior zero-shot performance versus full-shot models.'
+  location: Abstract
+  page: 1
+  quote: Trained on our newly introduced Large-scale Open Time Series Archive (LOTSA) featuring over 27B observations across nine domains, MOIRAI achieves competitive or superior performance as a zero-shot
+    forecaster when compared to full-shot models.
+- id: c3
+  statement: 'In-distribution evaluation: LOTSA includes the Monash archive as a data source; for a large portion of the Monash datasets only the train set is included, and the held-out test sets are used
+    for in-distribution (not zero-shot) evaluation.'
+  location: Experiments
+  page: 6
+  quote: For a large portion of these datasets, we only include the train set, holding out the test set which we now use for in-distribution evaluation.
+- id: c4
+  statement: 'Evaluation-practice remark: the authors say comparing zero-shot methods is made harder by not having a standard held-out test split, making it challenging to collate datasets that none of
+    the models were trained on; in the same paragraph they state that the datasets used for their out-of-distribution evaluation were not included in LOTSA.'
+  location: Out-of-distribution / Zero-shot Forecasting
+  page: 6
+  quote: Furthermore, the problem of comparing zero-shot methods is exacerbated by not having a standard held-out test split, making it challenging to collate a set of datasets which all the models have
+    not been trained on.
+- id: c5
+  statement: 'Tuning protocol (probabilistic forecasting): full-shot baselines were hyperparameter-tuned per dataset on validation CRPS and averaged over five seeds; Moirai itself received inference-time
+    tuning of context length and patch size on validation CRPS. Metrics: CRPS and MSIS with rolling evaluation.'
+  location: Out-of-distribution / Zero-shot Forecasting
+  page: 6
+  quote: For each dataset and baseline, we perform hyperparameter tuning on a validation CRPS, and report results averaged over five training runs with different seeds.
+- id: c6
+  statement: 'Long sequence forecasting protocol: datasets with same-source data in pretraining were omitted (the appendix names the LSF Traffic dataset, omitted because LOTSA includes PeMS-sourced LargeST
+    data); full-shot baseline results were copied from Liu et al. (2023b); Moirai was tuned on average validation MSE.'
+  location: Out-of-distribution / Zero-shot Forecasting
+  page: 7
+  quote: We evaluate on a subset of the popular long sequence forecasting benchmark (Wu et al., 2021), omitting datasets which have datasets from the same source present in our pre-training data and cannot
+    be considered zero-shot.
+- id: c7
+  statement: 'Limitations: little to no hyperparameter tuning due to resource constraints; the multi patch size mapping is somewhat heuristic; limited support for high-dimensional time series.'
+  location: Limitations & Future Work
+  page: 9
+  quote: Due to resource constraints, little to no hyperparameter tuning was performed – efficient tuning techniques such as µP (Yang et al., 2022a) can be applied.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings
+    of the 41st International Conference on Machine Learning (ICML), Vienna, Austria, PMLR 235, 2024. Affiliations on the title page: Salesforce AI Research; School of Computing and Information Systems,
+    Singapore Management University. In long sequence forecasting the authors call the performance/model-size relationship tenuous in that setting while not taking it as strong evidence against scaling.
+    Chronos (arxiv-2403.07815) later remarks that many Chronos Benchmark II datasets were in Moirai''s pretraining corpus.'

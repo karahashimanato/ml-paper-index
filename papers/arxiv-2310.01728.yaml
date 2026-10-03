@@ -1,0 +1,82 @@
+id: arxiv-2310.01728
+title: 'Time-LLM: Time Series Forecasting by Reprogramming Large Language Models'
+authors:
+- Ming Jin
+- Shiyu Wang
+- Lintao Ma
+- Zhixuan Chu
+- James Y. Zhang
+- Xiaoming Shi
+- Pin-Yu Chen
+- Yuxuan Liang
+- Yuan-Fang Li
+- Shirui Pan
+- Qingsong Wen
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2310.01728
+  code: https://github.com/KimMeen/Time-LLM
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d71c4a83ffb545502cee07e0e5ab41578a9c8e06fb61b65a5740afbe42cda142
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - large-language-models
+  paradigms:
+  - supervised
+proposes:
+- 'Time-LLM: reprogramming time-series patches into text-prototype representations for a frozen LLM'
+- Prompt-as-Prefix (PaP)
+claims:
+- id: c1
+  statement: 'Method: input time series (patched) are reprogrammed with text prototypes before being fed into a frozen LLM; Prompt-as-Prefix adds context and task instructions, and LLM outputs are projected
+    to forecasts.'
+  location: Abstract
+  page: 1
+  quote: We begin by reprogramming the input time series with text prototypes before feeding it into the frozen LLM to align the two modalities.
+- id: c2
+  statement: Only the parameters of the lightweight input transformation and output projection are updated, while the backbone LLM stays frozen (the paper uses Llama-7B as the default backbone).
+  location: Methodology
+  page: 4
+  quote: We note that only the parameters of the lightweight input transformation and output projection are updated, while the backbone language model is frozen.
+- id: c3
+  statement: 'Main claim: Time-LLM outperforms state-of-the-art specialized forecasting models, and the abstract states it excels in few-shot and zero-shot settings.'
+  location: Abstract
+  page: 1
+  quote: Our comprehensive evaluations demonstrate that TIME-LLM is a powerful time series learner that outperforms state-of-the-art, specialized forecasting models.
+- id: c4
+  statement: 'Definition of zero-shot: cross-domain adaptation, i.e. the model is trained (optimized) on one dataset and evaluated on another dataset whose samples it has not seen, using ETT dataset pairs
+    under the long-term forecasting protocol; it is not a pretrained-only setting.'
+  location: 'Zero-shot forecasting: Setups'
+  page: 8
+  quote: we evaluate the zero-shot learning capabilities of the reprogrammed LLM within the framework of cross-domain adaptation.
+- id: c5
+  statement: 'Evaluation protocol: configurations follow Wu et al. (2023) with a unified evaluation pipeline, and baseline performance is cited (copied) from Zhou et al. (2023a, GPT4TS) where applicable;
+    which baselines were re-run instead is not stated in the text.'
+  location: 'Main results: Baselines'
+  page: 6
+  quote: We compare with the SOTA time series models, and we cite their performance from (Zhou et al., 2023a) if applicable.
+- id: c6
+  statement: 'Long-term forecasting setup: ETTh1/ETTh2/ETTm1/ETTm2, Weather, Electricity, Traffic and ILI, input length 512 and horizons 96-720, metrics MSE and MAE (per Table 1 caption and Table 9, ILI
+    uses horizons 24-60 and input length 96).'
+  location: 'Long-term forecasting: Setups'
+  page: 6
+  quote: The input time series length T is set as 512, and we use four different prediction horizons H ∈{96, 192, 336, 720}.
+- id: c7
+  statement: 'Affiliations: authors are from Monash University, Ant Group, IBM Research, Griffith University, Alibaba Group and HKUST (Guangzhou).'
+  location: Title page
+  page: 1
+  quote: 1Monash University 2Ant Group 3IBM Research 4Griffith University 5Alibaba Group
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. PDF states: Published
+    as a conference paper at ICLR 2024. All experiments are repeated three times and averaged (Appendix B.1). Short-term forecasting uses M4. LLMTime is among the baselines in the zero-shot comparison.
+    The reprogramming network has fewer than 6.6 million trainable parameters per the efficiency analysis. Re-evaluated by arxiv-2406.16964, whose ablations removing or replacing the LLM did not degrade
+    (in most cases improved) forecasting performance.'

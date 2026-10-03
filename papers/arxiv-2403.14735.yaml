@@ -1,0 +1,71 @@
+id: arxiv-2403.14735
+title: 'Foundation Models for Time Series Analysis: A Tutorial and Survey'
+authors:
+- Yuxuan Liang
+- Haomin Wen
+- Yuqi Nie
+- Yushan Jiang
+- Ming Jin
+- Dongjin Song
+- Shirui Pan
+- Qingsong Wen
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2403.14735
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 85d08118f6421ea0ce5e78157a7574bdc0fe07293e3ee2b1754115e07c2b9a9e
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+  - supervised
+proposes:
+- methodology-centric taxonomy of time-series foundation models (architecture, pre-training, adaptation, modality)
+claims:
+- id: c1
+  statement: 'Survey scope: a methodology-centric taxonomy of time-series foundation models by model architecture, pre-training technique, adaptation method and data modality, covering standard time series,
+    spatial time series, trajectories and events.'
+  location: Abstract
+  page: 1
+  quote: To address this gap, our survey adopts a methodology-centric classification, delineating various pivotal elements of time-series FMs, including model architectures, pre-training techniques, adaptation
+    methods, and data modalities.
+- id: c2
+  statement: 'Two routes to TSFMs are distinguished: repurposing pretrained LLMs for time series, or training a Transformer from scratch on time series.'
+  location: Model architecture
+  page: 6
+  quote: This includes either repurposing pretrained LLMs for time series to leverage their preexisting sequence modeling strengths [102], or directly using Transformer as a base for TSFMs, training from
+    scratch
+- id: c3
+  statement: 'Architecture choice is unsettled: encoder-only, encoder-decoder and decoder-only TSFMs all exist, unlike the trend to decoder-only models in NLP.'
+  location: Model architecture
+  page: 6
+  quote: The choice of foundation model framework remains debated in the realm of time series analysis, contrasting the trend towards decoder-only models in natural language processing.
+- id: c4
+  statement: Pre-training mechanisms are categorized by learning objective into fully-supervised, self-supervised (generative, contrastive, hybrid) and others; the authors consider self-supervised pre-training
+    more generic and realistic than fully-supervised pre-training.
+  location: Pre-training
+  page: 7
+  quote: Compared with fully-supervised pre-training, it provides a more generic and realistic solution for the acquisition of a time series foundation model.
+- id: c5
+  statement: On zero-shot (direct) usage, the survey notes that good zero-shot performance can also indicate homogeneity between the pre-training data and the target data, especially for domain-specific
+    foundation models.
+  location: Adaptation
+  page: 8
+  quote: It can also indicate the homogeneity between the pre-trained dataset and target dataset, especially for some real-world applications where a foundation model is built to fulfill domain-specific
+    tasks [4, 13].
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. PDF states: KDD
+    ''24 (30th ACM SIGKDD Conference), Barcelona. Survey without its own experiments; searched ''benchmark'', ''leak'', ''evaluation'': no discussion of evaluation benchmarks or pretraining/test leakage
+    found. Future directions listed in the appendix: multi-modality, efficient architectures (e.g. Mamba), temporal distribution shift and interpretability, privacy.'

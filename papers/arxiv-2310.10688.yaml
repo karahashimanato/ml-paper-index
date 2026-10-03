@@ -1,0 +1,74 @@
+id: arxiv-2310.10688
+title: A decoder-only foundation model for time-series forecasting
+authors:
+- Abhimanyu Das
+- Weihao Kong
+- Rajat Sen
+- Yichen Zhou
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2310.10688
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 3969aae97301f8300da392a7c5309776d8a12ebfe71f64f22fbc28125be2e72c
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- TimesFM (decoder-only patched attention model pretrained on Google Trends, Wiki pageviews, synthetic and public data)
+claims:
+- id: c1
+  statement: 'Method: TimesFM pretrains a decoder-style attention model with input patching on a large corpus of real-world and synthetic time series.'
+  location: Abstract
+  page: 1
+  quote: Our model is based on pretraining a decoder style attention model with input patching, using a large time-series corpus comprising both real-world and synthetic datasets.
+- id: c2
+  statement: 'Pretraining data: the bulk comes from Google Trends, Wiki Pageviews and synthetic series; M4, hourly/15-min Electricity, hourly Traffic and the 10-minute Weather dataset of the Informer benchmark
+    were also added.'
+  location: Pretraining Details
+  page: 5
+  quote: 'We address this problem by sourcing the bulk of data used to train our models from three major sources: Google trends, Wiki Pageview statistics and synthetic time-series.'
+- id: c3
+  statement: 'Zero-shot definition: the evaluation dataset groups (Monash, Darts, Informer/ETT) were intentionally held out from pretraining; from the Informer collection only the ETT datasets are used
+    because a few others were used in pretraining.'
+  location: Empirical Results
+  page: 6
+  quote: These datasets have been intentionally held out from our pretraining data.
+- id: c4
+  statement: 'Evaluation protocol: Monash is filtered (following llmtime) to 18 datasets without missing values, scored by MAE scaled by a naive last-value baseline and aggregated with a geometric mean;
+    ETT uses horizons 96 and 192 with context 512 and, following llmtime, only the last test window.'
+  location: Zero-shot Evaluation
+  page: 7
+  quote: Therefore, following llmtime, we compare all methods on the last test window.
+- id: c5
+  statement: 'Contamination remark about a baseline: for the Darts datasets the authors state that data contamination for llmtime (GPT-3) cannot be ruled out, and that ARIMA needed manual seasonality tuning.'
+  location: Zero-shot Evaluation
+  page: 7
+  quote: Further, since these datasets are used in numerous time series blog posts for illustrative purposes, data contamination for llmtime cannot be ruled out.
+- id: c6
+  statement: 'Ablation finding: a PatchTST pretrained on the same data loader to the same FLOPS (PatchTST(ZS)) did not do as well on Monash but performed similarly to TimesFM(ZS) and PatchTST on ETT; the
+    authors call both outcomes expected, citing the pretraining loader''s predominant context length of 512 (vs shorter Monash contexts, plus fewer PatchTST iterations at equal FLOPS) and the 512 context
+    used on ETT.'
+  location: Appendix (Pretraining PatchTST)
+  page: 14
+  quote: On ETT datasets, the PatchTST(ZS) model is performs similarly to TimesFM(ZS) and PatchTST.
+- id: c7
+  statement: 'Affiliation: the title page lists all four authors under Google Research (Google Trends, one of the main pretraining sources, is covered in c2).'
+  location: Title page
+  page: 1
+  quote: Google Research
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. The ''Google Research''
+    quote is the affiliation line on the title page. The paper reports point forecasts (MAE-based); probabilistic forecasting is listed as future work. Appendix A.1 limitations: little hyper-parameter tuning
+    in pretraining due to cost; no covariate pretraining.'

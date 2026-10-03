@@ -1,0 +1,92 @@
+id: arxiv-2310.08278
+title: 'Lag-Llama: Towards Foundation Models for Probabilistic Time Series Forecasting'
+authors:
+- Kashif Rasul
+- Arjun Ashok
+- Andrew Robert Williams
+- Hena Ghonia
+- Rishika Bhagwatkar
+- Arian Khorasani
+- Mohammad Javad Darvishi Bayazi
+- George Adamopoulos
+- Roland Riachi
+- Nadhir Hassen
+- Marin Biloš
+- Sahil Garg
+- Anderson Schneider
+- Nicolas Chapados
+- Alexandre Drouin
+- Valentina Zantedeschi
+- Yuriy Nevmyvaka
+- Irina Rish
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2310.08278
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b6aa71ada7f94aca4d2ffdfee4a96a276c10a917c17d87ce3d82119a499742fe
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- Lag-Llama (decoder-only transformer using lag features as covariates, univariate probabilistic forecasting)
+claims:
+- id: c1
+  statement: 'Method: Lag-Llama is a general-purpose foundation model for univariate probabilistic forecasting built on a decoder-only transformer that uses lags as covariates.'
+  location: Abstract
+  page: 1
+  quote: We present Lag-Llama, a general-purpose foundation model for univariate probabilistic time series forecasting based on a decoder-only transformer architecture that uses lags as covariates.
+- id: c2
+  statement: 'Pretraining data: the pretraining corpus comprises 7,965 univariate series (around 352 million data windows/tokens); it is the pretraining part of a collated collection of 27 datasets in six
+    domains, from which held-out test datasets were also taken.'
+  location: Datasets
+  page: 5
+  quote: Our pretraining corpus comprises a total of 7, 965 different univariate time series, each of different lengths, when put together, comprising a total of around 352 million data windows (tokens)
+    for our model to train on.
+- id: c3
+  statement: 'Zero-shot definition: some datasets from each pretraining domain are held out as unseen test datasets, and datasets from entirely different domains are also set aside; ''domain'' is only a
+    grouping label.'
+  location: Datasets
+  page: 5
+  quote: We leave out a few datasets from each domain for testing the few-shot generalization abilities of the pretrained model, whle using the remaining datasets for pretraining the founda-tion model.
+- id: c4
+  statement: 'Evaluation protocol: following Shchur et al. (2023), all reported results are on the last prediction window of each test split.'
+  location: Appendix (Protocol Details)
+  page: 17
+  quote: Following typical evaluation setups (Shchur et al., 2023), all results reported in the paper are on the last prediction window of the test splits defined in App. §A.
+- id: c5
+  statement: 'Baseline training: supervised baselines (via AutoGluon and others) were trained with the same setup as Lag-Llama fine-tuning; a dataset-specific hyperparameter search for baselines was not
+    found in the text (Lag-Llama itself used a 100-configuration random search on pretraining validation loss).'
+  location: Appendix (Protocol Details)
+  page: 17
+  quote: We use the same setup as fine-tuning Lag-Llama, for all supervised baselines that we produce results for in the paper.
+- id: c6
+  statement: 'Main empirical claim: zero-shot Lag-Llama is comparable to baselines, and after fine-tuning it reaches the best average rank among the compared methods on the unseen datasets.'
+  location: Zero-Shot & Finetuning Performance on New Data
+  page: 7
+  quote: In the zero-shot setting, Lag-Llama achieves comparable performance to all baselines, with an average rank of 6.714.
+- id: c7
+  statement: 'In-distribution caveat: on its pretraining datasets Lag-Llama is not the best model on each dataset, which the authors attribute to its training budget being split across all pretraining datasets.'
+  location: Appendix (Results on the Pretraining Datasets)
+  page: 17
+  quote: This is reflected in the results, as Lag-Llama is not the best performing model in each dataset.
+- id: c8
+  statement: 'Metrics: CRPS computed from 100 empirical samples, averaged over the prediction horizon and all series of a dataset; the average rank across datasets is also reported.'
+  location: Inference and Model Evaluation
+  page: 6
+  quote: We use 100 empirical samples and report the CRPS averaged over the prediction horizon and across all the time series of a dataset.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. Affiliations on
+    the title page: Morgan Stanley; ServiceNow Research; Université de Montréal; Mila; McGill University. Table 3 lists ETT H1, ETT H2, ETT M1 in the pretraining corpus and ETT M2 among the unseen datasets
+    (same source, different dataset). No code URL found in the PDF text.'

@@ -1,0 +1,79 @@
+id: arxiv-2407.07874
+title: 'Toto: Time Series Optimized Transformer for Observability'
+authors:
+- Ben Cohen
+- Emaad Khwaja
+- Kan Wang
+- Charles Masson
+- Elise Ramé
+- Youssef Doubli
+- Othmane Abou-Amal
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2407.07874
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: cde653f01fbecc98df1985fb2b58503623fc8ad2e06294207ef26540635414cb
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - time-series-foundation-model
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- Toto (decoder-only time series foundation model for observability)
+- Proportional Factorized Space-Time Attention
+- Student-T mixture model output head
+- Datadog observability forecasting benchmark
+claims:
+- id: c1
+  statement: 'Pre-training data: Toto was trained on about one trillion time series points, of which 75% are anonymous observability metrics from the Datadog platform, alongside publicly available time
+    series datasets.'
+  location: Abstract
+  page: 1
+  quote: Alongside publicly available time series datasets, 75% of the data used to train Toto consists of fully anonymous numerical metric data points from the Datadog platform.
+- id: c2
+  statement: 'The training-data section says the non-Datadog points come from the LOTSA collection; a later subsection adds synthetic data (generated similarly to TimesFM) at approximately 5% of the training
+    dataset. Whether the LSF evaluation datasets were excluded from the LOTSA portion is not stated in the text (searched for leakage, overlap, exclusion, held-out: not found).'
+  location: Training data
+  page: 7
+  quote: The remaining points come from the LOTSA dataset [15], a compilation of publicly-available time series datasets across many different domains.
+- id: c3
+  statement: 'Architecture: Toto is a decoder-only forecasting model that uses causal next-patch prediction, techniques from recent LLM architectures (pre-normalization, RMSNorm, SwiGLU feed-forward layers),
+    and a novel adaptation of multi-head attention to multivariate time series.'
+  location: Model architecture
+  page: 5
+  quote: Toto is a decoder-only forecasting model.
+- id: c4
+  statement: 'LSF evaluation protocol: ETTh1, ETTh2, ETTm1, ETTm2, Electricity and Weather with horizons 96 to 720 in sliding windows of stride 512, context 512, median of 200 samples, normalized MAE/MSE.'
+  location: Experiments (LSF benchmark)
+  page: 9
+  quote: We evaluate with forecast lengths of 96, 192, 336, and 720 time steps, in sliding windows with stride 512, and average the results.
+- id: c5
+  statement: 'Baselines on LSF are not rerun: Toto is compared with results reported in the Moirai and TimesFM papers for zero-shot foundation models and with reported results for full-shot models.'
+  location: Experiments (LSF benchmark)
+  page: 9
+  quote: We compared Toto's performance with the reported results of other recent zero-shot foundation models [15, 19], as well as full-shot time series forecasting models [14, 16, 17, 36, 44–47].
+- id: c6
+  statement: 'Datadog benchmark: on an in-house benchmark of 82 multivariate observability series (sMAPE, sMdAPE; other foundation models run with the sampling procedures from their papers), the authors
+    suggest that open datasets may not provide sufficient information for observability data, highlighting training on more relevant data.'
+  location: Experiments (Datadog benchmark)
+  page: 10
+  quote: These results suggest that current open datasets may not provide suﬃcient information to extrapolate to the speciﬁc nuances of observability data, highlighting the importance of training on more
+    relevant data as demonstrated by Toto's superior performance.
+- id: c7
+  statement: 'Affiliation/conflict of interest: this is a Datadog technical report (all authors at datadoghq.com) evaluating Datadog''s own model, partly on a benchmark built from Datadog data.'
+  location: Introduction
+  page: 2
+  quote: We present Toto, a groundbreaking time series forecasting foundation model developed by Datadog.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. Technical report;
+    the authors announce a forthcoming paper with more details. No code or weights URL found in the text; the responsible-AI section says Toto is not intended for mass distribution.'

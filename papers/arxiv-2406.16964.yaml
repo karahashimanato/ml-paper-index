@@ -1,0 +1,79 @@
+id: arxiv-2406.16964
+title: Are Language Models Actually Useful for Time Series Forecasting?
+authors:
+- Mingtian Tan
+- Mike A. Merrill
+- Vinayak Gupta
+- Tim Althoff
+- Thomas Hartvigsen
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2406.16964
+  code: https://github.com/BennyTMT/LLMsForTimeSeries
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 2af6a3dc791357b716058fbee47f790ba549853fcdfb65d39c9da3abed3a6c2b
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'LLM ablations for LLM-based forecasters: w/o LLM, LLM2Attn, LLM2Trsf'
+- PAttn (patching + one attention layer) baseline
+claims:
+- id: c1
+  statement: 'Main finding: in ablations of three recent LLM-based forecasters, removing the LLM or replacing it with a basic attention layer does not degrade forecasting performance, and in most cases
+    results improve.'
+  location: Abstract
+  page: 1
+  quote: In a series of ablation studies on three recent and popular LLM-based time series forecasting methods, we find that removing the LLM component or replacing it with a basic attention layer does
+    not degrade forecasting performance—in most cases, the results even improve!
+- id: c2
+  statement: 'Scope: three ablations of three methods (OneFitsAll/GPT4TS, Time-LLM, CALF) on eight standard benchmark datasets used by those methods plus five Monash datasets; metrics MAE and MSE. LLMTime
+    is not among the ablated methods.'
+  location: Introduction
+  page: 1
+  quote: We substantiate our claim by performing three ablations of three popular and recent LLM-based forecasting methods [49, 14, 21] using eight standard benchmark datasets from reference methods
+- id: c3
+  statement: 'Reproduction protocol: the original hyperparameters, runtime environments and code of each method were used, and error metrics from the original papers are shown alongside the replication
+    where possible (Appendix D.2 adds that for the smaller ablations the learning rate or batch size was adjusted in some cases).'
+  location: 'Experimental setup: Reproducibility Note'
+  page: 3
+  quote: We used the original hyper-parameters, runtime environments, and code, including model architectures, training loops, and data-loaders.
+- id: c4
+  statement: 'Pretraining test: randomly initializing CALF''s language model and training it on time series, versus using pretrained weights (with/without finetuning), led the authors to conclude that textual
+    knowledge from pretraining provides very limited aid for forecasting.'
+  location: 'Results: RQ3'
+  page: 8
+  quote: In summary, textual knowledge from pretraining provides very limited aids for time series forecasting.
+- id: c5
+  statement: 'Few-shot test: training on 10% of each dataset, LLMs were not meaningfully useful: for Time-LLM (LLaMA) the LLM version and the w/o LLM ablation each performed better in the same number of
+    cases, and for CALF (GPT-2) the ablations could perform better.'
+  location: 'Results: RQ5'
+  page: 9
+  quote: In this section, our evaluation demonstrates that LLMs are still not meaningfully useful in few-shot learning scenarios.
+- id: c6
+  statement: 'Simple alternative: a linear model with an encoder made of patching and attention (PAttn) achieves forecasting performance similar to LLM-based methods.'
+  location: Introduction
+  page: 2
+  quote: We find that a simple linear model with an encoder composed of patching and attention can achieve forecasting performance similar to that of LLMs.
+- id: c7
+  statement: 'Stated limitations: only forecasting is evaluated (not classification or question answering), and only evenly spaced time series (not irregular sequences such as payment records).'
+  location: 'Appendix: Limitations'
+  page: 14
+  quote: Our evaluation is limited to only time-series datasets, i.e., sequences with even time-intervals.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. PDF states: 38th
+    Conference on Neural Information Processing Systems (NeurIPS 2024). Also reports that LLM-based methods were no more vulnerable to input shuffling than their ablations (RQ4) and that ablations cut training/inference
+    time substantially (RQ2). Table 19 caption (Appendix) states LLM-based methods slightly outperform non-LLM methods whose results are copied from the LLM-Time and iTransformer papers on the same splits,
+    but that the ablations indicate this is not due to the LLM. The authors stress they do not claim LLMs will never be useful for time series. Affiliations: University of Virginia and University of Washington.'

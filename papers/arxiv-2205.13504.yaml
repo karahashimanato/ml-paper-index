@@ -1,0 +1,75 @@
+id: arxiv-2205.13504
+title: Are Transformers Effective for Time Series Forecasting?
+authors:
+- Ailing Zeng
+- Muxi Chen
+- Lei Zhang
+- Qiang Xu
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2205.13504
+  code: https://github.com/cure-lab/LTSF-Linear
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 97abddd1821cc72942c8d7ddde7e99466bb91f1bddc37c2b54e0e97be7b5be1b
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - linear-models
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- LTSF-Linear (Linear, DLinear, NLinear) one-layer linear direct multi-step baselines
+claims:
+- id: c1
+  statement: Proposes LTSF-Linear, a set of one-layer linear models (Linear, DLinear with trend/remainder decomposition, NLinear with last-value subtraction) as a comparison baseline for long-term forecasting.
+  location: Abstract
+  page: 1
+  quote: To validate our claim, we introduce a set of embarrass-ingly simple one-layer linear models named LTSF-Linear for comparison.
+- id: c2
+  statement: 'Main claim: on nine real-life datasets, LTSF-Linear outperforms existing Transformer-based LTSF models in all cases, often by a large margin.'
+  location: Abstract
+  page: 1
+  quote: Experimental results on nine real-life datasets show that LTSF-Linear surprisingly outperforms existing sophisticated Transformer-based LTSF models in all cases, and often by a large margin.
+- id: c3
+  statement: 'Hedged conclusion: the temporal modeling capabilities of Transformers for time series are exaggerated, at least for the existing LTSF benchmarks.'
+  location: Introduction
+  page: 2
+  quote: With the above, we conclude that the temporal modeling capabilities of Transformers for time series are exaggerated, at least for the existing LTSF benchmarks.
+- id: c4
+  statement: 'Baseline protocol: Appendix B.2 states that Transformer baselines (Autoformer, Informer, vanilla Transformer from the Autoformer code; FEDformer and Pyraformer from their repositories) were
+    trained with their default hyperparameters; in the main Table 2, however, only methods marked * (Linear, NLinear, DLinear, Pyraformer, Repeat) were run by the authors and the other results (FEDformer,
+    Autoformer, Informer, LogTrans) are copied from the FEDformer paper.'
+  location: 'Appendix: Implementation Details'
+  page: 9
+  quote: We also adopt their default hyper-parameters to train the models.
+- id: c5
+  statement: 'Look-back asymmetry: by default the paper reports look-back L=336 for LTSF-Linear and L=96 for Transformers, motivated by linear models underfitting on short inputs and Transformers overfitting
+    on long ones.'
+  location: 'Appendix: Implementation Details'
+  page: 9
+  quote: To compare the best performance of existing LTSF-Transformers with LTSF-Linear, we re-port L=336 for LTSF-Linear and L=96 for Transformers by default.
+- id: c6
+  statement: 'Look-back study: similar to previous studies'' observations, existing Transformer-based models'' performance deteriorates or stays stable as the look-back window grows, whereas LTSF-Linear
+    improves.'
+  location: 'Experiments: More Analyses on LTSF-Transformers'
+  page: 5
+  quote: Similar to the observations from previous studies [27, 30], existing Transformer-based models’ performance deteriorates or stays stable when the look-back window size increases.
+- id: c7
+  statement: 'Stated limitation: LTSF-Linear has limited model capacity and is meant only as a simple, competitive baseline; e.g. a one-layer linear network struggles with dynamics caused by change points.'
+  location: 'Conclusion: Future work'
+  page: 8
+  quote: LTSF-Linear has a limited model ca-pacity, and it merely serves a simple yet competitive base-line with strong interpretability for future research.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. Datasets: ETTh1/ETTh2/ETTm1/ETTm2,
+    Traffic, Electricity, Weather, ILI, Exchange-Rate; metrics MSE and MAE; horizons 96-720 (ILI 24-60). Table 2 caption: methods marked * are implemented by the authors, other results are from the FEDformer
+    paper. The paper hypothesizes that earlier Transformer gains over IMS baselines largely come from direct multi-step (DMS) forecasting. A naive Repeat (last value) baseline outperforms all Transformer-based
+    methods on Exchange-Rate per the text. The PDF text does not state a venue.'

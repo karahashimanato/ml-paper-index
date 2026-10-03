@@ -29,3 +29,7 @@ themes:
     tags: [model-compression]
     arxiv_queries:
       - 'abs:quantization AND (abs:evaluation OR abs:degradation OR abs:empirical OR abs:benchmark OR abs:trustworthiness OR abs:fairness) AND (cat:cs.LG OR cat:cs.CL)'
+  - name: 時系列基盤モデルと予測
+    tags: [time-series-forecasting, time-series-foundation-model]
+    arxiv_queries:
+      - 'abs:"time series" AND abs:forecasting AND (abs:"foundation model" OR abs:"zero-shot" OR abs:benchmark OR abs:pretrained) AND (cat:cs.LG OR cat:stat.ML)'

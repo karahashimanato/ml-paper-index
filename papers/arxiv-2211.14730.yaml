@@ -1,0 +1,76 @@
+id: arxiv-2211.14730
+title: 'A Time Series is Worth 64 Words: Long-term Forecasting with Transformers'
+authors:
+- Yuqi Nie
+- Nam H. Nguyen
+- Phanwadee Sinthong
+- Jayant Kalagnanam
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2211.14730
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: ffd4021d25b4959883242f256b0fe4ec42f477f66db78c61bfacf7baa7848b0e
+tags:
+  tasks:
+  - time-series-forecasting
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+  - self-supervised
+proposes:
+- 'PatchTST: patching + channel-independent Transformer'
+- masked patch self-supervised pretraining
+claims:
+- id: c1
+  statement: 'Method: PatchTST segments each series into subseries-level patches used as Transformer input tokens, and processes channels independently with shared embedding and Transformer weights across
+    all series.'
+  location: Abstract
+  page: 1
+  quote: 'It is based on two key components: (i) segmentation of time series into subseries-level patches which are served as input tokens to Transformer; (ii) channel-independence'
+- id: c2
+  statement: 'Main claim: PatchTST significantly improves long-term forecasting accuracy compared with SOTA Transformer-based models.'
+  location: Abstract
+  page: 1
+  quote: Our channel-independent patch time series Transformer (PatchTST) can improve the long-term forecasting accuracy signiﬁcantly when compared with that of SOTA Transformer-based models.
+- id: c3
+  statement: 'Baseline protocol: baseline results are collected from Zeng et al. (2022) (default look-back 96 for Transformers, 336 for DLinear; Appendix A.1.2 gives 36 and 104 for ILI); additionally FEDformer,
+    Autoformer and Informer are re-run for six look-back windows and the best result per task is kept to avoid under-estimating them. Whether this best-of-six selection used validation or test data was
+    not found in the text.'
+  location: 'Experiments: Baselines and Experimental Settings'
+  page: 6
+  quote: But in order to avoid under-estimating the baselines, we also run FEDformer, Autoformer and Informer for six different look-back window L ∈{24, 48, 96, 192, 336, 720}, and always choose the best
+    results to create strong baselines.
+- id: c4
+  statement: Versus DLinear (the linear baseline that challenged Transformers), PatchTST outperforms it in general, especially on the large datasets (Weather, Traffic, Electricity) and ILI.
+  location: 'Experiments: Results'
+  page: 6
+  quote: Compared with the DLinear model, PatchTST can still outperform it in general, especially on large datasets (Weather, Trafﬁc, Electricity) and ILI dataset.
+- id: c5
+  statement: 'Self-supervised pretraining (masked patches, 40% masking): on large datasets, pretraining clearly improves over supervised training from scratch.'
+  location: 'Representation learning: Comparison with Supervised Methods'
+  page: 7
+  quote: As shown in the table, on large datasets our pre-training procedure contributes a clear improvement compared to supervised training from scratch.
+- id: c6
+  statement: 'Transfer learning (pretrain on Electricity, fine-tune on other datasets): fine-tuning MSE is slightly worse than pretraining on the same dataset, and in some cases worse than supervised training.'
+  location: 'Representation learning: Transfer Learning'
+  page: 7
+  quote: The ﬁne-tuning performance is also worse than supervised training in some cases.
+- id: c7
+  statement: 'Affiliations: one author is from Princeton University and three are from IBM Research.'
+  location: Title page
+  page: 1
+  quote: 1Princeton University 2IBM Research
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. PDF states: Published
+    as a conference paper at ICLR 2023. Metrics MSE and MAE on Weather, Traffic, Electricity, ILI and four ETT datasets. Variants: PatchTST/42 (L=336, presented as the fair comparison to DLinear) and PatchTST/64
+    (L=512). The re-run over six look-back windows covers FEDformer, Autoformer and Informer only (for ILI the windows are 24-144). Exchange-rate, used by Zeng et al., is not included in the benchmark (Appendix
+    A.1.1 cites the Repeat result and market predictability). No code URL found in the PDF text. Stated future work: modeling cross-channel dependencies properly. The conclusion describes PatchTST as a
+    potential building block for time series foundation models (no foundation-model family tag applied).'

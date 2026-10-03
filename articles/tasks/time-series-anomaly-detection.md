@@ -2,8 +2,8 @@
 title: 時系列異常検知の手法比較と評価方法の問題
 kind: task
 tags: [time-series-anomaly-detection]
-depends_on: [arxiv-2109.05257, arxiv-2009.13807, arxiv-2308.13068, arxiv-2506.18046, arxiv-2211.05244, arxiv-2608.02821, arxiv-2609.39215, arxiv-2610.01168, arxiv-2609.38004, arxiv-2609.31470, arxiv-2609.28022, arxiv-2608.01885, arxiv-2609.39489, arxiv-2609.38789, arxiv-2610.01223, arxiv-2610.00978, arxiv-2609.39337, arxiv-2609.39257, arxiv-2609.36765, arxiv-2609.29194, arxiv-2504.06643, doi-10.24963_ijcai.2026_276, doi-10.24963_ijcai.2026_332]
-written_at: 2026-10-02
+depends_on: [arxiv-2109.05257, arxiv-2009.13807, arxiv-2308.13068, arxiv-2506.18046, arxiv-2211.05244, arxiv-2608.02821, arxiv-2609.39215, arxiv-2610.01168, arxiv-2609.38004, arxiv-2609.31470, arxiv-2609.28022, arxiv-2608.01885, arxiv-2609.39489, arxiv-2609.38789, arxiv-2610.01223, arxiv-2610.00978, arxiv-2609.39337, arxiv-2609.39257, arxiv-2609.36765, arxiv-2609.29194, arxiv-2504.06643, doi-10.24963_ijcai.2026_276, doi-10.24963_ijcai.2026_332, arxiv-2402.03885]
+written_at: 2026-10-03
 written_by: claude-opus-5-5 via Claude Code
 ---
 
@@ -95,12 +95,13 @@ TAB は100本の研究を調べ、次の点を指摘している。
 
 ### 単純な手法が強い
 
-4本の論文が、それぞれ別の方法で「単純な手法が、凝った深層学習の手法と同等以上」であることを示している。
+5本の論文が、それぞれ別の方法で「単純な手法が、凝った深層学習の手法と同等以上」であることを示している。
 
 - **訓練していないモデル**: PA を使わない評価では、既存手法の多くが訓練していないモデルの基準線を下回るか同程度だった [arxiv-2109.05257#c2](https://arxiv.org/pdf/2109.05257v2#page=1 "an untrained model obtains comparable detection performance to the existing methods even when PA is forbidden.") [arxiv-2109.05257#c8](https://arxiv.org/pdf/2109.05257v2#page=7 "mostly inferior to Case 2 and 3, implying that the currently proposed methods may have obtained marginal or even no advancement against the baselines.")。
 - **PCA**: 単純な前処理と後処理を加えた PCA が、多くの深層学習手法を上回った [arxiv-2308.13068#c3](https://arxiv.org/pdf/2308.13068v2#page=1 "we propose a simple, yet challenging, baseline based on Principal Components Analysis (PCA) that surprisingly outperforms many recent Deep Learning (DL) based approaches on popular benchmark datasets.") [arxiv-2308.13068#c10](https://arxiv.org/pdf/2308.13068v2#page=14 "we use simple pre-processing and post-processing blocks (input scaling, clipping and score smoothing) that significantly improve the score.")。著者は、多くの研究が十分に手強い単純な基準線を置いていないと批判している [arxiv-2308.13068#c13](https://arxiv.org/pdf/2308.13068v2#page=1 "instead of putting the highest weight on the design of increasingly more complex")。
 - **古典的な手法(TAB)**: 単変量の系列では、機械学習や学習を使わない古典的な手法が平均で最良だった [arxiv-2506.18046#c11](https://arxiv.org/pdf/2506.18046v2#page=10 "Machine learning (ML) and non-learning (NL) methods exhibit the best average performance in terms of the V-PR and Aff-F metrics.") [arxiv-2506.18046#c18](https://arxiv.org/pdf/2506.18046v2#page=11 "with OCSVM, HOBS, and DWT achieving the excellent results.")。著者は、新手法を追う一方で古典的な手法を見落とすべきではないとしている [arxiv-2506.18046#c12](https://arxiv.org/pdf/2506.18046v2#page=10 "while pursuing novel methods, we should not overlook the classic methods.")。
 - **1行のコード**: ベンチマークの多くの系列は、1行の単純なコードで解ける [arxiv-2009.13807#c3](https://arxiv.org/pdf/2009.13807v5#page=3 "316 out of 367 (86.1%) can be easily solved with a one-liner")。
+- **時系列基盤モデル自身の論文(MOMENT)**: 統計的な手法や Transformer でない手法が多くの深層モデルを上回ったと報告しており、その例の1つが異常検知での k 近傍法である。著者は、こうした基準線が実用性の評価に必要だと主張している [arxiv-2402.03885#c7](https://arxiv.org/pdf/2402.03885v3#page=7 "We found that statistical and non-transformer-based approaches like ARIMA for short-horizon forecasting, N-BEATS for long-horizon forecasting, and k-nearest neighbors for anomaly detection outperform many deep and transformer-based models.")。
 
 ### GDN は評価方法を変えても崩れにくい
 
@@ -166,3 +167,4 @@ TAB の著者は、すべての系列と異常の種類で最良の手法はな�
 - [arxiv-2308.13068](../../papers/arxiv-2308.13068.yaml) Sehili & Zhang, "Multivariate Time Series Anomaly Detection: Fancy Algorithms and Flawed Evaluation Methodology"
 - [arxiv-2506.18046](../../papers/arxiv-2506.18046.yaml) Qiu et al., "TAB: Unified Benchmarking of Time Series Anomaly Detection Methods" (PVLDB 2025)
 - [arxiv-2211.05244](../../papers/arxiv-2211.05244.yaml) Darban et al., "Deep Learning for Time Series Anomaly Detection: A Survey"
+- [arxiv-2402.03885](../../papers/arxiv-2402.03885.yaml) Goswami et al., "MOMENT: A Family of Open Time-series Foundation Models"

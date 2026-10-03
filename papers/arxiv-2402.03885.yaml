@@ -1,0 +1,90 @@
+id: arxiv-2402.03885
+title: 'MOMENT: A Family of Open Time-series Foundation Models'
+authors:
+- Mononito Goswami
+- Konrad Szafer
+- Arjun Choudhry
+- Yifu Cai
+- Shuo Li
+- Artur Dubrawski
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2402.03885
+  code: https://github.com/moment-timeseries-foundation-model/moment-research
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 037108e4be01e9ae7643bbe54bd4f65c9b5710d53f336c05054e68be645124e2
+tags:
+  tasks:
+  - time-series-forecasting
+  - time-series-anomaly-detection
+  - time-series-classification
+  method_families:
+  - time-series-foundation-model
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- MOMENT (open-source family of transformer time-series foundation models pre-trained by masked time series modeling)
+- Time Series Pile (collection of public time series for pre-training)
+- multi-task limited-supervision benchmark extending the TimesNet benchmark
+claims:
+- id: c1
+  statement: MOMENT is a family of high-capacity transformer models pre-trained with a masked time series prediction task on large amounts of time series from diverse domains; the authors present it as
+    the first family of open-source large pre-trained time series models.
+  location: Introduction
+  page: 1
+  quote: MOMENT is a family of high-capacity transformer models, pre-trained using a masked time series prediction task on large amounts of time series data drawn from diverse domains.
+- id: c2
+  statement: 'Pre-training data and contamination control: the Time Series Pile collates the Informer long-horizon forecasting datasets, the Monash archive, the UCR/UEA classification archive and TSB-UAD;
+    every dataset is split into disjoint train/validation/test splits (creators'' splits, otherwise a random 60/10/30 split) and only the training splits are used for pre-training. The Informer collection
+    listed as part of the Pile comprises ETT, Electricity, Traffic, Weather, ILI and Exchange-rate.'
+  location: Methodology (Figure 2 caption)
+  page: 3
+  quote: We only use the training splits of all datasets for pre-training.
+- id: c3
+  statement: 'Zero-shot short-horizon forecasting follows the setting of Oreshkin et al. (2021): MOMENT is fine-tuned on a source dataset and evaluated on a target dataset of the same temporal resolution.
+    Results are reported only on the portion of M3 and M4 unseen during pre-training and on the frequencies with the most data; the authors say daily, hourly and weekly frequencies had very little data
+    and they could not get promising zero-shot performance for any of the deep learning models.'
+  location: Appendix (Zero-shot short-horizon forecasting)
+  page: 25
+  quote: our results are reported only (1) on 40% of the M3 and M4 datasets that were unseen during pre-training, (2) a subset of frequencies with largest support in the datasets.
+- id: c4
+  statement: 'Tuning protocol: the main text states that no hyper-parameter tuning is performed (the appendix says no ''extensive'' tuning); MOMENT-Large is fine-tuned with a fixed batch size and a one-cycle
+    schedule, and baselines use the recommended settings from their papers and public repositories. Long-horizon forecasting uses linear probing (only the forecasting head is trained).'
+  location: Experimental Setup and Results
+  page: 7
+  quote: We do not perform hyper-parameter tuning.
+- id: c5
+  statement: 'Long-horizon forecasting: linearly probed MOMENT is near state-of-the-art on most datasets and horizons but second to PatchTST, which generally achieves the lowest MSE; LLM-based forecasters
+    (Time-LLM, GPT4TS) perform worse than MOMENT on many datasets and horizons, and N-BEATS outperforms several recent methods.'
+  location: Results (Long-horizon forecasting)
+  page: 7
+  quote: Linearly probing MOMENT achieves near state-of-the-art performance on most datasets and horizons, and is only second to PatchTST which generally achieves the lowest MSE (Tab. 2).
+- id: c6
+  statement: 'Zero-shot short-horizon forecasting is where the authors see the largest scope for improvement: statistical methods such as Theta and ETS outperformed the deep models, although on some datasets
+    MOMENT had lower sMAPE than ARIMA.'
+  location: Results (Zero-shot short-horizon forecasting)
+  page: 7
+  quote: Statistical methods such as Theta and ETS outperformed their deeper counterparts.
+- id: c7
+  statement: 'Negative finding across tasks: the authors found that statistical and non-transformer approaches (ARIMA for short-horizon forecasting, N-BEATS for long-horizon forecasting, k-nearest neighbors
+    for anomaly detection) outperform many deep and transformer-based models, and argue such baselines are needed to assess practical utility.'
+  location: Experimental Setup and Results (Baselines)
+  page: 7
+  quote: We found that statistical and non-transformer-based approaches like ARIMA for short-horizon forecasting, N-BEATS for long-horizon forecasting, and k-nearest neighbors for anomaly detection outperform
+    many deep and transformer-based models.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): time-series foundation models and forecasting; carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings
+    of the 41st International Conference on Machine Learning (ICML), PMLR 235, 2024. Authors at Carnegie Mellon University (Auton Lab) and University of Pennsylvania; funding from NIH and U.S. Army. Anomaly
+    detection is evaluated with adjusted best F1 and VUS-ROC on a subset of the UCR anomaly archive; classification via SVM on unsupervised representations on 91 UCR datasets. Models and the Time Series
+    Pile are released on Hugging Face (AutonLab); the reproducibility statement gives the research-code URL github.com/moment-timeseries-foundation-model/moment-research. The appendix hyper-parameter paragraph
+    describes different default fine-tuning settings (MOMENT-Base, batch size 16, cosine schedule) from the main text (MOMENT-Large, batch size 64, one-cycle). Reviewer inference, not stated as such in
+    the paper: the long-horizon evaluation datasets in Table 1 (ETT, Electricity, Traffic, Weather, Exchange, ILI) are the Informer datasets included in the Time Series Pile, so their training splits (and
+    only those, per Section 3.1) were seen in pre-training; long-horizon results are therefore not out-of-distribution with respect to pre-training data.'

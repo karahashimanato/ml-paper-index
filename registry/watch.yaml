@@ -49,3 +49,7 @@ themes:
     tags: [model-selection, selective-prediction, mlops]
     arxiv_queries:
       - '(abs:"model selection" OR abs:"algorithm selection" OR abs:"learning to defer" OR abs:"selective prediction" OR abs:"selective classification" OR abs:"model routing" OR abs:"LLM routing" OR abs:"fallback" OR abs:"MLOps") AND (cat:cs.LG OR cat:cs.SE OR cat:stat.ML)'
+  - name: オートエンコーダ
+    tags: [autoencoders, variational-autoencoders, reconstruction-based-detectors]
+    arxiv_queries:
+      - '(abs:autoencoder OR abs:"auto-encoder" OR abs:"variational autoencoder" OR abs:"posterior collapse") AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'

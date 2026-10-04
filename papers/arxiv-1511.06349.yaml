@@ -1,0 +1,86 @@
+id: arxiv-1511.06349
+title: Generating Sentences from a Continuous Space
+authors:
+- Samuel R. Bowman
+- Luke Vilnis
+- Oriol Vinyals
+- Andrew M. Dai
+- Rafal Jozefowicz
+- Samy Bengio
+year: 2015
+venue: CoNLL 2016
+links:
+  arxiv: https://arxiv.org/abs/1511.06349
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-04'
+  pdf_sha256: b44c9758ee3a862048682b0cbf154984eefb87523df1c4d9a0d18d8968d017d2
+tags:
+  tasks:
+  - generative-modeling
+  - language-modeling
+  - representation-learning
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- An LSTM-based VAE for sentences with a global latent code, trained with KL cost annealing and word dropout in the decoder; an adversarial-classifier evaluation for imputing missing words
+claims:
+- id: c1
+  statement: 'Motivating observation: decoding points on a path between two sentence encodings of a conventional (sequence) autoencoder gives intermediate sentences that are generally ungrammatical (Table
+    1), which the authors take to suggest that standard autoencoders do not learn a smooth, interpretable sentence feature space.'
+  location: Background
+  page: 2
+  quote: Standard autoencoders are not eﬀective at extracting for global semantic features.
+- id: c2
+  statement: 'Optimization failure (posterior collapse): straightforward implementations fail to encode information in the latent variable; except in vanishingly rare cases, most training runs with most
+    hyperparameters set the approximate posterior equal to the prior, bringing the KL term to zero, and the model then behaves as an RNN language model.'
+  location: Optimization challenges
+  page: 3
+  quote: Straightforward implementations of our vae fail to learn this behavior
+- id: c3
+  statement: 'Proposed mechanism: the LSTM decoder is sensitive to small variations in the hidden state, so the model first learns to ignore the latent code; afterwards the decoder ignores the encoder and
+    little gradient passes between them, an undesirable stable equilibrium with the KL term at zero.'
+  location: Optimization challenges
+  page: 3
+  quote: Once this has happened, the decoder ignores the encoder and little to no gradient signal passes between the two, yielding an undesirable stable equilibrium with the kl cost term at zero.
+- id: c4
+  statement: 'KL cost annealing: the weight on the KL term starts at zero and is gradually increased to 1, so the true lower bound is not optimized early in training; the authors describe it as annealing
+    from a vanilla autoencoder to a VAE, with the rate tuned as a hyperparameter.'
+  location: KL cost annealing
+  page: 4
+  quote: This can be thought of as annealing from a vanilla autoencoder to a vae.
+- id: c5
+  statement: 'Word dropout: replacing a fraction of the conditioned-on previous words with an unknown-word token weakens the decoder and forces it to rely on the latent variable; standard dropout on decoder
+    input embeddings did not help the model use the latent variable.'
+  location: Word dropout and historyless decoding
+  page: 4
+  quote: This forces the model to rely on the latent variable
+- id: c6
+  statement: Without both word dropout and KL annealing, training in the standard setting reliably gives models equivalent to the baseline RNN language model with zero KL divergence.
+  location: 'Results: Language modeling'
+  page: 4
+  quote: Training a vae in the standard setting without both word dropout and cost annealing reliably results in models with equivalent performance to the baseline rnnlm, and zero kl divergence.
+- id: c7
+  statement: 'Evaluation caveats on Penn Treebank language modelling: the VAE hyperparameter search was restricted to models encoding a non-trivial amount in the latent variable, and the VAE is reported
+    with a variational lower bound while the RNNLM is reported with its exact likelihood, which the authors note puts the VAE at a potential disadvantage. In the standard setting the VAE performs slightly
+    worse than the RNNLM.'
+  location: 'Results: Language modeling'
+  page: 4
+  quote: This discrepancy puts the vae at a potential disadvantage.
+- id: c8
+  statement: Even with these techniques the authors could not train models in which the KL term dominates the reconstruction term, which they take to suggest that it is substantially easier to model the
+    data with local statistics, so the encoder only encodes what those statistics cannot describe.
+  location: 'Results: Language modeling'
+  page: 5
+  quote: This suggests that it is still substantially easier to learn to factor the data distribution using simple local statistics
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliations: Stanford University, University of Massachusetts Amherst, Google Brain; the footnote states that the work was done when all authors were at Google. Venue from the arXiv journal_ref
+    (SIGNLL Conference on Computational Natural Language Learning (CONLL), 2016). Results tables (Penn Treebank, imputation) not recorded.'

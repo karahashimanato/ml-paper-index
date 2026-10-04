@@ -1,0 +1,85 @@
+id: arxiv-1511.05644
+title: Adversarial Autoencoders
+authors:
+- Alireza Makhzani
+- Jonathon Shlens
+- Navdeep Jaitly
+- Ian Goodfellow
+- Brendan Frey
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1511.05644
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-04'
+  pdf_sha256: be300d41e88544997232a9c6c082a38125b3eb88da0c43f59ea7954e98dd6356
+tags:
+  tasks:
+  - generative-modeling
+  - representation-learning
+  method_families:
+  - autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- 'Adversarial autoencoder (AAE): an autoencoder trained with a reconstruction loss plus an adversarial network on the latent code that matches the aggregated posterior q(z) to an arbitrary prior p(z),
+  so that the decoder becomes a generative model; extensions for supervised, semi-supervised, clustering and dimensionality-reduction settings'
+claims:
+- id: c1
+  statement: 'Definition: the AAE is an autoencoder regularized by matching the aggregated posterior q(z) (the encoding distribution averaged over the data) to an arbitrary prior p(z), using an adversarial
+    network attached to the latent code; the encoder plays the role of the GAN generator.'
+  location: Adversarial Autoencoders
+  page: 2
+  quote: The adversarial autoencoder is an autoencoder that is regularized by matching the aggregated posterior, q(z), to an arbitrary prior, p(z).
+- id: c2
+  statement: 'Training: the adversarial network and the autoencoder are trained jointly with SGD in two phases on each mini-batch, a reconstruction phase (encoder and decoder minimize reconstruction error)
+    and a regularization phase (the discriminator is updated, then the encoder is updated to confuse it).'
+  location: Adversarial Autoencoders
+  page: 2
+  quote: Both, the adversarial network and the autoencoder are trained jointly with SGD in two phases – the reconstruction phase and the regularization phase – executed on each mini-batch.
+- id: c3
+  statement: 'Encoder choice: deterministic, Gaussian-posterior and universal-approximator encoders were considered; the authors argue the stochastic ones could smooth q(z), but after an extensive hyperparameter
+    search they obtained similar test likelihood with each, and report only the deterministic encoder in the rest of the paper.'
+  location: Adversarial Autoencoders
+  page: 3
+  quote: Nevertheless, after extensive hyper-parameter search, we obtained similar test-likelihood with each type of q(z|x).
+- id: c4
+  statement: 'Relation to the VAE regularizer: the VAE bound is rewritten as reconstruction minus the entropy of q(z|x) plus the cross-entropy between the aggregated posterior and the prior; the authors
+    argue the KL/cross-entropy term encourages q(z) to pick the modes of p(z), and the AAE replaces the two regularization terms with an adversarial procedure that matches the whole distribution of p(z).'
+  location: Relationship to Variational Autoencoders
+  page: 4
+  quote: In adversarial autoencoders, we replace the second two terms with an adversarial training procedure that encourages q(z) to match to the whole distribution of p(z).
+- id: c5
+  statement: 'Qualitative comparison (2-D codes of held-out MNIST, Figure 2, same architecture): with a 2-D Gaussian prior the VAE roughly matches the prior shape but leaves local regions of the code space
+    with no data points, which the authors take to indicate that the VAE may not have captured the data manifold as well as the AAE. Evidence is visual only.'
+  location: Relationship to Variational Autoencoders
+  page: 4
+  quote: However, no data points map to several local regions of the coding space indicating that the VAE may not have captured the data manifold as well as the adversarial autoencoder.
+- id: c6
+  statement: 'Practical difference: backpropagating through the VAE''s KL term by Monte Carlo sampling requires the exact functional form of the prior, whereas the AAE only needs samples from the prior
+    (demonstrated with a swiss-roll prior).'
+  location: Relationship to Variational Autoencoders
+  page: 5
+  quote: However, in AAEs, we only need to be able to sample from the prior distribution in order to induce q(z) to match p(z).
+- id: c7
+  statement: 'Likelihood evaluation protocol (real-valued MNIST and Toronto Face Dataset): since p(x) cannot be computed directly, a Gaussian Parzen window is fitted to samples generated from the model
+    and the test-data likelihood is computed under it, with the Parzen bandwidth chosen by cross-validation; 10K- and 10M-sample estimates are reported.'
+  location: Likelihood Analysis of Adversarial Autoencoders
+  page: 7
+  quote: We ﬁt a Gaussian Parzen window (kernel density estimator) to 10, 000 samples generated from the model and compute the likelihood of the test data under this distribution.
+- id: c8
+  statement: 'Stated caveat on that evaluation: although the AAE achieved superior log-likelihoods in all their comparisons, the authors warn that the currently available likelihood metrics for generative
+    models such as GANs are deeply flawed, citing Theis et al. for problems including the 10K and 10M sample Parzen window estimates.'
+  location: Likelihood Analysis of Adversarial Autoencoders
+  page: 7
+  quote: However, the reader must be aware that the metrics currently available for evaluating the likelihood of generative models such as GANs are deeply ﬂawed.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliations: University of Toronto, Google Brain, OpenAI. Goodfellow (an author) is also the first author of the GAN paper whose adversarial procedure is used and which is a baseline in
+    Table 1. No venue statement was found in the PDF (arXiv v2, May 2016) and the arXiv record has no comment, so no venue is recorded (the WAE paper, arxiv-1711.01558, cites it as ''In ICLR, 2016''; not
+    used as a source). The paper also reports semi-supervised classification (MNIST, SVHN), unsupervised clustering and dimensionality-reduction results (Tables 2-3, Figure 11); results tables not recorded.'

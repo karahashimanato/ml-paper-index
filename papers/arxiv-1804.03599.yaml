@@ -1,0 +1,80 @@
+id: arxiv-1804.03599
+title: Understanding disentangling in β-VAE
+authors:
+- Christopher P. Burgess
+- Irina Higgins
+- Arka Pal
+- Loic Matthey
+- Nick Watters
+- Guillaume Desjardins
+- Alexander Lerchner
+year: 2018
+venue: NIPS 2017 Workshop on Learning Disentangled Representations
+links:
+  arxiv: https://arxiv.org/abs/1804.03599
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-04'
+  pdf_sha256: 1172b97c557eaad6c70a7e44a790883bccef48fa0034ef085ec4c0fc8668d712
+tags:
+  tasks:
+  - representation-learning
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- An information-bottleneck / rate-distortion account of why beta-VAE learns axis-aligned disentangled representations, and a training regime that replaces the fixed beta-weighted KL with a penalty on the
+  deviation of the KL from a target capacity C that is increased gradually during training (called AnnealedVAE by later work, e.g. arxiv-1811.12359)
+claims:
+- id: c1
+  statement: Citing the original beta-VAE paper [15], the authors state that the higher beta values needed for disentangling often trade reconstruction fidelity against how disentangled the latent code
+    is, due to information lost through the restricted-capacity bottleneck.
+  location: β-VAE
+  page: 3
+  quote: Higher values of β necessary to encourage disentangling often lead to a trade-off between the ﬁdelity of β-VAE reconstructions and the disentangled nature of its latent code z (see Fig. 6 in [15]).
+- id: c2
+  statement: 'Information-theoretic view: treating each latent unit of the diagonal-Gaussian posterior as an additive white Gaussian noise channel, the KL term can be seen as an upper bound on the information
+    transmitted through the latent channels per data sample.'
+  location: β-VAE through the information bottleneck perspective
+  page: 3
+  quote: can be seen as an upper bound on the amount of information that can be transmitted through the latent channels per data sample
+- id: c3
+  statement: 'Key hypothesis: beta-VAE finds latent components that make different contributions to the log-likelihood term, and the diagonal posterior covariance pushes these components into separate latent
+    dimensions, which may align them with the generative factors.'
+  location: β-VAE aligns latent dimensions with components that make different contributions to reconstruction
+  page: 4
+  quote: Our key hypothesis is that β-VAE ﬁnds latent components which make different contributions to the log-likelihood term of the cost function (Eq. 5).
+- id: c4
+  statement: 'Illustration on a dataset with two factors (x and y position of a Gaussian blob): the standard VAE (beta = 1) spread the two factors across four latent dimensions with representational discontinuities,
+    while beta-VAE (beta = 150) represented them in two.'
+  location: Comparing disentangling in β-VAE and VAE
+  page: 4
+  quote: The standard VAE learns to represent these two factors across four latent dimensions, whereas β-VAE represents them in two.
+- id: c5
+  statement: 'Proposed modification: the objective penalizes the absolute deviation of the KL from a target capacity C, and C is gradually increased from zero to a value large enough for good reconstructions.'
+  location: Improving disentangling in β-VAE with controlled capacity increase
+  page: 7
+  quote: Similar to the generator model, C is gradually increased from zero to a value large enough to produce good quality reconstructions (see Sec. A.2 for more details).
+- id: c6
+  statement: 'Evaluation is qualitative: results on coloured dSprites and 3D Chairs are shown as latent traversals and reconstructions judged by eye; no quantitative disentanglement metric was found in
+    the text (searched for ''metric'' and ''quantitative'').'
+  location: Improving disentangling in β-VAE with controlled capacity increase
+  page: 8
+  quote: Furthermore, the quality of the traversal images are high, and by eye, the model reconstructions (second row) are quite difﬁcult to distinguish from the corresponding data samples used to generate
+    them (top row).
+- id: c7
+  statement: On 3D Chairs, the authors note that it is unclear what the disentangled axes should correspond to.
+  location: Improving disentangling in β-VAE with controlled capacity increase
+  page: 8
+  quote: With this richer dataset it is unclear exactly what the disentangled axes should correspond to
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: DeepMind. Venue from the arXiv comment (''Presented at the 2017 NIPS Workshop on Learning Disentangled Representations''); the PDF footer reads ''31st Conference on Neural
+    Information Processing Systems (NIPS 2017)''. Disclosure: several authors (Higgins, Burgess, Matthey, Lerchner and others) are authors of the original beta-VAE paper [15] that this paper analyses and
+    modifies. arxiv-1811.12359 includes this method as ''AnnealedVAE'' in its large-scale study.'

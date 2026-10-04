@@ -1,0 +1,100 @@
+id: arxiv-2009.11732
+title: A Unifying Review of Deep and Shallow Anomaly Detection
+authors:
+- Lukas Ruff
+- Jacob R. Kauffmann
+- Robert A. Vandermeulen
+- Grégoire Montavon
+- Wojciech Samek
+- Marius Kloft
+- Thomas G. Dietterich
+- Klaus-Robert Müller
+year: 2020
+venue: Proceedings of the IEEE
+links:
+  arxiv: https://arxiv.org/abs/2009.11732
+  doi: https://doi.org/10.1109/JPROC.2021.3052449
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-04'
+  pdf_sha256: a3aa0d76fc40457ee9bd3cdcd6bd7d380bd4cd6638ef675ea8a6a1531207bc71
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - autoencoders
+  - reconstruction-based-detectors
+  - classical-outlier-detectors
+  - kernel-methods
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- A unifying view that describes probabilistic, one-class classification and reconstruction anomaly detectors by five modeling dimensions (loss, model, feature map, regularization, inference mode)
+- An AUC comparison of nine shallow and deep detectors (including PCA, kernel PCA and an autoencoder) on MNIST-C and MVTec-AD, plus worked-through examples with explanation (LRP) of anomaly predictions
+claims:
+- id: c1
+  statement: 'Positioning: autoencoders were studied early for anomaly detection, and deep autoencoders are today among the most widely adopted methods for deep anomaly detection, which the authors attribute
+    (with ''likely'') to their long history and easy-to-use standard variants.'
+  location: Section V-C (Autoencoders)
+  page: 15
+  quote: Today, deep autoencoders are among the most widely adopted methods for deep anomaly detection in the literature
+- id: c2
+  statement: 'Assumption behind the reconstruction score: without restrictions the reconstruction objective would be solved by the identity map, so structural assumptions (manifold or prototype) are needed;
+    if the model has learned a truthful manifold or prototypical structure, a high reconstruction error would detect off-manifold or non-prototypical points. Most reconstruction methods have no probabilistic
+    motivation, while some (PCA, Bayesian PCA, VAEs) relate to density estimation.'
+  location: Section V-A (Reconstruction Objective)
+  page: 14
+  quote: For models that have learned some truthful manifold structure or prototypical representation, a high reconstruction error would then detect off-manifold or non-prototypical instances.
+- id: c3
+  statement: 'Failure mode (open problem): citing Tong et al. [554], the authors note that an anomalous all-black image can be well reconstructed by an autoencoder trained on MNIST; they state that similar
+    observations suggest reconstruction-based models can systematically reconstruct simpler out-of-distribution points within the convex hull of the data, give the PCA example of perfect reconstruction
+    along the principal subspace far from the training data, and call for more theoretical research on such out-of-distribution generalization.'
+  location: Section IX-F (Foundation and Theory)
+  page: 26
+  quote: For example, an anomalous all-black image can be well reconstructed by an autoencoder trained on MNIST digits
+- id: c4
+  statement: 'Comparison setup and finding: nine methods (Gaussian, MVE, PCA, KDE, SVDD, kPCA, AGAN, DOCC, AE) are compared by AUC on MNIST-C (trained on the standard MNIST training set, tested on each
+    corruption separately) and on MVTec-AD (one model per image set); performance is heterogeneous across corruptions and defect classes, more powerful nonlinear models are not better on every class, and
+    simple shallow models occasionally outperform deep ones.'
+  location: Section VII-C (Comparison on MNIST-C and MVTec-AD)
+  page: 20
+  quote: Also, the more powerful nonlinear models are not better on every class, and simple ‘shallow’ models occasionally outperform their deeper counterparts.
+- id: c5
+  statement: 'Hyperparameter selection in the comparison: the AE is trained so that the reconstruction error on a small training hold-out set is minimized (64-dimensional code on MNIST-C, 512-dimensional
+    bottleneck on MVTec-AD); PCA and kPCA keep 90% of the variance; KDE bandwidth maximizes the likelihood of a small hold-out set from the training data; for SVDD the kernel scale is selected using a small
+    labeled hold-out set.'
+  location: Appendix B-B (Training Details)
+  page: 27
+  quote: We train the AE such that the reconstruction error of a small training hold-out set is minimized.
+- id: c6
+  statement: 'Worked example (MVTec-AD wood): hyperparameters are selected on hold-out data that may include a few inliers and anomalies extracted from the test set, and performance is evaluated on the
+    remainder of the test set; LRP explanations then show that the best-scoring model (KDE) relies on the wood grain rather than the stain, which the authors call a ''Clever Hans'' effect.'
+  location: 'Section VIII-B (Example 2: MVTec Industrial Inspection)'
+  page: 22
+  quote: Following the standard model training / validation procedure, we train a set of models on the training data, select their hyperparameters on hold out data (e.g., a few inliers and anomalies extracted
+    from the test set), and then evaluate their performance on the remainder of the test set.
+- id: c7
+  statement: 'Contamination: in the unsupervised setting, unlabeled training data may be contaminated with undetected anomalies (a mixture with contamination rate eta); the greater the contamination, the
+    more the normal decision boundary is distorted. Assumptions about noise and contamination rate are described as crucial, and robust methods aim to account for them.'
+  location: Section II-C2 (The Unsupervised Setting)
+  page: 6
+  quote: The greater the contamination, the more the normal data decision boundary will be distorted by including the anomalous points.
+- id: c8
+  statement: 'Evaluation advice: the decision threshold is set to minimize type I/II error costs on validation data or to meet deployment constraints; when costs are unspecified, threshold-independent AUC
+    is common, but it can be overly optimistic on highly imbalanced test sets where AUPRC is more informative; the authors recommend ideally reporting both. They also note that k-classes-out benchmarks
+    may not be a good simulacrum of real anomalies.'
+  location: Section VII-B (Evaluating Anomaly Detectors)
+  page: 19
+  quote: One caveat of AUC is that it can produce overly optimistic scores in case of highly imbalanced test sets [200], [451].
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Venue and DOI from the arXiv journal_ref (''Proceedings of the IEEE (2021) 1-40'') and arXiv DOI field. Affiliations not recorded. Possible conflict of interest (not stated as such in the
+    paper): the reference list shows that Ruff, Vandermeulen, Kloft and Müller are authors of Deep SVDD [137] and Deep SAD [144], which the review discusses; whether the ''DOCC'' model in the MNIST-C/MVTec-AD
+    comparison is the authors'' own method is not stated (Appendix B-B describes it as a whitening transform on pre-trained VGG16 / EMNIST-CNN features). AUC values in Fig. 8 labels and in Tables IV-VI
+    are not recorded. Only the reconstruction/autoencoder, evaluation and open-problem parts of the 40-page review were read closely.'

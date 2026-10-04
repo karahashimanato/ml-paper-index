@@ -1,0 +1,86 @@
+id: arxiv-1206.5538
+title: 'Representation Learning: A Review and New Perspectives'
+authors:
+- Yoshua Bengio
+- Aaron Courville
+- Pascal Vincent
+year: 2012
+links:
+  arxiv: https://arxiv.org/abs/1206.5538
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-04'
+  pdf_sha256: ff1668886c857e0337585db6cef0ffa3851f1a25ee45abd1d844a795df569acd
+tags:
+  tasks:
+  - representation-learning
+  method_families:
+  - autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- A review of unsupervised representation learning (probabilistic models, regularized auto-encoders, manifold learning, deep architectures); for auto-encoders, it frames sparse, denoising and contractive
+  variants as regularizers that prevent learning the identity, and relates them to score estimation and manifold tangents
+claims:
+- id: c1
+  statement: 'Why plain reconstruction is not enough: since the identity function has zero reconstruction error everywhere, something in the training criterion or the parametrization must prevent the auto-encoder
+    from learning it; the authors call auto-encoders with such means regularized auto-encoders, a low-dimensional code (as in the classical auto-encoder or PCA) being one particular form.'
+  location: Section 7.1
+  page: 13
+  quote: To capture the structure of the data-generating distribution, it is therefore important that something in the training criterion or the parametrization prevents the auto-encoder from learning the
+    identity function, which has zero reconstruction error everywhere.
+- id: c2
+  statement: A linear auto-encoder with squared reconstruction error learns the same subspace as PCA; citing Bourlard and Kamp (1988), this also holds with a sigmoid encoder, but not when encoder and decoder
+    weights are tied.
+  location: Section 7.1
+  page: 14
+  quote: In the case of a linear auto-encoder (linear encoder and decoder) with squared reconstruction error, minimizing Eq. 19 learns the same subspace
+- id: c3
+  statement: Overcomplete codes (more hidden units than inputs), favoured by sparse coding and RBM approaches, can let the auto-encoder simply copy the input into the features and reconstruct perfectly
+    without extracting meaningful features; regularized auto-encoders are presented as ways to constrain the representation even when it is overcomplete.
+  location: Section 7.2
+  page: 14
+  quote: This can allow the auto-encoder to simply duplicate the input in the features, with perfect reconstruction without having extracted more meaningful features.
+- id: c4
+  statement: 'Sparse auto-encoders: sparsity has been obtained by penalizing hidden biases (which risks the weights compensating for the bias) or the hidden activations directly (L1, Student-t, or a KL
+    penalty towards a target mean activation); the authors state that a clear comparative analysis of the activation-penalty variants is still lacking.'
+  location: Section 7.2.1
+  page: 14
+  quote: When directly penalizing the hidden unit outputs, several variants can be found in the literature, but a clear comparative analysis is still lacking.
+- id: c5
+  statement: Denoising auto-encoders (citing Vincent et al. 2008, 2010) are trained to reconstruct the clean input from an artificially corrupted one, so learning the identity is no longer enough; the reconstruction
+    is described as essentially a nearby point of higher density than the corrupted input.
+  location: Section 7.2.2
+  page: 14
+  quote: 'Learning the identity is no longer enough: the learner must capture the structure of the input distribution in order to optimally undo the effect of the corruption process, with the reconstruction
+    essentially being a nearby but higher density point than the corrupted input.'
+- id: c6
+  statement: Contractive auto-encoders (citing Rifai et al. 2011a) add the Frobenius norm of the encoder Jacobian; the authors list three differences from DAEs (feature rather than reconstruction sensitivity
+    is penalized, the penalty is analytic rather than stochastic, and a hyper-parameter controls the trade-off) that may be partly responsible for the better performance CAE features seem to show, and note
+    that the analytic penalty only encourages robustness to infinitesimal input variations.
+  location: Section 7.2.3
+  page: 15
+  quote: There are at least three notable differences with DAEs, which may be partly responsible for the better performance that CAE features seem to empirically demonstrate
+- id: c7
+  statement: 'Implication of the score interpretation (citing Vincent 2011 and Alain and Bengio 2012): the reconstruction-minus-input vector is aligned with the estimated score, which can be zero at local
+    maxima but also at local minima of the log-density, so low reconstruction error cannot be equated with high estimated probability.'
+  location: Section 9.2
+  page: 19
+  quote: It means that we cannot equate low reconstruction error with high estimated probability.
+- id: c8
+  statement: 'Evaluation caveat: test-set reconstruction error of auto-encoder and sparse coding variants may be misleading, because larger capacity (more features, more training time) tends to lower it
+    even on the test set, so it cannot be used reliably to select most hyper-parameters; denoising reconstruction error is stated to be immune to this, but not for the hyper-parameter controlling the amount
+    of noise or contraction.'
+  location: Section 9.5
+  page: 20
+  quote: Hence it cannot be used reliably for selecting most hyper-parameters.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: U. Montreal (Bengio and Vincent also CIFAR). No venue is stated in the PDF and none was given in the arXiv metadata; no venue recorded. Review paper without own experiments.
+    Disclosure: the authors review their own methods (Vincent: denoising auto-encoders; Bengio: co-author of the contractive/score results cited, e.g. Alain and Bengio 2012 = arxiv-1211.4246). In Section
+    9.5 the sentence reads ''this immunity can be extended to DAEs'' after a sentence about DAEs (as printed; possibly meant CAEs) - not paraphrased in the claim.'

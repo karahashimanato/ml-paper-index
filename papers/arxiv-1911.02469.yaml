@@ -1,0 +1,78 @@
+id: arxiv-1911.02469
+title: Don't Blame the ELBO! A Linear VAE Perspective on Posterior Collapse
+authors:
+- James Lucas
+- George Tucker
+- Roger Grosse
+- Mohammad Norouzi
+year: 2019
+venue: NeurIPS 2019
+links:
+  arxiv: https://arxiv.org/abs/1911.02469
+  url: https://sites.google.com/view/dont-blame-the-elbo
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-04'
+  pdf_sha256: 1a57f11ae8b91de1236d5fceaf827c2cbc3702705d3b83efd66bee33650de1ab
+tags:
+  tasks:
+  - generative-modeling
+  - representation-learning
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- An analysis of posterior collapse through linear VAEs and their correspondence with probabilistic PCA, and an (epsilon, delta)-collapse definition for measuring posterior collapse in trained VAEs
+claims:
+- id: c1
+  statement: 'Prevailing view being challenged: most existing papers attribute posterior collapse to the KL term in the ELBO, and many heuristics try to diminish the effect of the KL term.'
+  location: Introduction
+  page: 1
+  quote: Most existing papers suggest that posterior collapse is caused by the KL-divergence term in the ELBO objective, which directly encourages the variational distribution to match the prior [7, 25,
+    38].
+- id: c2
+  statement: 'Theoretical result: for a linear VAE, the ELBO does not introduce any spurious local maxima beyond those of the log marginal likelihood of probabilistic PCA, and its global optimum recovers
+    the (scaled) principal components as the decoder columns.'
+  location: Analysis of linear VAE
+  page: 5
+  quote: Theorem 1. The ELBO objective for a linear VAE does not introduce any additional local maxima to the pPCA model.
+- id: c3
+  statement: 'Posterior collapse can occur when optimizing the exact log marginal likelihood even without powerful decoders: in pPCA, collapsed stationary points (zeroed decoder columns) become stable local
+    maxima as the observation noise sigma^2 grows, so learning sigma^2 is necessary for a full latent representation.'
+  location: Analysis of linear VAE
+  page: 4
+  quote: Therefore, learning σ2 is necessary for gaining a full latent representation.
+- id: c4
+  statement: 'Critique of KL annealing (with Bowman et al. cited among its users): during annealing one is no longer optimizing a bound on the log-likelihood, schedules are hard to design, and the authors
+    found that the posterior typically collapses again once regular ELBO training resumes.'
+  location: Related work
+  page: 3
+  quote: Also, it is difﬁcult to design these annealing schedules and we have found that once regular ELBO training resumes the posterior will typically collapse again (Section 6.2).
+- id: c5
+  statement: 'Measurement: the authors note that posterior collapse has not been measured or defined consistently and define a latent dimension as (epsilon, delta)-collapsed if its per-example KL to the
+    prior is below epsilon for at least a 1 - delta fraction of the data (delta fixed at 0.01).'
+  location: Section 6.2
+  page: 8
+  quote: Despite the large volume of work studying posterior collapse it has not been measured in a consistent way (or even deﬁned so).
+- id: c6
+  statement: 'Deep nonlinear VAEs (MNIST, CelebA, Gaussian observation model): many public implementations fix sigma^2 = 1, which the linear analysis suggests is suboptimal; with large initial sigma^2 the
+    variational distribution matched the prior closely even when sigma^2 was learned, suggesting that local optima may contribute to posterior collapse in deep VAEs.'
+  location: Section 6.2
+  page: 8
+  quote: This was true even when σ2 is learned — suggesting that local optima may contribute to posterior collapse in deep VAEs.
+- id: c7
+  statement: The gap between different sigma^2 initializations when sigma^2 is learned is not predicted by the linear VAE, which the authors take to suggest that learning sigma^2 correctly is more challenging
+    in the nonlinear case.
+  location: Section 6.2
+  page: 8
+  quote: The linear VAE does not predict this gap which suggests that learning σ2 correctly is more challenging in the nonlinear case.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliations: University of Toronto and Google Brain (first author an intern at Google Brain). Venue from the PDF footer (''33rd Conference on Neural Information Processing Systems (NeurIPS
+    2019)''). The nonlinear experiments report training-set ELBO only (Table 1). Results tables not recorded.'

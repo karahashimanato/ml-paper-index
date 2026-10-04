@@ -1,0 +1,88 @@
+id: arxiv-1811.12359
+title: Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations
+authors:
+- Francesco Locatello
+- Stefan Bauer
+- Mario Lucic
+- Gunnar Rätsch
+- Sylvain Gelly
+- Bernhard Schölkopf
+- Olivier Bachem
+year: 2018
+venue: ICML 2019
+links:
+  arxiv: https://arxiv.org/abs/1811.12359
+  code: https://github.com/google-research/disentanglement_lib
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-04'
+  pdf_sha256: 7d92c1b51c604a055086e63d2ae4d439f72341aac24e840b8e0823f376ae721f
+tags:
+  tasks:
+  - representation-learning
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- An impossibility theorem for unsupervised disentanglement without inductive biases on models and data
+- A large-scale reproducible study (disentanglement_lib) of six VAE-based disentanglement methods and six disentanglement metrics on seven datasets
+claims:
+- id: c1
+  statement: 'Theoretical result: unsupervised learning of disentangled representations is fundamentally impossible without inductive biases on both the models and the data (for factorized priors, there
+    are infinitely many completely entangled bijections of z with the same marginal distribution, so observations alone cannot distinguish them).'
+  location: Abstract
+  page: 1
+  quote: We ﬁrst theoretically show that the unsupervised learning of disentangled representations is fundamentally impossible without inductive biases on both the models and the data.
+- id: c2
+  statement: 'Study design: six methods (beta-VAE, AnnealedVAE, FactorVAE, beta-TCVAE, DIP-VAE-I, DIP-VAE-II) with the same convolutional architecture, optimizer, batch size, Gaussian encoder, Bernoulli
+    decoder and 10 latent dimensions; six regularization strengths per method chosen a priori (partly from ranges in the literature); 50 random seeds per setting; more than 12 000 models on seven datasets.'
+  location: Section 4
+  page: 4
+  quote: We ﬁx our experimental setup in advance and we run all the considered methods on each data set for 50 different random seeds and evaluate them on the considered metrics.
+- id: c3
+  statement: The methods are effective at making the dimensions of the sampled aggregated posterior uncorrelated, but this does not seem to make the dimensions of the mean representation (the one usually
+    used) uncorrelated; the total correlation of the mean representation generally increases with regularization strength (DIP-VAE-I is an exception).
+  location: Section 5.1
+  page: 5
+  quote: this does not seem to imply that the dimensions of the mean representation (usually used for representation) are uncorrelated.
+- id: c4
+  statement: Across methods, the attainable disentanglement scores overlap heavily; the authors (qualitatively) conclude that hyperparameters and random seeds seem substantially more important than the
+    choice of objective, and that a good run with a bad hyperparameter can beat a bad run with a good one. They note that the fixed hyperparameter grid means specific models might have done better with
+    other values.
+  location: Section 5.3
+  page: 5
+  quote: the choice of hyperparameters and the random seed seems to be substantially more important than the choice of objective function.
+- id: c5
+  statement: 'Model selection: unsupervised scores (reconstruction error, KL, ELBO, estimated total correlation) showed no clear pattern of correlation with the disentanglement metrics, so the authors consider
+    selecting models with them unlikely to succeed in practice.'
+  location: Section 5.4
+  page: 7
+  quote: While we do observe some correlations, no clear pattern emerges which leads us to conclude that this approach is unlikely to be successful in practice.
+- id: c6
+  statement: Transferring good hyperparameters across datasets or metrics does not allow distinguishing good from bad random seeds on the target task; the authors conclude that unsupervised model selection
+    remains unsolved.
+  location: Section 5.4
+  page: 7
+  quote: Unsupervised model selection remains an unsolved problem.
+- id: c7
+  statement: 'Downstream usefulness: on the simplest downstream task (predicting the true factors with logistic regression or gradient boosted trees), higher disentanglement scores did not reliably lead
+    to higher sample efficiency.'
+  location: Section 5.5
+  page: 7
+  quote: We do not observe that higher disentanglement scores reliably lead to a higher sample efﬁciency.
+- id: c8
+  statement: 'Cost of the study: reproducing the experiments requires approximately 2.52 GPU years (NVIDIA P100); the authors release more than 10 000 trained models.'
+  location: Section 1 (footnote 1)
+  page: 2
+  quote: Reproducing these experiments requires approximately 2.52 GPU years (NVIDIA P100).
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliations: ETH Zurich, Max Planck Institute for Intelligent Systems, Google Research (Brain Team). Venue from the arXiv journal_ref and the PDF (Proceedings of the 36th International
+    Conference on Machine Learning, PMLR 97, 2019). The methods studied include AnnealedVAE (Burgess et al., 2017; arxiv-1804.03599). All datasets are synthetic or rendered with known ground-truth factors
+    (dSprites and three variants, Cars3D, SmallNORB, Shapes3D). Results are shown as figures; Table 1 (transfer vs random selection) not recorded.'

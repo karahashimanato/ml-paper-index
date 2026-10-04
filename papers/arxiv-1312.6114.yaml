@@ -1,0 +1,82 @@
+id: arxiv-1312.6114
+title: Auto-Encoding Variational Bayes
+authors:
+- Diederik P Kingma
+- Max Welling
+year: 2013
+links:
+  arxiv: https://arxiv.org/abs/1312.6114
+source:
+  version: arXiv v11
+  retrieved_at: '2026-10-04'
+  pdf_sha256: bdcb63b79ed88f64f8ee2d43a721930d01dde5441a4dba20ecaa2342b34e017c
+tags:
+  tasks:
+  - generative-modeling
+  - representation-learning
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- 'SGVB: a reparameterized, differentiable Monte Carlo estimator of the variational lower bound for models with continuous latent variables'
+- 'AEVB: jointly learning a recognition model (probabilistic encoder) and a generative model (probabilistic decoder) with SGVB; with neural networks for both, the variational auto-encoder (VAE)'
+claims:
+- id: c1
+  statement: 'Contribution: reparameterizing the variational lower bound gives a lower-bound estimator that can be optimized with standard stochastic gradient methods; for i.i.d. data with continuous per-datapoint
+    latent variables, an approximate inference (recognition) model is fitted to the intractable posterior with this estimator.'
+  location: Abstract
+  page: 1
+  quote: First, we show that a reparameterization of the variational lower bound yields a lower bound estimator that can be straightforwardly optimized using standard stochastic gradient methods.
+- id: c2
+  statement: 'Link to autoencoders: in the objective, the KL divergence of the approximate posterior from the prior acts as a regularizer and the second term is an expected negative reconstruction error.'
+  location: Section 2.3
+  page: 4
+  quote: The ﬁrst term is (the KL divergence of the approximate posterior from the prior) acts as a regularizer, while the second term is a an expected negative reconstruction error.
+- id: c3
+  statement: Citing Bengio, Courville & Vincent [BCV13], the authors note that the reconstruction criterion alone is known not to be sufficient for learning useful representations, which motivated denoising,
+    contractive and sparse autoencoder variants.
+  location: Related work
+  page: 6
+  quote: However, it is well known that this reconstruction criterion is in itself not sufﬁcient for learning useful representations [BCV13].
+- id: c4
+  statement: In contrast to those regularized autoencoders, the regularization term in the SGVB objective is dictated by the variational bound, without the usual regularization hyperparameter.
+  location: Related work
+  page: 6
+  quote: The SGVB objective contains a regularization term dictated by the variational bound (e.g. eq. (10)), lacking the usual nuisance regularization hyperparameter required to learn useful representations.
+- id: c5
+  statement: The diagonal-Gaussian approximate posterior used in the VAE example is described as a simplifying choice, not a limitation of the method.
+  location: 'Example: Variational Auto-Encoder (footnote 2)'
+  page: 5
+  quote: Note that this is just a (simplifying) choice, and not a limitation of our method.
+- id: c6
+  statement: 'Evaluation setup: generative models of MNIST and Frey Face images are compared on the variational lower bound and on an estimated marginal likelihood, against the wake-sleep algorithm (same
+    encoder) and, for marginal likelihood, Monte Carlo EM; the Adagrad step size was chosen from three values based on training-set performance in the first few iterations.'
+  location: Experiments
+  page: 7
+  quote: the Adagrad global stepsize parameters were chosen from {0.01, 0.02, 0.1} based on performance on the training set in the ﬁrst few iterations.
+- id: c7
+  statement: The authors state (Figure 2 caption) that AEVB converged considerably faster than wake-sleep and reached a better lower bound in all experiments; the comparison is shown only as a figure.
+  location: Figure 2
+  page: 7
+  quote: Our method converged considerably faster and reached a better solution in all experiments.
+- id: c8
+  statement: Adding superfluous latent variables did not cause overfitting in these experiments, which the authors attribute to the regularizing nature of the variational bound.
+  location: Experiments
+  page: 7
+  quote: Interestingly, superﬂuous latent variables did not result in overﬁtting, which is explained by the regularizing nature of the variational bound.
+- id: c9
+  statement: 'Limitation of the evaluation: the marginal likelihood could only be estimated (by MCMC) for a 3-dimensional latent space, because for higher-dimensional latent spaces the estimates became
+    unreliable.'
+  location: Experiments
+  page: 7
+  quote: for higher dimensional latent space the estimates became unreliable.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: Universiteit van Amsterdam. No venue is stated in the PDF (arXiv v11, 2022 revision). Results are shown as figures only (Figures 2-3); no numbers recorded. The paper also mentions
+    that Rezende et al. (2014) independently made the same connection [RMW14].'

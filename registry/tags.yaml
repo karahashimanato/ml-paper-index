@@ -65,6 +65,12 @@ tasks:
     description: Abstaining from or deferring a prediction (classification with a reject option, learning to defer).
   - id: mlops
     description: Monitoring, deploying and managing models in production.
+  - id: representation-learning
+    description: Learning features or latent representations without labels (including disentangled representations).
+  - id: generative-modeling
+    description: Learning a data distribution to generate samples or evaluate likelihoods.
+  - id: anomaly-detection
+    description: Detecting anomalous or out-of-distribution inputs in non-time-series data (e.g. images, tabular records).
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -172,6 +178,11 @@ method_families:
     description: Ensembles that choose which models to use for each input.
   - id: model-cascades
     description: Trying cheaper models first and passing inputs to stronger models when needed, and routing queries between models.
+  - id: autoencoders
+    description: Encoder-decoder networks trained to reconstruct their input (e.g. denoising, sparse, contractive, adversarial, Wasserstein autoencoders).
+  - id: variational-autoencoders
+    description: Autoencoders trained as latent-variable models with variational inference (e.g. VAE, IWAE, beta-VAE, VQ-VAE, hierarchical VAEs).
+    parent: autoencoders
 paradigms:
   - id: supervised
     description: Supervised learning.

@@ -1,0 +1,84 @@
+id: arxiv-2003.05991
+title: Autoencoders
+authors:
+- Dor Bank
+- Noam Koenigstein
+- Raja Giryes
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2003.05991
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-04'
+  pdf_sha256: db1ba7f163edaeb468830b2c2d0eaf080fc7ad8935ab4536bcbbf2f4d129d41d
+tags:
+  tasks:
+  - representation-learning
+  - generative-modeling
+  - anomaly-detection
+  method_families:
+  - autoencoders
+  - variational-autoencoders
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'A book-chapter survey of autoencoder types (regularized: sparse, denoising, contractive; variational and disentangled) and applications (generation, classification, clustering, anomaly detection, recommendation,
+  dimensionality reduction) and of combinations with GANs'
+claims:
+- id: c1
+  statement: When the hidden layer is at least as large as the input, there is a risk that the encoder learns the identity function; regularization is described as a way to prevent this without a bottleneck.
+  location: Section 2
+  page: 3
+  quote: In cases where the size of the hidden layer is equal or greater than the size of the input, there is a risk that the encoder will simply learn the identity function.
+- id: c2
+  statement: 'A bottleneck alone is not sufficient: even with a bottleneck of a single node, overfitting is still possible if encoder and decoder have enough capacity to encode each sample to an index.'
+  location: Section 2
+  page: 3
+  quote: overﬁtting is still possible if the capacity of the encoder and the decoder is large enough to encode each sample to an index.
+- id: c3
+  statement: Citing [38], a linear autoencoder achieves the same latent representation as PCA; the authors therefore describe an autoencoder as a generalization of PCA that can learn a non-linear manifold.
+  location: Section 1
+  page: 2
+  quote: Therefore, an autoencoder is in fact a generalization of PCA, where instead of ﬁnding a low dimensional hyperplane in which the data lies, it is able to learn a non-linear manifold.
+- id: c4
+  statement: 'Anomaly detection use: the objective is to learn a normal profile from normal data only, assuming a trained autoencoder learns the latent subspace of normal samples and thus gives low reconstruction
+    error for normal samples and high error for anomalies (citing [21, 18, 62, 61]). No discussion of how the anomaly threshold is set, or of failure modes such as anomalies being reconstructed well, was
+    found in the text (searched for threshold, anomal, outlier, novelty, limitation, weakness).'
+  location: Section 4.4
+  page: 11
+  quote: The use of autoencoders for this tasks, follows the assumption that a trained autoencoder would learn the latent subspace of normal samples.
+- id: c5
+  statement: 'Clustering use: the main disadvantage of vanilla autoencoders for clustering is that the embeddings are trained solely for reconstruction, not for clustering; modifications add a cluster-distance
+    term or a prior on the embeddings.'
+  location: Section 4.3
+  page: 10
+  quote: The main disadvantage of using vanilla autoencoders for clustering is that the embeddings are trained solely for reconstruction and not for the clustering application.
+- id: c6
+  statement: 'Limitation of reconstruction losses: autoencoder reconstructions of images are usually blurry, which the authors attribute to a loss that does not take into account how realistic the results
+    are; combinations with GANs are presented as addressing this.'
+  location: Section 5
+  page: 14
+  quote: On the other hand, by looking at the reconstruction quality of autoencoders for images, one of its major weaknesses becomes clear, as the resulting images are usually blurry.
+- id: c7
+  statement: 'Dimensionality reduction: PCA is optimal as a linear projection, while non-linear methods such as autoencoders ''may and often do'' achieve superior results (stated without supporting experiments
+    in the chapter).'
+  location: Section 4.6
+  page: 13
+  quote: However, non-linear methods such as autoencoders, may and often do achieve superior results.
+- id: c8
+  statement: 'Open problem: for generative modelling, choosing the size and distribution of the hidden state is still done by experimentation (reconstruction error and varying the hidden state after training),
+    and the authors call for research to set these parameters better.'
+  location: Section 6
+  page: 19
+  quote: As for modeling generative processes, despite the success of variational and disentangled autoencoders, the way to choose the size and distribution of the hidden state is still based on experimentation,
+    by considering the reconstruction error, and by varying the hidden state at post training.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: Tel Aviv University. arXiv comment: ''Book chapter'' without naming the book; no venue recorded. Survey chapter without own experiments (one illustrative figure of VAE samples
+    on MNIST).'

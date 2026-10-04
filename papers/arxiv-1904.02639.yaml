@@ -1,0 +1,90 @@
+id: arxiv-1904.02639
+title: 'Memorizing Normality to Detect Anomaly: Memory-augmented Deep Autoencoder for Unsupervised Anomaly Detection'
+authors:
+- Dong Gong
+- Lingqiao Liu
+- Vuong Le
+- Budhaditya Saha
+- Moussa Reda Mansour
+- Svetha Venkatesh
+- Anton van den Hengel
+year: 2019
+venue: ICCV 2019
+links:
+  arxiv: https://arxiv.org/abs/1904.02639
+  url: https://donggong1.github.io/anomdec-memae
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-04'
+  pdf_sha256: 8b5d1038d796a0b419de8083797d49e68b5bf37f6ecfce8804c30e3a16d83b9b
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - autoencoders
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'MemAE: an autoencoder whose encoding is used as a query to a learned memory of prototypical normal patterns (cosine-similarity attention with hard shrinkage and an entropy loss for sparse addressing);
+  the decoder reconstructs only from retrieved memory items, and the reconstruction error is the anomaly score'
+claims:
+- id: c1
+  statement: 'Motivation (failure mode of AE detectors): the assumption that anomalies get higher reconstruction error may not always hold; sometimes the AE ''generalizes'' so well that it also reconstructs
+    anomalous inputs well, an observation the authors attribute to existing literature ([47, Figure 1]) and to their own Figures 4 and 6.'
+  location: Introduction
+  page: 1
+  quote: However, this assumption may not always hold, and sometimes the AE can “generalize” so well that it can also reconstruct the abnormal inputs well.
+- id: c2
+  statement: 'Proposed explanation: since there are no anomalous training samples, reconstruction behaviour on anomalies should be unpredictable; if anomalies share compositional patterns with normal data
+    (e.g. local edges in images) or the decoder is ''too strong'', the AE is very likely to reconstruct them well.'
+  location: Introduction
+  page: 2
+  quote: AE is very likely to reconstruct the anomalies well.
+- id: c3
+  statement: 'Anomaly score: at test time the anomaly criterion is the l2-norm based mean squared reconstruction error between the input and its reconstruction.'
+  location: Section 3.2
+  page: 3
+  quote: to measure of the reconstruction quality, which is used as the criterion for anomaly detection.
+- id: c4
+  statement: 'Sparse addressing is motivated by a remaining failure mode: some anomalies might still be reconstructed well by a complex combination of memory items through dense addressing weights, so a
+    hard shrinkage operator (threshold lambda, suggested in [1/N, 3/N]) is applied to the weights.'
+  location: Section 3.3.3
+  page: 4
+  quote: 'To alleviate this issue, we apply a hard shrinkage operation to promote the sparsity of w:'
+- id: c5
+  statement: 'Image protocol (MNIST, CIFAR-10, one class as normal): the training set contains only normal samples and does not overlap the test set; anomalies from other classes make up around 30% of the
+    test data; performance is reported as AUC over a varying threshold, so no operating threshold is selected.'
+  location: Section 4.1
+  page: 5
+  quote: Following the setting used in [42, 47], the training set only consists of normal samples and has no overlapping with the testing set.
+- id: c6
+  statement: 'Observed AE failure: in the MNIST visualization, the AE without memory tends to learn more local representations, so an abnormal sample may also be reconstructed well, whereas MemAE reconstructs
+    a normal-class digit.'
+  location: Section 4.1
+  page: 6
+  quote: Thus an abnormal sample may also be reconstructed well.
+- id: c7
+  statement: 'Video protocol (UCSD-Ped2, CUHK Avenue, ShanghaiTech), following [9, 24]: the frame normality score is the reconstruction error min-max normalized to [0, 1] using the minimum and maximum error
+    over the frames of the same video episode; frame-level AUC is reported.'
+  location: Section 4.2
+  page: 7
+  quote: where eu denotes the reconstruction error the u-th frame in a video episode.
+- id: c8
+  statement: 'Cybersecurity protocol (KDDCUP99 10 percent, following [47]): 80% of the samples labelled ''attack'' in the original dataset are treated as normal, half of the data is randomly sampled for
+    training, and only normal-class samples are used for training; precision, recall and F1 are averaged over 20 runs. How the decision threshold for these metrics is set was not found in the text (searched
+    for ''threshold''); the paper refers to the standard protocol of [47].'
+  location: Section 4.3
+  page: 8
+  quote: Only data samples from normal class are used for training.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliations: The University of Adelaide, A2I2 Deakin University, University of Western Australia. Venue from the arXiv comment (''Accepted to appear at ICCV 2019''); the arXiv PDF itself
+    does not state the venue. No time-series data is evaluated (images, video clips, KDDCUP99 tabular vectors), so the time-series task tag is not used. Hyperparameters: alpha = 0.0002 for all experiments;
+    memory size N is stated to be non-trivial to optimize but MemAE is described as insensitive to it given a large enough N (Fig 7, UCSD-Ped2); how hyperparameters were selected is not described beyond
+    10% of the image training data being held out for validation, whose use is not specified. Results tables (Table 1-4: AUC on MNIST/CIFAR-10 and video, P/R/F1 on KDDCUP, ablations) not recorded.'

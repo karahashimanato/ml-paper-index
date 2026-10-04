@@ -1,0 +1,87 @@
+id: arxiv-2501.13864
+title: Autoencoders for Anomaly Detection are Unreliable
+authors:
+- Roel Bouman
+- Tom Heskes
+year: 2025
+links:
+  arxiv: https://arxiv.org/abs/2501.13864
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-04'
+  pdf_sha256: ce4830a88fbd548140ab146ec742003574fe83ba901e0c33cd9cef1b51a53cba
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - autoencoders
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- Proofs that PCA and linear autoencoders (at the global optimum) reconstruct with zero loss points arbitrarily far from all training data, plus a ReLU toy construction and experiments (2D tabular, convolutional
+  AE on MNIST) showing out-of-bounds and inter-class reconstruction of anomalies
+claims:
+- id: c1
+  statement: 'Thesis: autoencoder anomaly detection assumes normal data is reconstructed more accurately than anomalies; the authors show this assumption does not hold and illustrate that anomalies far
+    from normal data can be perfectly reconstructed in practice.'
+  location: Abstract
+  page: 1
+  quote: In this work we show that this assumption indeed does not hold, and illustrate that anomalies, lying far away from normal data, can be perfectly reconstructed in practice.
+- id: c2
+  statement: 'Linear theory (PCA and linear AE): any point in the span of the first d principal components has zero reconstruction loss, and moving along this subspace outward from the convex hull gives
+    points beyond any distance delta (Euclidean) from all training data; for linear autoencoders the authors assume convergence to the global optimum (citing Baldi & Hornik) so the case reduces to PCA,
+    with bias terms covered in Appendix A.1. The proof holds in the semi-supervised setting (training data contain no anomalies) and hence also the unsupervised one; other distance metrics are only posited.'
+  location: 'Out-of-bounds reconstruction: PCA'
+  page: 4
+  quote: We can prove this even in the semi-supervised setting, where we guarantee that the model was not exposed to anomalous data at training time.
+- id: c3
+  statement: 'Non-linear (ReLU) case: for a 2D dataset on the diagonal, a ReLU autoencoder can find the same weights as a linear one, and far points on the diagonal are perfectly reconstructed; beyond this
+    simple case the authors only theorize that similar linear behavior can occur outside the convex hull, and show it experimentally on synthetic 2D data (100 points per distribution, [2,5,1,5,2] or deeper
+    autoencoders).'
+  location: Failure of a non-linear network with ReLU activations
+  page: 6
+  quote: We theorize that even beyond this simple case, similar linear behavior can occur beyond the convex hull that the normal data occupies.
+- id: c4
+  statement: 'Activation functions: C0 activations such as ReLU suffer most from out-of-bounds reconstruction but are easier to train deep; C-infinity activations such as sigmoid generally have more desirable
+    properties for anomaly detection but suffer from vanishing gradients, and sigmoid autoencoders can still show low-loss regions where the two clusters'' sigmoids intersect.'
+  location: Other activation functions
+  page: 7
+  quote: In summary, activation functions with an order of continuity of C0 suffer most from out-of-bounds reconstruction, but allow for more easily trainable deep networks.
+- id: c5
+  statement: 'Image experiment: a convolutional autoencoder (2-layer encoder/decoder, ReLU, sigmoid output) with a 2-dimensional latent space (chosen to rule out the ''identical shortcut'') is trained on
+    MNIST subsets (digits 4, 5, 7; digits 0, 1); decoding low-loss latent grid points gives adversarial anomalies with lower reconstruction loss than all training data. The authors note there is no consensus
+    on which digits are normal and that only in some of their tried combinations does out-of-bounds reconstruction occur.'
+  location: 'Failure on real-world data: MNIST'
+  page: 8
+  quote: In our experiments, both shown and non-shown, we have tried several different combinations and observe that in some cases out-of-bounds reconstruction occurs.
+- id: c6
+  statement: 'Instability of the failure: whether out-of-bounds reconstruction is easily detected depends on the random seed and the digits chosen as normal, and it can disappear and reappear between epochs;
+    the authors argue that in semi-supervised or unsupervised settings one cannot accurately judge whether a network will fail on future data. They also note some out-of-bounds reconstruction (an unusual
+    diagonal 1) matches what a user would consider normal.'
+  location: 'Failure on real-world data: MNIST'
+  page: 9
+  quote: We observe that depending on the random seed used for initialization and the digits selected as normal data, the out-of-bounds reconstruction may or may not be easily detected.
+- id: c7
+  statement: 'On proposed fixes (related work): the authors state that, from their experiments, relying on distances or densities in the latent space (as in Zong et al. 2018 and Cheng et al. 2021) does
+    not always work in practice; they also say memory modules reduce reconstruction ability and that they do not think adversarially robust training (Salehi et al. 2021) results in a reliable autoencoder.'
+  location: Related work
+  page: 2
+  quote: From our experiments we can glean that relying on distances or densities in the latent space does not always work in practice.
+- id: c8
+  statement: 'Recommendation: practitioners should at least check whether a trained non-linear autoencoder shows out-of-bounds reconstruction, e.g. by searching for adversarial anomalies in the latent space;
+    for larger latent spaces projected gradient descent ''might be'' a feasible strategy (not tested in the paper).'
+  location: Conclusion
+  page: 10
+  quote: Good practice would be to at least check whether a trained non-linear autoencoder exhibits the undesirable out-of-bounds reconstruction.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: Radboud University (Nijmegen). arXiv API record has no comment or journal_ref and the PDF states no venue, so no venue recorded. The experiments are illustrative (contour plots
+    and constructed adversarial anomalies); no detection metric (AUC etc.) or threshold-selection protocol is reported, and no optimizer/learning-rate/epoch details were found in the text (searched for
+    optimizer, learning rate, Adam, batch size, trained for). The authors cite their own earlier benchmark (Bouman et al., 2024, JMLR) only as an analogy for tabular benchmarking practice. Figures not converted
+    to numbers; body-text loss values for the MNIST adversarial examples are not recorded.'

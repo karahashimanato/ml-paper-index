@@ -1,0 +1,74 @@
+id: arxiv-1509.00519
+title: Importance Weighted Autoencoders
+authors:
+- Yuri Burda
+- Roger Grosse
+- Ruslan Salakhutdinov
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1509.00519
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-04'
+  pdf_sha256: b1927ce0f1039a4781dc853f60b78b2b918ef2b77d06e12408a4832a77f21a30
+tags:
+  tasks:
+  - generative-modeling
+  - representation-learning
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- 'IWAE: a model with the VAE architecture trained on the k-sample importance-weighted lower bound L_k, which is strictly tighter than the VAE bound (k = 1) and approaches log p(x) as k grows'
+claims:
+- id: c1
+  statement: 'Motivation: VAEs typically assume an approximately factorial posterior whose parameters can be predicted by nonlinear regression; the authors show empirically that the VAE objective can lead
+    to overly simplified representations that do not use the network''s full capacity.'
+  location: Abstract
+  page: 1
+  quote: VAE objective can lead to overly simpliﬁed representations which fail to use the network’s entire modeling capacity.
+- id: c2
+  statement: 'Theorem 1: the bounds are monotone in the number of samples, log p(x) >= L_{k+1} >= L_k, and if p(h,x)/q(h|x) is bounded, L_k approaches log p(x) as k goes to infinity; k = 1 equals the standard
+    VAE objective.'
+  location: Importance weighted autoencoder
+  page: 3
+  quote: Observe, however, that the special case of k = 1 is equivalent to the standard VAE objective
+- id: c3
+  statement: 'Cost: in the basic implementation the forward and backward passes are done independently for each of the k samples, so the number of operations scales linearly with k.'
+  location: Training procedure
+  page: 5
+  quote: Therefore, the number of operations scales linearly with k.
+- id: c4
+  statement: 'Evaluation protocol: held-out log-likelihood on binarized MNIST and Omniglot (standard splits), estimated as the mean of L_5000 on the test set (a stochastic lower bound); VAE and IWAE trained
+    for k in {1, 5, 50} for about the same time; the learning-rate schedule was chosen from preliminary experiments with a one-layer VAE on MNIST.'
+  location: Evaluation on density estimation
+  page: 7
+  quote: All log-likelihood values were estimated as the mean of L5000 on the test set.
+- id: c5
+  statement: The authors note that the generative-modelling literature binarizes MNIST inconsistently and that different binarizations can lead to considerably different log-likelihood values.
+  location: Evaluation on density estimation (footnote 2)
+  page: 6
+  quote: Unfortunately, the generative modeling literature is inconsistent about the method of binarization, and different choices can lead to considerably different log-likelihood values.
+- id: c6
+  statement: 'Inactive latent dimensions: both VAEs and IWAEs learned representations with effective dimensions far below their capacity (a dimension counted as active if the covariance over x of its posterior
+    mean exceeds 10^-2); with k > 1 the IWAE learned more active dimensions than the VAE in all cases.'
+  location: Latent space representation
+  page: 7
+  quote: We have observed that both VAEs and IWAEs tend to learn latent representations with effective dimensions far below their capacity.
+- id: c7
+  statement: Swapping objectives after training (VAE continued with the IWAE objective and vice versa) changed the number of active dimensions and the log-likelihood in the direction of the new objective,
+    which the authors take as strong evidence that inactivation is driven by the objective rather than by optimization, while noting that optimization also appears to play a role.
+  location: Latent space representation
+  page: 8
+  quote: The fact that training with the VAE objective actively reduces both the number of active dimensions and the log-likelihood strongly suggests that inactivation of the latent dimensions is driven
+    by the objective functions rather than by optimization issues.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: University of Toronto; acknowledgments list support from NSERC, the Fields Institute and Samsung. The PDF header says ''Under review as a conference paper at ICLR 2016''; no
+    venue recorded. The paper notes that the importance-weighted bound for VAEs was independently explored by Laurent Dinh and Vincent Dumoulin. Results tables (Table 1, Table 2) not recorded.'

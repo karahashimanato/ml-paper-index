@@ -1,0 +1,77 @@
+id: arxiv-1711.00937
+title: Neural Discrete Representation Learning
+authors:
+- Aaron van den Oord
+- Oriol Vinyals
+- Koray Kavukcuoglu
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1711.00937
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-04'
+  pdf_sha256: d62036803c190a82718b718f59a87adb2be8b586e4887a394ad0cef15c56301e
+tags:
+  tasks:
+  - generative-modeling
+  - representation-learning
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- 'VQ-VAE: an autoencoder whose encoder output is mapped to the nearest vector in a learned codebook (discrete latent), trained with a straight-through gradient, a codebook (VQ) loss and a commitment loss;
+  an autoregressive prior (PixelCNN or WaveNet) is fitted over the discrete codes after training'
+claims:
+- id: c1
+  statement: 'VQ-VAE differs from VAEs in two ways: the encoder outputs discrete codes, and the prior is learnt rather than static; the authors state that using vector quantisation lets the model circumvent
+    posterior collapse with powerful autoregressive decoders.'
+  location: Abstract
+  page: 1
+  quote: Using the VQ method allows the model to circumvent issues of “posterior collapse”
+- id: c2
+  statement: 'Training: since the nearest-neighbour lookup has no gradient, gradients are copied from the decoder input to the encoder output (straight-through estimator).'
+  location: Learning
+  page: 3
+  quote: we approximate the gradient similar to the straight-through estimator [3] and just copy gradients from decoder input zq(x) to encoder output ze(x).
+- id: c3
+  statement: The loss adds a codebook term and a commitment term weighted by beta; the authors report that results did not vary for beta between 0.1 and 2.0 and use beta = 0.25 throughout, noting that in
+    general this depends on the scale of the reconstruction loss.
+  location: Learning
+  page: 4
+  quote: We found the resulting algorithm to be quite robust to β, as the results did not vary for values of β ranging from 0.1 to 2.0.
+- id: c4
+  statement: With a deterministic one-hot posterior and a uniform prior, the KL term is a constant (log K) and is ignored in training; the prior is kept uniform during VQ-VAE training and an autoregressive
+    prior is fitted afterwards (joint training left to future work).
+  location: Prior
+  page: 5
+  quote: Whilst training the VQ-VAE, the prior is kept constant and uniform.
+- id: c5
+  statement: The authors could not train with a soft-to-hard relaxation of vector quantisation from scratch because the decoder always learned to invert the continuous relaxation, so no actual quantisation
+    took place.
+  location: Related Work
+  page: 3
+  quote: In our experiments we were unable to train using the soft-to-hard relaxation approach from scratch as the decoder was always able to invert the continuous relaxation during training, so that no
+    actual quantisation took place.
+- id: c6
+  statement: 'Comparison on CIFAR10 with the same architecture (lower bounds in bits/dim): the continuous VAE obtains a better bound than VQ-VAE, and VQ-VAE a better bound than VIMCO; all reported likelihoods
+    are lower bounds.'
+  location: Comparison with continuous variables
+  page: 5
+  quote: The VAE, VQ-VAE and VIMCO models obtain 4.51 bits/dim, 4.67 bits/dim and 5.14 respectively.
+- id: c7
+  statement: ImageNet 128x128 images compressed to a 32x32x1 discrete latent (K = 512) are reconstructed with an MSE-trained deconvolutional decoder and look only slightly blurrier than the originals (qualitative,
+    Figure 2); a perceptual or GAN loss is left to future work.
+  location: Images
+  page: 6
+  quote: Even considering that we greatly reduce the dimensionality with discrete encoding, the reconstructions look only slightly blurrier than the originals.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: DeepMind. No venue recorded: the arXiv record has no comment or journal_ref, and the PDF footer (''31st Conference on Neural Information Processing Systems (NIPS 2017)'') also
+    appears on a workshop paper in this set (arxiv-1804.03599), so it is not treated as confirmation. Bowman et al. (arxiv-1511.06349) and VLAE (arxiv-1611.02731) describe the posterior collapse problem
+    that this paper says VQ-VAE avoids. NVAE (arxiv-2007.03898) notes that VQ-VAE''s objective does not correspond to a lower bound on data log-likelihood.'

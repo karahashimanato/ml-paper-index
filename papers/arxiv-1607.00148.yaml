@@ -1,0 +1,92 @@
+id: arxiv-1607.00148
+title: LSTM-based Encoder-Decoder for Multi-sensor Anomaly Detection
+authors:
+- Pankaj Malhotra
+- Anusha Ramakrishnan
+- Gaurangi Anand
+- Lovekesh Vig
+- Puneet Agarwal
+- Gautam Shroff
+year: 2016
+venue: ICML 2016 Anomaly Detection Workshop
+links:
+  arxiv: https://arxiv.org/abs/1607.00148
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-04'
+  pdf_sha256: d4c506d82061d0eb532a7c172682c7c8c1803705a8dbd9561fc8980927d9b3cd
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - autoencoders
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'EncDec-AD: an LSTM encoder-decoder trained to reconstruct normal multi-sensor time-series windows; the reconstruction error vector is scored by its Mahalanobis-type distance under a Gaussian fitted on
+  errors of held-out normal sequences'
+claims:
+- id: c1
+  statement: 'Training data assumption: EncDec-AD is trained on normal sequences only, which the authors present as useful when anomalous data is unavailable or sparse (e.g. machines serviced before anomalies
+    appear).'
+  location: Introduction
+  page: 2
+  quote: EncDec-AD uses only the normal sequences for training.
+- id: c2
+  statement: 'Detection premise (hedged): since the encoder-decoder has only seen normal instances, it may not reconstruct an anomalous sequence well, which would give higher reconstruction errors than
+    for normal sequences.'
+  location: Introduction
+  page: 2
+  quote: When given an anomalous sequence, it may not be able to reconstruct it well, and hence would lead to higher reconstruction errors compared to the reconstruction errors for the normal sequences.
+- id: c3
+  statement: 'Anomaly score: normal data is split into sN (training), vN1 (early stopping), vN2 and tN, and anomalous data into vA and tA; a Normal distribution is fitted by maximum likelihood to the point-wise
+    absolute reconstruction-error vectors on vN1, and the anomaly score of a point is (e - mu)^T Sigma^-1 (e - mu).'
+  location: Section 2.2
+  page: 2
+  quote: are used to estimate the parameters µ and Σ of a Normal distribution N(µ, Σ)
+- id: c4
+  statement: 'Threshold selection uses labeled anomalies: when enough anomalous sequences are available, the threshold tau is learnt to maximize an F-beta score (beta < 1, anomalous = positive class); tau
+    and the number of LSTM units c are chosen on the validation sets vN2 (normal) and vA (anomalous).'
+  location: Section 2.2
+  page: 3
+  quote: The parameters τ and c are chosen with maximum Fβ score on the validation sequences in vN2 and vA.
+- id: c5
+  statement: 'Window-level labels: a window containing an anomalous pattern is labelled anomalous as a whole, which the authors find helpful when the exact position of an anomaly is unknown; for the engine
+    data the only information is a repair date, and the last runs before repair are assumed anomalous and the first runs after repair normal.'
+  location: Section 2.2
+  page: 3
+  quote: is helpful in many real-world applications where the exact position of anomaly is not known.
+- id: c6
+  statement: 'ECG exception: with only one anomaly in the ECG series, vN2 and vA are not created; c is chosen by minimum reconstruction error on vN1, and the threshold is set from normal data only as the
+    mean plus one standard deviation of the anomaly scores on vN1.'
+  location: Section 3.1
+  page: 4
+  quote: We choose τ = µa + σa, where µa and σa are the mean and standard deviation of the anomaly scores of the points from vN1.
+- id: c7
+  statement: 'Data provenance: power demand, space shuttle valve and ECG are taken from Keogh et al. (2005); the engine data (Engine-P, Engine-NP; 12 sensors reduced to the first principal component) is
+    proprietary, from a real-life project.'
+  location: Section 3
+  page: 3
+  quote: whereas the engine dataset is a proprietary one encountered in a real-life project.
+- id: c8
+  statement: 'Comparison with the authors'' own prediction-based LSTM-AD (Malhotra et al., 2015, which shares authors with this paper): LSTM-AD gives better results on the predictable datasets (Space Shuttle,
+    Power, Engine-P; F0.1 of 0.84, 0.90, 0.89 as stated in the text), while EncDec-AD gives better results on the unpredictable Engine-NP.'
+  location: Section 3.2
+  page: 4
+  quote: On the other hand, EncDec-AD gives better results for Engine-NP where the sequences are not predictable.
+- id: c9
+  statement: The authors conclude (hedged) that because EncDec-AD detects anomalies even in unpredictable time series, it may be more robust than models that rely on predictability.
+  location: Discussion
+  page: 4
+  quote: and hence may be more robust compared to such models.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: TCS Research, New Delhi (Tata Consultancy Services); the first page carries a Tata Consultancy Services copyright notice. Venue from the PDF (''Presented at ICML 2016 Anomaly
+    Detection Workshop'') and the arXiv comment. Disclosure: Malhotra, Vig, Shroff and Agarwal are also authors of the LSTM-AD baseline (Malhotra et al., 2015). Thresholds (except ECG) are tuned with labelled
+    anomalous validation sequences (vA), so the detector is unsupervised in training but not in threshold selection. Table 2 (P, R, F-beta, TPR/FPR per dataset; beta differs by dataset) not recorded.'

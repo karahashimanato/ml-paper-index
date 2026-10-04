@@ -1,0 +1,101 @@
+id: arxiv-1802.03903
+title: Unsupervised Anomaly Detection via Variational Auto-Encoder for Seasonal KPIs in Web Applications
+authors:
+- Haowen Xu
+- Wenxiao Chen
+- Nengwen Zhao
+- Zeyan Li
+- Jiahao Bu
+- Zhihan Li
+- Ying Liu
+- Youjian Zhao
+- Dan Pei
+- Yang Feng
+- Jie Chen
+- Zhaogang Wang
+- Honglin Qiao
+year: 2018
+venue: WWW 2018
+links:
+  arxiv: https://arxiv.org/abs/1802.03903
+  doi: https://doi.org/10.1145/3178876.3185996
+  code: https://github.com/korepwx/donut
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-04'
+  pdf_sha256: fd28428064dc04e4e01225e34f03a5b0b0dcb56cc0eeb2db3b9f4c480bbb0f3f
+  license: CC BY 4.0
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  method_families:
+  - variational-autoencoders
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'Donut: a fully-connected VAE over sliding windows of seasonal KPIs, trained with a modified ELBO (M-ELBO) that excludes labelled anomalies and missing points, with missing-data injection during training
+  and MCMC imputation of missing points at detection; scored by reconstruction probability, with a KDE interpretation of that score'
+claims:
+- id: c1
+  statement: 'Claimed contribution: the authors state that adopting VAEs (or generative models in general) for anomaly detection requires training on both normal and abnormal data, contrary to common intuition.'
+  location: Introduction
+  page: 1
+  quote: For the first time in the literature, we discover that adopting VAE (or generative models in general) for anomaly detection requires training on both normal data and abnormal data, contrary to
+    common intuition.
+- id: c2
+  statement: 'Training on contaminated data: the authors note that the earlier VAE-based detector of An & Cho [2] assumes training only on clean data, which is infeasible in their context, and that the
+    VRNN-based work [36] does not discuss this problem.'
+  location: Previous Work
+  page: 2
+  quote: Fifth, [2] assumes training only on clean data, which is infeasible in our context, while [36] does not discuss this problem.
+- id: c3
+  statement: 'M-ELBO: training windows are not filtered; missing points are filled with zeros and an indicator removes labelled anomalies and missing points from the reconstruction term, with the prior
+    term scaled by the fraction of normal points; the objective still applies when there are no anomaly labels (the unsupervised case), in which unlabelled anomalies remain in the training windows.'
+  location: Training
+  page: 4
+  quote: Note that Eqn (3) still holds when there is no labeled anomalies in the training data.
+- id: c4
+  statement: 'Anomaly score: following An & Cho [2], the score is the reconstruction probability E_q(z|x)[log p(x|z)], computed after MCMC imputation of known missing points and only for the last point
+    of each window; the authors report that Monte Carlo estimation of p(x) by sampling on the prior does not work well enough in practice.'
+  location: Detection
+  page: 4
+  quote: Since only the ordering rather than the exact values of anomaly scores are concerned in anomaly detection, we follow [2] and use the latter one.
+- id: c5
+  statement: 'Threshold: the paper does not propose a way to choose the detection threshold, calling it a difficult problem especially in the unsupervised scenario, and points to existing work (e.g. [21])
+    that might be applicable.'
+  location: Future Work
+  page: 11
+  quote: We did not discuss how to choose the right threshold for detection.
+- id: c6
+  statement: 'Evaluation metric uses an oracle threshold: the headline metric is the best F-score over all thresholds on the test set, which the authors describe as the best possible performance given an
+    optimal global threshold (AUC and alert delay are also reported).'
+  location: Performance Metrics
+  page: 5
+  quote: The best F-score indicates the best possible performance of a model on a particular testing set, given an optimal global threshold.
+- id: c7
+  statement: 'Segment-level adjustment of the metric: if any point of a ground-truth anomaly segment is detected at a threshold, all points of that segment are counted as detected; points outside segments
+    are treated as usual.'
+  location: Performance Metrics
+  page: 5
+  quote: 'We instead use a simple strategy: if any point in an anomaly segment in the ground truth can be detected by a chosen threshold, we say this segment is detected correctly, and all points in this
+    segment are treated as if they can be detected by this threshold.'
+- id: c8
+  statement: 'Acknowledged failure mode: despite M-ELBO, missing-data injection and MCMC imputation, Donut may still fail to find a good posterior if a window contains too many anomalies; the authors argue
+    that for long-lasting anomalies correct scores in the first few minutes suffice in their context.'
+  location: Find Good Posteriors for Abnormal x
+  page: 9
+  quote: Despite these techniques, Donut may still fail to find a good posterior, if there are too many anomalies in x.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliations: Tsinghua University and Alibaba Group; acknowledgments list support from NSFC and Alibaba Innovative Research (AIR). Data provenance: 18 business KPIs at 1-minute intervals
+    obtained from ''a large Internet company'' (the abstract says ''a top global Internet company''; not named in the text), of which 3 (A, B, C) were evaluated, split 49%/21%/30% train/validation/test,
+    with all anomalies labelled by the company''s operators; the data is not stated to be released. Venue from the PDF (ACM reference format ''In WWW 2018: The 2018 Web Conference'' and the IW3C2 CC BY
+    4.0 notice); the arXiv comment says ''submitted to WWW 2018''. Disclosure: the supervised baseline Opprentice [25] is earlier work by Xu, Zhao and Pei (authors of this paper). Latent dimension K was
+    chosen empirically (3 for B and C, 8 for A); Fig 10 shows test-set F-scores across K, which the authors say cannot be used to pick K, and choosing K unsupervised is left as future work. Labels were
+    down-sampled to 0%/10%/100% of anomaly segments for the unsupervised/occasional-label settings. Results (Fig 8-10) are figures only; no numbers recorded beyond the abstract range.'

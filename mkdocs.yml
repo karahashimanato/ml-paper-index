@@ -31,6 +31,7 @@ nav:
       - 時系列の異常検知: articles/tasks/time-series-anomaly-detection.md
   - 手法の記事:
       - 表データ基盤モデル (TabPFN 系): articles/methods/tabular-foundation-models.md
+      - オートエンコーダ: articles/methods/autoencoders.md
   - 横断記事:
       - モデルと評価方法の弱点と改善: articles/topics/weaknesses-and-fixes.md
       - モデルの解釈可能性: articles/topics/model-interpretability.md

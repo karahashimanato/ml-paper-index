@@ -1,0 +1,77 @@
+id: arxiv-2007.03898
+title: 'NVAE: A Deep Hierarchical Variational Autoencoder'
+authors:
+- Arash Vahdat
+- Jan Kautz
+year: 2020
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/2007.03898
+  code: https://github.com/NVlabs/NVAE
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-04'
+  pdf_sha256: 4e186ed9ea906f22f67b739778c5051c1ad5199cbd5fa2bc36f6715b4f4fbf2d
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- 'NVAE: a deep hierarchical VAE for images built from depthwise-separable residual cells with batch normalization, Swish and squeeze-and-excitation, a residual parameterization of the approximate posterior
+  relative to the prior, and spectral regularization to stabilize training'
+claims:
+- id: c1
+  statement: 'Positioning: VAEs offer fast sampling and easy-to-access encoders but are currently outperformed by normalizing flows and autoregressive models; most VAE research focuses on statistical challenges,
+    while this paper focuses on neural architecture design for hierarchical VAEs.'
+  location: Abstract
+  page: 1
+  quote: However, they are currently outperformed by other models such as normalizing ﬂows and autoregressive models.
+- id: c2
+  statement: 'Training instability: due to the unbounded KL term, training very deep hierarchical VAEs is often unstable; the authors observe that instability remains a major roadblock as the number of
+    hierarchical groups increases, independent of batch normalization.'
+  location: Introduction
+  page: 2
+  quote: We also observe that instability of training remains a major roadblock when the number of hierarchical groups is increased, independent of the presence of BN.
+- id: c3
+  statement: 'Batch normalization: earlier state-of-the-art VAEs omitted BN; the authors observed that BN''s negative impact occurs during evaluation (running statistics shift the outputs), and address
+    it by adjusting the BN momentum and regularizing the norm of BN scaling parameters.'
+  location: Section 3.1
+  page: 4
+  quote: In our early experiments, we observed that the negative impact of BN is during evaluation, not training.
+- id: c4
+  statement: 'Spectral regularization: residual Normal distributions alone do not stabilize training because the KL is still unbounded; the authors add a penalty on the largest singular value of each layer
+    to keep encoder outputs bounded.'
+  location: Section 3.2
+  page: 5
+  quote: The residual Normal distributions do not sufﬁce for stabilizing VAE training as KL in Eq. 2 is still unbounded.
+- id: c5
+  statement: 'Architecture over statistics: NVAE''s performance is only slightly improved by adding normalizing flows in the encoder, which the authors take to indicate that network architecture is an important
+    component of VAEs.'
+  location: Section 4.1
+  page: 6
+  quote: This indicates that the network architecture is an important component in VAEs and a carefully designed network with Normal distributions in encoder can compensate for some of the statistical challenges.
+- id: c6
+  statement: 'Sampling protocol for the shown images: samples are drawn with a reduced prior temperature (which often improves quality but reduces diversity), and BN statistics are readjusted by sampling
+    500 times at that temperature; the quantitative evaluation uses the default BN setting.'
+  location: Section 4.2
+  page: 7
+  quote: This is done by scaling down the standard deviation of the Normal distributions in each conditional in the prior, and it often improves the quality of the samples, but it also reduces their diversity.
+- id: c7
+  statement: 'Comparison with VQ-VAE-2 (Related Work): although VQ-VAE is motivated by VAEs, its objective does not correspond to a lower bound on the data log-likelihood, whereas NVAE is trained directly
+    with the VAE objective.'
+  location: Introduction (Related Work)
+  page: 2
+  quote: Although VQ-VAE’s formulation is motivated by VAEs, its objective does not correspond to a lower bound on data log-likelihood.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: NVIDIA (no conflict-of-interest statement found; mixed precision uses the NVIDIA APEX library). Venue from the arXiv comment (NeurIPS 2020, spotlight) and the PDF footer. Results
+    tables (bits/dim on MNIST, CIFAR-10, ImageNet 32, CelebA 64, CelebA HQ, FFHQ; ablations on CIFAR-10) not recorded; the abstract''s state-of-the-art claim is among non-autoregressive likelihood-based
+    models.'

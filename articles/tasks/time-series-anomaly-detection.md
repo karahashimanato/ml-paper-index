@@ -10,7 +10,7 @@ written_by: claude-opus-5-5 via Claude Code
 # 時系列異常検知の手法比較と評価方法の問題
 
 <!-- generated:stale -->
-> 未反映のカードはありません。
+> ⚠ この記事の執筆後(2026-10-03)に、関連カードが 2 件追加されています(未反映): `arxiv-1607.00148`, `arxiv-1802.03903`
 <!-- /generated:stale -->
 
 ## この課題とは

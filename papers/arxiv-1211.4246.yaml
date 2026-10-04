@@ -1,0 +1,86 @@
+id: arxiv-1211.4246
+title: What Regularized Auto-Encoders Learn from the Data Generating Distribution
+authors:
+- Guillaume Alain
+- Yoshua Bengio
+year: 2012
+links:
+  arxiv: https://arxiv.org/abs/1211.4246
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-04'
+  pdf_sha256: 2547daa8259e89735ba016bf2af707df52494cfe0425742c725dc010513ded42
+tags:
+  tasks:
+  - representation-learning
+  - generative-modeling
+  method_families:
+  - autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- Theorems showing that the optimal reconstruction function of a denoising auto-encoder with small Gaussian noise and squared error (and of a reconstruction contractive auto-encoder, RCAE) satisfies r(x)
+  - x proportional to the score d log p(x)/dx (and its Jacobian estimates the Hessian) as the noise goes to 0, independent of parametrization; and an approximate Metropolis-Hastings sampler using the estimated
+  energy differences
+claims:
+- id: c1
+  statement: 'Main result: the (regularized) auto-encoder captures the score, i.e. the derivative of the log-density with respect to the input; the theorems are generic (not parametrization-specific) and
+    describe what the auto-encoder would tend to given enough capacity and examples.'
+  location: Abstract
+  page: 1
+  quote: We show that the auto-encoder captures the score (derivative of the log-density with respect to the input).
+- id: c2
+  statement: 'Link between regularizers: the analysed contractive criterion is shown to be similar to the denoising criterion with small corruption noise, with the contraction applied to the whole reconstruction
+    function rather than only the encoder (Proposition 1, via a Taylor expansion).'
+  location: Abstract
+  page: 1
+  quote: These results are for a contractive training criterion we show to be similar to the denoising auto-encoder training criterion with small corruption noise, but with contraction applied on the whole
+    reconstruction function rather than just encoder.
+- id: c3
+  statement: 'Assumptions behind recovering the score: the ''perfect world'' scenario assumes no constraint on r (non-parametric), infinite training data and perfect minimization, plus a known and sufficiently
+    small sigma; the theorems are asymptotic as sigma goes to 0. Later subsections drop these assumptions one by one.'
+  location: Section 3.2
+  page: 8
+  quote: As a starting point, we will assume that we are in a perfect situation, i.e., with no constraint on r (non-parametric setting), an inﬁnite amount of training data, and a perfect minimization.
+- id: c4
+  statement: 'Reconstruction error is not an energy: the analysis suggests that in regularized auto-encoders reconstruction error is the norm of an approximate score (contradicting Ranzato et al. 2008''s
+    energy view); its norm is small near training examples but could also be small at local minima of density, which happened in the spiral example between two arms of the manifold.'
+  location: Section 3.4
+  page: 10
+  quote: Note that the norm of the score should be small near training examples (corresponding to local maxima of density) but it could also be small at other places corresponding to local minima of density.
+- id: c5
+  statement: 'Protocol of the 2-D spiral experiment: a DAE (tanh encoder, linear decoder, 1000 hidden units, untied weights, Gaussian noise sigma = 0.01) was trained with BFGS on a fixed training set of
+    10 000 samples; because the solution depends on initialization, corruption noise and finite sample, the model was trained multiple times and the two most visually appealing outcomes were shown (Figure
+    5). The noise levels in Figure 4 were also selected for visual appeal.'
+  location: Section 3.4
+  page: 9
+  quote: For those reasons, we trained the model multiple times and selected two of the most visually appealing outcomes.
+- id: c6
+  statement: 'Limited parametrization: with a specific parametrization r(x) - x need not be a conservative vector field; for the DAE used, a potential exists only with tied weights, yet untied weights gave
+    much better results and the tied-weight energy is not normalizable, which the authors take to suggest not worrying too much about the exact parametrization as long as it is flexible enough.'
+  location: Section 3.6
+  page: 12
+  quote: In that sense, this suggests that we should not worry too much about the exact parameterization of the denoising auto-encoder as long as it has the required ﬂexibility to approximate the optimal
+    reconstruction function suﬃciently well.
+- id: c7
+  statement: 'Noise-level trade-off when sampling (1-d manifold in 10-D, sigma_train = sigma_MH = 0.1 found after some hyperparameter tweaking): too large a training noise gives a ''blurry'' density estimate
+    missing details; too small a noise means the DAE never sees examples far from the manifold, which can lead to strange behaviour when the sampler enters those regions.'
+  location: Section 4.2
+  page: 15
+  quote: When σtrain is too large, the DAE trained learns a “blurry” version of the density that fails to represent the details that we are interested in.
+- id: c8
+  statement: 'Failure mode: spurious probability maxima arise from inadequate DAE training, when the auto-encoder lacks capacity or training ends in a bad local minimum; Figure 7 shows a DAE whose vector
+    field is out of control away from the spiral because the training noise was so small, and the caption states that training with enough examples with sufficiently large corruption noise typically eliminated
+    the problem in the experiments.'
+  location: Section 4.3
+  page: 15
+  quote: It happens when an auto-encoder lacks the capacity to model the density with enough precision, or when the training procedure ends up in a bad local minimum (in terms of the DAE parameters).
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: University of Montreal. No venue is stated in the PDF and none was given in the arXiv metadata; no venue recorded. Experiments are toy/artificial (1-D density, 2-D spiral,
+    1-d manifold in 10-D) and results are figures only; no numbers recorded. The conclusion lists generalization to discrete data as an open question (addressed by the same group in arxiv-1305.6663).'

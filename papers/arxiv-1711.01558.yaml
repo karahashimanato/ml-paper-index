@@ -1,0 +1,86 @@
+id: arxiv-1711.01558
+title: Wasserstein Auto-Encoders
+authors:
+- Ilya Tolstikhin
+- Olivier Bousquet
+- Sylvain Gelly
+- Bernhard Schölkopf
+year: 2017
+venue: ICLR 2018
+links:
+  arxiv: https://arxiv.org/abs/1711.01558
+  code: https://github.com/tolstikhin/wae
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-04'
+  pdf_sha256: e8a0cdcabd8ec1c87afd9aabab693a63c5c40c08f4f5c898bcdbd5e166bae56f
+tags:
+  tasks:
+  - generative-modeling
+  - representation-learning
+  method_families:
+  - autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- 'Wasserstein Auto-Encoder (WAE): a family of regularized autoencoders minimizing a relaxed optimal-transport cost W_c(P_X, P_G) as reconstruction cost c plus lambda times a divergence D_Z between the
+  encoded distribution Q_Z and the prior P_Z, with two instances: WAE-GAN (adversarial D_Z) and WAE-MMD (MMD D_Z, adversary-free)'
+claims:
+- id: c1
+  statement: 'Main idea: WAE minimizes a penalized form of the Wasserstein distance between the model and data distributions, which yields a regularizer different from the VAE''s; this regularizer encourages
+    the encoded training distribution to match the prior.'
+  location: Abstract
+  page: 1
+  quote: This regularizer encourages the encoded training distribution to match the prior.
+- id: c2
+  statement: 'Objective: for a deterministic decoder, the optimal-transport cost can be written as an optimization over probabilistic encoders whose aggregate Q_Z equals the prior (Theorem 1, from earlier
+    work [4]); relaxing this constraint with a penalty lambda * D_Z(Q_Z, P_Z) gives the WAE objective, which, unlike the VAE, allows deterministic encoders.'
+  location: Proposed method
+  page: 4
+  quote: Note that as opposed to VAEs, the WAE formulation allows for non-random encoders deterministically mapping inputs to their latent codes.
+- id: c3
+  statement: 'Difference from the VAE regularizer: citing [13], the VAE regularizer equals KL(Q_Z, P_Z) plus the mutual information between X and Z, and WAE simply drops the mutual-information term.'
+  location: Related work
+  page: 6
+  quote: WAEs simply drop the mutual information term IQ(X, Z) in the VAE regularizer.
+- id: c4
+  statement: 'Relation to AAE: with squared cost, WAE-GAN is equivalent to adversarial autoencoders, so the theory of [4] suggests AAEs minimize the 2-Wasserstein distance between data and model; WAE generalizes
+    AAE to any input-space cost and any latent discrepancy (e.g. MMD).'
+  location: Related work
+  page: 6
+  quote: This provides the ﬁrst theoretical justiﬁcation for AAEs known to the authors.
+- id: c5
+  statement: 'Stability: in some cases WAE-GAN seems to give better matching and better samples than WAE-MMD, but because of adversarial training it is less stable than WAE-MMD, whose training is very stable
+    much like the VAE.'
+  location: Experiments
+  page: 10
+  quote: However, due to adversarial training WAE-GAN is less stable than WAE-MMD, which has a very stable training much like VAE.
+- id: c6
+  statement: Sample quality depends on how accurately Q_Z matches P_Z, because the decoder is trained only on encoded data points; the authors noticed that even slight differences between Q_Z and P_Z may
+    affect sample quality.
+  location: Experiments
+  page: 10
+  quote: In our experiments we noticed that even slight diﬀerences between QZ and PZ may aﬀect the quality of samples.
+- id: c7
+  statement: 'Experimental setup (MNIST and CelebA): deterministic encoder-decoder pairs, isotropic Gaussian prior, squared cost, DCGAN-like architectures; the regularization weight was set by trying various
+    values, and lambda = 10 seemed to work well across datasets.'
+  location: Experiments
+  page: 8
+  quote: We tried various values of λ and noticed that λ = 10 seems to work good across all datasets we considered.
+- id: c8
+  statement: 'Larger-scale comparison (bigVAE/bigWAE in Table 1): over 3,000 WAE-GAN, WAE-MMD and VAE models with randomly sampled hyperparameters (latent dimension, batch size, learning rates, lambda or
+    the VAE decoder variance, DCGAN-style or ResNet50-v2 architectures), with each algorithm given exactly the same computational budget and three random seeds per configuration.'
+  location: Supplementary D
+  page: 19
+  quote: In total we trained over 3 thousand WAE-GAN, WAE-MMD, and VAE models with various hyperparameters while making sure each one of the three algorithms gets exactly the same computational budget.
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliations: Max Planck Institute for Intelligent Systems and Google Brain. Venue from the arXiv comment (''Published at ICLR 2018''); the v4 PDF itself has no venue statement. Disclosure:
+    the theory (Theorem 1) is from the authors'' earlier work [4], restated here. Evaluation-protocol notes: in the larger study (Supplementary D) the checkpoint with the lowest FID was selected for each
+    configuration; the text does not say whether FID samples are compared against training or test images (not found). The main text says lambda = 10 seemed to work across datasets, but Supplementary C.2
+    lists lambda = 100 (WAE-MMD) and lambda = 1 (WAE-GAN) for CelebA. The CelebA VAE uses a Gaussian decoder with fixed sigma^2 = 0.3 and no batch normalization. Results table (FID, sharpness) not recorded.'

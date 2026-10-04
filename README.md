@@ -69,13 +69,15 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 古典アルゴリズムと機械学習 | 論文カード25本(学習済みインデックス、予測つきアルゴリズム、微分可能なソート、アルゴリズムの学習、機械学習の中の貪欲法)、記事 [articles/topics/algorithms-and-ml.md](articles/topics/algorithms-and-ml.md) |
 | アルゴリズム設計技法と機械学習 | 論文カード25本+既存4本(分割統治・動的計画・分枝限定・局所探索と機械学習、学習した組合せ最適化の再検証)、記事 [articles/topics/design-techniques-and-ml.md](articles/topics/design-techniques-and-ml.md) |
 | 予測モデルのフォールバックとモデル選択 | 論文カード21本+既存3本(メタ学習によるモデル選択、動的選択、予測の保留と委譲、切り替えの引き金、LLM のルーティング、MLOps の監視と入れ替え)、記事 [articles/topics/model-fallback-and-selection.md](articles/topics/model-fallback-and-selection.md) |
+| オートエンコーダ | 論文カード24本+既存4本(正則化オートエンコーダの理論、VAE と事後崩壊、KL 項の代わりの正則化、disentanglement の再検証、再構成誤差による異常検知とその信頼性)、記事 [articles/methods/autoencoders.md](articles/methods/autoencoders.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では294本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では318本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
 
 - [表データ基盤モデル(TabPFN 系)— 仕組み、適用範囲、評価の読み方](articles/methods/tabular-foundation-models.md)
+- [オートエンコーダ — 正則化、VAE、異常検知での使い方と限界](articles/methods/autoencoders.md)
 
 横断記事:
 

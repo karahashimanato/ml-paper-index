@@ -1,0 +1,88 @@
+id: arxiv-1812.02765
+title: Improving Reconstruction Autoencoder Out-of-distribution Detection with Mahalanobis Distance
+authors:
+- Taylor Denouden
+- Rick Salay
+- Krzysztof Czarnecki
+- Vahdat Abdelzad
+- Buu Phan
+- Sachin Vernekar
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1812.02765
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-04'
+  pdf_sha256: 0b6e5e5e7844e3bc3d4e64d50bceaaa84c8b3280edacb6a64b57417683d1eabd
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - autoencoders
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'A hybrid novelty score: the Mahalanobis distance of the encoded sample to the mean of the encoded training set plus the reconstruction error, each scaled by the reciprocal of its standard deviation on
+  an inlier validation set'
+claims:
+- id: c1
+  statement: 'Thesis: the authors suggest that reconstruction-based approaches fail to capture anomalies that lie far from known inliers in latent space but near the latent manifold defined by the model,
+    and propose adding the latent Mahalanobis distance; the abstract says this ''often'' improves over the baseline.'
+  location: Abstract
+  page: 1
+  quote: Here we suggest that reconstruction-based approaches fail to capture particular anomalies that lie far from known inlier samples in latent space but near the latent dimension manifold deﬁned by
+    the parameters of the model.
+- id: c2
+  statement: 'Observed failure: autoencoders sometimes reconstruct OOD samples with less error than many inlier samples, so no threshold can classify those OOD samples correctly while keeping all inliers
+    correct; the authors report observing this for dense and convolutional autoencoders of different depths and hidden-layer sizes, often with OOD samples visibly distinct to humans.'
+  location: Problem and approach
+  page: 2
+  quote: Experimentally, we have found that autoencoders will sometimes reconstruct OOD samples with less error than many inlier samples.
+- id: c3
+  statement: 'Why not enlarge the bottleneck: increasing the latent dimensionality increases model power, and a bottleneck equal to or larger than the input can potentially learn the identity and reconstruct
+    any input; the authors instead add a distance in the latent space.'
+  location: Problem and approach
+  page: 3
+  quote: An autoencoder with a bottleneck layer dimensionality equal to or greater than the original input can potentially learn the identity function and reconstruct any given input, diminishing its ability
+    to distinguish between inlier and OOD data.
+- id: c4
+  statement: 'Score weighting without OOD data: the mixing parameters are set from an inlier-only validation set (alpha = 1/std of the latent Mahalanobis distance, beta = 1/std of the reconstruction error);
+    the authors say tuning this combination may give further improvements in future work.'
+  location: Experiments and results
+  page: 4
+  quote: α and β are mixing parameters that were determined using a validation set of inliers samples.
+- id: c5
+  statement: 'Evaluation setup: for each of ten bottleneck sizes (2 to 798, stated as the original input size), a separate autoencoder is trained on a single MNIST digit class, which is the inlier class
+    for that model; metrics are FPR at 95% TPR, AUROC, AUPR (in) and AUPR (out). MNIST is the only dataset.'
+  location: Experiments and results
+  page: 3
+  quote: For each of the different architectures, a separate autoencoder was trained using only images from a single digit class from MNIST.
+- id: c6
+  statement: 'Result statement (hedged): incorporating the latent distance improved performance over reconstruction error alone ''in most cases''; the conclusion says the hybrid ''often'' improves performance.'
+  location: Experiments and results
+  page: 4
+  quote: Our results show that incorporating the latent distance improved performance over using only the reconstruction error in most cases.
+- id: c7
+  statement: 'Model selection for the summary table: Table 1 compares methods at the architecture that gave the best available result for the baseline (reconstruction error); the caption does not say on
+    which data split this best result was determined.'
+  location: Table 1 caption
+  page: 5
+  quote: Architecture chosen was for the best available result for the baseline method.
+- id: c8
+  statement: 'Stated limitations / future work: extend to more complex naturalistic image datasets, optimize how latent distance and reconstruction error are combined, and model multiple inlier classes
+    with a single autoencoder.'
+  location: Conclusion and future work
+  page: 4
+  quote: In the future, we would like to extend our work to more complex naturalistic image datasets
+results: []
+relations: []
+card:
+  created_at: '2026-10-04'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-04): autoencoders (foundations and regularized autoencoders, VAEs, autoencoder-based anomaly detection). Results tables not recorded;
+    claims only. Affiliation: University of Waterloo. arXiv comment ''9 pages, 5 figures''; no venue stated in the PDF. Training (Appendix): MNIST training set randomly split into 50000 training / 10000
+    validation; Adadelta, binary cross-entropy, up to 500 epochs with early stopping (patience 20) on validation loss. The text says the largest bottleneck, 798, is ''the original input size'' (recorded
+    as written; not checked against MNIST''s 28x28 = 784). The OOD test samples are not explicitly described in the body; Figure 1 and 3a show other MNIST digits as OOD. Results tables (Tables 1-11) not
+    recorded.'

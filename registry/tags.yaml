@@ -185,6 +185,8 @@ method_families:
   - id: variational-autoencoders
     description: Autoencoders trained as latent-variable models with variational inference (e.g. VAE, IWAE, beta-VAE, VQ-VAE, hierarchical VAEs).
     parent: autoencoders
+  - id: diffusion-models
+    description: Generative models that learn to reverse a gradual noising process (denoising diffusion, score-based models, and their samplers and distillations).
 paradigms:
   - id: supervised
     description: Supervised learning.

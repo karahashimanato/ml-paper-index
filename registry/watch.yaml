@@ -57,3 +57,7 @@ themes:
     tags: [gradient-boosted-trees, random-forests, decision-trees]
     arxiv_queries:
       - '(abs:"gradient boosting" OR abs:"random forest" OR abs:"decision tree" OR abs:XGBoost OR abs:LightGBM OR abs:CatBoost) AND (cat:cs.LG OR cat:stat.ML)'
+  - name: 拡散モデル
+    tags: [diffusion-models]
+    arxiv_queries:
+      - '(abs:"diffusion model" OR abs:"score-based generative" OR abs:"denoising diffusion" OR abs:"consistency model") AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'

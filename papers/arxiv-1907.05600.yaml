@@ -1,0 +1,82 @@
+id: arxiv-1907.05600
+title: Generative Modeling by Estimating Gradients of the Data Distribution
+authors:
+- Yang Song
+- Stefano Ermon
+year: 2019
+venue: NeurIPS 2019
+links:
+  arxiv: https://arxiv.org/abs/1907.05600
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: c4a898f531eb8716d8e96035dfab27ca2cee3b5b82078ac283af1242d687bf22
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes:
+- 'Noise Conditional Score Networks (NCSN): a single network trained with denoising score matching to estimate the scores of the data perturbed by Gaussian noise at multiple levels'
+- 'Annealed Langevin dynamics: sampling with Langevin dynamics using scores for gradually decreasing noise levels'
+claims:
+- id: c1
+  statement: 'First challenge for naive score-based modeling: if the data lie on a low-dimensional manifold, as is often assumed for real-world data, the score is undefined in the ambient space and score
+    matching does not give a consistent estimator.'
+  location: Introduction
+  page: 2
+  quote: First, if the data distribution is supported on a low dimensional manifold—as it is often assumed for many real world datasets—the score will be undeﬁned in the ambient space, and score matching
+    will fail to provide a consistent score estimator.
+- id: c2
+  statement: 'Second challenge: in low-density regions score matching may lack samples; in a toy 2-D mixture-of-Gaussians experiment with sliced score matching, score estimates were reliable only near the
+    modes.'
+  location: Challenges of score-based generative modeling (Low data density regions)
+  page: 4
+  quote: As the ﬁgure demonstrates, score estimation is only reliable in the immediate vicinity of the modes of pdata, where the data density is high.
+- id: c3
+  statement: 'Slow mixing: when modes are separated (or connected only by low-density regions), Langevin dynamics with the score alone may fail to recover the relative mode weights in reasonable time; in
+    theory it can, but may need a very small step size and very many steps.'
+  location: Challenges of score-based generative modeling (Slow mixing of Langevin dynamics)
+  page: 4
+  quote: In this case, Langevin dynamics can produce correct samples in theory, but may require a very small step size and a very large number of steps to mix.
+- id: c4
+  statement: 'Approximation in sampling: with finite step size and finite steps, Langevin dynamics would need a Metropolis-Hastings correction, which the authors assume negligible when the step size is
+    small and the number of steps large.'
+  location: Sampling with Langevin dynamics
+  page: 3
+  quote: In this work, we assume this error is negligible when ϵ is small and T is large.
+- id: c5
+  statement: 'Training objective: NCSNs are trained with denoising score matching (Gaussian perturbation at each noise level, combined across levels with a weighting λ(σ)); the authors chose it because
+    it is slightly faster and fits noise-perturbed scores, while noting that sliced score matching empirically trains NCSNs equally well.'
+  location: 'Noise Conditional Score Networks: learning and inference'
+  page: 6
+  quote: We adopt denoising score matching as it is slightly faster and naturally ﬁts the task of estimating scores of noise-perturbed data distributions.
+- id: c6
+  statement: 'Image setup: L = 10 noise levels forming a geometric sequence from σ_1 = 1 to σ_10 = 0.01 (pixels in [0,1]); annealed Langevin sampling uses T = 100 steps per noise level, step parameter ϵ
+    = 2e-5 and uniform-noise initialization; the authors report results robust to T and that ϵ between 5e-6 and 5e-5 generally works.'
+  location: Experiments (Setup)
+  page: 7
+  quote: When using annealed Langevin dynamics for image generation, we choose T = 100 and ϵ = 2 × 10−5, and use uniform noise as our initial samples.
+- id: c7
+  statement: 'Ablation: a baseline using the same score network conditioned on a single small noise level (σ = 0.01) with vanilla Langevin dynamics fails to generate reasonable images, which the authors
+    attribute to the small noise not providing score information in low-density regions.'
+  location: Experiments (Image generation)
+  page: 8
+  quote: As a result, this baseline fails to generate reasonable images, as shown by samples in Appendix C.1.
+- id: c8
+  statement: 'Model selection: checkpoints were saved every 5000 iterations; for CIFAR-10 and CelebA the checkpoint with the smallest FID on 1000 generated images was chosen (MNIST used the last checkpoint),
+    and Table 1 scores were then computed on 50000 samples; the authors note ProgressiveGAN used a similar procedure.'
+  location: Appendix B.2
+  page: 15
+  quote: For selecting our CIFAR-10 and CelebA models, we generate 1000 images for each checkpoint and choose the one with the smallest FID score computed on these 1000 images.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: Stanford University; acknowledgments
+    list funding from Toyota Research Institute, NSF, ONR and AFOSR. Venue from the arXiv comment ''NeurIPS 2019 (Oral)'' and the PDF footer. arXiv v3 is dated 10 Oct 2020. The paper omits FID/IS on MNIST
+    and CelebA, citing non-comparable preprocessing across papers. Table 1 not recorded.'

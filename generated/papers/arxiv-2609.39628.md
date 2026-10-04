@@ -6,7 +6,7 @@
 - 著者: Pengfei Li, Mohammad Khalil
 - 年・掲載: 2026
 - 原論文: [PDF](https://arxiv.org/pdf/2609.39628v1)(arXiv v1、カード作成時に読んだ版)
-- タグ: deep-learning, tabular-data-generation, unsupervised
+- タグ: deep-learning, diffusion-models, tabular-data-generation, unsupervised
 - 人手レビュー: 未
 
 ## 主張

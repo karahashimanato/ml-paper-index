@@ -1,0 +1,84 @@
+id: arxiv-1706.08500
+title: GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium
+authors:
+- Martin Heusel
+- Hubert Ramsauer
+- Thomas Unterthiner
+- Bernhard Nessler
+- Sepp Hochreiter
+year: 2017
+venue: NeurIPS 2017
+links:
+  arxiv: https://arxiv.org/abs/1706.08500
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 4abcb2e018d07ae53cfc41e02b48d6158730cfe55523bd38e875e9a19a5178ff
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'TTUR: training GANs with separate learning rates for the discriminator and the generator, with a convergence proof to a stationary local Nash equilibrium via two time-scale stochastic approximation'
+- 'FID (Fréchet Inception Distance): the Fréchet (Wasserstein-2) distance between Gaussians fitted to the mean and covariance of Inception-v3 coding-layer features of real and generated images'
+claims:
+- id: c1
+  statement: 'TTUR (briefly): with separate learning rates for discriminator and generator, the authors prove via stochastic approximation theory that GAN training converges under mild assumptions to a
+    stationary local Nash equilibrium; the convergence carries over to Adam.'
+  location: Abstract
+  page: 1
+  quote: Using the theory of stochastic approximation, we prove that the TTUR converges under mild assumptions to a stationary local Nash equilibrium.
+- id: c2
+  statement: 'Motivation for FID: the drawback of the Inception Score is that it does not use the statistics of real-world samples and compare them with those of synthetic samples.'
+  location: Experiments (Performance Measure)
+  page: 6
+  quote: Drawback of the Inception Score is that the statistics of real world samples are not used and compared to the statistics of synthetic samples.
+- id: c3
+  statement: 'FID definition and its assumption: only the first two moments (mean and covariance) of the Inception coding layer are used, the coding units are assumed to follow a multidimensional Gaussian
+    (justified as the maximum-entropy distribution for given mean and covariance), and the two Gaussians are compared with the Fréchet (Wasserstein-2) distance.'
+  location: Experiments (Performance Measure)
+  page: 6
+  quote: The Gaussian is the maximum entropy distribution for given mean and covariance, therefore we assume the coding units to follow a multidimensional Gaussian.
+- id: c4
+  statement: 'Evidence offered for FID: on CelebA, six disturbances (Gaussian noise, Gaussian blur, implanted black rectangles, swirl, salt-and-pepper noise, contamination with ImageNet images) are applied
+    at increasing levels, and the authors state that FID captures the disturbance level very well (shown as a figure). The text claims FID is consistent with ''disturbances and human judgment'', but no
+    human study was found in the text (searched for human, judg).'
+  location: Experiments (Performance Measure)
+  page: 6
+  quote: The FID captures the disturbance level very well.
+- id: c5
+  statement: 'Comparison with the Inception Score (Appendix A1, figure caption): across the disturbances, FID increases monotonically with the disturbance level, whereas the Inception Score (converted to
+    a distance) fluctuates, stays flat or decreases; the comparison is shown only as a figure.'
+  location: Appendix A1 (Figure A8)
+  page: 13
+  quote: The FID captures the disturbance level very well by monotonically increasing whereas the Inception Score ﬂuctuates, stays ﬂat or even, in the worst case, decreases.
+- id: c6
+  statement: 'FID computation protocol: reference statistics are computed from all training images passed through the pretrained Inception-v3 (last pooling layer as coding layer), and model statistics from
+    50,000 generated images.'
+  location: Experiments (Model Selection and Evaluation)
+  page: 7
+  quote: To approximate these moments for the model distribution, we generate 50,000 images, propagate them through the Inception-v3 model, and then compute the mean m and the covariance matrix C.
+- id: c7
+  statement: 'Model selection used the evaluation metric: learning rates were optimized to be large while keeping training stable as indicated by a decreasing FID (or JSD), and the stopping time was fixed
+    to the update step when the FID or JSD of the best models stopped decreasing; Table 1 reports the best FID for optimized number of updates and learning rates.'
+  location: Experiments (Model Selection and Evaluation)
+  page: 7
+  quote: We further ﬁxed the time point for stopping training to the update step when the FID or Jensen-Shannon-divergence of the best models was no longer decreasing.
+- id: c8
+  statement: 'Scope limitation: FID only works for images, so the character-level language experiments (One Billion Word) are evaluated with the Jensen-Shannon divergence instead, as done previously [23].'
+  location: Experiments (WGAN-GP on Language Data)
+  page: 9
+  quote: Since the FID criterium only works for images, we measured the performance by the Jensen-Shannon-divergence (JSD) between the model and the real world distribution as has been done previously [23].
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: LIT AI Lab & Institute of Bioinformatics,
+    Johannes Kepler University Linz. Venue from the PDF footer (''31st Conference on Neural Information Processing Systems (NIPS 2017)''). FID is introduced here and is also used by the same paper to select
+    learning rates and stopping points for its own TTUR comparison. No dependence of FID on the number of samples is discussed in the text (searched for ''sample''/''number of samples''). Results tables
+    (Table 1, Table A2) not recorded.'

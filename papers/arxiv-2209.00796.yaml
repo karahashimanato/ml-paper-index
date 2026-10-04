@@ -1,0 +1,87 @@
+id: arxiv-2209.00796
+title: 'Diffusion Models: A Comprehensive Survey of Methods and Applications'
+authors:
+- Ling Yang
+- Zhilong Zhang
+- Yang Song
+- Shenda Hong
+- Runsheng Xu
+- Yue Zhao
+- Wentao Zhang
+- Bin Cui
+- Ming-Hsuan Yang
+year: 2022
+venue: ACM Computing Surveys
+links:
+  arxiv: https://arxiv.org/abs/2209.00796
+source:
+  version: arXiv v15
+  retrieved_at: '2026-10-05'
+  pdf_sha256: a187286589b43becae9086ccff3b71f50f284c3e312f8cd587336aabbe675fb3
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes: []
+claims:
+- id: c1
+  statement: 'Taxonomy: research on diffusion models is categorized into efficient sampling (Section 3), improved likelihood estimation (Section 4) and handling data with special structures (Section 5),
+    with connections to other generative models in Section 6.'
+  location: Introduction
+  page: 5
+  quote: 'categorizing it into three key areas: efficient sampling (Section 3), improved likelihood estimation (Section 4), and methods for handling data with special structures (Section 5)'
+- id: c2
+  statement: 'Improved likelihood: the training objective is a variational lower bound that, citing VDM [155], may not be tight in many cases, leading to potentially suboptimal log-likelihoods; the survey
+    covers noise schedule optimization, reverse variance learning and exact log-likelihood evaluation.'
+  location: Diffusion Models with Improved Likelihood
+  page: 14
+  quote: This bound, however, may not be tight in many cases [155], leading to potentially suboptimal log-likelihoods from diffusion models.
+- id: c3
+  statement: 'Summary of VDM: noise schedules do not affect the VLB as long as they share the same endpoint SNR values, and only affect the variance of Monte Carlo estimators of the VLB.'
+  location: Noise Schedule Optimization
+  page: 15
+  quote: As a result, noise schedules do not affect the VLB as long as they share the same values at Rmin and Rmax, and will only affect the variance of Monte Carlo estimators for VLB.
+- id: c4
+  statement: 'Summary of reverse variance learning: classical diffusion models fix the reverse-kernel variance, and many methods train it to further maximize the VLB and log-likelihood (iDDPM''s interpolation
+    with a hybrid objective; Analytic-DPM''s optimal variance from a pre-trained score model).'
+  location: Reverse Variance Learning
+  page: 15
+  quote: Many methods propose to train the reverse variances as well to further maximize VLB and log-likelihood values.
+- id: c5
+  statement: 'Exact likelihood: the probability-flow-ODE likelihood can be computed accurately but cannot be directly optimized because it requires an expensive ODE solve per data point; Song et al. (2021)
+    maximize the SDE variational bound as a proxy (ScoreFlows).'
+  location: Exact Likelihood Computation
+  page: 16
+  quote: Unfortunately, this formula cannot be directly optimized to maximize 𝑝ode 𝜃 on data, as it requires calling expensive ODE solvers for each data point x0.
+- id: c6
+  statement: 'VAE connection: DDPM can be conceptualized as a hierarchical Markovian VAE with a fixed encoder (the linear Gaussian forward process), a decoder shared across decoding steps, and latents of
+    the same size as the data.'
+  location: Variational Autoencoders and Connections with Diffusion Models
+  page: 21
+  quote: The DDPM can be conceptualized as a hierarchical Markovian VAE with a fixed encoder.
+- id: c7
+  statement: 'Future directions: the assumption that the forward process completely erases information may not always hold, since complete removal is unachievable in finite time; when to halt the forward
+    process to balance sampling efficiency and sample quality is open.'
+  location: Future Directions
+  page: 44
+  quote: In reality, complete removal of information is unachievable in finite time.
+- id: c8
+  statement: 'Future directions: diffusion models are less effective than VAEs or GANs at providing good latent representations, and because the latent space often has the data''s dimensionality, sampling
+    efficiency suffers and the models may not learn representation schemes well.'
+  location: Future Directions
+  page: 44
+  quote: Unlike variational autoencoders or generative adversarial networks, diffusion models are less effective for providing good representations of data in their latent space.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Survey paper (Peking University and others).
+    Venue: the PDF footer states ''Accepted by ACM Computing Surveys'' (ACM reference format lists 2023); the year recorded is the arXiv year 2022. Conflict of interest: co-author Yang Song is an author
+    of several surveyed methods (score-based models, Score SDE, ScoreFlow). No experiments. Section 3 (efficient sampling) splits methods into learning-free and learning-based sampling, motivated by the
+    large number of evaluation steps. Note: on p.14 the survey describes the iDDPM reverse variance as an interpolation between beta_t and 1 - alpha-bar_t, whereas p.15 (and the iDDPM paper) use beta-tilde_t;
+    this inconsistency is in the source. Applications (Section 7) not recorded.'

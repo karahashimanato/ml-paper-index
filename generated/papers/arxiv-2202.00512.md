@@ -1,0 +1,25 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Progressive Distillation for Fast Sampling of Diffusion Models
+
+- カード: [`arxiv-2202.00512`](../../papers/arxiv-2202.00512.yaml)
+- 著者: Tim Salimans, Jonathan Ho
+- 年・掲載: 2022 ICLR 2022
+- 原論文: [PDF](https://arxiv.org/pdf/2202.00512v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: diffusion-models, generative-modeling, knowledge-distillation, unsupervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Procedure: the student is initialized as a copy of the teacher; training is like standard diffusion training except that the denoising target is the value that makes one student DDIM step match two teacher DDIM steps (computed by running the teacher and inverting one DDIM step); after convergence the student becomes the new teacher and the number of steps is halved.([Progressive distillation, p.3](https://arxiv.org/pdf/2202.00512v2#page=3 "At every iteration of progressive distillation, we then initialize the student model with a copy of the teacher, using both the same parameters and same model deﬁnition."))
+- **c2** Rationale: the distillation target is fully determined given the teacher and z_t, unlike the original data point, so the student can make sharp rather than blurry (averaged) predictions.([Progressive distillation, p.4](https://arxiv.org/pdf/2202.00512v2#page=4 "By making sharper predictions, the student model can make faster progress during sampling."))
+- **c3** Parameterization requirement: the standard epsilon-prediction with SNR-weighted loss is not well suited for distillation, because as distillation progresses the model is evaluated at lower SNR, where the implied x-prediction amplifies small errors and, at zero SNR, the link between epsilon- and x-prediction breaks down.([Diffusion model parameterization and training loss, p.5](https://arxiv.org/pdf/2202.00512v2#page=5 "Although this standard speciﬁcation works well for training the original model, it is not well suited for distillation:"))
+- **c4** Ablation protocol (undistilled CIFAR-10 models, Table 1): results are averages over 3 seeds of the best metrics obtained over 2 million training steps, with about +-0.1 noise; the epsilon output with truncated-SNR weighting diverged.([Experiments: model parameterization and training loss (Table 1 caption), p.6](https://arxiv.org/pdf/2202.00512v2#page=6 "All reported results are averages over 3 random seeds of the best metrics obtained over 2 million training steps; nevertheless we ﬁnd results are still ±0.1 due to the noise inherent in training our models."))
+- **c5** Training cost: distillation starts from 8192 teacher steps on CIFAR-10 and 1024 on the larger datasets, with 50 thousand parameter updates per iteration (100 thousand for 2 and 1 steps); with these settings, distilling to 4 steps costs comparable to or less than training the original model.([Experiments: progressive distillation, p.7](https://arxiv.org/pdf/2202.00512v2#page=7 "Using these settings, the computational cost of progressive distillation to 4 sampling steps is comparable or less than for training the original model."))
+- **c6** Step-quality trade-off: progressive distillation gives near-optimal results down to 4 or 8 steps, quality degrades relatively faster at 2 or 1 steps, while undistilled DDIM and stochastic samplers degrade very sharply below 128 steps; the authors conclude it is attractive for budgets of 128 steps or fewer.([Experiments: progressive distillation, p.7](https://arxiv.org/pdf/2202.00512v2#page=7 "At 2 or 1 sampling steps, the sample quality degrades relatively more quickly."))
+- **c7** Baseline protocol (Figure 4): DDIM and the stochastic sampler use the same models that initialize distillation; the stochastic sampler's variance interpolation coefficient is tuned separately for each number of steps and only the best result is reported; CIFAR-10 results average 4 seeds, other datasets a single run because of compute.([Figure 4 caption, p.8](https://arxiv.org/pdf/2202.00512v2#page=8 "We then tune this interpolation coefﬁcient separately for each number of sampling steps and report only the best result for that number of steps:"))
+- **c8** Compared with Luhman & Luhman (2021), whose one-step distillation requires building a large dataset by running the original model at its full number of steps, progressive distillation never runs the original model at the full number of steps, so total distillation time grows logarithmically with the number of teacher steps.([Related work on fast sampling, p.8](https://arxiv.org/pdf/2202.00512v2#page=8 "In contrast, our method never needs to run the original model at the full number of sampling steps:"))
+- **c9** Limitation: the student has the same architecture and number of parameters as the teacher; smaller students are left to future work.([Discussion, p.9](https://arxiv.org/pdf/2202.00512v2#page=9 "In the current work we limited ourselves to setups where the student model has the same architecture and number of parameters as the teacher model:"))
+

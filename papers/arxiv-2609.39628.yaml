@@ -14,6 +14,7 @@ tags:
   tasks:
   - tabular-data-generation
   method_families:
+  - diffusion-models
   - deep-learning
   paradigms:
   - unsupervised

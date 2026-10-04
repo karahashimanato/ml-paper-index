@@ -1,0 +1,89 @@
+id: arxiv-2011.13456
+title: Score-Based Generative Modeling through Stochastic Differential Equations
+authors:
+- Yang Song
+- Jascha Sohl-Dickstein
+- Diederik P. Kingma
+- Abhishek Kumar
+- Stefano Ermon
+- Ben Poole
+year: 2020
+venue: ICLR 2021
+links:
+  arxiv: https://arxiv.org/abs/2011.13456
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: b244b740e60628d01bc3d4b98d721c2343be1fb9b67ad22593c8555e66f4d4a6
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes:
+- A continuous-time SDE framework in which a forward SDE diffuses data to a prior and a reverse-time SDE, depending only on the score, generates samples; SMLD and DDPM correspond to discretizations of the
+  VE and VP SDEs
+- Predictor-Corrector samplers and the probability flow ODE (deterministic sampling and exact likelihood computation); the sub-VP SDE
+claims:
+- id: c1
+  statement: 'Key idea: a forward SDE slowly injects noise to turn data into a known prior, and the corresponding reverse-time SDE depends only on the time-dependent score of the perturbed data distribution,
+    which is estimated with neural networks and then integrated with numerical SDE solvers.'
+  location: Abstract
+  page: 1
+  quote: Crucially, the reverse-time SDE depends only on the time-dependent gradient ﬁeld (a.k.a., score) of the perturbed data distribution.
+- id: c2
+  statement: The authors group SMLD (Song & Ermon, 2019) and DDPM (Sohl-Dickstein et al., 2015; Ho et al., 2020) together as score-based generative models because, for continuous state spaces, the DDPM
+    objective implicitly computes scores at each noise scale.
+  location: Introduction
+  page: 1
+  quote: For continuous state spaces, the DDPM training objective implicitly computes scores at each noise scale.
+- id: c3
+  statement: 'Unification: in the limit of infinitely many noise scales, the SMLD perturbations become the Variance Exploding (VE) SDE and the DDPM perturbations the Variance Preserving (VP) SDE; DDPM ancestral
+    sampling corresponds to one particular discretization of the reverse-time VP SDE.'
+  location: Section 3.4
+  page: 5
+  quote: Therefore, the noise perturbations used in SMLD and DDPM correspond to discretizations of SDEs Eqs. (9) and (11).
+- id: c4
+  statement: 'Predictor-Corrector sampling on CIFAR-10: adding one corrector (score-based MCMC) step per predictor step doubles computation but always improved sample quality over predictor-only sampling
+    with the same number of steps, and was typically better than doubling the predictor steps; corrector-only sampling was worse at equal computation.'
+  location: Predictor-corrector samplers
+  page: 6
+  quote: For all predictors, adding one corrector step for each predictor step (PC1000) doubles computation but always improves sample quality (against P1000).
+- id: c5
+  statement: 'Probability flow ODE and likelihood protocol: the deterministic ODE sharing the SDE''s marginals allows exact likelihood computation; NLLs are computed on uniformly dequantized CIFAR-10 and
+    compared only with models evaluated the same way, except DDPM whose ELBO values on discrete data are included.'
+  location: Section 4.3
+  page: 7
+  quote: We compute log-likelihoods on uniformly dequantized data, and only compare to models evaluated in the same way (omitting models evaluated with variational dequantization (Ho et al., 2019) or discrete
+    data)
+- id: c6
+  statement: 'Trade-off: VE SDEs typically gave better sample quality than VP/sub-VP SDEs but empirically worse likelihoods, which the authors take to indicate practitioners likely need to experiment with
+    different SDEs for different domains and architectures.'
+  location: Section 4.4
+  page: 8
+  quote: As shown in Table 3, VE SDEs typically provide better sample quality than VP/sub-VP SDEs, but we also empirically observe that their likelihoods are worse than VP/sub-VP SDE counterparts.
+- id: c7
+  statement: 'Evaluation protocol: Table 3 (sample quality) reports the checkpoint with the smallest FID over training, sampled with PC samplers, whereas Table 2 reports the last checkpoint with black-box
+    ODE solvers; FIDs use 50k samples, and the PC samplers'' signal-to-noise ratio was grid-searched on CIFAR-10 (Appendix G).'
+  location: Section 4.4
+  page: 8
+  quote: Results reported in Table 3 are for the checkpoint with the smallest FID over the course of training, where samples are generated with PC samplers.
+- id: c8
+  statement: 'Stated limitations: the proposed samplers remain slower than GANs on the same datasets, and the range of possible samplers introduces many hyperparameters that future work should select and
+    tune automatically.'
+  location: Conclusion
+  page: 9
+  quote: While our proposed sampling approaches improve results and enable more efﬁcient sampling, they remain slower at sampling than GANs (Goodfellow et al., 2014) on the same datasets.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliations: Stanford University and Google
+    Brain. Venue from the PDF header (''Published as a conference paper at ICLR 2021'') and the arXiv comment ''ICLR 2021 (Oral)''. Conflict of interest: the authors include Yang Song and Stefano Ermon
+    (authors of SMLD/NCSN, arXiv-1907.05600) and Jascha Sohl-Dickstein (first author of arXiv-1503.03585), so the paper re-evaluates and extends the authors'' own earlier methods. The paper also states
+    that with a black-box ODE solver the number of function evaluations can be reduced by over 90% without affecting the visual quality of samples (Fig. 3). Main text read in full; of the appendix only
+    the sampler hyperparameter and architecture-exploration settings (Appendices G-H) were read. Tables 1-3 not recorded.'

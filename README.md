@@ -72,8 +72,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | オートエンコーダ | 論文カード24本+既存4本(正則化オートエンコーダの理論、VAE と事後崩壊、KL 項の代わりの正則化、disentanglement の再検証、再構成誤差による異常検知とその信頼性)、記事 [articles/methods/autoencoders.md](articles/methods/autoencoders.md) |
 | 勾配ブースティング木 | 論文カード12本+既存6本(関数空間の勾配降下と正則化、XGBoost・CatBoost の設計、サンプリング、DART・区分線形の木・EBM、チューニング、予測分布と不確実性)、記事 [articles/methods/gradient-boosted-trees.md](articles/methods/gradient-boosted-trees.md) |
 | ランダムフォレストと決定木 | 論文カード12本+既存6本(最適な決定木、ランダムフォレストの理論の範囲、効く理由の3つの説明、チューニング、変数重要度の偏り、因果フォレスト)、記事 [articles/methods/random-forests-and-decision-trees.md](articles/methods/random-forests-and-decision-trees.md) |
+| 拡散モデル | 論文カード21本+既存4本(DDPM・スコアベース・SDE、尤度とサンプルの質、VAE とのつながり、サンプリングの高速化と蒸留、ガイダンス、潜在拡散、FID の問題、学習データの記憶と複製)、記事 [articles/methods/diffusion-models.md](articles/methods/diffusion-models.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では342本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では363本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -82,6 +83,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [オートエンコーダ — 正則化、VAE、異常検知での使い方と限界](articles/methods/autoencoders.md)
 - [勾配ブースティング木 — 仕組み、実装の設計の違い、チューニングと不確実性](articles/methods/gradient-boosted-trees.md)
 - [ランダムフォレストと決定木 — 理論の範囲、効く理由、変数重要度の偏り](articles/methods/random-forests-and-decision-trees.md)
+- [拡散モデル — 定式化の系譜、サンプリングの高速化、ガイダンス、評価と記憶の問題](articles/methods/diffusion-models.md)
 
 横断記事:
 

@@ -137,7 +137,7 @@ SPECS = [
    "authors": ["Pengfei Li", "Mohammad Khalil"],
    "year": 2026, "version": "arXiv v1",
    "links": {"arxiv": "https://arxiv.org/abs/2609.39628"},
-   "tasks": ["tabular-data-generation"], "fam": ["deep-learning"], "par": ["unsupervised"],
+   "tasks": ["tabular-data-generation"], "fam": ["diffusion-models", "deep-learning"], "par": ["unsupervised"],
    "proposes": ["MIND (marginal-invariant dependency diffusion with column-wise marginal transport, copula-tangent denoising and rank projection)"],
    "claims": [
      ("MIND maps different variable types into a unified latent dependency space via column-wise marginal transport instead of learning the joint distribution in the raw feature space.", "Abstract",

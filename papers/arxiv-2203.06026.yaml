@@ -1,0 +1,94 @@
+id: arxiv-2203.06026
+title: The Role of ImageNet Classes in Fréchet Inception Distance
+authors:
+- Tuomas Kynkäänniemi
+- Tero Karras
+- Miika Aittala
+- Timo Aila
+- Jaakko Lehtinen
+year: 2022
+venue: ICLR 2023
+links:
+  arxiv: https://arxiv.org/abs/2203.06026
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 28efcdbc95260aec5f416997389e2a5685da737ecc0202e62aac9f123e421a9e
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- A Grad-CAM-based visualization of which image regions FID is most sensitive to
+- Resampling generated sets (Top-1 histogram matching, FID-optimized sampling weights, Top-N histogram matching) to probe the 'perceptual null space' of FID
+claims:
+- id: c1
+  statement: 'Main finding: the feature space in which FID is typically computed is so close to the ImageNet classifications that aligning Top-N class histograms between generated and real images can reduce
+    FID substantially without improving result quality; the authors conclude FID is prone to intentional or accidental distortions.'
+  location: Abstract
+  page: 1
+  quote: We show that the feature space that FID is (typically) computed in is so close to the ImageNet classiﬁcations that aligning the histograms of Top-N classiﬁcations between sets of generated and
+    real images can reduce FID substantially — without actually improving the quality of results.
+- id: c2
+  statement: 'Evaluation protocol: StyleGAN2 models (256x256, AFHQ-V2 DOG at 512x512 with ADA) on FFHQ, LSUN CAT/CAR/PLACES and AFHQ-V2 DOG; FID computed against the training set with 50k random real and
+    generated images and the official TensorFlow Inception-V3.'
+  location: Probing the perceptual null space in FID
+  page: 5
+  quote: Following standard practice, we compute FID against the training set, using 50k randomly chosen real and generated images and the ofﬁcial TensorFlow version of Inception-V3.
+- id: c3
+  statement: Grad-CAM heatmaps of FID sensitivity seem to correspond to the region of the image's ImageNet Top-1 class prediction; on FFHQ (ImageNet has no 'person' or 'face' class) the most important regions
+    are typically outside the face.
+  location: What does FID look at in an image?
+  page: 4
+  quote: Interestingly, we observe that the heatmaps seem to correspond very well with the areas that the image’s ImageNet Top-1 class prediction would occupy.
+- id: c4
+  statement: Simply resampling generated images to match the Top-1 class histogram of 50k real images consistently improved FID by about 10% over several datasets; FID in a ResNet-50 ImageNet feature space
+    dropped almost as much, while SwAV and CLIP feature-space FIDs dropped less, which the authors read as no clear quality increase.
+  location: Probing the perceptual null space in FID (Top-1 histogram matching)
+  page: 6
+  quote: Over multiple datasets, this simple Top-1 histogram matching consistently improves FID, by ∼10% (Table 1).
+- id: c5
+  statement: Optimizing per-image sampling weights over 250k candidates (generator unchanged) to minimize FID reduced FID drastically, with substantially smaller improvement in non-ImageNet feature spaces;
+    the authors allow that results may have improved in some minor way but conclude most of the improvement lies in FID's perceptual null space. They state they do not advocate this resampling to improve
+    models.
+  location: Probing the perceptual null space in FID (Matching all fringe features)
+  page: 7
+  quote: In other words, FID can be manipulated to a great extent through the ImageNet classiﬁcation probabilities, without meaningfully improving the generated results.
+- id: c6
+  statement: 'Practical case: a Projected FastGAN (ImageNet pre-trained EfficientNet in the discriminator) and StyleGAN2 on FFHQ at roughly equal FID and Recall; citing the human preference study of Sauer
+    et al. (2021) and the authors'' visual inspection, Projected FastGAN is worse, and FID computed with CLIP features agrees; the authors believe information leaks from the pre-trained network.'
+  location: 'Practical example: ImageNet pre-trained GANs'
+  page: 9
+  quote: This observation does not mean that ImageNet pre-training is a bad idea, but it does mean that such pre-training can make FID unreliable in practice.
+- id: c7
+  statement: 'Where FID remains useful: large values reliably indicate training failures, FID appears dependable for monitoring convergence, and improvements from hyperparameter sweeps generally seem to
+    translate to better subjective results; the caveats arise when sufficiently different architectures or training setups are compared.'
+  location: Conclusions
+  page: 9
+  quote: The caveats arise when two sufﬁciently different architectures and/or training setups are compared.
+- id: c8
+  statement: 'Recommendation: when ImageNet pre-training is introduced to generative models, FID improvements should at least be verified with a Fréchet distance in a non-ImageNet-trained feature space
+    (e.g. CLIP, SwAV, an uninitialized network); KID and Precision/Recall also rely on ImageNet classifier features.'
+  location: Conclusions
+  page: 9
+  quote: As a partial solution, the FID improvements should at least be veriﬁed using a non-ImageNet trained Fr´echet distance.
+- id: c9
+  statement: 'Numerical sensitivity (Appendix A, citing prior work such as Binkowski et al. 2018): FID depends strongly on the number of real and generated samples, so the sample count must be standardized;
+    the appendix also reports sensitivity to the exact Inception-V3 instance (TensorFlow vs PyTorch weights) and, citing Parmar et al. (2022), to resizing artifacts.'
+  location: Appendix A (Numerical sensitivity of FID)
+  page: 14
+  quote: FID depends strongly on the number of samples used in evaluation (Figure 8a).
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliations: Aalto University and NVIDIA.
+    Venue from the PDF header (''Published as a conference paper at ICLR 2023''). Disclosure: co-authors Karras, Aittala, Aila and Lehtinen are authors of StyleGAN2, the model used throughout and the one
+    favoured in the Projected FastGAN comparison. The human assessment in the practical example comes from Sauer et al. (2021) plus the authors'' visual inspection; no new human study was run (searched
+    for ''human'', ''participants''). Appendix A also states the official TensorFlow Inception network must be used for comparable results. The conclusions'' remark that FID improvements from hyperparameter
+    sweeps translate to better results is based on personal communication (footnote 7). Results tables (Tables 1-2, Figure 8 tables) not recorded.'

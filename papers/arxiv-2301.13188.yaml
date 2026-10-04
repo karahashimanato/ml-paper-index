@@ -1,0 +1,100 @@
+id: arxiv-2301.13188
+title: Extracting Training Data from Diffusion Models
+authors:
+- Nicholas Carlini
+- Jamie Hayes
+- Milad Nasr
+- Matthew Jagielski
+- Vikash Sehwag
+- Florian Tramèr
+- Borja Balle
+- Daphne Ippolito
+- Eric Wallace
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2301.13188
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 10e53f4e6284b0653b85fff9426898d9799caccaf5379b24f9f0de00719caacf
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes:
+- (l, delta)-diffusion extraction and (k, l, delta)-eidetic memorization definitions for image models
+- A generate-and-filter extraction attack (many generations per prompt, clique-based membership inference on near-identical generations)
+- Membership inference (loss threshold, LiRA) and inpainting attacks on diffusion models, with comparisons to GANs
+claims:
+- id: c1
+  statement: 'Definition: because verbatim definitions do not suit high-resolution images, memorization is defined approximately: an example is extractable if an efficient algorithm that does not receive
+    it outputs an image within distance delta (normalized Euclidean l2 by default), and (k, l, delta)-eidetic memorized if, additionally, at most k training examples are within delta of it (k counts near-duplicates).'
+  location: Defining Image Memorization
+  page: 4
+  quote: Instead, we deﬁne a notion of approximate memorization based on image similarity metrics.
+- id: c2
+  statement: 'The definition is intentionally conservative: e.g. a recognizable but not near-identical generated photograph of a person (Barack Obama) does not count as memorized, although such generations
+    could still cause privacy harms. A footnote stresses this is a very restricted definition of memorization.'
+  location: Defining Image Memorization (Restrictions of our definition)
+  page: 4
+  quote: Our deﬁnition of extraction is intentionally conservative as compared to what privacy concerns one might ultimately have.
+- id: c3
+  statement: 'Stable Diffusion attack setup: the search is biased toward training images that are near-duplicated (CLIP-embedding cosine similarity) because these are much more likely to be memorized; for
+    the 350,000 most-duplicated examples, 500 images per caption are generated (175 million in total) and flagged when at least 10 of 500 generations are near-identical. 94 images were (l2, 0.15)-extracted
+    and 13 more were judged near-copies by manual inspection of the top 1000.'
+  location: Extracting Data from Stable Diffusion
+  page: 4
+  quote: To reduce the computational load of our attack, as is done in [65], we bias our search towards duplicated training examples because these are orders of magnitude more likely to be memorized than
+    non-duplicated examples [47, 41].
+- id: c4
+  statement: 'Role of duplication: little eidetic memorization is found for k < 100, which the authors say is expected because the prompts were chosen from highly duplicated images (the figure caption calls
+    the result an upper bound for this reason); they conclude duplication is a major factor behind extraction.'
+  location: Extracting Data from Stable Diffusion (Measuring eidetic memorization)
+  page: 6
+  quote: These results show that duplication is a major factor behind training data extraction.
+- id: c5
+  statement: 'Imagen (2B parameters, non-public data): 23 of the top-1000 most duplicated prompts yielded memorized examples, and 3 of the 500 most out-of-distribution (unique) images were extracted, whereas
+    no memorization was found for Stable Diffusion even among the 10,000 most-outlier samples; the authors believe higher capacity, more training iterations and a smaller dataset explain the difference.'
+  location: Extracting Outlier Examples
+  page: 7
+  quote: Thus, Imagen appears less private than Stable Diffusion both on duplicated and non-duplicated images.
+- id: c6
+  statement: 'CIFAR-10: 16 diffusion models, each trained on a random half of CIFAR-10, each generate 2^16 images; an uncalibrated l2 threshold or perceptual distances (SSIM, CLIP) failed, so an image counts
+    as extracted if its l2 distance to the nearest training image is abnormally low relative to its 50 nearest training neighbours. The authors note this is a check of capability rather than an attack per
+    se.'
+  location: Untargeted Extraction
+  page: 8
+  quote: Using the above methodology we identify 1,280 unique extracted images from the CIFAR-10 dataset (2.5% of the entire dataset).
+- id: c7
+  statement: 'Diffusion vs GANs on off-the-shelf CIFAR-10 models (1 million unconditional generations each, non-duplicated images counted): diffusion models memorize more than GANs even at similar FID,
+    and both families memorize more as FID improves.'
+  location: Comparing Diffusion Models to GANs (Data extraction results)
+  page: 13
+  quote: Overall, we ﬁnd that diffusion models memorize more data than GANs, even when the GANs reach similar performance, e.g., the best DDPM model memorizes 2× more than StyleGAN-ADA but reaches the same
+    FID.
+- id: c8
+  statement: 'Deduplication as a defense: retraining on CIFAR-10 after removing 5,275 near-duplicates (imagededup similarity > 0.85) reduced regenerated examples from 1280 to 986; the authors expect deduplication
+    to be more effective for larger datasets such as Stable Diffusion''s. DP-SGD caused training to diverge even at epsilon around 50.'
+  location: Defenses and Recommendations (Deduplicating Training Data)
+  page: 14
+  quote: While not a substantial drop, these results show that deduplication can mitigate memorization.
+- id: c9
+  statement: 'Open question: the success of the attacks does not settle whether large models generate novel output or copy and interpolate training examples; the authors also note that more human-aligned
+    definitions of data copying will need a more comprehensive analysis than their l2-based measurement.'
+  location: Discussion and Conclusion
+  page: 15
+  quote: If our extraction attacks had failed, it may have refuted the hypothesis that models copy and interpolate training data; but because our attacks succeed, this question remains open.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliations: Google, DeepMind, ETHZ, Princeton,
+    UC Berkeley. No venue statement was found in the v1 PDF and the arXiv record has no comment/journal_ref given, so no venue is recorded. Disclosure: authors are from Google/DeepMind, and one attacked
+    model (Imagen) is a Google model whose training data is not public, so its extracted examples cannot be shown; the paper states an advance copy was shared with the authors of each large model studied.
+    Membership inference results (e.g. LiRA TPR at fixed FPR, better FID associated with higher attack success over training) are shown in figures and partly in text; not recorded as claims. Table 1 (images
+    extracted per model) not recorded.'

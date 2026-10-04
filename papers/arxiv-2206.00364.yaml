@@ -1,0 +1,99 @@
+id: arxiv-2206.00364
+title: Elucidating the Design Space of Diffusion-Based Generative Models
+authors:
+- Tero Karras
+- Miika Aittala
+- Timo Aila
+- Samuli Laine
+year: 2022
+venue: NeurIPS 2022
+links:
+  arxiv: https://arxiv.org/abs/2206.00364
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 0cf53de9ac234366fdba08d472afa236d46edd8202fda340f579aa2db866087a
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+  - supervised
+proposes:
+- A common framework that separates the design choices of diffusion models (noise schedule sigma(t), scaling s(t), time steps, ODE solver, preconditioning c_skip/c_out/c_in/c_noise, training noise distribution
+  and loss weighting)
+- 'EDM choices: Heun 2nd-order deterministic sampler with rho-parameterized time steps and sigma(t) = t, s(t) = 1; a stochastic sampler with tunable ''churn''; preconditioning derived from unit-variance
+  requirements; log-normal training noise distribution with matching loss weights; non-leaky augmentation'
+claims:
+- id: c1
+  statement: 'Sampler as a separable component: the authors hypothesize that sampling choices are largely independent of architecture and training, and test this by plugging different samplers into three
+    pre-trained models (DDPM++ VP and NCSN++ VE on unconditional CIFAR-10, ADM on class-conditional ImageNet-64); their reimplementations in the unified framework gave similar but consistently better results
+    than the original samplers.'
+  location: Section 3
+  page: 4
+  quote: Our hypothesis is that the choices related to the sampling process are largely independent of the other components, such as network architecture and training details.
+- id: c2
+  statement: 'Cost-quality accounting: quality is plotted against NFE (number of D_theta evaluations per image), and each curve is summarized by the lowest NFE whose FID is within 3% of the lowest observed
+    FID. With Heun''s method (one extra evaluation per step, O(h^3) local error), rho = 7 time steps and sigma(t) = t, s(t) = 1, the NFE needed for high-quality results drops by large factors relative to
+    the original samplers.'
+  location: Section 3
+  page: 6
+  quote: 'Together, they reduce the NFE needed to reach high-quality results by a large factor: 7.3× for VP, 300× for VE, and 3.2× for DDIM, corresponding to the highlighted NFE values in Figure 2.'
+- id: c3
+  statement: 'Stochasticity has drawbacks: excessive Langevin-like noise addition and removal causes gradual loss of detail and a drift toward oversaturated colors; the authors suspect practical denoisers
+    induce a slightly non-conservative vector field, and counter it heuristically (stochasticity only in a noise-level range, S_noise slightly above 1).'
+  location: Section 4
+  page: 7
+  quote: We suspect that practical denoisers induce a slightly non-conservative vector ﬁeld in Eq. 3, violating the premises of Langevin diffusion and causing these detrimental effects.
+- id: c4
+  statement: 'Evaluation concern stated by the authors: the stochastic-sampler parameters {S_churn, S_tmin, S_tmax, S_noise} had to be found case by case with grid search, which raises the concern that
+    using stochastic sampling as the main evaluation may inadvertently influence architecture and training design choices.'
+  location: Section 4
+  page: 8
+  quote: This raises a general concern that using stochastic sampling as the primary means of evaluating model improvements may inadvertently end up inﬂuencing the design choices related to model architecture
+    and training.
+- id: c5
+  statement: 'Preconditioning: D_theta = c_skip x + c_out F_theta(c_in x; c_noise), with c_in and c_out chosen for unit-variance inputs and targets, c_skip to amplify network errors as little as possible,
+    and c_noise chosen empirically. In the ablation (Table 2, deterministic sampler) the preconditioning alone left results largely unchanged except VE at 64x64; its stated main benefit is more robust training,
+    after which the log-normal p_train and lambda = 1/c_out^2 gave a dramatic FID improvement.'
+  location: Section 5
+  page: 9
+  quote: Instead of improving FID per se, the main beneﬁt of our preconditioning is that it makes the training more robust, enabling us to turn our focus on redesigning the loss function without adverse
+    effects.
+- id: c6
+  statement: 'Stochastic sampling revisited: with the authors'' training setup on CIFAR-10 the best results came from deterministic sampling and any stochasticity was detrimental, whereas for class-conditional
+    ImageNet-64 stochastic sampling was clearly better than deterministic, which the authors say suggests more diverse datasets continue to benefit from it.'
+  location: Section 5
+  page: 9
+  quote: When using our training setup in CIFAR-10 (Figure 5b), the best results were obtained with deterministic sampling, and any amount of stochastic sampling was detrimental.
+- id: c7
+  statement: 'FID protocol: FID between 50,000 generated images and all available real images without x-flip augmentation, using the StyleGAN3 Inception-v3 model (verified to match Dhariwal and Nichol and
+    Karras et al.); to reduce random variation of typically about ±2%, FID is computed three times per experiment and the minimum is reported.'
+  location: Appendix F.1
+  page: 44
+  quote: To reduce the impact of random variation, typically in the order of ±2%, we compute FID three times in each experiment and report the minimum.
+- id: c8
+  statement: 'Checkpoint selection: models were trained for 200 Mimg (about 400,000 iterations at batch 512), snapshots saved every 2.5 Mimg, and results reported for the snapshot with the lowest FID under
+    the deterministic sampler at NFE = 35 or 79 depending on resolution; i.e. the reported snapshot is selected by the evaluation metric itself.'
+  location: Appendix F.3
+  page: 45
+  quote: We saved a snapshot of the model every 2.5 million images and reported results for the snapshot that achieved the lowest FID according to our deterministic sampler with NFE = 35 or NFE = 79, depending
+    on the resolution.
+- id: c9
+  statement: 'Compute and scope: the project consumed about 250 MWh on an in-house cluster of NVIDIA V100s; the authors also note that many parameter values may need re-adjustment for higher-resolution
+    datasets.'
+  location: Conclusions (Societal impact)
+  page: 10
+  quote: our project consumed ∼250MWh on an in-house cluster of NVIDIA V100s.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: NVIDIA (all authors). Venue from
+    the PDF footer (''36th Conference on Neural Information Processing Systems (NeurIPS 2022)'') and the arXiv comment. Conflict of interest: the augmentation pipeline is borrowed from the authors'' own
+    GAN work [25] (Karras et al., ADA) and the FID implementation uses the Inception model shipped with their StyleGAN3 [26]; StyleGAN-XL is cited as a comparison point. The paper notes that many of its
+    parameter values may need to be re-adjusted for higher-resolution datasets. Results tables (Tables 2, appendix) not recorded; main text and Appendices E.2/F were read for the claims.'

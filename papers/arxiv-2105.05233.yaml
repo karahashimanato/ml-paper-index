@@ -1,0 +1,99 @@
+id: arxiv-2105.05233
+title: Diffusion Models Beat GANs on Image Synthesis
+authors:
+- Prafulla Dhariwal
+- Alex Nichol
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2105.05233
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-05'
+  pdf_sha256: f3e66af0c1b698250d3f286dbd4641f91fce661d8af4f5b26ecdc427015b7ab6
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - supervised
+  - unsupervised
+proposes:
+- 'ADM: an improved UNet architecture for diffusion models found by ablations (more attention heads, multi-resolution attention, BigGAN up/downsampling residual blocks, adaptive group normalization)'
+- 'Classifier guidance: shifting the mean of each reverse step (or, for DDIM, the epsilon prediction) by the gradient of a classifier trained on noisy images, with a gradient scale s that trades diversity
+  for fidelity'
+claims:
+- id: c1
+  statement: 'Overview: the authors state that a single hyperparameter, the scale of the classifier gradients, can be tuned to trade off diversity for fidelity, and that this scale can be increased by an
+    order of magnitude without obtaining adversarial examples.'
+  location: Introduction
+  page: 2
+  quote: We ﬁnd that a single hyperparameter, the scale of the classiﬁer gradients, can be tuned to trade off diversity for ﬁdelity, and we can increase this gradient scale factor by an order of magnitude
+    without obtaining adversarial examples [61].
+- id: c2
+  statement: 'Approximation in the derivation (following Sohl-Dickstein et al.): the classifier-conditioned reverse transition is approximated by a Gaussian whose mean is shifted by Sigma times the classifier
+    gradient, assuming log p(y|x_t) has low curvature compared to Sigma^-1; the authors call this assumption reasonable in the limit of infinite diffusion steps. For deterministic DDIM sampling this derivation
+    does not apply, and a score-based conditioning trick adapted from Song et al. is used instead.'
+  location: Classifier Guidance (Conditional Reverse Noising Process)
+  page: 7
+  quote: This assumption is reasonable in the limit of inﬁnite diffusion steps, where ||Σ|| →0.
+- id: c3
+  statement: 'Extra model and why the scale exceeds 1: the classifier (the UNet downsampling trunk with an attention pool) is trained on the same noising distribution as the diffusion model; with an unconditional
+    ImageNet model and scale 1 the classifier gave about 50% probability to the desired classes but samples did not match the classes on visual inspection, and scaling up the gradients remedied this.'
+  location: Section 4.3
+  page: 8
+  quote: When using a scale of 1, we observed that the classiﬁer assigned reasonable probabilities (around 50%) to the desired classes for the ﬁnal samples, but these samples did not match the intended
+    classes upon visual inspection.
+- id: c4
+  statement: 'Interpretation of the scale: s times the classifier gradient equals the gradient of a renormalized distribution proportional to p(y|x)^s, which is sharper than p(y|x) when s > 1; the authors
+    say a larger scale focuses more on the classifier''s modes, which is potentially desirable for higher-fidelity but less diverse samples.'
+  location: Section 4.3
+  page: 8
+  quote: In other words, using a larger gradient scale focuses more on the modes of the classiﬁer, which is potentially desirable for producing higher ﬁdelity (but less diverse) samples.
+- id: c5
+  statement: 'Diversity-fidelity trade-off: for a class-conditional ImageNet 128x128 model (Figure 4), raising the gradient scale beyond 1.0 smoothly trades recall (diversity) for higher precision and IS
+    (fidelity); FID and sFID, which depend on both, are best at an intermediate scale. The trade-off is shown in figures; no values are recorded here.'
+  location: Section 4.3
+  page: 9
+  quote: We see that scaling the gradients beyond 1.0 smoothly trades off recall (a measure of diversity) for higher precision and IS (measures of ﬁdelity).
+- id: c6
+  statement: Compared with BigGAN-deep's truncation trick on ImageNet 128x128 (Figure 5), classifier guidance is reported as strictly better when trading FID for IS, but on the precision/recall trade-off
+    it is only better up to a certain precision threshold, beyond which it cannot achieve better precision.
+  location: Section 4.3
+  page: 9
+  quote: Less clear cut is the precision/recall trade-off, which shows that classiﬁer guidance is only a better choice up until a certain precision threshold, after which point it cannot achieve better
+    precision.
+- id: c7
+  statement: 'Evaluation protocol: FID is the default metric (Precision or IS for fidelity, Recall for diversity); metrics for other methods are recomputed from public samples or models whenever possible,
+    using the entire training set as the reference batch and the same codebase for all models. Table 5 marks some baseline values as taken from previous papers because public models or samples were lacking,
+    and the architecture ablation curves in Figure 2 use FID over 10k instead of 50k samples.'
+  location: Sample Quality Metrics
+  page: 4
+  quote: To ensure consistent comparisons, we use the entire training set as the reference batch [23, 5], and evaluate metrics for all models using the same codebase.
+- id: c8
+  statement: 'Guidance-scale selection: the ''optimal'' classifier scales were chosen by sweeping a small grid per resolution and sampler (e.g. [0.5, 1, 2] for ImageNet 128 and 256 with the 250-step sampler).
+    The text does not state which metric or which data were used to define ''optimal'' or that a held-out set was used (searched for swept, optimal, select).'
+  location: Appendix I (Hyperparameters)
+  page: 27
+  quote: When choosing optimal classiﬁer scales for our sampler, we swept over [0.5, 1, 2] for ImageNet 128×128 and ImageNet 256×256, and [1, 2, 3, 3.5, 4, 4.5, 5] for ImageNet 512×512.
+- id: c9
+  statement: 'Compute accounting: training compute is compared in V100-days with StyleGAN2 and BigGAN-deep; BigGAN-deep''s TPU-v3 estimates were converted at 2 TPU-v3 days = 1 V100 day and StyleGAN2''s
+    from reported throughput. The authors note that classifier training is relatively lightweight compared with training the generative model.'
+  location: Appendix A.3
+  page: 18
+  quote: We note that our classiﬁer training is relatively lightweight compared to training the generative model.
+- id: c10
+  statement: 'Stated limitations: diffusion models remain slower than GANs at sampling time because of multiple denoising steps, and classifier guidance is limited to labeled datasets, with no effective
+    strategy provided for trading off diversity for fidelity on unlabeled data.'
+  location: Limitations and Future Work
+  page: 12
+  quote: Our proposed classiﬁer guidance technique is currently limited to labeled datasets, and we have provided no effective strategy for trading off diversity for ﬁdelity on unlabeled datasets.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: OpenAI. No venue is stated in
+    the PDF (arXiv v4; the v4 comment says compute requirements were added, which is Appendix A). The ADM baseline builds on the authors'' own earlier improved DDPM (Nichol and Dhariwal [43]), which is
+    also a comparison row in Table 5. Results tables (Tables 1-10) not recorded; the FID numbers in the abstract are not recorded as claims.'

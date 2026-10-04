@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Denoising Diffusion Implicit Models
+
+- カード: [`arxiv-2010.02502`](../../papers/arxiv-2010.02502.yaml)
+- 著者: Jiaming Song, Chenlin Meng, Stefano Ermon
+- 年・掲載: 2020 ICLR 2021
+- 原論文: [PDF](https://arxiv.org/pdf/2010.02502v4)(arXiv v4、カード作成時に読んだ版)
+- タグ: diffusion-models, generative-modeling, unsupervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Contribution: DDIMs are iterative implicit probabilistic models with the same training procedure as DDPMs; DDPMs are generalized via non-Markovian diffusion processes that lead to the same training objective, and these can correspond to deterministic generative processes.([Abstract, p.1](https://arxiv.org/pdf/2010.02502v4#page=1 "To accelerate sampling, we present denoising diffusion implicit models (DDIMs), a more efﬁcient class of iterative implicit probabilistic models with the same training procedure as DDPMs."))
+- **c2** No retraining: Theorem 1 states that for all sigma > 0 the variational objective J_sigma equals some weighted DDPM objective L_gamma up to a constant; if parameters are not shared across t, the optimum does not depend on the weights, so pretrained DDPM models can be used and only the generative process (sigma) is changed. The deterministic case sigma = 0 is not covered by Theorem 1 and is approximated by making sigma very small (footnote 5).([Sampling from generalized generative processes, p.4](https://arxiv.org/pdf/2010.02502v4#page=4 "Therefore, we can essentially use pretrained DDPM models as the solutions to the new objectives, and focus on ﬁnding a generative process that is better at producing samples subject to our needs by changing σ."))
+- **c3** Fewer steps: because the denoising objective does not depend on the specific forward procedure as long as the marginals q_sigma(x_t|x_0) are fixed, forward processes defined on a sub-sequence tau of [1, ..., T] can be used, which accelerates the generative process without training a different model.([Accelerated generation processes, p.5](https://arxiv.org/pdf/2010.02502v4#page=5 "which accelerates the corresponding generative processes without having to train a different model."))
+- **c4** Relation to ODEs: the DDIM iterate can be seen as an Euler method for an ODE; with the optimal model this ODE is equivalent to the probability flow ODE of the Variance-Exploding SDE of Song et al. (2020) (Proposition 1), but the sampling procedures differ (Euler steps in d sigma(t) vs in dt), which the authors say makes a difference with fewer sampling steps.([Relevance to neural ODEs, p.6](https://arxiv.org/pdf/2010.02502v4#page=6 "While the ODEs are equivalent, the sampling procedures are not, since the Euler method for the probability ﬂow ODE will make the following update:"))
+- **c5** Evaluation setup: the same trained model (T = 1000, gamma = 1 objective) is used per dataset and only the sampling (tau, and sigma via eta) is changed; pretrained checkpoints from the original DDPM implementation are used for CIFAR10, LSUN Bedroom and Church, and the authors trained their own CelebA 64x64 model.([Appendix D.1, p.18](https://arxiv.org/pdf/2010.02502v4#page=18 "For CIFAR10, Bedroom and Church, we obtain the pretrained checkpoints from the original DDPM implementation; for CelebA, we trained our own model using the denoising objective L1."))
+- **c6** Step-sub-sequence choice: tau is selected linearly or quadratically; quadratic was used for CIFAR10 and linear for the other datasets because these choices gave slightly better FID than the alternative on the respective dataset (i.e. the schedule was chosen by FID).([Appendix D.2, p.18](https://arxiv.org/pdf/2010.02502v4#page=18 "These choices achieve slightly better FID than their alternatives in the respective datasets."))
+- **c7** Steps-vs-quality trade-off (CIFAR10 and CelebA FID, Table 1): quality improves as dim(tau) increases; DDIM (eta = 0) is best when dim(tau) is small, and DDPM (eta = 1 and sigma-hat) is typically worse at the same dim(tau), except for dim(tau) = 1000 with sigma-hat as reported by Ho et al. (2020), where DDIM is marginally worse; sigma-hat becomes much worse for small dim(tau).([Sample quality and efficiency, p.7](https://arxiv.org/pdf/2010.02502v4#page=7 "As expected, the sample quality becomes higher as we increase dim(τ), presenting a trade-off between sample quality and computational costs."))
+- **c8** The authors state that DDIM reaches sample quality comparable to 1000-step models within 20 to 100 steps (a 10x to 50x speed-up over the original DDPM), and that sampling time scales linearly with trajectory length (Figure 4).([Sample quality and efficiency, p.7](https://arxiv.org/pdf/2010.02502v4#page=7 "Notably, DDIM is able to produce samples with quality comparable to 1000 step models within 20 to 100 steps, which is a 10× to 50× speed up compared to the original DDPM."))
+

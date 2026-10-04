@@ -1,0 +1,88 @@
+id: arxiv-2102.09672
+title: Improved Denoising Diffusion Probabilistic Models
+authors:
+- Alex Nichol
+- Prafulla Dhariwal
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2102.09672
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 1f041c12d72020bb40cc69c644694027fa89131ab05349ec07dc48a929f75adf
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes:
+- Learned reverse-process variances, parameterized as a log-domain interpolation between beta_t and beta-tilde_t, trained with a hybrid objective L_hybrid = L_simple + lambda * L_vlb (lambda = 0.001, stop-gradient
+  on the mean for the L_vlb term)
+- A cosine noise schedule for alpha-bar_t that adds noise more slowly than the linear schedule of Ho et al. (2020)
+- Importance sampling of timesteps (p_t proportional to sqrt(E[L_t^2])) to reduce gradient noise when optimizing L_vlb directly
+- Sampling with a strided subsequence of timesteps (e.g. 50-100 steps) from models trained with 4000 steps, without fine-tuning
+claims:
+- id: c1
+  statement: 'Motivation: Ho et al. (2020) obtained high-fidelity samples by FID and Inception Score but were unable to achieve competitive log-likelihoods with DDPMs; the authors argue it is important
+    to explore why, since this may suggest a fundamental shortcoming such as bad mode coverage.'
+  location: 3. Improving the Log-likelihood
+  page: 3
+  quote: Thus, it is important to explore why DDPMs seem to perform poorly on this metric, since this may suggest a fundamental shortcoming such as bad mode coverage.
+- id: c2
+  statement: 'Diagnosis: beta_t and beta-tilde_t (the two fixed variance choices of Ho et al.) are almost equal except near t = 0, which may explain why the choice does not matter for samples; but the first
+    few diffusion steps contribute the most to the variational lower bound, so a better choice of Sigma_theta seems likely to improve log-likelihood (shown in Figures 1-2).'
+  location: 3.1. Learning Σθ(xt, t)
+  page: 3
+  quote: Thus, it seems likely that we could improve log-likelihood by using a better choice of Σθ(xt, t).
+- id: c3
+  statement: The linear noise schedule of Ho et al. (2020) worked well for high-resolution images but was sub-optimal at 64x64 and 32x32, because the end of the forward process is too noisy and contributes
+    little to sample quality; the cosine schedule is the proposed fix. The authors say the choice of cos^2 was arbitrary.
+  location: 3.2. Improving the Noise Schedule
+  page: 4
+  quote: We found that while the linear noise schedule used in Ho et al. (2020) worked well for high resolution images, it was sub-optimal for images of resolution 64 × 64 and 32 × 32.
+- id: c4
+  statement: 'Optimizing L_vlb directly was difficult in practice, at least on ImageNet 64x64: the hybrid objective reached better training-set log-likelihoods in the same training time, which the authors
+    attribute to much noisier L_vlb gradients (confirmed by gradient noise scales); importance sampling of timesteps then allowed the best log-likelihoods by optimizing L_vlb.'
+  location: 3.3. Reducing Gradient Noise
+  page: 5
+  quote: With this importance sampled objective, we are able to achieve our best log-likelihoods by optimizing Lvlb.
+- id: c5
+  statement: 'Likelihood vs sample quality trade-off: L_hybrid with the cosine schedule improves log-likelihood while keeping FID similar to the Ho et al. baseline, whereas optimizing L_vlb further improves
+    log-likelihood at the cost of a higher FID; the authors generally prefer L_hybrid.'
+  location: 3.4. Results and Ablations
+  page: 5
+  quote: Optimizing Lvlb further improves log-likelihood at the cost of a higher FID.
+- id: c6
+  statement: 'Ablation setup: to study the modifications, fixed model architectures with fixed hyperparameters are trained on ImageNet 64x64 and CIFAR-10. In early experiments, increasing T from 1000 to
+    4000 improved log-likelihood, and T = 4000 is used for the rest of the section.'
+  location: 3. Improving the Log-likelihood
+  page: 3
+  quote: To study the effects of different modiﬁcations, we train ﬁxed model architectures with ﬁxed hyperparameters on the ImageNet 64 × 64 (van den Oord et al., 2016b) and CIFAR-10 (Krizhevsky, 2009)
+    datasets.
+- id: c7
+  statement: 'FID protocol: 50K samples were generated except for unconditional ImageNet 64x64, where 10K samples were used; the authors note that 10K samples biases FID upward and accept this because FID
+    is mainly used for relative comparisons there. Reference statistics use the full training set for CIFAR-10 and ImageNet.'
+  location: Appendix A (Hyperparameters)
+  page: 11
+  quote: Since we mainly use FID for relative comparisons on unconditional ImageNet 64×64, this bias is acceptable.
+- id: c8
+  statement: 'Scaling: validation NLL does not fit a power law in training compute as cleanly as FID; the authors list possible causes (an unexpectedly high irreducible loss or overfitting) and note these
+    models were trained with L_hybrid rather than L_vlb, so they do not achieve optimal log-likelihoods.'
+  location: 6. Scaling Model Size
+  page: 8
+  quote: We also note that these models do not achieve optimal log-likelihoods in general because they were trained with our Lhybrid objective and not directly with Lvlb to keep both good log-likelihoods
+    and sample quality.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: OpenAI. No venue is stated in
+    the PDF (arXiv v1); none recorded. Other protocol facts in the text: the class-conditional ImageNet 64x64 comparison with BigGAN-deep used 50K samples and an own-trained BigGAN-deep (125K iterations,
+    no truncation); dropout was swept over {0.1, 0.2, 0.3} on CIFAR-10 (Appendix A); all models overfit on CIFAR-10 and on class-conditional ImageNet 64x64, and the authors concluded that early stopping
+    was the best way to train for FID (Appendices F-G; the data used for early stopping is not stated in the quoted passages). Sampling: L_simple models with fixed variances lost much more sample quality
+    with fewer sampling steps than the L_hybrid model; 100 steps sufficed for near-optimal FID for fully trained models (Section 4); DDIM was better below 50 steps and worse at 50 or more. Appendix D reports
+    that theta_vlb is better at the start and end of the diffusion process and theta_hybrid in the middle. Tables 1-5 (NLL/FID) not recorded.'

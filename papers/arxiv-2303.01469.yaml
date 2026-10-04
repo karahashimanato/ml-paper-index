@@ -1,0 +1,95 @@
+id: arxiv-2303.01469
+title: Consistency Models
+authors:
+- Yang Song
+- Prafulla Dhariwal
+- Mark Chen
+- Ilya Sutskever
+year: 2023
+venue: ICML 2023
+links:
+  arxiv: https://arxiv.org/abs/2303.01469
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: b36df36eb96abcad5ad67173952258c34f2ba0624c15acaaf38bebf855074043
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  - knowledge-distillation
+  paradigms:
+  - unsupervised
+proposes:
+- 'Consistency models: networks f(x_t, t) trained so that all points on the same probability flow ODE trajectory map to its origin, with a boundary condition f(x, eps) = x built into the parameterization;
+  one network evaluation per sample, optionally multistep'
+- Consistency distillation (CD) from a pre-trained diffusion (score) model and consistency training (CT) without any pre-trained model
+claims:
+- id: c1
+  statement: 'Contribution: consistency models map noise directly to data, support one-step generation by design, and allow multistep sampling that trades compute for sample quality; they can be trained
+    by distilling a pre-trained diffusion model or as standalone generative models.'
+  location: Abstract
+  page: 1
+  quote: They support fast one-step generation by design, while still al-lowing multistep sampling to trade compute for sample quality.
+- id: c2
+  statement: 'Requirements: consistency distillation uses a numerical ODE solver and a pre-trained diffusion model to generate adjacent points on a PF ODE trajectory, whereas consistency training needs
+    no pre-trained diffusion model; neither uses adversarial training. CD models are initialized from the pre-trained diffusion models; CT models are randomly initialized.'
+  location: Introduction
+  page: 2
+  quote: By contrast, our second method eliminates the need for a pre-trained diffusion model altogether, allowing us to train a consistency model in isolation.
+- id: c3
+  statement: 'Positioning: citing Luhman & Luhman (2021) and Zheng et al. (2022), most distillation methods collect a large dataset of diffusion-model samples beforehand, which is computationally expensive;
+    the authors state progressive distillation is the only one they know without this drawback, and that ODE solvers still need more than 10 steps for competitive samples.'
+  location: Diffusion Models (Section 2)
+  page: 3
+  quote: However, ODE solvers still need more than 10 evaluation steps to generate competitive samples.
+- id: c4
+  statement: 'Multistep sampling protocol: the intermediate time points of Algorithm 1 are found greedily, one at a time, by ternary search optimizing the FID of the samples, assuming FID is unimodal in
+    the next time point (which they found to hold empirically).'
+  location: Section 3 (Sampling)
+  page: 4
+  quote: where the time points are pinpointed one at a time using ternary search to optimize the FID of samples obtained from Algorithm 1.
+- id: c5
+  statement: 'Theory (Theorem 1): assuming the consistency model is Lipschitz and the ODE solver has bounded local error of order p+1, zero CD loss implies the estimation error is O((Delta t)^p); the authors
+    say that under some regularity conditions the model can become arbitrarily accurate if the ODE step size is small enough. Theorem 2 relates CT to CD assuming the Euler solver and a score model equal
+    to the ground truth.'
+  location: Section 4
+  page: 5
+  quote: the estimated consistency model can become arbitrarily accurate, as long as the step size of the ODE solver is sufficiently small.
+- id: c6
+  statement: 'CT trade-off: convergence of consistency training is highly sensitive to the number of discretization steps N (smaller N converges faster but gives worse samples), which motivates progressively
+    increasing N and the EMA rate during training; these schedules were tuned separately per image resolution.'
+  location: Section 6.1
+  page: 7
+  quote: As demonstrated in Fig. 3d, the con-vergence of CT is highly sensitive to N—smaller N leads to faster convergence but worse samples, whereas larger N leads to slower convergence but better samples
+    upon convergence.
+- id: c7
+  statement: Continuous-time CD and CT losses avoid choosing N but require Jacobian-vector products and forward-mode automatic differentiation, which may not be well supported in some deep learning frameworks.
+  location: Section 4
+  page: 5
+  quote: Nonetheless, they involve Jacobian-vector products and require forward-mode automatic dif-ferentiation for efficient implementation, which may not be well-supported in some deep learning frameworks.
+- id: c8
+  statement: 'Comparison protocol with progressive distillation: both PD and CD distill the same EDM models pre-trained in-house; LPIPS improved PD over the squared L2 distance used originally, but the
+    tables report PD with L2 (its default). CD outperforms PD across datasets, steps and metrics considered, except single-step generation on LSUN Bedroom 256x256 where CD with L2 slightly underperforms
+    PD with L2. CD settings (LPIPS, Heun, N = 18) were chosen on CIFAR-10 and N was tuned separately on other datasets.'
+  location: Section 6.2
+  page: 7
+  quote: All methods distill from an EDM (Karras et al., 2022) model that we pre-trained in-house.
+- id: c9
+  statement: As standalone models, the authors conclude that consistency models generate better samples than existing single-step generation models except for GANs (CT reaching quality comparable to one-step
+    PD without distillation).
+  location: Section 7 (Conclusion)
+  page: 9
+  quote: Furthermore, as a standalone generative model, consistency models generate better samples than existing single-step generation models except for GANs.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: OpenAI. Venue from the PDF footer
+    (''Proceedings of the 40th International Conference on Machine Learning ... PMLR 202, 2023'') and the arXiv comment. Main text read; Appendix C read for training details (EDM teachers trained in-house;
+    PD used Salimans & Ho settings, and their ImageNet settings for LSUN). Conflict of interest: Yang Song co-authored Score SDE (Song et al., 2021), and Prafulla Dhariwal co-authored ADM (Dhariwal & Nichol,
+    2021); both appear as baselines in Tables 1-2 and their architectures are used. Abstract reports one-step FID 3.55 (CIFAR-10) and 6.20 (ImageNet 64x64). Number of samples for FID not found in the main
+    text. Results tables not recorded.'

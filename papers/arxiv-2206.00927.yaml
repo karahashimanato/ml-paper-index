@@ -1,0 +1,94 @@
+id: arxiv-2206.00927
+title: 'DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps'
+authors:
+- Cheng Lu
+- Yuhao Zhou
+- Fan Bao
+- Jianfei Chen
+- Chongxuan Li
+- Jun Zhu
+year: 2022
+venue: NeurIPS 2022
+links:
+  arxiv: https://arxiv.org/abs/2206.00927
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 4a14cb652bb4996c6bfdd717b0bf71d6a5c92cf9e09abdc3173106213f4fd671
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes:
+- An exact formulation of diffusion-ODE solutions that computes the linear part analytically and, after a change of variable to the half-log-SNR lambda, leaves an exponentially weighted integral of the
+  noise-prediction network
+- 'DPM-Solver-1/2/3: training-free k-th order solvers (k network evaluations per step) for this integral, with a uniform-in-lambda or adaptive step-size schedule, applicable to discrete- and continuous-time
+  DPMs'
+claims:
+- id: c1
+  statement: 'Method: diffusion ODEs are semi-linear; the proposed exact formulation computes the linear part of the solution analytically instead of leaving all terms to black-box ODE solvers, and by change
+    of variable reduces to an exponentially weighted integral of the neural network.'
+  location: Abstract
+  page: 1
+  quote: The formulation analytically computes the linear part of the solution, rather than leaving all terms to black-box ODE solvers as adopted in previous works.
+- id: c2
+  statement: 'Requirements: DPM-Solver applies to both discrete-time and continuous-time DPMs without any further training; for discrete-time models the noise-prediction network is fed non-integer (continuous)
+    time inputs, which the authors find still works and hypothesize is due to smooth time embeddings.'
+  location: Abstract
+  page: 1
+  quote: DPM-Solver is suitable for both discrete-time and continuous-time DPMs without any further training.
+- id: c3
+  statement: 'Positioning: the authors divide fast samplers into training-based ones (knowledge distillation, noise-level or trajectory learning), which require a possibly expensive training stage and whose
+    applicability and flexibility might be limited, and training-free ones, which (citing [21]) still require about 50 function evaluations for high-quality samples.'
+  location: Introduction
+  page: 2
+  quote: Such methods require a possibly expensive training stage before they can be used for efﬁcient sampling.
+- id: c4
+  statement: 'Cost per step and theory: DPM-Solver-k needs k function evaluations per step (k = 1, 2, 3); higher orders are usually more efficient because they need far fewer steps. Theorem 3.2 states DPM-Solver-k
+    is a k-th order solver under regularity conditions on the noise-prediction model (Appendix B.1); orders k >= 4 are not considered.'
+  location: High-order solvers for diffusion ODEs
+  page: 6
+  quote: As shown in the algorithm, DPM-Solver-k requires k function evaluations per step for k = 1, 2, 3.
+- id: c5
+  statement: DDIM's update is shown to be identical to DPM-Solver-1, which the authors say explains DDIM's advantage over the first-order Euler discretization (it uses the semi-linearity of diffusion ODEs).
+  location: Comparison with existing fast sampling methods
+  page: 7
+  quote: Although motivated by entirely different perspectives, we show that the updates of DPM-Solver-1 and Denoising Diffusion Implicit Models (DDIM) [19] are identical.
+- id: c6
+  statement: Citing progressive distillation [13], the authors note it can give a sampler within 4 steps but needs further training and loses part of the original model's information (the distilled model
+    cannot predict the noise at every time step), whereas training-free samplers keep the original model and can be combined with an external classifier for guidance.
+  location: Training-based fast sampling methods for DPMs
+  page: 8
+  quote: Although the progressive distillation method [13] can obtain a fast sampler within 4 steps, it needs further training costs and loses part of the information in the original DPM
+- id: c7
+  statement: 'Evaluation protocol: NFE is the number of calls to the noise-prediction model; FID is computed from 50K samples; existing pre-trained checkpoints are used (e.g. Ho et al. for CIFAR-10, Dhariwal
+    & Nichol for ImageNet 128x128 with classifier guidance scale 1.25 and LSUN bedroom); a solver combination with uniform step size is used for NFE <= 20 and the adaptive DPM-Solver otherwise. Some baseline
+    results are taken from the original papers (GGDM, and the improved-Euler SDE solver).'
+  location: Experiments
+  page: 8
+  quote: For each experiment, We draw 50K samples and use the widely adopted FID score [37] to evaluate the sample quality, where lower FID usually implies better sample quality.
+- id: c8
+  statement: With the continuous-time 'VP deep' CIFAR-10 model, the authors report FID 4.70 at 10 NFE, 3.75 at 12 NFE, 3.24 at 15 NFE and 2.87 at 20 NFE; they state other solvers have large discretization
+    error even at 50 NFE.
+  location: 'Experiments: comparison with continuous-time sampling methods'
+  page: 9
+  quote: In particular, we achieve 4.70 FID with 10 NFE, 3.75 FID with 12 NFE, 3.24 FID with 15 NFE, and 2.87 FID with 20 NFE, which is the fastest sampler on CIFAR-10.
+- id: c9
+  statement: 'Limitations stated: DPM-Solver is designed for fast sampling and may not be suitable for accelerating likelihood evaluation; compared with GANs, diffusion models with DPM-Solver are still
+    not fast enough for real-time applications.'
+  location: Conclusions (Limitations and broader impact)
+  page: 10
+  quote: Besides, compared to the commonly-used GANs, diffusion models with DPM-Solver are still not fast enough for real-time applications.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliations: Tsinghua University and Renmin
+    University of China. Venue from the PDF footer (''36th Conference on Neural Information Processing Systems (NeurIPS 2022)'') and the arXiv comment. Conflict of interest: Analytic-DPM/Analytic-DDIM [21]
+    (F. Bao, C. Li, J. Zhu, B. Zhang), used as a training-free baseline, is by co-authors of this paper. Some baseline numbers are copied from the original papers (GGDM [18]; improved-Euler SDE solver [20]).
+    DDIM on CelebA uses quadratic steps as the ''strongest baseline''. Most comparisons are shown as figures (Fig. 2); FID tables not recorded.'

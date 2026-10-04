@@ -1,0 +1,92 @@
+id: arxiv-2107.00630
+title: Variational Diffusion Models
+authors:
+- Diederik P. Kingma
+- Tim Salimans
+- Ben Poole
+- Jonathan Ho
+year: 2021
+venue: NeurIPS 2021
+links:
+  arxiv: https://arxiv.org/abs/2107.00630
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 86ae796b67367231863ee502fbc54fcd803d57ebff1636bb4fa4d71d12bb0632
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- 'VDM: a diffusion model whose noise schedule (SNR(t) = exp(-gamma_eta(t)), gamma_eta a monotonic network) is learned jointly with the denoising model by maximizing the VLB, in discrete and continuous
+  time'
+- An expression of the VLB in terms of the signal-to-noise ratio, showing that in continuous time the VLB depends on the schedule only through SNR at its endpoints
+- Fourier features appended to the denoising network input to model fine-scale detail for likelihood
+- Learning the schedule between the endpoints to minimize the variance of the VLB estimator
+claims:
+- id: c1
+  statement: 'Framing: diffusion probabilistic models can be viewed as a type of VAE whose structure and loss allow efficient training of arbitrarily deep models; optimizing the diffusion process jointly
+    with the rest of the model turns it into a type of VAE.'
+  location: Related work
+  page: 2
+  quote: DPMs can be viewed as a type of variational autoencoder (VAE) [Kingma and Welling, 2013, Rezende et al., 2014], whose structure and loss function allows for efﬁcient training of arbitrarily deep
+    models.
+- id: c2
+  statement: 'Theory: in continuous time, the diffusion loss depends on alpha(t) and sigma(t) only through SNR at the endpoints t = 0 and t = 1; given SNR_min and SNR_max, the VLB is invariant to the shape
+    of SNR(t) in between, and diffusion specifications satisfying the paper''s mild constraints (including variance-exploding and variance-preserving) can be seen as equivalent in continuous time.'
+  location: Equivalence of diffusion models in continuous time
+  page: 6
+  quote: The VLB is thus only impacted by the function SNR(t) through its endpoints SNRmin and SNRmax.
+- id: c3
+  statement: 'Discrete vs continuous time: if the denoising model is sufficiently good, doubling the number of timesteps (with a fixed SNR function) lowers the diffusion loss, i.e. more timesteps give a
+    better VLB; this motivates the continuous-time (T -> infinity) model.'
+  location: More steps leads to a lower loss
+  page: 5
+  quote: We then ﬁnd that if our trained denoising model ˆxθ is sufﬁciently good, we have that L2T (x) < LT (x), i.e. that our VLB will be better for a larger number of timesteps.
+- id: c4
+  statement: Weighted losses (as used for perceptual quality) put more emphasis on noisier data than the VLB and can sometimes improve FID and Inception Score; the models in this paper use w(v) = 1, the
+    unweighted VLB.
+  location: Weighted diffusion loss
+  page: 7
+  quote: For the models presented in this paper, we further use w(v) = 1 as corresponding to the (unweighted) VLB.
+- id: c5
+  statement: 'Likelihood vs sample quality: the CIFAR-10 model, with hyperparameters tuned for likelihood, has FID 7.41, worse than recent diffusion models that target FID; with the weighting of Ho et al.
+    (2020) the FID improves to 4.0. The authors did not tune further for FID.'
+  location: Likelihood and samples
+  page: 8
+  quote: Our CIFAR-10 model, whose hyper-parameters were tuned for likelihood, results in a FID (perceptual quality) score of 7.41.
+- id: c6
+  statement: 'Ablation: learning the SNR is necessary to get the most out of Fourier features; with the fixed schedule of Ho et al. (2020) the maximum log-SNR is about 8 and test-set negative likelihood
+    stays above 4 bits per dim, whereas the learned maximum log-SNR ends up at 13.3.'
+  location: Ablations
+  page: 8
+  quote: In addition, we ﬁnd that learning the SNR is necessary to get the most out of including Fourier features
+- id: c7
+  statement: The authors hypothesize that DDPM and improved DDPM report better FID and IS than NCSN and this paper because their implied loss weightings emphasize global consistency and coarse patterns
+    more than fine-scale features.
+  location: Appendix K
+  page: 21
+  quote: The latter two works report better FID and Inception Score than Song et al. [2020] and the current paper, which we hypothesize is due to their loss emphasizing the global consistence and coarse
+    level patterns more than the ﬁne scale features of the data.
+- id: c8
+  statement: 'Evaluation protocol: the variational bound is regularly evaluated on the validation set and the models were not found to overfit, so no early stopping is used; CIFAR-10 models are trained
+    for 10 million updates and ImageNet for 2 million before reporting test-set numbers. The reported VDM numbers are variational bounds.'
+  location: Appendix B.1
+  page: 15
+  quote: We therefore do not use early stopping and instead allow the network to be optimized for 10 million parameter updates for CIFAR-10, and for 2 million updates for ImageNet, before obtaining the
+    test set numbers reported in this paper.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: Google Research. Venue from the
+    PDF footer (''35th Conference on Neural Information Processing Systems (NeurIPS 2021)'') and the arXiv comment. Conflict of interest: Jonathan Ho is an author of DDPM (Ho et al., 2020) and Kingma of
+    the VAE, Glow and IAF, and Kingma/Poole are co-authors of EBM-DRL (Gao et al., 2020); these are baselines in Table 1. Table 1 compares bits/dim numbers taken from other papers with differing data augmentations
+    (marked A/B/C). Lossless compression (bits-back, BB-ANS) is also demonstrated; the authors note a gap to the theoretical codelength and high cost for large T_eval. Fourier features gave no benefit when
+    added to PixelCNN++. Tables 1-2 not recorded.'

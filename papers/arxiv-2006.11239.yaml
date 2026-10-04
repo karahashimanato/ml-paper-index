@@ -1,0 +1,83 @@
+id: arxiv-2006.11239
+title: Denoising Diffusion Probabilistic Models
+authors:
+- Jonathan Ho
+- Ajay Jain
+- Pieter Abbeel
+year: 2020
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.11239
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes:
+- 'DDPM: diffusion models with a fixed linear Gaussian noise schedule, a reverse-process mean parameterized through a noise-prediction network ε_θ, and the simplified (unweighted) objective L_simple, linking
+  diffusion models to denoising score matching and annealed Langevin dynamics'
+claims:
+- id: c1
+  statement: 'Main stated contribution: a particular parameterization of diffusion models reveals an equivalence with denoising score matching over multiple noise levels during training and with annealed
+    Langevin dynamics during sampling (citing [55, 61]); the best sample quality was obtained with this parameterization.'
+  location: Introduction
+  page: 2
+  quote: We obtained our best sample quality results using this parameterization (Section 4.2), so we consider this equivalence to be one of our primary contributions.
+- id: c2
+  statement: 'Forward process: the forward-process variances β_t are fixed to constants rather than learned, so the approximate posterior q has no learnable parameters and the L_T term is constant during
+    training; the forward process admits sampling x_t at any timestep in closed form.'
+  location: Diffusion models and denoising autoencoders (Forward process and L_T)
+  page: 3
+  quote: Thus, in our implementation, the approximate posterior q has no learnable parameters, so LT is a constant during training and can be ignored.
+- id: c3
+  statement: 'ε-prediction: training the reverse-process mean through a network that predicts the added noise ε makes the sampler resemble Langevin dynamics and turns the variational bound into an objective
+    resembling denoising score matching; the authors note it is just another parameterization of p_θ(x_{t−1}|x_t), and that predicting x_0 led to worse sample quality early in their experiments.'
+  location: Diffusion models and denoising autoencoders (Reverse process)
+  page: 4
+  quote: We have shown that the ϵ-prediction parameterization both resembles Langevin dynamics and simpliﬁes the diffusion model’s variational bound to an objective that resembles denoising score matching.
+- id: c4
+  statement: L_simple drops the per-term weights of the bound, making it a weighted variational bound; with their diffusion setup this down-weights the small-t terms (denoising very small noise) so the
+    network can focus on harder denoising tasks at larger t, which the authors report leads to better sample quality.
+  location: Simplified training objective
+  page: 5
+  quote: Since our simpliﬁed objective (14) discards the weighting in Eq. (12), it is a weighted variational bound that emphasizes different aspects of reconstruction compared to the standard variational
+    bound [18, 22].
+- id: c5
+  statement: 'Likelihood vs sample quality: training on the true variational bound gives better codelengths than training on the simplified objective, while the simplified objective gives the best sample
+    quality.'
+  location: Experiments (Sample quality)
+  page: 6
+  quote: We ﬁnd that training our models on the true variational bound yields better codelengths than training on the simpliﬁed objective, as expected, but the latter yields the best sample quality.
+- id: c6
+  statement: 'Stated limitation: despite their sample quality, the models'' log likelihoods are not competitive with other likelihood-based models (though better than the large AIS-based estimates reported
+    for energy-based models and score matching); the authors find most of the lossless codelength is spent on imperceptible image details.'
+  location: Introduction
+  page: 2
+  quote: Despite their sample quality, our models do not have competitive log likelihoods compared to other likelihood-based models
+- id: c7
+  statement: 'Sampling cost: T = 1000 is used for all experiments so that the number of network evaluations during sampling matches previous work [53, 55]; β_t increases linearly from 1e-4 to 0.02.'
+  location: Experiments
+  page: 5
+  quote: We set T = 1000 for all experiments so that the number of neural network evaluations needed during sampling matches previous work [53, 55].
+- id: c8
+  statement: 'Evaluation protocol: hyperparameters were mostly searched for CIFAR10 sample quality and transferred to other datasets; final models were trained once and evaluated throughout training, and
+    the reported sample-quality scores and log likelihood are at the checkpoint with minimum FID; IS/FID use 50000 samples.'
+  location: Appendix B (Experimental details)
+  page: 15
+  quote: Sample quality scores and log likelihood are reported on the minimum FID value over the course of training.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: UC Berkeley; acknowledgments
+    list ONR PECASE, NSF GRFP and Google TensorFlow Research Cloud (Cloud TPUs). Venue from the PDF first-page footer (''34th Conference on Neural Information Processing Systems (NeurIPS 2020)''). The main
+    text also states that CIFAR10 FID is computed with respect to the training set ''as is standard practice'' (p.5). Appendix C lists differences from NCSN (scaling of data in the forward process, signal
+    destroyed at x_T, sampler coefficients derived from β_t rather than set post hoc). Tables 1-2 not recorded.'

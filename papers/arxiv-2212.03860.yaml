@@ -1,0 +1,94 @@
+id: arxiv-2212.03860
+title: Diffusion Art or Digital Forgery? Investigating Data Replication in Diffusion Models
+authors:
+- Gowthami Somepalli
+- Vasu Singla
+- Micah Goldblum
+- Jonas Geiping
+- Tom Goldstein
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2212.03860
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 4b725a407d6942769fc2323bb2bb6a06bf3c505e80b9a7b4c41c9aac031b53d8
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - unsupervised
+proposes:
+- A benchmark of 10 feature extractors for replication detection on 5 real retrieval datasets and 5 purpose-built synthetic copy datasets, and a split-product similarity
+- Retrieval-based search for content replication in DDPMs (CelebA, Oxford Flowers), an ImageNet LDM, and Stable Diffusion v1.4
+claims:
+- id: c1
+  statement: 'Working definition (informal): a generated image has replicated content if an object in the foreground or background appears identically in a training image, ignoring minor variations explainable
+    by data augmentation; style or semantic similarity is deliberately excluded as highly subjective.'
+  location: 3. What Counts as Replication?
+  page: 3
+  quote: We say that a generated image has replicated content if it contains an object (either in the foreground or background) that appears identically in a training image, neglecting minor variations
+    in appearance that could result from data augmentation.
+- id: c2
+  statement: The authors state that the similarity level needed to count as replication is subjective, and instead of choosing an arbitrary definition they present quantitative and qualitative results for
+    readers to judge.
+  location: 1. Introduction
+  page: 2
+  quote: Rather than choosing an arbitrary deﬁnition, we focus on presenting quantitative and qualitative results to the reader, leaving each person to draw their own conclusions based on their role and
+    stake in the process of generative AI.
+- id: c3
+  statement: 'Choosing the detector: among 10 feature extractors evaluated by mAP on 5 real retrieval datasets and 5 synthetic copy datasets, DINO with split-product had the best average rank; Swin Transformer
+    was best on real datasets and SSCD on synthetic ones. SSCD, Swin and DINO are used afterwards.'
+  location: 4.1. Choosing the Best Replication Detector
+  page: 5
+  quote: DINO [12] with split-product performed the best on average across all 10 datasets.
+- id: c4
+  statement: 'Training-set size: DDPMs trained on Celeb-A subsets (300, 3000, full) and Oxford Flowers (100, 1083, 8189 images), each for at least 300k steps and until FID < 50, show frequent copying for
+    small training sets that decreases as training data grows; for the full Celeb-A model the generation-to-train similarity histogram overlaps the train-to-train baseline. Displayed examples come from
+    the 20 generations with highest similarity.'
+  location: 5. Do Diffusion Models Copy?
+  page: 5
+  quote: We observe that the diffusion models trained on smaller datasets tend to generate images that are copied from the training data.
+- id: c5
+  statement: 'ImageNet LDM (off-the-shelf, class-conditional; 100 random classes, 1000 samples each): no significant copying was observed; similarity scores never exceeded 0.65 and the closest matches,
+    though very similar, were never exact copies and may be explained by low intra-class diversity.'
+  location: '6. Case Study: ImageNet LDM'
+  page: 6
+  quote: Qualitatively, we observe no signiﬁcant copying in any of the generations by this model.
+- id: c6
+  statement: 'Stable Diffusion v1.4: 9000 captions sampled from LAION Aesthetics v2 6+ (12M images) were used as prompts; among about 170 generations with top-1 similarity > 0.5 (top 1.88 percentile) a
+    significant amount of copying (whole objects, backgrounds) was observed, though no generation matched its own caption''s source image. Some replication depended on key phrases in the caption.'
+  location: '7. Case Study: Stable Diffusion'
+  page: 7
+  quote: Above this 0.5 threshold, we observe a signiﬁcant amount of copying.
+- id: c7
+  statement: 'Duplication (duplicate = SSCD score > 0.95 in LAION-Aesthetics): a random source image is duplicated 11.6 times on average and a typical matched image 3.1 times, but very close matches (>
+    .5 SSCD) 34.1 times; the authors conclude replicated content seems to come from images duplicated more than a typical image.'
+  location: '7. Case Study: Stable Diffusion (Role of duplicate training data)'
+  page: 10
+  quote: It seems that replicated content tends to be drawn from training images that are duplicated more than a typical image.
+- id: c8
+  statement: 'Duplication alone is not the explanation: the small-dataset models of Section 5 replicate strongly without duplicated images; the authors speculate that Stable Diffusion''s replication comes
+    from an interaction of text conditioning, a highly skewed distribution of image repetitions, and enough gradient updates to overfit a subset of the data.'
+  location: 8. Possible causes of replication
+  page: 10
+  quote: However this explanation is incomplete and oversimpliﬁed; Our models in Section 5 consistently show strong replication when they are trained with small datasets that are unlikely to have any duplicated
+    images.
+- id: c9
+  statement: 'Limitation: only the 12M LAION Aesthetics v2 6+ subset (less than 0.6% of the training data) was searched, replication exists outside it, and the retrieval method likely misses some replication,
+    so the results systematically underestimate replication.'
+  location: 9. Limitations & Conclusion
+  page: 11
+  quote: For both of these reasons, the results here systematically underestimate the amount of replication in Stable Diffusion and other models.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Maryland, College
+    Park and New York University. The v3 PDF (arXiv, Dec 2022, ''updated draft'') contains no venue statement (searched for CVPR, conference), so no venue is recorded. The authors also note that sampling
+    captions from LAION may itself raise replication rates because some captions contain key phrases tied to dataset images, and that there is no baseline sampler for ''typical'' captions. Table 1 (mAP
+    per extractor/dataset) not recorded.'

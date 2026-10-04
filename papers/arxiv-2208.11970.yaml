@@ -1,0 +1,79 @@
+id: arxiv-2208.11970
+title: 'Understanding Diffusion Models: A Unified Perspective'
+authors:
+- Calvin Luo
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2208.11970
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 431ebb18fb1d504982b976b700ff09388ab74a5ec759fc8806af6fddac5272bf
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  - variational-autoencoders
+  paradigms:
+  - unsupervised
+proposes: []
+claims:
+- id: c1
+  statement: 'Tutorial framing: a variational diffusion model is presented as a Markovian hierarchical VAE with three restrictions: latent dimension equal to data dimension, a fixed (not learned) linear
+    Gaussian encoder at each timestep, and encoder parameters chosen so the final latent is a standard Gaussian.'
+  location: Variational Diffusion Models
+  page: 6
+  quote: 'The easiest way to think of a Variational Diﬀusion Model (VDM) [4, 5, 6] is simply as a Markovian Hierarchical Variational Autoencoder with three key restrictions:'
+- id: c2
+  statement: The ELBO derivations use only the Markov assumption, so they hold for any Markovian HVAE, and with T = 1 both forms reduce exactly to the ELBO of a vanilla VAE.
+  location: Variational Diffusion Models
+  page: 10
+  quote: Furthermore, when we set T = 1, both of the ELBO interpretations for a VDM exactly recreate the ELBO equation of a vanilla VAE, as written in Equation 19.
+- id: c3
+  statement: A first ELBO form (consistency terms over two random variables per timestep) may have high-variance Monte Carlo estimates for large T; rewriting encoder transitions via Bayes' rule gives a
+    form where each term is an expectation over at most one random variable, estimable with lower variance.
+  location: Variational Diffusion Models
+  page: 9
+  quote: As it is computed by summing up T −1 consistency terms, the ﬁnal estimated value of the ELBO may have high variance for large T values.
+- id: c4
+  statement: 'Learning the noise schedule: the per-timestep objective can be written in terms of the SNR, which must decrease monotonically, and the SNR can be parameterized by a neural network and learned
+    jointly with the diffusion model.'
+  location: Learning Diffusion Noise Parameters
+  page: 14
+  quote: Following the simpliﬁcation of the objective in Equation 110, we can directly parameterize the SNR at each timestep using a neural network, and learn it jointly along with the diﬀusion model.
+- id: c5
+  statement: 'Three equivalent objectives: predicting the original image x0, the source noise, or the score at an arbitrary noise level (the latter via Tweedie''s formula). Citing [5, 7] (Ho et al.; Saharia
+    et al.), the tutorial notes that some works found noise prediction to perform better empirically.'
+  location: Three Equivalent Interpretations
+  page: 17
+  quote: 'We have therefore derived three equivalent objectives to optimize a VDM: learning a neural network to predict the original image x0, the source noise ϵ0, or the score of the image at an arbitrary
+    noise level ∇log p(xt).'
+- id: c6
+  statement: 'Score-based link: citing Song and Ermon, vanilla score matching has three problems (ill-defined score on low-dimensional manifolds, inaccurate scores in low-density regions, Langevin dynamics
+    that may not mix), which adding multiple levels of Gaussian noise addresses; the resulting objective almost exactly matches the VDM objective.'
+  location: Score-based Generative Models
+  page: 19
+  quote: It turns out that these three drawbacks can be simultaneously addressed by adding multiple levels of Gaussian noise to the data.
+- id: c7
+  statement: 'Stated drawbacks of diffusion models: no interpretable latents (the encoder is a fixed linear Gaussian, so intermediate latents are just noisy versions of the input), latents restricted to
+    the input dimensionality, and expensive sampling because all timesteps must be iterated.'
+  location: Closing
+  page: 22
+  quote: The VDM does not produce interpretable latents.
+- id: c8
+  statement: The author suggests that the success of diffusion models highlights the power of hierarchical VAEs, and that further gains may be achieved with general deep HVAEs with complex encoders and
+    semantically meaningful latent spaces.
+  location: Closing
+  page: 22
+  quote: As a ﬁnal note, the success of diﬀusion models highlights the power of Hierarchical VAEs as a generative model.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Tutorial / review paper (Google Research,
+    Brain Team); it derives existing results and reports no experiments. ''Variational Diffusion Model'' is used here as a name for diffusion models in general (citing Sohl-Dickstein et al., Ho et al.,
+    Kingma et al. [4, 5, 6]). No venue stated in the PDF; none recorded. Also covers classifier and classifier-free guidance, stating that guidance trades sample diversity for adherence to conditioning
+    information.'

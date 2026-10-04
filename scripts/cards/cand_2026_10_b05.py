@@ -74,7 +74,7 @@ SPECS = [
   {"id": "arxiv-2609.39124", "title": "CDMD: A Cross-Dataset Mixed-Type Diffusion Model for Tabular Data",
    "authors": ["Mohamed Amine Ketata", "Maximilian Schambach", "Stephan Günnemann"], "year": 2026, "version": "arXiv v1",
    "links": {"arxiv": "https://arxiv.org/abs/2609.39124", "code": "https://github.com/ketatam/cdmd"},
-   "tasks": ["tabular-data-generation"], "fam": ["deep-learning", "tabular-attention"], "par": ["unsupervised"],
+   "tasks": ["tabular-data-generation"], "fam": ["diffusion-models", "deep-learning", "tabular-attention"], "par": ["unsupervised"],
    "proposes": ["CDMD (cross-dataset mixed-type diffusion model with schema-restricted masked diffusion and a schema-aware Transformer denoiser)"],
    "claims": [
      ("CDMD is a tabular diffusion model trained jointly across datasets with different schemas, defining diffusion directly over the mixed-type feature space.", "Abstract",

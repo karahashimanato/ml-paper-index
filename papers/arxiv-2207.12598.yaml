@@ -1,0 +1,90 @@
+id: arxiv-2207.12598
+title: Classifier-Free Diffusion Guidance
+authors:
+- Jonathan Ho
+- Tim Salimans
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2207.12598
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: ccbdf2da65903ed579d35240165aba2d0e9ad6f015ade81af6e30823eb0a7f24
+tags:
+  tasks:
+  - generative-modeling
+  method_families:
+  - diffusion-models
+  paradigms:
+  - supervised
+proposes:
+- 'Classifier-free guidance: jointly training a conditional and an unconditional diffusion model in one network by dropping the conditioning with probability p_uncond, and sampling with the score combination
+  (1 + w) eps(z, c) - w eps(z)'
+claims:
+- id: c1
+  statement: 'Motivation: classifier guidance requires training an extra classifier on noisy data (so a pre-trained classifier generally cannot be plugged in), and because it mixes in classifier gradients
+    it can be interpreted as a gradient-based adversarial attack, raising the question whether its gains on classifier-based metrics (FID, IS) are partly adversarial.'
+  location: Introduction
+  page: 2
+  quote: Classiﬁer guidance complicates the diffusion model training pipeline because it requires training an extra classiﬁer, and this classiﬁer must be trained on noisy data so it is generally not possible
+    to plug in a pre-trained classiﬁer.
+- id: c2
+  statement: 'Method and cost at training time: a single network parameterizes both models, with a null token as the class input for the unconditional model, trained jointly by randomly setting the conditioning
+    to null with probability p_uncond; joint training (rather than separate models) is chosen because it is simple and does not increase the total number of parameters.'
+  location: Classifier-free guidance
+  page: 5
+  quote: (It would certainly be possible to train separate models instead of jointly training them together, but we choose joint training because it is extremely simple to implement, does not complicate
+    the training pipeline, and does not increase the total number of parameters.)
+- id: c3
+  statement: 'Caveat on the implicit-classifier interpretation: the guided score is inspired by the gradient of an implicit classifier p(z|c)/p(z), but the authors note that with a misspecified model, classifiers
+    derived by Bayes'' rule can be inconsistent (citing Grünwald & Langford) and all guarantees on their performance are lost; the effectiveness is therefore shown empirically.'
+  location: Classifier-free guidance
+  page: 5
+  quote: In cases such as ours, where we expect the model to be misspeciﬁed, classiﬁers derived by Bayes’ rule can be inconsistent (Gr¨unwald & Langford, 2007) and we lose all guarantees on their performance.
+- id: c4
+  statement: 'Experimental setup: class-conditional ImageNet at 64x64 and 128x128, framed as a proof of concept rather than pushing to state of the art; architectures and hyperparameters are those of Dhariwal
+    & Nichol''s guided diffusion models (apart from continuous-time training), which the authors note were tuned for classifier guidance and may be suboptimal for classifier-free guidance.'
+  location: Experiments
+  page: 6
+  quote: those hyperparameter settings were tuned for classiﬁer guidance and hence may be suboptimal for classiﬁer-free guidance.
+- id: c5
+  statement: 'Evaluation protocol: guidance strength w is swept over {0, 0.1, ..., 4} and FID and IS are computed with 50000 samples for each value, following Heusel et al. and Salimans et al. No statement
+    of which real-image set provides the FID reference statistics was found in the text (searched for reference, training set, validation, statistics).'
+  location: Varying the classifier-free guidance strength
+  page: 7
+  quote: calculate FID and Inception Scores with 50000 samples for each value following the procedures of Heusel et al. (2017) and Salimans et al. (2016)
+- id: c6
+  statement: 'Quality-diversity trade-off: the best FID is obtained with a small amount of guidance and the best IS with strong guidance, with a trade-off between the two in between; samples show decreasing
+    variety and increasing individual fidelity as guidance grows. The ''best'' w is read off the same sweep that is reported; no separate selection set is described.'
+  location: Varying the classifier-free guidance strength
+  page: 7
+  quote: We obtain the best FID results with a small amount of guidance (w = 0.1 or w = 0.3, depending on the dataset) and the best IS result with strong guidance (w ≥4).
+- id: c7
+  statement: 'Training hyperparameter p_uncond (64x64 ImageNet, 400k steps each): p_uncond = 0.5 was consistently worse than 0.1 or 0.2 across the IS/FID frontier, while 0.1 and 0.2 performed about equally;
+    the authors conclude only a relatively small portion of model capacity needs to go to unconditional generation.'
+  location: Varying the unconditional training probability
+  page: 8
+  quote: We ﬁnd puncond = 0.5 consistently performs worse than puncond ∈{0.1, 0.2} across the entire IS/FID frontier; puncond ∈{0.1, 0.2} perform about equally as well as each other.
+- id: c8
+  statement: 'Sampling cost: each sampling step evaluates the denoising model twice (conditional and unconditional), so with the same architecture as ADM-G the speed-matched comparison is the T = 128 setting,
+    which underperforms ADM-G in FID. In the Discussion the authors add that classifier-guided sampling may be faster since classifiers can be smaller than generative models.'
+  location: Varying the number of sampling steps
+  page: 8
+  quote: Because we used the same model architecture as ADM-G, the fair comparison in terms of sampling speed would be our T = 128 setting, which underperforms compared to ADM-G in terms of FID score.
+- id: c9
+  statement: 'Stated concern about reduced diversity: any guidance method that raises fidelity at the expense of diversity faces the question of whether decreased diversity is acceptable; the authors say
+    there may be negative impacts in deployed models where parts of the data are underrepresented.'
+  location: Discussion
+  page: 9
+  quote: There may be negative impacts in deployed models, since sample diversity is important to maintain in applications where certain parts of the data are underrepresented in the context of the rest
+    of the data.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): diffusion models. Carded by a subagent. Results tables not recorded; claims only. Affiliation: Google Research, Brain team.
+    No venue recorded: the PDF and the arXiv comment say a short version appeared in the NeurIPS 2021 Workshop on Deep Generative Models and Downstream Applications; this arXiv v1 is the full paper. Conflict
+    of interest: both authors are co-authors of CDM (Ho et al., 2021), which is a comparison row in Tables 1-2. The text says FID is ''monotonically decreasing'' with w between the best-FID and best-IS
+    settings, whereas Tables 1-2 list FID values that grow with w beyond the best setting; that sentence is not recorded as a claim. Results tables (Tables 1-2) not recorded.'

@@ -1,0 +1,89 @@
+id: arxiv-1005.0208
+title: Analysis of a Random Forests Model
+authors:
+- Gérard Biau
+year: 2010
+links:
+  arxiv: https://arxiv.org/abs/1005.0208
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 824f46d3c587b7a1a7d8699f283f251a5295247de446b8d68f6ce36dc6e962e9
+tags:
+  tasks:
+  - tabular-regression
+  method_families:
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- 'Consistency and rate-of-convergence analysis of a simplified random forests model suggested by Breiman (2004 draft): data-independent randomization, midpoint splits, coordinate j chosen with probability
+  p_nj, trees of ceil(log2 k_n) levels, under a sparsity assumption (regression function depends on S strong features)'
+claims:
+- id: c1
+  statement: The paper analyses a random forests model suggested by Breiman in a short draft, which the author describes as very close to the original algorithm, and shows that it is consistent and adapts
+    to sparsity (its rate depends only on the number of strong features, not on the number of noise variables).
+  location: Abstract
+  page: 1
+  quote: In this paper, we oﬀer an in-depth analysis of a random forests model suggested by Breiman in [12], which is very close to the original algorithm.
+- id: c2
+  statement: 'Simplifying assumption: the randomizing variable Theta is independent of X and of the training sample, which excludes any bootstrapping/resampling step and any data-dependent split search
+    on the training observations (a second, independent sample is allowed); each tree splits ceil(log2 k_n) times, choosing coordinate j with probability p_nj and cutting at the midpoint of the chosen side.'
+  location: Introduction (The model)
+  page: 4
+  quote: This excludes in particular any bootstrapping or resampling step in the training set.
+- id: c3
+  statement: Theorem 2.1 covers the 'purely random' case (coordinate chosen uniformly, p_nj = 1/d), which is consistent if k_n goes to infinity and k_n/n to 0; the author calls this a radically simplified
+    version of practical random forests that does not explain the algorithm's good performance.
+  location: Asymptotic analysis (Theorem 2.1)
+  page: 6
+  quote: This is however a radically simpliﬁed version of the random forests used in practice, which does not explain the good performance of the algorithm.
+- id: c4
+  statement: 'Proposition 2.1 (X uniform, bounded conditional variance): the forest variance is O(k_n / (n (log k_n)^{S/2d})), so even with k_n = n it still tends to 0, whereas a single tree''s variance
+    is of order k_n/n; the log term comes from the Theta-averaging (correlation between trees). The author believes this offers a perspective on why unpruned trees still work, while noting that the bias
+    bound (Proposition 2.2) contains a term e^{-n/2k_n} that prevents the extreme choice k_n = n.'
+  location: Asymptotic analysis (Proposition 2.1)
+  page: 9
+  quote: We believe that it provides an interesting perspective on why random forests are still able to do a good job, despite the fact that individual trees are not pruned.
+- id: c5
+  statement: 'Proposition 2.2 / Corollary 2.1 (X uniform, r* Lipschitz on the S strong coordinates, p_nj = (1/S)(1 + xi_nj) for strong j with xi_nj log n -> 0): the bias rate depends on S rather than d,
+    and the overall rate n^{-0.75/(S log 2 + 0.75)} is faster than the d-dimensional rate n^{-2/(d+2)} as soon as S <= floor(0.54 d).'
+  location: Asymptotic analysis (Proposition 2.2)
+  page: 9
+  quote: In other words, when the number of active variables is less than (roughly) half of the ambient dimension, the bias of the random forests regression estimate decreases to 0 much faster than the
+    usual rate.
+- id: c6
+  statement: 'Remark 2: the reduced-dimensional rate is strictly slower than the S-dimensional optimal rate n^{-2/(S+2)}, and the author does not know whether that optimal rate can be achieved by the algorithm.'
+  location: Asymptotic analysis (Remark 2)
+  page: 12
+  quote: We do not know whether the latter rate can be achieved by the algorithm.
+- id: c7
+  statement: 'Gap to Breiman''s algorithm: a CART-like procedure that chooses the best split among M_n random coordinates on a second sample is described as close to random forests, but the original algorithm
+    searches cuts on the training data itself; the author does not know whether the results hold when Theta depends on the training data (as in CART) and calls the heuristic argument a rough approach needing
+    more theoretical work.'
+  location: Discussion
+  page: 16
+  quote: We do not know whether our results are still true if Θ depends on Dn (as in the CART algorithm), but the analysis does not appear to be simple.
+- id: c8
+  statement: 'Variable importance: the out-of-bag permutation importance used by random forests has, as far as the author is aware, no systematic mathematical study; such a study is said to be beyond the
+    paper''s scope.'
+  location: Discussion
+  page: 16
+  quote: As far as we are aware, there is to date no systematic mathematical study of this criterion.
+- id: c9
+  statement: 'Simulation (Sinus, Friedman #1, Tree models; test set of 50 000; 100 data sets): Breiman''s forests (R randomForest, mtry automatically tuned by the package, 1000 trees, minimum node size
+    5) are compared with an alternative that fixes the number of terminal nodes to ceil(n/5) but otherwise splits on the actual sample like CART; the author reports very similar overall performance and
+    takes this as confirming that the analysed model is a good approximation. Note: the alternative still uses data-dependent CART splits, unlike the analysed model.'
+  location: A small simulation study
+  page: 20
+  quote: This conﬁrms our idea that the model discussed in the present paper is a good approximation of the authentic Breiman’s forests.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: Université Pierre et Marie Curie – Paris VI and Ecole Normale Supérieure. No venue statement was found in the arXiv v3 PDF (searched for journal, JMLR, published, to appear), so no venue
+    is recorded (the Biau & Scornet survey, arxiv-1511.05741, cites it as Biau (2012); not used as a source). Section 3 also discusses an idealized mtry scheme (strong set known) in which M_n -> infinity
+    and M_n/log n -> infinity are required, which the author says is not consistent with the belief that M_n should not depend on n. MSE results are shown as figures only (Figures 6-8); no numbers recorded.'

@@ -1,0 +1,101 @@
+id: arxiv-2402.01502
+title: Why do Random Forests Work? Understanding Tree Ensembles as Self-Regularizing Adaptive Smoothers
+authors:
+- Alicia Curth
+- Alan Jeffares
+- Mihaela van der Schaar
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2402.01502
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 0c8197b5df49b7f25ff4d79cd2e06ec6c861f5b21263e69fa681d7887a427038
+  license: CC BY 4.0
+tags:
+  tasks:
+  - tabular-regression
+  - tabular-classification
+  method_families:
+  - random-forests
+  - gradient-boosted-trees
+  - decision-trees
+  paradigms:
+  - supervised
+proposes:
+- Interpreting trees and tree ensembles as adaptive smoothers (weighted averages of training labels) and quantifying their smoothing with the effective-parameter measure of Curth et al. (2023), separately
+  at training and test inputs
+- A decomposition of forest-over-tree gains into reduced sampling variation (label noise), reduced model variability, and reduced representation bias
+claims:
+- id: c1
+  statement: 'Main thesis: forests improve upon trees by three distinct, usually entangled mechanisms: smoothing reduces variance due to outcome noise, reduces variability in the quality of the learned
+    function given fixed inputs, and reduces potential bias by enriching the hypothesis space.'
+  location: Abstract
+  page: 1
+  quote: Instead, we show that forests can improve upon trees by three distinct mechanisms that are usually implicitly entangled.
+- id: c2
+  statement: 'Argument for interpolating (full-depth) ensembles: each tree acts as a 1-NN estimator at both training and test inputs, but different randomized trees can place an unseen input in leaves with
+    different training points, so the forest is smoother at test inputs than at training inputs and smoother than individual trees there.'
+  location: Section 2.5
+  page: 9
+  quote: Therefore, interpolating forests should be expected to (i) be smoother when issuing predictions for testing examples than for training examples and (ii) be smoother than individual trees at previously
+    unseen test inputs
+- id: c3
+  statement: 'Evaluation setup: the ''MARSadd'' simulation (d = 5 uniform features, n_train = n_test = 500, sigma = 1 by default), averaged over 10 seeds; Appendix C replicates analyses on 4 datasets from
+    Grinsztajn et al. (2022) subsampled to 2000 train/test points; trees, forests and boosting use scikit-learn RandomForestRegressor / GradientBoostingRegressor. Results are shown as figures.'
+  location: Section 3 (Experimental setup)
+  page: 10
+  quote: All experiments are averaged over 10 replications with different random seeds and shaded areas in plots represent 95% confidence intervals.
+- id: c4
+  statement: Spiked-smooth behaviour (Wyner et al. 2017) is quantified as a gap between train-time and test-time effective parameters; it also appears in non-interpolating forests (limited number of leaves)
+    but is much more pronounced for interpolating trees, leading the authors to conjecture it appears whenever there is some overfitting.
+  location: Section 3.1.2
+  page: 12
+  quote: We thus conjecture that spiked-smooth behavior appears whenever there is some degree of overfitting to the training data.
+- id: c5
+  statement: For ensembles of 50 interpolating trees, adding randomness by lowering the fraction m of features per split appears to improve generalization at first, then hurts once tree construction becomes
+    too random (a U-shape, analogous to k in k-NN); adding more trees never hurt generalization error in their experiments.
+  location: Section 3.1.1
+  page: 11
+  quote: We observe that in-troducing more randomness (by decreasing m) appears to improve generalization initially, until a turning point is reached when additional randomness hurts performance – this
+    is when tree construction becomes too random.
+- id: c6
+  statement: The covariance-based degrees of freedom used by Mentch and Zhou (2020) cannot fully explain forest-vs-tree performance differences (e.g. it is constant across ensemble sizes); the authors argue
+    Wyner et al.'s spiked-smooth explanation is a special case of Mentch and Zhou's randomization-as-regularization explanation.
+  location: Section 3
+  page: 9
+  quote: We show that their chosen measure for degrees of freedom cannot fully explain the success of forests relative to trees
+- id: c7
+  statement: Trees and forests (built from i.i.d. Theta) have the same statistical bias, so classically all gains are attributed to variance reduction; the authors argue this notion misses differences in
+    what trees and forests can represent, and propose distinguishing them by representation bias (forests' hypothesis class contains that of trees).
+  location: Section 4.1.3
+  page: 19
+  quote: We therefore argue that distinguishing trees and forests by their representation bias can be more meaningful.
+- id: c8
+  statement: In the noiseless setting (sigma = 0), bagging full-depth trees worsened in-sample error relative to interpolating trees, while for unseen test inputs forests improved over individual trees
+    even without label noise (shown in Figure 10).
+  location: Section 4.2.1
+  page: 21
+  quote: when given previously unseen test examples, Panel (A) of Fig. 10 highlights that forest predictions can improve upon individual trees even in the absence of any label noise (σ = 0)!
+- id: c9
+  statement: 'Protocol caveat for the RepBias/ModVar analysis: 50 re-seeded versions of each model are trained on a fixed noiseless train-test set (delta = 0.1) and the best one is selected using oracle
+    knowledge of the test outcomes as a proxy for representation bias.'
+  location: Section 4.2.2
+  page: 23
+  quote: Among these 50 models, we measure performance on the test set and identify the best-performing model
+- id: c10
+  statement: 'Practical takeaway: bootstrapping mainly affects in-sample error (ability to overfit labels at observed inputs), whereas randomness in feature selection matters much more for out-of-sample
+    performance, especially when trees fit the training data perfectly; too much randomness can hurt.'
+  location: Conclusion (Practical takeaways)
+  page: 25
+  quote: Randomness in feature selection, especially when the training data can be fit perfectly, is much more important for out-of-sample prediction performance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: University of Cambridge. No venue statement found in the arXiv v1 PDF; license CC BY 4.0 stated on page 1. Disclosure: the effective-parameter measure used throughout is from the authors''
+    own earlier work (Curth, Jeffares and van der Schaar, NeurIPS 2023, ''A U-turn on double descent'', per the reference list: same three authors). All results are figures (no tables); no numbers recorded.
+    Boosted ensembles are also shown to be smoothers (Appendix B) and to display spiked-smooth behaviour (Fig. 5).'

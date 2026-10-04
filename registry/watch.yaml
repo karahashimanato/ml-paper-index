@@ -53,3 +53,7 @@ themes:
     tags: [autoencoders, variational-autoencoders, reconstruction-based-detectors]
     arxiv_queries:
       - '(abs:autoencoder OR abs:"auto-encoder" OR abs:"variational autoencoder" OR abs:"posterior collapse") AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'
+  - name: 木モデル(勾配ブースティング木、ランダムフォレスト、決定木)
+    tags: [gradient-boosted-trees, random-forests, decision-trees]
+    arxiv_queries:
+      - '(abs:"gradient boosting" OR abs:"random forest" OR abs:"decision tree" OR abs:XGBoost OR abs:LightGBM OR abs:CatBoost) AND (cat:cs.LG OR cat:stat.ML)'

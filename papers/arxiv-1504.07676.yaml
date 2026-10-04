@@ -1,0 +1,88 @@
+id: arxiv-1504.07676
+title: Explaining the Success of AdaBoost and Random Forests as Interpolating Classifiers
+authors:
+- Abraham J. Wyner
+- Matthew Olson
+- Justin Bleich
+- David Mease
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1504.07676
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: a02595112587491b818c76c7c37f1e654be9ab0b7834f77fa875b2163c3f5020
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - random-forests
+  - tree-ensembles
+  paradigms:
+  - supervised
+proposes:
+- An explanation of AdaBoost and random forests as self-averaging, interpolating classifiers that produce a 'spiked-smooth' decision surface
+- A decomposition of AdaBoost run for many iterations into a weighted sum of interpolating classifiers
+claims:
+- id: c1
+  statement: 'Main conjecture: random forests are a self-averaging, interpolating algorithm producing what the authors call a ''spiked-smooth'' classifier; they view AdaBoost in the same light and conjecture
+    that both succeed because of this mechanism, supported by examples rather than proofs.'
+  location: Abstract
+  page: 1
+  quote: We conjecture that both AdaBoost and random forests succeed because of this mechanism.
+- id: c2
+  statement: 'Proposed mechanism: interpolation gives a kind of robustness to noise, because a classifier that fits the data extremely locally lets a noise point affect the fit only in a small region; combined
+    with averaging, the fit stabilizes where there is signal while the influence of noise points becomes more localized.'
+  location: Introduction
+  page: 4
+  quote: 'It turns out that interpolation provides a kind of robustness to noise: if a classiﬁer ﬁts the data extremely locally, a “noise” point in one region will not aﬀect the ﬁt of the classiﬁer at a
+    nearby location.'
+- id: c3
+  statement: 'Practical recommendation drawn from this view, against the conventional advice to regularize boosting, stop early, or use low-complexity learners such as stumps: boosting should be used like
+    random forests, with large trees and without regularization or early stopping.'
+  location: Abstract
+  page: 1
+  quote: 'We conclude that boosting should be used like random forests: with large decision trees, without regularization or early stopping.'
+- id: c4
+  statement: 'Why random forests count as interpolators here (classification): in implementations such as R randomForest the minimum node size is 1 for classification, so each tree interpolates its bootstrap
+    sample; the authors argue the voted forest then fits the whole training set perfectly, at least with very high probability, because each point appears in most bootstrap samples as the number of trees
+    grows.'
+  location: Section 3.1
+  page: 10
+  quote: The ﬁnal random forest classiﬁer still ﬁts the entire training data set perfectly, at least with very high probability.
+- id: c5
+  statement: 'Self-smoothing of AdaBoost: in a 20-dimensional pure-noise simulation (n = 5000, P(y=1|x) = 0.8), 1000 iterations of AdaBoost are rewritten as a weighted average of 10 blocks of 100 iterations,
+    each of which itself interpolates the training data; the authors argue the extra iterations act as averaging that further localizes errors near noise points rather than as overfitting.'
+  location: Section 4.1
+  page: 26
+  quote: Boosting for 1000 iterations is thus a point-wise weighted average of 10 interpolating classiﬁers.
+- id: c6
+  statement: 'Against stumps: in a five-dimensional simulation with an additive Bayes rule and a high Bayes error, AdaBoost with stumps was outperformed by AdaBoost with large trees (up to 2^8 terminal
+    nodes); the authors attribute this to stumps not interpolating locally enough and lacking self-smoothing. The numbers come from a single simulation run, which the authors say is qualitatively reproducible.'
+  location: Section 4.3
+  page: 30
+  quote: These numerical values are based only on a single run of this simulation, but the qualitative ﬁnding is reproducible over repeated runs.
+- id: c7
+  statement: 'Evidence base on real data: because noise points cannot be identified in real data, the authors flip the labels of 100 randomly chosen training points (about 2%) of the phoneme data (n = 5404,
+    p = 5; 70/30 train/test split) and study the fits of boosted trees and a random forest around them; a version of this analysis with 5% label noise was repeated on five UCI datasets over 50 random splits.'
+  location: Section 5.1
+  page: 32
+  quote: As a substitute for noise points, we ﬂipped the signs of 100 randomly chosen points in our training data set (about 2% of the data) and analyzed the ﬁts of boosted trees and a random forest classiﬁer
+    around these points.
+- id: c8
+  statement: 'Hedge on the decorrelation finding: sub-ensembles of AdaBoost had less correlated errors than those of a random forest, which were less correlated than those of bagged trees, in this example;
+    the authors observed this in a few datasets and say they cannot state under what conditions it holds more generally.'
+  location: Section 4.2
+  page: 29
+  quote: While we observed this phenomenon in a few data sets, we cannot state under what conditions it happens more generally.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: Wharton School, University of Pennsylvania (Wyner, Olson, Bleich) and Apple Inc. (Mease). The PDF uses a journal-style template with an empty ''Editor:'' field, but no venue is stated
+    in the PDF or the arXiv metadata (comment: ''40 pages, 11 figures, 2 algorithms''); no venue recorded. AdaBoost here uses rpart trees grown to a maximum depth of 8; random forests use 500 trees. The
+    evidence is mostly two- to twenty-dimensional simulations with known Bayes rules plus label-flipping experiments on six real datasets; no theorem is proved. The paper cites the authors'' own earlier
+    work (Mease and Wyner, 2008; Wyner, 2003) as evidence against the statistical view of boosting. Results (Table 1, error rates) not recorded. AdaBoost is not tagged gradient-boosted-trees.'

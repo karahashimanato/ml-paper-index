@@ -1,0 +1,25 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# CatBoost: unbiased boosting with categorical features
+
+- カード: [`arxiv-1706.09516`](../../papers/arxiv-1706.09516.yaml)
+- 著者: Liudmila Prokhorenkova, Gleb Gusev, Aleksandr Vorobev, Anna Veronika Dorogush, Andrey Gulin
+- 年・掲載: 2017
+- 原論文: [PDF](https://arxiv.org/pdf/1706.09516v5)(arXiv v5、カード作成時に読んだ版)
+- タグ: gradient-boosted-trees, supervised, tabular-classification
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Contribution: ordered boosting and a new algorithm for categorical features, both designed against a prediction shift caused by a special kind of target leakage that the authors say is present in all existing gradient boosting implementations.([Abstract, p.1](https://arxiv.org/pdf/1706.09516v5#page=1 "Both techniques were created to ﬁght a prediction shift caused by a special kind of target leakage present in all currently existing implementations of gradient boosting algorithms."))
+- **c2** Ordered target statistics compute each training example's statistic only from examples preceding it in a random permutation (an artificial 'time'), satisfying no conditional shift (P1) while using all data (P2); the stated cost is that with a single permutation, early examples have much higher-variance statistics, so different permutations are used at different boosting steps.([Section 3.2, p.4](https://arxiv.org/pdf/1706.09516v5#page=4 "Note that, if we use only one random permutation, then preceding examples have TS with much higher variance than subsequent ones."))
+- **c3** Theorem 1 is proved for a simplified setting only: regression with quadratic loss, two i.i.d. Bernoulli(1/2) features, a linear target, two boosting steps with depth-1 stumps and step size 1. Reusing the same dataset at both steps gives a bias inversely proportional to n, while independent samples give an unbiased estimate (up to an exponentially small term).([Section 4.1, p.4](https://arxiv.org/pdf/1706.09516v5#page=4 "We formally analyze the problem of prediction shift in a simple case of a regression task with the quadratic loss function"))
+- **c4** The idealized ordered boosting algorithm (n supporting models, each trained on a prefix of the permutation) is not feasible in most practical tasks because it multiplies complexity and memory by n; CatBoost implements a modification based on GBDT with decision trees.([Section 4.2, p.5](https://arxiv.org/pdf/1706.09516v5#page=5 "Unfortunately, this algorithm is not feasible in most practical tasks due to the need of training n different models, what increase the complexity and memory requirements by n times."))
+- **c5** Comparison protocol (Appendix D.2): random 80/20 train-test split; for XGBoost, LightGBM and CatBoost, key parameters tuned by 50 steps of Hyperopt's Tree Parzen Estimator minimizing logloss with 5-fold cross-validation on the training set, then the number of trees chosen by exhaustive search in [1, 5000]; for Epsilon, default parameters were used (only the number of trees tuned) due to running time. Library versions: catboost 0.3, xgboost 0.6, lightgbm 0.1.([Appendix D.2, p.19](https://arxiv.org/pdf/1706.09516v5#page=19 "We tune all the key parameters of each algorithm by 50 steps of the sequential optimization algorithm Tree Parzen Estimator implemented in Hyperopt library21 (mode algo=tpe.suggest) by minimizing logloss."))
+- **c6** In the baseline comparison, categorical features for all learning algorithms (including XGBoost and LightGBM) were preprocessed with CatBoost's own ordered TS method; CatBoost used Ordered boosting mode; metrics are logloss and zero-one loss on nine binary classification datasets.([Section 6, p.8](https://arxiv.org/pdf/1706.09516v5#page=8 "For all learning algorithms, we preprocess categorical features using the ordered TS method described in Section 3.2."))
+- **c7** The authors report that CatBoost outperforms XGBoost and LightGBM on all considered datasets, with improvements statistically significant (paired one-tailed t-test) except on Appetency, Churn and Upselling.([Section 6, p.8](https://arxiv.org/pdf/1706.09516v5#page=8 "except three datasets (Appetency, Churn and Upselling) the improvements are statistically signiﬁcant with p-value ≪0.01 measured by the paired one-tailed t-test."))
+- **c8** Ordered vs Plain mode: the largest benefit of Ordered mode is on the relatively small datasets (Adult and Internet, under 40K training examples), consistent with the bias of Theorem 1 being larger for smaller datasets; the authors note the bias can also depend on other dataset properties.([Section 6, p.8](https://arxiv.org/pdf/1706.09516v5#page=8 "It can be clearly seen that Ordered mode is particularly useful on small datasets."))
+- **c9** Cost: in the running-time comparison on Epsilon (Appendix C.2), CatBoost Plain and LightGBM were the fastest, followed by Ordered mode, about 1.7 times slower.([Section 6, p.8](https://arxiv.org/pdf/1706.09516v5#page=8 "To summarize, we obtained that CatBoost Plain and LightGBM are the fastest ones followed by Ordered mode, which is about 1.7 times slower."))
+

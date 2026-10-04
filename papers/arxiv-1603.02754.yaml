@@ -1,0 +1,86 @@
+id: arxiv-1603.02754
+title: 'XGBoost: A Scalable Tree Boosting System'
+authors:
+- Tianqi Chen
+- Carlos Guestrin
+year: 2016
+venue: KDD 2016
+links:
+  arxiv: https://arxiv.org/abs/1603.02754
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 52bc282c922a239134ee4d6f4367c58bf920a9bdd53acbb3b2aa3342e2bb7214
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- 'XGBoost: an open-source, end-to-end scalable tree boosting system'
+- 'Sparsity-aware split finding: a learned default direction per tree node for missing/absent entries, visiting only non-missing entries'
+- Weighted quantile sketch for proposing candidate splits in the approximate algorithm, with second-order gradients as instance weights
+- Cache-aware column block structure, block compression and sharding for parallel and out-of-core tree learning
+- A regularized learning objective (penalty on number of leaves and L2 norm of leaf weights), included for completeness
+claims:
+- id: c1
+  statement: 'Contributions stated in the abstract: a sparsity-aware algorithm for sparse data and a weighted quantile sketch for approximate tree learning, plus insights on cache access patterns, data
+    compression and sharding for a scalable system.'
+  location: Abstract
+  page: 1
+  quote: We propose a novel sparsity-aware algorithm for sparse data and weighted quantile sketch for approximate tree learning.
+- id: c2
+  statement: 'Regularized objective: a complexity penalty (gamma times the number of leaves plus an L2 penalty on leaf weights) is added to the loss to smooth the learnt weights and avoid over-fitting;
+    with the regularization parameter set to zero the objective falls back to traditional gradient tree boosting. The authors describe the objective as a minor improvement included for completeness, resembling
+    Regularized Greedy Forest but simpler and easier to parallelize.'
+  location: Regularized Learning Objective
+  page: 2
+  quote: When the regularization parameter is set to zero, the objective falls back to the traditional gradient tree boosting.
+- id: c3
+  statement: Citing Friedman et al. [12], the tree is fitted with a second-order (gradient and Hessian) approximation of the loss; the authors state the derivation follows existing gradient boosting literature.
+  location: Gradient Tree Boosting
+  page: 2
+  quote: Second-order approximation can be used to quickly optimize the objective in the general setting [12].
+- id: c4
+  statement: Besides shrinkage, column (feature) subsampling is used against over-fitting; the authors report, based on user feedback, that it prevents over-fitting even more than traditional row subsampling
+    (which is also supported), and that it speeds up the parallel algorithm.
+  location: Shrinkage and Column Subsampling
+  page: 3
+  quote: According to user feedback, using column sub-sampling prevents over-ﬁtting even more so than the traditional row sub-sampling (which is also supported).
+- id: c5
+  statement: 'Split finding: the exact greedy algorithm enumerates all splits on pre-sorted features; the approximate algorithm proposes candidate splits from feature percentiles either once per tree (global)
+    or after each split (local). In the Higgs 10M comparison (shown as a figure), the authors find the local proposal needs fewer candidates and the global one can be as accurate given enough candidates.'
+  location: Approximate Algorithm
+  page: 4
+  quote: The global proposal can be as accurate as the local one given enough candidates.
+- id: c6
+  statement: Sparsity-aware split finding learns, for each node, a default direction for missing entries from the data, and only visits non-missing entries so that cost is linear in their number; on Allstate-10K
+    (sparse mainly due to one-hot encoding) it ran 50 times faster than a naive implementation.
+  location: Sparsity-aware Split Finding
+  page: 5
+  quote: We ﬁnd that the sparsity aware algorithm runs 50 times faster than the naive version.
+- id: c7
+  statement: 'Evaluation protocol: four datasets (Allstate, Higgs Boson, Yahoo LTRC, Criteo); all experiments use a common setting of maximum depth 8 and shrinkage 0.1 with no column subsampling unless
+    specified. No per-library hyperparameter tuning procedure was found in the text (searched for tun, hyperparameter, grid, default).'
+  location: Dataset and Setup
+  page: 8
+  quote: In all the experiments, we boost trees with a common setting of maximum depth equals 8, shrinkage equals 0.1 and no column subsampling unless explicitly speciﬁed.
+- id: c8
+  statement: 'Single-machine exact greedy comparison on dense Higgs-1M (chosen because scikit-learn only handles non-sparse input; 1M subset so scikit-learn finishes in reasonable time): both XGBoost and
+    scikit-learn performed better than R''s GBM (which expands only one branch of a tree), and XGBoost ran more than 10x faster than scikit-learn. Column subsampling gave slightly worse performance here,
+    which the authors say could be due to few important features.'
+  location: Classification
+  page: 8
+  quote: Both XGBoost and scikit-learn give better performance than R’s GBM, while XGBoost runs more than 10x faster than scikit-learn.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: University of Washington. Venue from the ACM block on page 1 (''KDD ’16, August 13-17, 2016, San Francisco'') and the arXiv comment. The authors are the developers of XGBoost and compare
+    it with other libraries (scikit-learn, R GBM, pGBRT, Spark MLLib, H2O); the comparisons are mostly about running time and scalability. Results tables (Tables 3-4) and figure-only results not recorded.
+    The introduction also reports usage in Kaggle 2015 winning solutions and KDDCup 2015 (not recorded as claims).'

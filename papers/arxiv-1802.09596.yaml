@@ -1,0 +1,87 @@
+id: arxiv-1802.09596
+title: 'Tunability: Importance of Hyperparameters of Machine Learning Algorithms'
+authors:
+- Philipp Probst
+- Bernd Bischl
+- Anne-Laure Boulesteix
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1802.09596
+  code: https://github.com/PhilippPro/tunability
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 7241986dfe4878a8625623186a3108be37c037fc06aeeeb92fb373c782143429
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  - decision-trees
+  - linear-models
+  - kernel-methods
+  paradigms:
+  - supervised
+proposes:
+- Definitions of data-based optimal defaults, the tunability of an algorithm and of individual hyperparameters (risk of the default minus risk of the best configuration), joint gains of hyperparameter pairs,
+  and tuning ranges from quantiles of per-dataset optima, estimated with surrogate models
+claims:
+- id: c1
+  statement: 'Definition: the tunability of an algorithm on a dataset is the difference between the risk of a reference default configuration (package defaults or the data-based optimal defaults) and the
+    risk of the best configuration on that dataset; per-hyperparameter tunability tunes only that hyperparameter with the others at defaults.'
+  location: Measuring overall tunability of a ML algorithm
+  page: 4
+  quote: 'A general measure of the tunability of an algorithm per dataset can then be computed based on the diﬀerence between the risk of an overall reference conﬁguration (e.g., either the software defaults
+    or deﬁnition (3)) and the risk of the best possible conﬁguration on that dataset:'
+- id: c2
+  statement: 'Data: the 38 binary classification tasks without missing values from the OpenML100 suite; algorithms: glmnet, rpart, kknn, svm, ranger (random forest) and xgboost.'
+  location: Datasets from the OpenML platform
+  page: 5
+  quote: For our study we only use the 38 binary classiﬁcation tasks that do not contain any missing values.
+- id: c3
+  statement: 'Protocol: configurations are sampled uniformly at random within the ranges of Table 1 by an OpenML bot and evaluated by 10-fold cross-validation; a random-forest surrogate per dataset is fitted
+    to the results, and defaults and per-dataset optima are found by random search on the surrogates.'
+  location: Random Bot sampling strategy for meta data
+  page: 7
+  quote: In an embarrassingly parallel manner it chooses in each iteration a random dataset, a random classiﬁcation al- gorithm, samples a random conﬁguration and evaluates it via cross-validation.
+- id: c4
+  statement: 'Overfitting caveat: the new defaults are chosen with the same datasets used to measure performance, so the authors also evaluate them by a 10-fold cross-validation across datasets.'
+  location: Optimizing surrogates to obtain optimal defaults
+  page: 7
+  quote: Of course one has to be careful with overﬁtting here, as our new defaults are chosen with the help of the same datasets that are used to determine the performance.
+- id: c5
+  statement: 'Algorithm-level result (AUC): glmnet and svm are much more tunable than the others, while ranger (random forest) is the least tunable; some datasets are outliers where tuning has a much larger
+    impact.'
+  location: Optimal defaults and tunability
+  page: 8
+  quote: Clearly, some algorithms such as glmnet and svm are much more tunable than the others, while ranger is the algorithm with the smallest tunability, which is in line with common knowledge in the
+    web community.
+- id: c6
+  statement: 'Hyperparameter-level result (AUC, w.r.t. optimal defaults): for xgboost, eta and booster (tree vs linear model) are quite tunable; for ranger, mtry is the most tunable; for rpart, minbucket
+    and minsplit seem the most important.'
+  location: Tunability of speciﬁc hyperparameters
+  page: 10
+  quote: 'For xgboost there are two parameters that are quite tunable: eta and the booster.'
+- id: c7
+  statement: For random forest, the best mtry values on quite a few datasets seem much higher than the package default; all optimal defaults fall inside the proposed tuning space while some package defaults
+    do not.
+  location: Hyperparameter space for tuning
+  page: 10
+  quote: Note that for quite a few data sets much higher values than the package defaults seem advantageous.
+- id: c8
+  statement: 'Stated limitations: only binary classification; uniform random sampling may not scale to very high-dimensional spaces; defaults are static and cannot depend on dataset characteristics; initial
+    ranges must still be set.'
+  location: Conclusion and Discussion
+  page: 14
+  quote: 'Our study has some limitations that could be addressed in the future: a) We only con- sidered binary classiﬁcation, where we tried to include a wider variety of datasets from diﬀerent domains.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Author order follows the arXiv record; the PDF title block lists ''Philipp Probst, Anne-Laure Boulesteix and Bernd Bischl''. No venue is stated in the PDF (arXiv v3, dated October 23, 2018); arXiv comment
+    is ''22 pages, 10 tables, 8 figures''. The benchmark data come from the authors'' own OpenML random bot (Kühn, Probst, Thomas, Bischl 2018), and experiments use mlr, whose authors include Bischl. Mainly
+    AUC results are discussed; accuracy and Brier score are in the appendix. Results tables (Tables 2-5) not recorded.'

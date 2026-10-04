@@ -1,0 +1,98 @@
+id: arxiv-1610.01271
+title: Generalized Random Forests
+authors:
+- Susan Athey
+- Julie Tibshirani
+- Stefan Wager
+year: 2016
+venue: Annals of Statistics
+links:
+  arxiv: https://arxiv.org/abs/1610.01271
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 16f3e320d67b6a39d47490bbda466df7a42343deb53f4609729a4826b9e649e8
+tags:
+  tasks:
+  - causal-effect-estimation
+  - tabular-regression
+  - uncertainty-estimation
+  method_families:
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- 'Generalized random forests (GRF): forest-based adaptive weights for solving local moment (estimating) equations, with gradient-based splitting (labeling step producing pseudo-outcomes + CART regression
+  split), honesty and subsampling, an asymptotic normality theory, and delta-method confidence intervals via the bootstrap of little bags; applied to quantile regression, conditional average partial effects
+  (causal forests with local centering) and instrumental-variables forests; R/C++ package grf'
+claims:
+- id: c1
+  statement: 'Core idea: since noisy solutions to moment equations are generally biased and averaging per-tree solutions would not remove the bias, GRF treats the forest as an adaptive locally weighted
+    estimator: forest weights alpha_i(x) (how often training example i shares a leaf with x) replace classical kernel weights, and the estimating equation is solved with these weights. For conditional means
+    this is equivalent to Breiman''s averaging.'
+  location: Introduction
+  page: 2
+  quote: To avoid this issue, we cast forests as a type of adaptive locally weighted estimators that ﬁrst use a forest to calculate a weighted set of neighbors for each test point x, and then solve a plug-in
+    version of the estimating equation (1) using these neighbors.
+- id: c2
+  statement: 'Splitting rule: splits aim to maximise heterogeneity of the in-sample theta estimates between children (Delta criterion, motivated by Proposition 1); to avoid solving the estimating equation
+    for every candidate split, a labeling step computes gradient-based pseudo-outcomes (influence-function values at the parent estimate) and a regression step runs a standard CART split on them, so existing
+    optimized tree software (ranger) can be used. For least-squares regression this recovers the usual regression-forest split.'
+  location: Section 2.3
+  page: 9
+  quote: Next, in a regression step, we run a standard CART regression split on the pseudo-outcomes ρi.
+- id: c3
+  statement: 'Forest requirements for the theory (Specification 1): trees are symmetric, make balanced splits (each child gets at least a fraction omega of the parent), split on each feature with probability
+    at least pi (implemented by trying min{max{Poisson(m),1},p} variables), and the forest is honest (Algorithm 1 splits each subsample into halves, one to grow the tree and one to populate the leaves)
+    and built by subsampling without replacement.'
+  location: Section 3
+  page: 13
+  quote: The forest is honest and built via subsampling with subsample size s satisfying s/n →0 and s →∞, as described in Section 2.4.
+- id: c4
+  statement: 'Asymptotic results: given Assumptions 1-6 (Lipschitz x-signal, smooth identification, Lipschitz variogram, regularity of psi, existence of solutions, convexity) and a forest per Specification
+    1, the estimates are consistent (Theorem 3); with subsample size s = n^beta for beta between a beta_min and 1 and positive conditional variance of the influence function, they are asymptotically Gaussian
+    (Theorem 5). The nuisance parameters are also consistent and asymptotically normal, but the authors caution they may be inaccurate in finite samples because splits are not targeted at them.'
+  location: Section 3.1
+  page: 16
+  quote: however, we caution that the tree splits are not necessarily targeted to expressing heterogeneity in ν(x), and so the resulting ˆν(x) may not be particularly accurate in ﬁnite samples.
+- id: c5
+  statement: 'Confidence intervals: delta-method intervals use a problem-specific curvature estimate and an estimate of the forest score variance from a variant of the bootstrap of little bags (Sexton and
+    Laake, 2009), where trees are grown in little bags sharing a half-sample; Theorem 6 states the half-sampling variance estimator is consistent and the intervals asymptotically have nominal coverage given
+    a consistent curvature estimate. With few trees the variance estimate can be negative, which the software handles with a Bayesian analysis of variance.'
+  location: Section 4
+  page: 17
+  quote: As a side beneﬁt, we also obtain the ﬁrst consistency guarantees for this method for any type of forest, including regression forests.
+- id: c6
+  statement: 'Causal forests in GRF: for conditional average partial / treatment effects the regressors W are assumed exogenous given X (for binary W, equivalent to unconfoundedness); performance can be
+    improved by locally centering Y and W with leave-one-out estimates of E[Y|X] and E[W|X] (Robinson-style orthogonalization). The theory covers deterministic centering or k-fold cross-fitting, not leave-one-out
+    centering exactly.'
+  location: Section 6.1.1
+  page: 22
+  quote: however, a practitioner wanting to use results that are precisely covered by theory may prefer to use cross-ﬁtting for centering.
+- id: c7
+  statement: 'Stated limitations: the confidence intervals rely on undersmoothing for valid asymptotic coverage and do not capture bias otherwise, so a principled bias correction is left open; forests can
+    also exhibit edge effects where the slope of the estimates tapers off near the boundary of X-space.'
+  location: Section 8 (Discussion)
+  page: 27
+  quote: In particular, as discussed above, our conﬁdence interval construction relies on undersmoothing to get valid asymptotic coverage (without undersmoothing, the conﬁdence intervals account for sampling
+    variability of the forest, but do not capture bias).
+- id: c8
+  statement: 'Coverage check for instrumental-variables forests (simulations with confounding and nuisance terms, centered forests, B = 4,000 trees, 20 replications): coverage is closer to nominal when
+    the effect depends on 2 features and declines considerably with 4 features at the sample sizes studied; comparing with coverage of the expected forest prediction, the authors suggest the shortfall is
+    mostly due to non-negligible bias.'
+  location: Appendix C.3
+  page: 48
+  quote: These results suggest that low coverage numbers in the left panel are mostly due to our forests having non-negligible bias, rather than to failures of Gaussianity or of the variance estimates underlying
+    our conﬁdence intervals.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: Stanford University and Elasticsearch BV. Venue from the arXiv comment given in the task (''Forthcoming in the Annals of Statistics''); the PDF header of this v4 reads ''Submitted to the
+    Annals of Statistics''. Shared authorship: Athey and Wager are the authors of arxiv-1510.04342 (causal forests); Table 1 of this paper compares GRF against their own Procedures 1 and 2 (WA-1, WA-2)
+    from that paper. The authors also wrote the grf package used in all experiments. In the Appendix C.2 simulations the authors used a fairly limited amount of tuning for the baselines and made no effort
+    to tune GRF (default grf parameters, subsample size s = n/2). The assumptions of Section 3 are not exactly met by the Appendix C simulations (footnote: signals are not Lipschitz after mapping to the
+    unit cube). Results tables (Tables 1-3) and figures not recorded.'

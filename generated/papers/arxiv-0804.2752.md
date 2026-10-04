@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Boosting Algorithms: Regularization, Prediction and Model Fitting
+
+- カード: [`arxiv-0804.2752`](../../papers/arxiv-0804.2752.yaml)
+- 著者: Peter Bühlmann, Torsten Hothorn
+- 年・掲載: 2008 Statistical Science
+- 原論文: [PDF](https://arxiv.org/pdf/0804.2752v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: gradient-boosted-trees, linear-models, supervised, tabular-classification, tabular-regression
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Citing Breiman [15, 16], the authors state that AdaBoost can be represented as a steepest-descent algorithm in function space, which they call functional gradient descent (FGD); Friedman, Hastie and Tibshirani [33] and Friedman [32] then developed a more general statistical framework ('stagewise, additive modeling').([Section 2, p.4](https://arxiv.org/pdf/0804.2752v1#page=4 "showed that the AdaBoost algorithm can be represented as a steepest descent algorithm in function space which we call functional gradient descent (FGD)."))
+- **c2** Generic FGD algorithm (as given by Friedman [32]): repeatedly fit the negative gradient of the loss at the current fit with a real-valued base procedure and add it with a step-length factor 0 < nu <= 1; the stopping iteration mstop is the main tuning parameter, chosen by cross-validation or an information criterion.([Section 2.1, p.4](https://arxiv.org/pdf/0804.2752v1#page=4 "The stopping iteration, which is the main tuning parameter, can be determined via cross-validation or some information criterion; see Section 5.4."))
+- **c3** Step length (shrinkage): the choice of nu is described as of minor importance as long as it is small (e.g. 0.1); a smaller nu typically requires more iterations and computing time, while predictive accuracy has been empirically found (citing Friedman [32]) to be potentially better and almost never worse.([Section 2.1, p.4](https://arxiv.org/pdf/0804.2752v1#page=4 "The choice of the step-length factor ν in step 4 is of minor importance, as long as it is “small,” such as ν = 0.1."))
+- **c4** Early stopping: after the earlier debate on whether AdaBoost is immune to overfitting, the authors state (citing [7, 51, 64]) that AdaBoost and other boosting algorithms eventually overfit, so early stopping is necessary, although AdaBoost is quite resistant to overfitting (slow overfitting) as iterations increase.([Section 1.3, p.3](https://arxiv.org/pdf/0804.2752v1#page=3 "It is clear nowadays that Ada-Boost and also other boosting algorithms are overﬁtting eventually, and early stopping"))
+- **c5** Tree base learners: regression trees are invariant under monotone transformations of the predictors and handle continuous, ordinal and nominal covariates in a unified way; boosting stumps gives an additive model, and boosting trees with at most d terminal nodes gives a model with interactions of order at most d - 2, so the interaction degree can be constrained via the number of nodes.([Section 4.3, p.12](https://arxiv.org/pdf/0804.2752v1#page=12 "Similarly, boosting trees with (at most) d terminal nodes result in a nonparametric model having at most interactions of order d −2."))
+- **c6** Low-variance principle: the authors advise choosing a base procedure (with the desired structure) with low variance at the price of larger estimation bias; a small step-size factor can be seen as shrinking the base procedure by nu, implying low variance but potentially large estimation bias.([Section 4.4, p.13](https://arxiv.org/pdf/0804.2752v1#page=13 "Note that a small step-size factor can be seen as a shrinkage of the base procedure by the factor ν, implying low variance but potentially large estimation bias."))
+- **c7** For L2Boosting with a linear base procedure, the boosting hat matrix B_m = I - (I - H)^m converges to the identity, i.e. the fit eventually interpolates the responses, so iterations must be stopped early; the eigen-analysis (Section 1.3 summary) shows variance increasing in exponentially small increments while squared bias decreases exponentially fast, which the authors use to explain why overfitting sets in slowly.([Section 5.1, p.13](https://arxiv.org/pdf/0804.2752v1#page=13 "Thus, we see here explicitly that we have to stop early with the boosting iterations in order to prevent overﬁtting."))
+- **c8** Limitation of the information-criterion stopping rule: the degrees of freedom df(m) = trace(B_m) used in the corrected AIC neglect the selection effect of the componentwise base procedure, because B_m depends on the response through the selected components.([Section 5.3, p.18](https://arxiv.org/pdf/0804.2752v1#page=18 "should be viewed as an approximate hat matrix only."))
+

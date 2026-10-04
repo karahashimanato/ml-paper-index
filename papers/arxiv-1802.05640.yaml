@@ -1,0 +1,84 @@
+id: arxiv-1802.05640
+title: Gradient Boosting With Piece-Wise Linear Regression Trees
+authors:
+- Yu Shi
+- Jian Li
+- Zhize Li
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1802.05640
+  code: https://github.com/GBDT-PL/GBDT-PL.git
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 6c9b6ec6286602daa0503d7ef84913763c439ea57e5cc54f4356e107bd56228d
+tags:
+  tasks:
+  - tabular-regression
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  - linear-models
+  paradigms:
+  - supervised
+proposes:
+- 'GBDT-PL: second-order gradient boosting with piecewise linear regression trees (linear models in the leaves) as base learners, made scalable with incremental feature selection, half-additive fitting,
+  histogram statistics for linear models and SIMD/cache-oriented implementation'
+claims:
+- id: c1
+  statement: 'Contribution: gradient boosting is extended to use piecewise linear regression trees (PL Trees) instead of piecewise constant trees as base learners; the authors state that PL Trees can accelerate
+    convergence and improve accuracy, with optimizations reducing training time at little sacrifice of accuracy.'
+  location: Abstract
+  page: 1
+  quote: Speciﬁcally, we extend gradient boosting to use piecewise linear regression trees (PL Trees), instead of piecewise constant regression trees, as base learners.
+- id: c2
+  statement: 'Regularization: the second-order (XGBoost-style) objective is used with an L2 penalty on the parameters of each leaf''s linear model; leaf linear models are fitted analytically and split gain
+    is the loss reduction when both children are refitted.'
+  location: Gradient Boosting with PL Trees
+  page: 2
+  quote: This prevents the linear models in the leaves from being too steep.
+- id: c3
+  statement: 'Difference from M5/M5'' model trees (used in Weka and Cubist), which fit linear models after the tree structure is fixed: the PL Tree chooses each split by the largest loss reduction considering
+    the linear models in both children. Citing Sun et al., the authors also contrast their second-order gradients with the first-order algorithm of Wang and Hastie (2014).'
+  location: Related Work and Discussions
+  page: 5
+  quote: By contrast, PL Tree used in our work is designed to greedily reduce the loss at each step of its growing.
+- id: c4
+  statement: 'Cost of the speedups: incremental feature selection (regressors limited to split features of ancestor nodes, up to a preset number) restricts the linear model size, and half-additive fitting
+    gives suboptimal linear-model parameters; the authors report great speedup with a small sacrifice of accuracy (Table 1, one dataset setting).'
+  location: Effects of Optimization Techniques on Accuracy
+  page: 5
+  quote: Incremental feature selection restricts the size of linear models, and half-additive ﬁtting results in suboptimal linear model parameters.
+- id: c5
+  statement: 'Evaluation protocol: 10 public datasets (6 regression with RMSE, 4 binary classification with AUC) against XGBoost, LightGBM and CatBoost over a grid of leaves, bins, min sum hessians, learning
+    rate and L2 regularization, with number of trees set by learning rate x num trees = 50 (200 for CatBoost SymmetricTree) and the number of regressors fixed at 5; for the three baselines the best iteration
+    over all settings on the test set is recorded, whereas GBDT-PL''s setting is picked on a 20% validation split of the training data.'
+  location: Accuracy
+  page: 5
+  quote: For XGBoost, LightGBM and CatBoost, result of the best iteration over all settings on test set is recorded.
+- id: c6
+  statement: The authors state that GBDT-PL achieves better accuracy on these dense numerical datasets, with a greater advantage on regression tasks.
+  location: Accuracy
+  page: 5
+  quote: With linear models on leaves, GBDT-PL achieves better accuracy in these dense numerical datasets.
+- id: c7
+  statement: 'Convergence (fixed setting: 256 leaves, 63 bins, 500 iterations, learning rate 0.1; shown only as figures): in most datasets GBDT-PL needs fewer trees to reach comparable accuracy.'
+  location: Convergence Rate
+  page: 5
+  quote: In most datasets, GBDT-PL uses fewer trees to reach a comparable accuracy.
+- id: c8
+  statement: 'Limitation: GBDT-PL currently handles only numerical features; the authors suggest categorical features could first be converted to numerical ones as CatBoost does; GPU support is left for
+    future work.'
+  location: Related Work and Discussions
+  page: 5
+  quote: Currently GBDT-PL only handles numerical features.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: Institute for Interdisciplinary Information Sciences, Tsinghua University; acknowledgments list a grant from Microsoft Research Asia among others. No venue stated in the PDF (arXiv v3,
+    2019 revision) or in the arXiv comment. The baseline/proposed selection protocol is asymmetric (baselines: best on test; GBDT-PL: chosen on validation), as stated in the text. Results tables (Table
+    2) and the convergence/time figures not recorded.'

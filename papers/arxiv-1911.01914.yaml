@@ -1,0 +1,83 @@
+id: arxiv-1911.01914
+title: A Comparative Analysis of XGBoost
+authors:
+- Candice Bentéjac
+- Anna Csörgő
+- Gonzalo Martínez-Muñoz
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1911.01914
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 1725d08b0b57de852705622a8ca8a76e0ea05cb90a4343bc9ed602d22194ca03
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- A comparison of XGBoost, scikit-learn gradient boosting and random forest with default and grid-search-tuned hyperparameters on 28 UCI classification datasets, and a proposed default parametrization and
+  reduced tuning grid for XGBoost
+claims:
+- id: c1
+  statement: 'Setup: 28 UCI classification datasets; scikit-learn random forest and gradient boosting and the XGBoost package, each evaluated with package defaults and with grid-search tuning; accuracy
+    estimated by stratified 10-fold cross-validation, with tuning by a nested stratified 10-fold cross-validation inside each training set.'
+  location: Experimental results
+  page: 6
+  quote: The comparison was carried out using stratiﬁed 10-fold cross-validation.
+- id: c2
+  statement: 'Fixed choices: all ensembles had 200 trees (the authors argue ensemble size need not be tuned), and XGBoost''s own missing-value handling was not used; missing values were mean-imputed for
+    a fairer comparison with scikit-learn trees.'
+  location: Experimental results
+  page: 8
+  quote: All ensembles were composed of 200 decision trees.
+- id: c3
+  statement: 'Tuning budgets differ between methods: the grids had 3840, 256 and 1920 configurations for XGBoost, random forest and gradient boosting, so the tuning time is not directly comparable between
+    classifiers.'
+  location: Experimental results
+  page: 11
+  quote: Since the size of the grid is diﬀerent for diﬀerent classiﬁers (i.e. 3840, 256 and 1920 for XGB, RF and GB respectively), the time dedicated to ﬁnding the best parameters is not directly comparable
+    between classiﬁers.
+- id: c4
+  statement: 'Default vs tuned: default random forest performs closest to its tuned counterpart, while default XGBoost and gradient boosting generally perform worse than tuned versions, though not always.'
+  location: Experimental results
+  page: 9
+  quote: Default random forest is the method that performs more evenly with respect to its tuned counterpart.
+- id: c5
+  statement: On some datasets default XGBoost beat tuned XGBoost; the authors attribute this to noisy data plus good defaults, noting that parameter estimation, even within training cross-validation, may
+    overfit the training set especially on noisy datasets.
+  location: Experimental results
+  page: 9
+  quote: The parameter esti- mation process, even though it is performed within train cross-validation, may overﬁt the training set specially in noisy datasets.
+- id: c6
+  statement: No statistically significant differences in average rank among the six tested configurations (Nemenyi test).
+  location: Experimental results
+  page: 9
+  quote: From Figure 1, it can be observed that there are not any statistically sig- niﬁcant diﬀerences among the average ranks of the six tested methods.
+- id: c7
+  statement: 'Conclusion on tuning: a meticulous parameter search is necessary for accurate gradient-boosting-based models, but not for random forest, whose performance was slightly better on average with
+    default (Breiman''s) values.'
+  location: Conclusion
+  page: 17
+  quote: In consequence, we conclude that a meticulous parameter search is necessary to create accurate models based on gradient boosting.
+- id: c8
+  statement: 'Which XGBoost hyperparameters matter: tuning the randomization parameters (subsampling rate, features per split) seems unnecessary provided reasonable values are used; including the gamma
+    complexity term may give a small, not statistically significant edge.'
+  location: Analysis of XGBoost parametrization
+  page: 15
+  quote: A conclusion that may be clearer is that it seems unnecessary to tune the number of random features and the subsampling rate provided that those techniques are applied with reasonable values (in
+    our case subsampling to 0.75 and feature sampling to sqrt).
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: University of Bordeaux, Pázmány Péter Catholic University, Universidad Autónoma de Madrid. No venue is stated in the PDF (arXiv v1). LightGBM and CatBoost are not evaluated (no mention
+    found in the text; searched for ''LightGBM'' and ''CatBoost''); ''gradient boosting'' here is scikit-learn''s implementation. The proposed XGBoost defaults were selected using the same 28 datasets on
+    which they are then evaluated. Results tables (Tables 3, 4, 11, 12) not recorded.'

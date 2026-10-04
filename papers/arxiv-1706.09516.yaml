@@ -1,0 +1,94 @@
+id: arxiv-1706.09516
+title: 'CatBoost: unbiased boosting with categorical features'
+authors:
+- Liudmila Prokhorenkova
+- Gleb Gusev
+- Aleksandr Vorobev
+- Anna Veronika Dorogush
+- Andrey Gulin
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1706.09516
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-05'
+  pdf_sha256: e682f177e24106a1c48a0dbba1d752a806526bd7ea85bd97e12bec07a2ed955b
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- 'Ordered target statistics: encoding a categorical value by target statistics computed only from examples preceding it in a random permutation'
+- 'Ordered boosting: a permutation-driven variant of gradient boosting in which the residual of an example is computed by a model not trained on that example, to avoid prediction shift'
+- An analysis of prediction shift in gradient boosting as a form of target leakage
+- 'CatBoost: an open-source gradient boosting library with Ordered and Plain modes, oblivious trees and greedy categorical feature combinations'
+claims:
+- id: c1
+  statement: 'Contribution: ordered boosting and a new algorithm for categorical features, both designed against a prediction shift caused by a special kind of target leakage that the authors say is present
+    in all existing gradient boosting implementations.'
+  location: Abstract
+  page: 1
+  quote: Both techniques were created to ﬁght a prediction shift caused by a special kind of target leakage present in all currently existing implementations of gradient boosting algorithms.
+- id: c2
+  statement: Ordered target statistics compute each training example's statistic only from examples preceding it in a random permutation (an artificial 'time'), satisfying no conditional shift (P1) while
+    using all data (P2); the stated cost is that with a single permutation, early examples have much higher-variance statistics, so different permutations are used at different boosting steps.
+  location: Section 3.2
+  page: 4
+  quote: Note that, if we use only one random permutation, then preceding examples have TS with much higher variance than subsequent ones.
+- id: c3
+  statement: 'Theorem 1 is proved for a simplified setting only: regression with quadratic loss, two i.i.d. Bernoulli(1/2) features, a linear target, two boosting steps with depth-1 stumps and step size
+    1. Reusing the same dataset at both steps gives a bias inversely proportional to n, while independent samples give an unbiased estimate (up to an exponentially small term).'
+  location: Section 4.1
+  page: 4
+  quote: We formally analyze the problem of prediction shift in a simple case of a regression task with the quadratic loss function
+- id: c4
+  statement: The idealized ordered boosting algorithm (n supporting models, each trained on a prefix of the permutation) is not feasible in most practical tasks because it multiplies complexity and memory
+    by n; CatBoost implements a modification based on GBDT with decision trees.
+  location: Section 4.2
+  page: 5
+  quote: Unfortunately, this algorithm is not feasible in most practical tasks due to the need of training n different models, what increase the complexity and memory requirements by n times.
+- id: c5
+  statement: 'Comparison protocol (Appendix D.2): random 80/20 train-test split; for XGBoost, LightGBM and CatBoost, key parameters tuned by 50 steps of Hyperopt''s Tree Parzen Estimator minimizing logloss
+    with 5-fold cross-validation on the training set, then the number of trees chosen by exhaustive search in [1, 5000]; for Epsilon, default parameters were used (only the number of trees tuned) due to
+    running time. Library versions: catboost 0.3, xgboost 0.6, lightgbm 0.1.'
+  location: Appendix D.2
+  page: 19
+  quote: We tune all the key parameters of each algorithm by 50 steps of the sequential optimization algorithm Tree Parzen Estimator implemented in Hyperopt library21 (mode algo=tpe.suggest) by minimizing
+    logloss.
+- id: c6
+  statement: In the baseline comparison, categorical features for all learning algorithms (including XGBoost and LightGBM) were preprocessed with CatBoost's own ordered TS method; CatBoost used Ordered
+    boosting mode; metrics are logloss and zero-one loss on nine binary classification datasets.
+  location: Section 6
+  page: 8
+  quote: For all learning algorithms, we preprocess categorical features using the ordered TS method described in Section 3.2.
+- id: c7
+  statement: The authors report that CatBoost outperforms XGBoost and LightGBM on all considered datasets, with improvements statistically significant (paired one-tailed t-test) except on Appetency, Churn
+    and Upselling.
+  location: Section 6
+  page: 8
+  quote: except three datasets (Appetency, Churn and Upselling) the improvements are statistically signiﬁcant with p-value ≪0.01 measured by the paired one-tailed t-test.
+- id: c8
+  statement: 'Ordered vs Plain mode: the largest benefit of Ordered mode is on the relatively small datasets (Adult and Internet, under 40K training examples), consistent with the bias of Theorem 1 being
+    larger for smaller datasets; the authors note the bias can also depend on other dataset properties.'
+  location: Section 6
+  page: 8
+  quote: It can be clearly seen that Ordered mode is particularly useful on small datasets.
+- id: c9
+  statement: 'Cost: in the running-time comparison on Epsilon (Appendix C.2), CatBoost Plain and LightGBM were the fastest, followed by Ordered mode, about 1.7 times slower.'
+  location: Section 6
+  page: 8
+  quote: To summarize, we obtained that CatBoost Plain and LightGBM are the fastest ones followed by Ordered mode, which is about 1.7 times slower.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: Yandex and Moscow Institute of Physics and Technology. Conflict of interest: the authors are the CatBoost developers (the paper presents CatBoost as their open-source library) and compare
+    it with XGBoost and LightGBM; all three libraries were tuned with the same Hyperopt TPE budget (50 steps), but categorical features for the baselines were encoded with CatBoost''s ordered TS rather
+    than the baselines'' own handling. The PDF says ''Preprint. Work in progress.''; no venue is stated in the PDF, so none recorded. Appendix G compares a ''raw'' CatBoost setting (Plain mode, oblivious
+    trees, no categorical options) with the baselines and reports the difference as insignificant. Results tables (Tables 2-4, 8) not recorded.'

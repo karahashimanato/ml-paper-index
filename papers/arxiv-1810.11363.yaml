@@ -1,0 +1,80 @@
+id: arxiv-1810.11363
+title: 'CatBoost: gradient boosting with categorical features support'
+authors:
+- Anna Veronika Dorogush
+- Vasily Ershov
+- Andrey Gulin
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1810.11363
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: d52f743574bd5eef22d6916498171cd505b1a87934f2629205a0c73047aea5ff
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- 'CatBoost library description: categorical feature handling during training (one-hot, ordered target statistics, greedy feature combinations, counters), a gradient-bias-reducing scheme for choosing tree
+  structures, oblivious trees with a fast scorer, and a GPU training implementation'
+claims:
+- id: c1
+  statement: One-hot encoding of categorical features can be done at preprocessing or during training; CatBoost does it during training, which the authors say is more efficient in training time.
+  location: Categorical features
+  page: 2
+  quote: One-hot encoding can be done during the preprocessing phase or during training, the latter can be implemented more efﬁciently in terms of training time and is implemented in CatBoost.
+- id: c2
+  statement: 'Feature combinations: since the number of combinations of categorical features grows exponentially, CatBoost considers them greedily: none for the first split, then combinations of categorical
+    features already in the current tree with all categorical features, converted to numbers on the fly; splits on numerical features are also used in combinations as two-valued categorical features.'
+  location: Categorical features
+  page: 2
+  quote: When constructing a new split for the current tree, CatBoost considers combinations in a greedy way.
+- id: c3
+  statement: 'Gradient bias: gradients at each step are estimated on the same data points the current model was built on, which the authors say shifts the distribution of estimated gradients and leads to
+    overfitting; the formal analysis is referenced to the authors'' earlier paper [5] (arXiv:1706.09516).'
+  location: Fighting Gradient Bias
+  page: 3
+  quote: Gradients used at each step are estimated using the same data points the current model was built on.
+- id: c4
+  statement: CatBoost uses the modified (unbiased-gradient) scheme only for choosing the tree structure, setting leaf values with the traditional GBDT scheme; the per-example models are relaxed so that
+    all share the same tree structures.
+  location: Fighting Gradient Bias
+  page: 3
+  quote: 'CatBoost implementation uses the following relaxation of this idea: all Mi share the same tree structures.'
+- id: c5
+  statement: 'Quality comparison protocol against XGBoost, LightGBM and H2O: categorical features preprocessed with statistics on a random permutation, tuning and training on 4/5 of the data, testing on
+    1/5, final training repeated with 5 seeds and logloss averaged; the detailed setup (including the tuning procedure) is said to be on the authors'' GitHub rather than in the paper.'
+  location: Experiments
+  page: 5
+  quote: The parameter tunning and training was performed on 4/5 of the data and the testing was performed on the other 1/5.
+- id: c6
+  statement: The authors state CatBoost outperforms the other algorithms on all datasets in the classification comparison, and point to their GitHub repository (not shown in the paper) for results of default-parameter
+    CatBoost against tuned baselines.
+  location: Experiments
+  page: 5
+  quote: In our repo on github you can also see that CatBoost with default parameters outperforms tunned XGBoost and H2O on all datasets and LightGBM on all but one datasets.
+- id: c7
+  statement: The authors say training speed is very hard to compare across boosting libraries because parameters affect speed, quality and model size in non-obvious ways, so they only compare the time to
+    train ensembles of fixed size (8000 trees on Epsilon, 15 bins, depth 6 or 64 leaves).
+  location: 'GPU training performance: comparison with baselines'
+  page: 6
+  quote: As a result, we can’t compare libraries by time we need to obtain certain level of quality.
+- id: c8
+  statement: 'Cost of the bias-fighting scheme: by design 2-3 times slower than classical boosting; the GPU speed benchmark used the classic scheme instead.'
+  location: 'GPU training performance: comparison with baselines'
+  page: 6
+  quote: This scheme is by design 2-3 times slower then classical boosting approach.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: Yandex. Conflict of interest: the authors are CatBoost developers comparing it with XGBoost, LightGBM and H2O. The tuning budget/search method for each library is not described in the paper
+    (only referred to GitHub). No venue is stated in the PDF; the MVS paper (arXiv:1910.13204) cites it as ''Workshop on ML Systems at NIPS (2017)'', but this is not confirmed by the PDF itself, so no venue
+    recorded. Results tables (Tables 1-3) not recorded.'

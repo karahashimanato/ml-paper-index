@@ -1,0 +1,102 @@
+id: arxiv-1511.05741
+title: A Random Forest Guided Tour
+authors:
+- Gérard Biau
+- Erwan Scornet
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1511.05741
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: b53bc6e19f9708bc5c03fc517441171cd32fb4bece9e6970a9c41996f547ef25
+tags:
+  tasks:
+  - tabular-regression
+  - tabular-classification
+  - model-explanation
+  method_families:
+  - random-forests
+  - decision-trees
+  paradigms:
+  - supervised
+proposes: []
+claims:
+- id: c1
+  statement: 'Survey''s description of Breiman''s algorithm: three parameters a_n (points sampled per tree), mtry (directions tried per node) and nodesize; in the regression mode of the R package randomForest
+    the defaults are mtry = ceil(p/3), a_n = n (bootstrap) and nodesize = 5.'
+  location: The random forest estimate (Algorithm)
+  page: 6
+  quote: an is set to n, and nodesize is set to 5.
+- id: c2
+  statement: 'Theoretical studies have so far considered simplified versions because bagging and the CART split are hard to analyse: typically the bagging step is ignored and/or CART-split selection is
+    replaced by a more elementary cut protocol; in Breiman''s forests, leaves typically contain between 1 and 5 observations.'
+  location: Introduction
+  page: 3
+  quote: This is often done by simply ignoring the bagging step and/or replacing the CART-split selection by a more elementary cut protocol.
+- id: c3
+  statement: 'Centered (purely random) forests: no resampling, uniformly chosen coordinate, split at the cell centre, k levels; they are consistent if k -> infinity and n/2^k -> infinity, but the unpruned
+    choice k ~ log n violates this condition, there is no bagging, and forest consistency follows from tree consistency, so the authors judge the model too simple to explain Breiman''s forests.'
+  location: Simplified models
+  page: 13
+  quote: Overall, this model does not demonstrate the beneﬁt of using forests in place of individual trees and is too simple to explain the mathematical forces driving Breiman’s forests.
+- id: c4
+  statement: The sparsity-adaptive rate for centered forests (Breiman 2004; Biau 2012), depending only on the number of strong variables |S|, is obtained by assuming that the splitting probabilities on
+    informative variables tend to 1/|S|, i.e. that the procedure selects the informative variables, which the authors call a strong assumption.
+  location: Simplified models
+  page: 14
+  quote: Of course, this is achieved by assuming that the procedure succeeds in selecting the informative variables for splitting, which is indeed a strong assumption.
+- id: c5
+  statement: 'The role of the bootstrap is still poorly understood: most analyses (citing Mentch and Hooker 2015; Wager 2014; Scornet et al. 2015) replace it by subsampling without replacement with a_n
+    < n, usually with a_n/n -> 0, which excludes the bootstrap regime.'
+  location: The resampling mechanism
+  page: 19
+  quote: The role of the bootstrap in random forests is still poorly understood and, to date, most analyses are doomed to replace the bootstrap by a subsampling scheme
+- id: c6
+  statement: Little has been proven for Breiman's original procedure; citing Breiman (2001), the forest error is bounded in terms of the correlation between tree errors and the strength of individual trees;
+    consistency and asymptotic normality results (Wager 2014; Mentch and Hooker 2015) replace bootstrap by subsampling and simplify the splitting step.
+  location: Consistency, asymptotic normality, and more
+  page: 24
+  quote: All in all, little has been proven mathematically for the original procedure of Breiman.
+- id: c7
+  statement: 'Citing Scornet et al. (2015): consistency in additive regression models was proved for a pruned version of Breiman''s forest, while consistency of the unpruned procedure depends on a conjecture
+    about CART that is difficult to verify.'
+  location: Consistency, asymptotic normality, and more
+  page: 25
+  quote: Unfortunately, the consistency of the unpruned procedure comes at the price of a conjecture regarding the behavior of the CART algorithm that is diﬃcult to verify.
+- id: c8
+  statement: 'Open problems: the default bootstrap mode (a_n = n with replacement) seems to give excellent results but has no supporting theory; the impact of tree depth on statistical performance is also
+    stated to be an open question.'
+  location: Conclusion and perspectives
+  page: 32
+  quote: By default, the algorithm runs in bootstrap mode (i.e., an = n points selected with replacement) and although this seems to give excellent results, there is to date no theory to support this choice.
+- id: c9
+  statement: 'Variable importance caveats (citing empirical studies): correlated variables negatively affect MDA (permutation importance), and Archer and Kimes (2008) found both MDA and MDI behave poorly
+    as correlation increases; Strobl et al. (2008) attribute MDA''s bias to evaluating marginal rather than conditional importance.'
+  location: Variable importance (Related works)
+  page: 29
+  quote: Similarly, the empirical study of Archer and Kimes (2008) points out that both MDA and MDI behave poorly when correlation increases
+- id: c10
+  statement: 'Split-selection bias (citing Breiman et al. 1984; Segal 1988; Kim and Loh 2001): splits in random forests are known to be biased toward covariates with many possible splits or with missing
+    values; Hothorn et al. (2006) correct this by first selecting the variable and then the cut position.'
+  location: Decision splits
+  page: 23
+  quote: Splits in random forests are known to be biased toward covariates with many possible splits (Breiman et al., 1984; Segal, 1988) or with missing values (Kim and Loh, 2001).
+- id: c11
+  statement: The authors conclude that present results are insufficient to explain random forests' behaviour in full generality; their intuition (stated as such) is that tree aggregation can estimate patterns
+    not characterized by standard sparsity or smoothness conditions.
+  location: Conclusion and perspectives
+  page: 32
+  quote: It remains however that the present results are insuﬃcient to explain in full generality the remarkable behavior of random forests.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: Sorbonne Universités, UPMC Univ Paris 06 (Biau also Institut universitaire de France). Review article; the acknowledgments thank ''the Editors and three anonymous referees'' but the arXiv
+    v1 PDF names no journal, so no venue is recorded (Curth et al., arxiv-2402.01502, cite it as ''Test, 25:197–227, 2016''; not used as a source). Disclosure: many of the reviewed theoretical results are
+    the authors'' own (Biau 2012 = arxiv-1005.0208; Scornet et al. 2015 = arxiv-1405.2881; Scornet 2015a/b; Biau and Devroye 2010; Biau et al. 2008). The survey also covers parameter tuning (out-of-bag
+    error lets parameters be adjusted without a validation set; nodesize defaults 1/5 ''not supported by solid theory''), the LNN / kernel view of forests, and Louppe et al. (2013)''s MDI decomposition
+    for totally randomized trees on categorical variables.'

@@ -71,6 +71,8 @@ tasks:
     description: Learning a data distribution to generate samples or evaluate likelihoods.
   - id: anomaly-detection
     description: Detecting anomalous or out-of-distribution inputs in non-time-series data (e.g. images, tabular records).
+  - id: uncertainty-estimation
+    description: Producing predictive distributions or uncertainty estimates (probabilistic prediction, separating data and knowledge uncertainty), beyond point predictions.
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.

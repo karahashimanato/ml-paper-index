@@ -70,14 +70,18 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | アルゴリズム設計技法と機械学習 | 論文カード25本+既存4本(分割統治・動的計画・分枝限定・局所探索と機械学習、学習した組合せ最適化の再検証)、記事 [articles/topics/design-techniques-and-ml.md](articles/topics/design-techniques-and-ml.md) |
 | 予測モデルのフォールバックとモデル選択 | 論文カード21本+既存3本(メタ学習によるモデル選択、動的選択、予測の保留と委譲、切り替えの引き金、LLM のルーティング、MLOps の監視と入れ替え)、記事 [articles/topics/model-fallback-and-selection.md](articles/topics/model-fallback-and-selection.md) |
 | オートエンコーダ | 論文カード24本+既存4本(正則化オートエンコーダの理論、VAE と事後崩壊、KL 項の代わりの正則化、disentanglement の再検証、再構成誤差による異常検知とその信頼性)、記事 [articles/methods/autoencoders.md](articles/methods/autoencoders.md) |
+| 勾配ブースティング木 | 論文カード12本+既存6本(関数空間の勾配降下と正則化、XGBoost・CatBoost の設計、サンプリング、DART・区分線形の木・EBM、チューニング、予測分布と不確実性)、記事 [articles/methods/gradient-boosted-trees.md](articles/methods/gradient-boosted-trees.md) |
+| ランダムフォレストと決定木 | 論文カード12本+既存6本(最適な決定木、ランダムフォレストの理論の範囲、効く理由の3つの説明、チューニング、変数重要度の偏り、因果フォレスト)、記事 [articles/methods/random-forests-and-decision-trees.md](articles/methods/random-forests-and-decision-trees.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では318本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では342本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
 
 - [表データ基盤モデル(TabPFN 系)— 仕組み、適用範囲、評価の読み方](articles/methods/tabular-foundation-models.md)
 - [オートエンコーダ — 正則化、VAE、異常検知での使い方と限界](articles/methods/autoencoders.md)
+- [勾配ブースティング木 — 仕組み、実装の設計の違い、チューニングと不確実性](articles/methods/gradient-boosted-trees.md)
+- [ランダムフォレストと決定木 — 理論の範囲、効く理由、変数重要度の偏り](articles/methods/random-forests-and-decision-trees.md)
 
 横断記事:
 

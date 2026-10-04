@@ -1,0 +1,86 @@
+id: arxiv-1505.01866
+title: 'DART: Dropouts meet Multiple Additive Regression Trees'
+authors:
+- K. V. Rashmi
+- Ran Gilad-Bachrach
+year: 2015
+venue: AISTATS 2015
+links:
+  arxiv: https://arxiv.org/abs/1505.01866
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: def3125674df45cc1e6bc0076f2726657f720e4c1965d02c4e20b538332f25c9
+tags:
+  tasks:
+  - tabular-regression
+  - image-classification
+  method_families:
+  - gradient-boosted-trees
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- 'DART: MART (gradient boosted regression trees) with dropout of whole trees: the gradient for each new tree is computed against a random subset of the existing ensemble, and the new and dropped trees
+  are rescaled (by 1/k and k/(k+1)) to avoid overshooting'
+claims:
+- id: c1
+  statement: 'Problem defined: MART suffers from what the authors call over-specialization, where trees added at later iterations affect the prediction of only a few instances and contribute negligibly
+    for the rest; the authors say this hurts performance on unseen data and makes the model over-sensitive to the first few trees.'
+  location: Abstract
+  page: 1
+  quote: However, it suﬀers an issue which we call over-specialization, wherein trees added at later iterations tend to impact the prediction of only a few instances, and make negligible contribution towards
+    the remaining instances.
+- id: c2
+  statement: Shrinkage, the most common remedy, reduces the impact of the first trees, but according to the authors the problem reappears as the ensemble grows (illustrated on CTSlice in Figures 1-2; similar
+    observations reported on the other datasets).
+  location: Introduction
+  page: 2
+  quote: As we will see in Section 2, shrinkage does help in reducing the impact of the ﬁrst trees, nevertheless, however, as the size of the ensemble increases, the problem of over-specialization reappears.
+- id: c3
+  statement: 'Proposed mechanism: in MART without shrinkage, adding a constant to all labels would only change the first tree, so in a sense the first tree learns the bias and the remaining trees learn
+    deviations from it, making the ensemble very sensitive to the first tree''s decisions.'
+  location: Overcoming the Over-specialization in MART
+  page: 2
+  quote: Therefore, in a sense, the ﬁrst tree learns the bias of the problem while the rest of the trees in the ensemble learn the deviation from this bias.
+- id: c4
+  statement: 'Algorithm: DART differs from MART in two places: the gradient for the next tree is computed using only a random subset of the existing ensemble, and a normalization step scales the new tree
+    by 1/k (k = number of dropped trees) and then the new and dropped trees by k/(k+1), because the new tree and the dropped trees would otherwise both close the same gap and overshoot.'
+  location: Description of the DART Algorithm
+  page: 5
+  quote: First, when computing the gradient that the next tree will ﬁt, only a random subset of the existing ensemble is considered.
+- id: c5
+  statement: 'The number of dropped trees controls the amount of regularization: dropping none gives MART and dropping all gives (in the authors'' description) random forest; the experiments use a ''Binomial-plus-one''
+    rule (each tree dropped with probability p_drop, and one random tree if none was selected).'
+  location: Description of the DART Algorithm
+  page: 5
+  quote: On the other extreme, if all the trees are dropped, the DART is no diﬀerent than random forest.
+- id: c6
+  statement: 'Ranking evaluation protocol (LambdaMART with dropout on MSLR-WEB10K, 60/20/20 train/validation/test): parameter grids were scanned for both algorithms by training on the training data and
+    comparing NDCG@3 on validation, and the best validation models were applied to the test set.'
+  location: 'Evaluation: Ranking'
+  page: 6
+  quote: We selected the best performing models based on their scores on the validation set, and applied them to the test set to obtain the reported results.
+- id: c7
+  statement: 'Regression evaluation protocol (UCI CT slices, 53500 histograms from 74 individuals): 10-fold cross-validation with folds grouped by individual; Table 4 reports the L2 error of the optimal
+    parameter combinations per ensemble size. A separate validation split for this task was not found in the text (searched for validation, nested, held-out).'
+  location: 'Evaluation: Regression'
+  page: 7
+  quote: The folds were selected such that either all the images of an individual are in the train set or all of them are in the test set.
+- id: c8
+  statement: 'Classification (Pascal Large Scale Learning Challenge face detection; first 300K examples train, next 200K validation, next 200K test; parameters selected on validation): the authors describe
+    DART and MART as comparable, with MART winning at 3 of 5 ensemble sizes but the best model being a DART model; they report the best-model difference as statistically significant.'
+  location: Table 6
+  page: 8
+  quote: 'The results are comparable between DART and MART: while MART “wins” on 3 out of the 5 diﬀerent ensembles sizes, however, the best model is a DART model.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: UC Berkeley (Rashmi) and Microsoft Research (Gilad-Bachrach); acknowledgments state the work was done while the first author was an intern at Microsoft Research. Venue from the PDF footnote
+    (''Appearing in Proceedings of the 18th International Conference on Artificial Intelligence and Statistics (AISTATS) 2015'') and the arXiv comment. Over-specialization evidence is shown as figures on
+    one dataset (CTSlice). The ranking task (MSLR-WEB10K) has no matching task tag. No discussion of the computational cost of dropout (e.g. recomputing predictions of the reduced ensemble) was found in
+    the text (searched for time, cost, slow, comput). Results tables not recorded.'

@@ -1,0 +1,89 @@
+id: arxiv-2001.04295
+title: Trees, forests, and impurity-based variable importance
+authors:
+- Erwan Scornet
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2001.04295
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: cc78b865e6487ea42be13e9779ecbb21ea336eff3343c07b10c280a94b0a1a24
+tags:
+  tasks:
+  - model-explanation
+  - tabular-regression
+  method_families:
+  - random-forests
+  - decision-trees
+  paradigms:
+  - supervised
+proposes:
+- 'Asymptotic analysis of the empirical Mean Decrease Impurity (MDI) of CART trees and Breiman''s random forests in regression: MDI as a variance decomposition (sum of MDI ~ explained variance), its limit
+  V[m_j(X_j)] in additive models with independent inputs, and its ill-definedness under interactions or dependent inputs'
+claims:
+- id: c1
+  statement: 'Background (citing prior empirical work): MDI is known to favour variables with many categories (citing Strobl et al., 2007; Nicodemus, 2011); even with equal numbers of categories it shows
+    empirical bias towards variables with a high-frequency category (citing Nicodemus, 2011; Boulesteix et al., 2011), and it is biased in the presence of correlated features (citing Nicodemus and Malley,
+    2009).'
+  location: Introduction
+  page: 2
+  quote: MDI is known to favor variables with many categories [see, e.g., Strobl et al., 2007, Nicodemus, 2011].
+- id: c2
+  statement: 'Background (citing Strobl et al., 2008 and Strobl and Zeileis, 2008): MDA (permutation importance) seems to exhibit less bias than MDI but tends to overestimate correlated features; its scaled
+    version (the default in the R package randomForest) depends on the sample size and on the number of trees.'
+  location: Introduction
+  page: 2
+  quote: On the other hand, MDA seems to exhibit less bias than MDI but tends to overestimate correlated features Strobl et al. [2008].
+- id: c3
+  statement: 'Scope: the analysis is confined to regression with bounded continuous inputs (X in [0,1]^d); the author states that extending it to classification is not straightforward because the main result
+    relies on the additive regression framework.'
+  location: Section 2 (Remark 1)
+  page: 4
+  quote: Extending our work to the classiﬁcation setting is not straightforward, since our main result relies on the additive regression framework which does not have any equivalent in classiﬁcation.
+- id: c4
+  statement: 'Fully grown trees: for trees with one observation per leaf the sum of empirical MDI tends to V[m(X)] + sigma^2, i.e. it also contains the noise, so MDI of some variables is higher than expected;
+    when the noise variance is larger than that of the regression function this can induce a very important bias. The author concludes that MDI from a fully grown tree must never be used for interpretation,
+    whereas MDI from trees of fixed, large enough depth estimates the population MDI (Theorem 1).'
+  location: Section 3
+  page: 9
+  quote: The noise, when having a larger variance than the regression function, can induce a very important bias in the MDI by overestimating the importance of some variables.
+- id: c5
+  statement: 'Additive model (Theorem 3): under Model 3 (Y = sum_j m_j(X_j) + Gaussian noise, m_j continuous, X uniform on [0,1]^d, hence independent inputs), the empirical MDI of each variable computed
+    with a truncated (depth-k) CART tree converges to V[m_j(X_j)]; since forest MDI is the average of tree MDI, the result also holds for random forests. The author stresses that MDI must not be computed
+    with fully grown trees, which would give positively biased MDI.'
+  location: Section 4
+  page: 12
+  quote: Theorem 3 is the ﬁrst result highlighting that empirical MDI computed with CART procedure converge to reasonable values that can be used for variable selection, in the framework of Model 3.
+- id: c6
+  statement: Citing Gregorutti et al. (2017) for the population MDA, the author notes that in additive models with independent features MDI and MDA target the same quantity (up to a factor 2), so both can
+    then be used to rank features and select variables.
+  location: Section 4
+  page: 12
+  quote: Thus, in the particular context of additive models with independent features, both MDI and MDA target the same quantity, which is the natural way to decompose the total variance.
+- id: c7
+  statement: 'Interactions (multiplicative Model 5): different theoretical CART trees can output different MDI for the same variable (Lemma 2), and the variable split in the second step can receive larger
+    importance than the one split first; the author suggests that averaging MDI over many randomized trees, as in random forests, is a way to circumvent this, since a single tree cannot give the symmetric
+    importances one can hope for.'
+  location: Section 5
+  page: 16
+  quote: Since MDI are usually used to rank and select variables, the fact that each tree can output a diﬀerent MDI, and therefore a diﬀerent variable ranking, is a major drawback for employing this measure
+    in presence of interactions.
+- id: c8
+  statement: 'Dependent inputs (Model 6: Y = X1 + X2 + alpha X3 + noise with (X1, X2) positively correlated on diagonal squares, X3 independent): CART splits favour the positively correlated variables (Proposition
+    4), only the sum of their MDI is identified (Theorem 6) and it exceeds V[X1] + V[X2], and two theoretical trees can split it very differently between X1 and X2 (Lemma 4). The author notes the opposite
+    effect would hold for negative correlation or coefficients of opposite signs, and recommends averaging over many shallow trees rather than using a single tree.'
+  location: Section 6
+  page: 19
+  quote: Therefore, the group of variables X(1) and X(2) has a larger importance because of their positive correlation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: CMAP, Ecole Polytechnique, CNRS, Institut Polytechnique de Paris. Title follows the arXiv record given in the task; the PDF (v3) title reads ''Trees, forests, and impurity-based variable
+    importance in regression''. No venue is named in the PDF (the acknowledgements thank an associate editor and two referees, but no journal is stated); venue not recorded. This arXiv v3 contains no experiments;
+    the text says ''Experiments on MDI can be found on the ArXiv version of this paper.'' All results are asymptotic and concern specific simulated models (Models 1-6); no rates of convergence are given
+    (Remark 2).'

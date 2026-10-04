@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# DART: Dropouts meet Multiple Additive Regression Trees
+
+- カード: [`arxiv-1505.01866`](../../papers/arxiv-1505.01866.yaml)
+- 著者: K. V. Rashmi, Ran Gilad-Bachrach
+- 年・掲載: 2015 AISTATS 2015
+- 原論文: [PDF](https://arxiv.org/pdf/1505.01866v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: gradient-boosted-trees, image-classification, random-forests, supervised, tabular-regression
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Problem defined: MART suffers from what the authors call over-specialization, where trees added at later iterations affect the prediction of only a few instances and contribute negligibly for the rest; the authors say this hurts performance on unseen data and makes the model over-sensitive to the first few trees.([Abstract, p.1](https://arxiv.org/pdf/1505.01866v1#page=1 "However, it suﬀers an issue which we call over-specialization, wherein trees added at later iterations tend to impact the prediction of only a few instances, and make negligible contribution towards the remaining instances."))
+- **c2** Shrinkage, the most common remedy, reduces the impact of the first trees, but according to the authors the problem reappears as the ensemble grows (illustrated on CTSlice in Figures 1-2; similar observations reported on the other datasets).([Introduction, p.2](https://arxiv.org/pdf/1505.01866v1#page=2 "As we will see in Section 2, shrinkage does help in reducing the impact of the ﬁrst trees, nevertheless, however, as the size of the ensemble increases, the problem of over-specialization reappears."))
+- **c3** Proposed mechanism: in MART without shrinkage, adding a constant to all labels would only change the first tree, so in a sense the first tree learns the bias and the remaining trees learn deviations from it, making the ensemble very sensitive to the first tree's decisions.([Overcoming the Over-specialization in MART, p.2](https://arxiv.org/pdf/1505.01866v1#page=2 "Therefore, in a sense, the ﬁrst tree learns the bias of the problem while the rest of the trees in the ensemble learn the deviation from this bias."))
+- **c4** Algorithm: DART differs from MART in two places: the gradient for the next tree is computed using only a random subset of the existing ensemble, and a normalization step scales the new tree by 1/k (k = number of dropped trees) and then the new and dropped trees by k/(k+1), because the new tree and the dropped trees would otherwise both close the same gap and overshoot.([Description of the DART Algorithm, p.5](https://arxiv.org/pdf/1505.01866v1#page=5 "First, when computing the gradient that the next tree will ﬁt, only a random subset of the existing ensemble is considered."))
+- **c5** The number of dropped trees controls the amount of regularization: dropping none gives MART and dropping all gives (in the authors' description) random forest; the experiments use a 'Binomial-plus-one' rule (each tree dropped with probability p_drop, and one random tree if none was selected).([Description of the DART Algorithm, p.5](https://arxiv.org/pdf/1505.01866v1#page=5 "On the other extreme, if all the trees are dropped, the DART is no diﬀerent than random forest."))
+- **c6** Ranking evaluation protocol (LambdaMART with dropout on MSLR-WEB10K, 60/20/20 train/validation/test): parameter grids were scanned for both algorithms by training on the training data and comparing NDCG@3 on validation, and the best validation models were applied to the test set.([Evaluation: Ranking, p.6](https://arxiv.org/pdf/1505.01866v1#page=6 "We selected the best performing models based on their scores on the validation set, and applied them to the test set to obtain the reported results."))
+- **c7** Regression evaluation protocol (UCI CT slices, 53500 histograms from 74 individuals): 10-fold cross-validation with folds grouped by individual; Table 4 reports the L2 error of the optimal parameter combinations per ensemble size. A separate validation split for this task was not found in the text (searched for validation, nested, held-out).([Evaluation: Regression, p.7](https://arxiv.org/pdf/1505.01866v1#page=7 "The folds were selected such that either all the images of an individual are in the train set or all of them are in the test set."))
+- **c8** Classification (Pascal Large Scale Learning Challenge face detection; first 300K examples train, next 200K validation, next 200K test; parameters selected on validation): the authors describe DART and MART as comparable, with MART winning at 3 of 5 ensemble sizes but the best model being a DART model; they report the best-model difference as statistically significant.([Table 6, p.8](https://arxiv.org/pdf/1505.01866v1#page=8 "The results are comparable between DART and MART: while MART “wins” on 3 out of the 5 diﬀerent ensembles sizes, however, the best model is a DART model."))
+

@@ -1,0 +1,87 @@
+id: arxiv-2006.10562
+title: Uncertainty in Gradient Boosting via Ensembles
+authors:
+- Andrey Malinin
+- Liudmila Prokhorenkova
+- Aleksei Ustimenko
+year: 2020
+venue: ICLR 2021
+links:
+  arxiv: https://arxiv.org/abs/2006.10562
+  code: https://github.com/yandex-research/GBDT-uncertainty
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-05'
+  pdf_sha256: a167e4c92cfd645a30ee3c9ea9aec93966ff6c9f17b954bbe1daca34589e4548
+tags:
+  tasks:
+  - uncertainty-estimation
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- Ensemble-based estimation of total, data and knowledge uncertainty for GBDT models using ensembles of SGB or SGLB models
+- 'Virtual SGLB ensemble (vSGLB): truncated sub-models of a single SGLB model (every K-th iteration from the second half) used as ensemble members at the cost of one model'
+claims:
+- id: c1
+  statement: 'Gap identified: NGBoost-style GBDT models that predict a mean and variance capture only data (aleatoric) uncertainty, not knowledge (epistemic) uncertainty about inputs far from or sparsely
+    covered by the training data.'
+  location: Introduction
+  page: 2
+  quote: However, such models only capture data uncertainty (Gal, 2016; Malinin, 2019), also known as aleatoric uncertainty, which arises due to inherent class overlap or noise in the data.
+- id: c2
+  statement: 'Ensemble generation: SGB ensembles (independent stochastic gradient boosting models with different seeds) have no guarantee of approximating the true posterior; SGLB (Stochastic Gradient Langevin
+    Boosting, by two of the authors) is used because its models are asymptotically sampled from the true posterior.'
+  location: Generating ensembles of GDBT models
+  page: 4
+  quote: Unfortunately, there are no guarantees on how well the distribution q(θ) estimates the true posterior p(θ|D).
+- id: c3
+  statement: 'Virtual ensembles trade quality for cost: members are truncated sub-models of one GBDT and are strongly correlated; on synthetic data the authors conclude that vSGLB knowledge-uncertainty
+    estimates are very cheap but inferior to ensembles of independent models.'
+  location: Analysis on synthetic data
+  page: 7
+  quote: This shows that while vSGLB yields very cheap estimates of knowledge uncertainty by exploiting the ‘ensemble of trees’ structure of GBDT models, the quality of these estimates is inferior to ensembles
+    of independent models.
+- id: c4
+  statement: 'Failure mode on continuous features: traces of class boundaries remain in knowledge-uncertainty maps, possibly because split values vary across ensemble members near class borders (decision-boundary
+    ''jitter''); outside the training domain, trees extend the boundary behaviour outward.'
+  location: Analysis on synthetic data
+  page: 6
+  quote: However, we still can see traces of the class boundaries in Figure 3(c).
+- id: c5
+  statement: On real datasets, ensembles do not outperform single models for error detection (PRR); the authors believe this is because GBDT models are already ensembles and because knowledge uncertainty
+    contributes little to total uncertainty.
+  location: Detection of errors and anomalous inputs
+  page: 8
+  quote: However, ensembles do not outperform single models.
+- id: c6
+  statement: Knowledge-uncertainty measures give better out-of-domain detection (AUC-ROC) than total uncertainty; the OOD data are synthetic, sampled from another dataset (Year MSD, or CT slices for KDD
+    datasets and Year MSD) because real OOD examples were hard to obtain.
+  location: Detection of errors and anomalous inputs
+  page: 8
+  quote: However, obtaining ‘real’ OOD examples for the datasets considered in this work is challenging, so we instead create synthetic OOD data as follows.
+- id: c7
+  statement: 'Evaluation protocol: all GBDT models are built with CatBoost; ensembles have 10 models of 1000 trees; hyperparameters were tuned by grid search over learning rate {0.001, 0.01, 0.1} and depth
+    {3, 4, 5, 6}, with subsample fixed to 0.5 for SGB and 1 for SGLB; UCI regression uses standard splits, classification a 65/15/20 split.'
+  location: Appendix A.2
+  page: 13
+  quote: For all approaches, we use grid search to tune learning-rate in {0.001, 0.01, 0.1}, tree depth in {3, 4, 5, 6}.
+- id: c8
+  statement: 'Conflict of interest: the methods were implemented within the open-source CatBoost library, which is the library used for all GBDT models in the experiments (and the paper cites Prokhorenkova
+    et al., 2018 for CatBoost).'
+  location: Introduction
+  page: 2
+  quote: Our methods have been implemented within the open-source CatBoost library.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: Yandex, HSE University, Moscow Institute of Physics and Technology (Yandex is the developer of CatBoost). Venue from the PDF header (''Published as a conference paper at ICLR 2021'').
+    Disclosure: Prokhorenkova is an author of the cited CatBoost paper (Prokhorenkova et al., 2018), and Ustimenko & Prokhorenkova are the authors of SGLB, the method evaluated here. Appendix A.1 compares
+    the authors'' implementation with NGBoost and Deep Ensembles (Table 2); Appendix C evaluates random-forest ensembles. Results tables not recorded.'

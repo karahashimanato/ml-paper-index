@@ -1,0 +1,90 @@
+id: arxiv-1510.04342
+title: Estimation and Inference of Heterogeneous Treatment Effects using Random Forests
+authors:
+- Stefan Wager
+- Susan Athey
+year: 2015
+venue: Journal of the American Statistical Association
+links:
+  arxiv: https://arxiv.org/abs/1510.04342
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 4ce3bc946f2f3aae9f0d2a485e5f6632b7e5cfd94639f4b50edd6347bb219e6a
+tags:
+  tasks:
+  - causal-effect-estimation
+  - uncertainty-estimation
+  method_families:
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- 'Causal forests: forests of honest causal trees grown on subsamples (double-sample trees or propensity trees), with pointwise consistency and asymptotic normality of the CATE estimates under unconfoundedness
+  and overlap, and variance estimation by the infinitesimal jackknife; an asymptotic normality theory for honest subsampled regression forests in general'
+claims:
+- id: c1
+  statement: 'Honesty: the results require each tree to be honest, i.e. a training example''s response is used either to place splits or to estimate the within-leaf effect, not both. Two honest constructions:
+    double-sample trees (the subsample is split into halves I and J; J places splits, I estimates leaf effects; splits maximise the variance of the effect estimates following Athey and Imbens, 2016) and
+    propensity trees (splits placed by a classification tree on the treatment W only).'
+  location: Section 2.4 (Honest Trees and Forests)
+  page: 8
+  quote: a tree is honest if, for each training example i, it only uses the response Yi to estimate the within-leaf treatment eﬀect τ using (5) or to decide where to place the splits, but not both.
+- id: c2
+  statement: 'Cost of sample splitting: the authors argue honesty via double-sample trees does not waste data in the forest because the I/J split is re-randomized for every subsample, so each point is used
+    for both structure and estimation across trees; they report that double-sample trees can also improve mean-squared error over standard random forests in practice.'
+  location: Section 2.4 (Honest Trees and Forests)
+  page: 8
+  quote: However, in our case, the forest subampling mechanism enables us to achieve honesty without wasting any data in this sense, because we re-randomize the I/J -data splits over each subsample.
+- id: c3
+  statement: 'Assumptions for causal inference: unconfoundedness (potential outcomes independent of W given X), Lipschitz continuity of E[Y(0)|X=x] and E[Y(1)|X=x], and overlap (epsilon < P(W=1|X=x) < 1
+    - epsilon); under these and the forest conditions, Theorem 11 states causal forest predictions are consistent, asymptotically Gaussian and centered, with variance consistently estimated by the infinitesimal
+    jackknife (assuming enough trees that Monte Carlo variability does not matter).'
+  location: Section 2.3
+  page: 7
+  quote: This condition eﬀectively guarantees that, for large enough n, there will be enough treatment and control units near any test point x for local methods to work.
+- id: c4
+  statement: 'Conditions of Theorem 1 (regression forests): i.i.d. data with X uniform on [0,1]^d (a density bounded away from 0 and infinity also suffices), Lipschitz mu(x) and E[Y^2|X=x], positive conditional
+    variance and a 2+delta moment bound; trees honest, alpha-regular with alpha <= 0.2 (leaves with k to 2k-1 observations), symmetric and random-split (each feature split with probability at least pi/d);
+    subsample size s ~ n^beta with beta_min < beta < 1, without replacement. If s grows slower, the forest is still asymptotically normal but may be asymptotically biased.'
+  location: Section 3
+  page: 11
+  quote: If the subsample size grows slower than this, the forest will still be asymptotically normal, but the forest may be asymptotically biased.
+- id: c5
+  statement: 'Why honesty: in a randomized-trial example with rare outliers, adaptive (non-honest) CART forests with leaf size 1 were biased at a corner of the feature space, with bias increasing with n,
+    while honest forests were unbiased; the authors state that pointwise centered asymptotic Gaussianity appears to require honesty and that their theorems are not valid for adaptive forests.'
+  location: Appendix B
+  page: 31
+  quote: However, if we want pointwise centered asymptotic Gaussianity results, then honesty appears to be necessary.
+- id: c6
+  statement: 'Honest vs adaptive mean-squared error (setting of Table 2, d = 8): at their best both perform comparably, but adaptive forests with the usual minimum leaf size k = 1 do extremely badly and
+    are very sensitive to k, whereas honest forests perform well over a wide range of k.'
+  location: Appendix B.1
+  page: 32
+  quote: Thus, it appears that accurately tuning adaptive forests in this setting may present a challenge and, overall, a practitioner may prefer honest forests even based on their mean-squared error characteristics
+    alone.
+- id: c7
+  statement: 'Simulation setup: X ~ U([0,1]^d), unconfoundedness respected, homoscedastic Gaussian noise; baseline k-NN matching; metrics are MSE for tau(X) at random test points and coverage with target
+    0.95. Setup 1 (no effect, confounding via e(x) and m(x)): n = 500, d from 2 to 30, propensity trees, B = 1000, s = 50. Setup 2 (heterogeneous effect in a randomized design): n = 5000, d from 2 to 8,
+    double-sample trees, s = 2500, B = 2000. Setup 3 (sharper effect peak): n = 10000, s = 2000, B = 10000. Implemented in R (causalTree, randomForestCI, FNN).'
+  location: Simulation Experiments
+  page: 21
+  quote: All our trees had a minimum leaf size of k = 1.
+- id: c8
+  statement: 'Stated limitations: in setup 3 coverage struggles, which the authors attribute largely to bias dominating variance as d grows; whether to use double-sample or propensity forests was chosen
+    manually per setting, and automatic splitting rules and a principled rule for choosing s are left open.'
+  location: Simulation Experiments (Results)
+  page: 24
+  quote: A limitation of the present simulation study is that we manually chose whether to use double-sample forests or propensity forests, depending on which procedure seemed more appropriate in each problem
+    setting.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: Department of Statistics and Graduate School of Business, Stanford University. Venue from the arXiv comment given in the task (''To appear in the Journal of the American Statistical Association'');
+    the PDF itself names no journal. Part of the results appeared earlier as the technical report ''Asymptotic Theory for Random Forests'' (arXiv:1405.0352). Shared authorship with arxiv-1610.01271 (Generalized
+    Random Forests: Athey, Tibshirani, Wager), which revisits this paper''s simulations and calls its Procedure 1 very nearly a special case of GRF. The double-sample splitting rule follows Athey and Imbens
+    (2016), co-authored by Athey. Results tables (Tables 1-3) not recorded.'

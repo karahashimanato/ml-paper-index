@@ -1,0 +1,94 @@
+id: arxiv-1804.03515
+title: Hyperparameters and Tuning Strategies for Random Forest
+authors:
+- Philipp Probst
+- Marvin Wright
+- Anne-Laure Boulesteix
+year: 2018
+venue: WIREs Data Mining and Knowledge Discovery
+links:
+  arxiv: https://arxiv.org/abs/1804.03515
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: fb351faca12bb87f5040f62bec2c8799cdcb406842403e1b8747aaef58aad882
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - random-forests
+  - tree-ensembles
+  paradigms:
+  - supervised
+proposes:
+- A literature review of random forest hyperparameters (mtry, sample size, replacement, node size, number of trees, splitting rule) and their effect on performance and variable importance
+- 'tuneRanger: an R package tuning mtry, sample size and node size with sequential model-based optimization evaluated on out-of-bag predictions'
+claims:
+- id: c1
+  statement: 'Starting point: the authors state it is well known that random forests mostly work reasonably well with software default hyperparameters, but that tuning can nevertheless improve performance.'
+  location: Abstract
+  page: 1
+  quote: It is well known that in most cases RF works reasonably well with the default values of the hyperparameters speciﬁed in software packages.
+- id: c2
+  statement: 'Defaults (Table 1 and Section 2.1.1): mtry = sqrt(p) for classification and p/3 for regression in several packages; sample size n drawn with replacement; node size 1 for classification and
+    5 for regression. Lower mtry gives less correlated trees but weaker individual trees (a stability-accuracy trade-off).'
+  location: Section 2.1.1
+  page: 3
+  quote: As default value in several software packages mtry is set to √p for classiﬁcation and p/3 for regression with p being the number of predictor variables.
+- id: c3
+  statement: The number of trees is not a tuning parameter in the classical sense but should be set sufficiently high; citing their own earlier work, more trees are always better for mean-quadratic-loss
+    measures, while out-of-bag error-rate curves occasionally increase slightly with more trees.
+  location: Section 2.1.4
+  page: 4
+  quote: The number of trees in a forest is a parameter that is not tunable in the classical sense but should be set suﬃciently high (Díaz-Uriarte and De Andres, 2006; Oshiro et al., 2012; Probst and Boulesteix,
+    2017).
+- id: c4
+  statement: 'Which hyperparameters matter, citing Probst et al. (2018, their own tunability study on 38 datasets): random forests are far less tunable than e.g. SVMs; tuning mtry gave the largest average
+    AUC gain, then sample size, while node size had only a small effect and sampling without replacement a small positive effect.'
+  location: Tunability of random forest
+  page: 7
+  quote: In their study, tuning the parameter mtry provides the biggest average improvement of the AUC (0.006), followed by the sample size (0.004), while the node size had only a small eﬀect (0.001).
+- id: c5
+  statement: 'Evaluation strategy for tuning: the authors recommend out-of-bag predictions for most datasets because they are much faster than k-fold cross-validation, noting that OOB estimates can be biased
+    in special situations (e.g., very small datasets with many predictors and balanced classes).'
+  location: Evaluation strategies and evaluation measures
+  page: 7
+  quote: we recommend the out-of-bag approach for tuning as an appropriate procedure for most datasets.
+- id: c6
+  statement: 'Benchmark protocol: 39 binary-target OpenML100 datasets without missing values (26 small, 13 big by estimated tuning time); 5-fold CV repeated 10 times for small and once for big datasets;
+    2000 trees for every method; tuneRanger (with several target measures), mlrHyperopt, caret and tuneRF at default settings compared with untuned ranger; failed runs were assigned the worst result or
+    imputed.'
+  location: Benchmark study
+  page: 11
+  quote: For classiﬁcation we only use datasets that have a binary target and no missing values, which leads to a collection of 39 datasets.
+- id: c7
+  statement: 'Benchmark result: differences were small, although on average all tuning methods beat default ranger; the authors relate the small differences to random forests being less tunable. Tuning
+    node size and sample size together with mtry gave on average a further improvement over tuning mtry alone.'
+  location: Results
+  page: 14
+  quote: We see that the diﬀerences are small, although on average all algorithms perform better than the ranger default.
+- id: c8
+  statement: 'When defaults fail badly: on two datasets the default forest was far worse and tuning mtry was essential: monks-problems-2 (an interaction between two of six categorical predictors, where
+    low mtry forces splits on the wrong variable) and madelon (20 informative and 480 non-informative predictors, where the default mtry is much too low).'
+  location: Results
+  page: 12
+  quote: For these two datasets it is essential to tune mtry, which is done by all tuning algorithms.
+- id: c9
+  statement: 'Conclusion: mtry, sample size and node size control the randomness of the forest; mtry is the most influential, with its best value depending on the number of variables related to the outcome,
+    while sample size and node size have a minor influence but are worth tuning in many cases. The authors also note the literature lacks systematic large-scale comparison studies of random forest hyperparameters.'
+  location: Conclusion and Discussion
+  page: 16
+  quote: Out of these parameters, mtry is most inﬂuential both according to the literature and in our own experiments.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method articles requested by the user (2026-10-05): gradient-boosted trees, and random forests / decision trees. Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations not recorded. Venue from the arXiv journal_ref (''WIREs Data Mining Knowl Discov 2019''). Conflict of interest: tuneRanger, the method that performed best on average in the benchmark, is
+    the authors'' own package (Probst, 2018), and ranger is co-author Wright''s package (Wright and Ziegler, 2017); the tunability evidence (Probst et al., 2018) and the number-of-trees results (Probst
+    and Boulesteix, 2017) are the authors'' own earlier work. The paper does not state these as conflicts, although its conclusion discusses that comparison studies in papers introducing new methods are
+    often biased in their favour. tuneRanger defaults: SMBO (mlrMBO) with 30 initial random points and 70 iterations, tuning mtry, sample size and node size, sampling without replacement, OOB evaluation,
+    Brier score (classification) or MSE (regression); final setting = average of the best 5% of iterations. Benchmark is classification only. Results tables (Tables 2-3) not recorded.'

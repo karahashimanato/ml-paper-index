@@ -68,8 +68,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 学習モデルと計算量 | 論文カード24本(スケーリング則、計算最適な学習とその再検証、創発と逆スケーリング、推論時の計算、計算コストの測り方、効率化アーキテクチャ)、記事 [articles/topics/compute-and-scaling.md](articles/topics/compute-and-scaling.md) |
 | 古典アルゴリズムと機械学習 | 論文カード25本(学習済みインデックス、予測つきアルゴリズム、微分可能なソート、アルゴリズムの学習、機械学習の中の貪欲法)、記事 [articles/topics/algorithms-and-ml.md](articles/topics/algorithms-and-ml.md) |
 | アルゴリズム設計技法と機械学習 | 論文カード25本+既存4本(分割統治・動的計画・分枝限定・局所探索と機械学習、学習した組合せ最適化の再検証)、記事 [articles/topics/design-techniques-and-ml.md](articles/topics/design-techniques-and-ml.md) |
+| 予測モデルのフォールバックとモデル選択 | 論文カード21本+既存3本(メタ学習によるモデル選択、動的選択、予測の保留と委譲、切り替えの引き金、LLM のルーティング、MLOps の監視と入れ替え)、記事 [articles/topics/model-fallback-and-selection.md](articles/topics/model-fallback-and-selection.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では273本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では294本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -85,6 +86,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [学習モデルと計算量 — スケーリング則、計算の配分、コストの測り方](articles/topics/compute-and-scaling.md)
 - [古典アルゴリズムと機械学習 — ソート・二分探索・貪欲法から見る](articles/topics/algorithms-and-ml.md)
 - [アルゴリズム設計技法と機械学習 — 分割統治・動的計画・分枝限定・局所探索](articles/topics/design-techniques-and-ml.md)
+- [予測モデルのフォールバックとモデル選択 — 運用でモデルを切り替える仕組み](articles/topics/model-fallback-and-selection.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

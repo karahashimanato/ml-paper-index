@@ -1,0 +1,75 @@
+id: arxiv-1810.03548
+title: 'Meta-Learning: A Survey'
+authors:
+- Joaquin Vanschoren
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1810.03548
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 1ad62ac807e410e58c05f72687724d4f70ba9a9bd9ae26184faa64c179379b9c
+tags:
+  tasks:
+  - model-selection
+  method_families:
+  - automl-systems
+  paradigms:
+  - meta-learning
+proposes:
+- 'Survey of meta-learning organized by the type of meta-data used: learning from prior model evaluations (task-independent recommendations, portfolios/rankings, configuration-space design, configuration
+  transfer, learning curves), learning from task properties (meta-features, learned meta-features, warm-starting, meta-models for ranking and performance prediction, pipeline synthesis, whether to tune),
+  and learning from prior models (transfer, meta-learning in neural networks, few-shot learning)'
+claims:
+- id: c1
+  statement: 'Framing: meta-learning observes how different ML approaches perform on a wide range of tasks and learns from this meta-data to learn new tasks faster; the Introduction then categorizes techniques
+    by the type of meta-data they leverage (model evaluations, task properties, prior models).'
+  location: Abstract
+  page: 1
+  quote: Meta-learning, or learning to learn, is the science of systematically observing how diﬀerent machine learning approaches perform on a wide range of learning tasks, and then learning from this experience,
+    or meta-data, to learn new tasks much faster than otherwise possible.
+- id: c2
+  statement: 'Caveat (no free lunch): the more similar previous tasks are, the more meta-data can be leveraged, and defining task similarity is called a key overarching challenge; when a new task is unrelated
+    or random noise, leveraging prior experience will not be effective.'
+  location: Introduction
+  page: 1
+  quote: When a new task represents completely unrelated phenomena, or random noise, leveraging prior experience will not be eﬀective.
+- id: c3
+  statement: 'Per-set (task-independent) recommendation, as described by the survey with citations to prior work: without evaluations on the new task, a candidate set of configurations (a portfolio) is
+    evaluated on many prior tasks, ranked per task and aggregated into a global ranking (e.g. average rank, citing Lin 2010 and Abdulrahman et al. 2018); a simple anytime method (citing Brazdil et al. 2003a)
+    then evaluates the top-K on the new task in turn.'
+  location: Task-Independent Recommendations
+  page: 2
+  quote: This is typically done by discretizing Θ into a set of candidate conﬁgurations θi, also called a portfolio, evaluated on a large number of tasks tj.
+- id: c4
+  statement: 'Meta-feature caveat (citing Bilalli et al., 2017): studies on OpenML meta-data showed the optimal set of meta-features depends on the application; meta-features need aggregation, normalization
+    and feature selection or dimensionality reduction when computing task similarity.'
+  location: Meta-Features
+  page: 8
+  quote: Studies on OpenML meta-data have shown that the optimal set of meta-features depends on the application (Bilalli et al., 2017).
+- id: c5
+  statement: 'Meta-models for algorithm selection (prior work, citing Kalousis and Hilario 2001 and Kopf and Iglezakis 2002): those experiments showed boosted and bagged trees often gave the best meta-model
+    predictions, although much depends on the exact meta-features used.'
+  location: Meta-Models
+  page: 10
+  quote: Experiments showed that boosted and bagged trees often yielded the best predictions, although much depends on the exact meta-features used
+- id: c6
+  statement: 'Meta-features versus observations on the new task: the survey states (citing Feurer et al. 2018b, Wistuba et al. 2018, Leite et al. 2012) that, rather than combining per-task predictions by
+    meta-feature similarity, it is ultimately more effective to gather new evaluations on the new task, which refine the task-similarity estimates.'
+  location: Performance Prediction
+  page: 11
+  quote: While meta-features could also be used to combine per-task predictions based on task similarity, it is ultimately more eﬀective to gather new observations Pi,new, since these allow to reﬁne the
+    task similarity estimates with every new observation
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Book-chapter-style survey (the text calls itself ''this chapter''); no experiments of its own. Affiliation:
+    Eindhoven University of Technology; the reference list shows the author is a co-author of OpenML (Vanschoren et al., 2014), which the survey cites as a meta-data repository and source of meta-data.
+    Scope is per-task (per-dataset) selection and configuration; per-instance selection, Rice''s framework, the virtual best solver / oracle gap and evaluation pitfalls of selectors were not found in the
+    text (searched ''Rice'', ''oracle'', ''virtual best''). The survey also describes meta-models proposed to predict whether tuning is worthwhile (''To Tune or Not to Tune?'' section, citing Ridd and Giraud-Carrier
+    2014 and Sanders and Giraud-Carrier 2017) and that multi-objective rankings including training time converge to near-optimal models faster in time-constrained settings (citing Abdulrahman et al. 2018,
+    van Rijn et al. 2015). Tag note: automl-systems is an approximation (the survey covers meta-learning used to warm-start and configure AutoML, not one AutoML system).'

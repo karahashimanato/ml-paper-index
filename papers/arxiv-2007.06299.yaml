@@ -1,0 +1,87 @@
+id: arxiv-2007.06299
+title: Monitoring and explainability of models in production
+authors:
+- Janis Klaise
+- Arnaud Van Looveren
+- Clive Cox
+- Giovanni Vacanti
+- Alexandru Coca
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2007.06299
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: cbaed6728f70d029dafd165db644f979c69f582e99fad9b49e5fed8dd49913fc
+tags:
+  tasks:
+  - mlops
+  - dataset-shift-detection
+  - model-explanation
+  method_families:
+  - two-sample-tests
+  - dimensionality-reduction-for-shift
+  - feature-attribution
+  paradigms:
+  - post-hoc
+proposes:
+- 'Position/overview of four post-deployment areas (performance monitoring, input-data metrics, outlier and drift detection, explanations) with deployment patterns: asynchronous monitoring via KNative eventing
+  with KFServing/Seldon Core, and a /predict + /explain design for black-box explainers'
+claims:
+- id: c1
+  statement: 'Framing (citing Diethe et al.): a big MLOps challenge is designing systems that monitor live deployments and take action or raise alerts when events affecting model performance occur.'
+  location: Introduction
+  page: 1
+  quote: One of the big challenges in MLOps is to design systems that monitor live deployments and take action or raise alerts when events impacting model performance are encountered (Diethe et al., 2019).
+- id: c2
+  statement: Without labels (citing Breck et al.), statistics of input data and output predictions are monitored as a proxy for model performance; labels for live data are seldom available in time due to
+    operational and financial constraints.
+  location: Introduction
+  page: 1
+  quote: In the absence of labels it is critical to monitor the statistics of input data and output predictions as these can serve as a proxy for model performance (Breck et al., 2017).
+- id: c3
+  statement: 'Alert thresholds: even with label-dependent metrics, a threshold or decision rule for alerts must be set; such thresholds need domain knowledge and are hard to set to limit false alarms, and
+    the authors say alternatives based on change-point detection may prove more robust (citing Bifet, 2017).'
+  location: Performance and metrics
+  page: 2
+  quote: Such thresholds require domain knowledge and can be difﬁcult to set appropriately to limit the number of false alarms.
+- id: c4
+  statement: Outlier detection is motivated by prior work (citing Recht et al., Engstrom et al., Hendrycks & Dietterich; Guo et al.; Lakshminarayanan et al.) showing models often fail to generalize outside
+    the training distribution and are typically not well calibrated, which can lead to overconfident out-of-distribution predictions; flagged predictions are ones the authors say should not be trusted or
+    used in production. They add that unsupervised anomaly detection on real-world data is far from solved.
+  location: Outlier detection
+  page: 2
+  quote: Outlier detection is therefore key to ﬂag anomalies whose model predictions we cannot trust and should not use in a production setting.
+- id: c5
+  statement: 'Acting on drift: drift detection (described with citations, e.g. Rabanser et al. 2019 for the pre-processing: dimensionality reduction followed by a two-sample test such as MMD with permutation
+    p-values, or feature-wise KS tests with Bonferroni/FDR correction) informs the user when the model should be retrained, which the authors call especially important when performance feedback is not readily
+    available.'
+  location: Drift detection
+  page: 3
+  quote: Drift detection informs the user when the model should be retrained which is especially important in applications where model performance feedback is not readily available.
+- id: c6
+  statement: 'Stated open problem: relating the label-independent measures from metrics, outlier and drift detectors more directly to model performance.'
+  location: Conclusion
+  page: 4
+  quote: One of the main open research topics is to more directly relate the label-independent measures obtained from the metrics, outlier and drift detectors to the model performance.
+- id: c7
+  statement: 'Affiliation: all five authors carry the affiliation Seldon Technologies Ltd (seldon.io e-mail addresses). Self-citation of tools: Seldon Core (Cox et al., 2018), Alibi (Klaise, Van Looveren,
+    Vacanti, Coca, 2019) and Alibi Detect (Van Looveren, Vacanti, Klaise, Coca, 2020), all with github.com/SeldonIO URLs in the references, have authors of this paper among their authors and are among the
+    open-source solutions highlighted in the Conclusion (alongside KFServing and creme by other authors). The paper contains no separate conflict-of-interest statement.'
+  location: Title page (affiliation footnote)
+  page: 1
+  quote: Seldon Technologies Ltd, London, United Kingdom
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Workshop on Challenges in Deploying and Monitoring Machine Learning Systems (ICML 2020). Position/overview
+    paper: no experiments or quantitative evaluation of the described detectors. Searched the full text for rollback, roll back, fallback, fall back, canary, shadow, A/B, replace, revert, previous model,
+    champion and challenger: none found, so the paper describes no rollback to a previous model and no switch to a fallback model at serving time. The stated actions on detection are taking action or raising
+    alerts (Introduction, citing Diethe et al.), sending detector events to alerting or storage modules, informing retraining, and not using flagged predictions. A ''carbon copy of the model'' is mentioned
+    only to serve explanation requests separately from production predictions (Section 3.2), not as a fallback. Other self-cited works: Vacanti & Van Looveren (2020), Van Looveren & Klaise (2019). Explanations
+    are also described as a follow-up to outlier flags (to judge whether a flagged prediction can be trusted and acted on). The monitoring architecture is asynchronous (payload logging to a KNative broker),
+    so detectors run alongside rather than in the request path.'

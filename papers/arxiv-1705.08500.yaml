@@ -1,0 +1,79 @@
+id: arxiv-1705.08500
+title: Selective Classification for Deep Neural Networks
+authors:
+- Yonatan Geifman
+- Ran El-Yaniv
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1705.08500
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 91899dfcbc41553f571f7a491839733e4d16f81d82e9274278e8f06ffc42022b
+tags:
+  tasks:
+  - selective-prediction
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- 'Selection with Guaranteed Risk (SGR): given an already trained classifier and a confidence-rate function (softmax response or MC-dropout), binary-search a rejection threshold on a labeled sample so that
+  the selective risk is at most a user-chosen target with probability at least 1 - delta'
+claims:
+- id: c1
+  statement: 'Contribution: a method to construct a selective classifier from a trained neural network in which the user sets a desired risk level and, at test time, instances are rejected as needed to
+    grant that risk with high probability.'
+  location: Abstract
+  page: 1
+  quote: At test time, the classiﬁer rejects instances as needed, to grant the desired risk (with high probability).
+- id: c2
+  statement: 'Selection mechanism: the classifier f is fixed; a rejection function is learned by choosing a threshold over one of two known confidence-rate functions, softmax response (SR, the maximal softmax
+    output) or MC-dropout (minus the variance of the most probable class''s response over dropout passes).'
+  location: Introduction
+  page: 2
+  quote: To this end, we consider the above two known techniques for rejection (SR and MC-dropout), and devise a learning method that chooses an appropriate threshold that ensures the desired risk.
+- id: c3
+  statement: 'Guarantee and its assumptions (Theorem 3.2): if the labeled set S_m used by SGR is sampled i.i.d. from P, then with probability at least 1 - delta over the draw of S_m, every selective classifier
+    computed in the k = ceil(log2 m) SGR iterations has true selective risk (w.r.t. P restricted to its accepted region) no larger than its computed bound (Lemma 3.1 applied with delta/k, plus a union bound).
+    The guarantee is for the 0/1 loss and for test data from the same P; nothing is assumed about the confidence-rate function beyond using it to rank inputs (Section 3).'
+  location: Selection with Guaranteed Risk Control
+  page: 5
+  quote: Theorem 3.2 (SGR) Let Sm be a given labeled set, sampled i.i.d. from P, and consider an application of the SGR procedure.
+- id: c4
+  statement: 'Caveat on the confidence function: the theorem always holds, but if the confidence-rate function is severely skewed (far from ideal), the bound of the resulting selective classifier can be
+    far from the target risk.'
+  location: Confidence-Rate Functions for Neural Networks (footnote)
+  page: 6
+  quote: While Theorem 3.2 always holds, we note that if κf is severely skewed (far from ideal), the bound of the resulting selective classiﬁer can be far from the target risk.
+- id: c5
+  statement: 'Choice of signal: risk-coverage curves computed on validation data show SR and MC-dropout nearly identical on CIFAR-10/100, while on ImageNet SR is significantly better on both top-1 and top-5,
+    so the remaining experiments use SR only.'
+  location: Empirical Results
+  page: 7
+  quote: see that SR is signiﬁcantly better than MC-dropout on both tasks.
+- id: c6
+  statement: 'Evaluation protocol: for CIFAR-10 the standard validation set is randomly split into two equal halves, one used as the SGR training set and the other reserved for testing the bounds (the paper
+    states CIFAR-100 and ImageNet repeat the same experimental design); the test half is thus a random split of the same validation data (no shifted test data), and all SGR runs use delta = 0.001.'
+  location: Selective Guaranteed Risk for CIFAR-10
+  page: 8
+  quote: The other half, which was not consumed by SGR for training, was reserved for testing the resulting bounds.
+- id: c7
+  statement: 'Stated limitations / open questions: only the 0/1 loss is studied (extension to other losses and regression, and control of false-positive/false-negative rates, is left open), and the classifier
+    and selection function are not trained jointly.'
+  location: Concluding Remarks
+  page: 11
+  quote: In this paper we only studied selective classiﬁcation under the 0/1 loss.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Affiliation: Technion - Israel Institute of Technology; supported by The Israel Science Foundation (grant
+    No. 1890/14). No experiment with shifted or out-of-distribution test data was found in the text (searched ''shift'', ''out-of'', ''distribution''): the SGR train/test sets are random halves of the standard
+    validation sets. The risk guarantee is a high-probability bound over the draw of the i.i.d. calibration sample (Eq. 2, Lemma 3.1 of Gascuel and Caraux, Theorem 3.2). The paper does not compare against
+    other selective-classification methods beyond SR vs MC-dropout as confidence functions. Evaluation caveat (footnote 2, Section 5.1): ''With this small δ, and small number of reported experiments (6-7
+    lines in each table) we did not perform a Bonferroni correction (which can be easily added).'' - i.e. delta applies per risk target, not jointly across the rows of a table.'

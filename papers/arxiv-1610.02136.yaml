@@ -1,0 +1,77 @@
+id: arxiv-1610.02136
+title: A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks
+authors:
+- Dan Hendrycks
+- Kevin Gimpel
+year: 2016
+links:
+  arxiv: https://arxiv.org/abs/1610.02136
+  code: https://github.com/hendrycks/error-detection
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7987ceacab204bf71831719a365c74e5c8bc6a5572acff4ad5d6e11f6d1ddb1d
+tags:
+  tasks:
+  - selective-prediction
+  - dataset-shift-detection
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- Maximum softmax probability (MSP) of a trained classifier as a baseline score for detecting misclassified and out-of-distribution examples, with standard detection tasks and threshold-independent metrics
+  (AUROC, AUPR); plus an auxiliary-decoder 'abnormality module' that beats the baseline on some tasks
+claims:
+- id: c1
+  statement: 'Selection signal: correctly classified examples tend to have a higher maximum softmax probability than misclassified and out-of-distribution examples, which allows detecting the latter (the
+    baseline needs no change to the classifier).'
+  location: Abstract
+  page: 1
+  quote: Correctly classiﬁed examples tend to have greater maximum softmax probabilities than erroneously classiﬁed and out-of-distribution examples, allowing for their detection.
+- id: c2
+  statement: 'Caveat: the softmax prediction probability, viewed in isolation, corresponds poorly to confidence; the authors'' point is that it still ranks examples usefully (incorrect / out-of-distribution
+    examples tend to get lower values), not that it is calibrated.'
+  location: Introduction
+  page: 1
+  quote: Throughout our experiments we establish that the prediction probability from a softmax distribution has a poor direct correspondence to conﬁdence.
+- id: c3
+  statement: 'Evaluation metric: because a detector needs a score threshold that trades off false negatives and false positives, the paper uses threshold-independent AUROC, plus AUPR (reported with success/in-distribution
+    and with error/out-of-distribution as the positive class) because AUROC is not ideal when base rates differ greatly; no operating threshold is chosen.'
+  location: Problem formulation and evaluation
+  page: 2
+  quote: Faced with this issue, we employ the Area Under the Receiver Operating Characteristic curve (AUROC) metric, which is a threshold-independent performance evaluation (Davis & Goadrich, 2006).
+- id: c4
+  statement: 'OOD protocol (vision): all in-distribution test examples are positives; out-of-distribution negatives are realistic images and noise: SUN scenes for CIFAR-10/100; Omniglot, notMNIST and black-and-white
+    CIFAR-10 for MNIST; Gaussian and uniform noise. Other tasks use other text corpora, held-out topics, and noise-mixed or Chinese speech.'
+  location: Computer vision
+  page: 3
+  quote: For out-of-distribution (negative) examples, we use realistic images and noise.
+- id: c5
+  statement: 'Failure mode: when distorted inputs degrade the classifier only slightly (a noise-robust fully connected TIMIT network), softmax statistics alone did not give useful out-of-distribution detection,
+    while the trained abnormality module did. Separately (Section 3.2, POS tagging with the WSJ-trained tagger), the authors state that out-of-distribution weblog text, being closer in style to newswire
+    than tweets are, is harder to detect than tweets.'
+  location: Abnormality detection with auxiliary decoders
+  page: 8
+  quote: Because the classiﬁcation degradation was only slight, the softmax statistics alone did not provide useful out-of-distribution detection.
+- id: c6
+  statement: 'Evaluation recommendation: report AUPR and AUROC together with the underlying classifier''s accuracy, because an always-wrong classifier gets maximum AUPR for error detection when error is
+    the positive class; new detectors should be compared against the softmax baseline of their own classifiers on a variety of datasets and architectures.'
+  location: Discussion and future work
+  page: 9
+  quote: Reporting the AUPR and AUROC values is important, and so is the underlying classiﬁer’s accuracy since an always-wrong classiﬁer gets a maximum AUPR for error detection if error is the positive
+    class.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at ICLR 2017. Affiliations: UC Berkeley (work done at TTIC),
+    Toyota Technological Institute at Chicago; NVIDIA donated GPUs (Acknowledgments). Tasks span vision (MNIST, CIFAR-10/100), NLP (IMDB sentiment, 20 Newsgroups/Reuters topic, WSJ/Twitter POS tagging)
+    and speech (TIMIT); image-classification tag covers only part of it. The authors also tried KL divergence from uniform and found it highly correlated with MSP (footnote 3). Ranking quality only: the
+    paper does not set or calibrate a deployment threshold. Tag note: the task tags are approximations. No calibration / uncertainty / OOD-detection tag exists yet (a user decision on adding one is pending);
+    selective-prediction and dataset-shift-detection are the closest existing tags and do not exactly describe this paper (it scores misclassified / OOD inputs, it does not abstain or detect dataset-level
+    shift itself).'

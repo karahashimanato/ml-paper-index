@@ -1,0 +1,84 @@
+id: arxiv-1706.04599
+title: On Calibration of Modern Neural Networks
+authors:
+- Chuan Guo
+- Geoff Pleiss
+- Yu Sun
+- Kilian Q. Weinberger
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1706.04599
+  code: http://github.com/gpleiss/temperature_scaling
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: cb654a65acb785ed4387d6c2db1301d065075dddc2d363676836a2f2a14bc50d
+tags:
+  tasks:
+  - selective-prediction
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- 'Temperature scaling: a single-parameter variant of Platt scaling that divides the logits by a scalar T fitted by NLL on a held-out validation set; plus an empirical study of miscalibration in modern
+  networks and a comparison of post-processing calibration methods'
+claims:
+- id: c1
+  statement: 'Main observation: modern neural networks, unlike those from a decade ago, are poorly calibrated (confidence does not match the probability of being correct).'
+  location: Abstract
+  page: 1
+  quote: We discover that modern neural networks, unlike those from a decade ago, are poorly calibrated.
+- id: c2
+  statement: 'Factors (correlational, not causal): increased model capacity and lack of regularization are closely related to miscalibration; the paper examines depth, width, Batch Normalization and weight
+    decay.'
+  location: Observing miscalibration
+  page: 3
+  quote: Though we cannot claim causality, we ﬁnd that increased model capacity and lack of regularization are closely related to model miscalibration.
+- id: c3
+  statement: 'Mechanism of temperature scaling: a single scalar T > 0 for all classes divides the logits, T is optimized with respect to NLL on the validation set, and since it does not change the softmax
+    argmax, class predictions and accuracy are unchanged.'
+  location: Calibration methods
+  page: 6
+  quote: In other words, temperature scaling does not affect the model’s accuracy.
+- id: c4
+  statement: 'Calibration set and scope: all compared methods are post-processing steps that need a hold-out validation set (in practice possibly the same set used for hyperparameter tuning), and the paper
+    assumes training, validation and test sets are drawn from the same distribution; all calibration results in the paper are therefore in-distribution, and nothing is claimed about calibration under dataset
+    shift.'
+  location: Calibration methods
+  page: 4
+  quote: We assume that the training, validation, and test sets are drawn from the same distribution.
+- id: c5
+  statement: 'Main empirical result: temperature scaling outperforms all other compared methods on the vision tasks and performs comparably on the NLP datasets (compared: histogram binning, isotonic regression,
+    BBQ, vector and matrix scaling).'
+  location: Results
+  page: 7
+  quote: Temperature scaling outperforms all other methods on the vision tasks, and performs comparably to other methods on the NLP datasets.
+- id: c6
+  statement: 'Evaluation metric: ECE with equally spaced confidence bins (M = 15 in the results table) is the primary calibration metric, with MCE and NLL also defined. In Results, the authors note that
+    the one dataset temperature scaling did not calibrate, Reuters, was already well calibrated (ECE <= 1%), and say it is ''also possible'' that their measurements there are affected by the dataset split
+    or the binning scheme.'
+  location: Definitions
+  page: 3
+  quote: We use ECE as the primary empirical metric to measure calibration.
+- id: c7
+  statement: 'Failure mode of richer calibrators: matrix scaling performs poorly with hundreds of classes and fails to converge on 1000-class ImageNet; the authors state any calibration model with tens
+    of thousands or more parameters will overfit a small validation set even with regularization.'
+  location: Results
+  page: 8
+  quote: Any calibration model with tens of thousands (or more) parameters will overﬁt to a small validation set, even when applying regularization.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 34th International Conference on Machine Learning, Sydney, Australia, PMLR
+    70, 2017. Affiliation: Cornell University; NSF, Bill and Melinda Gates Foundation, Office of Naval Research support. Datasets: Birds, Cars, ImageNet 2012, CIFAR-10/100, SVHN (image); 20 News, Reuters,
+    SST binary/fine-grained (text). Networks trained with ''the data preprocessing, training procedures, and hyperparameters as described in each paper''; Birds/Cars fine-tuned from ImageNet; DAN/TreeLSTM
+    with authors'' default hyperparameters. Validation sets are carved from the same distribution (e.g. 45,000/5,000/10,000 for CIFAR). All evaluation is in-distribution (train/validation/test from the
+    same distribution); behaviour under dataset shift is not studied in this paper (see arxiv-1906.02530, which tests temperature scaling under shift). Tag note: the task tags are approximations. No calibration
+    tag exists yet (a user decision on adding one is pending); selective-prediction is the closest existing tag and does not exactly describe this paper, which studies calibration, not abstention (it only
+    motivates calibration by handing control to other sensors or human doctors when confidence is low).'

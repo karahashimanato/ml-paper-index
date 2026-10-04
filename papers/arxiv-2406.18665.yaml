@@ -1,0 +1,97 @@
+id: arxiv-2406.18665
+title: 'RouteLLM: Learning to Route LLMs with Preference Data'
+authors:
+- Isaac Ong
+- Amjad Almahairi
+- Vincent Wu
+- Wei-Lin Chiang
+- Tianhao Wu
+- Joseph E. Gonzalez
+- M Waleed Kadous
+- Ion Stoica
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2406.18665
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c9bc9c8171cab95bb3832cde8767c6b5e0925cd62930e51ddbd60d7cb2616741
+tags:
+  tasks:
+  - model-selection
+  method_families:
+  - model-cascades
+  - large-language-models
+  paradigms:
+  - supervised
+  - post-hoc
+proposes:
+- 'RouteLLM: a framework for learning binary strong/weak LLM routers from human preference data (Chatbot Arena battles grouped into model tiers) plus data augmentation (MMLU golden labels, GPT-4-judge labels);
+  a win-prediction model P(strong wins | query) is thresholded by a cost threshold alpha, with four parameterizations (similarity-weighted Bradley-Terry ranking, matrix factorization, BERT classifier, Llama
+  3 8B causal classifier); evaluated with APGR and CPT metrics'
+claims:
+- id: c1
+  statement: 'Routing decision: before any LLM is called, a win-prediction model estimates the probability that the strong model beats the weak model on the query, and the query goes to the strong model
+    when this probability is at least a cost threshold alpha; a higher alpha favours the weak model (stricter cost), a lower alpha favours the strong model. Each query is sent to a single LLM.'
+  location: Problem formulation
+  page: 3
+  quote: 'The threshold α controls the trade-off between quality and cost: a higher value of α enforces stricter cost constraints by favoring weak models more often, while a lower α biases toward higher-quality
+    (but more expensive) strong models.'
+- id: c2
+  statement: 'Training signal: the primary preference data are 80k Chatbot Arena battles in which users vote between two anonymous models; to reduce label sparsity, models are clustered into 10 tiers by
+    Arena leaderboard score, the top two tiers form the strong class and the third tier the weak class, and only winner identities (not responses) are kept.'
+  location: Chatbot Arena data
+  page: 4
+  quote: Our primary source for preference data is the 80k battles from the online Chatbot Arena platform (Chiang et al., 2024), where users submit prompts and receive responses from two anonymous models.
+- id: c3
+  statement: 'Cost/quality metrics and thresholds: cost is measured as the percentage of calls to the strong model and quality relative to the weak-strong gap (performance gap recovered, PGR); APGR averages
+    PGR over 10 discretized call percentages, choosing for each the threshold that satisfies that cost constraint, and CPT(x%) is the minimum percentage of strong-model calls needed to reach a PGR of x%.
+    The text does not say on which data the thresholds for each call percentage are determined.'
+  location: Metrics
+  page: 4
+  quote: For each ci, we determine the threshold αi that satisfies the cost constraint.
+- id: c4
+  statement: 'Evaluation protocol: MMLU, MT Bench (LLM-as-a-judge) and GSM8K, after discarding evaluation examples flagged by an embedding similarity search against the training data with a threshold of
+    0.95 (Appendix B); the authors present these public benchmarks as a test of out-of-domain generalization; main strong/weak pair gpt-4-1106-preview / Mixtral 8x7B; the baseline is a random router under
+    the same cost constraint; BERT and causal-LLM routers use 5k samples held out from the Arena data as a validation set for model selection.'
+  location: Experiments
+  page: 6
+  quote: MMLU (Hendrycks et al., 2020) consisting of 14,042 questions across 57 subjects, MT Bench (Zheng et al., 2023) with 160 open-ended questions using LLM-as-a-judge, and GSM8K (Cobbe et al., 2021)
+    with over 1,000 grade school math problems
+- id: c5
+  statement: 'Failure under query-distribution shift: routers trained only on Arena data perform at the level of the random router on MMLU (and close to random on GSM8K), which the authors attribute to
+    most questions being out-of-distribution; adding about 1500 golden-labeled questions from MMLU''s own validation split (for MMLU; i.e. in-domain data for that benchmark) or the roughly 120K GPT-4-judge
+    labels on Nectar queries (for GSM8K) brings them above random. The authors relate router quality to an embedding-based benchmark-dataset similarity score.'
+  location: Results
+  page: 8
+  quote: On MMLU (Table 2), all routers perform poorly at the level of the random router when trained only on Arena dataset, which we attribute to most MMLU questions being out-of-distribution (see Section
+    5.3).
+- id: c6
+  statement: 'Generalization to unseen model pairs: the same routers (trained on Arena + judge data) are applied without retraining to Claude 3 Opus / Claude 3 Sonnet and Llama 3.1 70B / Llama 3.1 8B, which
+    are not in the training data (the judge-labeled augmentation data compare GPT-4 and Mixtral responses); the authors report performance on MT Bench comparable to the original pair and significantly stronger
+    than random. This transfer test is reported on MT Bench only, not on MMLU or GSM8K.'
+  location: Adaptability across models
+  page: 8
+  quote: Importantly, we use the same routers as before without any retraining, and only replace the strong and weak model routed to.
+- id: c7
+  statement: 'Stated limitations: real-world query distributions may differ substantially from the evaluated benchmarks (the authors suggest collecting a small amount of in-domain data for augmentation);
+    only two-model routing is studied; and performance of different routers trained on the same data can vary widely on the same benchmark without a clear explanation.'
+  location: Conclusion
+  page: 10
+  quote: First, although we evaluate on a diverse set of benchmarks, real-world applications may have distributions that differ substantially from these benchmarks.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at ICLR 2025. Affiliations: UC Berkeley, Anyscale, Canva; funding
+    acknowledgment lists gifts from Accenture, AMD, Anyscale, Google, IBM, Intel, Microsoft, MBZUAI, Samsung SDS, SAP, Uber and VMware. Several authors (Chiang, Gonzalez, Stoica) are among the authors of
+    the Chatbot Arena paper (Chiang et al., 2024; source of the training data) and of the MT Bench / LLM-as-a-judge paper (Zheng et al., 2023; one of the evaluation benchmarks and the judge protocol used
+    for the augmentation labels), per the reference list. Stoica is also affiliated with Anyscale, which is among the listed gift funders. Evaluated models: OpenAI GPT-4, Mistral Mixtral 8x7B, Anthropic
+    Claude 3 Opus/Sonnet, Meta Llama 3.1; OpenAI text-embedding-3-small is used for embeddings. Cost in the metrics (and in the abstract''s ''over 2 times'') is the share of calls to the strong model, not
+    dollars. The Table 6 ''cost saving ratio'' (up to 3.66x) is the inverse ratio of GPT-4 calls of the best router vs. the random baseline; dollar prices enter only as the justification that GPT-4 cost
+    dominates (estimated averages of $24.7 for GPT-4, from gpt-4-1106 list prices and assumed prompt/response lengths, and $0.24 for Mixtral per million tokens; Appendix D). Appendix E compares against
+    commercial routers (Unify AI, Martian) on MT Bench. Router overhead measured on Google Cloud VMs (Table 7). The paper says it open-sources the framework but no code URL was found in the PDF text. It
+    criticizes Hybrid LLM (arxiv-2404.14618) for evaluating only on the MixInstruct test split without out-of-domain evidence (Related work).'

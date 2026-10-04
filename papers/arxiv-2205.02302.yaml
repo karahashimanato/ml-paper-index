@@ -1,0 +1,80 @@
+id: arxiv-2205.02302
+title: 'Machine Learning Operations (MLOps): Overview, Definition, and Architecture'
+authors:
+- Dominik Kreuzberger
+- Niklas Kühl
+- Sebastian Hirschl
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2205.02302
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 680907b6ee15a9ca113c33acfc981988dc6dc7fcf06c337a2e112dd5d7aff319
+tags:
+  tasks:
+  - mlops
+  method_families:
+  - automl-systems
+proposes:
+- Definition of MLOps plus nine principles, nine technical components, seven roles and a technology-agnostic end-to-end architecture/workflow, derived from a mixed-method study (structured literature review,
+  tool review, semi-structured expert interviews)
+claims:
+- id: c1
+  statement: 'Method: mixed-method study combining a structured literature review (search in May 2021: 1,864 retrieved, 194 screened in detail, 27 selected, all peer-reviewed), a tool review, and semi-structured
+    interviews (June to August 2021) with eight experts identified via LinkedIn under a theoretical sampling approach, conducted until no new categories and concepts emerged (theoretical saturation).'
+  location: Methodology
+  page: 2
+  quote: In total, we conduct eight interviews with experts (α - θ), whose details are depicted in Table 2 of the Appendix.
+- id: c2
+  statement: 'Definition: MLOps is a paradigm (best practices, concepts, development culture) covering end-to-end conceptualization, implementation, monitoring, deployment and scalability of ML products;
+    the authors describe it as an engineering practice drawing on ML, software engineering (especially DevOps) and data engineering.'
+  location: Conceptualization
+  page: 8
+  quote: MLOps (Machine Learning Operations) is a paradigm, including aspects like best practices, sets of concepts, as well as a development culture when it comes to the end-to-end conceptualization, implementation,
+    monitoring, deployment, and scalability of machine learning products.
+- id: c3
+  statement: 'Monitoring component (C9): continuously monitors model serving performance (e.g., prediction accuracy); monitoring of ML infrastructure, CI/CD and orchestration is also required (both statements
+    are backed in the paper by literature citations and interviewee markers). Tool examples, each attributed to interviewees, include Prometheus with Grafana, the ELK stack and TensorBoard.'
+  location: Technical Components
+  page: 4
+  quote: The monitoring component takes care of the continuous monitoring of the model serving performance (e.g., prediction accuracy).
+- id: c4
+  statement: 'Alert path in the proposed workflow: the monitoring component observes serving performance and infrastructure in real time, and once a threshold is reached (e.g., low prediction accuracy detected)
+    the information is forwarded via a feedback loop to upstream receivers (experimental stage, data engineering zone, scheduler).'
+  location: Architecture and Workflow
+  page: 7
+  quote: Once a certain threshold is reached, such as detection of low prediction accuracy, the information is forwarded via the feedback loop.
+- id: c5
+  statement: 'Retraining triggers: when the monitoring component detects drift in the data, the scheduler triggers the automated ML workflow pipeline for retraining (continuous training); drift can be detected
+    with distribution comparisons, and retraining can also be triggered by new feature data or run periodically.'
+  location: Architecture and Workflow
+  page: 8
+  quote: Retraining is not only triggered automatically when a statistical threshold is reached; it can also be triggered when new feature data is available, or it can be scheduled periodically.
+- id: c6
+  statement: 'Model registry and promotion: retrained models are pushed to the model registry, the metadata store records model version and status (e.g., staging or production-ready), and switching a well-performing
+    model''s status from staging to production hands it over for deployment via the continuous deployment pipeline.'
+  location: Architecture and Workflow
+  page: 7
+  quote: Once the status of a well-performing model is switched from staging to production, it is automatically handed over to the DevOps engineer or ML engineer for model deployment.
+- id: c7
+  statement: 'Operational challenge reported (citing literature [18] and interviewee θ): a constant stream of new data forces retraining capabilities, a repetitive task requiring a high level of automation;
+    the resulting artifacts need strong governance and versioning of data, model and code (further citations).'
+  location: Open Challenges
+  page: 8
+  quote: Also, a constant incoming stream of new data forces retraining capabilities.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Affiliations (PDF): KIT (Kreuzberger, Kühl) and IBM (Hirschl), with the footnote ''This paper does not
+    represent an official IBM statement''. Per Table 2 (Appendix), the eight interviewees'' industries are: sporting goods/retail (α), IT services/cloud provider/cloud computing (β), cloud provider (γ,
+    δ, ε), consulting company (ζ), conglomerate (η), music/audio streaming (θ). The tool review covers 11 tools (Figure 1; Table 1 of the Appendix). Searched the full text for rollback, roll back, fallback,
+    fall back, canary, shadow, A/B, replace, revert, previous model, champion and challenger: none found (the only ''switch'' hit is the staging-to-production status switch in c6); the architecture describes
+    promotion (staging to production), monitoring with threshold-based feedback, and retraining, but no rollback to a previous model version and no switch to a fallback model at serving time. The Introduction
+    says the paper concludes with ''limitations, and outlook'', but no limitations section or limitation statement was found in the text. No experiments. Tag note: the family tag automl-systems is a PLACEHOLDER
+    and does not describe this paper (that tag is for AutoML systems that search over and ensemble model types; this is a conceptual MLOps study with no AutoML system). No existing family tag fits; a user
+    decision on a new tag is pending.'

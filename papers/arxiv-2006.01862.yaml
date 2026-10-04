@@ -1,0 +1,92 @@
+id: arxiv-2006.01862
+title: Consistent Estimators for Learning to Defer to an Expert
+authors:
+- Hussein Mozannar
+- David Sontag
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.01862
+  code: https://github.com/clinicalml/learn-to-defer
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: b38a2b5aaff66903346d46f70ed34a9ea72cc790641e6502db3147c8bd587a28
+tags:
+  tasks:
+  - selective-prediction
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Learning to defer via a reduction to cost-sensitive learning: a K+1-way softmax (K classes plus a defer output) trained with the convex surrogate L_CE, consistent for the 0-1 system loss of the classifier-plus-expert
+  system, and an alpha-reweighted variant L^alpha_CE (consistent only for alpha = 1) used as a tunable hyperparameter'
+claims:
+- id: c1
+  statement: 'Contribution: predictors that either predict or defer to a downstream expert, learned from samples of the expert''s decisions by training a classifier and a rejector, based on a reduction
+    to cost-sensitive learning with a consistent surrogate loss that generalizes cross entropy.'
+  location: Abstract
+  page: 1
+  quote: Our approach is based on a novel reduction to cost sensitive learning where we give a consistent surrogate loss for cost sensitive learning that generalizes the cross entropy loss.
+- id: c2
+  statement: 'Guarantee (Theorem 1): L_CE (= L^alpha_CE with alpha = 1) is convex in g, upper-bounds the 0-1 system loss, and is classification-consistent: its minimizer over all measurable functions matches
+    the Bayes classifier and Bayes rejector (defer when the expert''s probability of being correct is at least the classifier''s maximal class posterior, Proposition 2). Setting (Section 3): samples (x,
+    y, m) with (x, y) i.i.d. from P and m drawn from the expert''s distribution given (x, y); the guarantee is asymptotic/population-level, not a finite-sample or restricted-class statement.'
+  location: Proposed Surrogate Loss
+  page: 5
+  quote: The proposed surrogate LCE is in fact consistent and upper bounds L0−1 as the following theorem demonstrates.
+- id: c3
+  statement: 'Authors'' caveat on the guarantee: with the specific (restricted) hypothesis classes used in practice, if the Bayes predictor is not in the class, consistency might not guarantee much; the
+    paper therefore also defines realizable (H, R)-consistency. It then defines a mixture-of-experts loss L_mix, which in the authors'' words extends the approach of [MPZ18] (Madras, Pitassi, Zemel) to
+    the multiclass setting, and shows (Proposition 3) that this L_mix is realizable (H, R)-consistent for classes closed under scaling (including linear models and neural networks) but not classification-consistent;
+    which property matters more in practice is stated to be not immediately clear.'
+  location: Inconsistency of mixtures of experts loss and Realizable-consistency
+  page: 8
+  quote: So far we have focused on classiﬁcation consistency to verify the soundness of proposed approaches, however, we usually have speciﬁc hypothesis classes H, R in mind, and if the Bayes predictor
+    is not in our class then consistency might not guarantee much [BDLSS12].
+- id: c4
+  statement: 'Failure mode of an alternative deferral loss (Mozannar & Sontag''s finding about their own multiclass implementation of the [MPZ18] approach, not a result of Madras et al.): in the CIFAR-10
+    experiment with synthetic experts, the mixture-of-experts loss learns never to defer; the authors'' explanation is that the classifier''s training loss converges to zero while validation accuracy keeps
+    improving, whereas the expert''s loss stays constant.'
+  location: 'Experiments: CIFAR-10'
+  page: 12
+  quote: the mixtures of experts loss of [MPZ18] fails in this setup and learns never to defer.
+- id: c5
+  statement: 'How the expert is obtained (Section 6): simulated throughout. CIFAR-10 uses synthetic experts that are perfect on the first k classes and uniform otherwise; CIFAR-100 and CheXpert use probabilistic
+    synthetic experts; hate speech uses a synthetic expert whose probability of being correct depends on whether a language model predicts the tweet to be African-American English (AAE); CIFAR10H simulates
+    an average human annotator by sampling from real crowdworker class counts.'
+  location: 'Experiments: CIFAR-10'
+  page: 11
+  quote: 'We simulate multiple synthetic experts of varying competence in the following way: let k ∈[10], then if the image belongs to the ﬁrst k classes the expert predicts perfectly, otherwise the expert
+    predicts uniformly over all classes.'
+- id: c6
+  statement: 'Fairness of the combined system (hate speech, synthetic experts): with the synthetic fair expert (correct with probability 0.9 on both AAE and non-AAE tweets), the confidence-score baseline
+    doubles the system''s discrimination (difference in false positive rates between AAE and non-AAE tweets) relative to the classifier alone; the proposed method does not achieve significantly lower discrimination
+    than the baseline.'
+  location: Hate Speech and Offensive Language Detection
+  page: 14
+  quote: While our method does not achieve signiﬁcantly lower discrimination than the baseline
+- id: c7
+  statement: 'Input-noise robustness test (CheXpert, synthetic expert with q = 0.7, p = 1; main text, Section 6.6 ''Further Analysis''): models trained on original X-rays are evaluated on X-rays with a
+    randomly placed rectangle erased (area varied from 0.1 to 0.66). The text for Figure 8 reports that all methods'' maximum achievable AU-ROC/AU-PR (averaged over the 5 tasks) degrade with the noise scale,
+    and the gap between methods stays constant in AU-PR but diminishes in AU-ROC.'
+  location: 'Synthetic Experts on CheXpert: Further Analysis (Impact of input noise)'
+  page: 19
+  quote: In the second experiment, we train with the original chest X-rays but evaluate with noisy X-rays with noise in the form of erasing a randomly placed rectangular region of the X-ray.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Affiliation: Massachusetts Institute of Technology; supported by NSF CAREER award #1350965. Measured quantities:
+    system accuracy, coverage and classifier accuracy on non-deferred examples (CIFAR, CIFAR10H), discrimination (FPR difference) for hate speech, system AU-ROC/AU-PR versus coverage for CheXpert. Evaluation-practice
+    note: in the CheXpert experiments coverage is fixed by setting the deferral threshold tau at a percentile of the score q(x) computed over the test set (''The deﬁnition of τ ensures that we obtain exactly
+    c% coverage''); alpha was chosen on a validation set (grid search for hate speech; validation AU-ROC for CheXpert), and temperature scaling on the validation set calibrates the baselines. The only real
+    human labels used are the CIFAR10H crowdworker annotations, and even there the expert is sampled from label counts. Stated future work (Conclusion): limited expert data, biased expert data, and deferring
+    to multiple experts. No text-classification task tag exists in registry/tags.yaml, so the hate-speech experiment is not reflected in the task tags. Consistency caveat (Section 4): ''note that for α
+    ≠ 1 the loss LCE is no longer consistent'', yet alpha is treated as a hyperparameter and tuned (e.g. alpha chosen on validation AU-ROC for CheXpert), so reported results for alpha != 1 are not covered
+    by Theorem 1. Section 5.1 (''Failure of Confidence Scores Method'') argues that comparing separately learned classifier and expert confidences [RBC+19] does not allow the classifier to adapt to the
+    expert''s strengths and weaknesses and can fail when H and R are restricted.'

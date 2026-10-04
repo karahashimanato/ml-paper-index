@@ -45,3 +45,7 @@ themes:
     tags: [combinatorial-optimization, divide-and-conquer, dynamic-programming, branch-and-bound, local-search]
     arxiv_queries:
       - '(abs:"combinatorial optimization" OR abs:"branch and bound" OR abs:"branch-and-bound" OR abs:"local search" OR abs:"dynamic programming") AND (abs:learning OR abs:neural) AND (cat:cs.LG OR cat:cs.AI OR cat:math.OC)'
+  - name: 予測モデルのフォールバックとモデル選択
+    tags: [model-selection, selective-prediction, mlops]
+    arxiv_queries:
+      - '(abs:"model selection" OR abs:"algorithm selection" OR abs:"learning to defer" OR abs:"selective prediction" OR abs:"selective classification" OR abs:"model routing" OR abs:"LLM routing" OR abs:"fallback" OR abs:"MLOps") AND (cat:cs.LG OR cat:cs.SE OR cat:stat.ML)'

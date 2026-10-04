@@ -1,0 +1,89 @@
+id: arxiv-2107.03315
+title: Predicting with Confidence on Unseen Distributions
+authors:
+- Devin Guillory
+- Vaishaal Shankar
+- Sayna Ebrahimi
+- Trevor Darrell
+- Ludwig Schmidt
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2107.03315
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: db143daf76974cb8d575344cf9432f9a8c021b1ee1801e9f25ce694348105a60
+tags:
+  tasks:
+  - mlops
+  - dataset-shift-detection
+  - image-classification
+  method_families:
+  - deep-learning
+  - linear-models
+  paradigms:
+  - post-hoc
+proposes:
+- 'Difference of confidences (DoC): the drop in average max-softmax confidence from the base (held-out training-distribution) set to an unlabeled target set, used directly (DoC-Feat) or as a feature for
+  a linear regressor fitted on labeled calibration shifts, to predict accuracy on unseen distributions; DoE uses average entropy instead'
+claims:
+- id: c1
+  statement: 'Proposed signal: DoC is defined as the base set''s average confidence minus the target set''s average confidence (over classes shared by both); it is used as a feature for a regressor of the
+    accuracy gap or directly as an accuracy estimate, motivated by average confidence (AC) being an overly optimistic accuracy predictor for miscalibrated models.'
+  location: Predicting performance with difference of confidences
+  page: 4
+  quote: 'We propose difference of conﬁdences DoC as a way to quantify distribution shifts:'
+- id: c2
+  statement: 'Negative finding: common distributional distances such as Frechet distance and MMD fail to give reliable performance estimates under distribution shift; in Results, when calibrated on synthetic
+    shifts, A-proxy and discriminator AUC did not significantly improve on the naive base-accuracy baseline for natural shifts.'
+  location: Abstract
+  page: 1
+  quote: Our investigation determines that common distributional distances such as Frechet distance or Maximum Mean Discrepancy, fail to induce reliable estimates of performance under distribution shift.
+- id: c3
+  statement: 'Evaluation protocol: ImageNet is the base distribution; regressors are trained on labeled ''calibration'' groupings of shifts and evaluated on held-out ''validation'' groupings, with similar
+    shifts placed in the same group to avoid leakage; the main setting calibrates on synthetic shifts (ImageNet-C) and predicts on natural shifts (ImageNet-V2, ImageNet-Vid-Robust, ImageNet-Rendition, ImageNet-Sketch),
+    averaged over many pretrained architectures; metric is MAE of predicted accuracy.'
+  location: Experiments
+  page: 5
+  quote: Our work’s chief concern is the ability to predict natural distribution shifts, and as such focuses on settings with synthetic calibration and natural validation datasets.
+- id: c4
+  statement: 'Failure mode (synthetic shifts): although DoC improved on the AC baseline for every natural shift, it decreased prediction accuracy on 2 of 8 synthetic shifts (Defocus Blur and Gaussian Blur).'
+  location: Results
+  page: 7
+  quote: While DoC improves upon the AC baseline for each form of natural distribution shift, we note that in 2 of the 8 synthetic shifts explored (Defocus Blur and Gaussian Blur) DoC actually decreases
+    the accuracy of the predictions.
+- id: c5
+  statement: 'Failure mode (training interventions): the improvement from DoC declines steeply for models trained with synthetic corruptions (AugMix, AugMix-DeepAugment), and DoC did not improve the AugMix-DeepAugment
+    model; the authors think the distances are likely off because AugMix corruptions were not replicated between base and calibration sets.'
+  location: Results
+  page: 6
+  quote: Furthermore, we observe a steep decline in the magnitude of improvement offered from our DoC approach as it is evaluated over models which incorporate synthetic corruptions into the training process
+    (Augmix, AM-DeepAugment).
+- id: c6
+  statement: 'Failure mode (adversarially collected shift): ImageNet-A produced the highest accuracy-prediction error of all shifts studied for every approach; when calibrated on synthetic shifts, DoC was
+    the only approach to noticeably improve on AC there; calibrating on natural shifts instead improved all approaches, but only DoE and DoC then beat AC (the others stayed significantly worse than AC),
+    which the authors take as showing the importance of calibrating and evaluating on natural shifts and as highlighting limitations of these approaches.'
+  location: Results
+  page: 7
+  quote: In Figure 7, we observe that this distribution shift produces the highest predicted accuracy error of shifts we have studied across all approaches.
+- id: c7
+  statement: 'Stated limitation: the authors call their results a promising step for detecting performance drop under shift but say the problem is far from solved; they also echo Ovadia et al. that many
+    methods designed for uncertainty prediction seem to fall short of simpler baselines. No impossibility or identifiability result is stated in the text.'
+  location: Conclusion
+  page: 8
+  quote: While our results present a promising step forward for detecting performance drop under distribution shift, we note that the problem is far from solved.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Affiliations: UC Berkeley, Amazon (Vaishaal Shankar), Toyota Research Institute (Ludwig Schmidt); funding
+    from DoD/DARPA XAI and LwLL programs and Berkeley''s BAIR industrial alliance programs. Venue not stated in the arXiv v2 PDF text. Regression-based variants need labeled target-like shifts (calibration
+    groupings); DoC-Feat needs none. Experiments with non-linear regressors in the supplement are said to follow the same trends as linear ones. The paper also reports DoC on a single ResNet-101 beating
+    a ResNet ensemble at predicting accuracy. Later work, not this paper: Garg et al. (arxiv-2201.04234) use DoC-Feat as a baseline and, on BREEDS, fit a robust linear regression for DOC on labeled shifts
+    of the source subpopulations and test on novel subpopulations; they report that their ATC without regression performs better or similar, and argue that regression on labeled target domains can fail
+    when unseen shifts are not linearly correlated with seen ones. Those are Garg et al.''s findings in their setting. This paper itself evaluates only on ImageNet-based shifts and states no impossibility
+    result. Tag note: the task tags are approximations. No performance-estimation tag exists yet (a user decision on adding one is pending); mlops and dataset-shift-detection are the closest existing tags
+    and do not exactly describe this paper, which predicts accuracy under shift rather than detecting shift; linear-models is for the linear regressor.'

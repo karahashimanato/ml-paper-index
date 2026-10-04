@@ -1,0 +1,93 @@
+id: arxiv-2007.04074
+title: 'Auto-Sklearn 2.0: Hands-free AutoML via Meta-Learning'
+authors:
+- Matthias Feurer
+- Katharina Eggensperger
+- Stefan Falkner
+- Marius Lindauer
+- Frank Hutter
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2007.04074
+  code: https://github.com/automl/ASKL2.0_experiments
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c4d5a1de2783776ccd07bfefcedcd0d2270a3aafdfb1a09598b58cd09c89dd68
+tags:
+  tasks:
+  - model-selection
+  - tabular-classification
+  method_families:
+  - automl-systems
+  paradigms:
+  - meta-learning
+proposes:
+- 'PoSH Auto-sklearn: a greedily built, meta-feature-free static portfolio of complementary ML pipelines to warm-start Bayesian optimization, plus successive halving for budget allocation'
+- 'Auto-sklearn 2.0: a model-based policy selector that chooses per dataset among eight AutoML policies ({holdout, 3/5/10-fold CV} x {successive halving, full budget}, each with its own portfolio) using
+  pairwise random forests on two meta-features, with a rule-based fallback for out-of-distribution datasets'
+claims:
+- id: c1
+  statement: 'Portfolio guarantee and its conditions: minimizing a portfolio''s test loss on the meta-datasets (choosing a pipeline from the portfolio per dataset by holdout or CV) is shown equivalent to
+    sensor placement; the penalty is submodular, so the greedy portfolio achieves at least (1-1/e) of the penalty reduction of the optimal portfolio of the same size, measured on the meta-train datasets
+    Dmeta (''at the very least''). For new datasets there is no guarantee: the authors only state that the portfolio is a strong set of defaults under the assumption that new datasets come from the same
+    distribution.'
+  location: Theoretical Properties of the Greedy Algorithm
+  page: 9
+  quote: Under the assumption that we apply the portfolio to datasets from the same distribution of datasets, we have a strong set of default ML pipelines.
+- id: c2
+  statement: 'Selector mechanism (per-instance algorithm selection, following HydraMIP): for each pair of policies a random forest predicts whether one outperforms the other from the dataset''s meta-features;
+    meta-observations are weighted by the loss difference, errors are rescaled per dataset, pairwise models vote at test time, and the selector''s hyperparameters are tuned by BO on cross-validation error
+    (tree depth 0 recovers the single best policy).'
+  location: Constructing the per-dataset Policy Selector
+  page: 19
+  quote: for each pair of AutoML policies, we ﬁt a random forest to predict whether policy πA outperforms policy πB given the current dataset’s meta-features.
+- id: c3
+  statement: 'Meta-features: only two simple meta-features computable in linear time (number of datapoints and number of features) are used, chosen to avoid the time and robustness problems of richer meta-features;
+    the authors describe this as learning the manually designed fallbacks.'
+  location: Meta-Features
+  page: 20
+  quote: 'reliably computed in linear time for every dataset: 1) the number of datapoints and 2) the number of features.'
+- id: c4
+  statement: 'Fallback for out-of-distribution datasets: because the selector is not guaranteed to extrapolate (e.g. to much larger datasets, where a chosen policy could time out), if no meta-dataset has
+    higher or equal values on every meta-feature (number of datapoints and features) the system falls back to holdout with successive halving, described as the most aggressive and cheapest policy considered.
+    The fallback is a fixed rule on the two meta-features, not learned; Figure 3 marks several test datasets as outside the meta-dataset distribution.'
+  location: Backup strategy
+  page: 20
+  quote: Since there is no guarantee that our model-based policy selector will extrapolate well to datasets outside of the meta-datasets, we implement a fallback measure to avoid failures.
+- id: c5
+  statement: 'Ablation: removing the fallback degrades performance for all policy selection strategies, which the authors say can mainly be explained by a few huge datasets the selector cannot extrapolate
+    to; the authors suggest research on an adaptive fallback that switches strategy during execution, and report the selector beats the single best policy at 10 minutes but not at 60 minutes when no fallback
+    is used.'
+  location: Ablation
+  page: 23
+  quote: The rather stark performance degradation compared to the regular model-based policy selector can mainly be explained by a few, huge datasets, to which the model-based policy selector cannot extrapolate
+    (and which the single best does not account for).
+- id: c6
+  statement: 'Evaluation protocol: portfolios and the selector are built on 208 OpenML meta-datasets (filtered by size and attribute types, synthetic datasets dropped, clusters of highly similar datasets
+    subsampled, manually checked for overlap with the test set) and evaluated on 39 disjoint AutoML-benchmark datasets with one 33.33% holdout test split per task, 10 repetitions, normalized balanced error
+    (ADTM), Wilcoxon signed-rank tests; the ablation adds a random policy and an oracle that picks the best policy on the test set.'
+  location: Datasets
+  page: 13
+  quote: Finally, we manually checked for overlap with Dtest and ended up with a total of 208 training datasets and used them to train our method.
+- id: c7
+  statement: 'Stated limitations: the system optimizes toward a given optimization budget, metric and configuration space; there is no performance guarantee for SH combined with BO; several AutoML-level
+    hyperparameters remain hand-picked; whether other meta-features than the two used would help is open; and building the meta training data is expensive.'
+  location: Discussion and Conclusion
+  page: 33
+  quote: However, our system also introduces some shortcomings since it optimizes performance towards a given optimization budget, performance metric and conﬁguration space.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Journal of Machine Learning Research 23 (2022) 1-61. Conflict of interest: the paper calls
+    Auto-sklearn 2.0 ''the next generation of our AutoML system'' (the authors develop Auto-sklearn) and compares Auto-sklearn 2.0 against Auto-sklearn 1.0 and other AutoML systems (Auto-WEKA, TPOT, H2O
+    AutoML, tuned RF) on the AutoML benchmark (1h8c setting, 10 folds, 5 repeats); they note they cannot compute significance on CV folds there. Affiliations include Bosch Center for Artificial Intelligence;
+    acknowledgements state Robert Bosch GmbH financial support. The authors report the improvement over Auto-sklearn 1.0 is skewed by several large datasets on which Auto-sklearn 1.0''s KND initialization
+    only suggested ML pipelines that time out or hit the memory limit. Motivation for the portfolio: meta-feature computation ran over time on one track of the first AutoML challenge even after removing
+    landmarking features (Portfolio Building). Meta-data for the selector built with inner 5-fold CV over meta-datasets to avoid overestimating policy performance; meta-data generation used Auto-sklearn
+    runs at ten times the user budget with the best pipeline picked on the meta-dataset test split. The oracle in Table 6 is defined as always choosing the best policy on the test set; footnote says its
+    normalized error can be non-zero. Results tables not recorded.'

@@ -39,6 +39,7 @@ nav:
       - 学習モデルと計算量: articles/topics/compute-and-scaling.md
       - 古典アルゴリズムと機械学習: articles/topics/algorithms-and-ml.md
       - アルゴリズム設計技法と機械学習: articles/topics/design-techniques-and-ml.md
+      - 予測モデルのフォールバックとモデル選択: articles/topics/model-fallback-and-selection.md
   - 索引と論文ページ:
       - 索引: generated/index.md
       - 未反映カード: generated/stale.md

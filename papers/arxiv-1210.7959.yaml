@@ -1,0 +1,83 @@
+id: arxiv-1210.7959
+title: 'Algorithm Selection for Combinatorial Search Problems: A Survey'
+authors:
+- Lars Kotthoff
+year: 2012
+links:
+  arxiv: https://arxiv.org/abs/1210.7959
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 52f3c449712738f94548942937215de12a97e10cff8dc148faaf86c82f9bb5d2
+tags:
+  tasks:
+  - model-selection
+  - combinatorial-optimization
+  method_families:
+  - dynamic-ensemble-selection
+  paradigms:
+  - meta-learning
+proposes:
+- Survey of the Algorithm Selection Problem (selecting the best algorithm per problem instance, after Rice 1976) for combinatorial search problems (SAT, constraints, planning, QBF, scheduling), organized
+  by what to select from (static/dynamic portfolios), what and when to select (single algorithm vs schedules; offline vs online), how to select (performance models, types of predictions) and features (low/high-knowledge,
+  static/dynamic/probing, feature selection)
+claims:
+- id: c1
+  statement: 'Framework (Rice 1976, as summarized by the survey): given a problem space and an algorithm space, map each problem-algorithm pair to its performance and use the mapping to select the best
+    algorithm; Rice''s refined model adds problem features, which the survey calls the crucial difference that often makes an approach feasible.'
+  location: Introduction
+  page: 1
+  quote: The basic model described in the paper is very simple – given a space of problems and a space of algorithms, map each problem-algorithm pair to its performance.
+- id: c2
+  statement: 'Caveat on training samples and features (the survey summarizing Rice 1976 on the difficulty of knowing the problem space): problem spaces are often sampled to evaluate algorithms empirically;
+    if the sample is not representative or the features do not separate problem classes, there is little hope of finding the best or even a good selection mapping.'
+  location: Introduction
+  page: 4
+  quote: If the sample is not representative, or the features do not facilitate a good separation of the problem classes in the feature space, there is little hope of ﬁnding the best or even a good selection
+    mapping.
+- id: c3
+  statement: 'Failure mode of selecting a single algorithm per instance: a wrong selection cannot be mitigated; the system is stuck with a badly performing algorithm even if other portfolio algorithms would
+    do much better (schedules over several algorithms are the surveyed alternative).'
+  location: What to select
+  page: 12
+  quote: If an algorithm is chosen that exhibits bad performance on the problem, the system is “stuck” with it and no adjustments are made, even if all other portfolio algorithms would perform much better.
+- id: c4
+  statement: 'Offline vs online selection: purely offline approaches have no way of mitigating wrong choices, often do not even detect them (they do not monitor the chosen algorithm), and are inherently
+    vulnerable to bad choices, but incur no overhead during solving; online selection allows finer decisions at the price of higher overhead.'
+  location: When to select
+  page: 13
+  quote: Purely oﬄine approaches are inherently vulnerable to bad choices.
+- id: c5
+  statement: 'Selector cost requirement: apart from accuracy, a selector must be relatively cheap to run, since selecting is pointless if it costs more than solving the problem.'
+  location: Portfolio selectors
+  page: 15
+  quote: Apart from accuracy, one of the main requirements for such a selector is that it is relatively cheap to run – if selecting an algorithm for solving a problem is more expensive than solving the
+    problem, there is no point in doing so.
+- id: c6
+  statement: 'Fallback to a default algorithm (described for systems such as SATzilla, Xu et al. 2008): pre-solvers run before feature analysis, and if the predicted feature-analysis time is too high a
+    default algorithm with reasonable performance is chosen; the survey says this matters when problems are hard to analyse but easy to solve.'
+  location: Portfolio selectors
+  page: 15
+  quote: If the predicted required analysis time is too high, a default algorithm with reasonable performance is chosen and run on the problem.
+- id: c7
+  statement: 'No Free Lunch: the survey notes NFL would also apply to selection systems themselves (gains on one part of the problem space, losses elsewhere), but judges from the literature that, if applicable,
+    the ramifications in practice may not be significant.'
+  location: No Free Lunch theorems
+  page: 5
+  quote: However, a review of the literature suggests that, if the theorems are applicable, the ramiﬁcations in practice may not be signiﬁcant.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Survey; no experiments of its own. Affiliation stated: 4c.ucc.ie email address. Rice''s four selection
+    criteria include ''best selection for all mappings and problems'' (per-instance) and ''best selection for a subclass of problems'' (a single algorithm for a subclass, i.e. per-set); the survey says
+    the latter cases are more common in practice. It also cites Guo (2003) that the Algorithm Selection Problem is undecidable in general and says a mapping that generalises well may be preferable to the
+    best-performing one. Dynamic features (computed during search) are the only ones that use performance on the current problem, allowing remedial action when a problem is unlike anything seen before (Features
+    section). Feature cost: Xu et al. (2009) fall back to a default selection when feature computation is predicted too expensive. Misclassification-penalty weighting (Gent et al. 2010) is described for
+    training selectors. The terms ''virtual best solver'' and ''oracle'' were not found in the text; the Summary only states some systems have come very close to always choosing the best algorithm. Tag
+    note: the family tag dynamic-ensemble-selection is an approximation and does not describe this paper accurately. The survey is about per-instance algorithm selection from solver portfolios (and schedules)
+    for combinatorial search problems, not about ensembles of classifiers; no existing family tag covers algorithm portfolios, and dynamic-ensemble-selection (choosing which models to use for each input)
+    was the closest.'

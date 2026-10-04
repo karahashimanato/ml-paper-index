@@ -1,0 +1,92 @@
+id: arxiv-1906.02530
+title: Can You Trust Your Model's Uncertainty? Evaluating Predictive Uncertainty Under Dataset Shift
+authors:
+- Yaniv Ovadia
+- Emily Fertig
+- Jie Ren
+- Zachary Nado
+- D Sculley
+- Sebastian Nowozin
+- Joshua V. Dillon
+- Balaji Lakshminarayanan
+- Jasper Snoek
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1906.02530
+  code: https://github.com/google-research/google-research/tree/master/uq_benchmark_2019
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 1610d04d7f69d10751f0e9ff1db9fbd8b3fdf5306798879016192eb2dbf17a6f
+tags:
+  tasks:
+  - selective-prediction
+  - dataset-shift-detection
+  - image-classification
+  method_families:
+  - deep-learning
+proposes:
+- Large-scale benchmark of predictive uncertainty (accuracy, NLL, Brier, ECE, entropy, confidence-vs-accuracy) under increasing dataset shift and on fully OOD data, across image, text and categorical (ad-click)
+  classification
+claims:
+- id: c1
+  statement: 'Methods compared (all model p(y|x) only): vanilla maximum softmax probability, temperature scaling on a validation set, MC dropout, deep ensembles of independently trained networks (M = 10),
+    stochastic variational inference, and last-layer SVI / last-layer dropout.'
+  location: Methods and metrics
+  page: 3
+  quote: (Ensembles) Ensembles of M networks trained independently on the entire dataset using random initialization (Lakshminarayanan et al., 2017) (we set M = 10 in experiments below)
+- id: c2
+  statement: 'Shift protocol: models are trained and validated i.i.d., then evaluated on (i) shifted versions of test inputs whose labels stay in the k classes (covariate shift: corruptions and perturbations
+    from Hendrycks & Dietterich 2019 on CIFAR-10/ImageNet, rotations/translations on MNIST, randomly reassigned categorical tokens on Criteo), and (ii) completely different OOD datasets (e.g. Not-MNIST,
+    SVHN for CIFAR-10, LM1B for text), for which only label-free diagnostics (entropy, confidence histograms, confidence vs accuracy) are reported. Exception: for 20 Newsgroups the ''shifted'' set is the
+    10 odd-numbered classes held out from training, i.e. its labels are not among the training classes.'
+  location: Background
+  page: 3
+  quote: We use shifts such as corruptions and perturbations proposed by Hendrycks & Dietterich (2019), and ideally would like the model predictions to become more uncertain with increased shift, assuming
+    shift degrades accuracy.
+- id: c3
+  statement: 'Tuning protocol: hyperparameters were optimized by Bayesian optimization (Google Vizier), maximizing log-likelihood on a validation set held out from the (unshifted) training data; the main
+    text says this applies to all methods except on ImageNet.'
+  location: Appendix (Hyperparameter tuning)
+  page: 14
+  quote: We maximized the log-likelihood on a validation set that was held out from training (10K examples for MNIST and CIFAR-10, 125K examples for ImageNet).
+- id: c4
+  statement: 'Failure of i.i.d. calibration under shift (CIFAR-10 / ImageNet): temperature scaling achieves low ECE for small shift but ECE increases significantly as shift increases, so calibrating on
+    an i.i.d. validation set does not guarantee calibration under distributional shift.'
+  location: Experiments and results
+  page: 7
+  quote: Interestingly, while temperature scaling achieves low ECE for low values of shift, the ECE increases signiﬁcantly as the shift increases, which indicates that calibration on the i.i.d. validation
+    dataset does not guarantee calibration under distributional shift.
+- id: c5
+  statement: On the Criteo ad-click data with categorical-feature shift, temperature scaling had a worse Brier score than the vanilla model, which the authors read as post-hoc calibration on the validation
+    set actually harming calibration under dataset shift.
+  location: Experiments and results
+  page: 9
+  quote: Strikingly, temperature scaling has a worse Brier score than Vanilla indicating that post-hoc calibration on the validation set actually harms calibration under dataset shift.
+- id: c6
+  statement: 'Take-home: along with accuracy, uncertainty quality consistently degrades with increasing dataset shift for every method tested.'
+  location: Takeaways and recommendations
+  page: 9
+  quote: Along with accuracy, the quality of uncertainty consistently degrades with increasing dataset shift regardless of method.
+- id: c7
+  statement: 'Take-home (hedged): deep ensembles ''seem to'' perform best across most metrics and be more robust to shift, and a small ensemble (e.g. M = 5) may be sufficient; the authors also note the
+    best-performing methods tend to be more expensive in compute and memory, and that the method ordering on MNIST does not reflect the other datasets.'
+  location: Takeaways and recommendations
+  page: 9
+  quote: Deep ensembles seem to perform the best across most metrics and be more robust to dataset shift.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: 33rd Conference on Neural Information Processing Systems (NeurIPS 2019), Vancouver, Canada.
+    Affiliations: Google Research and DeepMind (all authors). Reviewer observation (NOT stated by the paper, which does not discuss it): corresponding author Balaji Lakshminarayanan is the first author
+    of the deep ensembles method (Lakshminarayanan et al., 2017, ''Simple and Scalable Predictive Uncertainty Estimation Using Deep Ensembles'', in the reference list) that the paper finds ''seem to'' perform
+    best; readers may weigh that finding accordingly. Other observations relevant to switching: on MNIST most methods give low-entropy, high-confidence predictions on entirely OOD data (''confidently wrong'');
+    in the text experiment temperature scaling ''does not appear to increase uncertainty significantly on the shifted data''; LL-SVI and LL-Dropout perform worse than vanilla on shifted data and SVHN. Higher-capacity
+    vanilla/dropout models (double filters) did not explain the ensemble advantage. Data: MNIST, CIFAR-10, ImageNet, 20 Newsgroups, Criteo (37M examples, 13 numeric + 26 categorical features), plus a genomics
+    problem in the appendix. Tag note: the task tags are approximations. No calibration / uncertainty-evaluation tag exists yet (a user decision on adding one is pending); selective-prediction and dataset-shift-detection
+    are the closest existing tags and do not exactly describe this paper, which benchmarks uncertainty quality under shift rather than proposing an abstention or shift-detection method. Data tag image-classification
+    covers only part (text and Criteo tabular-like data also used).'

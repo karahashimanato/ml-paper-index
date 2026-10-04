@@ -1,0 +1,81 @@
+id: arxiv-2011.09926
+title: 'Challenges in Deploying Machine Learning: a Survey of Case Studies'
+authors:
+- Andrei Paleyes
+- Raoul-Gabriel Urma
+- Neil D. Lawrence
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2011.09926
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: d943c38c9a145e7db7455d3915e7ccf36fd81727228fd23c3d4125b58caebc68
+tags:
+  tasks:
+  - mlops
+  method_families:
+  - automl-systems
+proposes:
+- Survey of published ML deployment case studies, review papers and lessons-learned reports, mapping reported challenges to the stages of the ML deployment workflow of Ashmore et al. (data management, model
+  learning, model verification, model deployment) plus cross-cutting aspects
+claims:
+- id: c1
+  statement: 'Main claim: by mapping the challenges found in reports to the steps of the deployment workflow, the authors show that practitioners face issues at each stage of deployment.'
+  location: Abstract
+  page: 1
+  quote: By mapping found challenges to the steps of the machine learning deployment workﬂow we show that practitioners face issues at each stage of the deployment process.
+- id: c2
+  statement: 'Evidence base: case study papers (single deployment project), review papers of a field/industry, and lessons-learned papers, mostly limited to the last five years with a few exceptions; the
+    authors state they conducted no interviews themselves.'
+  location: Introduction
+  page: 2
+  quote: We have not conducted any interviews ourselves as part of this study.
+- id: c3
+  statement: 'Monitoring (citing Sculley et al.): the ML community is said to be early in understanding which data and model metrics to monitor and how to trigger alarms when they deviate; monitoring evolving
+    input data, prediction bias and overall performance is called an open problem.'
+  location: Monitoring
+  page: 13
+  quote: Monitoring of evolving input data, prediction bias and overall performance of ML models is an open problem.
+- id: c4
+  statement: 'Outlier detection (citing Klaise et al.): outlier detection is presented as a key instrument to flag predictions that cannot be used in production; deploying the detector is itself a challenge
+    because labeled outlier data are scarce, making training semi-supervised or unsupervised.'
+  location: Monitoring
+  page: 13
+  quote: Klaise et al. [72] point out the importance of outlier detection as a key instrument to ﬂag model predictions that cannot be used in a production setting.
+- id: c5
+  statement: 'Case study cited (Ackermann et al., early intervention system for two US police departments): data integrity checks, anomaly detection and performance metrics had to be built from scratch;
+    the survey takes this as a sign that out-of-the-box tooling of end-to-end platforms often does not fit problem specifics.'
+  location: Monitoring
+  page: 13
+  quote: However, the authors explain that they had to build all these checks from scratch in order to maintain good model performance.
+- id: c6
+  statement: 'Updating: besides when to retrain (concept drift, linked to monitoring) and how to deliver the model artifact (continuous delivery), the survey notes (citing Bansal et al. and Srivastava et
+    al.) that updates may harm users or downstream systems through behavior changes, e.g. backward-incompatible updates.'
+  location: Updating
+  page: 14
+  quote: While updating is necessary for keeping a model up to date with recent ﬂuctuations in the data, it may also inﬂict damage on users or downstream systems because of the changes in the model’s behavior,
+    even without causing obvious software errors.
+- id: c7
+  statement: 'Stated limitation: the set of reviewed challenges is far from complete; identifying further (especially non-technical) challenges, possibly via interviews with industry representatives, is
+    left as further work.'
+  location: Further Work
+  page: 21
+  quote: Even though the set of challenges we reviewed covers every stage of the ML deployment workﬂow, it is far from complete.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: ACM Computing Surveys, 2022, https://doi.org/10.1145/3533378. Affiliations (PDF): University
+    of Cambridge (Paleyes, Lawrence) and Cambridge Spark (Urma, a company). Acknowledgments: funding for A.P. and N.L. from a Senior AI Fellowship of the Alan Turing Institute and UKRI. Model-deployment
+    challenges are grouped as integration, monitoring (feedback loops, outlier detection, custom design tooling) and updating (concept drift, continuous delivery) in Table 1. The survey points to dataset-shift
+    detection libraries/services (Rabanser et al. methods implemented in Alibi Detect, Azure ML, AWS SageMaker) in its Discussion of potential solutions. Searched the full text for rollback, roll back,
+    fallback, fall back, canary, shadow, A/B, replace, revert, previous model, champion and challenger: no description of rolling back to a previous model or switching to a fallback model at serving time.
+    The only related hits are ''replacement'' in other senses (simulation is not a full replacement for real-world testing; an ML solution replacing a previous pen-and-paper method in the Firebird case
+    study; replacing micro-service architectures with dataflow architectures). Updating (c6) is discussed in terms of when to retrain, continuous delivery and backward compatibility, not rollback. The Klaise
+    et al. [72] paper cited in c4 is carded as arxiv-2007.06299. Conclusion notes a relative shortage of deployment experience reports in the academic literature. Tag note: the family tag automl-systems
+    is a PLACEHOLDER and does not describe this paper (that tag is for AutoML systems that search over and ensemble model types; this survey only mentions AutoML tools briefly in its Discussion of potential
+    solutions and evaluates no AutoML system). No existing family tag fits; a user decision on a new tag is pending.'

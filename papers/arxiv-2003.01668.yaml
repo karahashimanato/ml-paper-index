@@ -1,0 +1,84 @@
+id: arxiv-2003.01668
+title: Model Assertions for Monitoring and Improving ML Models
+authors:
+- Daniel Kang
+- Deepti Raghavan
+- Peter Bailis
+- Matei Zaharia
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2003.01668
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 5cb1f9399eb3f7a5556c855c78300dbfecef7b60fb997c392826f75c5e31fabf
+tags:
+  tasks:
+  - mlops
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Model assertions: user-written functions over model inputs/outputs returning a severity score that flags likely errors, used for runtime monitoring, label validation, bandit-based active learning (BAL)
+  and consistency-assertion weak supervision; implemented in the Python library OMG'
+claims:
+- id: c1
+  statement: 'Abstraction: model assertions are arbitrary functions over a model''s input and output that indicate when errors may be occurring (e.g., an object rapidly changing its class in a video); they
+    return a Boolean or continuous severity score, 0 meaning abstention.'
+  location: Abstract
+  page: 1
+  quote: Model assertions are arbitrary functions over a model’s input and output that indicate when errors may be occurring, e.g., a function that triggers if an object rapidly changes its class in a video.
+- id: c2
+  statement: 'Runtime use as stated by the authors: assertions can log unexpected behavior or automatically trigger corrective actions such as shutting down an autopilot. The evaluation measures assertion
+    precision, high-confidence errors found, active learning and weak supervision; an experiment where an assertion triggers an automatic runtime corrective action was not found in the text.'
+  location: Introduction
+  page: 2
+  quote: 'First, we show that model assertions can be used for runtime monitoring: they can be used to log unexpected behavior or automatically trigger corrective actions, e.g., shutting down an autopilot.'
+- id: c3
+  statement: 'Settings: four workloads based on industrial and academic use cases: TV news (50 problematic hour-long segments with precomputed outputs; no retraining possible), video analytics (ResNet-34
+    SSD pretrained on MS-COCO on night-street video), autonomous vehicles (NuScenes; PointPillars LIDAR and SSD camera detectors) and AF classification from ECG (CINC17).'
+  location: Experimental Setup
+  page: 7
+  quote: 'We evaluated OMG and model assertions on four diverse ML workloads based on real industrial and academic use-cases: analyzing TV news, video analytics, autonomous vehicles, and medical classiﬁcation.'
+- id: c4
+  statement: 'Precision protocol: for each assertion, 50 randomly sampled data points that triggered it were checked manually for an incorrect model output. Only precision among flagged points is reported;
+    a recall or miss-rate measurement for assertions was not found in the text.'
+  location: Evaluation
+  page: 8
+  quote: To test this, we randomly sampled 50 data points that triggered each assertion and manually checked whether that data point had an incorrect output from the ML model.
+- id: c5
+  statement: 'High-confidence errors: for the video-analytics assertions, the 10 highest-confidence errors per assertion were placed in the confidence distribution of all boxes; the authors state uncertainty-based
+    monitoring would not catch these errors.'
+  location: Evaluation
+  page: 8
+  quote: Importantly, uncertainty-based methods of monitoring would not catch these errors.
+- id: c6
+  statement: 'Fallback inside BAL (active learning): BAL samples data flagged by assertions in proportion to the marginal reduction in assertions fired; when assertions cannot be reduced (e.g., noisy assertions;
+    all reductions under 1% in Algorithm 2), it defaults to random or uncertainty sampling as the user specifies. The authors state BAL itself has no statistical guarantees and is verified empirically.'
+  location: Active learning with BAL
+  page: 6
+  quote: In this case, BAL will default to random sampling or uncertainty sampling, as speciﬁed by the user.
+- id: c7
+  statement: 'Stated limitations: assertions have not been thoroughly evaluated in real-time systems and may add overhead where actuation has tight latency constraints (e.g., AVs), though they can be run
+    over historical data; the authors also list API expressiveness for some temporal assertions and out-of-scope issues such as training-set bias.'
+  location: Discussion
+  page: 10
+  quote: Second, we have not thoroughly evaluated model assertions’ performance in real-time systems.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 3rd MLSys Conference, Austin, TX, USA, 2020. Affiliation (PDF): Stanford
+    University. Acknowledgments: supported in part by Stanford DAWN affiliates (Ant Financial, Facebook, Google, Infosys, NEC, VMware), Toyota Research Institute, Northrop Grumman, Cisco, SAP and NSF; the
+    authors note they are collaborating with an AV company on real-time issues. Severity scores need not be calibrated because the algorithms use only their relative ordering. Consistency assertions also
+    produce corrective weak labels (e.g., most common attribute value; user-supplied WeakLabel functions), used for retraining rather than runtime replacement of outputs. Active-learning trials: night-street
+    run twice, NuScenes 8 trials (Appendix). Searched the full text for rollback, roll back, fallback, fall back, canary, shadow, A/B, replace, revert, previous model, champion and challenger: no rollback
+    to a previous model and no switch to a fallback model at serving time. Hits are only (a) ''Fall back to baseline method'' in Algorithm 2 (BAL data selection falling back to random/uncertainty sampling,
+    c6) and (b) ''replace'' in consistency-assertion correction rules that replace an inconsistent attribute to generate weak labels (Section 4) and in an Appendix table of assertion types. Runtime corrective
+    actions (e.g., shutting down an autopilot) are only stated as a possible use (c2); Figure 1 illustrates correcting a missed box with a consistency assertion, but the corrections are evaluated as weak
+    labels for retraining, and the stated runtime-deployment uses are logging and populating dashboards. Tag note: experiments are on object detection (video, LIDAR) and ECG classification, for which no
+    task tag exists; only mlops is used as task.'

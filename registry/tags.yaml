@@ -59,6 +59,12 @@ tasks:
     description: Automatically searching for neural network architectures.
   - id: structured-prediction
     description: Predicting structured outputs such as label sequences, alignments or trees (e.g. sequence labelling, time-series alignment).
+  - id: model-selection
+    description: Choosing which model or algorithm to use (algorithm selection, meta-learned selection, routing between models).
+  - id: selective-prediction
+    description: Abstaining from or deferring a prediction (classification with a reject option, learning to defer).
+  - id: mlops
+    description: Monitoring, deploying and managing models in production.
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -162,6 +168,10 @@ method_families:
     description: Branch and bound and exact optimization built on it (including mixed integer programming solvers).
   - id: local-search
     description: Local and neighbourhood search (e.g. 2-opt, large neighbourhood search).
+  - id: dynamic-ensemble-selection
+    description: Ensembles that choose which models to use for each input.
+  - id: model-cascades
+    description: Trying cheaper models first and passing inputs to stronger models when needed, and routing queries between models.
 paradigms:
   - id: supervised
     description: Supervised learning.
@@ -177,3 +187,5 @@ paradigms:
     description: Applied to an already trained model without changing it.
   - id: reinforcement-learning
     description: Reinforcement learning.
+  - id: meta-learning
+    description: Learning from experience on previous tasks or datasets how to select or adapt models.

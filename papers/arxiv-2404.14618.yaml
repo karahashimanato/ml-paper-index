@@ -1,0 +1,93 @@
+id: arxiv-2404.14618
+title: 'Hybrid LLM: Cost-Efficient and Quality-Aware Query Routing'
+authors:
+- Dujian Ding
+- Ankur Mallick
+- Chi Wang
+- Robert Sim
+- Subhabrata Mukherjee
+- Victor Ruhle
+- Laks V. S. Lakshmanan
+- Ahmed Hassan Awadallah
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2404.14618
+  code: https://github.com/m365-core/hybrid_llm_routing
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c0ebc21073112b8f8e51c7ea279eeac4d5b62be88c69a5cd2bccc2d58ec28cbb
+tags:
+  tasks:
+  - model-selection
+  method_families:
+  - model-cascades
+  - large-language-models
+  paradigms:
+  - supervised
+  - post-hoc
+proposes:
+- 'Hybrid LLM: a DeBERTa-v3-large query router that predicts the probability that a small model''s response quality (BART score) is at least that of a large model (quality gap), with deterministic labels,
+  probabilistic soft labels from 10 sampled responses per model, and a relaxed-label data transformation Pr[H(x) >= -t] for large quality gaps (t chosen by grid search); a test-time threshold on the router
+  score trades quality for cost'
+claims:
+- id: c1
+  statement: 'Main empirical claim (abstract): routing on predicted query difficulty allows up to 40% fewer calls to the large model with no drop in response quality; the desired quality level can be tuned
+    at test time.'
+  location: Abstract
+  page: 1
+  quote: In experiments our approach allows us to make up to 40% fewer calls to the large model, with no drop in response quality.
+- id: c2
+  statement: 'Routing decision: an encoder router scores each query before generation, with a score designed to be large for ''easy'' queries where the small model''s quality is likely close to the large
+    model''s (an estimate of the quality gap tail probability); at test time a threshold on the score is tuned, and queries scoring above it go to the small model. Each query is sent to a single LLM.'
+  location: Hybrid LLM Inference
+  page: 6
+  quote: At test time we achieve the desired performance accuracy tradeoff by tuning a threshold on the score and routing queries with score above the threshold to the small model.
+- id: c3
+  statement: 'Evaluation protocol: MixInstruct (real-world instructions from four public datasets); 10k training queries sampled from its training split with 10 responses per LLM, validation and test splits
+    of 5k each from MixInstruct (the validation set is also used to choose router checkpoints); quality is BART score and cost is ''cost advantage'' (fraction of queries routed to the small model); baselines
+    are all-at-large, all-at-small and random routing. Models: FLAN-T5 (800m, 11b), Llama-2 (7b, 13b), GPT-3.5-turbo.'
+  location: Evaluation Setup
+  page: 9
+  quote: We use BART score [Yuan et al., 2021] as the quality metric and use fraction of queries routed to the small model (cost advantage) as the efficiency metric (see Section 2.3).
+- id: c4
+  statement: 'Failure mode: when the large model is much stronger than the small one (e.g. FLAN-t5 800m vs Llama-2 13b), the empirical probability that the small model is at least as good is near zero for
+    most queries, giving a weak training signal; the deterministic and probabilistic routers then improve little over random assignment, which motivates the relaxed-label transformation.'
+  location: Section 3.3
+  page: 8
+  quote: Because q(S(x)) << q(L(x)) for most queries in this case, it provides an extremely weak signal for training using Equation (2) and as shown in Section 4 both rdet and rprob fail to provide much
+    improvement over random query assignment in this case.
+- id: c5
+  statement: 'Threshold selection: the authors recommend default thresholds from a small calibration set (500 random samples from the MixInstruct validation split, evaluated on the MixInstruct test split,
+    grid search for the highest cost advantage with at most 1% BART-score drop) and report that test-set results closely follow validation results; for the Llama-2 7b/13b pair the performance drop increases
+    slightly from validation to test, which they suggest handling with a more conservative limit.'
+  location: Section 4.5
+  page: 13
+  quote: This clearly illustrates that a threshold chosen on the validation set generalizes well to the test set.
+- id: c6
+  statement: 'Generalization to other model pairs (on MixInstruct with BART-score quality gaps; the specific pairs are not named in the text): routers applied to LLM pairs different from their training
+    pair generalize well when the quality gaps of the test pair correlate strongly with those of the training pair, and performance decays as the correlation weakens; the authors propose this correlation
+    as an early indicator of whether a router can be reused. A similar dependence on correlation is reported when evaluating with GPT-4 scores instead of BART score (Section 4.6).'
+  location: Section 4.7
+  page: 14
+  quote: Similar to our observation in Section 4.6, our routers can generalize well if the quality gaps of testing LLM pairs exhibit strong positive correlation with the quality gaps of the training pairs.
+- id: c7
+  statement: 'Stated limitation: the model pair and data distribution are fixed across training and testing; the authors note that training a new router for every new model pair and data distribution may
+    be cumbersome or infeasible and list out-of-distribution generalization as future work (along with task-aware routing, N-model routing and better evaluation metrics).'
+  location: Discussion and Conclusion
+  page: 15
+  quote: In this work, the model pair and data distribution is fixed across training and testing.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Affiliations: University of British Columbia, Microsoft (first author''s work performed during an internship
+    at Microsoft), Hippocratic AI (one author''s work performed while at Microsoft). Evaluated models include OpenAI GPT-3.5-turbo (via API), Meta Llama-2 and Google FLAN-T5; no conflict-of-interest statement
+    found. The abstract''s ''no drop in response quality'' at up to 40% fewer large-model calls corresponds to the small-performance-gap pair (Llama-2 7b vs 13b); Table 1 reports larger drops at 40% cost
+    advantage for medium and large gaps. Numeric/wording discrepancies within the paper: the abstract says ''no drop in response quality'' while the conclusion says ''no significant drop''; Table 3 (thresholds
+    chosen on 500 validation samples with <=1% drop) gives test cost advantages above 96% for the Llama-2 7b/13b pair, far above the abstract''s ''up to 40%'', with test drops of 1.39-1.60% exceeding the
+    1% limit (and rtrans 1.02% for the FLAN-t5/Llama-2 13b pair). Cost is a proxy (fraction routed to the small model), not API prices; router latency is measured but GPT-3.5-turbo latency is not. RouteLLM
+    (arxiv-2406.18665) later criticizes this paper for lacking out-of-domain evaluation; this paper itself states the distribution is fixed (claim on limitations).'

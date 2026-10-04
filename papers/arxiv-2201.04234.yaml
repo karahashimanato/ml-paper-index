@@ -1,0 +1,96 @@
+id: arxiv-2201.04234
+title: Leveraging Unlabeled Data to Predict Out-of-Distribution Performance
+authors:
+- Saurabh Garg
+- Sivaraman Balakrishnan
+- Zachary C. Lipton
+- Behnam Neyshabur
+- Hanie Sedghi
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2201.04234
+  code: https://github.com/saurabhgarg1996/ATC_code
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 7cb2f27e56afaa892400202062f0984ece7c74c8834bb64e0efe27596e76429f
+tags:
+  tasks:
+  - mlops
+  - dataset-shift-detection
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- 'Average Thresholded Confidence (ATC): pick a threshold on a confidence score (max confidence or negative entropy) on labeled source validation data so that the fraction below it equals source error,
+  then predict target error as the fraction of unlabeled target points below it; plus an identifiability/impossibility analysis of target-accuracy estimation'
+claims:
+- id: c1
+  statement: 'Method: ATC learns a threshold on model confidence and predicts target accuracy as the fraction of unlabeled target examples whose confidence exceeds it, using only labeled source data and
+    unlabeled target data.'
+  location: Abstract
+  page: 1
+  quote: We propose Average Thresholded Conﬁdence (ATC), a practical method that learns a threshold on the model’s conﬁdence, predicting accuracy as the fraction of unlabeled examples for which model conﬁdence
+    exceeds that threshold.
+- id: c2
+  statement: 'Threshold choice: the threshold is chosen on held-out source validation data so that the fraction of source examples scoring above it matches their accuracy; the same threshold is then applied
+    to the target (the authors note a different target threshold would in principle exist, but the source one worked well in their experiments).'
+  location: Introduction
+  page: 2
+  quote: ATC selects a threshold on validation source data such that the fraction of source examples that receive the score above the threshold match the accuracy of those examples.
+- id: c3
+  statement: 'Impossibility statement (theory, Section 3.1): the setting is knowledge of the full labeled source distribution p_s(x,y) and the unlabeled target marginal p_t(x), with no assumptions on the
+    classifier f (f may be any classifier on X). Proposition 1: absent further assumptions, target accuracy is identifiable iff p_t(y|x) is uniquely identified given p_s(x,y) and p_t(x) (e.g. it is, under
+    covariate shift with target support inside source support, or under label shift). Corollary 1: absent assumptions on the classifier f, no method of estimating accuracy works for all natures of distribution
+    shift. Example 1 (binary Gaussian mixture) shows the same p_s(x,y), p_t(x) give different target errors under covariate shift vs label shift, so a method consistent under one is wrong under the other.'
+  location: 'Accuracy estimation: possibility and impossibility results'
+  page: 5
+  quote: Corollary 1. Absent assumptions on the classiﬁer f, no method of estimating accuracy will work in all scenarios, i.e., for different nature of distribution shifts.
+- id: c4
+  statement: 'Stated limitation following from the theory: ATC, like all methods, must fail (give inconsistent estimates) on certain types of distribution shift. The main-text positive guarantee (Theorem
+    1, informal) is for a toy setting: binary classification with an invariant feature and a spurious feature, a linear sigmoid classifier with w_inv > 0, the max-confidence score, and target shift only
+    in the degree of spurious correlation; there, ATC is consistent. In that same toy model, shrinking the support of the target class-conditional p_t(x_inv|y) can make ATC over-estimate target accuracy.
+    Appendix D.1 is said to give a more general (less interpretable) classifier-dependent shift condition under which ATC is consistent.'
+  location: Introduction
+  page: 3
+  quote: Finally, we note that although ATC achieves superior performance in our empirical evaluation, like all methods, it must fail (returns inconsistent estimates) on certain types of distribution shifts,
+    per our impossibility result.
+- id: c5
+  statement: 'Evaluation protocol: metric is mean absolute error between true target accuracy and the estimate on the same unlabeled examples (target labels used only for the true value); models use standard
+    training with benchmarked hyperparameters (the reproducibility statement says no hyperparameter tuning was done); for all methods, temperature-scaling calibration is fitted on source validation data,
+    and results are reported both before and after it; baselines are AC, DOC (the DOC-Feat variant of Guillory et al.), importance re-weighting (IM) and GDE; MAE aggregated over 4 seeds.'
+  location: Experiments
+  page: 6
+  quote: To compare methods, we report average absolute difference between the true accuracy on the target data and the estimated accuracy on the same unlabeled examples.
+- id: c6
+  statement: 'Where it works and fails: MAE is small on BREEDS shifts from the same subpopulation, but on shifts with novel subpopulations MAE is significantly higher for all methods (ATC still best among
+    them); the conclusion repeats that ATC still suffers large estimation error on novel-population datasets such as BREEDS. Shift families tested: synthetic corruptions (ImageNet-C, CIFAR-10-C/100-C),
+    dataset reproduction (ImageNetV2, CIFARv2), renditions/sketch, BREEDS subpopulations, WILDS, MNIST to USPS/SVHN/QMNIST.'
+  location: Results
+  page: 8
+  quote: While we observe a small MAE (i.e., comparable to our observations on other datasets) on BREEDS with natural and synthetic shifts from the same sub-population, MAE on shifts with novel population
+    is signiﬁcantly higher with all methods.
+- id: c7
+  statement: 'Garg et al.''s critique and re-evaluation of prior work (Deng et al.; Guillory et al.''s DoC with regression): in this paper''s view, methods that fit a regression on labeled target domains
+    rely on unseen target domains being strongly linearly correlated with the seen ones on the distance measure, and can be rendered ineffective otherwise. Garg et al.''s own re-evaluation (Section 5.1,
+    BREEDS): they observe a poor linear correlation across subpopulations (Living-17 shown); they fit a robust (Siegel) linear regression for DOC ''as in Guillory et al.'' on labeled natural and synthetic
+    shifts of the source subpopulations, evaluate on shifts with novel subpopulations, and find the fitted DOC improves over unfitted DOC while ATC without any regression performs better or similar. This
+    is Garg et al.''s result in their setting, not a finding of Guillory et al.'
+  location: Introduction
+  page: 2
+  quote: methods that leverage labeled data from target domains rely on the fact that unseen target domains exhibit strong linear correlation with seen target domains on the underlying distance measure
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Published as a conference paper at ICLR 2022. Affiliations: Carnegie Mellon University; Google
+    Research (Blueshift team, Brain team); first author interned at Google. Also cites Ovadia et al. (2019) for the claim that models calibrated on source are not, in general, calibrated on an unseen target
+    domain. Architectures: DenseNet121 and ResNet50 (vision), DistilBERT-base-uncased (Amazon/CivilComments-WILDS), MLP (MNIST); results aggregated over 4 seeds. Temperature scaling substantially improved
+    MAE for all methods in their experiments. Garg et al. also characterize Guillory et al. (2021) as requiring calibration on the target domain for consistent estimates; that is Garg et al.''s characterization.
+    Tag note: the task tags are approximations. No performance-estimation tag exists yet (a user decision on adding one is pending); mlops and dataset-shift-detection are the closest existing tags and do
+    not exactly describe this paper, which estimates target accuracy from unlabeled data rather than detecting shift.'

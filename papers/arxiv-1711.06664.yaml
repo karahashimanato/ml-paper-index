@@ -1,0 +1,85 @@
+id: arxiv-1711.06664
+title: 'Predict Responsibly: Improving Fairness and Accuracy by Learning to Defer'
+authors:
+- David Madras
+- Toniann Pitassi
+- Richard Zemel
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1711.06664
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 646211ea89d88b8a423e27ccd04e4f423e2d793ebd1557831eadf1d8370c1645
+tags:
+  tasks:
+  - selective-prediction
+  - tabular-classification
+  method_families:
+  - deep-learning
+  - model-cascades
+  paradigms:
+  - supervised
+proposes:
+- 'Learning to defer (adaptive rejection learning): a two-stage cascade in which a model either predicts or passes to an external decision maker (DM), trained on the system loss (a mixture-of-experts-like
+  objective where only the model expert is learned), with post-hoc threshold and differentiable variants and an equalized-odds regularizer'
+claims:
+- id: c1
+  statement: 'Contribution: learning to defer generalizes rejection learning by accounting for the external decision maker (DM; e.g. a human user or a proprietary black-box model) that makes the decision
+    when the model says pass, with a learning algorithm that accounts for potential biases of that DM.'
+  location: Abstract
+  page: 1
+  quote: We extend this concept by proposing learning to defer, which generalizes rejection learning by considering the eﬀect of other agents in the decision-making process.
+- id: c2
+  statement: 'Formal result (Theorem, Section 2.3): if the DM has constant loss on each example (e.g. is an oracle), there exist pass penalties gamma_reject, gamma_defer for which the learning-to-defer
+    and rejection-learning objectives are equivalent; i.e. rejection learning is the special case of learning to defer with a constant-loss DM.'
+  location: Why Learn to Defer?
+  page: 5
+  quote: 'The proof in Sec. 2.3 shows the central point of learning to defer: rejection learning is exactly a special case of learning to defer: a DM with constant loss α on each example.'
+- id: c3
+  statement: 'Deferral signal: the post-hoc variant thresholds the model''s own score (two thresholds giving a pass region), while the differentiable variant lets the deferral probability depend on the
+    input X as well, because the DM''s expected loss may vary with X differently from the model''s; at test time it defers when the deferral probability exceeds 0.5.'
+  location: Learning a Differentiable Model
+  page: 6
+  quote: 'This is advantageous because a DM’s actions may depend heterogenously on the data: the DM’s expected loss may change as a function of X, and it may do so diﬀerently than the model’s.'
+- id: c4
+  statement: 'How the DM is obtained: semi-synthetic. Real datasets (COMPAS recidivism with race as sensitive attribute; Heritage Health Charlson Index with age) and a simulated DM trained as a separate
+    classifier with extra information the model does not see; biased DMs are trained with a negative fairness coefficient and inconsistent DMs have predictions flipped with 30% probability on a subgroup.'
+  location: Experiments
+  page: 8
+  quote: 'Due to diﬃculty obtaining and evaluating real-life decision-making data, we use “semi-synthetic data”: real datasets, and simulated DM data by training a separate classiﬁer under slightly diﬀerent
+    conditions (see Experiment Details).'
+- id: c5
+  statement: 'Reporting protocol: results are shown across sweeps of the fairness coefficient and the defer/reject penalty, each point a median of 5 runs, and in the accuracy-fairness plots only the Pareto
+    front is shown; all results are on held-out test sets. The Pareto front is therefore formed from test-set points; the text does not describe a separate selection set for choosing which settings are
+    plotted.'
+  location: Experiments
+  page: 9
+  quote: In Fig. 3, we only show the Pareto front, i.e., points for which no other point had both better accuracy and fairness.
+- id: c6
+  statement: 'Threshold selection for the post-hoc model uses the test set: 1000 random threshold combinations are sampled, the best on one half of the test set is picked, and it is evaluated on the other
+    half.'
+  location: 'Appendix D (Details on Optimization: Hard Thresholds)'
+  page: 17
+  quote: We sampled 1000 combinations of thresholds, picked the thresholds which minimized the loss on one half of the test set, and evaluated these thresholds on the other half of the test set.
+- id: c7
+  statement: 'Generalization across decision makers is suggested, not tested: the authors note decision data could be sampled from many DMs and cite research suggesting common trends in DM behavior, so
+    a model trained on some DM could generalize to unseen DMs.'
+  location: Why Learn to Defer?
+  page: 5
+  quote: Research suggests that common trends exist in DM behavior [6, 11], suggesting that a model trained on some DM could generalize to unseen DMs.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Affiliation: University of Toronto, Vector Institute. No surrogate-loss consistency guarantee is given
+    (searched ''consisten''; the only matches concern ''inconsistent'' DMs); the formal result is the equivalence to rejection learning when the DM has constant loss. Measured quantities: accuracy, disparate
+    impact (equalized-odds gap), deferral rate overall and per subgroup, and minimum subgroup accuracy. Models and DMs are fully connected two-layer networks (5 hidden units for COMPAS, 20 for Health),
+    early stopping on a 20% validation split of training data (Appendix C). Mozannar & Sontag (arxiv-2006.01862, claim c3) later show that their multiclass extension of this mixture-of-experts style loss
+    is not classification-consistent and (claim c4) that it learns never to defer in their CIFAR-10 setup. Tag note: no fairness tag exists in registry/tags.yaml. ''model-cascades'' is justified by the
+    text: Section 2.1 states ''The decision-making ﬂow is modeled as a cascade, where the ﬁrst-step model can either predict (positive/negative) or say pass'', and the second stage may be a human or ''a
+    proprietary black-box model''; it is an approximation in that the second stage is a fixed external DM, not a stronger model chosen for cost/quality. The paper draws inspiration from mixture-of-experts
+    but the ''mixture-of-experts'' family tag was not added because only the model ''expert'' is learned.'

@@ -1,0 +1,74 @@
+id: arxiv-1802.04967
+title: 'DESlib: A Dynamic ensemble selection library in Python'
+authors:
+- Rafael M. O. Cruz
+- Luiz G. Hafemann
+- Robert Sabourin
+- George D. C. Cavalcanti
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1802.04967
+  code: https://github.com/scikit-learn-contrib/DESlib
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-02'
+  pdf_sha256: c0822013f1878c215dd18422061cd5227e4c21370d00d4d377efa1a42e96d2f9
+tags:
+  tasks:
+  - model-selection
+  method_families:
+  - dynamic-ensemble-selection
+  paradigms:
+  - supervised
+proposes:
+- 'DESlib: scikit-learn-compatible Python library implementing dynamic classifier selection (DCS), dynamic ensemble selection (DES, incl. META-DES, KNORA-E/U, DES-P, KNOP, DES-RRC, DES-KL) and static baselines
+  (Single Best, Static Selection, Oracle, Stacked Generalization)'
+claims:
+- id: c1
+  statement: 'Rationale of dynamic selection: competence of each pool classifier is estimated per query and only the most competent classifier (or an ensemble of the most competent) predicts, on the premise
+    that each base classifier is an expert in a different local region of the feature space.'
+  location: Introduction
+  page: 1
+  quote: The rationale for such techniques is that not every classiﬁer in the pool is an expert in classifying all unknown samples; rather, each base classiﬁer is an expert in a different local region of
+    the feature space.
+- id: c2
+  statement: 'Modular design following the authors'' taxonomy (Cruz et al., 2018): a DS method is defined by how the region of competence is defined, the source of information used to estimate competence,
+    and the selection approach; new methods often only need estimate_competence and select.'
+  location: Project management
+  page: 2
+  quote: (1) the methodology used to deﬁne the local region, in which the competence level of the base classiﬁers are estimated (region of competence); (2) the source of information used to estimate the
+    competence
+- id: c3
+  statement: 'What is selected: DCS selects only the single base classifier with the highest competence; DES selects all base classifiers that reach a minimum competence level.'
+  location: Implemented techniques
+  page: 3
+  quote: All base classiﬁers that attain a minimum competence level are selected to compose the ensemble of classiﬁers.
+- id: c4
+  statement: 'Baselines provided: static ensembles commonly used as baselines for DS methods, including Single Best, Static Selection, the Oracle and Stacked Generalization.'
+  location: Implemented techniques
+  page: 3
+  quote: 'Static Ensembles: This module provides the implementation of static ensemble techniques that are usually used as a baseline for the comparison of DS methods: Single Best (SB), Static Selection
+    (SS), Oracle and Stacked Generalization.'
+- id: c5
+  statement: 'Usage defaults: from version 0.3 each method has default values and can train its pool inside fit when no trained pool is given; the documented example fits the DS method on a separate dynamic
+    selection set (X_dsel).'
+  location: Usage
+  page: 4
+  quote: As of version 0.3, each implemented method comes with a list of default values, not requiring a trained list of classiﬁers as input.
+- id: c6
+  statement: 'Scope / future work: dynamic selection for other contexts such as one-class classification and regression is listed as future work (the library covers classification).'
+  location: Conclusion and future plans
+  page: 4
+  quote: Future work on this library includes the implementation of dynamic selection methods in different contexts, such as One-Class-Classiﬁcation (OCC) and regression.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. Software paper; no experiments, datasets or accuracy comparisons were found in the text. Conflict of interest
+    (from the reference list): the library authors are also authors of several implemented methods, e.g. META-DES (Cruz, Sabourin, Cavalcanti et al.), FIRE-DES++ and Online Local Pool (both including Cruz,
+    Cavalcanti, Sabourin), KNORA-E/U and KNOP (including Sabourin), and of the DS taxonomy and the review cited for DS improvements over static combination (Cruz et al., 2018). Affiliations: LIVIA, ETS
+    - Universite du Quebec (Montreal) and Universidade Federal de Pernambuco. Part of scikit-learn-contrib; v0.3 at time of writing. Also implements Dynamic Frienemy Pruning (FIRE-DES) and dynamic weighting
+    / hybrid selection+weighting variants.'

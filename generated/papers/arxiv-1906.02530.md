@@ -1,0 +1,23 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Can You Trust Your Model's Uncertainty? Evaluating Predictive Uncertainty Under Dataset Shift
+
+- カード: [`arxiv-1906.02530`](../../papers/arxiv-1906.02530.yaml)
+- 著者: Yaniv Ovadia, Emily Fertig, Jie Ren, Zachary Nado, D Sculley, Sebastian Nowozin, Joshua V. Dillon, Balaji Lakshminarayanan, Jasper Snoek
+- 年・掲載: 2019
+- 原論文: [PDF](https://arxiv.org/pdf/1906.02530v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: dataset-shift-detection, deep-learning, image-classification, selective-prediction
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Methods compared (all model p(y|x) only): vanilla maximum softmax probability, temperature scaling on a validation set, MC dropout, deep ensembles of independently trained networks (M = 10), stochastic variational inference, and last-layer SVI / last-layer dropout.([Methods and metrics, p.3](https://arxiv.org/pdf/1906.02530v2#page=3 "(Ensembles) Ensembles of M networks trained independently on the entire dataset using random initialization (Lakshminarayanan et al., 2017) (we set M = 10 in experiments below)"))
+- **c2** Shift protocol: models are trained and validated i.i.d., then evaluated on (i) shifted versions of test inputs whose labels stay in the k classes (covariate shift: corruptions and perturbations from Hendrycks & Dietterich 2019 on CIFAR-10/ImageNet, rotations/translations on MNIST, randomly reassigned categorical tokens on Criteo), and (ii) completely different OOD datasets (e.g. Not-MNIST, SVHN for CIFAR-10, LM1B for text), for which only label-free diagnostics (entropy, confidence histograms, confidence vs accuracy) are reported. Exception: for 20 Newsgroups the 'shifted' set is the 10 odd-numbered classes held out from training, i.e. its labels are not among the training classes.([Background, p.3](https://arxiv.org/pdf/1906.02530v2#page=3 "We use shifts such as corruptions and perturbations proposed by Hendrycks & Dietterich (2019), and ideally would like the model predictions to become more uncertain with increased shift, assuming shift degrades accuracy."))
+- **c3** Tuning protocol: hyperparameters were optimized by Bayesian optimization (Google Vizier), maximizing log-likelihood on a validation set held out from the (unshifted) training data; the main text says this applies to all methods except on ImageNet.([Appendix (Hyperparameter tuning), p.14](https://arxiv.org/pdf/1906.02530v2#page=14 "We maximized the log-likelihood on a validation set that was held out from training (10K examples for MNIST and CIFAR-10, 125K examples for ImageNet)."))
+- **c4** Failure of i.i.d. calibration under shift (CIFAR-10 / ImageNet): temperature scaling achieves low ECE for small shift but ECE increases significantly as shift increases, so calibrating on an i.i.d. validation set does not guarantee calibration under distributional shift.([Experiments and results, p.7](https://arxiv.org/pdf/1906.02530v2#page=7 "Interestingly, while temperature scaling achieves low ECE for low values of shift, the ECE increases signiﬁcantly as the shift increases, which indicates that calibration on the i.i.d. validation dataset does not guarantee calibration under distributional shift."))
+- **c5** On the Criteo ad-click data with categorical-feature shift, temperature scaling had a worse Brier score than the vanilla model, which the authors read as post-hoc calibration on the validation set actually harming calibration under dataset shift.([Experiments and results, p.9](https://arxiv.org/pdf/1906.02530v2#page=9 "Strikingly, temperature scaling has a worse Brier score than Vanilla indicating that post-hoc calibration on the validation set actually harms calibration under dataset shift."))
+- **c6** Take-home: along with accuracy, uncertainty quality consistently degrades with increasing dataset shift for every method tested.([Takeaways and recommendations, p.9](https://arxiv.org/pdf/1906.02530v2#page=9 "Along with accuracy, the quality of uncertainty consistently degrades with increasing dataset shift regardless of method."))
+- **c7** Take-home (hedged): deep ensembles 'seem to' perform best across most metrics and be more robust to shift, and a small ensemble (e.g. M = 5) may be sufficient; the authors also note the best-performing methods tend to be more expensive in compute and memory, and that the method ordering on MNIST does not reflect the other datasets.([Takeaways and recommendations, p.9](https://arxiv.org/pdf/1906.02530v2#page=9 "Deep ensembles seem to perform the best across most metrics and be more robust to dataset shift."))
+

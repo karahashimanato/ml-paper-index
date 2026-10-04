@@ -1,0 +1,83 @@
+id: arxiv-1901.09192
+title: 'SelectiveNet: A Deep Neural Network with an Integrated Reject Option'
+authors:
+- Yonatan Geifman
+- Ran El-Yaniv
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1901.09192
+  code: https://github.com/geifmany/SelectiveNet
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-02'
+  pdf_sha256: 70c911da4c620285d643f13332ba2dd5bf4743581a1f05f960ba4423cceec8d6
+tags:
+  tasks:
+  - selective-prediction
+  - image-classification
+  - tabular-regression
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'SelectiveNet: a three-headed network (prediction f, selection g, auxiliary h) trained end-to-end for a user-specified target coverage with a quadratic interior-point-style coverage penalty, plus a post-training
+  coverage calibration of the selection threshold on an unlabeled validation set'
+claims:
+- id: c1
+  statement: 'Contribution: unlike rejection mechanisms that threshold the confidence of a pre-trained network, SelectiveNet optimizes prediction (classification or regression) and rejection jointly, end-to-end,
+    for a target coverage.'
+  location: Abstract
+  page: 1
+  quote: In contrast, SelectiveNet is trained to optimize both classiﬁcation (or regression) and rejection simultaneously
+- id: c2
+  statement: 'Selection signal: a learned selection head whose final layer is a single sigmoid neuron; at inference the network predicts only if g(x) is at least 0.5 and abstains otherwise.'
+  location: SelectiveNet Architecture
+  page: 3
+  quote: At inference time, a sample x is fed to SelectiveNet, which predicts f(x) if and only if g(x) ≥0.5; otherwise, SelectiveNet abstains from predicting the label of x.
+- id: c3
+  statement: 'Coverage is not guaranteed by training: on CIFAR-10 both SR (threshold chosen on the training set) and SelectiveNet (trained with target coverage c) miss the target coverage on the test set
+    in all cases (in Table 1 SR falls below the target, SelectiveNet lands above it), with a smaller average violation for SelectiveNet.'
+  location: Coverage Accuracy
+  page: 4
+  quote: Clearly, both SR and SelectiveNet violate the target coverage rate in all cases.
+- id: c4
+  statement: 'Guarantee and its assumptions: a post-training calibration sets the threshold tau at the 100(1-c) percentile of g over an independent unlabeled validation set of n samples; treating each event
+    g(x_i) >= tau as a Bernoulli variable, a Hoeffding bound gives, with probability at least 1 - delta, coverage in [c - epsilon, c + epsilon] with epsilon = sqrt(ln(2/delta)/(2n)). (The Hoeffding step
+    presumes independent draws from the distribution the coverage refers to; shift is not discussed.) This is a coverage guarantee only, not a risk guarantee; Section 2 states such a model can be converted
+    into a risk-controlling one with the technique of Geifman & El-Yaniv (2017b).'
+  location: Coverage Accuracy
+  page: 4
+  quote: This goal can be achieved easily using the following simple post-training coverage calibration technique, which relies on an independent unlabeled validation set Vn containing n samples.
+- id: c5
+  statement: 'Evaluation protocol: datasets SVHN, CIFAR-10, Cats vs. Dogs (image classification) and UCI Concrete Compressive Strength (regression); baselines are SR and MC-dropout, rejection mechanisms
+    composed over a standard network trained for full coverage (MC-dropout as recommended by its creators: p = 0.5 and 100 passes in classification, p = 0.05 and 200 passes in regression); SR is not applied
+    to regression because there is no softmax layer.'
+  location: Baseline Methods
+  page: 4
+  quote: 'We compare the proposed method with two baselines: SR and MC-dropout, which are described below.'
+- id: c6
+  statement: 'Hyperparameters: alpha (weight between selective and auxiliary loss) was 0.5 in all experiments (Section 4.2 adds: without any hyperparameter optimization); lambda was set to 32, a value found
+    large enough to preserve the coverage constraint through training.'
+  location: Architectures and Hyperparameters
+  page: 5
+  quote: The value of α (the convex combination between the selective loss and the auxiliary loss) was set to 0.5 for all experiments, and λ was set to 32
+- id: c7
+  statement: 'Stated limitations / future work: the capacity (architecture) of the selection head was not optimized, and the authors anticipate that different datasets and perhaps different coverage rates
+    may require different selection-head architectures; whether ensembling improves SelectiveNet is left open.'
+  location: Concluding Remarks
+  page: 8
+  quote: Here, we have not tried to optimize this choice, but we anticipate that different datasets and perhaps different coverage rates may require different architectures also for the selection head.
+results: []
+relations: []
+card:
+  created_at: '2026-10-02'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-03): model fallback and model selection in MLOps (meta-learned selection, dynamic selection, abstention/deferral, switching triggers,
+    cascades/routing, monitoring); carded by a subagent. Results tables not recorded; claims only. PDF states: Proceedings of the 36th International Conference on Machine Learning, Long Beach, California,
+    PMLR 97, 2019. Affiliation: Technion - Israel Institute of Technology; supported by The Israel Science Foundation (grant No. 710/18). No experiment with shifted or out-of-distribution test data was
+    found in the text (searched ''shift'', ''out-of''); test sets are the standard splits (Cats vs. Dogs: a random stratified 20,000/5,000 split). Cost note from Related Work: the authors state effective
+    MC-dropout can require hundreds of forward passes per prediction, which motivates a single-pass selector. Coverage-mismatch note (Section 8.1, Table 6, CIFAR-10, averages of three runs): SelectiveNet
+    trained for coverage c and calibrated to c is nearly optimal among models trained for other coverages; calibration costs little ''provided that we calibrate towards a coverage rate that is close to
+    the trained (target) coverage'', and off-diagonal (mismatched) entries often have inferior selective risk.'

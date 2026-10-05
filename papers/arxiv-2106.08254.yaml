@@ -1,0 +1,85 @@
+id: arxiv-2106.08254
+title: 'BEiT: BERT Pre-Training of Image Transformers'
+authors:
+- Hangbo Bao
+- Li Dong
+- Songhao Piao
+- Furu Wei
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2106.08254
+  url: https://aka.ms/beit
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 6455f47a0ad99294c9e1eb8a361da558f87f9e4446f5d6c0b02c20646a93741c
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - masked-image-modeling
+  - autoencoders
+  paradigms:
+  - self-supervised
+proposes:
+- 'BEiT and masked image modeling (MIM): about 40% of image patches are masked blockwise and replaced by a mask embedding, and a ViT predicts the discrete visual tokens (from a dVAE image tokenizer, vocabulary
+  8192) of the original image at the masked positions'
+claims:
+- id: c1
+  statement: 'Target: the image is first tokenized into discrete visual tokens with the publicly available DALL-E dVAE tokenizer (vocabulary 8192, 14x14 tokens per image); masked patches are fed to the
+    Transformer and the objective is to recover the original visual tokens.'
+  location: Abstract
+  page: 1
+  quote: The pre-training objective is to recover the original visual tokens based on the corrupted image patches.
+- id: c2
+  statement: 'Motivation for tokens rather than pixels: citing [RPG+21], the authors state that pixel-level recovery tends to waste modelling capacity on short-range dependencies and high-frequency details.'
+  location: Introduction
+  page: 1
+  quote: However, such pixel-level recovery task tends to waste modeling capability on pre-training short-range dependencies and high-frequency details [RPG+21].
+- id: c3
+  statement: 'Pre-training setup: ViT-Base, ImageNet-1K training set without labels, augmentations random resized cropping, horizontal flipping and color jittering; at most 75 patches masked (roughly 40%)
+    with blockwise masking; about 500k steps (800 epochs) with 2k batch size, taking about five days on 16 V100 32GB GPUs.'
+  location: Pre-Training Setup
+  page: 5
+  quote: The 500k training steps take about ﬁve days using 16 Nvidia Telsa V100 32GB GPU cards.
+- id: c4
+  statement: 'Ablation (300-epoch pre-training, fine-tuned on ImageNet and ADE20K): predicting raw pixels instead of visual tokens is clearly worse, even worse than training from scratch; blockwise masking
+    helps, especially for segmentation and for pixel regression; recovering all visual tokens hurts.'
+  location: Section 3.3
+  page: 8
+  quote: Our proposed masked image modeling task signiﬁcantly outperforms naive pixel-level auto-encoding.
+- id: c5
+  statement: 'Tokenizer data: a tokenizer re-trained on ImageNet-1K without labels gives comparable reconstruction loss and ImageNet fine-tuning accuracy to the off-the-shelf DALL-E tokenizer (ablation
+    setup of Section 3.3).'
+  location: Appendix C
+  page: 15
+  quote: Table 8 shows that our reimplemented tokenizer obtains comparable reconstruction loss and ImageNet ﬁne-tuning performance compared with the off-the-shelf DALL-E tokenizer.
+- id: c6
+  statement: 'Main evaluation is end-to-end fine-tuning: a linear classifier on average-pooled patch representations is fine-tuned together with BEiT, mostly following DeiT hyperparameters (fewer epochs,
+    larger learning rate with layer-wise decay); intermediate fine-tuning on labeled ImageNet is also used.'
+  location: Image Classification
+  page: 6
+  quote: We directly follow the most of hyperparameters of DeiT [TCD+20] in our ﬁne-tuning experiments for a fair comparison.
+- id: c7
+  statement: 'Linear probes (appendix): the authors state that discriminative methods (contrastive, self-distillation) learn to aggregate image-level features into a global vector, which suits linear probing,
+    while generative methods such as iGPT and BEiT do not, which tends to make linear probes difficult. Following iGPT, they average-pool patch states and probe an intermediate layer (best at the 9th layer
+    for BEiT-B and 14th for BEiT-L), training with AdamW for 50 epochs with DINO''s augmentations.'
+  location: Appendix D
+  page: 15
+  quote: In contrast, the second strand of methods, such as iGPT [CRC+20] and ours, usually do not pretrain such global feature aggregation, which tends to make linear probes difﬁcult.
+- id: c8
+  statement: Overall, discriminative methods perform better than generative pre-training on linear probing; the authors attribute this to pre-trained global aggregation in DINO and MoCo v3 and state that
+    full fine-tuning eliminates the gap.
+  location: Appendix D
+  page: 16
+  quote: So the pre-training of global aggregation of image-level features is beneﬁcial to linear probing in DINO and MoCo v3, although full ﬁne-tuning eliminates the gap.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Harbin Institute of Technology and Microsoft Research (first author''s work done during an internship at Microsoft). No venue is stated in the PDF (arXiv v2); none recorded. Appendix B uses intermediate
+    fine-tuning on ImageNet-22K and on an in-house 70M labeled dataset. Results tables not recorded.'

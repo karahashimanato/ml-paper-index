@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Revisiting Self-Supervised Visual Representation Learning
+
+- カード: [`arxiv-1901.09005`](../../papers/arxiv-1901.09005.yaml)
+- 著者: Alexander Kolesnikov, Xiaohua Zhai, Lucas Beyer
+- 年・掲載: 2019
+- 原論文: [PDF](https://arxiv.org/pdf/1901.09005v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: deep-learning, image-classification, representation-learning, self-supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Evaluation protocol: a linear logistic regression is trained on representations extracted from the frozen network at the pre-logits level (other layers investigated in Section 4.5); for fast evaluation it is trained with L-BFGS on precomputed representations, while the comparison to prior literature uses SGD with momentum and data augmentation.([Section 3.3, p.4](https://arxiv.org/pdf/1901.09005v1#page=4 "We extract the representation from the (frozen) network at the pre-logits level, but investigate other possibilities in Section 4.5."))
+- **c2** To avoid overfitting to the official ImageNet validation split, all studies report accuracy on the authors' own validation split of 50,000 images held out from the training split; only the comparison with the literature (Table 2) uses the official validation set. Places205 is handled the same way.([Section 3.4, p.4](https://arxiv.org/pdf/1901.09005v1#page=4 "In order to avoid overﬁtting to the ofﬁcial validation split, we report numbers on our own validation split (50 000 random images from the training split) for all our studies except in Table 2, where for a fair comparison with the literature we evaluate on the ofﬁcial validation set."))
+- **c3** Similar models often give representations with significantly different linear-evaluation performance, and neither the ranking of architectures is consistent across pretext methods nor the ranking of methods across architectures; VGG19-BN is consistently the worst although it performs similarly to ResNet50 models on standard supervised benchmarks.([Section 4.1, p.5](https://arxiv.org/pdf/1901.09005v1#page=5 "Importantly, neither is the ranking of architectures consistent across different methods, nor is the ranking of methods consistent across architectures."))
+- **c4** Evaluating the same ImageNet-trained models on Places205 with the same protocol, the authors observe that the ranking of models is consistent with the ImageNet ranking, which they take as indicating that their findings generalize to new datasets.([Section 4.1, p.6](https://arxiv.org/pdf/1901.09005v1#page=6 "ranking of models evaluated on Places205 is consistent with that of models evaluated on ImageNet, indicating that our ﬁndings generalize to new datasets."))
+- **c5** Replacing the linear model by an MLP with one hidden layer (1000 channels) gives only marginal improvement and mostly unchanged relative performance, so the authors conclude a linear model is adequate for evaluation; they note that linear evaluation requires the relevant information to be linearly separable, which is not necessarily a prerequisite for a useful representation.([Section 4.3, p.6](https://arxiv.org/pdf/1901.09005v1#page=6 "Figure 3 clearly shows that the MLP provides only marginal improvement over the linear evaluation and the relative performance of various settings is mostly unchanged."))
+- **c6** Pretext-task accuracy is a good proxy for downstream ImageNet accuracy only when the architecture is fixed; it cannot reliably be used to select the architecture, and the authors call for other label-free model-selection mechanisms.([Section 4.4, p.7](https://arxiv.org/pdf/1901.09005v1#page=7 "but it can unfortunately not be used to reliably select the model architecture."))
+- **c7** Which layer is probed matters: as in prior observations for AlexNet, representation quality in VGG19-BN deteriorates towards the end of the network, whereas in ResNets it consistently increases up to the final pre-logits layer; the authors hypothesize this is due to residual units being invertible under some conditions.([Section 4.5, p.7](https://arxiv.org/pdf/1901.09005v1#page=7 "In contrast, we observe that this is not the case for models with skip-connections: representation quality in ResNet consistently increases up to the ﬁnal pre-logits layer."))
+- **c8** Linear evaluation trained with SGD (batch 2048, initial learning rate 0.1 decayed twice by 10x, first decay after 30, 120 or 480 epochs followed by 40 more epochs) keeps improving after a very large number of epochs (about 500 gave higher accuracy); the authors conclude SGD optimization hyperparameters of the probe play an important role and need to be reported.([Section 4.7, p.8](https://arxiv.org/pdf/1901.09005v1#page=8 "Thus, we conclude that SGD optimization hyperparameters play an important role and need to be reported."))
+

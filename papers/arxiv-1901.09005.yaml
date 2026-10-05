@@ -1,0 +1,84 @@
+id: arxiv-1901.09005
+title: Revisiting Self-Supervised Visual Representation Learning
+authors:
+- Alexander Kolesnikov
+- Xiaohua Zhai
+- Lucas Beyer
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1901.09005
+  code: https://github.com/google/revisiting-self-supervised
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 7ed9fad54787d61514ed9bdfb0fec517e2b39ec51caecff8d280a9442a399c19
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- A large-scale study of four pretext tasks (Rotation, Exemplar, Jigsaw, Relative Patch Location) across ResNet50 v1/v2, RevNet50 and VGG19-BN with several widening factors, evaluated by linear logistic
+  regression on ImageNet and Places205
+claims:
+- id: c1
+  statement: 'Evaluation protocol: a linear logistic regression is trained on representations extracted from the frozen network at the pre-logits level (other layers investigated in Section 4.5); for fast
+    evaluation it is trained with L-BFGS on precomputed representations, while the comparison to prior literature uses SGD with momentum and data augmentation.'
+  location: Section 3.3
+  page: 4
+  quote: We extract the representation from the (frozen) network at the pre-logits level, but investigate other possibilities in Section 4.5.
+- id: c2
+  statement: To avoid overfitting to the official ImageNet validation split, all studies report accuracy on the authors' own validation split of 50,000 images held out from the training split; only the
+    comparison with the literature (Table 2) uses the official validation set. Places205 is handled the same way.
+  location: Section 3.4
+  page: 4
+  quote: In order to avoid overﬁtting to the ofﬁcial validation split, we report numbers on our own validation split (50 000 random images from the training split) for all our studies except in Table 2,
+    where for a fair comparison with the literature we evaluate on the ofﬁcial validation set.
+- id: c3
+  statement: Similar models often give representations with significantly different linear-evaluation performance, and neither the ranking of architectures is consistent across pretext methods nor the ranking
+    of methods across architectures; VGG19-BN is consistently the worst although it performs similarly to ResNet50 models on standard supervised benchmarks.
+  location: Section 4.1
+  page: 5
+  quote: Importantly, neither is the ranking of architectures consistent across different methods, nor is the ranking of methods consistent across architectures.
+- id: c4
+  statement: Evaluating the same ImageNet-trained models on Places205 with the same protocol, the authors observe that the ranking of models is consistent with the ImageNet ranking, which they take as indicating
+    that their findings generalize to new datasets.
+  location: Section 4.1
+  page: 6
+  quote: ranking of models evaluated on Places205 is consistent with that of models evaluated on ImageNet, indicating that our ﬁndings generalize to new datasets.
+- id: c5
+  statement: Replacing the linear model by an MLP with one hidden layer (1000 channels) gives only marginal improvement and mostly unchanged relative performance, so the authors conclude a linear model
+    is adequate for evaluation; they note that linear evaluation requires the relevant information to be linearly separable, which is not necessarily a prerequisite for a useful representation.
+  location: Section 4.3
+  page: 6
+  quote: Figure 3 clearly shows that the MLP provides only marginal improvement over the linear evaluation and the relative performance of various settings is mostly unchanged.
+- id: c6
+  statement: Pretext-task accuracy is a good proxy for downstream ImageNet accuracy only when the architecture is fixed; it cannot reliably be used to select the architecture, and the authors call for other
+    label-free model-selection mechanisms.
+  location: Section 4.4
+  page: 7
+  quote: but it can unfortunately not be used to reliably select the model architecture.
+- id: c7
+  statement: 'Which layer is probed matters: as in prior observations for AlexNet, representation quality in VGG19-BN deteriorates towards the end of the network, whereas in ResNets it consistently increases
+    up to the final pre-logits layer; the authors hypothesize this is due to residual units being invertible under some conditions.'
+  location: Section 4.5
+  page: 7
+  quote: 'In contrast, we observe that this is not the case for models with skip-connections: representation quality in ResNet consistently increases up to the ﬁnal pre-logits layer.'
+- id: c8
+  statement: Linear evaluation trained with SGD (batch 2048, initial learning rate 0.1 decayed twice by 10x, first decay after 30, 120 or 480 epochs followed by 40 more epochs) keeps improving after a very
+    large number of epochs (about 500 gave higher accuracy); the authors conclude SGD optimization hyperparameters of the probe play an important role and need to be reported.
+  location: Section 4.7
+  page: 8
+  quote: Thus, we conclude that SGD optimization hyperparameters play an important role and need to be reported.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Google Brain, Zurich. No venue is stated in the PDF (arXiv v1); none recorded. Self-supervised pre-training: 35 epochs on ImageNet without labels (Appendix A). Results tables (Tables 1-6) and figure
+    values not recorded. The probe-protocol findings come from Rotation (Section 4.7), with the other tasks in the appendix (Figure 9).'

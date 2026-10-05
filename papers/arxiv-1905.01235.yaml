@@ -1,0 +1,86 @@
+id: arxiv-1905.01235
+title: Scaling and Benchmarking Self-Supervised Visual Representation Learning
+authors:
+- Priya Goyal
+- Dhruv Mahajan
+- Abhinav Gupta
+- Ishan Misra
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1905.01235
+  code: https://github.com/facebookresearch/fair_self_supervision_benchmark
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 32f8327aabbfddfaf4e0fbcb4d430e1a569ac0fc3116be6ce12475715349f9d6
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- Scaling Jigsaw and Colorization pretext tasks along data size (up to YFCC-100M), model capacity (AlexNet vs ResNet-50) and problem complexity
+- A benchmark suite of 9 transfer datasets/tasks (linear classification on Places205/VOC07/COCO2014, low-shot classification, visual navigation, object detection with frozen conv body, surface normal estimation)
+  with a consistent evaluation setup
+claims:
+- id: c1
+  statement: The benchmark is based on the principle that a good representation transfers to many different tasks and does so with limited supervision and limited fine-tuning; the authors view self-supervised
+    learning as learning features rather than as an initialization method, so they perform limited fine-tuning.
+  location: Introduction
+  page: 2
+  quote: 'Our benchmark is based on the following principle: a good representation (1) transfers to many different tasks, and, (2) transfers with limited supervision and limited ﬁne-tuning.'
+- id: c2
+  statement: The authors report inconsistencies across previous methods' evaluations (image crops, weight re-scaling, pre-processing, longer fine-tuning schedules) that affect final performance, and argue
+    that a consistent setup with hyperparameters set fairly for all methods is needed to separate better representations from better transfer optimization.
+  location: Section 6 (footnote 1)
+  page: 5
+  quote: We discovered inconsistencies across previous methods (different image crops for evaluation, weights re-scaling, pre-processing, longer ﬁne-tuning schedules etc.) which affects the ﬁnal performance.
+- id: c3
+  statement: 'Linear-classification protocol for VOC07/COCO2014: one linear SVM per class on frozen, L2-normalized features (from several layers: after every conv layer for AlexNet, the last layer of every
+    residual stage for ResNet-50), with the cost chosen per class by 3-fold cross-validation over 26 values on the training data; Places205 uses linear classifiers trained with SGD following Zhang et al.'
+  location: Appendix D.1
+  page: 14
+  quote: We use 3-fold cross-validation to choose the cost parameter per class and then further calculate the mean average precision.
+- id: c4
+  statement: The authors found that SGD-trained linear classifiers, although common practice, can give significantly different results depending on optimization hyperparameters (number of iterations, learning-rate
+    decay) because of slow convergence; they obtained more robust results with dual coordinate descent (linear SVM, LIBLINEAR) and use it for VOC07 and COCO2014.
+  location: Appendix D.6
+  page: 15
+  quote: Although, using SGD based Linear Classiﬁers is a common practice [80] to evaluate representations, we found that optimization hyperparameters can lead to signﬁcantly different results.
+- id: c5
+  statement: 'Pre-training domain matters: for Jigsaw, ImageNet-22k pre-training transfers to VOC07 as well as YFCC-100M, while on Places205 YFCC-1M transfers as well as ImageNet-22k; a similar trend holds
+    for Colorization. A possible explanation offered is that ImageNet is closer to VOC07 (object-centric) and YFCC to Places205 (scene-centric), which motivates evaluating on varied domains and tasks.'
+  location: Section 5
+  page: 5
+  quote: A possible explanation for this beneﬁt is that the domain (image distribution) of ImageNet is closer to VOC07 (both are object-centric) whereas YFCC is closer to Places205 (both are scene-centric).
+- id: c6
+  statement: 'Low-shot linear SVM evaluation (k positives per class, 5 independent training samples, ResNet-50 best layer res4): a significant gap between supervised and self-supervised features remains,
+    larger at small sample sizes (stated as 30 points at k=1 versus 20 points full-shot on Places205); for lower layers the self-supervised features are competitive.'
+  location: Section 6.2
+  page: 6
+  quote: This gap is much larger at lower sample size, e.g., at k=1 it is 30 points for Places205, whereas at higher values (full-shot in Table 3) it is 20 points.
+- id: c7
+  statement: Full fine-tuning is excluded from the benchmark suite (reported only as a legacy task) because, the authors argue, it evaluates not only the representation but also the initialization and optimization
+    method.
+  location: Section 7
+  page: 8
+  quote: We argue that this view evaluates not only the quality of the representations but also the initialization and optimization method.
+- id: c8
+  statement: 'ImageNet-1k linear classification is excluded from the benchmark suite: evaluating on ImageNet-1k does not test generalization of the supervised baseline trained on it, and most self-supervised
+    methods pre-train on ImageNet-1k, so pre-training and evaluating in the same domain (here on identical images) biases evaluation; results are still reported for comparison.'
+  location: Section 7
+  page: 8
+  quote: Hence, evaluating also on the same dataset (ImageNet-1k) does not test generalization of the supervised baseline.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Facebook AI Research. No venue is stated in the PDF (arXiv v2); none recorded. Investigation setup (Section 4) uses VOC07 linear SVMs on conv4 (AlexNet) / res4 (ResNet-50). The abstract concludes that
+    current methods ''do not seem to learn effective high level semantic representations''; the paper also states self-supervised features are competitive on VOC07 detection with frozen conv body or full
+    fine-tuning (same training schedule for supervised and self-supervised). Tables 3-9 values are not readable in the text dump and not recorded.'

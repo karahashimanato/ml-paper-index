@@ -1,0 +1,85 @@
+id: arxiv-2105.04906
+title: 'VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning'
+authors:
+- Adrien Bardes
+- Jean Ponce
+- Yann LeCun
+year: 2021
+venue: ICLR 2022
+links:
+  arxiv: https://arxiv.org/abs/2105.04906
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: c227c290d5eb2ba459fd502de3b4e1da36a0ea4c88989b7d8153e211751e9e77
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- 'VICReg: a joint-embedding loss with an invariance term (mean squared distance between embeddings), a variance term (hinge on the per-dimension standard deviation over the batch) and a covariance term
+  (squared off-diagonal covariances), with variance and covariance applied to each branch separately'
+claims:
+- id: c1
+  statement: 'Claim of the method: the variance and covariance terms explicitly avoid collapse, so VICReg does not require weight sharing, batch or feature-wise normalization, quantization, stop-gradient
+    or memory banks.'
+  location: Abstract
+  page: 1
+  quote: 'Unlike most other approaches to the same problem, VICReg does not require techniques such as: weight sharing between the branches, batch normalization, feature-wise normalization, output quantization,
+    stop gradient, memory banks, etc.'
+- id: c2
+  statement: 'Using the standard deviation rather than the variance in the hinge is crucial: with the variance, the gradient vanishes near the mean and the embeddings collapse.'
+  location: Method
+  page: 5
+  quote: Using the standard deviation and not directly the variance is crucial.
+- id: c3
+  statement: 'Coefficient ablation: without the variance term the representations immediately collapse to a single vector, and the covariance term, which has no repulsive effect, has no impact; the invariance
+    term is necessary; variance and covariance are complementary.'
+  location: Appendix D.4
+  page: 18
+  quote: Without variance regularization the representations immediately collapse to a single vector and the covariance term, which has no repulsive effect preventing collapse, has no impact.
+- id: c4
+  statement: 'Combining components (Table 4, 100 epochs): with variance regularization, adding a predictor makes no significant difference (redundant); without it, the representations collapse and both
+    stop-gradient and predictor are necessary.'
+  location: Analysis (Asymmetric networks)
+  page: 8
+  quote: In comparison, without VR, the representations collapse, and both stop-gradient (SG) and PR are necessary.
+- id: c5
+  statement: Adding variance regularization to stop-gradient or momentum-encoder setups gives small gains, which the authors suggest might be because those tricks do not perfectly maintain the variance,
+    i.e. very slow collapse is happening.
+  location: Analysis (Asymmetric networks)
+  page: 9
+  quote: which might be explained by the fact that these architectural tricks that prevent collapse are not perfectly maintaining the variance of the representations, i.e. very slow collapse is happening
+    with these methods.
+- id: c6
+  statement: 'Batch size (128 to 4096, base learning rate grid-searched per size): small drops at 256 and 128, which the authors call comparable to the batch-size robustness of Barlow Twins and SimSiam.'
+  location: Appendix D.7
+  page: 21
+  quote: We observe a 0.7% and 1.2% drop in accuracy with small batch size of 256 and 128 which is comparable with the robustness to batch size of Barlow Twins Zbontar et al. (2021) and SimSiam Chen & He
+    (2020)
+- id: c7
+  statement: 'Selection of the loss coefficients: the final values were the ones that worked best (by a small margin) on ImageNet; the authors add that they could have tuned them by cross-validation on
+    validation sets of smaller datasets (MNIST, CIFAR), where the same values also worked well.'
+  location: Appendix D.4
+  page: 19
+  quote: that setting lambda = mu = 25 and nu = 1 works best (by a small margin) for Imagenet
+- id: c8
+  statement: 'Non-shared weights: going from shared to different weights, performance drops by 2.1% for VICReg and 4.5% for Barlow Twins; the authors conclude VICReg is more robust in these scenarios.'
+  location: Analysis (Weight sharing)
+  page: 9
+  quote: The performance drops by 2.1% with VICReg and 4.5% with Barlow Twins, between the shared weights scenario (SW) and the different weight scenario (DW).
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Facebook AI Research; Inria/ENS; NYU. Venue from the PDF header (''Published as a conference paper at ICLR 2022'') and the arXiv comment. Although the abstract says batch normalization is not required,
+    the default expander uses BN in its hidden layers (Implementation details), and Appendix D.5 reports a drop when it is removed. Linear evaluation (Appendix C.2): SGD, lr 0.02, 100 epochs, batch 256,
+    reported on the ImageNet validation set. Main ImageNet results are means over 3 runs; semi-supervised and later sections are single runs. Disclosure: Yann LeCun is a co-author of Barlow Twins, the main
+    comparison method; BYOL and SimSiam in Table 4 are the authors'' own re-implementations. Results tables not recorded.'

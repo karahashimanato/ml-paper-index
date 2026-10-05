@@ -1,0 +1,86 @@
+id: arxiv-2011.13377
+title: How Well Do Self-Supervised Models Transfer?
+authors:
+- Linus Ericsson
+- Henry Gouk
+- Timothy M. Hospedales
+year: 2020
+venue: CVPR 2021
+links:
+  arxiv: https://arxiv.org/abs/2011.13377
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 978127a2b136deb52e660295215d68bc2c44d7c38a478cde213c8ae2e583c42d
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'A transfer benchmark of 13 released ImageNet-pre-trained self-supervised ResNet50 models (plus a supervised baseline) on 40 downstream tasks: many-shot linear and fine-tuned recognition, few-shot recognition
+  (incl. CD-FSL), VOC detection, NYUv2 surface normals and ADE20K segmentation, with correlation analysis against ImageNet top-1'
+claims:
+- id: c1
+  statement: 'Headline finding: ImageNet top-1 accuracy is highly correlated with transfer to many-shot recognition, but increasingly less so for few-shot recognition, object detection and dense prediction.'
+  location: Abstract
+  page: 1
+  quote: We ﬁnd ImageNet Top-1 accuracy to be highly correlated with transfer to many-shot recognition, but increasingly less so for few-shot, object detection and dense prediction.
+- id: c2
+  statement: 'Setup caveat: the authors use released pre-trained weights and cannot control pre-training, so the models differ in training length, data augmentation, loss and additional architectural elements;
+    all share the ResNet50(1x) backbone pre-trained on ImageNet.'
+  location: Preliminaries
+  page: 4
+  quote: As we cannot control the pre-training setup, there are differences in how long the models were trained for, what data augmentation they applied, what loss they trained with and what additional
+    architectural elements they used.
+- id: c3
+  statement: 'Many-shot protocol: hyperparameters are selected on a validation set (author-defined or a random 20% of training data), then the model is retrained on training plus validation and evaluated
+    on test. The linear probe is multinomial logistic regression on 2048-d frozen features, no augmentation, L2 constant chosen from 45 log-spaced values, optimized with L-BFGS; fine-tuning runs 5,000 steps
+    of SGD with Nesterov momentum with learning rate, weight decay and augmentation chosen by grid.'
+  location: Appendix A.2
+  page: 11
+  quote: The optimal hyperparameters were selected on the validation set, after which we retrained the model on all training and validation images.
+- id: c4
+  statement: 'Few-shot protocol: a nearest-centroid classifier (prototypical networks) on frozen backbone features, 5-way 20-shot (5- and 50-shot in the appendix), 15 query images per class, 600 random
+    episodes with 95% confidence intervals, on the Kornblith datasets (except VOC2007) and the four CD-FSL datasets.'
+  location: Section 4.2
+  page: 5
+  quote: Our evaluation uses a nearest-centroid classiﬁer (also known as Prototypical Networks [50]) on the features extracted from the ResNet50 backbones.
+- id: c5
+  statement: 'Few-shot results differ from many-shot linear results: the supervised model dominates on the Kornblith datasets except DTD and Flowers, while on the CD-FSL datasets several self-supervised
+    models outperform it; the authors summarize that self-supervision lags for low-domain-shift few-shot transfer but beats supervision for larger domain shifts.'
+  location: Section 4.2
+  page: 5
+  quote: Summarising these results, we see that self-supervision still lags behind for low domain shift few-shot transfer while it consistently beats supervision for larger domain shifts.
+- id: c6
+  statement: For surface normal estimation, the authors trained all methods for a fixed number of iterations because NYUv2 has no validation split, noting that their numbers are therefore not directly comparable
+    to Goyal et al. [16], who selected checkpoints on test performance.
+  location: Section 4.4 (footnote 2)
+  page: 6
+  quote: Given the absence of a validation split for NYUv2, we considered it better practice to train all methods for a ﬁxed number of iterations.
+- id: c7
+  statement: 'Conclusion: ImageNet performance is broadly representative of downstream natural-image recognition, but not reliably representative of unstructured image recognition or spatially sensitive
+    tasks (detection, surface normals, semantic segmentation); the authors suggest SSL researchers adopt a wider range of benchmarks.'
+  location: Discussion
+  page: 8
+  quote: ImageNet performance is not reliably representative of downstream performance on unstructured image recognition, or other spatially sensitive tasks such as detection, surface normal prediction
+    and semantic segmentation.
+- id: c8
+  statement: 'Stated limitation: the study could not compare ImageNet-pre-trained self-supervised representations with domain-specific self-supervised representations trained on each target dataset.'
+  location: Discussion
+  page: 8
+  quote: Most notably, we were not able to compare the value of self-supervised representations transferred from ImageNet to domain-speciﬁc self-supervised representations trained on each target dataset.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    University of Edinburgh (Hospedales also Samsung AI Research, Cambridge). Venue CVPR 2021 from the arXiv comment given by the caller; the PDF itself does not state a venue. InsDis and PIRL weights come
+    from PyContrast rather than the original authors (Appendix A.1). Correlations (Figures 1-2, Pearson r on logit-transformed accuracies and Spearman rho) are shown only as figures; values not recorded.
+    The paper also reports that no single method dominates and that SSL features seem to discard colour information (conjectured to be due to colour augmentation).'

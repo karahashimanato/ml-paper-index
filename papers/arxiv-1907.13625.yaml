@@ -1,0 +1,92 @@
+id: arxiv-1907.13625
+title: On Mutual Information Maximization for Representation Learning
+authors:
+- Michael Tschannen
+- Josip Djolonga
+- Paul K. Rubenstein
+- Sylvain Gelly
+- Mario Lucic
+year: 2019
+venue: ICLR 2020
+links:
+  arxiv: https://arxiv.org/abs/1907.13625
+  code: https://github.com/google-research/google-research/tree/master/mutual_information_representation_learning
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: b4e277b1d7542437f62289e0c1fb4b9fac0321b91bac5975c3c847c86e638549
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  - deep-learning
+  paradigms:
+  - self-supervised
+  - unsupervised
+proposes:
+- Controlled experiments (MNIST top/bottom halves, CIFAR10 in the appendix) showing that representation quality under linear evaluation is only loosely connected to the MI estimate
+- An interpretation of InfoNCE with a symmetric separable critic as the multi-class K-pair (triplet-style) metric-learning loss
+claims:
+- id: c1
+  statement: 'Central claim: the success of MI-maximization methods (InfoNCE / NWJ estimators between views) cannot be attributed to properties of MI alone; it strongly depends on inductive biases in the
+    encoder architecture and in the parametrization of the MI estimator.'
+  location: Abstract
+  page: 1
+  quote: we argue, and provide empirical evidence, that the success of these methods cannot be attributed to the properties of MI alone, and that they strongly depend on the inductive bias in both the choice
+    of feature extractor architectures and the parametrization of the employed MI estimators.
+- id: c2
+  statement: 'Evaluation setup: representations of the top half of MNIST images (views = top and bottom halves) are evaluated by a linear classifier (SAGA, scikit-learn) trained with all training labels;
+    estimator values and accuracies are averaged over 20 runs on the test set; a linear classifier on raw top-half pixels gives about 85% and a simple supervised MLP or ConvNet about 94%.'
+  location: Biases in approximate information maximization (Setup)
+  page: 4
+  quote: Throughout, IEST values and downstream classiﬁcation accuracies are averaged over 20 runs and reported on the testing set (we did not observe large gaps between the training and testing values
+    of IEST).
+- id: c3
+  statement: With always-invertible encoders (RealNVP), the true MI is constant for any parameters, yet the estimator value and downstream linear accuracy increase during training, which the authors interpret
+    as the estimators biasing the encoder toward representations useful for linear classification.
+  location: Large MI is not predictive of downstream performance
+  page: 5
+  quote: Despite the fact that MI is maximized by any instantiation of g1 and g2, IEST and downstream accuracy increase during training, implying that the estimators provide gradient feedback leading to
+    a representation useful for linear classiﬁcation.
+- id: c4
+  statement: Conversely, an invertible encoder trained adversarially (without an MI estimator) to make linear classification hard attains globally maximal MI but worse linear accuracy than raw pixels; the
+    authors conclude information content alone does not guarantee a useful geometry of the representation space.
+  location: Large MI is not predictive of downstream performance
+  page: 5
+  quote: The information content alone is not sufﬁcient to guarantee a useful geometry in the representation space.
+- id: c5
+  statement: 'Critic capacity: higher-capacity critics give tighter MI bounds, but representations trained with an MLP critic barely beat the pixel baseline, whereas bilinear and separable critics clearly
+    do; the simple bilinear critic, despite the smallest NWJ value (loosest bound), gives better downstream performance than separable and MLP critics.'
+  location: Section 3.2
+  page: 7
+  quote: INWJ testing value, the simple bilinear critic leads to a better downstream performance than the higher-capacity separable and MLP critics.
+- id: c6
+  statement: 'Encoder architecture: when MLP and ConvNet encoders are trained to reach the same target estimator value t (t = 2, 4), ConvNet encoders give clearly better linear accuracy for both estimators,
+    while both architectures reach essentially the same accuracy (about 94%) when trained end-to-end with supervision.'
+  location: Section 3.3
+  page: 7
+  quote: Despite matching lower bounds, ConvNet encoders lead to clearly superior classiﬁcation accuracy, for both INCE and INWJ.
+- id: c7
+  statement: If negative samples are not drawn independently (as in some practical methods, e.g. CPC patches from the same image), the InfoNCE estimator is in general neither a lower nor an upper bound
+    on MI (proved in Appendix D; in a synthetic Gaussian experiment both estimators exceeded the true MI), so the connection to MI may vanish.
+  location: Section 4
+  page: 8
+  quote: Hence, the connection to MI under improper negative sampling is no longer clear and might vanish completely.
+- id: c8
+  statement: On the evaluation protocol, the authors note that some works report only marginal gains under non-linear evaluation and stress that a highly non-linear evaluation may give better downstream
+    performance but defeats the purpose of learning efficiently transferable representations; they also argue critics, encoders and evaluation protocol are mostly chosen independently and should be co-designed.
+  location: Conclusion (Going beyond the widely used linear evaluation protocol)
+  page: 10
+  quote: We stress that a highly-nonlinear evaluation framework may result in better downstream performance, but it defeats the purpose of learning efﬁciently transferable data representations.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Google Research, Brain Team (Rubenstein also University of Cambridge / MPI-IS). Venue from the PDF header ''Published as a conference paper at ICLR 2020''. Experiments are small-scale (MNIST, CIFAR10
+    in Appendix G), all results shown as figures; no numbers recorded beyond those stated in body text. Section numbers used only where confirmed by cross-references (Sections 3.2, 3.3, 4); other sections
+    cited by heading.'

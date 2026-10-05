@@ -187,6 +187,10 @@ method_families:
     parent: autoencoders
   - id: diffusion-models
     description: Generative models that learn to reverse a gradual noising process (denoising diffusion, score-based models, and their samplers and distillations).
+  - id: joint-embedding
+    description: "Self-supervised methods that learn representations by making embeddings of different views of the same input agree, with or without negatives (contrastive: CPC, SimCLR, MoCo; non-contrastive: BYOL, SimSiam, Barlow Twins, VICReg, DINO, SwAV)."
+  - id: masked-image-modeling
+    description: Self-supervised pre-training by predicting masked parts of an image (pixels or tokens), e.g. MAE, BEiT.
 paradigms:
   - id: supervised
     description: Supervised learning.

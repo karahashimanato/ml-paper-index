@@ -1,0 +1,88 @@
+id: arxiv-2005.10242
+title: Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere
+authors:
+- Tongzhou Wang
+- Phillip Isola
+year: 2020
+venue: ICML 2020
+links:
+  arxiv: https://arxiv.org/abs/2005.10242
+source:
+  version: arXiv v10
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 1b5e644e94cbc4b2fbd3177c115b153be44c622863aaec779bc66672b2e7deb7
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+  - unsupervised
+proposes:
+- 'Alignment loss L_align: expected distance (to the power alpha) between the l2-normalized features of positive pairs'
+- 'Uniformity loss L_uniform: log of the average pairwise Gaussian potential between normalized features, whose unique minimizer on the hypersphere is the uniform distribution'
+- Analysis showing that, as the number of negatives goes to infinity, the contrastive loss with normalized features optimizes alignment and uniformity
+claims:
+- id: c1
+  statement: 'Setting and assumption: positive pairs are typically two independent random augmentations of the same sample; the analysis assumes the positive-pair distribution is symmetric and that its
+    marginal matches the data distribution, and studies one specific form of contrastive loss (normalized features, temperature tau, M negatives drawn from the data distribution).'
+  location: Section 3
+  page: 3
+  quote: Based on empirical practices, we assume the following property.
+- id: c2
+  statement: Instead of reading the contrastive loss as a lower bound on mutual information, the authors analyse the loss itself, because (citing Tschannen et al., 2019) the bound interpretation is known
+    to have issues in practice, e.g. maximizing a tighter bound often gives worse downstream performance.
+  location: Section 3
+  page: 3
+  quote: However, this interpretation is known to have issues in practice, e.g., maximizing a tighter bound often leads to worse downstream task performance (Tschannen et al., 2019).
+- id: c3
+  statement: 'Theorem 1 (limit of infinitely many negatives, fixed tau): the first term of the limiting loss is minimized iff the encoder is perfectly aligned, perfectly uniform encoders, if they exist,
+    are the exact minimizers of the second term, and the deviation from the limit decays as O(M^-1/2).'
+  location: Section 4.2 (Theorem 1)
+  page: 6
+  quote: If perfectly uniform encoders exist, they form the exact minimizers of the second term.
+- id: c4
+  statement: Perfect uniformity is not always realizable (e.g. when the data manifold is lower-dimensional than the feature space), and when the pair distributions come from augmenting a finite dataset
+    no encoder can be both perfectly aligned and perfectly uniform; perfectly uniform encoders do exist when n >= m - 1 and the data distribution has bounded density.
+  location: Section 4.2 (Realizability of perfect uniformity)
+  page: 6
+  quote: Moreover, in the case that pdata and ppos are formed from sampling augmented samples from a ﬁnite dataset, there cannot be an encoder that is both perfectly aligned and perfectly uniform, because
+    perfect alignment implies that all augmentations from a single element have the same feature vector.
+- id: c5
+  statement: 'On the latent-class analysis (citing Saunshi et al., 2019): the authors say it gives nice theoretical insights but has a rather large gap with practice, because its result that representation
+    quality suffers with a large number of negatives is inconsistent with empirical observations.'
+  location: Section 2 (Related Work)
+  page: 2
+  quote: Analysis based on the assumption of latent classes provides nice theoretical insights (Saunshi et al., 2019), but unfortunately has a rather large gap with empirical practices
+- id: c6
+  statement: 'Evaluation protocol: 304 STL-10, 64 NYU-Depth-V2, 45 ImageNet-100 (MoCo-based) and 108 BookCorpus (Quick-Thought-based) encoders are trained with weighted combinations of the three losses;
+    for the tables, the ''best'' encoder is selected by cross-validation on the training set (5-fold for STL-10) and then reported on the validation set.'
+  location: Table 1
+  page: 8
+  quote: The best result is picked by encoder outputs linear classiﬁer accuracy from a 5-fold training set cross validation, among all 150 encoders trained from scratch with 128-dimensional output and 768
+    batch size.
+- id: c7
+  statement: Encoders trained only with L_align and L_uniform consistently outperformed their contrastive-loss counterparts in the STL-10 and NYU-Depth-V2 tables; the authors suggest that directly optimizing
+    the two properties can be superior in practice when only finite negatives are available.
+  location: Section 5
+  page: 8
+  quote: This empirical performance gap suggests that directly optimizing these properties can be superior in practice, when we can only have ﬁnite negatives.
+- id: c8
+  statement: 'Both properties are needed: weighting alignment much higher than uniformity produces a degenerate (collapsed) solution mapping all inputs to the same feature; as long as the weight ratio is
+    not too large (e.g. < 4), representation quality stays relatively good and insensitive to the exact weights.'
+  location: Section 5
+  page: 8
+  quote: When Lalign is weighted much higher than Luniform, degenerate solution occurs and all inputs are mapped to the same feature vector (exp Luniform = 1).
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    MIT CSAIL. Venue from the PDF first page (''Proceedings of the 37th International Conference on Machine Learning, Online, PMLR 119, 2020'') and the arXiv comment. The analysis is restricted to l2-normalized
+    features; Section 6 states that why the unit hypersphere is a nice feature space is not yet rigorously answered. The changelog notes Theorem 1''s convergence rate was corrected to O(M^-1/2) and two
+    STL-10 encoders were removed in 2022. A weaker result for a single negative (M = 1) is given in the appendix. Full-ImageNet MoCo v2 comparison (Table 5, 200 epochs) uses MoCo v2 numbers from the official
+    implementation. Saunshi et al. (2019) is the reference entry for arXiv 1902.09229 (Arora et al. in this index). Results tables not recorded.'

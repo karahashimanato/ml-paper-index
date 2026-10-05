@@ -1,0 +1,95 @@
+id: arxiv-2104.14294
+title: Emerging Properties in Self-Supervised Vision Transformers
+authors:
+- Mathilde Caron
+- Hugo Touvron
+- Ishan Misra
+- Hervé Jégou
+- Julien Mairal
+- Piotr Bojanowski
+- Armand Joulin
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2104.14294
+  code: https://github.com/facebookresearch/dino
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: aa464cfd59a428890190bea1065823a491a853478b4fb2a25f5eb44d442ce296
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  - knowledge-distillation
+  paradigms:
+  - self-supervised
+proposes:
+- 'DINO (self-distillation with no labels): a student network is trained with a cross-entropy loss to match the softmax output of a momentum (EMA) teacher of the same architecture on different crops of
+  the same image (multi-crop, local-to-global); collapse is avoided by centering and sharpening the teacher output'
+claims:
+- id: c1
+  statement: 'Collapse avoidance: other methods avoid collapse with a contrastive loss, clustering constraints, a predictor or batch normalizations; DINO can be stabilized with multiple normalizations but
+    can also work with only centering and sharpening of the momentum teacher outputs. Centering depends only on first-order batch statistics (an EMA-updated bias added to the teacher output) and sharpening
+    uses a low teacher softmax temperature; the authors describe this choice as trading stability for less dependence on the batch.'
+  location: Section 3.1 (Avoiding collapse)
+  page: 4
+  quote: it can also work with only a centering and sharpening of the momentum teacher outputs to avoid model collapse.
+- id: c2
+  statement: 'Why both operations: there are two forms of collapse (uniform output, or output dominated by one dimension). Centering avoids the dominant-dimension collapse but encourages a uniform output,
+    and sharpening has the opposite effect; in the collapse study, if either operation is missing the KL divergence between teacher and student converges to zero (a collapse), and applying both balances
+    the effects.'
+  location: Section 5.3
+  page: 9
+  quote: The centering avoids the collapse induced by a dominant dimension, but encourages an uniform output.
+- id: c3
+  statement: 'Teacher choice: using the student from the previous iteration or a copy of the student as teacher does not converge in their setting (it would require more normalizations), while a teacher
+    from the previous epoch does not collapse; the momentum (EMA) teacher gives the best k-NN performance, and the authors observe that it constantly outperforms the student during training, interpreting
+    it as Polyak-Ruppert averaging (a model ensemble guiding the student).'
+  location: Section 5.2
+  page: 9
+  quote: In our setting, using a teacher based on a recent version of the student does not converge.
+- id: c4
+  statement: 'Component ablation (ViT-S/16, 300 epochs): without momentum the framework does not work and more advanced operations such as Sinkhorn-Knopp are required to avoid collapse; with momentum, SK
+    has little impact; multi-crop and the cross-entropy loss are important; adding a predictor has little impact, whereas it is critical in BYOL to prevent collapse (citing [16, 30]).'
+  location: Section 5.1
+  page: 8
+  quote: First, we observe that in the absence of momentum, our framework does not work (row 2) and more advanced operations, SK for example, are required to avoid collapse (row 9).
+- id: c5
+  statement: 'Evaluation protocols: linear evaluation on frozen features and fine-tuning are both used, but the authors note both are sensitive to hyperparameters with large run-to-run variance when the
+    learning rate varies; they therefore also use a weighted k-NN classifier on frozen features, sweeping k and finding 20 NN consistently best for most runs, which needs no other hyperparameter tuning
+    or data augmentation.'
+  location: Section 3.2
+  page: 5
+  quote: However, both evaluations are sensitive to hyperparameters, and we observe a large variance in accuracy between runs when varying the learning rate for example.
+- id: c6
+  statement: 'Linear probe recipe: projection head removed, linear classifier trained with SGD (batch 1024) for 100 epochs on ImageNet without weight decay, with random resized crops and horizontal flips,
+    reporting central-crop top-1; the learning rate is swept for each model; for ViT-S the [CLS] tokens of the last 4 layers are concatenated, for ViT-B the final [CLS] token is concatenated with average-pooled
+    patch tokens. Accuracies are reported on the ImageNet validation set (Table 2); no separate held-out split for the learning-rate sweep was found in the text (searched for held-out, validation, val set,
+    minival).'
+  location: Appendix F.2
+  page: 19
+  quote: For each model, we sweep the learning rate value.
+- id: c7
+  statement: 'k-NN emergence: with ViT-S, DINO''s k-NN accuracy is almost on par with its linear accuracy; the authors state this property emerges only for DINO with ViT, not with other self-supervised
+    methods nor with ResNet-50. The BYOL, MoCov2 and SwAV ViT-S baselines in Table 2 were run by the authors (marked with an asterisk).'
+  location: Section 4.1
+  page: 6
+  quote: This property emerges only when using DINO with ViT architectures, and does not appear with other existing self-supervised methods nor with a ResNet-50.
+- id: c8
+  statement: 'Compute and setup: pre-training on ImageNet without labels with AdamW and batch size 1024 (16 GPUs for ViT-S/16), BYOL augmentations (color jittering, Gaussian blur, solarization) plus multi-crop;
+    a ViT-S/16 DINO reaches its reported linear accuracy with two 8-GPU servers for 3 days (Table 8 lists running time and peak memory per multi-crop variant).'
+  location: Section 5.4
+  page: 10
+  quote: Overall, training DINO with Vision Transformers achieves 76.1 top-1 accuracy using two 8-GPU servers for 3 days.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Facebook AI Research, Inria, Sorbonne University. No venue is stated in this PDF (arXiv v2); a venue is not recorded. Several authors (Caron, Misra, Mairal, Bojanowski, Joulin) are also authors of SwAV,
+    which is a baseline (re-run by the authors on ViT-S). Author list taken from the PDF (arXiv API could not be queried from this environment); ''Hervé Jégou'' is written ''Herv´e Jegou'' in the PDF text.
+    Results tables not recorded.'

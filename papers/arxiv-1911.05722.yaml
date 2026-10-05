@@ -1,0 +1,98 @@
+id: arxiv-1911.05722
+title: Momentum Contrast for Unsupervised Visual Representation Learning
+authors:
+- Kaiming He
+- Haoqi Fan
+- Yuxin Wu
+- Saining Xie
+- Ross Girshick
+year: 2019
+venue: CVPR 2020
+links:
+  arxiv: https://arxiv.org/abs/1911.05722
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: ad31ea26ed2d9ba3e2f767a2dcb0961a5b70ff505b1c3fb18d07201140e4e1fe
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+  - unsupervised
+proposes:
+- 'Momentum Contrast (MoCo): contrastive learning as dictionary look-up with a queue of encoded keys (decoupling dictionary size from mini-batch size) and a key encoder updated as a momentum moving average
+  of the query encoder; shuffling BN to prevent intra-batch information leakage'
+claims:
+- id: c1
+  statement: 'Hypothesis: contrastive dictionaries should be (i) large, to better sample the continuous high-dimensional visual space, and (ii) consistent, with keys represented by the same or similar encoder;
+    existing contrastive mechanisms can be limited in one of these two aspects.'
+  location: Introduction
+  page: 1
+  quote: 'From this perspective, we hypothesize that it is desirable to build dictionaries that are: (i) large and (ii) consistent as they evolve during training.'
+- id: c2
+  statement: 'Queue: encoded keys of the current mini-batch are enqueued and the oldest are dequeued, so the dictionary size can be much larger than the mini-batch and is set as an independent hyper-parameter;
+    the negatives come from the queue.'
+  location: Section 3.2
+  page: 3
+  quote: The introduction of a queue decouples the dictionary size from the mini-batch size.
+- id: c3
+  statement: 'Momentum encoder: the key encoder cannot be updated by back-propagation through the queue; copying the query encoder yields poor results, which the authors hypothesize is caused by a rapidly
+    changing encoder. A momentum update is used instead; a relatively large momentum (default 0.999) works much better than a smaller one (0.9), and with no momentum the training loss oscillates and fails
+    to converge (Section 4.1).'
+  location: Section 3.2
+  page: 3
+  quote: In experiments, a relatively large momentum (e.g., m = 0.999, our default) works much better than a smaller value (e.g., m = 0.9), suggesting that a slowly evolving key encoder is a core to making
+    use of a queue.
+- id: c4
+  statement: 'Shuffling BN: with standard BN the model appears to cheat the pretext task and easily find a low-loss solution, possibly because intra-batch communication leaks information; shuffling the
+    sample order for the key encoder across GPUs addresses this.'
+  location: Section 3.3
+  page: 4
+  quote: The model appears to “cheat” the pretext task and easily ﬁnds a low-loss solution.
+- id: c5
+  statement: 'Linear classification protocol: unsupervised pre-training on ImageNet-1M (ResNet-50, batch 256 on 8 GPUs, 200 epochs, about 53 hours; augmentation: random resized crop, color jitter, horizontal
+    flip, grayscale; temperature 0.07), then a linear classifier on frozen global-average-pooled features for 100 epochs, reporting 1-crop top-1 on the ImageNet validation set. The classifier''s learning
+    rate (30) and weight decay (0) came from a grid search; the data used for that search is not stated (searched for grid, validation, held out).'
+  location: Section 4.1
+  page: 5
+  quote: For this classiﬁer, we perform a grid search and ﬁnd the optimal initial learning rate is 30 and weight decay is 0 (similarly reported in [56]).
+- id: c6
+  statement: 'Mechanism ablation (same pretext task and InfoNCE loss): all three mechanisms (end-to-end, memory bank, MoCo) benefit from a larger number of negatives K. End-to-end is limited by the mini-batch
+    size (1024 on 8 Volta 32GB GPUs) and needs linear learning-rate scaling; the memory bank (the authors'' improved reimplementation) supports a large dictionary but is 2.6% worse than MoCo, attributed
+    to inconsistent keys.'
+  location: Section 4.1
+  page: 5
+  quote: Overall, all three mecha-nisms beneﬁt from a larger K.
+- id: c7
+  statement: 'Transfer protocol: for detection/segmentation fine-tuning, MoCo uses the same hyper-parameters and schedule as the ImageNet supervised counterpart (with BN fine-tuned and synchronized), which
+    the authors note may place MoCo at a disadvantage but avoids extra hyper-parameter search; random-initialization results are given as references.'
+  location: Section 4.2
+  page: 7
+  quote: This may place MoCo at a disadvantage.
+- id: c8
+  statement: 'Negative case: MoCo is worse than supervised pre-training on VOC semantic segmentation (by at least 0.8 point) and on par on Cityscapes instance segmentation, while it outperforms supervised
+    pre-training in 7 detection or segmentation tasks.'
+  location: Section 4.2 (More Downstream Tasks)
+  page: 8
+  quote: But on VOC semantic segmentation, MoCo is worse by at least 0.8 point, a negative case we have observed.
+- id: c9
+  statement: 'Caveat on protocols: linear classification on frozen features is a common protocol for evaluating unsupervised pre-training, but in practice it is more common to fine-tune end-to-end; the
+    authors add ImageNet fine-tuning results and note that pre-training on IN-1M and fine-tuning on ImageNet does not represent a real scenario.'
+  location: Appendix A.7
+  page: 9
+  quote: However, in practice, it is more common to ﬁne-tune the features end-to-end in a downstream task.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Facebook AI Research (FAIR). Venue from the arXiv comment (''CVPR 2020 camera-ready''); the PDF text itself does not state the venue. The paper uses ''unsupervised'' and treats self-supervised learning
+    as a form of it (footnote 1). Pre-training also on Instagram-1B (~940M images, ~1.4 epochs); the Discussion notes that the IN-1M to IG-1B improvement is consistently noticeable but relatively small.
+    Linear-protocol comparison (Table 1) uses improved re-implementations of other methods where available; the end-to-end and memory-bank mechanisms are implemented by the authors. Mentions MoCo v2 (a
+    later extension by overlapping authors). Results tables not recorded.'

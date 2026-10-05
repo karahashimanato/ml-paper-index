@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# How Well Do Self-Supervised Models Transfer?
+
+- カード: [`arxiv-2011.13377`](../../papers/arxiv-2011.13377.yaml)
+- 著者: Linus Ericsson, Henry Gouk, Timothy M. Hospedales
+- 年・掲載: 2020 CVPR 2021
+- 原論文: [PDF](https://arxiv.org/pdf/2011.13377v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: deep-learning, image-classification, joint-embedding, representation-learning, self-supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Headline finding: ImageNet top-1 accuracy is highly correlated with transfer to many-shot recognition, but increasingly less so for few-shot recognition, object detection and dense prediction.([Abstract, p.1](https://arxiv.org/pdf/2011.13377v2#page=1 "We ﬁnd ImageNet Top-1 accuracy to be highly correlated with transfer to many-shot recognition, but increasingly less so for few-shot, object detection and dense prediction."))
+- **c2** Setup caveat: the authors use released pre-trained weights and cannot control pre-training, so the models differ in training length, data augmentation, loss and additional architectural elements; all share the ResNet50(1x) backbone pre-trained on ImageNet.([Preliminaries, p.4](https://arxiv.org/pdf/2011.13377v2#page=4 "As we cannot control the pre-training setup, there are differences in how long the models were trained for, what data augmentation they applied, what loss they trained with and what additional architectural elements they used."))
+- **c3** Many-shot protocol: hyperparameters are selected on a validation set (author-defined or a random 20% of training data), then the model is retrained on training plus validation and evaluated on test. The linear probe is multinomial logistic regression on 2048-d frozen features, no augmentation, L2 constant chosen from 45 log-spaced values, optimized with L-BFGS; fine-tuning runs 5,000 steps of SGD with Nesterov momentum with learning rate, weight decay and augmentation chosen by grid.([Appendix A.2, p.11](https://arxiv.org/pdf/2011.13377v2#page=11 "The optimal hyperparameters were selected on the validation set, after which we retrained the model on all training and validation images."))
+- **c4** Few-shot protocol: a nearest-centroid classifier (prototypical networks) on frozen backbone features, 5-way 20-shot (5- and 50-shot in the appendix), 15 query images per class, 600 random episodes with 95% confidence intervals, on the Kornblith datasets (except VOC2007) and the four CD-FSL datasets.([Section 4.2, p.5](https://arxiv.org/pdf/2011.13377v2#page=5 "Our evaluation uses a nearest-centroid classiﬁer (also known as Prototypical Networks [50]) on the features extracted from the ResNet50 backbones."))
+- **c5** Few-shot results differ from many-shot linear results: the supervised model dominates on the Kornblith datasets except DTD and Flowers, while on the CD-FSL datasets several self-supervised models outperform it; the authors summarize that self-supervision lags for low-domain-shift few-shot transfer but beats supervision for larger domain shifts.([Section 4.2, p.5](https://arxiv.org/pdf/2011.13377v2#page=5 "Summarising these results, we see that self-supervision still lags behind for low domain shift few-shot transfer while it consistently beats supervision for larger domain shifts."))
+- **c6** For surface normal estimation, the authors trained all methods for a fixed number of iterations because NYUv2 has no validation split, noting that their numbers are therefore not directly comparable to Goyal et al. [16], who selected checkpoints on test performance.([Section 4.4 (footnote 2), p.6](https://arxiv.org/pdf/2011.13377v2#page=6 "Given the absence of a validation split for NYUv2, we considered it better practice to train all methods for a ﬁxed number of iterations."))
+- **c7** Conclusion: ImageNet performance is broadly representative of downstream natural-image recognition, but not reliably representative of unstructured image recognition or spatially sensitive tasks (detection, surface normals, semantic segmentation); the authors suggest SSL researchers adopt a wider range of benchmarks.([Discussion, p.8](https://arxiv.org/pdf/2011.13377v2#page=8 "ImageNet performance is not reliably representative of downstream performance on unstructured image recognition, or other spatially sensitive tasks such as detection, surface normal prediction and semantic segmentation."))
+- **c8** Stated limitation: the study could not compare ImageNet-pre-trained self-supervised representations with domain-specific self-supervised representations trained on each target dataset.([Discussion, p.8](https://arxiv.org/pdf/2011.13377v2#page=8 "Most notably, we were not able to compare the value of self-supervised representations transferred from ImageNet to domain-speciﬁc self-supervised representations trained on each target dataset."))
+

@@ -1,0 +1,119 @@
+id: arxiv-2304.07193
+title: 'DINOv2: Learning Robust Visual Features without Supervision'
+authors:
+- Maxime Oquab
+- Timothée Darcet
+- Théo Moutakanni
+- Huy Vo
+- Marc Szafraniec
+- Vasil Khalidov
+- Pierre Fernandez
+- Daniel Haziza
+- Francisco Massa
+- Alaaeldin El-Nouby
+- Mahmoud Assran
+- Nicolas Ballas
+- Wojciech Galuba
+- Russell Howes
+- Po-Yao Huang
+- Shang-Wen Li
+- Ishan Misra
+- Michael Rabbat
+- Vasu Sharma
+- Gabriel Synnaeve
+- Hu Xu
+- Hervé Jegou
+- Julien Mairal
+- Patrick Labatut
+- Armand Joulin
+- Piotr Bojanowski
+year: 2023
+venue: Transactions on Machine Learning Research (01/2024)
+links:
+  arxiv: https://arxiv.org/abs/2304.07193
+  code: https://github.com/facebookresearch/dinov2
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 3add205547f3ece5fb1ac7a91720aa9fabf02d9cde29a096643ff022449f3e91
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  - masked-image-modeling
+  - knowledge-distillation
+  paradigms:
+  - self-supervised
+proposes:
+- 'LVD-142M: a curated pretraining set of 142M images built by an automatic pipeline (deduplication and self-supervised retrieval of uncurated web images close to curated datasets)'
+- 'DINOv2: a discriminative self-supervised recipe combining the DINO image-level and iBOT patch-level (masked) losses with Sinkhorn-Knopp centering, a KoLeo regularizer, untied heads and a short high-resolution
+  phase, trained on a ViT-g and distilled into smaller ViTs'
+claims:
+- id: c1
+  statement: 'Thesis: the goal is general-purpose visual features that work across image distributions and tasks without fine-tuning; the paper shows that existing self-supervised methods can produce such
+    features if trained on enough curated data from diverse sources.'
+  location: Abstract
+  page: 1
+  quote: This work shows that existing pretraining methods, especially self-supervised methods, can produce such features if trained on enough curated data from diverse sources.
+- id: c2
+  statement: 'Data pipeline: the uncurated source is 1.2B unique images collected from a publicly available repository of crawled web data (with NSFW filtering and face blurring); near-duplicates are removed,
+    including near-duplicates of test or validation images of any benchmark used; images close to curated datasets (ImageNet-22k, the ImageNet-1k train split, Google Landmarks and fine-grained datasets)
+    are retrieved using embeddings of a self-supervised ViT-H/16 pretrained on ImageNet-22k. No statement that LVD-142M itself is released was found (searched for release, publicly, private).'
+  location: Data Processing
+  page: 5
+  quote: We also remove near-duplicates of images contained in the test or validation set of any benchmark used in this work.
+- id: c3
+  statement: 'Data ablation (ViT-g/14, same number of iterations, shorter than the final run): curated data works better on most benchmarks than 142M randomly sampled uncurated images from the same source;
+    compared with ImageNet-22k, LVD-142M is better on all benchmarks except ImageNet-1k, including domains not used for curation (iNaturalist 2018/2021, Places205).'
+  location: Ablation Studies (Pretraining Data Source)
+  page: 8
+  quote: The most salient observation is that training on a curated set of images works better on most benchmarks than training on uncurated data.
+- id: c4
+  statement: 'Method: the image-level DINO loss (student/teacher class tokens, EMA teacher) and the patch-level iBOT loss (masked student patches predicted against the teacher''s visible patches) are combined,
+    with SwAV''s Sinkhorn-Knopp centering instead of softmax-centering, a KoLeo regularizer that spreads features within a batch, and a short 518x518 phase at the end. Smaller models are distilled from
+    the ViT-g rather than trained from scratch.'
+  location: Discriminative Self-supervised Pre-training
+  page: 5
+  quote: We learn our features with a discriminative self-supervised method that can be seen as a combination of DINO and iBOT losses with the centering of SwAV (Caron et al., 2020).
+- id: c5
+  statement: Recipe ablation (ViT-L on ImageNet-22k, from iBOT to DINOv2) was optimized for ImageNet-1k k-NN accuracy, because in the authors' experience the linear probe is lower-bounded by k-NN; LayerScale
+    and high stochastic depth lowered linear-probe accuracy but were kept because they avoid NaN losses (training stability).
+  location: Table 1
+  page: 8
+  quote: We optimize for k-NN performance, as in our experience, the linear probe performance is lower-bounded by the k-NN performance.
+- id: c6
+  statement: 'Linear-probe protocol: a linear layer on frozen features trained with SGD for 12500 iterations with random-resized-crop augmentation, with a grid search over 13 learning rates, output layers
+    {1, 4} and whether average-pooled patch tokens are concatenated to the class token; the highest accuracy on the validation set is reported. All compared models, including weakly-supervised ones, were
+    evaluated with the authors'' code.'
+  location: Appendix B.3
+  page: 31
+  quote: We then report the highest accuracy value obtained on the validation set as is common practice.
+- id: c7
+  statement: Because most SSL methods were developed using ImageNet-1k validation accuracy as a debugging signal, the authors additionally report ImageNet-ReaL and ImageNet-V2 accuracy; they note the linear
+    model is used for simplicity and reproducibility even though classes may not be linearly separable.
+  location: Results (ImageNet Classification)
+  page: 11
+  quote: Because most SSL methods were developped using ImageNet-1k validation performance as a debugging signal, we also report the top-1 accuracy on ImageNet-ReaL and ImageNet-V2.
+- id: c8
+  statement: 'Fine-tuning sanity check (not core to the paper): to check whether the models were involuntarily specialized to linear evaluation, they apply the fine-tuning pipeline of Touvron et al. (2022)
+    without tweaking hyper-parameters; ImageNet-1k accuracy improves by more than 2% over the linear probe, which the authors describe as only modest, concluding that fine-tuning is optional.'
+  location: Results (Can we finetune the encoders?)
+  page: 12
+  quote: As DINOv2 leads to features that are strong in both the linear and finetuning settings, a strong property of our approach is that finetuning is optional.
+- id: c9
+  statement: 'Compute: the whole project is estimated at 0.5k to 1k tCO2eq, in the order of 200k GPU-days; one ViT-g pre-training takes 22k GPU-hours (A100). The estimate only counts GPU electricity.'
+  location: Estimating the Environmental Impact of Training our Models
+  page: 21
+  quote: For example, a single pre-training of a ViT-g model (22k GPU-hours) emits 3.7 tons of CO2eq, while a finetuning on ImageNet-1k (1k GPU-hours) emits 0.2 tons.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. All
+    authors are affiliated with Meta (Julien Mairal with Inria; some co-affiliations with Inria, Université Paris Saclay, ENS-PSL). Venue from the PDF header (''Published in Transactions on Machine Learning
+    Research (01/2024)''). Several authors (Misra, Jegou, Mairal, Bojanowski, Joulin) are DINO authors, and DINO is a baseline; DINOv2 builds on iBOT and their own reproduction of it. Code and models released
+    under Apache 2.0 per the text. Fairness section reports the model is still biased toward Western countries on Dollar Street. Results tables not recorded.'

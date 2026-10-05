@@ -1,0 +1,88 @@
+id: arxiv-2110.09348
+title: Understanding Dimensional Collapse in Contrastive Self-supervised Learning
+authors:
+- Li Jing
+- Pascal Vincent
+- Yann LeCun
+- Yuandong Tian
+year: 2021
+venue: ICLR 2022
+links:
+  arxiv: https://arxiv.org/abs/2110.09348
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 575847f8de13f88d1814e74566a5148ac30a6c40429e67c223c22761a5785d6f
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- 'Two mechanisms for dimensional collapse in contrastive learning: strong augmentation (single linear layer) and implicit regularization (over-parametrized linear networks)'
+- 'DirectCLR: apply InfoNCE directly to a fixed sub-vector of the backbone representation, without a trainable projector'
+claims:
+- id: c1
+  statement: 'Empirical observation: for a SimCLR model with a two-layer MLP projector trained 100 epochs on ImageNet, the singular-value spectrum of the covariance of 128-d embeddings on the validation
+    set has a number of singular values collapsing to zero, although negatives prevent complete collapse.'
+  location: Dimensional Collapse
+  page: 3
+  quote: We observe that a number of singular values collapse to zero, thus representing collapsed dimensions.
+- id: c2
+  statement: 'Mechanism 1 (single linear layer, additive-noise augmentation, InfoNCE, plain SGD without momentum or weight decay): the weight update is driven by the difference of a weighted data covariance
+    and a weighted augmentation covariance; if augmentation is strong enough that this matrix has negative eigenvalues, the weight matrix gets vanishing singular values and the embedding covariance becomes
+    low-rank.'
+  location: Dimensional Collapse Caused by Strong Augmentation (Theorem 1)
+  page: 4
+  quote: With ﬁxed matrix X (deﬁned in Eqn 6) and strong augmentation such that X has negative eigenvalues, the weight matrix W has vanishing singular values.
+- id: c3
+  statement: The strong-augmentation theory is limited to linear networks; for nonlinear networks the authors say 'strong augmentation' would depend on more complicated properties (higher-order statistics,
+    manifold properties) conditioned on network capacity.
+  location: Dimensional Collapse Caused by Strong Augmentation
+  page: 5
+  quote: Our theory in this section is limited to linear network settings.
+- id: c4
+  statement: 'Mechanism 2 (implicit regularization): with small augmentation and an over-parametrized two-layer linear network (no bias, unnormalized output), adjacent weight matrices align and small singular
+    values grow much more slowly, so the embedding covariance becomes low-rank; this happens only with more than one layer.'
+  location: Dimensional Collapse Caused by Implicit Regularization (Corollary 2)
+  page: 6
+  quote: With small augmentation and over-parametrized linear networks, the embedding space covariance matrix becomes low-rank.
+- id: c5
+  statement: The alignment result (Theorem 2) assumes distinct singular values; the toy experiment initializes non-degenerate singular values, and with random initialization in real scenarios only block-diagonal
+    alignment is expected.
+  location: Weight Alignment
+  page: 6
+  quote: In real scenario, when weight matrices are randomly initialized, we will only observe the alignment matrix to converge to a block-diagonal matrix, with each block representing a group of degenerate
+    singular values.
+- id: c6
+  statement: 'Role of the projector: comparing SimCLR trained with and without a projector, dimensional collapse in the representation (backbone output) space appears without a projector, so the projector
+    prevents collapse there.'
+  location: DirectCLR (Motivation)
+  page: 7
+  quote: The dimensional collapse in representation space happens when the model is trained without a projector.
+- id: c7
+  statement: 'Stated limit of the theory: it can explain a linear projector (DirectCLR replaces it) but cannot fully explain why a nonlinear projector prevents dimensional collapse, and DirectCLR still
+    relies on the last nonlinear backbone block for that mechanism.'
+  location: DirectCLR (Disclaimer)
+  page: 9
+  quote: But our theory is not able to fully explain why a nonlinear projector is able to prevent dimensional collapse.
+- id: c8
+  statement: 'Protocol: ResNet-50, SimCLR recipe for 100 epochs (LARS, batch size 4096 on 32 GPUs); the sub-vector size d0 was tuned on ImageNet linear-probe top-1 accuracy. No separate held-out split for
+    this tuning was found in the text (searched for validation, held-out, tuning).'
+  location: Appendix E (Figure 12)
+  page: 17
+  quote: Hyperparameter tuning on d0 based on ImageNet linear probe Top-1 accuracy.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Facebook AI Research. Venue from the PDF header (''Published as a conference paper at ICLR 2022'') and the arXiv journal_ref. Conflict of interest: Yuandong Tian is a co-author both here and of the
+    non-contrastive dynamics paper it builds on and cites (Tian et al. 2021, arXiv 2102.06810); the paper states its Lemma 2 is more general than Theorem 4 of Tian et al. (2020). Augmentations: random crop,
+    resize, flip, color jitter, grayscale, blur, solarization. Baselines (SimCLR with/without projector) are the authors'' own runs. Appendix C extends the theory to multilayer and nonlinear settings (not
+    read in detail). Results tables not recorded.'

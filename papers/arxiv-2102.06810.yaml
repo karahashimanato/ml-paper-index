@@ -1,0 +1,87 @@
+id: arxiv-2102.06810
+title: Understanding self-supervised Learning Dynamics without Contrastive Pairs
+authors:
+- Yuandong Tian
+- Xinlei Chen
+- Surya Ganguli
+year: 2021
+venue: ICML 2021
+links:
+  arxiv: https://arxiv.org/abs/2102.06810
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 0c9e92df6d68f2368a4c61287d78ed6b9c6d0acfb5b4a3ae2382a159461abb0d
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- A gradient-flow analysis of non-contrastive SSL (BYOL/SimSiam) in a bias-free linear model with online, predictor and EMA target weights, explaining the roles of predictor, stop-gradient, EMA, relative
+  predictor learning rate and weight decay
+- 'DirectPred: setting the linear predictor directly from the eigen-decomposition of the estimated correlation matrix of its inputs, without gradient training'
+claims:
+- id: c1
+  statement: 'Theorem 2 (SimSiam case, W_a = W): removing the stop-gradient turns the update into a PSD-matrix flow, and if its minimal eigenvalue stays bounded below the weights go to zero; the authors
+    say this proves, in this simple setting, collapse without stop-gradient (and similarly without a predictor).'
+  location: Two-layer linear model (Theorem 2)
+  page: 3
+  quote: Thus we have proven analytically in this simple setting that removing the stop-gradient leads to representational collapse
+- id: c2
+  statement: 'Theorem 1: weight decay promotes balancing between predictor and online weights, so what the predictor learns the online network also learns; a nonzero weight decay could help remove the initialization-dependent
+    constant.'
+  location: Two-layer linear model (Theorem 1)
+  page: 3
+  quote: Instead what the predictor learns, the online network will also learn, which is important as the online network’s representations are what is used for downstream tasks.
+- id: c3
+  statement: 'Simplifying assumptions behind the analytic results: (1) the EMA target stays proportional to the online network, (2) isotropic data (zero mean, identity covariance) and isotropic augmentation
+    noise, (3) a symmetric predictor; the authors report that the predictions still hold qualitatively when the assumptions do not.'
+  location: How multiple factors affect learning dynamics (Assumption 2)
+  page: 4
+  quote: We assume the data distribution p(x) has zero mean and identity covariance, while the augmentation distribution paug(·|x) has mean x and covariance σ2I.
+- id: c4
+  statement: 'Theorem 3: under these assumptions the eigenspaces of the predictor and of the correlation matrix of its inputs gradually align (given a positive-definite condition), giving decoupled per-mode
+    dynamics; the non-symmetric-predictor case is left for future work.'
+  location: Section 3.1
+  page: 5
+  quote: When Assumption 3 is absent, the analysis is much more convoluted.
+- id: c5
+  statement: 'Collapse in the decoupled dynamics: a collapsed fixed point always exists; with weight decay there is a basin of attraction to collapse that grows with weight decay, and under strong enough
+    weight decay collapse is unavoidable.'
+  location: Section 3.2
+  page: 7
+  quote: Under such strong weight decay collapse is unavoidable (Obs#5).
+- id: c6
+  statement: EMA can act as an automatic curriculum by setting a small initial goal for the predictor eigenvalues and raising it gradually, with the trade-offs of slow training for slow EMA and more modes
+    possibly trapped in the collapsed basin.
+  location: Section 3.2 (Role of EMA)
+  page: 7
+  quote: Therefore, EMA can serve as an automatic curriculum (Obs#8)
+- id: c7
+  statement: 'Experimental protocol: STL-10/CIFAR-10 use ResNet-18, SGD (lr 0.03, momentum 0.9, weight decay 0.0004, EMA 0.996), 5 repeats per setting; ImageNet uses the authors'' own BYOL implementation
+    with ResNet-50, with architecture, augmentations and linear classification protocol strictly following BYOL (60-epoch and 300-epoch settings).'
+  location: Optimization-free Predictor Wp (ImageNet experiments)
+  page: 9
+  quote: The architecture design (e.g., feature dimensions), augmentation strategies (e.g., color jittering, blur (Chen et al., 2020a), solarization, etc.) and linear classiﬁcation protocol strictly follow
+    BYOL (Grill et al., 2020).
+- id: c8
+  statement: 'Scope: the theory covers a linear predictor; for the 2-layer predictor used in practice the authors give no formal analysis, only an intuition that its wide hidden layer offers ''lucky'' initial
+    directions that speed up eigenspace alignment.'
+  location: Section 5 (Discussion)
+  page: 9
+  quote: While we don’t provide a formal analysis and the math can be quite complicated
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Facebook AI Research, Stanford University. Venue from the PDF first page (''Proceedings of the 38th International Conference on Machine Learning, PMLR 139, 2021''). Conflict of interest: Xinlei Chen
+    is a co-author of SimSiam (Chen & He, 2020), one of the two methods analysed; Yuandong Tian later co-authored the dimensional-collapse paper (arXiv 2110.09348) that cites this work. The analysis is
+    a gradient flow in the limit of large batch sizes and small learning rates. Table 1 reports that plugging in the ''optimal'' linear predictor performs poorly, which the authors use against the always-optimal-predictor
+    conjecture. Symmetric predictors without EMA fail unless the relative predictor learning rate is > 1 or weight decay is applied only to the predictor (Tables 3, 5; Figure 6). Results tables not recorded.'

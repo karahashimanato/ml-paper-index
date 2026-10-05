@@ -73,8 +73,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 勾配ブースティング木 | 論文カード12本+既存6本(関数空間の勾配降下と正則化、XGBoost・CatBoost の設計、サンプリング、DART・区分線形の木・EBM、チューニング、予測分布と不確実性)、記事 [articles/methods/gradient-boosted-trees.md](articles/methods/gradient-boosted-trees.md) |
 | ランダムフォレストと決定木 | 論文カード12本+既存6本(最適な決定木、ランダムフォレストの理論の範囲、効く理由の3つの説明、チューニング、変数重要度の偏り、因果フォレスト)、記事 [articles/methods/random-forests-and-decision-trees.md](articles/methods/random-forests-and-decision-trees.md) |
 | 拡散モデル | 論文カード21本+既存4本(DDPM・スコアベース・SDE、尤度とサンプルの質、VAE とのつながり、サンプリングの高速化と蒸留、ガイダンス、潜在拡散、FID の問題、学習データの記憶と複製)、記事 [articles/methods/diffusion-models.md](articles/methods/diffusion-models.md) |
+| 対照学習・自己教師あり表現学習 | 論文カード22本(対照学習と負例の集め方、負例を使わない方法と崩壊の防止、マスク予測、理論の仮定、線形評価の頑健性と転移の再検証)、記事 [articles/methods/self-supervised-representation-learning.md](articles/methods/self-supervised-representation-learning.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では363本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では385本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -84,6 +85,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [勾配ブースティング木 — 仕組み、実装の設計の違い、チューニングと不確実性](articles/methods/gradient-boosted-trees.md)
 - [ランダムフォレストと決定木 — 理論の範囲、効く理由、変数重要度の偏り](articles/methods/random-forests-and-decision-trees.md)
 - [拡散モデル — 定式化の系譜、サンプリングの高速化、ガイダンス、評価と記憶の問題](articles/methods/diffusion-models.md)
+- [対照学習・自己教師あり表現学習 — 崩壊の避け方、理論の範囲、線形評価の読み方](articles/methods/self-supervised-representation-learning.md)
 
 横断記事:
 

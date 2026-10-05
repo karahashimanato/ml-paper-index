@@ -1,0 +1,92 @@
+id: arxiv-2104.02057
+title: An Empirical Study of Training Self-Supervised Vision Transformers
+authors:
+- Xinlei Chen
+- Saining Xie
+- Kaiming He
+year: 2021
+venue: ICCV 2021
+links:
+  arxiv: https://arxiv.org/abs/2104.02057
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 5f75bd90555f8d549e2b57328ede2f4383757114c8d9fc7955f959d62723b1c7
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- 'MoCo v3: a contrastive framework using in-batch keys (no queue), a symmetrized InfoNCE loss, projection and prediction heads, and a momentum encoder; used to study self-supervised ViT training'
+- Freezing the ViT patch projection layer (fixed random patch projection) as a trick to improve training stability
+claims:
+- id: c1
+  statement: Unstable self-supervised ViT training may not fail catastrophically (e.g. diverge) but can cause mild accuracy degradation (e.g. 1-3%), which may not be noticeable without a more stable counterpart
+    for comparison.
+  location: Introduction
+  page: 1
+  quote: Interestingly, we observe that unstable ViT training may not result in catastrophic failure (e.g., divergence); instead, it can cause mild degradation in accuracy (e.g., 1∼3%).
+- id: c2
+  statement: 'MoCo v3 design: keys that co-exist in the same batch are used as negatives and the memory queue is abandoned because its gain diminishes for sufficiently large batches (e.g. 4096); the loss
+    is symmetrized, the query encoder has a projection and a prediction head, and the key encoder is a moving average of the query encoder excluding the prediction head.'
+  location: Section 3
+  page: 3
+  quote: We abandon the memory queue [20], which we ﬁnd has diminishing gain if the batch is sufﬁciently large (e.g., 4096).
+- id: c3
+  statement: 'Batch size: 1k and 2k batches give reasonably smooth training curves and the larger batch improves accuracy thanks to more negatives; a 4k batch becomes noticeably unstable and a 6k batch
+    shows worse failure patterns, yet still gives an apparently decent result.'
+  location: Section 4.1
+  page: 3
+  quote: In this regime, the larger batch improves accuracy thanks to more negative samples [20, 10].
+- id: c4
+  statement: 'Hidden degradation is hard to notice: repeating the same configuration usually differs by only 0.1-0.3%, so mild instability does not show up as large run-to-run variation.'
+  location: Section 4.1
+  page: 3
+  quote: In many of our ablations, running the same conﬁguration for a second trial often results in a small difference of 0.1∼0.3%.
+- id: c5
+  statement: 'Stability trick: gradient spikes appear earlier in the first layer (patch projection) than in the last layers, so the authors freeze the patch projection as a fixed random layer (stop-gradient
+    after it); it stabilized training and improved accuracy in MoCo v3, SimCLR, BYOL and SwAV in their experiments.'
+  location: Section 4.2
+  page: 4
+  quote: In other words, we use a ﬁxed random patch projection layer to embed the patches, which is not learned.
+- id: c6
+  statement: 'Limitation of the trick: it alleviates but does not solve the instability (the model can still be unstable if lr is too large); the authors think the issue concerns all layers and is an optimization
+    problem, and hope for a more fundamental solution.'
+  location: Section 4.2
+  page: 5
+  quote: The trick alleviates the issue, but does not solve it.
+- id: c7
+  statement: 'Evaluation protocol: after pre-training on the ImageNet training set, the MLP heads are removed and a linear classifier is trained on frozen features for 90 epochs on the ImageNet training
+    set (random resized crop and flip only; SGD, batch 4096, wd 0, lr swept per case), reporting single-crop top-1 on the validation set. Pre-training lr and wd are searched on 100-epoch results. The data
+    used to select the swept probe lr is not stated (searched for sweep, search, validation).'
+  location: Section 5
+  page: 5
+  quote: We use the SGD optimizer, with a batch size of 4096, wd of 0, and sweep lr for each case.
+- id: c8
+  statement: 'Framework comparison: MoCo v3, SimCLR, BYOL and SwAV with ViT are all run by the authors with the random-projection trick, two 224x224 crops, and lr and wd swept per framework; R-50 results
+    of the other frameworks are taken from an improved implementation in [13] (Chen and He, an earlier paper by two of the authors).'
+  location: Section 6.1
+  page: 6
+  quote: We sweep lr and wd for each individual framework for fair comparisons.
+- id: c9
+  statement: 'Momentum encoder ablation (ViT-B, 300 epochs): m = 0, analogous to SimCLR plus the prediction head and stop-gradient on keys, gives accuracy similar to SimCLR, and using the momentum encoder
+    leads to a 2.2% increase. Removing the prediction head still gives a decent result: MoCo as a contrastive method does not need the predictor, unlike negative-free methods.'
+  location: Section 6.2
+  page: 7
+  quote: The usage of the momentum encoder leads to 2.2% increase.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Facebook AI Research (FAIR); Chen and Xie contributed equally. Venue from the arXiv comment (''Camera-ready, ICCV 2021, Oral''). The abstract states the paper does not describe a novel method. Conflict
+    of interest: MoCo (v1/v2) and the R-50 reference implementation [13] are by overlapping authors, and the competing frameworks (SimCLR, BYOL, SwAV) with ViT are the authors'' own implementations. Instability
+    is diagnosed with a dense approximate kNN monitor (every tens of iterations, memory bank of 10% of ImageNet; Appendix A). Augmentation: random resized crop, flip, color jitter, grayscale, blur, solarization.
+    The postscript reports that Lucas Beyer observed the same behaviour for supervised BiT-ResNet on ImageNet-21k. Discussion notes that bigger self-supervised ViTs are better but the results saturate.
+    Results tables not recorded.'

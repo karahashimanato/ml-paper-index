@@ -1,0 +1,90 @@
+id: arxiv-2006.09882
+title: Unsupervised Learning of Visual Features by Contrasting Cluster Assignments
+authors:
+- Mathilde Caron
+- Ishan Misra
+- Julien Mairal
+- Priya Goyal
+- Piotr Bojanowski
+- Armand Joulin
+year: 2020
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.09882
+  code: https://github.com/facebookresearch/swav
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 4249b19a6c31946e27b4244d050b69d7283b87dde1d134c051cd596a8bd4e5dc
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- 'SwAV: online clustering in which codes (soft assignments of features to trainable prototypes) are computed per batch with the Sinkhorn-Knopp algorithm under an equipartition constraint, and the code
+  of one view is predicted from the feature of another view (swapped prediction)'
+- 'Multi-crop: two standard-resolution crops plus several low-resolution crops per image, with codes computed only from the full-resolution crops'
+claims:
+- id: c1
+  statement: 'Collapse prevention: codes are computed so that the examples in a batch are equally partitioned among the prototypes; this equipartition constraint keeps codes of different images distinct
+    and prevents the trivial solution where every image has the same code.'
+  location: Method (Computing codes online)
+  page: 4
+  quote: This equipartition constraint ensures that the codes for different images in a batch are distinct, thus preventing the trivial solution where every image has the same code.
+- id: c2
+  statement: A strong entropy regularization (high epsilon) generally leads to a trivial solution where all samples collapse to a single representation and are assigned uniformly to all prototypes, so epsilon
+    is kept low.
+  location: Method (Computing codes online)
+  page: 4
+  quote: We observe that a strong entropy regularization (i.e. using a high ε) generally leads to a trivial solution where all samples collapse into an unique representation and are all assigned uniformely
+    to all prototypes.
+- id: c3
+  statement: 'Small batches: when the batch is too small compared with the number of prototypes, an equal partition is impossible, so features from previous batches are stored to augment the assignment
+    problem (around 3K features, i.e. the last 15 batches of 256, versus the 65K instances the authors say contrastive methods typically store).'
+  location: Method (Working with small batches)
+  page: 5
+  quote: Therefore, when working with small batches, we use features from the previous batches to augment the size of Z in Prob. (3).
+- id: c4
+  statement: 'Batch size caveat: the headline ImageNet linear result is from 800 epochs with batches of 4096; results with shorter training and small batches are given separately (Fig. 3, Table 3).'
+  location: Main Results
+  page: 6
+  quote: Note that we train SwAV during 800 epochs with large batches (4096).
+- id: c5
+  statement: 'Cost in the small-batch setting (batch 256): SwAV with multi-crop runs 1.2x slower per epoch than SimCLR and about 1.4x slower than MoCov2; one epoch of MoCov2 or SimCLR is faster, but the
+    authors say these methods need more epochs for good downstream performance.'
+  location: Training with small batches
+  page: 7
+  quote: Hence, one epoch of MoCov2 or SimCLR is faster in wall clock time than one of SwAV, but these methods need more epochs for good downstream performance.
+- id: c6
+  statement: 'Sinkhorn iterations ablation: 3 iterations suffice for convergence; with fewer iterations the loss fails to converge, and more iterations slightly alter transfer performance (conjectured to
+    be due to converging too rapidly, as with discrete codes).'
+  location: Appendix C.4
+  page: 21
+  quote: When performing less iterations, the loss fails to converge.
+- id: c7
+  statement: 'Prototypes: learning them improves over fixed random prototypes only modestly; the authors say the prototypes are not strongly encouraged to be categorical, and that they help contrast views
+    without pairwise comparisons with many negatives.'
+  location: Appendix (Learning the prototypes)
+  page: 20
+  quote: Indeed, the prototypes in SwAV are not strongly encouraged to be categorical and random ﬁxed prototypes work almost as well.
+- id: c8
+  statement: Multi-crop improves several self-supervised methods (SimCLR, SeLa-v2, DeepCluster-v2, SwAV) in the authors' re-implementations with matched augmentation, epochs and batch size, and seems to
+    benefit clustering-based methods more than contrastive ones; it does not improve the supervised model.
+  location: Ablation Study (Applying the multi-crop strategy to different methods)
+  page: 8
+  quote: Interestingly, multi-crop seems to beneﬁt more clustering-based methods than contrastive methods.
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Inria and Facebook AI Research. Venue from the PDF footer (''34th Conference on Neural Information Processing Systems (NeurIPS 2020)'') and the arXiv comment. Linear evaluation (Appendix A.3): linear
+    classifier on frozen 2048-d ResNet-50 features, 100 epochs, lr 0.3, cosine decay, batch 256, RandomResizedCrop and flips; no held-out split for probe hyperparameters was found in the text (searched
+    for validation, held-out). Prototypes are frozen during the first epoch ''to help the very beginning of the optimization'' (Appendix). Disclosure: Caron, Bojanowski and Joulin are authors of DeepCluster,
+    which is re-implemented here as DeepCluster-v2. Results tables not recorded.'

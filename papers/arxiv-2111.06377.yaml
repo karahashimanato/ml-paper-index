@@ -1,0 +1,105 @@
+id: arxiv-2111.06377
+title: Masked Autoencoders Are Scalable Vision Learners
+authors:
+- Kaiming He
+- Xinlei Chen
+- Saining Xie
+- Yanghao Li
+- Piotr Dollár
+- Ross Girshick
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2111.06377
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 1b490443925c72a2b7c770f90dd797e248729ae34a57e1abfe9ed36751c4cc5b
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - masked-image-modeling
+  - autoencoders
+  paradigms:
+  - self-supervised
+proposes:
+- 'Masked autoencoder (MAE): random patches (e.g. 75%) are removed, a ViT encoder processes only the visible patches (no mask tokens), and a lightweight decoder reconstructs the missing pixels from the
+  latent representation and mask tokens; the loss is MSE on masked patches only'
+claims:
+- id: c1
+  statement: 'Two core designs: an asymmetric encoder-decoder (encoder on visible patches only, lightweight decoder with mask tokens) and a high masking ratio, e.g. 75%, which the authors find yields a
+    nontrivial and meaningful self-supervisory task; together they accelerate training (by 3x or more) and improve accuracy.'
+  location: Abstract
+  page: 1
+  quote: Second, we ﬁnd that masking a high proportion of the input image, e.g., 75%, yields a nontrivial and meaningful self-supervisory task.
+- id: c2
+  statement: 'Why a high ratio: images have heavy spatial redundancy (unlike information-dense language); random sampling with a high masking ratio largely eliminates redundancy so the task cannot be solved
+    by extrapolating from visible neighbours. The optimal ratio (75%) is much higher than BERT''s typical 15% and related vision works (20% to 50%).'
+  location: Section 3 (Masking)
+  page: 3
+  quote: Random sampling with a high masking ratio (i.e., the ratio of removed patches) largely eliminates redundancy, thus creating a task that cannot be easily solved by extrapolation from visible neighboring
+    patches (see Figures 2 – 4).
+- id: c3
+  statement: 'Mask tokens in the encoder hurt: if the encoder uses mask tokens, linear probing accuracy drops by 14%; the authors explain that such an encoder sees many mask tokens in pre-training that
+    never appear in uncorrupted images, a gap that may degrade accuracy in deployment. Skipping them also reduces training FLOPs by 3.3x.'
+  location: Section 4.1 (Mask token)
+  page: 5
+  quote: This gap may degrade accuracy in deployment.
+- id: c4
+  statement: 'Masking ratio and protocol: linear probing and fine-tuning follow different trends; linear probing accuracy increases steadily with the masking ratio up to the sweet point, while fine-tuning
+    is less sensitive and a wide range (40-80%) works well.'
+  location: Section 4.1 (Masking ratio)
+  page: 4
+  quote: Figure 5 also shows that linear probing and ﬁne-tuning results follow different trends.
+- id: c5
+  statement: 'Decoder depth matters for linear probing but less for fine-tuning: the last layers of an autoencoder specialize in reconstruction, so a deeper decoder keeps the latent representation more
+    abstract; under fine-tuning, the last encoder layers can adapt instead.'
+  location: Section 4.1 (Decoder design)
+  page: 5
+  quote: A sufﬁciently deep decoder is important for linear probing.
+- id: c6
+  statement: 'Linear probing vs fine-tuning: Table 1 shows the two are largely uncorrelated; in partial fine-tuning (ViT-L), tuning a single Transformer block raises accuracy substantially over linear probing,
+    and MoCo v3 has higher linear probing accuracy but worse partial fine-tuning results than MAE.'
+  location: Section 4.3
+  page: 7
+  quote: While the MAE representations are less linearly separable, they are stronger non-linear features and perform well when a non-linear head is tuned.
+- id: c7
+  statement: The authors conclude that linear separability is not the sole metric of representation quality, citing [8] that linear probing is not well correlated with transfer performance (e.g. detection),
+    and note that to their knowledge linear evaluation is not often used in NLP for benchmarking pre-training.
+  location: Section 4.3
+  page: 8
+  quote: These observations suggest that linear separability is not the sole metric for evaluating representation quality.
+- id: c8
+  statement: 'Linear probe recipe: follows MoCo v3 [9]; regularization (mixup, cutmix, drop path, color jitter, weight decay) is disabled as generally harmful; an extra BatchNorm without affine parameters
+    is applied to the features before the linear classifier, which helps calibrate feature magnitudes so variants can share one setting without further lr search. Ablations report top-1 accuracy on the
+    ImageNet-1K validation set.'
+  location: Appendix A.1
+  page: 11
+  quote: Introducing this layer helps calibrate the feature magnitudes across different variants in our ablations, so that they can use the same setting without further lr search.
+- id: c9
+  statement: 'Augmentation: MAE works well with cropping-only augmentation (fixed or random size, with flipping), color jittering degrades results, and it behaves decently even with no augmentation; the
+    authors contrast this with contrastive methods, citing [21] that cropping-only reduces BYOL and SimCLR accuracy, and attribute the regularizing role to random masking.'
+  location: Section 4.1 (Data augmentation)
+  page: 6
+  quote: Our MAE works well using cropping-only augmentation, either ﬁxed-size or random-size (both having random horizontal ﬂipping).
+- id: c10
+  statement: 'Tokens vs pixels: a dVAE-token target (as in BEiT) is not better than normalized pixels and reduces linear probing; the dVAE tokenizer needs an extra pre-training stage that may depend on
+    extra data, and its encoder adds overhead.'
+  location: Section 4.1 (Reconstruction target)
+  page: 6
+  quote: The dVAE tokenizer requires one more pre-training stage, which may depend on extra data (250M images [50]).
+- id: c11
+  statement: 'Compute: on 128 TPU-v3 cores, MAE ViT-L pre-training takes 31 hours for 1600 epochs versus 36 hours for 300 epochs of MoCo v3; pre-training is on the ImageNet-1K training set only.'
+  location: Section 4.2
+  page: 7
+  quote: For example, training ViT-L on 128 TPU-v3 cores, our MAE’s training time is 31 hours for 1600 epochs and MoCo v3’s is 36 hours for 300 epochs [9].
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Facebook AI Research (FAIR). arXiv comment marks it as a tech report; no venue stated in the PDF, none recorded. Kaiming He and Xinlei Chen are also authors of MoCo v3, which is a main baseline. Fine-tuning
+    is the primary ImageNet protocol (Table 3); BEiT entries on ADE20K were reproduced with the official code. Results tables not recorded.'

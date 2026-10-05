@@ -1,0 +1,97 @@
+id: arxiv-2002.05709
+title: A Simple Framework for Contrastive Learning of Visual Representations
+authors:
+- Ting Chen
+- Simon Kornblith
+- Mohammad Norouzi
+- Geoffrey Hinton
+year: 2020
+venue: ICML 2020
+links:
+  arxiv: https://arxiv.org/abs/2002.05709
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-05'
+  pdf_sha256: e1b10db76adeb0d21a014b9abcf42f6a6af928540c223f010fa1d8c293d9d105
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- 'SimCLR: contrastive learning by maximizing agreement between two augmented views of the same image with the NT-Xent loss, using the other examples in the (large) minibatch as negatives, a nonlinear projection
+  head that is discarded after training, and no memory bank or specialized architecture'
+claims:
+- id: c1
+  statement: 'Negatives come from the batch: negatives are not sampled explicitly; for a positive pair, the other 2(N-1) augmented examples in the minibatch are treated as negatives, and the loss (NT-Xent,
+    normalized temperature-scaled cross entropy on cosine similarity) has been used in previous work.'
+  location: Section 2.1
+  page: 2
+  quote: We do not sample negative examples explicitly.
+- id: c2
+  statement: 'Cost of large batches: no memory bank is used; batch size is varied from 256 to 8192 (8192 gives 16382 negatives per positive pair). Because large-batch training may be unstable with standard
+    SGD/Momentum and linear learning-rate scaling, LARS is used for all batch sizes, on 32 to 128 Cloud TPU cores; BN statistics are aggregated over all devices to avoid local information leakage.'
+  location: Section 2.2
+  page: 3
+  quote: To stabilize the training, we use the LARS optimizer (You et al., 2017) for all batch sizes.
+- id: c3
+  statement: 'Evaluation protocol: pre-training mostly on ImageNet ILSVRC-2012; representations are evaluated with the linear evaluation protocol (linear classifier on the frozen base network, test accuracy
+    as a proxy). Ablation default: ResNet-50, 2-layer MLP projection to 128-d, LARS, batch 4096, 100 epochs (the authors note that maximum performance is not reached in 100 epochs). The ImageNet linear
+    classifier is trained like fine-tuning (Nesterov momentum) with learning rate 1.6 for 90 epochs (Appendix B.6); no statement of how these probe hyperparameters were chosen was found in the text (searched
+    for tune, validation, held out).'
+  location: Section 2.3
+  page: 3
+  quote: a linear classiﬁer is trained on top of the frozen base network, and test accuracy is used as a proxy for representation quality.
+- id: c4
+  statement: 'Augmentation composition: in an asymmetric ablation (crop and resize always applied, the targeted transformation applied to one branch only, which the authors note hurts performance), no single
+    transformation sufficed to learn good representations even though the model could almost perfectly identify positive pairs; composing augmentations made the task harder but improved representation quality
+    dramatically.'
+  location: Section 3.1
+  page: 5
+  quote: We observe that no single transformation sufﬁces to learn good representations, even though the model can almost perfectly identify the positive pairs in the contrastive task.
+- id: c5
+  statement: Random cropping with random color distortion stands out. The authors conjecture that crops of one image share a similar color distribution, that color histograms alone suffice to distinguish
+    images, and that networks may exploit this shortcut, so cropping must be composed with color distortion.
+  location: Section 3.1
+  page: 5
+  quote: Neural nets may exploit this shortcut to solve the predictive task.
+- id: c6
+  statement: Stronger color augmentation substantially improves linear evaluation of the unsupervised models (AutoAugment did not work better than crop plus stronger color distortion), whereas it does not
+    improve or even hurts supervised models trained with the same augmentations.
+  location: Section 3.2
+  page: 5
+  quote: Thus, our experiments show that unsupervised contrastive learning beneﬁts from stronger (color) data augmentation than supervised learning.
+- id: c7
+  statement: 'Projection head: a nonlinear projection was better than a linear one (+3%) and much better than none (>10%), and the representation h before the head was much better (>10%) than the output
+    z = g(h). The authors conjecture this is due to information loss induced by the contrastive loss: z is trained to be invariant to the transformations, so g can remove information useful downstream (e.g.
+    color, orientation), which an auxiliary experiment predicting the applied transformation supports.'
+  location: Section 4.2
+  page: 6
+  quote: We conjecture that the importance of using the representation before the nonlinear projection is due to loss of information induced by the contrastive loss.
+- id: c8
+  statement: 'Batch size and training length: with few epochs (e.g. 100) larger batches have a significant advantage; with more epochs the gaps decrease or disappear, provided batches are randomly resampled.
+    Larger batches provide more negatives and facilitate convergence, and training longer also provides more negatives.'
+  location: Section 5.2
+  page: 7
+  quote: Training longer also provides more negative examples, improving the results.
+- id: c9
+  statement: Citing Tschannen et al. (2019), the authors state that it is not clear whether the success of contrastive approaches is determined by mutual information or by the specific form of the contrastive
+    loss.
+  location: Section 7 (Related Work)
+  page: 8
+  quote: However, it is not clear if the success of contrastive approaches is determined by the mutual information, or by the speciﬁc form of the contrastive loss (Tschannen et al., 2019).
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Google Research, Brain Team. Venue from the PDF first page (''Proceedings of the 37th International Conference on Machine Learning, Vienna, Austria, PMLR 119, 2020'') and the arXiv comment. Comparison-with-state-of-the-art
+    models are trained for 1000 epochs; baselines in Tables 6-7 are cited from the respective papers. Semi-supervised: fine-tuning on class-balanced 1%/10% ImageNet subsets following Zhai et al. (2019),
+    without regularization. Transfer (12 datasets, Appendix B.8): hyperparameters selected per model-dataset on a validation set (creator-specified or held out from training), then retrained on train+validation
+    and reported on test. Other-loss baselines (margin, logistic) were tuned over small grids (Appendix B.10). Appendix B.7 notes linear evaluation and fine-tuning are almost linearly correlated but fine-tuning
+    on few labels seems to benefit more from longer training. Results tables not recorded.'

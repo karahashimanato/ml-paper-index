@@ -61,3 +61,7 @@ themes:
     tags: [diffusion-models]
     arxiv_queries:
       - '(abs:"diffusion model" OR abs:"score-based generative" OR abs:"denoising diffusion" OR abs:"consistency model") AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'
+  - name: 対照学習・自己教師あり表現学習
+    tags: [joint-embedding, masked-image-modeling]
+    arxiv_queries:
+      - '(abs:"self-supervised" OR abs:"contrastive learning" OR abs:"masked image modeling" OR abs:"masked autoencoder") AND (abs:representation) AND (cat:cs.CV OR cat:cs.LG)'

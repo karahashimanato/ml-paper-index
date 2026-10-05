@@ -1,0 +1,81 @@
+id: arxiv-2011.10566
+title: Exploring Simple Siamese Representation Learning
+authors:
+- Xinlei Chen
+- Kaiming He
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2011.10566
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-05'
+  pdf_sha256: 37d37c81d423d503f54d99bc5c9d9dc23d07c7bd1aad62f37b47ec7d2871e63e
+tags:
+  tasks:
+  - representation-learning
+  - image-classification
+  method_families:
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- 'SimSiam: a weight-shared Siamese network (backbone + projection MLP) with a prediction MLP on one branch and a stop-gradient on the other, trained with a symmetrized negative cosine similarity; no negative
+  pairs, no momentum encoder, no large batches'
+claims:
+- id: c1
+  statement: 'Main finding: collapsing solutions exist for the SimSiam loss and architecture, but a stop-gradient operation plays an essential role in preventing collapse.'
+  location: Abstract
+  page: 1
+  quote: Our experiments show that collapsing solutions do exist for the loss and structure, but a stop-gradient operation plays an essential role in preventing collapsing.
+- id: c2
+  statement: Removing only the stop-gradient (architecture and hyperparameters unchanged) gives chance-level linear accuracy; collapse is diagnosed by the loss reaching its minimum of -1 and by the per-channel
+    std of the l2-normalized output going to zero. The authors note in a footnote that chance-level accuracy alone does not indicate collapse, since a diverging loss can also give it.
+  location: Section 4.1
+  page: 4
+  quote: Solely removing stop-gradient, the accuracy becomes 0.1%, which is the chance-level guess in ImageNet.
+- id: c3
+  statement: 'The predictor is needed: removing it (identity mapping) collapses, which is expected for the symmetrized loss; the asymmetric loss also fails without it; a predictor fixed at random initialization
+    fails without collapsing (training does not converge).'
+  location: Section 4.2
+  page: 4
+  quote: The model does not work if removing h (Table 1a), i.e., h is the identity mapping.
+- id: c4
+  statement: 'Batch size (64 to 4096, plain SGD, 100-epoch pre-training): SimSiam works reasonably well over the whole range, unlike SimCLR and SwAV which the authors say need large batches; the result
+    is lower with 4096, which they attribute to SGD with very large batches.'
+  location: Section 4.3
+  page: 4
+  quote: Our method works reasonably well over this wide range of batch sizes.
+- id: c5
+  statement: Batch size, batch normalization, similarity function and symmetrization may affect accuracy, but the authors saw no evidence that they are related to collapse prevention; it is mainly the stop-gradient.
+  location: Section 4.7
+  page: 5
+  quote: The optimizer (batch size), batch normalization, similarity function, and symmetrization may affect accuracy, but we have seen no evidence that they are related to collapse prevention.
+- id: c6
+  statement: 'On BYOL''s momentum encoder: the authors argue that the importance of stop-gradient can be obscured by a momentum encoder (always accompanied by stop-gradient), and that moving averaging may
+    improve accuracy but is not directly related to preventing collapse.'
+  location: Related Work (BYOL)
+  page: 2
+  quote: While the moving-average behavior may improve accuracy with an appropriate momentum coefﬁcient, our experiments show that it is not directly related to preventing collapsing.
+- id: c7
+  statement: 'Hypothesis, not proof: SimSiam is hypothesized to be an EM-like alternating optimization over network weights and per-image representations (Section 5); the authors state that this hypothesis
+    is about what the optimization problem can be, that it does not explain why collapse is prevented, and that non-collapse remains an empirical observation.'
+  location: Section 5.3
+  page: 7
+  quote: We point out that SimSiam and its variants’ non-collapsing behavior still remains as an empirical observation.
+- id: c8
+  statement: Comparisons on ImageNet linear evaluation use the authors' own reproductions of all competitors (some improved over the original papers), each with its original hyperparameter and augmentation
+    recipe, ResNet-50 and two 224x224 views.
+  location: Section 6.1
+  page: 7
+  quote: For fair comparisons, all competitors are based on our reproduction, and “+” denotes improved reproduction vs. the original papers (see supplement).
+results: []
+relations: []
+card:
+  created_at: '2026-10-05'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-05): contrastive and self-supervised representation learning. Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Facebook AI Research (FAIR). arXiv comment ''Technical report''; no venue recorded. Linear evaluation (supplement): linear classifier on frozen pool5 features, LARS, 90 epochs, batch 4096, evaluated
+    on the center crop of the ImageNet validation set; no separate held-out split for probe hyperparameters was found in the text (searched for validation, held-out). Disclosure: Kaiming He is an author
+    of MoCo/MoCo v2, which are among the reproduced baselines. The paper footnote notes that BYOL''s arXiv v3 reports 66.9% without a momentum encoder when the predictor learning rate is increased, concurrently
+    with this work. Results tables not recorded.'

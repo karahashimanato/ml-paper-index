@@ -1,0 +1,105 @@
+id: arxiv-1910.12656
+title: 'Beyond temperature scaling: Obtaining well-calibrated multiclass probabilities with Dirichlet calibration'
+authors:
+- Meelis Kull
+- Miquel Perello-Nieto
+- Markus Kängsepp
+- Telmo Silva Filho
+- Hao Song
+- Peter Flach
+year: 2019
+venue: NeurIPS 2019
+links:
+  arxiv: https://arxiv.org/abs/1910.12656
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 4a891404fb5bd7a929a8eb8ed325323f799e126148ec10e8a29896506cb66a55
+tags:
+  tasks:
+  - uncertainty-estimation
+  - image-classification
+  - tabular-classification
+  method_families:
+  - post-hoc-calibration
+  - deep-learning
+  paradigms:
+  - post-hoc
+  - supervised
+proposes:
+- 'Dirichlet calibration: a natively multiclass calibration map derived from class-conditional Dirichlet likelihoods (generalizing beta calibration), implemented as log-transformed probabilities followed
+  by a linear layer and softmax (multinomial logistic regression on log-probabilities)'
+- ODIR (Off-Diagonal and Intercept Regularisation) for Dirichlet calibration and matrix scaling on deep nets
+- classwise-ECE and classwise-reliability diagrams for evaluating classwise calibration
+claims:
+- id: c1
+  statement: 'Calibration notions: full multiclass calibration, classwise calibration (each one-vs-rest probability calibrated) and confidence calibration (only the top-class probability, as used by Guo
+    et al.); the authors note that some authors use the weaker confidence calibration and that the multiclass setting has subtleties not always recognised.'
+  location: Introduction
+  page: 2
+  quote: some authors use the weaker notion of conﬁdence calibration (our term), which requires only that the classiﬁer’s predicted probability for what it considers the most likely class is calibrated
+- id: c2
+  statement: Temperature scaling (one parameter fit on a hold-out validation set) made a wide ResNet on CIFAR-10 nearly confidence-calibrated (the Vaicenavicius et al. test did not reject at alpha = 0.01),
+    yet it systematically mis-estimated individual classes; with a single parameter it cannot act differently on different classes, motivating classwise-ECE.
+  location: Section 2 (Evaluation of calibration and temperature scaling)
+  page: 3
+  quote: Having only a single tuneable parameter, temperature scaling cannot learn to act differently on different classes.
+- id: c3
+  statement: 'Fundamental limitation of reliability diagrams and ECE measures: predicting the overall class distribution regardless of the instance gives almost perfect calibration, so other measures (error
+    rate, proper losses such as Brier score or log-loss) should always be considered too.'
+  location: Section 2 (Evaluation of calibration and temperature scaling)
+  page: 4
+  quote: Namely, it is easy to obtain almost perfectly calibrated probabilities by predicting the overall class distribution, regardless of the given instance.
+- id: c4
+  statement: 'Relationship to other families: for 2 classes Dirichlet calibration coincides with beta calibration; temperature-scaling maps are contained in the Dirichlet family; matrix scaling uses the
+    same layer but on logits, and because softmax followed by log loses information, matrix scaling has an informational advantage on deep nets.'
+  location: Section 3 (Dirichlet calibration)
+  page: 6
+  quote: As softmax followed by log-transform is losing information, matrix scaling has an informational advantage over Dirichlet calibration on deep neural networks, which we will turn back to in the experiments
+    section.
+- id: c5
+  statement: 'Assumption: although derived from Dirichlet-distributed likelihoods, the method does not assume the probability vectors are actually Dirichlet-distributed within each class (analogous to Platt
+    scaling and Gaussian likelihoods).'
+  location: Section 5 (Conclusion)
+  page: 9
+  quote: While derived from Dirichlet-distributed likelihoods, it does not assume that the probability vectors are actually Dirichlet-distributed within each class
+- id: c6
+  statement: 'Overfitting: responding to Guo et al.''s view that calibration models with many parameters overfit a small validation set, the authors agree some overfitting happens, but find L2 regularisation
+    suffices on non-neural models and propose ODIR for deep nets; fitting minimises log-loss on validation instances plus ODIR terms whose weights are tuned by internal cross-validation on the validation
+    data.'
+  location: Section 3 (Fitting and ODIR regularisation)
+  page: 6
+  quote: We agree that some overﬁtting happens, but in our experiments a simple L2 regularisation sufﬁces on non-neural models
+- id: c7
+  statement: 'Non-neural protocol: 21 UCI datasets x 11 classifiers; calibration maps trained with 3-fold internal cross-validation inside 5x5-fold external cross-validation, the 3 maps averaged as an ensemble;
+    calibrator hyperparameters chosen on the classifier''s training fold by lowest log-loss; 8 measures (including conf-ECE, cw-ECE and their significance-test variants) compared with Friedman and Bonferroni-Dunn
+    tests. The authors note svc-linear and svc-rbf have an unfair advantage because sklearn applies Platt scaling internally.'
+  location: Section 4 (Calibration of non-neural models)
+  page: 7
+  quote: We used 3-fold internal cross-validation to train the calibration maps within the 5 times 5-fold external cross-validation.
+- id: c8
+  statement: 'Deep-net protocol: 11 CNNs on CIFAR-10, CIFAR-100 and SVHN; following Guo et al., 5,000 training instances (6,000 for SVHN) were set aside for calibration, except for 3 pretrained models where
+    5,000 test instances were set aside; regularisation chosen by 5-fold cross-validation on the validation set and the 5 resulting calibrators averaged. Unregularised matrix scaling was excluded as reported
+    to perform very poorly.'
+  location: Section 4 (Calibration of deep neural networks)
+  page: 8
+  quote: On other models we followed [9], setting aside 5,000 training instances (6,000 in SVHN) for calibration purposes and training the models as in the original papers.
+- id: c9
+  statement: 'Deep-net results are hedged: the best general-purpose calibrator depends heavily on model and dataset; Dir-L2 is poor on CIFAR-100 while Dir-ODIR beats temperature scaling on cw-ECE at a minor
+    log-loss cost; by average rank Dir-ODIR is best but without statistical significance. Logit-based MS-ODIR beat Dir-ODIR in most cases but the effect is numerically usually very small (under 1% average
+    relative reduction).'
+  location: Section 4 (Calibration of deep neural networks)
+  page: 8
+  quote: According to the average rank across all deep net experiments, Dir-ODIR is best, but without statistical signiﬁcance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Tartu, University of Bristol, Universidade Federal da Paraíba, The Alan Turing Institute. Venue
+    from the PDF first-page footer (''33rd Conference on Neural Information Processing Systems (NeurIPS 2019)'') and the arXiv comment. Conflict of interest: the OvR beta calibration baseline is the authors''
+    own earlier method (Kull, Silva Filho, Flach 2017, reference [15]). Sections 2-5 are confirmed by the Introduction''s outline; subsections are cited by name. Non-neural classifiers include logistic
+    regression, naive Bayes, random forest, AdaBoost, LDA/QDA, decision tree, kNN, MLP and SVMs. The conclusion notes that on many deep nets Dirichlet calibration learns a map very close to the temperature-scaling
+    family, and suggests it may be useful after dataset shift (not evaluated). Results tables not recorded.'

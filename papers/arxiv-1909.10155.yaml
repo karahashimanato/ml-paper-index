@@ -1,0 +1,99 @@
+id: arxiv-1909.10155
+title: Verified Uncertainty Calibration
+authors:
+- Ananya Kumar
+- Percy Liang
+- Tengyu Ma
+year: 2019
+venue: NeurIPS 2019
+links:
+  arxiv: https://arxiv.org/abs/1909.10155
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: cc4e4bde39f530f9b873b79109d4d0f4908294d4303745db4f0e70ddc1dd05bf
+tags:
+  tasks:
+  - uncertainty-estimation
+  - image-classification
+  method_families:
+  - post-hoc-calibration
+  - deep-learning
+  paradigms:
+  - post-hoc
+  - supervised
+proposes:
+- 'Scaling-binning calibrator: fit a parametric scaling function on one split, build uniform-mass bins on a second split, and output the mean of the function values per bin estimated on a third split, so
+  the calibration error is measurable with O(1/eps^2 + B) samples'
+- Analysis showing the debiased (meteorological) estimator of squared calibration error needs samples proportional to sqrt(B) instead of B for the plugin estimator, for well-balanced binned models
+claims:
+- id: c1
+  statement: 'Claim about scaling methods: Platt scaling and temperature scaling are less calibrated than reported, and it is difficult to tell how miscalibrated they are; the authors argue that, if f(X)
+    is continuous, estimating E[Y | f(X)] (needed for the calibration error) is impossible without smoothness assumptions that cannot be verified in practice.'
+  location: Section 3 (Is Platt scaling calibrated?)
+  page: 4
+  quote: In this section, we show that methods like Platt scaling and temperature scaling are (i) less calibrated than reported and (ii) it is difﬁcult to tell how miscalibrated they are.
+- id: c2
+  statement: 'Multiclass definitions: the paper distinguishes top-label calibration error (top prediction only) from marginal calibration error (each class, one-vs-all, weighted), and notes that prior multiclass
+    methods were evaluated only on top-label calibration; citing other work, temperature scaling is worse than vector scaling on per-class metrics despite better top-label calibration.'
+  location: Section 2 (Setup and background)
+  page: 3
+  quote: Prior works [9, 15, 17] propose methods for multiclass calibration but only measure top-label calibration
+- id: c3
+  statement: 'Binned estimates can severely underestimate calibration error: for any binning scheme there is a distribution where the binned calibration error is 0 while the true error is at least 0.49
+    (Example 3.2); binning never increases calibration error (Proposition 3.3). Both hold for any lp calibration error including ECE.'
+  location: Section 3 (Is Platt scaling calibrated?)
+  page: 4
+  quote: A simple example shows that using binning to estimate the calibration error can severely underestimate the true calibration error.
+- id: c4
+  statement: 'Experiment protocol (ImageNet, VGG16): the ImageNet validation set was split into three sets, used respectively to recalibrate with Platt scaling, to select an equal-mass binning scheme, and
+    to measure the binned calibration error, with 1,000-bootstrap 90% intervals. Because binning lower-bounds calibration error, finer bins give a tighter bound; measured error grew with the number of bins
+    (the authors say with 15 bins as in Guo et al. one would think it is around 0.02 when it is at least twice as high), and Appendix C reportedly extends this to ECE and other binning strategies.'
+  location: Section 3 (Experiments)
+  page: 5
+  quote: We split the validation set into 3 sets of sizes (20000, 5000, 25000).
+- id: c5
+  statement: 'Scaling-binning calibrator guarantee (Theorem 4.1): with n of order B log B + log B / eps^2 samples, its squared calibration error is at most twice the best squared calibration error in the
+    scaling family G plus eps^2, with probability 1 - delta; this assumes regularity conditions on G and requires splitting the recalibration data into three sets (function fitting, uniform-mass bin construction,
+    discretization). The uniform-mass binning is described as essential for estimating the calibration error.'
+  location: The scaling-binning calibrator
+  page: 6
+  quote: Assume regularity conditions on G (ﬁnite parameters, injectivity, Lipschitz-continuity, consistency, twice differentiability).
+- id: c6
+  statement: 'Cost of binning: binning worsens sharpness and can increase the mean-squared error; the authors show (Proposition D.4) that with many bins the MSE cannot increase by much, and list better
+    binning schemes as future work.'
+  location: The scaling-binning calibrator (Analysis)
+  page: 6
+  quote: While binning worsens the sharpness and can increase the mean-squared error of the model, in Proposition D.4 we show that if we use many bins, binning the outputs cannot increase the mean-squared
+    error by much.
+- id: c7
+  statement: 'Verification: citing older meteorology work, the plugin estimator of squared calibration error is biased and a debiased estimator subtracts an approximate correction term; the authors'' contribution
+    is to show the plugin estimator needs samples proportional to B while the debiased one needs samples proportional to sqrt(B), for binned models with a 2-well-balanced binning scheme. A debiasing heuristic
+    for the l1 error (ECE) is proposed in Appendix G without a proof.'
+  location: Section 5 (Verifying calibration)
+  page: 8
+  quote: Older work in meteorology [18, 19] notices that this is a biased estimate, and proposes a debiased estimator that subtracts off an approximate correction term to reduce the bias.
+- id: c8
+  statement: 'CIFAR-10 recalibration protocol: from the 10,000-point validation set, a recalibration set of 1,000 points was sampled with replacement; each class was recalibrated separately with B bins
+    per class (sigmoid as the scaling function), marginal calibration error was measured on the entire 10K set, and the procedure was repeated 100 times. The authors report 35% lower calibration error than
+    histogram binning at 100 bins per class.'
+  location: The scaling-binning calibrator (Experiments)
+  page: 7
+  quote: We sampled, with replacement, a recalibration set of 1,000 points.
+- id: c9
+  statement: 'Open problem on dataset shift: with a small amount of labeled target data one can simply re-calibrate since only a few parameters are tuned, but the authors ask whether calibration can be
+    maintained without labeled target examples.'
+  location: Conclusion
+  page: 10
+  quote: However, can we maintain calibration when we do not have labeled examples from the target dataset?
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Stanford University. Venue from the PDF first-page footer (''33rd Conference on Neural Information Processing
+    Systems (NeurIPS 2019)'') and the arXiv comment. Section numbers 2, 3 and 5 are confirmed by in-text cross-references; Section 4 is referred to by name. Debiased-estimator experiment: CIFAR-10 validation
+    split into 3,000 (recalibrate/discretize VGG-16) and 7,000 (evaluation, resampled 1,000 times). ImageNet scaling-binning results are in Appendix E (5x lower top-label calibration error than histogram
+    binning is stated in the text). Library: pypi ''uncertainty-calibration''.'

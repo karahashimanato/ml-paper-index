@@ -6,7 +6,7 @@
 - 著者: Yaniv Ovadia, Emily Fertig, Jie Ren, Zachary Nado, D Sculley, Sebastian Nowozin, Joshua V. Dillon, Balaji Lakshminarayanan, Jasper Snoek
 - 年・掲載: 2019
 - 原論文: [PDF](https://arxiv.org/pdf/1906.02530v2)(arXiv v2、カード作成時に読んだ版)
-- タグ: dataset-shift-detection, deep-learning, image-classification, selective-prediction
+- タグ: bayesian-deep-learning, dataset-shift-detection, deep-learning, image-classification, selective-prediction, uncertainty-estimation
 - 人手レビュー: 未
 
 ## 主張

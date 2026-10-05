@@ -1,0 +1,99 @@
+id: arxiv-1604.04173
+title: Distribution-Free Predictive Inference For Regression
+authors:
+- Jing Lei
+- Max G'Sell
+- Alessandro Rinaldo
+- Ryan J. Tibshirani
+- Larry Wasserman
+year: 2016
+links:
+  arxiv: https://arxiv.org/abs/1604.04173
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 28bbed19a871a5dd748953a3ea4f9d58cb03f00bb9e3f7f26f8d46398c399914
+tags:
+  tasks:
+  - uncertainty-estimation
+  - tabular-regression
+  method_families:
+  - conformal-prediction
+  - linear-models
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- A general framework for distribution-free predictive inference in regression with conformal inference, analysing full and split conformal prediction (and a jackknife method), with interval-length (accuracy)
+  guarantees under stability or consistency assumptions
+- 'Extensions: rank-one-out (in-sample) split conformal inference, locally-weighted conformal bands for heteroskedastic data, and LOCO (leave-one-covariate-out) variable importance'
+claims:
+- id: c1
+  statement: 'Goal and setting: i.i.d. regression data (X_i, Y_i) with no assumptions on the regression function or P; the band must satisfy P(Y_{n+1} in C(X_{n+1})) >= 1 - alpha with the probability taken
+    over the n + 1 i.i.d. draws, with finite-sample (nonasymptotic) validity.'
+  location: Introduction
+  page: 3
+  quote: The main goal of this paper is to construct prediction bands as in (1) that have ﬁnite-sample (nonasymptotic) validity, without assumptions on P.
+- id: c2
+  statement: The naive interval from quantiles of the fitted (in-sample) residuals is only approximately valid for large samples under regularity conditions (e.g. a correctly specified model or appropriate
+    tuning) and can grossly undercover because the fitted residual distribution is often biased downwards.
+  location: Conformal Prediction Sets (Section 2)
+  page: 7
+  quote: In general, the naive method (3) can grossly undercover since the ﬁtted residual distribution can often be biased downwards.
+- id: c3
+  statement: 'Theorem 2.1 (full conformal): with i.i.d. data, coverage is at least 1 - alpha; if the fitted absolute residuals have a continuous joint distribution, coverage is also at most 1 - alpha +
+    1/(n+1). The lower bound is a standard property due to Vovk; the upper bound is new, and a random tie-breaking rule could remove the continuity assumption. The estimator must be a symmetric function
+    of the data points, and the i.i.d. assumption can be weakened to exchangeability.'
+  location: Section 2
+  page: 8
+  quote: The ﬁrst part of the theorem, on the ﬁnite-sample validity of conformal intervals in regression, is a standard property of all conformal inference procedures and is due to Vovk.
+- id: c4
+  statement: 'Remark 2.3: the guarantees are marginal (average) coverage and must not be confused with conditional coverage given X_{n+1} = x, a much stronger property that, citing Lei & Wasserman (2014,
+    an earlier paper by an overlapping author), cannot be achieved by finite-length prediction intervals without regularity and consistency assumptions on the model and the estimator; it holds asymptotically
+    under certain conditions (Theorem 3.5).'
+  location: Section 2
+  page: 9
+  quote: Conditional coverage does hold asymptotically under certain conditions; see Theorem 3.5 in Section 3.
+- id: c5
+  statement: 'Split conformal (Algorithm 2): randomly split the data into two equal halves, fit on one half and rank absolute residuals on the other; its computational cost is that of the fitting step.
+    Theorem 2.2: with i.i.d. data coverage is at least 1 - alpha, and at most 1 - alpha + 2/(n+2) if the residuals have a continuous joint distribution.'
+  location: Section 2.2
+  page: 10
+  quote: The split conformal method separates the ﬁtting and ranking steps using sample splitting, and its computational cost is simply that of the ﬁtting step.
+- id: c6
+  statement: 'Multiple splits: splitting introduces extra randomness; intersecting N split-conformal bands at level 1 - alpha/N keeps marginal coverage (Bonferroni), but Theorem 2.4 shows that under the
+    paper''s assumptions the band becomes wider with probability tending to 1, so the authors suggest using a single split.'
+  location: Multiple Splits
+  page: 11
+  quote: Therefore, we suggest using a single split.
+- id: c7
+  statement: 'Simulations (Settings A-C, 50 repetitions, 90% nominal level): in the low-dimensional linear-regression comparison, full conformal intervals were shorter than split conformal intervals but
+    at a higher computational cost; in the high-dimensional case (n = 500, d = 490) split conformal with linear regression had to be omitted because the regression is not well defined on half the sample.'
+  location: Section 4
+  page: 22
+  quote: The full conformal interval is shorter than the split conformal interval, but comes at a higher computational cost.
+- id: c8
+  statement: 'Constant width: full and split conformal bands have roughly constant width over x (exactly constant for split conformal), which is undesirable when the residual spread varies with X. The locally-weighted
+    extension divides residuals by an estimated conditional mean absolute deviation (fit on the first half for split conformal), and the validity properties carry over.'
+  location: Section 5.2
+  page: 30
+  quote: In fact, for split conformal, the width is exactly constant over x.
+- id: c9
+  statement: 'Conclusion: the distribution-free coverage is marginal; conditional coverage may be above 1 - alpha at some x and below at others. The authors do not view this as a disadvantage, since accuracy
+    of the band is tied to the base estimator: an accurate estimator gives a near-optimal band and a bad one still gives valid marginal coverage.'
+  location: Conclusion
+  page: 37
+  quote: The distribution-free coverage oﬀered by conformal intervals is marginal.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Department of Statistics, Carnegie Mellon University. No venue recorded: the PDF (dated March 9, 2017) states
+    none; other papers cite it as JASA 2018, which is not confirmed by this PDF. Remark 2.7: an unbalanced split (rho > 0.5) may be beneficial for complex regression procedures, but the paper uses rho =
+    0.5 and does not pursue the choice. The jackknife (leave-one-out residuals) can give shorter intervals but has no finite-sample out-of-sample guarantee. Section 5.2 also notes that under homoskedastic
+    noise the locally-weighted band will generally have inflated average length due to estimating the MAD. Interval-length accuracy results (Section 3) require stability or consistency assumptions (A0-A2
+    etc.), unlike coverage. Ridge tuning parameter lambda = 10 was used for all methods in Table 3. Section numbers confirmed by cross-references in the text (Section 2, 2.2, 3, 4, 5.2). Numerical tables
+    not recorded.'

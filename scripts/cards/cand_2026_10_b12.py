@@ -38,7 +38,7 @@ SPECS = [
    "version": "Publisher PDF via OpenAlex (submittedVersion)", "venue": "IEEE Transactions on Smart Grid",
    "links": {"doi": "https://doi.org/10.1109/tsg.2026.3676842"},
    "pdf_url": "https://edepot.wur.nl/713863", "license": "other-oa",
-   "tasks": ["tabular-regression"], "fam": ["gradient-boosted-trees", "random-forests", "linear-models", "deep-learning"], "par": ["supervised"],
+   "tasks": ["tabular-regression", "uncertainty-estimation"], "fam": ["conformal-prediction", "gradient-boosted-trees", "random-forests", "linear-models", "deep-learning"], "par": ["supervised"],
    "proposes": ["Probabilistic behind-the-meter PV disaggregation framework based on conformal prediction",
                 "Adaptive Mondrian Binning (AMB) conformal prediction variant", "Capacity estimation method for BtM PV systems"],
    "claims": [

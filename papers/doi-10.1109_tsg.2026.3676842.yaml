@@ -16,7 +16,9 @@ source:
 tags:
   tasks:
   - tabular-regression
+  - uncertainty-estimation
   method_families:
+  - conformal-prediction
   - gradient-boosted-trees
   - random-forests
   - linear-models

@@ -39,8 +39,8 @@ SPECS = [
      "authors": ["Chuan Guo", "Geoff Pleiss", "Yu Sun", "Kilian Q. Weinberger"],
      "year": 2017, "version": "arXiv v2",
      "links": {"arxiv": "https://arxiv.org/abs/1706.04599", "code": "http://github.com/gpleiss/temperature_scaling"},
-     "tasks": ["selective-prediction", "image-classification"],
-     "fam": ["deep-learning"], "par": ["post-hoc"],
+     "tasks": ["selective-prediction", "uncertainty-estimation", "image-classification"],
+     "fam": ["post-hoc-calibration", "deep-learning"], "par": ["post-hoc"],
      "proposes": ["Temperature scaling: a single-parameter variant of Platt scaling that divides the logits by a scalar T fitted by NLL on a held-out validation set; plus an empirical study of miscalibration in modern networks and a comparison of post-processing calibration methods"],
      "claims": [
          ("Main observation: modern neural networks, unlike those from a decade ago, are poorly calibrated (confidence does not match the probability of being correct).",
@@ -72,8 +72,8 @@ SPECS = [
      "authors": ["Yaniv Ovadia", "Emily Fertig", "Jie Ren", "Zachary Nado", "D Sculley", "Sebastian Nowozin", "Joshua V. Dillon", "Balaji Lakshminarayanan", "Jasper Snoek"],
      "year": 2019, "version": "arXiv v2",
      "links": {"arxiv": "https://arxiv.org/abs/1906.02530", "code": "https://github.com/google-research/google-research/tree/master/uq_benchmark_2019"},
-     "tasks": ["selective-prediction", "dataset-shift-detection", "image-classification"],
-     "fam": ["deep-learning"],
+     "tasks": ["selective-prediction", "uncertainty-estimation", "dataset-shift-detection", "image-classification"],
+     "fam": ["bayesian-deep-learning", "deep-learning"],
      "proposes": ["Large-scale benchmark of predictive uncertainty (accuracy, NLL, Brier, ECE, entropy, confidence-vs-accuracy) under increasing dataset shift and on fully OOD data, across image, text and categorical (ad-click) classification"],
      "claims": [
          ("Methods compared (all model p(y|x) only): vanilla maximum softmax probability, temperature scaling on a validation set, MC dropout, deep ensembles of independently trained networks (M = 10), stochastic variational inference, and last-layer SVI / last-layer dropout.",

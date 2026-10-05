@@ -1,0 +1,92 @@
+id: arxiv-1703.04977
+title: What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision?
+authors:
+- Alex Kendall
+- Yarin Gal
+year: 2017
+venue: NeurIPS 2017
+links:
+  arxiv: https://arxiv.org/abs/1703.04977
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: c9d7f101781eaffb3c6a29a5a29ab82bb274770b10855b358d7c7f07b7397411
+tags:
+  tasks:
+  - uncertainty-estimation
+  method_families:
+  - bayesian-deep-learning
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- A framework combining input-dependent (heteroscedastic) aleatoric uncertainty, learned as a predicted variance from the task loss, with epistemic uncertainty from MC dropout, for regression and classification
+- 'A heteroscedastic classification loss: Gaussian noise placed on the logits and integrated by Monte Carlo sampling, interpreted as learned loss attenuation'
+claims:
+- id: c1
+  statement: 'Definitions: aleatoric uncertainty captures noise inherent in the observations (e.g. sensor or motion noise) and cannot be reduced by collecting more data; epistemic uncertainty is uncertainty
+    in the model parameters, which can be explained away given enough data. Aleatoric uncertainty is further split into homoscedastic (constant) and heteroscedastic (input-dependent).'
+  location: Introduction
+  page: 1
+  quote: This could be for example sensor noise or motion noise, resulting in uncertainty which cannot be reduced even if more data were to be collected.
+- id: c2
+  statement: 'How each is modelled: epistemic uncertainty by a prior over weights with dropout variational inference (MC dropout); aleatoric uncertainty by placing a distribution over the model output and
+    learning its variance as a function of the input with MAP inference, which on its own does not capture epistemic uncertainty.'
+  location: Section 2.2
+  page: 4
+  quote: This approach does not capture epistemic model uncertainty, as epistemic uncertainty is a property of the model and not of the data.
+- id: c3
+  statement: 'Learned loss attenuation: predicting the (log) variance tempers the residual loss per input, so inputs with high predicted uncertainty have less effect on the loss, while the log-variance
+    term penalizes predicting high uncertainty everywhere; no uncertainty labels are needed. The classification analogue places Gaussian noise on the logits and samples only the logits, which the authors
+    say does not significantly increase test time.'
+  location: Section 3
+  page: 5
+  quote: 'This makes the model more robust to noisy data: inputs for which the model learned to predict high uncertainty will have a smaller effect on the loss.'
+- id: c4
+  statement: 'Protocol: DenseNet adapted for dense prediction (own implementation), MC dropout with p = 0.2 after each convolutional layer and 50 samples; aleatoric losses are derived with a Laplacian rather
+    than Gaussian likelihood (L1 on residuals), which deviates from the Gaussian derivation. Datasets: CamVid and NYUv2 (segmentation), Make3D and NYUv2 Depth (depth regression).'
+  location: Section 4
+  page: 6
+  quote: However, we derive the loss function using a Laplacian prior, as opposed to the Gaussian prior used for the derivations in §3.
+- id: c5
+  statement: On CamVid, modelling aleatoric uncertainty improves more than modelling epistemic uncertainty and combining both improves further; the authors take this to suggest epistemic uncertainty can
+    be mostly explained away in this large-data setting (per-pixel prediction).
+  location: Semantic Segmentation
+  page: 7
+  quote: This shows that for this application it is more important to model aleatoric uncertainty, suggesting that epistemic uncertainty can be mostly explained away in this large data setting.
+- id: c6
+  statement: Precision-recall curves for aleatoric-only and epistemic-only models are very similar, which the authors say suggests that when only one uncertainty is modelled it attempts to compensate for
+    the missing one when possible.
+  location: Quality of Uncertainty Metric
+  page: 8
+  quote: This suggests that when only one uncertainty is explicitly modeled, it attempts to compensate for the lack of the alternative uncertainty when possible.
+- id: c7
+  statement: 'Calibration evaluation: classification calibration plots are formed by binning predicted probabilities over all classes and all pixels of the test set and plotting the frequency of correct
+    labels per bin (the number of bins is not stated in the text); regression calibration compares the frequency of residuals within thresholds of the predicted distribution.'
+  location: Quality of Uncertainty Metric
+  page: 8
+  quote: To form calibration plots for classiﬁcation models, we discretize our model’s predicted probabilities into a number of bins, for all classes and all pixels in the test set.
+- id: c8
+  statement: 'Distance from training data (Table 3, reduced training sets and unrelated test datasets): aleatoric uncertainty stays roughly constant with more data, epistemic uncertainty decreases with
+    more data and increases considerably on test points far from the training set, so aleatoric uncertainty alone cannot identify out-of-data examples.'
+  location: Uncertainty with Distance from Training Data
+  page: 9
+  quote: Testing the models with a different test set (bottom two lines) shows that epistemic uncertainty increases considerably on those test points which lie far from the training sets.
+- id: c9
+  statement: 'Cost: aleatoric models add negligible compute, but epistemic models require MC dropout sampling; for DenseNet, where the entire architecture must be sampled, this is hard to parallelize due
+    to GPU memory and often gives a 50x slow-down for 50 samples (cheaper for models with dropout only in the last layers). The authors leave real-time epistemic uncertainty as future work.'
+  location: Real-Time Application
+  page: 9
+  quote: This is difﬁcult to parallelize due to GPU memory constraints, and often results in a 50× slow-down for 50 Monte Carlo samples.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliation: University of Cambridge. Venue from the PDF first page (''31st Conference on Neural Information Processing Systems
+    (NIPS 2017)'') and the arXiv comment. Section numbers 2.1, 2.2, 3 and 4 are confirmed by in-text cross-references (§2.1, §2.2, §3, §4); other locations use section names. Overlapping authorship: Yarin
+    Gal is an author of the MC dropout method used here for epistemic uncertainty, and Alex Kendall is an author of Bayesian SegNet [22] and SegNet [28], which appear as baselines in Table 1. The equation
+    for the classification aleatoric loss is referenced as being ''in the appendix'' (eq. 12), which is not in this arXiv PDF. Calibration MSE values appear only in a figure legend and are not recorded.
+    Tasks are semantic segmentation and monocular depth regression; no registered task tag fits these (reported for possible new tags), so only uncertainty-estimation is used.'

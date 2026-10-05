@@ -1,0 +1,100 @@
+id: arxiv-1904.01685
+title: Measuring Calibration in Deep Learning
+authors:
+- Jeremy Nixon
+- Mike Dusenberry
+- Ghassen Jerfel
+- Timothy Nguyen
+- Jeremiah Liu
+- Linchuan Zhang
+- Dustin Tran
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1904.01685
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 7c3faa8397a4c6f544a883038236e13bca54d9b03fb125e66b666e8eece79617
+tags:
+  tasks:
+  - uncertainty-estimation
+  - image-classification
+  method_families:
+  - post-hoc-calibration
+  - deep-learning
+  paradigms:
+  - post-hoc
+  - supervised
+proposes:
+- 'Static Calibration Error (SCE): ECE extended to every class probability, binned separately per class and averaged over classes'
+- 'Adaptive Calibration Error (ACE): class-wise calibration error with adaptive ranges that each contain an equal number of predictions (and a thresholded variant, TACE)'
+- 'General Calibration Error (GCE): a space of 32 calibration metrics spanned by binning scheme (even/adaptive), maximum-probability-only or all probabilities, class conditionality, thresholding and L1/L2
+  norm'
+claims:
+- id: c1
+  statement: 'Main critique: the authors claim that ECE has numerous pathologies and that recent calibration methods shown to recalibrate models according to ECE cannot be properly evaluated via ECE.'
+  location: Introduction
+  page: 2
+  quote: In this paper, we show that ECE has numerous pathologies, and that recent calibration methods, which have been shown to successfully recalibrate models according to ECE, cannot be properly evaluated
+    via ECE.
+- id: c2
+  statement: 'ECE as framed by Naeini et al. (2015) leaves ambiguity in the binning implementation and in how to handle multiple classes; the paper''s ECE implementation follows Guo et al. (2017): equally
+    spaced bins on [0, 1] and only the maximum (predicted-class) probability per data point.'
+  location: Background & Related Work (Expected Calibration Error)
+  page: 2
+  quote: ECE as framed in Naeini et al. (2015) leaves ambiguity in both its binning implementation and how to compute calibration for multiple classes.
+- id: c3
+  statement: 'Choosing the number of bins is a bias-variance tradeoff: more bins give a more granular (low-bias) measure but higher variance per bin as bins become sparsely populated; because of sharpness
+    (confident predictions), some bins hold many more points than others, which compounds the problem.'
+  location: Issues With Calibration Metrics (Bias-Variance Tradeoff)
+  page: 4
+  quote: Selecting the number of bins has a bias-variance tradeoff as it determines how many data points fall into each bin and therefore the quality of the estimate of calibration from that bin’s range.
+- id: c4
+  statement: 'Static binning allows cancellation: overconfident and underconfident predictions in the same bin can give near-zero calibration error. The authors hedge that these effects may not always be
+    extreme enough to bring a very miscalibrated model to zero, but say it can be difficult to judge whether a measured improvement is real or due to cancellation (an appendix code example constructs a
+    near-zero ECE for an extremely miscalibrated softmax).'
+  location: Issues With Calibration Metrics (Pathologies in Static Binning Schemes)
+  page: 4
+  quote: Metrics that depend on static binning schemes like ECE suffer from issues where you can get near 0 calibration error due to overconﬁdent and underconﬁdent predictions overlapping in the same bin.
+- id: c5
+  statement: ECE focuses only on the maximum probability per data point; SCE extends it to every class probability (binned separately per class, then averaged over classes). The authors state that, unlike
+    ECE, SCE is guaranteed to be zero if and only if the model is calibrated, under the assumption of infinite data and infinite bins.
+  location: Analyzing The Space of Calibration with General Calibration Error (Maximum Probability)
+  page: 5
+  quote: Unlike ECE, assuming inﬁnite data and inﬁnite bins, SCE is guaranteed to be zero if only if the model is calibrated.
+- id: c6
+  statement: 'Class conditionality: histogram binning optimizes directly for a notion of calibration error and is therefore measured overconfidently by a metric that matches its assumptions; on CIFAR-10
+    the ECE of histogram binning was one-third of the class-conditional ECE (and one-fifth on ImageNet, after controlling with the uncalibrated score). Histogram-binning probabilities come from average
+    accuracy on the validation dataset.'
+  location: Experiments (Class Conditionality)
+  page: 6
+  quote: We ﬁnd that on CIFAR 10 the ECE estimate of the calibration error is one-third that of the class conditional variant, which is the same as ECE in all respects but class conditionality (Table 1).
+- id: c7
+  statement: 'Metric choice changes conclusions: ranking 8 recalibration techniques (histogram binning variants, isotonic regression, temperature scaling, ECE-optimized temperature scaling, vector/matrix
+    scaling, neural network scaling) on CIFAR-10 predictions of a Wide ResNet with 32 metric variants gave dramatically different orderings.'
+  location: Recalibration Experiments
+  page: 7
+  quote: This demonstrates that varying the properties of the calibration error metric can lead to different conclusions about which model has the best calibration.
+- id: c8
+  statement: 'Sensitivity to the number of bins (10, 20, 30, 40, 50) was measured by mean rank correlation over recalibration techniques on a Wide ResNet on CIFAR-10: adaptive-binning metrics had 0.5927
+    versus 0.3677 for even binning, which leads the authors to recommend adaptive binning; they also recommend class conditioning and the L2 norm.'
+  location: Experiments (Sensitivity to the Number of Bins Hyperparameter)
+  page: 7
+  quote: This result leads us to recommend adapative binning as a method to improve rank order robustness to the number of bins hyperparameter.
+- id: c9
+  statement: 'Limitation acknowledged: adaptive metrics can create excessively large ranges where outputs are sparse; a very large number of ranges would recover granularity at the cost of interpretability
+    and higher within-range variance.'
+  location: Discussion (Criticisms & Limitations)
+  page: 8
+  quote: Adaptive calibration metrics can create excessively large ranges if there is very sparse output in a region.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Google Brain / Google Research. The PDF first page says ''Preprint. Under review.''; no venue recorded (none
+    stated in the PDF or the arXiv comment as given). Section headings in the PDF text carry no numbers, so locations use section names. Datasets: MNIST, Fashion-MNIST, CIFAR-10/100, ImageNet; temperature-scaling
+    optimization for each metric used Nelder-Mead. The split on which the recalibrators were fit is only described for histogram binning (''validation dataset''); no fuller statement was found (searched
+    for validation, held-out, hyperparameter). Table numbers not recorded.'

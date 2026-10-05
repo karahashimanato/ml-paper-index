@@ -1,0 +1,98 @@
+id: arxiv-1905.03222
+title: Conformalized Quantile Regression
+authors:
+- Yaniv Romano
+- Evan Patterson
+- Emmanuel J. Candès
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1905.03222
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-06'
+  pdf_sha256: e9483113d0563a6b274810c2ab70face7e876e06d4e7687b58d74ff07bdc9ee1
+tags:
+  tasks:
+  - uncertainty-estimation
+  - tabular-regression
+  method_families:
+  - conformal-prediction
+  - random-forests
+  - deep-learning
+  - linear-models
+  paradigms:
+  - supervised
+proposes:
+- 'Conformalized quantile regression (CQR): fit lower and upper conditional quantile regressors on a proper training set, compute conformity scores E_i = max{q_lo(X_i) - Y_i, Y_i - q_hi(X_i)} on a calibration
+  set, and widen (or shrink) the interval by their (1 - alpha)(1 + 1/|I2|)-th empirical quantile'
+claims:
+- id: c1
+  statement: 'Setting and guarantee: samples are assumed exchangeable (e.g. i.i.d.) from an arbitrary joint distribution; the target is marginal coverage P{Y_{n+1} in C(X_{n+1})} >= 1 - alpha with probability
+    over all n + 1 samples. The training data are split into a proper training set and a calibration set, and the conformalized interval satisfies the guarantee regardless of the choice or accuracy of the
+    quantile regression estimator.'
+  location: Introduction
+  page: 2
+  quote: Unlike the original interval, the conformalized prediction interval is guaranteed to satisfy the coverage requirement (1) regardless of the choice or accuracy of the quantile regression estimator.
+- id: c2
+  statement: Plain quantile regression is adaptive to heteroscedasticity but is not guaranteed to cover in finite samples (validity only for specific models under regularity and asymptotic conditions);
+    the authors state that the absence of a finite-sample guarantee can sometimes be disastrous and that their experiments show neural-network quantile intervals can substantially undercover.
+  location: Section 2
+  page: 3
+  quote: Indeed, the absence of any ﬁnite sample guarantee can sometimes be disastrous.
+- id: c3
+  statement: 'Limitation of standard split conformal regression: the interval length is fixed (twice the calibrated residual quantile) and independent of X_{n+1}; citing Lei et al., full conformal intervals
+    also vary only slightly with X_{n+1} if the regression algorithm is moderately stable. Split conformal avoids the infinitely many refits of full conformal at the cost of splitting the data.'
+  location: Section 3
+  page: 4
+  quote: A closer look at the prediction interval (8) reveals a major limitation of this procedure
+- id: c4
+  statement: 'Theorem 1: if (X_i, Y_i), i = 1..n+1, are exchangeable, split CQR has coverage >= 1 - alpha; if the conformity scores are almost surely distinct, coverage is also <= 1 - alpha + 1/(|I2| +
+    1). The result holds even conditionally on the proper training set.'
+  location: Section 4
+  page: 6
+  quote: The result even holds, and we will prove it, conditionally on the proper training set.
+- id: c5
+  statement: Hyperparameters of the underlying quantile regressor may be tuned by cross validation on the proper training set (minimizing average interval length); because quantile regression forests are
+    often and quantile networks occasionally overly conservative, the nominal quantiles can be tuned as hyperparameters, which does not invalidate the coverage guarantee but may yield shorter intervals.
+  location: Section 4
+  page: 7
+  quote: Notably, this tuning does not invalidate the coverage guarantee, but it may yield shorter intervals, as our experiments conﬁrm.
+- id: c6
+  statement: 'Limitations of locally adaptive (scaled-residual) split conformal: when data are homoskedastic it inflates intervals (noted by Lei et al., presumably due to extra variability from estimating
+    the scale); more fundamentally, the scale model is fit on proper-training residuals, which are biased by the fitting, so it tends to systematically underestimate prediction error, forcing a large correction
+    and less adaptive intervals (severe for neural networks that nearly interpolate the training data).'
+  location: Section 5
+  page: 8
+  quote: Because it uses the proper training residuals (as it must to ensure valid coverage), the locally adaptive method tends to systematically underestimate the prediction error.
+- id: c7
+  statement: 'Protocol: eleven regression benchmark datasets; features standardized and response rescaled using statistics from the proper training set only (to preserve exchangeability); 20 random 80/20
+    training-test splits; proper training and calibration sets of equal size; alpha = 0.1. Random forests use sklearn defaults except 1000 trees; network epochs are tuned by cross validation (upper limit
+    1000); gamma = 1 for the locally adaptive offset. Quantile forests'' coverage parameters are tuned by cross validation.'
+  location: Section 6
+  page: 8
+  quote: The proper training and calibration sets for split conformal prediction have equal size.
+- id: c8
+  statement: 'Results summary (Table 1, 2,200 experiments): on average CQR achieves shorter intervals than standard and locally adaptive conformal prediction; the authors call it possibly surprising that
+    CQR also beats non-conformalized quantile regression (which uses more training data) and give possible explanations (signed scores mitigating overcoverage; tuning quantiles by cross validation, where
+    CQR selects quantiles below nominal).'
+  location: Section 6
+  page: 9
+  quote: On average, our method achieves shorter prediction intervals than both standard and locally adaptive conformal prediction.
+- id: c9
+  statement: All conformal methods reached the nominal 90% coverage; non-conformalized quantile forests were slightly conservative and quantile networks tended to undercover. Citing Tagasovska & Lopez-Paz,
+    quantile-network coverage depends greatly on hyperparameter tuning, which the authors take as showing the importance of the finite-sample guarantee.
+  location: Section 6
+  page: 10
+  quote: Turning to the issue of valid coverage, all methods based on conformal prediction successfully construct prediction bands at the nominal coverage rate of 90%, as the theory suggests they should.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Department of Statistics (and Mathematics), Stanford University. No venue recorded: the PDF footer says ''Preprint.
+    Work in progress.'' (other papers cite it as NeurIPS 2019, not confirmed by this PDF). Theorem 2 gives separate lower/upper tail control (coverage of each tail); the stated price is slightly longer
+    intervals. CQR random forests were overly conservative on the two Facebook datasets, which the authors attribute to ties among conformity scores (the upper bound of Theorem 1 then does not apply). A
+    two-output network shares parameters between quantiles to reduce cost; a quantile-crossing post-processing gave a slight improvement. A variant without data splitting is mentioned (footnote 2) but not
+    studied. Section numbers confirmed by cross-references in the text (Sections 2-6). Numerical table values not recorded.'

@@ -74,8 +74,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | ランダムフォレストと決定木 | 論文カード12本+既存6本(最適な決定木、ランダムフォレストの理論の範囲、効く理由の3つの説明、チューニング、変数重要度の偏り、因果フォレスト)、記事 [articles/methods/random-forests-and-decision-trees.md](articles/methods/random-forests-and-decision-trees.md) |
 | 拡散モデル | 論文カード21本+既存4本(DDPM・スコアベース・SDE、尤度とサンプルの質、VAE とのつながり、サンプリングの高速化と蒸留、ガイダンス、潜在拡散、FID の問題、学習データの記憶と複製)、記事 [articles/methods/diffusion-models.md](articles/methods/diffusion-models.md) |
 | 対照学習・自己教師あり表現学習 | 論文カード22本(対照学習と負例の集め方、負例を使わない方法と崩壊の防止、マスク予測、理論の仮定、線形評価の頑健性と転移の再検証)、記事 [articles/methods/self-supervised-representation-learning.md](articles/methods/self-supervised-representation-learning.md) |
+| 不確実性の推定と較正 | 論文カード17本+既存7本(データとモデルの不確実性、MC dropout とアンサンブル、cold posterior、較正の再検証と ECE の測り方、温度スケーリングの先、conformal prediction の保証と分布の変化)、記事 [articles/topics/uncertainty-and-calibration.md](articles/topics/uncertainty-and-calibration.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では385本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では402本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -97,6 +98,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [古典アルゴリズムと機械学習 — ソート・二分探索・貪欲法から見る](articles/topics/algorithms-and-ml.md)
 - [アルゴリズム設計技法と機械学習 — 分割統治・動的計画・分枝限定・局所探索](articles/topics/design-techniques-and-ml.md)
 - [予測モデルのフォールバックとモデル選択 — 運用でモデルを切り替える仕組み](articles/topics/model-fallback-and-selection.md)
+- [不確実性の推定と較正 — ベイズ近似、較正の測り方、conformal prediction の保証の範囲](articles/topics/uncertainty-and-calibration.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

@@ -1,0 +1,100 @@
+id: arxiv-2009.14193
+title: Uncertainty Sets for Image Classifiers using Conformal Prediction
+authors:
+- Anastasios Angelopoulos
+- Stephen Bates
+- Jitendra Malik
+- Michael I. Jordan
+year: 2020
+venue: ICLR 2021
+links:
+  arxiv: https://arxiv.org/abs/2009.14193
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-06'
+  pdf_sha256: ca78c0ab20b95151db93e75f0fed5ef88faf180023b80d36c9e671034bc43f85
+tags:
+  tasks:
+  - uncertainty-estimation
+  - image-classification
+  method_families:
+  - conformal-prediction
+  - post-hoc-calibration
+  - deep-learning
+  paradigms:
+  - post-hoc
+proposes:
+- 'Regularized Adaptive Prediction Sets (RAPS): add a penalty lambda * (rank - k_reg)_+ to the cumulative sorted (Platt-scaled) class probabilities of the APS score, then conformally calibrate the threshold
+  on held-out data; APS is the special case lambda = 0'
+- 'Size-stratified coverage violation (SSCV): the worst-case deviation from 1 - alpha of coverage stratified by prediction-set size, as a measure of adaptiveness / conditional-coverage violation'
+claims:
+- id: c1
+  statement: 'The coverage guarantee P(Y in C(X)) >= 1 - alpha is marginal over X and Y: it holds on average, not for a particular image.'
+  location: Introduction
+  page: 2
+  quote: Note that the guarantee in Eq. (1) is marginal over X and Y —it holds on average, not for a particular image X.
+- id: c2
+  statement: 'Motivation: the naive approach (include classes by Platt-scaled softmax probability until the sum exceeds 1 - alpha) fails because CNN probabilities are known to be incorrect (citing Nixon
+    et al., 2019), so the sets do not achieve coverage, and badly miscalibrated tail probabilities lead to large sets.'
+  location: Introduction
+  page: 2
+  quote: 'There are two problems with naive: ﬁrst, the probabilities output by CNNs are known to be incorrect (Nixon et al., 2019), so the sets from naive do not achieve'
+- id: c3
+  statement: 'Theorem 1 (conformal calibration): assumes an i.i.d. calibration set not used for model training, nested set families that eventually contain all labels, and picks the smallest tau with empirical
+    coverage >= ceil((n+1)(1-alpha))/n; it also holds under exchangeability, and a matching upper bound 1 - alpha + 1/(n+1) holds for most families (roughly, when sets grow smoothly in tau). The authors
+    state the result is not new.'
+  location: Section 2.1
+  page: 5
+  quote: The result is not new—a special case of this result leveraging sample-splitting ﬁrst appears in the regression setting in Papadopoulos et al. (2002), and the core idea of conformal prediction was
+    introduced even earlier; see Vovk et al. (2005).
+- id: c4
+  statement: 'Three desiderata: coverage, small set size, and adaptiveness (smaller sets for easy, larger for hard examples). Coverage and size compete, and size and adaptiveness are also often in tension;
+    e.g. always predicting a set of size five could achieve coverage without being adaptive.'
+  location: Section 2 (Methods)
+  page: 4
+  quote: Coverage and size are obviously competing objectives, but size and adaptiveness are also often in tension.
+- id: c5
+  statement: 'Why regularize: in their experiments APS sets are larger than necessary because APS is sensitive to noisy probability estimates far down the class list, where the ordering of unlikely classes
+    is mostly random (a ''permutation problem''); RAPS regularization makes the algorithm avoid these unreliable tail probabilities.'
+  location: Section 2.3
+  page: 6
+  quote: This noise leads to a permutation problem of unlikely classes, where ordering of the classes with small probability estimates is determined mostly by random chance.
+- id: c6
+  statement: 'Protocol: nine pretrained torchvision ImageNet classifiers; before naive, APS and RAPS, classifiers are temperature/Platt scaled on the calibration set; randomized versions of the algorithms
+    are used; Imagenet-Val experiments use 100 trials with random calibration and evaluation subsets of 20K each, and RAPS parameters are chosen from data (Appendix E: k_reg and lambda picked on separate
+    tuning data, m = 10000 for ImageNet and 1000 for ImageNet-V2, which the authors say does not invalidate the guarantee because calibration still uses fresh data).'
+  location: Section 3 (Experiments)
+  page: 7
+  quote: Before applying naive, APS, or RAPS, we calibrated the classiﬁers using the standard temperature scaling/Platt scaling procedure as in Guo et al. (2017) on the calibration set.
+- id: c7
+  statement: 'ImageNet-V2 (5K calibration and evaluation sets): the authors state the method still provides coverage for models trained on a different distribution as long as the conformal calibration set
+    comes from the new distribution; coverage variance is higher because of less data.'
+  location: Section 3.2
+  page: 8
+  quote: The result shows that our method can still provide coverage even for models trained on different distributions, as long as the conformal calibration set comes from the new distribution.
+- id: c8
+  statement: 'Size vs adaptiveness trade-off: with large lambda, RAPS undercovers hard examples and must compensate with larger sets for easy examples to keep 1 - alpha marginal coverage; the size increase
+    is described as slight because easy images are more common. If undesired, lambda can be chosen to optimize adaptiveness instead.'
+  location: 'Section 3 (Experiment 4: Adaptiveness of RAPS on Imagenet)'
+  page: 8
+  quote: Since RAPS with large λ undercovers hard examples, it must compensate by taking larger sets for easy examples to ensure the 1 −α marginal coverage guarantee.
+- id: c9
+  statement: 'Conditional coverage: distribution-free conditional coverage is impossible (citing Vovk 2012; Lei & Wasserman 2014). Stratifying coverage by set size shows APS overcovers large sets and undercovers
+    easy ones, so it does not achieve exact conditional coverage. The authors argue that for high-signal problems exact conditional coverage requires a perfect classifier, so it is not the right goal at
+    realistic sample sizes, and propose requiring coverage within every set-size stratum (measured by SSCV) instead.'
+  location: Section 4
+  page: 10
+  quote: Therefore, conditional coverage isn’t the right goal for prediction sets with realistic sample sizes.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliation: UC Berkeley (EECS and Statistics); Angelopoulos and Bates contributed equally. Venue from the arXiv comment
+    (''ICLR 2021 Spotlight''); the PDF text itself does not state the venue. APS is from Romano et al. (2020), not by these authors. Proposition 2: with lambda = 1 and k_reg <= k* (smallest top-k size covering
+    on calibration data), RAPS sets are contained in the top-k* set. Proposition 1''s upper bound requires all class probabilities > 0. Appendix B: randomization is needed for exact 1 - alpha coverage;
+    turning it off gives slightly conservative sets. Appendix F compares to LAC (Least Ambiguous Set-valued Classifier; the citation is unresolved (''?'') in the PDF): LAC has slightly smaller sets but
+    worse adaptiveness. The automatic lambda for adaptiveness (Section 4.2) is chosen from a small grid minimizing SSCV on the tuning set. The same authors later wrote the conformal tutorial arXiv 2107.07511.
+    Numerical table values not recorded.'

@@ -191,6 +191,12 @@ method_families:
     description: "Self-supervised methods that learn representations by making embeddings of different views of the same input agree, with or without negatives (contrastive: CPC, SimCLR, MoCo; non-contrastive: BYOL, SimSiam, Barlow Twins, VICReg, DINO, SwAV)."
   - id: masked-image-modeling
     description: Self-supervised pre-training by predicting masked parts of an image (pixels or tokens), e.g. MAE, BEiT.
+  - id: conformal-prediction
+    description: "Distribution-free prediction sets or intervals with finite-sample coverage guarantees under exchangeability (split / full conformal, conformalized quantile regression, adaptive and weighted variants)."
+  - id: post-hoc-calibration
+    description: "Recalibrating a trained model's predicted probabilities or intervals (e.g. temperature scaling, Platt / isotonic / Dirichlet calibration, calibrated regression)."
+  - id: bayesian-deep-learning
+    description: "Approximate Bayesian or ensemble-based uncertainty for neural networks (e.g. MC dropout, deep ensembles, variational and SG-MCMC posteriors)."
 paradigms:
   - id: supervised
     description: Supervised learning.

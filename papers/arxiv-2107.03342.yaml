@@ -1,0 +1,109 @@
+id: arxiv-2107.03342
+title: A Survey of Uncertainty in Deep Neural Networks
+authors:
+- Jakob Gawlikowski
+- Cedrique Rovile Njieutcheu Tassi
+- Mohsin Ali
+- Jongseok Lee
+- Matthias Humt
+- Jianxiang Feng
+- Anna Kruspe
+- Rudolph Triebel
+- Peter Jung
+- Ribana Roscher
+- Muhammad Shahzad
+- Wen Yang
+- Richard Bamler
+- Xiao Xiang Zhu
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2107.03342
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 3327928a672f070a969118b9806a4185a1e5006b8ddaf1eca72e4b73d730929b
+tags:
+  tasks:
+  - uncertainty-estimation
+  method_families:
+  - deep-learning
+  - bayesian-deep-learning
+  - post-hoc-calibration
+  paradigms:
+  - supervised
+proposes:
+- 'A survey (no new method): sources of uncertainty in DNNs (five factors), data vs model (and distributional) uncertainty, a four-way taxonomy of estimation methods, uncertainty measures, calibration methods
+  and measures, data sets/baselines, applications, and open challenges'
+claims:
+- id: c1
+  statement: 'Data vs model uncertainty: predictive uncertainty is separated into data (aleatoric) and model (epistemic) uncertainty; model uncertainty covers four of the authors'' five factors (real-world
+    variability, model structure, training procedure, unknown data) and data uncertainty covers measurement error and noise (including label noise). Model uncertainty can (theoretically) be reduced, data
+    uncertainty cannot.'
+  location: Section II (Predictive Uncertainty Model)
+  page: 5
+  quote: While model uncertainty can be (theoretically) reduced by improving the architecture, the learning process, or the training data set, the data uncertainties cannot be explained away [60].
+- id: c2
+  statement: 'Taxonomy: uncertainty estimation methods are split into four types by the number and nature of the networks: single deterministic methods (one forward pass), Bayesian methods (stochastic networks),
+    ensemble methods (several deterministic networks), and test-time augmentation (one network, augmented inputs).'
+  location: Section III
+  page: 7
+  quote: In general, the methods for estimating the uncertainty can be split in four different types based on the number (single or multiple) and the nature (deterministic or stochastic) of the used DNNs.
+- id: c3
+  statement: Single deterministic methods are computationally efficient (one network, one or at most two forward passes, often applicable to pretrained networks), but because they rely on a single opinion
+    they can be very sensitive to architecture, training procedure and training data.
+  location: Section III (Summing Up Single Deterministic Methods)
+  page: 12
+  quote: A drawback of single deterministic neural network approaches is the fact that they rely on a single opinion and can therefore become very sensitive to the underlying network architecture, training
+    procedure, and the training data.
+- id: c4
+  statement: 'Ensemble cost and caveats: ensembles are easy to apply and parallelize, but memory and computation grow linearly with the number of members for training and testing, limiting deployment under
+    compute/memory/time constraints; the main challenge is member diversity, and overconfidence of single members can transfer to the whole ensemble.'
+  location: Section III (Sum Up Ensemble Methods)
+  page: 20
+  quote: The independence of the single ensemble members leads to a linear increase in the required memory and computation power with each additional member.
+- id: c5
+  statement: 'Ensembles vs Bayesian approaches: citing Gustafsson et al. [56], the survey reports that in their tests ensembles outperformed the considered Bayesian approaches, which it takes to indicate
+    that multi-mode evaluation is a powerful property; it adds that Bayesian approaches have also delivered strong results with a strong theoretical foundation, and that prior-network-style deterministic
+    methods often need separate in- and out-of-distribution sets for training.'
+  location: Section III (Neural Network Uncertainty Quantification Approaches for Real Life Applications)
+  page: 21
+  quote: Interestingly, they found for their tests ensembles to outperform the considered Bayesian approaches.
+- id: c6
+  statement: Calibration methods are grouped as regularization during training, post-processing after training, and uncertainty estimation methods; post-processing methods require a held-out calibration
+    set, only work if its distribution equals the inference distribution, and their result can depend on the size of that set.
+  location: Section V (Calibration Methods)
+  page: 24
+  quote: They only work under the assumption that the distribution of the left-out validation set is equivalent to the distribution, on which inference is done.
+- id: c7
+  statement: 'Recalibration does not reduce model uncertainty: the survey states that explicit calibration methods propagate model uncertainty onto the representation of data uncertainty (e.g. mapping an
+    overfitted classifier''s outputs to 0.5).'
+  location: Section V (Calibration)
+  page: 24
+  quote: It is important to note that these methods do not reduce the model uncertainty, but propagate the model uncertainty onto the representation of the data uncertainty.
+- id: c8
+  statement: 'Calibration measures: ECE uses M equal-width bins and only the top-label confidence; SCE averages over all classes; adaptive (equal-mass) versions aECE and aSCE are, citing empirical results
+    in [280] and [288], more robust to the number of bins. Classwise or not, calibration errors are weighted by class sizes, so larger classes can shadow poor calibration on small classes.'
+  location: Section V (Evaluating Calibration Quality)
+  page: 28
+  quote: As has been empirically shown in [280] and [288], the adaptive binning calibration measures aECE and aSCE are more robust to the number of bins than the corresponding equal-width binning calibration
+    measures ECE and SCE.
+- id: c9
+  statement: 'Open challenges named for real-world adoption: missing validation on real-world problems (baselines mostly developed on standard data sets such as CIFAR/ImageNet), lack of a standardized evaluation
+    protocol, inability to evaluate the uncertainty of a single decision (measures such as ECE aggregate over the test set), lack of ground-truth uncertainties (and calibration not transferring across shifted
+    data), and an explainability issue.'
+  location: Section VIII (Conclusion)
+  page: 32
+  quote: However, a clear standardized protocol of tests that should be performed on uncertainty quantiﬁcation methods is still not available.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. No venue recorded: the PDF text has no venue statement (searched for submitted, accepted, transactions on, under review,
+    preprint in the front matter) and no journal_ref/comment was given. Author list from the PDF first page (IEEE membership grades omitted). Section numbers are the survey''s Roman numerals as listed in
+    its introduction; subsection names are given in parentheses. Section IV notes evaluation is hard because quality depends on the estimation method, ground-truth uncertainties are lacking, and there is
+    no unified metric across classification, regression and segmentation; regression intervals are evaluated with PICP and MPIW. Test-time augmentation: augmentations must stay within the target distribution,
+    can turn correct predictions into incorrect ones (citing Shanmugam et al.), and the number/kind of augmentations needed is an open question. Conformal prediction is not covered in the survey (searched
+    for conformal). The survey cites Gustafsson et al. for the ensemble-vs-Bayesian finding; it does not run its own comparison.'

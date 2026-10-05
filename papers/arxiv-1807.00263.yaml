@@ -1,0 +1,98 @@
+id: arxiv-1807.00263
+title: Accurate Uncertainties for Deep Learning Using Calibrated Regression
+authors:
+- Volodymyr Kuleshov
+- Nathan Fenner
+- Stefano Ermon
+year: 2018
+venue: ICML 2018
+links:
+  arxiv: https://arxiv.org/abs/1807.00263
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-06'
+  pdf_sha256: e0007ef5e8ccbc67d6ed29117a8abce1fa03d3da8d037f1c0539db2c3c1f91c1
+tags:
+  tasks:
+  - uncertainty-estimation
+  - tabular-regression
+  method_families:
+  - post-hoc-calibration
+  - bayesian-deep-learning
+  - deep-learning
+  - linear-models
+  paradigms:
+  - post-hoc
+  - supervised
+proposes:
+- 'Recalibration of regression models (Algorithm 1): fit an auxiliary model R (e.g. isotonic regression) mapping predicted CDF values F_t(y_t) to their empirical frequencies, so that R composed with F_t
+  is quantile-calibrated'
+- 'Diagnostics for regression: a calibration plot of expected vs observed confidence levels, a calibration error score, and a sharpness score (mean predictive variance)'
+claims:
+- id: c1
+  statement: 'Motivation: Bayesian uncertainty estimates often fail to capture the true data distribution (e.g. a 90% credible interval not containing the outcome 90% of the time); the authors attribute
+    this to model bias, i.e. a predictor not being expressive enough. The abstract also cites model misspecification and approximate inference.'
+  location: Section 1 (Introduction)
+  page: 1
+  quote: 'This problem arises because of model bias: a predictor may not be sufﬁciently expressive to assign the right probability to every credible interval, just as it may not be able to always assign
+    the right label to a datapoint.'
+- id: c2
+  statement: 'Definition: a forecaster is calibrated if, over the dataset, the fraction of y_t below the predicted p-quantile converges to p for all p (sufficient condition under i.i.d. data: P(Y <= F_X^{-1}(p))
+    = p), which extends to any interval; related to Gneiting et al.''s probabilistic calibration.'
+  location: Section 3.1 (Calibration)
+  page: 3
+  quote: In other words, the empirical and the predicted CDFs should match as the dataset size goes to inﬁnity.
+- id: c3
+  statement: 'Calibration is not sufficient: the unconditional forecast F(y) = P(Y <= y) is calibrated but ignores the features; forecasts must also be sharp (small predictive variance).'
+  location: Section 3.1 (Calibration and Sharpness)
+  page: 4
+  quote: In order to be useful, forecasts must also be sharp.
+- id: c4
+  statement: 'Guarantee as stated: the procedure produces calibrated forecasts given enough i.i.d. data and applies to any regression model; the authors contrast this with existing methods (concrete dropout,
+    deep ensembles) that require modifying the forecaster and may not be calibrated even with large data. No formal theorem or proof of this guarantee was found in the text (searched for theorem, proof,
+    guarantee).'
+  location: Section 3.2
+  page: 4
+  quote: This approach is simple, produces calibrated forecasts given enough i.i.d. data
+- id: c5
+  statement: 'Protocol recommendation: as in classifier recalibration, R should be fit on a separate calibration set to reduce overfitting, or by K-fold training with hold-out folds as calibration sets
+    and averaging the K models; isotonic regression is recommended because the target function is monotone and it is non-parametric.'
+  location: Section 3.2
+  page: 5
+  quote: As in classiﬁer recalibration, it is advisable to ﬁt R on a separate calibration set in order to reduce overﬁtting.
+- id: c6
+  statement: 'Protocol actually used: in the experiments the recalibrator (isotonic regression) was fit on the same training set as the base model; the authors state they did not observe significant overfitting
+    and did not use a distinct calibration set.'
+  location: Section 4.1 (Setup)
+  page: 6
+  quote: We didn’t observe signiﬁcant overﬁtting and did not use a distinct calibration set.
+- id: c7
+  statement: 'Evaluation setup: eight UCI datasets (194 to 8192 examples), 25% random test split, averages over 5 random splits; models: Bayesian ridge regression and MC-dropout feedforward/recurrent networks;
+    baselines: concrete dropout and a deep ensemble of 5 heteroscedastic networks; calibration error with unit weights. Also Make3D depth estimation, grocery sales forecasting, and a model-based RL inventory
+    task.'
+  location: Section 4.1 (Setup)
+  page: 6
+  quote: There is generally no standard train/test split, hence we randomly assign 25% of each dataset for testing, and use the rest for training.
+- id: c8
+  statement: Using only the distance from a point forecast as the feature yields calibrated forecasts even for a non-probabilistic regressor, but intervals then have the same width everywhere, making them
+    less useful for identifying uncertain inputs; heteroscedastic features are suggested instead.
+  location: Section 3.4 (Features for Recalibration)
+  page: 5
+  quote: However, conﬁdence intervals will have the same width everywhere independently of x (e.g. Figure 4, left); this makes them less useful at identifying points x where the model is uncertain.
+- id: c9
+  statement: 'Limitations: recalibration preserves the accuracy of point estimates; a recalibrated quantile only becomes worse with insufficient recalibration data or distribution shift, and forecasts may
+    become less sharp if the original model underestimated its uncertainty.'
+  location: Section 5 (Discussion)
+  page: 8
+  quote: A recalibrated estimate of the median (or any other quantile) only becomes worse if there is insufﬁcient data for recalibration, or there is a shift in the data distribution.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Stanford University and Afresh Technologies. Venue from the PDF first page (''Proceedings of the 35th International
+    Conference on Machine Learning, Stockholm, Sweden, PMLR 80, 2018'') and the arXiv comment. The calibration error score averages squared gaps over m confidence levels (w_j = 1); the paper notes in Section
+    3.5 that for best results the diagnostic dataset should be distinct from the calibration and training sets. The calibration definition is a frequency over all data points; no discussion of calibration
+    conditional on x was found in the text (searched for conditional). Uses MC dropout (Gal and Ghahramani) for uncalibrated Bayesian forecasts. Results tables not recorded.'

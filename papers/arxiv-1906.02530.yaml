@@ -21,9 +21,11 @@ source:
 tags:
   tasks:
   - selective-prediction
+  - uncertainty-estimation
   - dataset-shift-detection
   - image-classification
   method_families:
+  - bayesian-deep-learning
   - deep-learning
 proposes:
 - Large-scale benchmark of predictive uncertainty (accuracy, NLL, Brier, ECE, entropy, confidence-vs-accuracy) under increasing dataset shift and on fully OOD data, across image, text and categorical (ad-click)

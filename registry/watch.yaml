@@ -65,3 +65,7 @@ themes:
     tags: [joint-embedding, masked-image-modeling]
     arxiv_queries:
       - '(abs:"self-supervised" OR abs:"contrastive learning" OR abs:"masked image modeling" OR abs:"masked autoencoder") AND (abs:representation) AND (cat:cs.CV OR cat:cs.LG)'
+  - name: 不確実性の推定と較正
+    tags: [uncertainty-estimation, conformal-prediction, post-hoc-calibration, bayesian-deep-learning]
+    arxiv_queries:
+      - '(abs:"conformal prediction" OR abs:"calibration" OR abs:"uncertainty quantification" OR abs:"predictive uncertainty" OR abs:"deep ensembles") AND (cat:cs.LG OR cat:stat.ML)'

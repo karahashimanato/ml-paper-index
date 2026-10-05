@@ -1,0 +1,93 @@
+id: arxiv-2107.07511
+title: A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification
+authors:
+- Anastasios N. Angelopoulos
+- Stephen Bates
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2107.07511
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-06'
+  pdf_sha256: c69aa191d8363c25b36685db4adb7e6980e55ee39892fd3626206c16e1e0efa1
+tags:
+  tasks:
+  - uncertainty-estimation
+  method_families:
+  - conformal-prediction
+  paradigms:
+  - post-hoc
+proposes: []
+claims:
+- id: c1
+  statement: 'Framing: given a fitted model and a small set of fresh i.i.d. calibration pairs unseen during training (e.g. about 500), split conformal prediction returns sets with 1 - alpha <= P(Y_test
+    in C(X_test)) <= 1 - alpha + 1/(n+1); the authors call this marginal coverage because the probability is averaged over the randomness in the calibration and test points.'
+  location: Section 1 (Conformal Prediction)
+  page: 4
+  quote: In words, the probability that the prediction set contains the correct label is almost exactly 1 −α; we call this property marginal coverage, since the probability is marginal (averaged) over the
+    randomness in the calibration and test points.
+- id: c2
+  statement: 'Assumptions of the guarantee: Theorem 1 (attributed to Vovk, Gammerman and Saunders) assumes the calibration pairs and the test pair are i.i.d.; the appendix restates it and remarks that it
+    also holds under the weaker condition of exchangeability. The proof given handles only the case of distinct scores (ties are referred to another work), and the upper bound needs a tie-breaking randomization
+    that the authors say is usually ignored in practice.'
+  location: Appendix D
+  page: 50
+  quote: As a technical remark, the theorem also holds if the observations to satisfy the weaker condition of exchangeability; see [1].
+- id: c3
+  statement: 'The guarantee holds for any score function, but the usefulness of the sets depends on it: if the scores rank inputs by magnitude of model error, sets are smaller for easy inputs and bigger
+    for hard ones; if the scores are random noise, the sets are a random sample of the label space just large enough for valid marginal coverage.'
+  location: Section 1 (Choice of score function)
+  page: 6
+  quote: although the guarantee always holds, the usefulness of the prediction sets is primarily determined by the score function.
+- id: c4
+  statement: 'What is not guaranteed: conditional coverage P[Y_test in C(X_test) | X_test] >= 1 - alpha is stronger than the marginal coverage conformal prediction achieves and, citing Vovk [14], is impossible
+    to achieve in the most general case, so procedures must be checked for how close they come. Example given: if sets always cover group A (90% of people) and never cover group B (10%), marginal coverage
+    is 90% but conditional coverage fails.'
+  location: Section 3 (Evaluating Conformal Prediction)
+  page: 13
+  quote: This is a stronger property than the marginal coverage property in (1) that conformal prediction is guaranteed to achieve—indeed, in the most general case, conditional coverage is impossible to
+    achieve [14].
+- id: c5
+  statement: 'Evaluation advice on set size and adaptivity: the procedure with the smallest average set size is not necessarily the best; sets should be small on easy and large on hard inputs, which the
+    coverage guarantee does not imply. Suggested checks are set-size histograms, a feature-stratified coverage metric (minimum coverage over predefined groups) and a size-stratified coverage metric (minimum
+    coverage over set-size bins), with the caveat that a good spread of set sizes does not by itself show that large sets occur for hard examples.'
+  location: Section 3 (Evaluating Conformal Prediction)
+  page: 12
+  quote: It is extremely important to keep in mind that the conformal prediction procedure with the smallest average set size is not necessarily the best.
+- id: c6
+  statement: 'Calibration set size: the guarantee holds for any n, but coverage conditional on a fixed calibration set is random (Beta(n + 1 - l, l) with l = floor((n+1) alpha), citing Vovk); the authors''
+    rough guideline is that about n = 1000 calibration points suffices for most purposes, and the n needed for coverage within 1 - alpha +/- epsilon with probability 1 - delta can be computed explicitly.'
+  location: Section 3.2
+  page: 14
+  quote: Roughly speaking, our conclusion will that be choosing a calibration set of size n = 1000 is suﬃcient for most purposes.
+- id: c7
+  statement: 'Checking correct coverage: run the procedure over R random calibration/validation splits of the available data (caching scores), and check that the histogram of empirical coverages is centered
+    near 1 - alpha; finite n, n_val and R cause benign fluctuations, and the authors note these evaluations are computationally intensive (at least 100 splits).'
+  location: Checking for Correct Coverage
+  page: 15
+  quote: So, we compute the coverage values by randomly splitting the n + nval data points R times into calibration and validation datasets, then running conformal.
+- id: c8
+  statement: 'Cost of data splitting: split conformal prediction needs only one model fit but sacrifices statistical efficiency by splitting data into training and calibration sets; full conformal prediction
+    avoids splitting at the cost of many more model fits, and cross-conformal and CV+/Jackknife+ lie in between.'
+  location: Section 6.2
+  page: 28
+  quote: Split conformal prediction requires only one model ﬁtting step, but sacriﬁces statistical eﬃciency.
+- id: c9
+  statement: 'Distribution shift breaks the standard guarantee: Theorem 1 assumes test points come from the same distribution as the calibration points. Weighted conformal prediction handles covariate shift
+    using the likelihood ratio dP_test/dP, which the authors describe as a somewhat restricted case (a known covariate shift).'
+  location: Conformal Prediction Under Covariate Shift
+  page: 20
+  quote: All previous conformal methods rely on Theorem 1, which assumes that the incoming test points come from the same distribution as the calibration points.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Tutorial/survey; proposes no new method. No venue recorded: the PDF title page gives only the date (December 8, 2022), and
+    ''Foundations and Trends'' was not found in the text. Conflict of interest: the authors are authors of the RAPS paper (ref [4], arXiv 2009.14193) and cite it for the APS implementation details and for
+    the size-stratified coverage metric (''introduced in [4]''); several other cited extensions (conformal risk control, Learn then Test) are also by the authors. The tutorial notes that the simple 1 -
+    softmax score gives the smallest average set size (citing [6]) but tends to undercover hard subgroups and overcover easy ones, motivating APS; CQR (Section 2.2) is presented as often the best way to
+    get intervals in regression, inheriting asymptotic near-conditional coverage from quantile regression. Under distribution drift, Theorem 4 (citing [26]) gives a coverage lower bound reduced by a TV-distance
+    term. Section numbers used only where a heading or cross-reference in the PDF confirms them (Section 1, 2.2, 3, 3.2, 4.6, 6, 6.1, 6.2).'

@@ -6,7 +6,7 @@
 - 著者: Jialin He, Tarek A. AlSkaif
 - 年・掲載: 2026 IEEE Transactions on Smart Grid
 - 原論文: [PDF](https://edepot.wur.nl/713863)(Publisher PDF via OpenAlex (submittedVersion)、カード作成時に読んだ版)
-- タグ: deep-learning, gradient-boosted-trees, linear-models, random-forests, supervised, tabular-regression
+- タグ: conformal-prediction, deep-learning, gradient-boosted-trees, linear-models, random-forests, supervised, tabular-regression, uncertainty-estimation
 - 人手レビュー: 未
 
 ## 主張

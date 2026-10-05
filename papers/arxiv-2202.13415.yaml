@@ -1,0 +1,107 @@
+id: arxiv-2202.13415
+title: Conformal prediction beyond exchangeability
+authors:
+- Rina Foygel Barber
+- Emmanuel J. Candès
+- Aaditya Ramdas
+- Ryan J. Tibshirani
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2202.13415
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 7d09be24289de9a91d90e1ce6331ce28e229f067bea9cdb095cebfa067e3416f
+tags:
+  tasks:
+  - uncertainty-estimation
+  - tabular-regression
+  method_families:
+  - conformal-prediction
+  - linear-models
+  paradigms:
+  - supervised
+  - post-hoc
+proposes:
+- 'Nonexchangeable conformal prediction (NexCP): split and full conformal (and jackknife+) using fixed, prespecified weights w_i in [0, 1] on the calibration residuals (weighted quantiles), e.g. geometrically
+  decaying weights under drift'
+- A random swap step (swap the test point's tag with that of a point K drawn with probability proportional to the weights) that allows nonsymmetric fitting algorithms (e.g. weighted least squares, changepoint-aware
+  or autoregressive fits) inside full conformal
+- 'A coverage-gap bound: coverage >= 1 - alpha - sum_i w~_i d_TV(R(Z), R(Z^i)), with no assumption on the joint distribution'
+claims:
+- id: c1
+  statement: 'Conformal validity relies on two assumptions: exchangeability of the data and a model-fitting algorithm that treats data points symmetrically. The paper drops both, generalizing split conformal,
+    full conformal and the jackknife+.'
+  location: Abstract
+  page: 1
+  quote: Its validity relies on the assumptions of exchangeability of the data, and symmetry of the given model ﬁtting algorithm as a function of the data.
+- id: c2
+  statement: 'What the guarantee becomes: the coverage gap ((1 - alpha) minus the actual coverage) is bounded by a weighted sum of total-variation distances between the data (or, more tightly, the residual
+    vectors) and the same with the test point swapped with point i, with no assumption on the joint distribution. The weights must be fixed (not data-dependent), and the authors state that using these methods
+    implicitly assumes this weighted TV sum is small.'
+  location: Introduction
+  page: 4
+  quote: In particular, if we use these methods, we are implicitly assuming that this weighted sum of total variation terms is small.
+- id: c3
+  statement: Under exchangeability the bound is zero, so introducing fixed weights loses no coverage; with unit weights and a symmetric algorithm the theorems also give a new robustness result for standard
+    split/full conformal (gap at most sum_i d_TV / (n + 1)), which the authors say helps explain their success on real data where exchangeability may not hold. Theorem 3 gives an upper bound on coverage
+    (no substantial overcoverage) when w~_{n+1} is small.
+  location: Theory (Remarks on the theorems)
+  page: 17
+  quote: These new bounds ensure robustness of existing methods against mild violations of the exchangeability (or i.i.d.) assumption, and thus help explain the success of these methods on real data, where
+    the exchangeability assumption may not hold.
+- id: c4
+  statement: 'Cost of weighting: low weights reduce the effective sample size (e.g. for estimating the residual quantile), so overly low weights often widen intervals; all-zero weights give zero coverage
+    gap but an uninformative interval (the whole real line). Optimal weight choice is left open.'
+  location: Theory (Remarks on the theorems)
+  page: 18
+  quote: How to choose weights optimally (and, even how to quantify optimality) is an interesting and important question that we leave for future work.
+- id: c5
+  statement: 'When the guarantee is useful: the bound holds with no distributional assumption but is meaningless if large, so the weights should be chosen in advance from (at least qualitative) prior knowledge
+    of the likely deviation, e.g. geometric decay under gradual drift; if the test point comes from a distribution bearing no resemblance to the training data, no method can guarantee coverage without further
+    assumptions. Whether coverage will likely hold for a particular data set is named as an open question.'
+  location: Theory (Is the guarantee useful?)
+  page: 18
+  quote: On the other hand, if the test point comes from a new distribution that bears no resemblance to the training data, neither our bound nor any other method would be able to guarantee valid coverage
+    without further assumptions.
+- id: c6
+  statement: 'Examples with weights w_i = rho^(n+1-i): for independent data with Lipschitz-type bounded drift (d_TV(Z_i, Z_{n+1}) <= eps (n + 1 - i)) the gap is at most 2 eps / (1 - rho); after a changepoint
+    k steps ago the gap is at most rho^k, small only when plenty of data has been observed since the changepoint.'
+  location: Section 4.4 (Examples)
+  page: 19
+  quote: This yields a small coverage gap as long as k is large, i.e., as long as we have plenty of data observed after the most recent changepoint.
+- id: c7
+  statement: Nonsymmetric algorithms need the random swap step for the guarantee; the swap may alter the fitted model and could make predictions far less accurate in some settings (e.g. autoregressive models
+    where the most recent point matters most). The theory does not rely on stability assumptions, and practical implementation in such settings is left to future work.
+  location: Section 3 (The swap step)
+  page: 15
+  quote: We leave the important question of practical implementation for such settings, and the question of how to choose algorithms A that will not be too sensitive to the swap, to future work.
+- id: c8
+  statement: 'Contrast with weighted conformal under covariate shift (citing Tibshirani et al. 2019): that method needs the covariate-shift assumption and a known or well-approximated, possibly high-dimensional
+    likelihood ratio, with data-dependent weights; here the weights are fixed and can compensate for unknown but small violations. The authors state that if the data were in fact exchangeable, the covariate-shift
+    weighted algorithm has no coverage guarantee, while theirs retains exact coverage.'
+  location: Section 2 (Further related work)
+  page: 8
+  quote: Finally, and importantly, if there was actually no distribution shift, and the data happened to be exchangeable, their weighted algorithm does not have any coverage guarantee, while ours retains
+    exact coverage.
+- id: c9
+  statement: 'Simulations (N = 2000, Gaussian covariates; Setting 1 i.i.d., Setting 2 two changepoints in the coefficients, Setting 3 linear drift; online after a 100-point burn-in, 200 replications, target
+    90%): full conformal with least squares (CP+LS) undercovers after changepoints and as drift grows, while NexCP+LS and NexCP+WLS (weights and tags 0.99^(n+1-i)) better maintain coverage; NexCP+WLS gives
+    narrower intervals than CP+LS, and weighted methods have slightly higher width variability under i.i.d. data (lower effective sample size).'
+  location: Section 5.1 (Simulations)
+  page: 24
+  quote: The NexCP+LS and NexCP+WLS methods are better able to maintain coverage in these settings.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. No venue recorded: the PDF text has no venue statement (searched for Annals, journal, to appear, accepted) and no journal_ref/comment
+    was given. Overlapping authors with arXiv-1904.06019 (weighted conformal under covariate shift), which this paper contrasts with its own method (claim c8). Section numbers: Section 2, 3.1, 4.3-4.5,
+    5.1, 5.2 confirmed by in-text cross-references; Section 3 and 4 headings are cited by name where the exact number is not confirmed. Additional caveat (Extensions): the coverage reduction is additive
+    (alpha + Delta), which may be a substantial increase in error probability if alpha is very low; a multiplicative bound under Huber contamination (symmetric algorithms only) is in Appendix C. Real data:
+    ELEC2 electricity (N = 3444 after filtering, with a randomly permuted copy as an exchangeable control) and 2020 US election counties (Eastern-time counties as training, 1119 train / 1957 test; weights
+    from 2016 covariates with gamma set so the effective sample size is 100; also quantile-regression scores). Tables 1-3 values not recorded. Jackknife+ and split conformal versions are in the appendices
+    (not read in detail).'

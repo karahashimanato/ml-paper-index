@@ -6,7 +6,7 @@
 - 著者: Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger
 - 年・掲載: 2017
 - 原論文: [PDF](https://arxiv.org/pdf/1706.04599v2)(arXiv v2、カード作成時に読んだ版)
-- タグ: deep-learning, image-classification, post-hoc, selective-prediction
+- タグ: deep-learning, image-classification, post-hoc, post-hoc-calibration, selective-prediction, uncertainty-estimation
 - 人手レビュー: 未
 
 ## 主張

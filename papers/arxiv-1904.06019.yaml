@@ -1,0 +1,103 @@
+id: arxiv-1904.06019
+title: Conformal Prediction Under Covariate Shift
+authors:
+- Ryan J. Tibshirani
+- Rina Foygel Barber
+- Emmanuel J. Candès
+- Aaditya Ramdas
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1904.06019
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-06'
+  pdf_sha256: d80dba944a136e075bbfe281009152ce42041e0a455f68f73684ace83cfc3fed
+tags:
+  tasks:
+  - uncertainty-estimation
+  - tabular-regression
+  method_families:
+  - conformal-prediction
+  - linear-models
+  - random-forests
+  paradigms:
+  - supervised
+  - post-hoc
+proposes:
+- 'Weighted conformal prediction: under covariate shift, each nonconformity score is weighted in proportion to the likelihood ratio w(x) = dP~X/dPX of test to training covariate distributions, and the band
+  uses a quantile of this weighted empirical distribution (plus a point mass at infinity weighted by w at the test point); a weighted split conformal variant is also given'
+- 'Weighted exchangeability: a generalization of exchangeability (joint density factorizes as a product of per-point weight functions times a permutation-invariant function) under which a weighted quantile
+  lemma and weighted conformal prediction give valid coverage'
+claims:
+- id: c1
+  statement: 'Setting and assumption: training points are i.i.d. from P = PX x PY|X and the test point from P~ = P~X x PY|X, independently; the conditional distribution of Y given X is assumed to be the
+    same for training and test data (covariate shift). Ordinary conformal prediction relies only on exchangeability, which no longer holds here.'
+  location: Section 2 (Covariate shift)
+  page: 3
+  quote: Notice that the conditional distribution of Y |X is assumed to be the same for both the training and test data.
+- id: c2
+  statement: 'Guarantee (Corollary 1): if P~X is absolutely continuous with respect to PX and the weights use w = dP~X/dPX, the weighted conformal band has marginal coverage P{Y_{n+1} in C_n(X_{n+1})} >=
+    1 - alpha for any score function; the same holds if w is known only up to a normalization constant (Remark 3). For weighted split conformal, coverage holds conditional on the preliminary data used to
+    fit the regression function.'
+  location: Section 2 (Weighted conformal prediction)
+  page: 4
+  quote: Assume that ePX is absolutely continuous with respect to PX
+- id: c3
+  statement: Unlike the unweighted case (upper bound 1 - alpha + 1/(n+1) when there are no ties), the authors state that a meaningful upper bound on coverage for the weighted quantile lemma does not seem
+    possible without further conditions on the weights, because a single weight can be very large.
+  location: Section 3 (Remark 5)
+  page: 13
+  quote: does not seem possible without further conditions on the weight functions in consideration
+- id: c4
+  statement: 'Cost: in general the weighted methodology requires quantiles of a weighted discrete distribution of scores, which is combinatorially hard, but under covariate shift with a known likelihood
+    ratio the computation simplifies and weighted conformal is as easy computationally as ordinary conformal prediction.'
+  location: Section 4 (Discussion)
+  page: 14
+  quote: In this case, known as covariate shift, the new weighted conformal prediction methodology is just as easy, computationally, as ordinary conformal prediction.
+- id: c5
+  statement: 'Airfoil experiment (UCI, N = 1503, d = 5; 5000 random splits into 25% for fitting a linear-regression mu0, 25% calibration, 50% test; nominal 90%, alpha = 0.1). The shifted test set is synthetic:
+    25% of the test points resampled with probabilities proportional to exp(x^T beta), so the likelihood ratio is known. Ordinary split conformal had average coverage 90.2% on the unshifted test set but
+    considerably undercovered on the shifted one (82.2%).'
+  location: Section 2 (Airfoil data example)
+  page: 6
+  quote: but for the nonuniformly subsampled test data Dshift (covariate shift, in blue), split conformal considerably undercovers, with its average coverage being 82.2%.
+- id: c6
+  statement: With oracle weights, weighted split conformal brought average coverage back to 90.8%, but the coverage histogram was more dispersed than without shift because the weighted quantile relies on
+    a reduced effective sample size; unweighted split conformal run with that effective number of calibration points lined up very closely with the weighted method.
+  location: Section 2 (Airfoil data example)
+  page: 6
+  quote: This is because, by using a quantile of the weighted empirical distribution of nonconformity scores, we are relying on a reduced “effective sample size”.
+- id: c7
+  statement: 'Estimated weights: the likelihood ratio is estimated by a classifier distinguishing training from (unlabeled) shifted test covariates, using the odds p(x)/(1 - p(x)); logistic regression (well-specified
+    here because the tilt is log-linear) and random forests (probabilities clipped to [0.01, 0.99] to avoid infinite weights) each gave 91.0% average coverage, with histograms only a little more dispersed
+    than with oracle weights; random-forest-weighted intervals were more variable and in some cases much longer.'
+  location: Section 2 (Airfoil data example)
+  page: 8
+  quote: Both classiﬁcation approaches deliver weights that translate into good average coverage, being 91.0% for each approach.
+- id: c8
+  statement: 'Scope of the evidence for estimated weights: the authors state that when the likelihood ratio is not known it can be estimated from unlabeled test covariates, which they showed empirically
+    on a low-dimensional example can still yield correct coverage (the theorem itself assumes the true ratio).'
+  location: Section 4 (Discussion)
+  page: 14
+  quote: When the likelihood ratio d ePX/dPX is not known, it can be estimated given access to unlabeled data (test covariate points), which we showed empirically, on a low-dimensional example, can still
+    yield correct coverage.
+- id: c9
+  statement: 'Conditional coverage: citing Vovk (2012) and Lei and Wasserman (2014), exact conditional coverage for almost all x0 and all distributions forces infinite expected length at non-atom points.
+    Weighted conformal with a kernel weight centred at x0 gives a locally weighted guarantee, but only for a centre point specified in advance (the band must be recomputed for each x0), so the authors state
+    that many problems in assumption-lean conditional predictive inference remain open.'
+  location: Section 4 (Towards local conditional coverage?)
+  page: 15
+  quote: We have only described a way to satisfy such a property if the center point x0 were speciﬁed in advance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. No venue recorded: the PDF text has no venue statement (searched for NeurIPS, Neural Information, proceedings, journal) and
+    no journal_ref/comment venue was given. Section 2 and Section 3/3.1/4 numbers are confirmed by cross-references in the introduction and proofs (''In Section 2, we describe...'', ''Section 3.1'', ''Section
+    3.5'', ''Section 2.2''); subsection names are used otherwise. Interval lengths (Figure 3): oracle-weighted intervals were longer than unweighted ones at equal effective sample size, which the authors
+    attribute to mu0 not being adjusted for the shift. With no actual shift (Figure 4), logistic-regression weights behaved like unweighted conformal and random-forest weights gave slightly more dispersed
+    coverage and lengths. Coverage values are histogram averages written in the body text; the histograms themselves were not read. Other applications discussed (graphical models with covariate shift, missing
+    covariates with known summaries) are not recorded as claims.'

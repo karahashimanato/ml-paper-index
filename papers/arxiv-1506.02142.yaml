@@ -1,0 +1,99 @@
+id: arxiv-1506.02142
+title: 'Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning'
+authors:
+- Yarin Gal
+- Zoubin Ghahramani
+year: 2015
+venue: ICML 2016
+links:
+  arxiv: https://arxiv.org/abs/1506.02142
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-06'
+  pdf_sha256: dcebe17f1cef7d510900659c23d68038e5c6f9aaca2949f40bf91edd10566bca
+tags:
+  tasks:
+  - uncertainty-estimation
+  - tabular-regression
+  - image-classification
+  method_families:
+  - bayesian-deep-learning
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- A theoretical framework casting dropout training (dropout before every weight layer) as approximate variational inference in a deep Gaussian process
+- 'MC dropout: keeping dropout on at test time and averaging T stochastic forward passes to estimate the predictive mean, with the predictive variance given by the sample variance of the passes plus the
+  inverse model precision'
+claims:
+- id: c1
+  statement: 'Motivation: predictive probabilities from the softmax are often erroneously interpreted as model confidence; a model can be uncertain in its predictions even with a high softmax output, and
+    passing a point estimate through a softmax gives unjustifiably high confidence far from the training data.'
+  location: Section 1
+  page: 1
+  quote: A model can be uncertain in its predictions even with a high softmax output (ﬁg. 1).
+- id: c2
+  statement: 'Core result: a NN of arbitrary depth and non-linearities with dropout applied before every weight layer is mathematically equivalent to an approximation to the deep Gaussian process (marginalised
+    over its covariance function parameters); the dropout objective in effect minimises the KL divergence between an approximate distribution (weight matrices with randomly zeroed columns) and the deep
+    GP posterior. The derivation is deferred to a separate appendix document.'
+  location: Section 3
+  page: 2
+  quote: We show that a neural network with arbitrary depth and non-linearities, with dropout applied before every weight layer, is mathematically equivalent to an approximation to the probabilistic deep
+    Gaussian process
+- id: c3
+  statement: 'MC dropout estimates the first two moments of the approximate predictive distribution by moment matching: the predictive mean is the average of T stochastic forward passes, and the predictive
+    variance is the sample variance of the passes plus the inverse model precision tau^-1, where tau is obtained from the weight decay, dropout probability and an assumed prior length-scale.'
+  location: Section 4
+  page: 4
+  quote: In practice this is equivalent to performing T stochastic forward passes through the network and averaging the results.
+- id: c4
+  statement: 'Hedge: the approximate predictive distribution is expected to be highly multi-modal (the variational distribution over each weight-matrix column is bi-modal), so the mean/variance approximations
+    only give a glimpse into its properties.'
+  location: Section 4
+  page: 4
+  quote: and the above approximations only give a glimpse into its properties
+- id: c5
+  statement: 'Cost as stated by the authors: the dropout model itself is not changed, so the method can be used with existing networks trained with dropout; the forward passes can be done concurrently,
+    giving constant running time identical to standard dropout. T = 1000 passes were used in the regression figures for drawing purposes, and the authors state much smaller numbers (e.g. T = 10) give a
+    reasonable estimate.'
+  location: Section 4
+  page: 4
+  quote: Furthermore, the forward passes can be done concurrently, resulting in constant running time identical to that of standard dropout.
+- id: c6
+  statement: 'The uncertainty depends on modelling choices: on the CO2 extrapolation task, the uncertainty grows far from the data for the ReLU model but stays bounded for the TanH model, which the authors
+    attribute to ReLU and TanH approximating different GP covariance functions; none of the models capture the periodicity.'
+  location: Section 5.1
+  page: 5
+  quote: Note that the uncertainty is increasing far from the data for the ReLU model, whereas for the TanH model it stays bounded.
+- id: c7
+  statement: 'UCI regression protocol (replicating the PBP setup): 1-hidden-layer networks of 50 units, dropout probabilities 0.05 and 0.005, prior length-scale set to 10^-2 for most datasets based on the
+    range of the data, and the model precision tau chosen by Bayesian optimisation over validation log-likelihood; 20 random splits (5 for Protein, 1 for Year). After BO, 10x more iterations were used because
+    dropout takes longer to converge.'
+  location: Section 5.3
+  page: 7
+  quote: over validation log-likelihood to ﬁnd optimal τ
+- id: c8
+  statement: 'Result as stated in the text: dropout significantly outperforms VI and PBP in RMSE and test log-likelihood on all datasets apart from Yacht, where PBP obtains better RMSE. MC dropout averaging
+    also improved over standard dropout weight averaging and over near-zero dropout probabilities.'
+  location: Section 5.3
+  page: 7
+  quote: Dropout signiﬁcantly outperforms all other models both in terms of RMSE as well as test log-likelihood on all datasets apart from Yacht, for which PBP obtains better RMSE.
+- id: c9
+  statement: 'Correction (October 2016 update): in an earlier version the reported dropout standard errors were erroneously scaled up by a factor of 4.5 (e.g. Boston RMSE standard error 0.85 instead of
+    0.19).'
+  location: Section 5.3 (footnote 3)
+  page: 7
+  quote: Note that in an earlier version of this paper our reported dropout standard error was erroneously scaled-up by a factor of 4.5
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. Affiliation: University of Cambridge. Venue from the PDF first page (''Proceedings of the 33rd International Conference on
+    Machine Learning, New York, NY, USA, 2016''). The arXiv comment of v6 notes a fixed mistake with the standard error, recorded as a claim (footnote 3). Footnote 4 (October 2016 update) says the Table
+    1 epochs were chosen to match PBP''s run time, and that 10x more epochs or a second hidden layer gives a considerable improvement (Table 2). The main derivation lives in a separate appendix (arXiv:1506.02157),
+    not in this PDF. MNIST: LeNet with dropout 0.5 before the last fully connected layer, evaluated on a rotated digit; uncertainty quantified by entropy or variation ratios (qualitative only). RL experiment
+    (Thompson sampling with a dropout Q-network) shown as figures only. No calibration metric such as ECE is used; uncertainty quality is assessed through predictive log-likelihood. Calibration/coverage
+    guarantees: none claimed.'

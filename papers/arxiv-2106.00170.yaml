@@ -1,0 +1,97 @@
+id: arxiv-2106.00170
+title: Adaptive Conformal Inference Under Distribution Shift
+authors:
+- Isaac Gibbs
+- Emmanuel Candès
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2106.00170
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 15f35bf6d3ff2abfc21eaff1f1a7df2a51a5c891f2bed752f6fd75d3e47a5ff7
+tags:
+  tasks:
+  - uncertainty-estimation
+  - time-series-forecasting
+  - tabular-regression
+  method_families:
+  - conformal-prediction
+  paradigms:
+  - supervised
+  - post-hoc
+proposes:
+- 'Adaptive conformal inference (ACI): in an online setting, the nominal miscoverage level alpha_t passed to the conformal quantile is updated after each observed label by alpha_{t+1} = alpha_t + gamma
+  (alpha - err_t), as a wrapper around any score function and quantile estimate'
+claims:
+- id: c1
+  statement: 'Setting and guarantee: an online setting where the data-generating distribution may vary over time in an unknown fashion; previous conformal methods rely on exchangeability, while ACI provably
+    achieves the desired coverage frequency over long time intervals regardless of the true data-generating process.'
+  location: Abstract
+  page: 1
+  quote: our adaptive approach provably achieves the desired coverage frequency over long-time intervals irrespective of the true data generating process.
+- id: c2
+  statement: 'Method: since under non-stationarity the realized miscoverage M_t(alpha) need not equal alpha, the argument of the fitted quantile function is recalibrated online, lowering (raising) alpha_t
+    when past sets under-covered (over-covered), via alpha_{t+1} = alpha_t + gamma (alpha - err_t); this requires the label Y_t to be observed after each prediction. A weighted-history variant gave almost
+    identical results in their experiments.'
+  location: Adapting conformal inference to distribution shifts
+  page: 3
+  quote: To perform this calibration we will use a simple online update.
+- id: c3
+  statement: 'Distribution-free result (Proposition 4.1): with probability one, |(1/T) sum_t err_t - alpha| <= (max{alpha_1, 1 - alpha_1} + gamma) / (T gamma) for all T, so the long-run miscoverage frequency
+    converges to alpha with no assumptions on the data. The authors argue that without assumptions on the initialization this cannot be improved in the worst case right after initialization.'
+  location: Section 4.1
+  page: 6
+  quote: Proposition 4.1 puts no constraints on the data generating distribution.
+- id: c4
+  statement: 'Long-run versus per-time coverage: the large-deviation bound on the average miscoverage (Theorem 4.1) says nothing about marginal coverage at a single time step; Theorem 4.2 bounds the expected
+    squared gap between realized marginal miscoverage and alpha by the size of the shift in the optimal alpha*_t, under a hidden Markov model with a stationary chain, a quantile/score function fixed over
+    time and a Lipschitz miscoverage function.'
+  location: Section 4.2
+  page: 8
+  quote: On the other hand, it provides no information about the marginal coverage frequency at a single time step.
+- id: c5
+  statement: 'The hidden-Markov-model assumptions behind the per-time results are simplifications: the authors do not expect them to hold exactly in any real-world setting, though they consider the results
+    representative and expect similar results under other models.'
+  location: Section 4.2
+  page: 7
+  quote: While we do not expect these assumptions to hold exactly in any real-world setting, we do consider our results to be representative of the true behaviour of adaptive conformal inference and we
+    expect similar results to hold under alternative models.
+- id: c6
+  statement: 'Step size: gamma trades adaptability against stability (large gamma lets alpha_t oscillate between small conservative and large anti-conservative sets); the experiments use gamma = 0.005,
+    chosen because it was found to give relatively stable trajectories while still adapting; too small a gamma behaves like fixed alpha. The data on which this choice was made is not stated (searched for
+    tuned, validation, held out).'
+  location: Section 2.1
+  page: 3
+  quote: The choice of γ gives a tradeoff between adaptability and stability.
+- id: c7
+  statement: 'Volatility experiment: GARCH(1,1) point predictions refit on the last 1250 trading days, a normalized absolute-residual score, alpha = 0.1, compared with fixed alpha via local coverage over
+    about two years. The four stocks shown were selected out of 12 examined because they showed a clear failure of the non-adaptive method; ACI was found to perform well in all cases (appendix figure).'
+  location: Section 2.2
+  page: 5
+  quote: These stocks were selected out of a total of 12 stocks that we examined because they showed a clear failure of the non-adaptive method.
+- id: c8
+  statement: 'Score choice: coverage of ACI is governed by the size of the shift in alpha*_t, which corresponds to the 1 - alpha quantile of the score, so it depends on how close the score is to stationary;
+    an unnormalized residual score gave much wider swings in local coverage than the normalized one (partially mitigated by a larger gamma). Interval length depends on the fitted model, so the model should
+    be refit on recent data.'
+  location: Impact of St(·) on the performance
+  page: 9
+  quote: Thus, the coverage properties of adaptive conformal inference depend on how close St(Xt, Yt) is to being stationary.
+- id: c9
+  statement: 'Limitations stated by the authors: the method assumes Y_t is revealed at every time point (delayed or batched feedback is not covered); the per-time theory covers a single data model with
+    a fixed quantile function; gamma should ideally be chosen adaptively without prior knowledge; experiments cover only two domains.'
+  location: Discussion
+  page: 10
+  quote: The methods we develop are speciﬁc to cases where Yt is revealed at each time point.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): uncertainty estimation and calibration (Bayesian approximations and ensembles, calibration measurement and recalibration, conformal
+    prediction). Carded by a subagent. Results tables not recorded; claims only. No venue recorded: page 1 footer says ''Preprint. Under review.'' and no journal_ref/comment venue was given. Sections 2.1,
+    2.2, 4.1, 4.2 and 6 are confirmed by in-text cross-references; other locations use heading names. Second experiment (Section 6): county-level 2020 election vote totals with conformalized quantile regression
+    (linear quantile regression per the appendix algorithm), counties ordered by time zone (random within zone) to mimic reporting drift; the non-adaptive method had troughs in local coverage at time-zone
+    changes, while ACI stayed near 90% with deviations comparable to a Bernoulli sequence (figure-based statements; no numbers recorded). Local coverage is compared visually with i.i.d. Bernoulli(0.1) sequences.
+    Related work notes that likelihood-ratio reweighting (Tibshirani et al.) requires an unchanged Y|X and a known or very accurately estimated ratio.'

@@ -1,0 +1,99 @@
+id: arxiv-2106.03844
+title: Mean-Shifted Contrastive Loss for Anomaly Detection
+authors:
+- Tal Reiss
+- Yedid Hoshen
+year: 2021
+venue: AAAI 2023
+links:
+  arxiv: https://arxiv.org/abs/2106.03844
+  code: https://github.com/talreiss/Mean-Shifted-Anomaly-Detection
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: ce16c9e8b7b11af0d1d5128343043b49b4ec56654f0b6129458c8d558461bff7
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  - joint-embedding
+  paradigms:
+  - self-supervised
+  - unsupervised
+proposes:
+- 'Mean-Shifted Contrastive (MSC) loss: fine-tune ImageNet-pretrained features on normal training images with a contrastive loss computed on l2-normalized features after subtracting the center of the normalized
+  pre-trained features of the training set; anomalies are scored by the summed cosine distance to the k nearest training exemplars (or k-means centers)'
+claims:
+- id: c1
+  statement: 'Setting: one-class classification, where all training samples are normal and contain no anomalies; the anomaly score is turned into a binary decision by applying a threshold.'
+  location: Background (Preliminaries)
+  page: 2
+  quote: In the one-class classiﬁcation task, we are given a set of training samples that are all normal (and contain no anomalies)
+- id: c2
+  statement: 'Why pre-trained features: citing (Reiss et al. 2021), even a simple kNN detector on ImageNet pre-trained representations already outperforms nearly all self-supervised methods, and fine-tuning
+    the features on normal training data can improve it further; the authors contrast this with outlier exposure, which can completely fail when anomalies are more similar to the normal data than to the
+    outlier-exposure dataset.'
+  location: Introduction
+  page: 1
+  quote: (Reiss et al. 2021) found that even a simple kNN anomaly detection classiﬁer based on ImageNet pre-trained representation already outperforms nearly all self-supervised methods.
+- id: c3
+  statement: 'Failure of the standard contrastive loss: initialized with ImageNet pre-trained weights, representations not only fail to improve but degrade quickly. The authors'' intuitive explanation:
+    normal data occupy a compact region of the pre-trained feature space, so the uniformity objective dominates over augmentation invariance, which makes anomalies harder to detect and loses useful properties
+    of the pre-trained space.'
+  location: Section 4.1 (Adaptation Failure of The Contrastive Loss)
+  page: 3
+  quote: Commonly, the normal data occupy a compact region in the ImageNet pre-trained feature space.
+- id: c4
+  statement: 'Protocol: multi-class datasets (CIFAR-10, the 20-class coarse CIFAR-100, CatsVsDogs) are converted to anomaly detection by taking one class as normal and all others as anomalies, for every
+    class; performance is ROC-AUC. Small datasets (MVTec, DIOR, fine-grained CIFAR-100, CIFAR-10 with 200 or 500 samples) are also evaluated; for MVTec the anomalies are in-class manufacturing errors with
+    subtle variations.'
+  location: Experiments
+  page: 5
+  quote: Following standard protocol, multi-class datasets are converted to anomaly detection by setting a class as normal and all other classes as anomalies.
+- id: c5
+  statement: 'Small datasets: the self-supervised contrastive method (CSI) does not perform well on small datasets while pre-trained methods perform better; the authors'' explanation is that self-supervised
+    methods see only the small dataset and cannot learn strong features from so few samples, whereas pre-trained methods transfer features from external datasets.'
+  location: Further Analysis & Ablation Study
+  page: 5
+  quote: The reason for the poor performance of self-supervised methods on small datasets is that they only see the small dataset for training, and cannot learn strong features using such a small sample
+    size.
+- id: c6
+  statement: 'Dependence on pre-training: with a random Gaussian center (training from scratch without strong pre-trained initialization), detection degrades drastically and the MSC objective does not improve
+    over standard contrastive losses; the authors call MSC a directed contribution to anomaly detection from pre-trained features.'
+  location: Further Analysis & Ablation Study
+  page: 6
+  quote: Therefore when training a model from scratch without any strong initialization that comes from a pre-trained model, our objective does not improve over standard contrastive losses.
+- id: c7
+  statement: 'Catastrophic collapse and stopping: like PANDA, the method collapses after a very large number of training epochs, though more slowly. In the supplementary, the collapse curves (Figure 5)
+    are CIFAR-10 mean ROC-AUC over training, and the authors state that early stopping after 25 iterations typically gets very close to the optimal accuracy; no held-out validation set for choosing the
+    stopping point was found in the text (searched for validation, tuned, held out).'
+  location: Appendix B
+  page: 9
+  quote: We ﬁnd that early stopping after 25 iterations typically gets very close to the optimal accuracy.
+- id: c8
+  statement: 'Baselines: DROC numbers are taken from its paper; other competitors are trained with the official repositories of their authors, with an effort to select the best configurations available
+    (CSI and PANDA with the exact protocol from their official repositories).'
+  location: Appendix A.2
+  page: 9
+  quote: For the evaluation of the other competing method, we trained using the ofﬁcial repositories of their authors and make an effort to select the best conﬁgurations available.
+- id: c9
+  statement: 'Outlier exposure vs pre-training: outlier exposure needs a large external dataset at training time from a domain similar to the anomalies, and choosing it with supervision contradicts detecting
+    any type of anomaly; pre-training also uses an external labeled dataset, but its labels need not relate to the anomalies and it is used only once, at pre-training.'
+  location: Further Analysis & Ablation Study
+  page: 7
+  quote: Pre-training, like OE, is also achieved through an external labeled dataset, but differently from OE, the labels are not required to be related to the anomalies and the external dataset is only
+    required once - at the pre-training stage and is never used again.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliation: The Hebrew University of Jerusalem. Venue from the arXiv comment ''AAAI 2023'' (the PDF also carries
+    an AAAI 2023 copyright line). Conflict of interest: the main pre-trained baseline PANDA (Reiss, Cohen, Bergman and Hoshen 2021) is by the same authors. Implementation (Appendix A.3): ImageNet ResNet152
+    (last two blocks fine-tuned, 25 epochs) or ResNet18 (full backbone, 20 epochs), temperature 0.25, SGD without momentum, batch 64, SimCLR-style augmentations, kNN with k = 2; about 3 hours per dataset
+    class on one RTX-2080 Ti. The appendix says ''early stopping after 25 iterations'' while A.3 says 25 epochs; the text does not reconcile the two. MVTec is evaluated at image level only (ROC-AUC), with
+    no localization. k-means compression of the training features is offered as a faster scoring option with a small loss in accuracy. Section numbers 4.1 and A.2/B are confirmed by cross-references and
+    appendix headings; other sections use names.'

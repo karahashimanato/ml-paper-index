@@ -1,0 +1,95 @@
+id: arxiv-1811.02141
+title: Extended Isolation Forest
+authors:
+- Sahand Hariri
+- Matias Carrasco Kind
+- Robert J. Brunner
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1811.02141
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-06'
+  pdf_sha256: bc8c2c083037cfe870f8ebc6bc525471525b8bf07e22c03fedeff8f72eb8fa28
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - tree-ensembles
+  paradigms:
+  - unsupervised
+proposes:
+- 'Extended Isolation Forest (EIF): isolation trees whose branch cuts are hyperplanes with a random slope (normal vector with N(0,1) components, i.e. uniform on the unit sphere) and a random intercept drawn
+  uniformly over the range of the data at the node, instead of axis-parallel cuts on one randomly chosen feature'
+- 'Extension levels: zeroing coordinates of the normal vector gives N levels for N-dimensional data; level 0 is identical to the standard Isolation Forest'
+- 'Rotated trees: running the standard Isolation Forest on a randomly rotated sub-sample per tree (presented as a less desirable alternative)'
+claims:
+- id: c1
+  statement: 'Diagnosis: on 2-D normally distributed data, the standard Isolation Forest score map shows rectangular regions of lower anomaly score along the x and y directions compared with points at the
+    same radial distance; the authors attribute these differences to the algorithm and note that two points of similar importance can then be categorized differently depending on the threshold.'
+  location: Section 2 (Motivation)
+  page: 2
+  quote: As we will see in later sections, the diﬀerence in the anomaly score in the x and y directions are indeed an artifacts introduced by the algorithm.
+- id: c2
+  statement: With two Gaussian clusters, the artifact is amplified where the bands intersect, producing low-score "ghost" clusters near (0, 0) and (10, 10); an anomaly near the origin would most likely
+    be categorized as nominal. The authors state this increases the chances of false positives and indicates a non-existent structure.
+  location: Section 2 (Motivation)
+  page: 3
+  quote: Not only does this increase the chances of false positives, it also wrongly indicates a non-existent structure in the data.
+- id: c3
+  statement: 'Mechanism: because each cut picks one random feature and a random value, all branch cuts are parallel to the coordinate axes; cuts still concentrate where the data are, but regions with few
+    data points end up with many cuts through them, so e.g. a point near (4, 0) receives many more branching operations than one near (3, 3) although both are anomalies relative to the center.'
+  location: Section 3 (Generalization of Isolation Forest)
+  page: 4
+  quote: However, because of the constraint that the branch cuts are only vertical and horizontal, regions that don’t necessarily contain many data points end up with many branch cuts through them.
+- id: c4
+  statement: 'Rotating each tree''s sub-sample by a random angle averages the bias out across trees and improves the score maps, but the authors call it not the ideal fix: each tree still has the rectangular
+    bias, every tree must store its rotation, rotation is not obvious beyond 2-D and the approach can become cumbersome for large, high-dimensional data. They suggest EIF should be preferred over rotation.'
+  location: Rotated Trees
+  page: 5
+  quote: In a sense the problem is not resolved, but only averaged out.
+- id: c5
+  statement: 'EIF branch cuts: a random slope is chosen by drawing each component of the normal vector from N(0, 1), which gives a uniform selection on the N-sphere; the intercept is drawn uniformly over
+    the range of values at the branching point, and a point goes left if (x - p) . n <= 0. Intercepts still accumulate where the data are, but no region artificially receives more cuts.'
+  location: Extended Isolation Forest
+  page: 6
+  quote: This results in a uniform selection of points on the N-sphere.
+- id: c6
+  statement: 'Extension levels: setting coordinates of the normal vector to zero gives levels Ex 0 to Ex N-1; Ex 0 is identical to the standard Isolation Forest. The authors suggest lower extension levels
+    may be useful when the dynamic ranges of dimensions differ strongly, and that for data essentially distributed along a line the standard Isolation Forest would probably give the best result.'
+  location: High Dimensional Data and Extension Levels
+  page: 7
+  quote: Isolation Forest method would probably yield the most optimal result.
+- id: c7
+  statement: 'AUC protocol: on the synthetic examples both algorithms are trained on 2000 points and then 200 anomalous points are added and scored; AUROC and AUPRC are also reported on five real benchmark
+    datasets (Cardio, ForestCover, Ionosphere, Mammography, Satellite). The only comparison is EIF vs the standard Isolation Forest; no number of trees, sub-sample size, train/test split or number of repeats
+    for the benchmark runs was found in the text (searched for sub-sample, trees, split, repeat, runs, contamination).'
+  location: Section 4 (AUC Comparison)
+  page: 10
+  quote: In order to obtain the AUC values for the example datasets, we ﬁrst train both algorithms on 2000 data points in each case distributed as seen previously.
+- id: c8
+  statement: On the real benchmarks the authors report improved AUC for EIF but note the improvement may seem modest in some cases and appreciable in others, because the axis-parallel limitation affects
+    some datasets more than others.
+  location: Section 4 (AUC Comparison)
+  page: 10
+  quote: Naturally, the axis-parallel limitation has more eﬀects on some datasets than other.
+- id: c9
+  statement: 'Cost: in convergence plots of the score versus forest size (2-D, 3-D and 4-D blobs), the scores settle quickly and the authors find no appreciable difference in convergence rate between the
+    standard Isolation Forest and EIF at any extension level, concluding that the number of trees should be the same and that EIF does not sacrifice computational efficiency. No wall-clock timing table
+    was found in the body (the abstract''s statement on computation time is supported by the convergence plots).'
+  location: Convergence of Anomaly Scores
+  page: 11
+  quote: Moreover we ﬁnd no appreciable diﬀerence between the standard Isolation Forest and the Extended Isolation Forest, including all the extension levels.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliation: University of Illinois at Urbana-Champaign / NCSA. The PDF says ''Manuscript received April 10,
+    2018'' and states no venue, so no venue is recorded (Deep Isolation Forest, arxiv-2206.06602, cites it as IEEE Trans. Knowl. Data Eng. vol. 33, but that is not confirmed by this PDF or its arXiv comment).
+    Section numbers 2-5 are confirmed by the outline in the Introduction (''Section 2 provides...'', ''In section 4 we compare...''); subsections are named because the extracted headings carry no numbers.
+    Variance-of-score analyses (concentric circles at 1-3 sigma, sine curve, 3-D and 4-D blobs) are shown as figures only. Python implementation: https://github.com/sahandha/eif. 9 claims: the ghost-cluster
+    claim is kept separately because later work (DIF) uses it as a benchmark of algorithmic bias.'

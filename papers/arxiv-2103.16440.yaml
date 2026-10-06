@@ -1,0 +1,95 @@
+id: arxiv-2103.16440
+title: Neural Transformation Learning for Deep Anomaly Detection Beyond Images
+authors:
+- Chen Qiu
+- Timo Pfrommer
+- Marius Kloft
+- Stephan Mandt
+- Maja Rudolph
+year: 2021
+venue: ICML 2021
+links:
+  arxiv: https://arxiv.org/abs/2103.16440
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-06'
+  pdf_sha256: ae99beb75e6eb19d61cb94475cdb78d621b7e997bc1be2a0b7290281ab54f1af
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  - joint-embedding
+  paradigms:
+  - self-supervised
+proposes:
+- 'NeuTraL AD: K learnable neural transformations and an encoder trained jointly on a deterministic contrastive loss (DCL) that pulls each transformed view towards the original sample''s embedding and pushes
+  views of the same sample apart; the same loss evaluated on a test sample is the anomaly score (no negative samples from other data)'
+claims:
+- id: c1
+  statement: 'Motivation: hand-crafted transformations give excellent image anomaly detectors with transformation-prediction or contrastive losses, but since transformations are not always easy to design
+    for new domains (time series, tabular), the authors study learning them.'
+  location: Section 3.2
+  page: 4
+  quote: Since it is not always easy to design transformations for new application domains, we study their suitability for learning data transformations.
+- id: c2
+  statement: 'Theory: with learnable transformations, the transformation-prediction loss tends to its minimum in a ''constant'' edge case (views not depending on the input) and the SimCLR loss is minimized
+    by the ''identity'' edge case (no diversity); in both cases normal and abnormal inputs incur the same loss. The authors prove that neither edge case minimizes the DCL.'
+  location: Section 3.2
+  page: 5
+  quote: Proposition 3. The edge-cases of Propositions 1 and 2 do not minimize L (DCL, Equation (2)).
+- id: c3
+  statement: 'Scope: the method targets data beyond images; for image data strong self-supervised baselines with hand-crafted transformations exist and the authors do not expect any benefit from NeuTraL
+    AD there (images are not evaluated).'
+  location: Section 4 (Empirical Study)
+  page: 5
+  quote: We do not expect any beneﬁt from using NeuTraL AD there.
+- id: c4
+  statement: 'Setting and model selection: evaluation is one-vs-rest (train on one class, other classes are anomalies) and n-vs-rest, i.e. training on clean normal-class data. A footnote states that 10%
+    of the test set is used as the validation set to allow parameterization selection.'
+  location: Section 4.3 (Implementation Details, footnote)
+  page: 6
+  quote: We use 10% of the test set as the validation set to allow parameterization selection.
+- id: c5
+  statement: 'Baseline configuration: OC-SVM, IF and LOF are run from scikit-learn with default parameters; for DAGMM the number of mixture components (4 to 12) and for GOAD the reduced dimension r of the
+    affine transformations are each set to the best-performing value. The set on which ''best performing'' was judged is not stated (searched for validation, select, tune).'
+  location: Appendix B.2
+  page: 16
+  quote: OC-SVM, IF, and LOF are taken from scikit-learn library with default parameters.
+- id: c6
+  statement: 'Time series (whole-sequence anomaly detection on five UEA datasets selected because supervised classifiers do well on them), one-vs-rest: NeuTraL AD outperforms all shallow baselines in all
+    experiments and the deep baselines in 4 of 5, losing on RS to transformation prediction with hand-crafted transformations; the shallow methods perform well on SAD and CT but worse than deep methods
+    on the other data.'
+  location: Section 4.3 (Anomaly Detection of Time Series)
+  page: 7
+  quote: the shallow methods perform well on SAD and CT, but perform worse than the deep learning based methods on other data.
+- id: c7
+  statement: When the normal class becomes more varied (n-vs-rest), all methods drop; LOF, a k-nearest-neighbor method, beats NeuTraL AD and all baselines on SAD when n > 3, and for n = N - 1 LOF performs
+    better than the deep learning methods on CT and SAD.
+  location: Section 4.3 (Anomaly Detection of Time Series)
+  page: 8
+  quote: The traditional method LOF performs better than deep learning methods on CT and SAD.
+- id: c8
+  statement: 'Tabular protocol (Arrhythmia, Thyroid, KDD, KDDRev): following Zong et al. (2018), models are trained on half of the normal data and tested on the rest of the normal data plus the anomalies,
+    reporting F1 as in prior work. Results for OC-SVM, LOF, DAGMM and GOAD are taken from Bergman & Hoshen (2020) and DROCC results were provided by its authors (a footnote notes their own study used a
+    different setting). How the F1 decision threshold is set was not found in the text (searched for threshold).'
+  location: Section 4.4 (Anomaly Detection of Tabular Data)
+  page: 8
+  quote: We follow the conﬁguration of (Zong et al., 2018) to train all models on half of the normal data, and test on the rest of the normal data as well as the anomalies.
+- id: c9
+  statement: 'Limitations: with K <= 4 transformations performance has larger variance because, without labels, the learned transformations are not guaranteed to be useful for anomaly detection (performance
+    stabilizes for large enough K); transformation-based methods need roughly K times the memory of other deep methods such as Deep SVDD.'
+  location: Section 4.5 (Design Choices for the Transformations)
+  page: 9
+  quote: The transformation based methods (including NeuTraL AD) have roughly K times the memory requirement as other deep learning methods (e.g. Deep SVDD).
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Bosch Center for AI, TU Kaiserslautern, UC Irvine. Venue confirmed by the PDF first page (''Proceedings
+    of the 38th International Conference on Machine Learning, PMLR 139, 2021'') and the arXiv journal_ref. The time-series task is detection of whole anomalous sequences (the authors contrast it with per-time-point
+    detection), so time-series-anomaly-detection (points or segments) was not assigned. Co-author M. Kloft is a co-author of the Deep SVDD baseline (Ruff et al., 2018), from the reference list. Number of
+    runs behind the reported standard deviations not found in the text. Section 3.2 is confirmed by its heading. 9 claims: the test-set-as-validation footnote is kept as a separate claim.'

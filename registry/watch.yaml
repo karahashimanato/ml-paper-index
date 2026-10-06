@@ -69,3 +69,7 @@ themes:
     tags: [uncertainty-estimation, conformal-prediction, post-hoc-calibration, bayesian-deep-learning]
     arxiv_queries:
       - '(abs:"conformal prediction" OR abs:"calibration" OR abs:"uncertainty quantification" OR abs:"predictive uncertainty" OR abs:"deep ensembles") AND (cat:cs.LG OR cat:stat.ML)'
+  - name: 異常検知(古典 vs 深層)
+    tags: [anomaly-detection, classical-outlier-detectors]
+    arxiv_queries:
+      - '(abs:"anomaly detection" OR abs:"outlier detection" OR abs:"novelty detection") AND (abs:benchmark OR abs:tabular OR abs:"isolation forest" OR abs:industrial) AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'

@@ -1,0 +1,93 @@
+id: arxiv-2007.02500
+title: 'Deep Learning for Anomaly Detection: A Review'
+authors:
+- Guansong Pang
+- Chunhua Shen
+- Longbing Cao
+- Anton van den Hengel
+year: 2020
+venue: ACM Computing Surveys
+links:
+  arxiv: https://arxiv.org/abs/2007.02500
+  doi: https://doi.org/10.1145/3439950
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-06'
+  pdf_sha256: ad2a22bd714ac85822caef7b82c9f469455cfa533e01eaa8c9e03ccb1d9eb28c
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  - autoencoders
+  - reconstruction-based-detectors
+  paradigms:
+  - unsupervised
+  - semi-supervised
+  - supervised
+proposes:
+- A taxonomy of deep anomaly detection into three paradigms (deep learning for feature extraction, learning feature representations of normality, end-to-end anomaly score learning) and 11 fine-grained categories,
+  mapped to six detection challenges (CH1-CH6), plus collections of open-source code and 21 datasets with real anomalies
+claims:
+- id: c1
+  statement: The authors argue that deep methods offer end-to-end optimization and representations tailored to anomaly detection, which traditional methods lack, and that although shallow methods exist
+    for complex data (high-dimensional, image, video, graph, heterogeneous sources), they are generally substantially weaker and less adaptive than deep methods (summarized in Table 1). This is an argument
+    in the review, not an empirical comparison carried out in it.
+  location: Section 2.2
+  page: 5
+  quote: Although there are shallow methods for handling those complex data, they are generally substantially weaker and less adaptive than the deep methods.
+- id: c2
+  statement: 'Terminology: methods trained on purely normal training data, which some studies call unsupervised, are referred to in this review as semi-supervised (following [2, 28]); weakly-supervised
+    detection instead assumes partial, inexact or inaccurate anomaly labels.'
+  location: Section 2.2
+  page: 4
+  quote: To avoid unnecessary confusion, following [2, 28], these methods are referred to as semi-supervised methods hereafter.
+- id: c3
+  statement: 'Challenge CH3: fully supervised detection is often impractical because labeled anomalies are costly, and unsupervised methods have no prior knowledge of true anomalies and rely heavily on
+    their assumption about the anomaly distribution; leveraging readily available labeled normal data and some labeled anomalies is therefore suggested.'
+  location: Section 2.2
+  page: 4
+  quote: However, unsupervised methods do not have any prior knowledge of true anomalies.
+- id: c4
+  statement: 'Disadvantages of using deep models only as feature extractors (e.g. pre-trained networks followed by a conventional detector): fully disjoint feature extraction and scoring often give suboptimal
+    anomaly scores, and pre-trained deep models are typically limited to specific types of data; the projection may not preserve enough information for detection.'
+  location: Section 4
+  page: 8
+  quote: Pre-trained deep models are typically limited to specific types of data.
+- id: c5
+  statement: 'No meta-analysis of performance: because the methods are evaluated on diverse datasets, the review does not compare their empirical performance; it observes instead that most methods are unsupervised
+    or semi-supervised, deep-learning tricks (augmentation, dropout, pre-training) are under-explored, and most networks have no more than five layers.'
+  location: Section 7.1
+  page: 27
+  quote: Since these methods are evaluated on diverse datasets, it is difficult to have an universal meta-analysis of their empirical performance.
+- id: c6
+  statement: 'Evaluation datasets: a main obstacle is the lack of real-world datasets with real anomalies; many studies evaluate on datasets converted from classification data, which may fail to reflect
+    performance in real-world applications. The review lists 21 public datasets with real anomalies, restricted to large-scale and/or high-dimensional ones.'
+  location: Section 7.2
+  page: 27
+  quote: This way may fail to reflect the performance of the methods in real-world anomaly detection applications.
+- id: c7
+  statement: Most methods learning representations of normality implicitly assume that the training data is clean (free of anomalies), so large-scale normality learning needs anomaly-free unlabeled data
+    or robustness to contamination.
+  location: Section 8.3
+  page: 30
+  quote: This is because most methods in Sections 5 implicitly assume that the training data is clean and does not contain any noise/anomaly instances.
+- id: c8
+  statement: The review states that most deep anomaly detection methods focus on point anomalies and show substantially better performance than traditional methods, while deep models for conditional/group
+    anomalies are much less explored. No supporting comparison is given in this sentence, and Section 7.1 says a universal meta-analysis is difficult.
+  location: Section 8.4
+  page: 30
+  quote: Most deep anomaly detection methods focus on point anomalies, showing substantially better performance than traditional methods.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Adelaide and University of Technology Sydney. Venue from the PDF (ACM Comput. Surv.,
+    DOI 10.1145/3439950) and the arXiv journal_ref. Survey without its own experiments; claims record its arguments and stated limitations. Section numbers are from the numbered headings in the PDF. Other
+    stated disadvantages (not recorded as claims): autoencoder representations can be biased by outliers in the training data and the reconstruction objective is not designed for anomaly detection (Section
+    5.1.1); deep one-class models may work ineffectively with complex normal-class distributions (Section 5.2.3); ranking models need labeled anomalies and may not generalize to unseen anomalies (Section
+    6.2). Conflict of interest: the first author''s own methods (REPEN [112], deep weakly-supervised detection/PReNet line [114], DevNet [115]) are reviewed, and Section 8.2 cites [113-115, 133] (three
+    of them by Pang et al.) for the statement that deep detectors can learn abnormality beyond the given anomaly examples; CH1 cites [115] for high false positives of unsupervised methods.'

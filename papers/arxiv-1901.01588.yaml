@@ -1,0 +1,81 @@
+id: arxiv-1901.01588
+title: 'PyOD: A Python Toolbox for Scalable Outlier Detection'
+authors:
+- Yue Zhao
+- Zain Nasrullah
+- Zheng Li
+year: 2019
+venue: JMLR
+links:
+  arxiv: https://arxiv.org/abs/1901.01588
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: d6b4a618ec1ee4b2d1cb9dacb887dae418210615d9f4e3aa20fa2f96d826b167
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'PyOD: an open-source Python toolbox with more than 20 outlier detection algorithms (proximity-based, linear models, ensembles, neural networks) and detector combination methods under a single scikit-learn-like
+  API'
+claims:
+- id: c1
+  statement: 'Motivation: Python lacked a dedicated outlier detection toolkit; existing implementations were single-algorithm tools (e.g. PyNomaly) or part of general frameworks such as scikit-learn that
+    do not cater specifically to anomaly detection, while ELKI, RapidMiner (Java) and outliers (R) exist in other languages.'
+  location: Introduction
+  page: 1
+  quote: However, Python, one of the most important languages in machine learning, still lacks a dedicated toolkit for outlier detection.
+- id: c2
+  statement: 'Coverage: more than 20 algorithms, from classical techniques such as local outlier factor to neural network architectures such as autoencoders and adversarial models, plus combination methods
+    for merging detector results and outlier ensembles (version 0.7.0 summarized in Table 1).'
+  location: Introduction
+  page: 2
+  quote: Firstly, it contains more than 20 algorithms which cover both classical techniques such as local outlier factor and recent neural network architectures such as autoencoders or adversarial models.
+- id: c3
+  statement: 'Unified API inspired by scikit-learn: every detector inherits from a base class with fit (train statistics), decision_function (raw outlier scores for unseen data), predict (binary labels)
+    and predict_proba (probability by normalization or unification); fitted training scores and labels are available as attributes.'
+  location: Section 3 (Library Design and Implementation)
+  page: 3
+  quote: fit processes the train data and computes the necessary statistics
+- id: c4
+  statement: 'Scalability: selected algorithms are JIT-compiled with numba and some support multi-core execution via joblib; the toolbox relies on numpy, scipy and scikit-learn, and neural networks additionally
+    require Keras.'
+  location: Section 3 (Library Design and Implementation)
+  page: 3
+  quote: To enhance model scalability, select algorithms (Table 1) are optimized with JIT using numba.
+- id: c5
+  statement: 'Engineering practices: continuous integration on several Python versions and operating systems, PEP8 and CodeClimate checks, refactoring of complex code, and unit tests for 95% overall code
+    coverage.'
+  location: Section 2 (Project Focus)
+  page: 3
+  quote: code blocks with high cognitive complexity are actively refactored and a standard set of unit tests exist to ensure 95% overall code coverage
+- id: c6
+  statement: The helper data generator used in the example creates inliers from a Gaussian distribution and outliers from a uniform distribution (two-dimensional artificial data); the paper's only performance
+    output is this demo, and it reports no benchmark comparison of the detectors.
+  location: Section 3 (Library Design and Implementation)
+  page: 4
+  quote: which generates inliers from a Gaussian distribution and outliers from a uniform distribution
+- id: c7
+  statement: 'Stated future work (current gaps): models for time series and geospatial data, computational efficiency through distributed computing, and engineering issues such as sparse matrices and memory
+    limitations.'
+  location: Section 4 (Conclusion and Future Plans)
+  page: 5
+  quote: As avenues for future work, we plan to enhance the toolbox by implementing models that work well with time series and geospatial data, improving computational eﬃciency through distributed computing
+    and addressing engineering challenges such as handling sparse matrices or memory limitations.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF header (''Journal of Machine Learning Research 20 (2019) 1-7'') and the arXiv journal_ref;
+    the PDF states CC-BY 4.0. Library paper without experiments: no benchmark of the included detectors (the documentation is said to contain algorithm benchmarks, not part of the paper). Table 1 includes
+    the first author''s own methods XGBOD (Zhao and Hryniewicki, 2018b) and LSCP (Zhao et al., 2019). Relation to ADBench (arxiv-2206.09426): Yue Zhao is an author of both; ADBench calls PyOD ''our early
+    work'' and takes most unsupervised algorithms from it, and ADBench criticizes fully synthetic anomaly generation ''such as PyOD'' for failing to create complex anomalies. The paper says PyOD has been
+    used in academic and commercial projects (self-reported usage statistics not recorded).'

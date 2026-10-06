@@ -1,0 +1,103 @@
+id: arxiv-2106.08265
+title: Towards Total Recall in Industrial Anomaly Detection
+authors:
+- Karsten Roth
+- Latha Pemula
+- Joaquin Zepeda
+- Bernhard Schölkopf
+- Thomas Brox
+- Peter Gehler
+year: 2021
+venue: CVPR 2022
+links:
+  arxiv: https://arxiv.org/abs/2106.08265
+  code: https://github.com/amazon-research/patchcore-inspection
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 371ef2388859aa2a102442c37f55cc6f4a87350ae83036b3174ea0726c3ccddd
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  - classical-outlier-detectors
+  paradigms:
+  - unsupervised
+proposes:
+- 'PatchCore: a memory bank of locally aware (neighbourhood-averaged) mid-level patch features from an ImageNet-pretrained network (default WideResNet50, blocks 2 and 3), reduced by greedy minimax-facility-location
+  coreset subsampling; the image score is the largest nearest-neighbour distance of any test patch to the memory bank (with a re-weighting by the neighbourhood of the matched memory feature), and the patch
+  scores form the segmentation map'
+claims:
+- id: c1
+  statement: 'Setting (cold-start, also called one-class classification): the model is fit using nominal (non-defective) example images only; the authors motivate it by industrial scenarios where normal
+    imagery is easy to acquire but expected defect variations are costly and complicated to specify in full.'
+  location: Introduction
+  page: 1
+  quote: It arises in many industrial scenarios where it is easy to acquire imagery of normal examples but costly and complicated to specify the expected defect variations in full.
+- id: c2
+  statement: 'Assumption about pretrained features: the last (deepest) feature level used by prior work loses localized nominal information and is biased towards natural image classification, which the
+    authors say has only little overlap with cold-start industrial anomaly detection; PatchCore therefore uses intermediate (mid-level) features with local neighbourhood aggregation to enlarge the receptive
+    field without losing spatial resolution.'
+  location: Section 3.1
+  page: 3
+  quote: Secondly, very deep and abstract features in ImageNet pretrained networks are biased towards the task of natural image classiﬁcation, which has only little overlap with the cold-start industrial
+    anomaly detection task and the evaluated data at hand.
+- id: c3
+  statement: 'Memory cost: the memory bank grows with the number of nominal images, making inference time and storage large; random subsampling would lose information about the coverage of nominal features,
+    so a greedy coreset approximation (with random linear projections to speed up selection) is used, which the authors find reduces inference time while retaining performance.'
+  location: Section 3.2
+  page: 4
+  quote: In this work we use a coreset subsampling mechanism to reduce M, which we ﬁnd reduces inference time while retaining performance.
+- id: c4
+  statement: 'Protocol: MVTec AD (15 sub-datasets, nominal-only training data, test sets with nominal and anomalous samples plus ground-truth masks), images resized to 256 and center-cropped to 224 as in
+    prior work, and no data augmentation; metrics are class-averaged image-level AUROC, pixel-wise AUROC and PRO. MTD (20% of defect-free images held out for testing, following prior work) and mSTC are
+    also used.'
+  location: Section 4.1
+  page: 5
+  quote: No data augmentation is applied, as this requires prior knowledge about class-retaining augmentations.
+- id: c5
+  statement: 'Inference cost: times are compared against the authors'' reimplementations of SPADE and PaDiM (WideResNet50, GPU where possible), including the backbone forward pass; PatchCore without subsampling
+    is faster than SPADE, coreset subsampling makes it faster than PaDiM, and approximate nearest-neighbour search (IVFPQ) on the full memory bank causes a performance drop, especially at image level.'
+  location: Section 4.3
+  page: 6
+  quote: With coreset subsampling, Patchcore can be made even faster, with lower inference times than even PaDiM while retaining state-of-the-art image-level anomaly detection and segmentation performance.
+- id: c6
+  statement: 'Hyperparameter choice: the neighbourhood size p = 3 and the feature hierarchy 2+3 (the default) are motivated by the ablation in Figure 4, which shows detection performance on MVTec AD over
+    neighbourhood sizes and hierarchy levels; no separate validation split for this choice was found in the text (searched for validation, tuning, held out). The supplementary also suggests image resolution
+    as something to validate over when localization matters.'
+  location: Section 4.4
+  page: 7
+  quote: Results in the top half of Figure 4 show a clear optimum between locality and global context for patch-based anomaly predictions, thus motivating the neighbourhood size p = 3.
+- id: c7
+  statement: On mSTC (pedestrian videos), which the authors describe as much closer to ImageNet natural images, deeper feature maps (hierarchy levels 3 and 4) are used, with no other hyperparameter tuning;
+    the authors say the results suggest good transferability to such domains.
+  location: Section 4.6
+  page: 8
+  quote: As the detection context is much closer to natural image data available in ImageNet, we make use of deeper network feature maps at hierarchy levels 3 and 4, but otherwise do not perform any hyperparameter
+    tuning for PatchCore.
+- id: c8
+  statement: 'Threshold: AUROC is threshold-free; the reported misclassification counts use an F1-optimal threshold (working point), computed only for PatchCore because the authors did not have individual
+    anomaly scores for competing methods. The remaining false positives are attributed mostly to labelling ambiguity and very high nominal variance.'
+  location: Appendix C.4
+  page: 12
+  quote: We compute the working point (threshold above which scores are considered anomalous) using the F1-optimal point.
+- id: c9
+  statement: 'Stated limitation: applicability is generally limited by the transferability of the pretrained features; the authors suggest combining PatchCore with adaptation of the features and leave this
+    to future work.'
+  location: Section 5 (Conclusion), Limitations
+  page: 8
+  quote: While PatchCore shows high effectiveness for industrial anomaly detection without the need to specifically adapt to the problem domain at hand, applicability is generally limited by the transferability
+    of the pretrained features leveraged.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Tübingen (first author, work done during a research internship at Amazon AWS) and
+    Amazon AWS (all other authors); code released under github.com/amazon-research. Venue from the arXiv comment ''Accepted to CVPR 2022''. The segmentation map is smoothed with a Gaussian of kernel width
+    sigma = 4, which the authors state they did not optimize (Section 3.3). The F1-optimal threshold is set on the test scores themselves (it defines a working point for counting errors, not a deployable
+    threshold). Low-shot and inference-time comparisons use the authors'' reimplementations of SPADE and PaDiM with WideResNet50. The ''unsupervised'' paradigm tag is used for the one-class (nominal-only
+    training) setting; no one-class tag exists. Section numbers are confirmed by headings in the PDF.'

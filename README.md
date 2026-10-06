@@ -75,8 +75,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 拡散モデル | 論文カード21本+既存4本(DDPM・スコアベース・SDE、尤度とサンプルの質、VAE とのつながり、サンプリングの高速化と蒸留、ガイダンス、潜在拡散、FID の問題、学習データの記憶と複製)、記事 [articles/methods/diffusion-models.md](articles/methods/diffusion-models.md) |
 | 対照学習・自己教師あり表現学習 | 論文カード22本(対照学習と負例の集め方、負例を使わない方法と崩壊の防止、マスク予測、理論の仮定、線形評価の頑健性と転移の再検証)、記事 [articles/methods/self-supervised-representation-learning.md](articles/methods/self-supervised-representation-learning.md) |
 | 不確実性の推定と較正 | 論文カード17本+既存7本(データとモデルの不確実性、MC dropout とアンサンブル、cold posterior、較正の再検証と ECE の測り方、温度スケーリングの先、conformal prediction の保証と分布の変化)、記事 [articles/topics/uncertainty-and-calibration.md](articles/topics/uncertainty-and-calibration.md) |
+| 異常検知(古典 vs 深層) | 論文カード15本+既存8本(設定の違い、大規模ベンチマーク、孤立型、自己教師ありの変換型、1クラス・半教師あり・補助の外れ値、事前学習の特徴を使う画像の手法、閾値と評価の落とし穴)、記事 [articles/topics/anomaly-detection-classical-vs-deep.md](articles/topics/anomaly-detection-classical-vs-deep.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では402本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では417本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -99,6 +100,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [アルゴリズム設計技法と機械学習 — 分割統治・動的計画・分枝限定・局所探索](articles/topics/design-techniques-and-ml.md)
 - [予測モデルのフォールバックとモデル選択 — 運用でモデルを切り替える仕組み](articles/topics/model-fallback-and-selection.md)
 - [不確実性の推定と較正 — ベイズ近似、較正の測り方、conformal prediction の保証の範囲](articles/topics/uncertainty-and-calibration.md)
+- [異常検知 — 古典的な手法と深層学習、設定の違いと評価の落とし穴](articles/topics/anomaly-detection-classical-vs-deep.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

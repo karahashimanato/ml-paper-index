@@ -212,5 +212,7 @@ paradigms:
     description: Applied to an already trained model without changing it.
   - id: reinforcement-learning
     description: Reinforcement learning.
+  - id: semi-supervised
+    description: "Learning from mostly unlabeled data plus a small amount of labeled data (e.g. a few labeled anomalies), or with auxiliary labeled examples such as outlier exposure."
   - id: meta-learning
     description: Learning from experience on previous tasks or datasets how to select or adapt models.

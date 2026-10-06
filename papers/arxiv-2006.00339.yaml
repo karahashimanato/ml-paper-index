@@ -1,0 +1,105 @@
+id: arxiv-2006.00339
+title: Rethinking Assumptions in Deep Anomaly Detection
+authors:
+- Lukas Ruff
+- Robert A. Vandermeulen
+- Billy Joe Franks
+- Klaus-Robert Müller
+- Marius Kloft
+year: 2020
+venue: ICML 2021 Workshop on Uncertainty and Robustness in Deep Learning
+links:
+  arxiv: https://arxiv.org/abs/2006.00339
+  code: https://github.com/lukasruff/Classification-AD
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 6d5b67baacce2e76a14eebb647f2dc00f9a2306cf1930b876572eb2e91b1dcd7
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  paradigms:
+  - unsupervised
+  - semi-supervised
+proposes:
+- 'Hypersphere classification (HSC): a cross-entropy objective with a radial-basis output l(z) = exp(-h(z)) (pseudo-Huber h) that concentrates nominal data and pushes outlier-exposure samples away; recovers
+  Deep SVDD with c = 0 when there are no anomalies'
+- An empirical comparison of unsupervised, unsupervised-OE and supervised-OE (plain binary classifier against auxiliary outliers) approaches on the one-vs-rest image AD benchmarks, varying OE set size,
+  OE diversity and blurring of OE images
+claims:
+- id: c1
+  statement: 'Terminology: the paper delineates unsupervised AD (trained on mostly nominal data), unsupervised OE (unsupervised methods adapted to incorporate auxiliary non-nominal data; elsewhere called
+    semi-supervised AD) and supervised OE (a standard classifier discerning nominal data from an auxiliary non-nominal dataset).'
+  location: Section 1 (Introduction)
+  page: 1
+  quote: 'Unsupervised OE: Adaptations of unsupervised methods that incorporate auxiliary data that is not nominal.'
+- id: c2
+  statement: 'Main finding: using the same experimental OE setup as Hendrycks et al. (2019b), a standard classifier is able to outperform the authors'' listed state-of-the-art AD methods on the one-vs-rest
+    benchmarks on MNIST and CIFAR-10.'
+  location: Section 1 (Introduction)
+  page: 2
+  quote: We ﬁnd that, using the same experimental OE setup as Hendrycks et al. (2019b), a standard classiﬁer is able to outperform current state-of-the-art AD methods on the one vs. rest AD benchmarks on
+    MNIST and CIFAR-10.
+- id: c3
+  statement: 'Few OE samples suffice: with 128 OE samples a classifier is competitive with state-of-the-art unsupervised methods on CIFAR-10 one-vs-rest, and with only 64 OE samples a classifier outperforms
+    unsupervised methods (with or without OE) on the ImageNet one-vs-rest benchmark of Hendrycks et al. (2019b). The authors say this seems to contradict the common wisdom that anomalies are unconcentrated
+    and hard to characterize with data.'
+  location: Section 1 (Introduction)
+  page: 2
+  quote: With only 64 OE samples a classiﬁer outperforms unsupervised methods (with or without OE) on the ImageNet one vs. rest benchmark (Hendrycks et al., 2019b).
+- id: c4
+  statement: 'Benchmark critique: the one-vs-rest benchmark (one class nominal, the remaining classes anomalous at test time) on these datasets is, according to the authors, used as a litmus test in virtually
+    all deep AD papers published at top-tier venues.'
+  location: Section 1 (Introduction)
+  page: 2
+  quote: This benchmark applied to the aforementioned datasets is used as a litmus test in virtually all deep AD papers published at top-tier venues
+- id: c5
+  statement: 'OE data assumption: the nominal and OE training data are exactly those used by Hendrycks et al. (2019b) and contain no representatives of the ground-truth anomaly classes (EMNIST-Letters for
+    MNIST, 80 Million Tiny Images without CIFAR-10/100 for CIFAR-10, ImageNet-22K without ImageNet-1K for 30 ImageNet-1K classes); the OE data is not tailored to the test anomalies. Drawing OE samples from
+    just one class (not present as anomaly at test time) already gave good performance on CIFAR-10 (Appendix B).'
+  location: Section 1 (Introduction)
+  page: 2
+  quote: The OE data is not tailored to be representative of the anomalies used at test time.
+- id: c6
+  statement: Deep SAD (Ruff et al., 2020, by overlapping authors) is classed as an unsupervised OE approach; the authors' HSC modification is reported to significantly improve on Deep SAD and is used as
+    the representative unsupervised OE method.
+  location: Section 2 (Deep One-Class Classification)
+  page: 2
+  quote: We found this modiﬁcation to signiﬁcantly improve upon the performance of Deep SAD and use it in our experiments as a representative of the unsupervised OE approach to AD.
+- id: c7
+  statement: 'Multiscale hypothesis: increasingly blurring OE images (removing small-scale features) quickly drops performance on ImageNet and CIFAR-10, and with sufficient blurring HSC performs better
+    than BCE; on MNIST HSC outperforms BCE at any degree of blurring. The authors take this to suggest two regimes: on high-dimensional multiscale images OE samples are highly informative and standard and
+    hypersphere classification perform similarly well, while on low-dimensional images like MNIST hypersphere classification performs better, reflecting the classic intuition that AD requires a compact
+    model.'
+  location: Section 3.3
+  page: 4
+  quote: This suggests that their are two regimes in deep image AD
+- id: c8
+  statement: 'Protocol: all of the authors'' implementations (HSC, Deep SAD, Focal, BCE) use the same network per setting (LeNet-style for MNIST/CIFAR-10, the WideResNet of Hendrycks et al. (2019b) for
+    ImageNet), Adam with fixed epoch counts and learning-rate milestones, batches balanced to 128 nominal and 128 OE samples, and data augmentation; Focal gamma = 2 as recommended by Lin et al. (2017).
+    Evaluation is mean AUC over classes and seeds; no threshold is chosen. No description of how these hyperparameters were selected or of a validation set was found in the text (searched for valid, tun,
+    select, hyperparam, grid, search).'
+  location: Appendix F
+  page: 10
+  quote: We always use the same underlying network φθ in each experimental setting for our HSC, Deep SAD, Focal, and BCE implementations to control architectural effects.
+- id: c9
+  statement: 'Scope caveat: the authors do not claim that supervised OE is the solution to AD in general or that unsupervised OE has no utility, but suggest it may be time to move to more challenging benchmarks
+    such as MVTec-AD.'
+  location: Section 4 (Conclusion)
+  page: 4
+  quote: that it may be time for the community to move to more challenging benchmarks (e.g., MVTec-AD (Bergmann et al., 2019)) to gauge the signiﬁcance of deep AD works.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Aignostics (work mostly done at TU Berlin), TU Berlin, TU Kaiserslautern, Korea University, MPII;
+    Ruff and Vandermeulen contributed equally. Venue from the PDF first page (''Presented at the ICML 2021 Workshop on Uncertainty and Robustness in Deep Learning.'') and the arXiv comment; a workshop presentation.
+    Conflict of interest / self-citation: Deep SVDD and Deep SAD (arxiv-1906.02694) are by overlapping authors and are among the evaluated methods; Ruff et al. also wrote the review arxiv-2009.11732. Results
+    marked * (DSVDD*, GT+*, Focal*, etc.) are taken from the literature rather than re-run; the authors say they are unsure why Focal* from Hendrycks et al. (2019b) is so poor since that code is not public,
+    and found Focal insensitive to gamma (Appendix E). Seed counts differ between the Table 2 caption (30 classes and 10 seeds) and the Figure 2(b)/3 captions (30 classes x 5 seeds) for ImageNet. OE-size,
+    OE-diversity and blurring results are figures only. If fewer OE samples than the OE batch size (128), sampling is with replacement and augmentation adds variety. Results not recorded.'

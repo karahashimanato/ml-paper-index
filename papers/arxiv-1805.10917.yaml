@@ -1,0 +1,97 @@
+id: arxiv-1805.10917
+title: Deep Anomaly Detection Using Geometric Transformations
+authors:
+- Izhak Golan
+- Ran El-Yaniv
+year: 2018
+venue: NeurIPS 2018
+links:
+  arxiv: https://arxiv.org/abs/1805.10917
+  code: https://github.com/izikgo/AnomalyDetectionTransformations
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 1dad6c94d3912202363360042a1b59694d4e1c5957923fa9682861f691036641
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'GEOM: train a multi-class classifier (WRN) to predict which of 72 geometric transformations (compositions of horizontal flip, translations and rotations) was applied to normal training images; at test
+  time apply all transformations and score normality with the combined log-likelihood of the softmax outputs under per-transformation Dirichlet distributions fitted on the training images (or a simplified
+  mean-softmax score)'
+claims:
+- id: c1
+  statement: 'Setting: only a sample of normal images is given (no contamination, no labeled anomalies); the authors note that the positive-and-unlabeled variant with a contaminated unlabeled sample is
+    easier (citing Blanchard et al.) and focus on the basic, harder version for vision, where deep models are essential.'
+  location: Introduction
+  page: 1
+  quote: In the present paper, we focus on the basic (and harder) version of anomaly detection, and consider only machine vision applications for which deep models (e.g., convolutional neural networks)
+    are essential.
+- id: c2
+  statement: 'Normality score: the combined log-likelihood of the softmax responses on each transformed image, under a naive (typically incorrect) assumption that the per-transformation conditional distributions
+    are independent, each approximated by a Dirichlet whose parameters are estimated from the training set S; the authors note an independent image set for that estimation may improve performance, and a
+    simplified mean-softmax score was only slightly worse.'
+  location: Section 4.2 (Dirichlet Normality Score)
+  page: 4
+  quote: under a naïve (typically incorrect) assumption that all of these conditional distributions are independent
+- id: c3
+  statement: 'Threshold and metric: the paper learns only the scoring function and completely ignores the choice of anomaly threshold, measuring performance with AUROC computed from the ground-truth test
+    labels (AUPR in the supplementary material). Protocol: one-vs-all on CIFAR-10, CIFAR-100 (20 superclasses), Fashion-MNIST and CatsVsDogs, training only on the normal class''s training images.'
+  location: Experimental Protocol
+  page: 6
+  quote: As stated in Section 3, we completely ignore the problem of choosing the appropriate anomaly threshold (λ) on the normality score, and quantify performance using the area under the ROC curve metric,
+    which is commonly utilized as a performance measure for anomaly detection models.
+- id: c4
+  statement: 'Hyperparameters: WRN depth/width (10, 4 for 32x32 data; 16, 8 for CatsVsDogs) were selected before any experiment and fixed for all runs; Adam with default hyperparameters, batch 128, ceil(200/|T|)
+    epochs on the self-labeled set. A footnote says 16, 8 improved CIFAR-10 results but smaller values were chosen for computational cost.'
+  location: Hyperparameters and Optimization Methods
+  page: 6
+  quote: These hyperparameters were selected prior to conducting any experiment, and were ﬁxed for all runs.
+- id: c5
+  statement: 'Baseline advantage: OC-SVM (raw pixels and on convolutional-autoencoder codes) gets an unfair advantage by choosing nu and gamma in hindsight to maximize AUROC over a grid, i.e. the tuning
+    was given a two-class problem; the authors note methods exist to tune without hindsight and are likely to degrade OC-SVM. One-Class Deep SVDD (E2E) results on CIFAR-10 are copied from its paper; OC-SVM
+    and ADGAN were run once, the others over five runs.'
+  location: Baseline Methods
+  page: 5
+  quote: Note that the hyperparameter optimization procedure has been provided with a two-class classiﬁcation problem.
+- id: c6
+  statement: 'Classical vs deep by image size: the relative advantage is most prominent on larger images; on CatsVsDogs (64x64) all baselines, including the hindsight-tuned OC-SVM variants, are only slightly
+    better than random guessing, whereas on smaller images the baselines can perform much better; on Fashion-MNIST all methods except DAGMM performed very well.'
+  location: Results
+  page: 7
+  quote: Our relative advantage is most prominent when focusing on the larger images.
+- id: c7
+  statement: 'Failure mode: on CIFAR-100 superclasses the method was challenged by the diversity inside the normal class and did not perform well on a few normal classes (e.g. non-insect invertebrates,
+    insects, household electrical devices).'
+  location: Results
+  page: 7
+  quote: Inspecting the results on CIFAR-100 (where 20 super-classes deﬁned the partition), we observe that our method was challenged by the diversity inside the normal class.
+- id: c8
+  statement: 'Choice of transformations: only geometric transformations are used; non-geometric ones (Gaussian blur, sharpening, gamma correction) degraded performance in early stages and were abandoned.
+    The authors hypothesize this is because they can eliminate important features, and speculate that effectiveness depends on preserving spatial information and on the classifier being able to predict
+    the applied transformation.'
+  location: Section 6
+  page: 7
+  quote: In the earlier stages of this work, we tried a few non-geometric transformations (e.g., Gaussian blur, sharpening, gamma correction), which degraded performance and we abandoned them altogether.
+- id: c9
+  statement: 'Invariance failure mode (MNIST, two transformations): with normal digit ''8'' and anomaly ''3'' using identity and horizontal flip, the method did not perform well (AUROC 0.646), which the
+    authors attribute to the invariance of ''8'' to horizontal flip; with normal ''3'' vs anomaly ''8'' it achieved 0.957, and with ''8'' vs ''3'' using a 7-pixel translation 0.919.'
+  location: Section 6
+  page: 8
+  quote: It can be expected that due to the invariance of ‘8’ to horizontal ﬂip, the classiﬁer will have difﬁculties learning distinguishing features.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Technion. Venue from the PDF footer (''32nd Conference on Neural Information Processing Systems
+    (NIPS 2018), Montréal, Canada.''); recorded as NeurIPS 2018 following the repository convention. The paper calls its training set ''self-labeled'' rather than ''self-supervised''; the self-supervised
+    paradigm tag is applied by analogy (arxiv-2006.00339 describes it as self-supervision). Novelty setting: clean normal training data only. Also reports OOD detection in labeled multi-class data (CIFAR-10
+    vs resized Tiny ImageNet) with a two-headed WRN using the simplified score, compared to ODIN numbers. DSEBM and DAGMM were run with deeper architectures than in their original papers. Section 3 (Problem
+    Statement) confirmed by ''As stated in Section 3''; Section 4.2 by ''as described in section 4.2''; Section 6 by ''see also Section 6 discussing the intuition''. Results table not recorded.'

@@ -1,0 +1,100 @@
+id: arxiv-2305.00735
+title: 'Unsupervised anomaly detection algorithms on real-world data: how many do we need?'
+authors:
+- Roel Bouman
+- Zaharah Bukhsh
+- Tom Heskes
+year: 2023
+venue: JMLR
+links:
+  arxiv: https://arxiv.org/abs/2305.00735
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-06'
+  pdf_sha256: b0dfbd36c8d5e103517acb6d591ee06270a6ad19d5367bac171e7efa75950563
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - deep-learning
+  - autoencoders
+  paradigms:
+  - unsupervised
+proposes:
+- A comparison of 32 unsupervised anomaly detection algorithms on 52 real-world multivariate tabular datasets without hyperparameter optimization (ROC AUC averaged over a range of sensible hyperparameters),
+  with Nemenyi post-hoc tests and a two-way clustering that separates 'local' and 'global' datasets
+claims:
+- id: c1
+  statement: 'No hyperparameter optimization: each algorithm is run with several sensible hyperparameter settings per dataset and the ROC-AUC is averaged over them; hyperparameters are not optimized (e.g.
+    by cross-validation) to reflect that no labels are available in practice.'
+  location: Section 3 (Materials and Methods)
+  page: 6
+  quote: We refrain from optimizing hyperparameters, e.g., using cross-validation, to reﬂect the real-world situation in which no labels are available for training the models.
+- id: c2
+  statement: 'Implementations: 27 of the 32 methods are used as implemented in PyOD, and as part of this research the authors contributed to PyOD (a memory-efficient COF and the Birgé-Rozenholc histogram
+    size selection used in HBOS and LODA); EIF uses the authors'' ''eif'' package, ODIN is implemented by the authors, and DeepSVDD uses Lukas Ruff''s public code modified for general tabular datasets.'
+  location: Section 3.1
+  page: 6
+  quote: As part of this research, we made several contributions to this open source library
+- id: c3
+  statement: 'Evaluation: anomaly scores are computed on all available data at once, without cross-validation or train-test splits, and compared with the ground-truth labels by ROC AUC; R-precision, average
+    precision and their chance-adjusted variants were considered but found less stable and harder to interpret. Differences are tested with the Iman-Davenport statistic and the Nemenyi post-hoc test.'
+  location: Section 3.3
+  page: 10
+  quote: For each dataset, we calculate anomaly scores on all available data at once, without using any cross-validation or train-test splits.
+- id: c4
+  statement: 'Dataset handling: duplicates are removed and variables are centered by the median and scaled by the interquartile range; three datasets on which nearly every algorithm had AUC between 0.4
+    and 0.6 were excluded, and for two datasets (skin, vertebral) where the more heterogeneous group had been chosen as the normal class, labels were inverted and AUC recalculated.'
+  location: Section 4.1
+  page: 10
+  quote: These datasets, the ‘hrss anomalous standard’, ‘wpbc’ and ‘yeast’ dataset, were therefore excluded from further analysis.
+- id: c5
+  statement: 'Overall: kth-NN significantly outperforms 14/15 algorithms at p = 0.05/0.10, and Isolation Forest and its extended version show similarly consistent performance; since their cost scales linearly
+    with the number of samples, this may give them a clear edge over kNN-type methods on large datasets. The original CBLOF is by far the worst.'
+  location: Section 4.1
+  page: 13
+  quote: Since the computational complexity of Isolation Forest and variants thereof scales linearly with the number of samples n, this may give them a clear edge over methods such as kNN and derivatives
+    for large datasets
+- id: c6
+  statement: 'Neural networks: many of them do not perform well ((soft-boundary) DeepSVDD, ALAD and SO-GAAL are in the lower segment). The authors surmise two reasons: they were not designed for tabular
+    data and cannot leverage the feature extraction that helps them in computer vision, and they are complex, making general hyperparameters and architectures hard to specify. The autoencoder and its variants
+    and LUNAR perform about average, likely due to more straightforward optimisation criteria.'
+  location: Section 4.1
+  page: 13
+  quote: From these overall results it is clear that many of the neural networks do not perform well.
+- id: c7
+  statement: 'Local vs global: clustering the results splits the datasets into roughly a quarter ''local'' and three quarters ''global'' problems. Local methods (COF, ensemble-LOF, LOF) are among the worst
+    overall but among the best on the local datasets, which the authors call an example of Simpson''s paradox and a partial explanation of the difference from Campos et al. (2016). On local datasets kNN
+    and ABOD are the top performers; on global datasets the Extended Isolation Forest has the highest mean, closely followed by Isolation Forest.'
+  location: Section 4.3
+  page: 15
+  quote: This phenomenon is a ﬁne example of Simpson’s paradox (Simpson, 1951).
+- id: c8
+  statement: 'Conclusion: the authors are ''tempted'' to answer ''three'': k-thNN, kNN and EIF seem sufficient for the type of multivariate datasets in the study (k-thNN without prior knowledge of anomaly
+    type, kNN for local, EIF/IF for global, with IF/EIF having the lowest computational complexity). The conclusion is stated as open to revision when other algorithms or datasets are added; raw images,
+    texts and time series are left to future work.'
+  location: Section 6 (Conclusion)
+  page: 21
+  quote: a toolbox with k-thNN, kNN, and EIF seems suﬃcient to perform well on the type of multivariate datasets considered in our study
+- id: c9
+  statement: 'Caveat: the authors are aware that the local/global characterization may be an oversimplification with more datasets and algorithms; local and global problems likely overlap with, but need
+    not equal, multimodal and unimodal problems, and further theoretical and simulation studies are needed.'
+  location: Section 5 (Discussion)
+  page: 20
+  quote: However, we are well aware that this characterization may turn out to be an
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Radboud University and Eindhoven University of Technology. Venue from the arXiv journal_ref given
+    by the caller (the v1 PDF shows only ''©2023 Bouman, Bukhsh, and Heskes. License: CC-BY 4.0'', no journal header). Same first author as arxiv-2501.13864. Purely unsupervised (transductive) evaluation
+    on real anomalies; no synthetic datasets. Hyperparameter grids per method in Table 1 (e.g. IF 1000 trees with 128-1024 samples; kNN/LOF k = 5..30; AE/VAE/DeepSVDD 1-3 layers with shrinkage factors).
+    The text gives two different significance levels for kNN on local datasets: Section 4.3 says kNN and ABOD ''significantly outperform 16 other methods at p = 0.05'', while the Conclusion says kNN ''outperforms
+    16 out of 32 methods at p = 0.10''. The paper describes ADBench (Han et al., 2022) as subsampling to 10,000 samples and generating anomalies synthetically; ADBench''s own main text was not found to
+    state the subsampling, and it evaluates real anomalies on its 47 datasets with synthetic anomalies only in the anomaly-type experiments (not verified further). Conflict of interest: the authors contributed
+    code to PyOD (the library of 27 of the 32 implementations) and implemented ODIN themselves; they are not authors of the benchmarked methods as far as the text shows. Ensembles (meta-techniques) were
+    deliberately not covered. Results tables not recorded.'

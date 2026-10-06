@@ -1,0 +1,110 @@
+id: arxiv-1906.02694
+title: Deep Semi-Supervised Anomaly Detection
+authors:
+- Lukas Ruff
+- Robert A. Vandermeulen
+- Nico Görnitz
+- Alexander Binder
+- Emmanuel Müller
+- Klaus-Robert Müller
+- Marius Kloft
+year: 2019
+venue: ICLR 2020
+links:
+  arxiv: https://arxiv.org/abs/1906.02694
+  code: https://github.com/lukasruff/Deep-SAD-PyTorch
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 5a573733307628cb6ca72d4aca66999ed39e0bfb682739d88bdc0d762d3f1b18
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  - autoencoders
+  paradigms:
+  - unsupervised
+  - semi-supervised
+  - supervised
+proposes:
+- 'Deep SAD: a generalization of Deep SVDD to general semi-supervised anomaly detection; unlabeled and labeled normal samples are pulled towards a fixed center c in output space, labeled anomalies are pushed
+  away via an inverse squared-distance loss weighted by eta; the anomaly score is the distance to c'
+- An information-theoretic interpretation of deep anomaly detection (Infomax with a regularizer asking for low entropy of the latent distribution of normal data and high entropy for anomalies)
+- Experimental scenarios for general semi-supervised AD (labeled-anomaly ratio, pollution ratio, number of known anomaly classes) and a hybrid SSAD baseline on autoencoder codes
+claims:
+- id: c1
+  statement: 'Setting: in addition to n unlabeled samples (mostly normal but possibly containing anomalous contamination), one may have m labeled samples verified as normal or anomalous, e.g. hand labeled
+    by a domain expert; the authors call this semi-supervised AD and note that most existing ''semi-supervised'' AD methods only use labeled normal samples (i.e. learning from positive and unlabeled examples).'
+  location: Introduction
+  page: 2
+  quote: Unlike the standard unsupervised AD setting, in many real-world applications one may also have access to some veriﬁed (i.e., labeled) normal or anomalous samples in addition to the unlabeled data.
+- id: c2
+  statement: 'Why not plain (semi-)supervised classification: semi-supervised classifiers typically make the cluster assumption (similar points are likely of the same class), which according to the authors
+    only holds for the normal class in AD, not for the anomaly class, since anomalies are not necessarily similar to one another.'
+  location: Introduction
+  page: 2
+  quote: only holds for the “normal class” in AD, but is crucially invalid for the “anomaly class” since anomalies are not necessarily similar to one another.
+- id: c3
+  statement: 'Deep SVDD (Ruff et al., 2018, by overlapping authors), the unsupervised special case: a network is trained to minimize the mean squared distance of mapped training samples to a center c plus
+    weight decay; following Ruff et al. (2018), the network is initialized from a pre-trained autoencoder''s encoder and c is set to the mean of the network outputs from an initial forward pass; the anomaly
+    score is the distance to c.'
+  location: Section 3.1
+  page: 4
+  quote: For initialization, Ruff et al. (2018) ﬁrst pre-train an autoencoder and then initialize the weights W of the network φ with the converged weights of the encoder.
+- id: c4
+  statement: 'Architecture constraint adopted from Ruff et al. (2018) to prevent ''hypersphere collapse'' (the network mapping everything to c): the network must have no bias terms and no bounded activation
+    functions; c is fixed rather than optimized, since a free c would allow the trivial collapse in the fully unlabeled setting. With sufficiently many labeled anomalies, collapse is not a problem for Deep
+    SAD.'
+  location: Appendix C
+  page: 17
+  quote: Most importantly, network φ must have no bias terms and no bounded activation functions.
+- id: c5
+  statement: Deep SAD keeps the Deep SVDD loss on unlabeled data and therefore incorporates the assumption that most unlabeled data is normal (recovering Deep SVDD when m = 0); labeled normal samples get
+    a quadratic loss to c and labeled anomalies an inverse squared-distance loss, weighted by eta. The authors found that simply setting eta = 1 yields a consistent and substantial improvement; other anomaly
+    losses (negative squared norm, robust losses, hinge) diverged, needed hard-to-select scale parameters, or performed worse.
+  location: Deep SAD
+  page: 5
+  quote: In doing this we also incorporate the assumption that most of the unlabeled data is normal.
+- id: c6
+  statement: 'Image benchmark: ten one-vs-rest setups each on MNIST, Fashion-MNIST and CIFAR-10 (one class normal, the other nine anomalies), using the clean training data of the normal class as unlabeled
+    data; in scenario (i) labeled anomalies come from one of the nine anomaly classes and all nine are anomalies at test time (eight novel classes), averaged over 90 experiments per ratio, with AUC on the
+    original test sets.'
+  location: Experimental Scenarios on MNIST, Fashion-MNIST, and CIFAR-10
+  page: 6
+  quote: We do this to simulate the unpredictable nature of anomalies.
+- id: c7
+  statement: 'Hyperparameter selection: the shallow and hybrid methods (OC-SVM/SVDD and SSAD, RBF kernel) are deliberately given an unfair advantage by selecting their hyperparameters to maximize AUC on
+    10% of the test set; the deep methods share the same LeNet-type networks to control for architecture, and Deep SAD uses fixed eta = 1 and lambda = 10^-6 with Adam defaults and a fixed two-phase learning-rate
+    schedule (Appendix E). Isolation Forest uses the original recommended defaults and KDE bandwidth is chosen by 5-fold cross-validation on log-likelihood.'
+  location: Competing Methods
+  page: 6
+  quote: In our experiments we deliberately grant the shallow and hybrid methods an unfair advantage by selecting their hyperparameters to maximize AUC on a subset (10%) of the test set to minimize hyperparameter
+    selection issues.
+- id: c8
+  statement: The supervised classifier is vulnerable to novel anomalies at test time when only little labeled data is available; it catches up as the number of known anomaly classes grows except on CIFAR-10.
+    The authors state Deep SAD is particularly beneficial on the more complex data; Deep SAD is fairly robust to eta in their sensitivity analysis (Section 4.3).
+  location: Experimental Scenarios on MNIST, Fashion-MNIST, and CIFAR-10
+  page: 7
+  quote: Figure 2 moreover conﬁrms that a supervised classiﬁcation approach is vulnerable to novel anomalies at testing time when only little labeled training data is available.
+- id: c9
+  statement: 'Classical vs deep: on six classic (ODDS) tabular benchmarks (60:40 train-test splits, 10 seeds, 1% labeled anomalies, no pollution, standardized features), the shallow kernel methods seem
+    to have a slight edge on the relatively small, low-dimensional benchmarks; the authors say Deep SAD is competitive and the small differences might be explained by the hyperparameter-selection advantage
+    granted to the shallow methods.'
+  location: Classic Anomaly Detection Benchmark Datasets
+  page: 9
+  quote: Here we observe that the shallow kernel methods seem to have a slight edge on the relatively small, low-dimensional benchmarks.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliations: TU Berlin, 123ai.de, SUTD, b-it Bonn, Korea University, MPI Informatics, TU Kaiserslautern. Venue
+    from the PDF header (''Published as a conference paper at ICLR 2020''); year is the arXiv submission year (2019). Conflict of interest / self-citation: Deep SVDD (Ruff et al., 2018), the main deep unsupervised
+    baseline, is by overlapping authors (Ruff, Vandermeulen, Görnitz, Binder, Müller, Kloft); Görnitz and Kloft also co-authored the SSAD baseline (Görnitz et al., 2013). Ruff et al. also wrote the review
+    arxiv-2009.11732 and the follow-up critique arxiv-2006.00339 (which recasts Deep SAD as ''unsupervised OE''). Semi-supervised setting: no ''semi-supervised'' paradigm tag exists; tagged unsupervised
+    + supervised as closest. Scenarios (ii) pollution (gamma_l = 0.05, k_l = 1, 90 experiments) and (iii) number of known anomaly classes (gamma_l = 0.05, gamma_p = 0.1, 10 seeds x 10 setups) are reported
+    as figures only; Wilcoxon signed-rank tests between 1st and 2nd best. No threshold is chosen (AUC only). Section 3.1 confirmed by the cross-reference ''from Section 3.1'' and Section 4.3 by ''A sensitivity
+    analysis on η is in Section 4.3''; other locations use section names. Results not recorded.'

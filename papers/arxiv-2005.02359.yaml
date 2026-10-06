@@ -1,0 +1,88 @@
+id: arxiv-2005.02359
+title: Classification-Based Anomaly Detection for General Data
+authors:
+- Liron Bergman
+- Yedid Hoshen
+year: 2020
+venue: ICLR 2020
+links:
+  arxiv: https://arxiv.org/abs/2005.02359
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 980f7f683304e26102aeb7871a546aeff2c95a4337b2674ebd90378b4007f547
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'GOAD: each sample is transformed by M transformations, a feature extractor is trained (center triplet loss plus softmax cross-entropy) so that each transformation''s features cluster around its own center,
+  and the anomaly score is the sum of -log of the distance-based (open-set, epsilon-smoothed) probability of predicting the correct transformation'
+- Random affine transformations T(x, m) = W_m x + b_m to apply transformation-based anomaly detection to tabular (non-image) data
+claims:
+- id: c1
+  statement: 'Setting: the paper addresses what it calls the semi-supervised scenario, where the training set contains only normal examples and the test data contain both normal and anomalous examples.'
+  location: Introduction
+  page: 1
+  quote: In this setting, we have a training set of normal examples (which contains no anomalies).
+- id: c2
+  statement: 'Problem with transformation classification (GEOM): the learned classifier is only valid for samples from the normal training subspace; for anomalies all transformed points fall outside every
+    subspace, which the authors say makes the score have very high variance for anomalies. Using anomaly examples (Outlier Exposure) would fix this but is not possible in general, e.g. for tabular data.'
+  location: Classification-Based Anomaly Detection
+  page: 3
+  quote: This makes the anomaly score P(m′|T(x, m)) have very high variance for anomalies.
+- id: c3
+  statement: 'Transformations and architecture: random affine matrices did not perform competitively on CIFAR-10 because they do not preserve pixel order, which CNNs exploit; as a rule of thumb, fully-connected
+    networks can fully utilize random affine matrices. Image experiments therefore use the geometric transformations of GEOM.'
+  location: Image Experiments
+  page: 5
+  quote: Random afﬁne matrices did not perform competitively as they are not pixel order preserving, this information is effectively used by CNNs and removing this information hurts performance.
+- id: c4
+  statement: 'Tabular protocol (Arrhythmia, Thyroid, KDDCUP99, KDDRev, following Zong et al. 2018): train on 50% of the normal data, evaluate on the other 50% plus all anomalies. OC-SVM, E2E-AE and DAGMM
+    results are copied from Zong et al.; LOF and the feature-bagging autoencoder were computed by the authors. Large-scale experiments are repeated 5 times and small-scale GOAD experiments 500 times (due
+    to high variance).'
+  location: Tabular Data Experiments
+  page: 7
+  quote: OC-SVM, E2E-AE and DAGMM results are directly taken from those reported by Zong et al. (2018).
+- id: c5
+  statement: 'Threshold for F1: following Zong et al. (2018), the decision threshold is set so that the number of test samples classified as anomalous equals the true number of anomalies in the test set
+    (the top-N_a scores).'
+  location: Tabular Data Experiments
+  page: 7
+  quote: Following the protocol in Zong et al. (2018), the decision threshold value is chosen to result in the correct number of anomalies e.g. if the test set contains Na anomalies, the threshold is selected
+    so that the highest Na scoring examples are classiﬁed as anomalies.
+- id: c6
+  statement: 'Per-dataset choices: on Arrhythmia a linear classifier performed better than deeper networks (which overfit) and early stopping after a single epoch gave the best results; the same held on
+    Thyroid; on KDDCUP99 and KDDRev deep networks are used and results are reported after 25 epochs. How these choices were selected (e.g. a validation set) was not found in the text (searched for validation,
+    held-out, select).'
+  location: Tabular Data Experiments
+  page: 7
+  quote: Early stopping after a single epoch generated the best results.
+- id: c7
+  statement: 'Deep vs shallow: the authors state that deep networks are beneficial for large datasets (particularly full KDDCUP99) but not needed for the smaller ones, indicating deep learning has not benefited
+    the smaller datasets; the approach may be used in a linear setting for performance-critical operations.'
+  location: Discussion
+  page: 9
+  quote: For performance critical operations, our approach may be used in a linear setting.
+- id: c8
+  statement: 'Contamination: although most results assume anomaly-free training data, on KDDCUP99 with X% anomalies added to training GOAD outperforms DAGMM at all impurity levels (figure), and it degrades
+    gracefully on other datasets (Thyroid omitted for lack of anomalies; there, anomalies are split between training contamination and test); the authors say it might therefore be considered for unsupervised
+    settings.'
+  location: Discussion
+  page: 9
+  quote: Our method might therefore be considered in the unsupervised settings.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Affiliation: The Hebrew University of Jerusalem. Venue from the PDF header (''Published as a conference paper
+    at ICLR 2020'') and the arXiv comment. Image evaluation is one-class-vs-rest on CIFAR-10 and FashionMNIST with the architecture of Golan & El-Yaniv (2018); GEOM with Dirichlet numbers were copied from
+    that paper. Stated negative result: the closed-set softmax variant was better on KDD (F1 = 0.99) (Discussion). Fewer than 16 auxiliary tasks gave poor results on KDDRev; more tasks reduced F1 variance
+    on small datasets. The paper describes its own setting as semi-supervised (clean normal training data), for which no paradigm tag exists. Section names are used because the extracted headings carry
+    no numbers (appendix A.2-A.4 are numbered).'

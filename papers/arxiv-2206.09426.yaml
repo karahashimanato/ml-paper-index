@@ -1,0 +1,108 @@
+id: arxiv-2206.09426
+title: 'ADBench: Anomaly Detection Benchmark'
+authors:
+- Songqiao Han
+- Xiyang Hu
+- Hailiang Huang
+- Minqi Jiang
+- Yue Zhao
+year: 2022
+venue: NeurIPS 2022 Datasets and Benchmarks Track
+links:
+  arxiv: https://arxiv.org/abs/2206.09426
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-06'
+  pdf_sha256: 482b4a489c07afaf930077df744d758649c7112951c6bcc90ca66a290785355c
+tags:
+  tasks:
+  - anomaly-detection
+  method_families:
+  - classical-outlier-detectors
+  - deep-learning
+  - tree-ensembles
+  paradigms:
+  - unsupervised
+  - semi-supervised
+  - supervised
+proposes:
+- 'ADBench: a tabular anomaly detection benchmark of 30 algorithms (14 unsupervised, 7 semi-supervised, 9 supervised) on 57 datasets (47 existing, 10 new CV/NLP datasets turned into embeddings), compared
+  from three angles: level of supervision (fraction of labeled anomalies), synthetic anomaly types (local, global, dependency, clustered) and robustness to noisy and corrupted data (duplicated anomalies,
+  irrelevant features, annotation errors)'
+claims:
+- id: c1
+  statement: 'Datasets: besides more than 40 existing benchmark datasets (kept only if the anomaly ratio is below 40%), 10 CV and NLP datasets are added as embeddings from pretrained models (BERT [CLS]
+    token for NLP, ImageNet-pretrained ResNet18 after the last average pooling for CV). For these, one class is set as normal, the remaining classes are downsampled to 5% of the total instances as anomalies,
+    and results are averaged over all classes, following previous works.'
+  location: Section 3.2
+  page: 4
+  quote: Following previous works [151, 152], we set one of the multi-classes as normal, downsample the remaining classes to 5% of the total instances as anomalies, and report the average results over all
+    the respective classes.
+- id: c2
+  statement: 'Protocol: although unsupervised detectors are primarily designed for the transductive setting, all algorithms are adapted to the inductive setting (as is common in PyOD, TODS and PyGOD): 70%
+    of the data for training and 30% for testing with stratified sampling to keep the anomaly ratio, each experiment repeated 3 times and averaged.'
+  location: Section 4.1
+  page: 6
+  quote: We repeat each experiment 3 times and report the average.
+- id: c3
+  statement: 'Hyperparameters: all algorithms use their default hyperparameter settings from the original paper (specific values in Appendix B.1 and the codebase). The authors acknowledge that a small hold-out
+    set could be used to tune semi- and fully-supervised methods, but this setting is not considered.'
+  location: Appendix C (Details on Experiment Setting)
+  page: 28
+  quote: It is also acknowledged that it is possible to use a small hold-out data for hyperparameter tuning for semi- and fully-supervised methods [164], while we do not consider this setting in this work.
+- id: c4
+  statement: 'Unsupervised setting (57 datasets, AUCROC): none of the 14 unsupervised methods is statistically better than the others in the critical difference diagram, where most algorithms are connected
+    without statistical significance.'
+  location: Section 4.2
+  page: 7
+  quote: None of the unsupervised methods is statistically better than the others, as shown in the critical difference diagram of Fig. 4a
+- id: c5
+  statement: Some deep unsupervised methods such as DeepSVDD and DAGMM are surprisingly worse than shallow methods; the authors attribute this to deep unsupervised methods being harder to train (more hyperparameters)
+    and harder to tune without label guidance.
+  location: Section 4.2
+  page: 7
+  quote: We also note that some DL-based unsupervised methods like DeepSVDD and DAGMM are surprisingly worse than shallow methods.
+- id: c6
+  statement: 'Few labels: for most semi-supervised methods, 1% labeled anomalies suffice to surpass the best unsupervised method, while most supervised methods need 10%; with few labels (5% or less) semi-supervised
+    methods are generally better than fully-supervised ones, and with many labeled anomalies both are comparable.'
+  location: Section 4.2
+  page: 7
+  quote: For most semi-supervised methods, merely 1% labeled anomalies are sufﬁcient to surpass the best unsupervised method (shown as the dashed line in Fig. 4b), while most supervised methods need 10%
+    labeled anomalies to achieve so.
+- id: c7
+  statement: 'Anomaly types (synthetic anomalies injected into benchmark datasets): unsupervised performance depends on how well the method''s assumptions match the anomaly type; LOF is statistically best
+    for local anomalies and KNN for global anomalies, and no algorithm performs well on all types (LOF does poorly on clustered anomalies). The authors advise selecting algorithms by the characteristics
+    of the task.'
+  location: Section 4.3
+  page: 8
+  quote: Performance of unsupervised algorithms highly depends on the alignment of its assumptions and the underlying anomaly type.
+- id: c8
+  statement: For local, global and dependency anomalies, most label-informed (semi- and fully-supervised) methods perform worse than the best unsupervised method of each type; only for clustered anomalies
+    do label-informed (especially semi-supervised) methods beat the best unsupervised method. The authors believe partial labels cannot capture all characteristics of a given anomaly type, so knowing the
+    anomaly type may outweigh partial labels.
+  location: Section 4.3
+  page: 8
+  quote: The “power” of prior knowledge on anomaly types may overweigh the usage of partial labels.
+- id: c9
+  statement: 'Conflict of interest stated in the text: most unsupervised algorithms are taken from PyOD, which the authors call their early work; the semi-supervised methods are implemented by the authors
+    and released with ADBench.'
+  location: Section 3.2
+  page: 4
+  quote: Most unsupervised algorithms are readily available in our early work Python Outlier Detection (PyOD) [198], and some supervised methods are available in scikit-learn [133] and corresponding libraries.
+results: []
+relations: []
+card:
+  created_at: '2026-10-06'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-06): anomaly detection, classical vs deep (benchmarks, isolation-based methods, self-supervised and one-class deep methods, industrial
+    image anomaly detection). Carded by a subagent. Results tables not recorded; claims only. Authors from Shanghai University of Finance and Economics and Carnegie Mellon University; all authors contributed
+    equally and are listed alphabetically. Venue from the PDF footnote (''36th Conference on Neural Information Processing Systems (NeurIPS 2022) Track on Datasets and Benchmarks'') and the arXiv comment.
+    Section numbers are taken from cross-references in the text (§3.2, §4.1-§4.4, Appx. C); the extracted headings carry no numbers. Metrics: AUCROC and AUCPR (main text reports AUCROC; the footnote says
+    AUCPR gives similar results), with critical difference diagrams (Wilcoxon-Holm, p <= 0.05). 98,436 experiments in total (Appx. C). Appendix B.1 says the default hyperparameters in PyOD are used for
+    the unsupervised algorithms deployed by PyOD; tree ensembles use the default settings of their official repositories and SVM/MLP/RF scikit-learn defaults. Training data for unsupervised detectors is
+    the 70% split including its anomalies (inductive, contaminated); labeled fraction gamma_l refers to anomalies in the train set. The anomaly-type and robustness experiments use only the 47 classical
+    datasets with synthetic anomalies generated from a model of the normal samples (GMM for local/clustered, uniform for global, vine copula/KDE for dependency; original anomalies discarded). Robustness
+    results (duplicated anomalies hurt unsupervised methods most; irrelevant features hurt supervised methods least) and runtime (HBOS, COPOD, ECOD, NB fastest; XGBOD, ResNet, FTTransformer heavy) not recorded
+    as claims. Conflict of interest: Yue Zhao is the first author of PyOD [198], XGBOD [195] and LSCP [197]; COPOD [96] and ECOD [97] (both benchmarked) are co-authored by Y. Zhao and X. Hu. Results tables/figures
+    not recorded.'

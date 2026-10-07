@@ -1,0 +1,91 @@
+id: arxiv-1710.03276
+title: Lagged Exact Bayesian Online Changepoint Detection with Parameter Estimation
+authors:
+- Michael Byrd
+- Linh Nghiem
+- Jing Cao
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1710.03276
+  code: https://github.com/lnghiemum/LEXO
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 904c48c039db49072d22b2722458b46def84b45a1e8e9b3b7893f6199c2d1d1b
+tags:
+  tasks:
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - streaming
+proposes:
+- 'LEXO-ℓ (Lagged EXact Online Bayesian Changepoint Detection): adds a recursive backward step to the exact online run-length recursion (EXO, i.e. Adams & MacKay 2007 / Fearnhead 2006) to obtain exact posteriors
+  of the run length at time t-ℓ with complexity O(ℓt)'
+- Recursive exact posterior (moments) of regime parameters under EXO and LEXO-ℓ as mixtures of mixtures
+claims:
+- id: c1
+  statement: 'Assumptions: observations form non-overlapping regimes (a product partition model); observations within a regime are i.i.d. and independent of other regimes.'
+  location: Section 2
+  page: 3
+  quote: Further, assume that observations generated within the same regime are iid, and also independent from observations in other regimes
+- id: c2
+  statement: Declaring changes from the run-length posterior in EXO is left to the practitioner, for example when the posterior mass shifts greatly toward 0 after being concentrated near the maximum run
+    length.
+  location: Section 2
+  page: 4
+  quote: For instance, if the concentration of the mass of the run length’s distribution shifts greatly toward 0 at time t + 1 after being mostly concentrated around the max possible run length at time
+    t, then this would indicate a change in the regime.
+- id: c3
+  statement: 'Hazard: as in Adams and MacKay, the prior on the interval between changepoints is geometric with time scale λgap, so the hazard is constant at 1/λgap.'
+  location: Section 2
+  page: 5
+  quote: this prior distribution is chosen to be the geometric distribution
+- id: c4
+  statement: LEXO-ℓ refines inference for time t-ℓ with a backward pass while staying online (past data need not be reused); Theorem 1 states it gives exact run-length posteriors computed recursively with
+    complexity O(ℓt). The run-length pruning used with EXO (setting probabilities below a threshold, e.g. 10^-5, to 0) is said to extend easily to LEXO.
+  location: Section 2
+  page: 8
+  quote: Our algorithm remains online in the sense that once a new datum is observed the past data need not be reused to update the model.
+- id: c5
+  statement: The backward step relies on the fact that, if a new regime starts at t, the earlier data become irrelevant; the derivation uses that the changepoint probability given the previous run length
+    is the constant hazard H.
+  location: Section 2
+  page: 9
+  quote: Intuitively, if we have a new regime at t, all the past information before that becomes irrelevant.
+- id: c6
+  statement: 'Theorem 2: the posterior of the regime parameter under LEXO-ℓ is a mixture of mixture models that can be computed exactly and recursively, and its posterior moments are computed in two recursive
+    stages.'
+  location: Section 3
+  page: 10
+  quote: is a mixture of mixture models and can be computed exactly and recursively for all
+- id: c7
+  statement: 'Simulation protocol: three settings (Normal mean shift, Normal precision shift, Poisson), 5 equally spaced changepoints, 1000 samples each; non-informative priors and hazard H = 1/50; run
+    length assessed by the median of the MAP run length (described as a common practitioner choice, citing Adams and MacKay) and parameters by the ratio of posterior MSE of EXO over LEXO-ℓ (ℓ = 1..30).
+    The only comparison is EXO versus LEXO.'
+  location: Section 4
+  page: 13
+  quote: The hyperparameters for the prior were chosen to be non-informative, and the hazard rate was chosen to be H = 1/50.
+- id: c8
+  statement: 'Caveat: right before a changepoint, a large number of lags can hurt parameter estimates (MSE ratio below 1) because the lags include points from the next regime, while detection does not deteriorate;
+    the authors suggest a high lag for detection and a smaller lag for moment calculations.'
+  location: Section 4
+  page: 15
+  quote: A reasonable solution is to use as higher order a lag as possible for the detection of changepoints, while using a smaller lag for moment calculations.
+- id: c9
+  statement: 'Real-data evaluation (Dow Jones 1972-75 returns, hazard 1/250, lags up to 100; coal mine disasters, lags up to 30) is qualitative: detected changepoints are matched to historical events, and
+    for EXO the authors ignore random MAP jumps that appear to be mistakes.'
+  location: Section 5
+  page: 19
+  quote: For EXO, we ignore random jumps that appear to be mistakes from the procedure.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliation: Department of Statistical Science, Southern Methodist University. No arXiv comment or journal reference; no venue recorded.
+    Section numbers are from the paper''s own outline in the Introduction (''In Section 2, we review the theory of EXO ...''). The paper names the Adams & MacKay (2007) / Fearnhead (2006) recursion ''EXO''.
+    The Conclusion states that EXO is naturally susceptible to outliers and can take several time points before finding a new regime. The coal mine data are modelled as yearly Poisson counts (not the weekly
+    model of Adams & MacKay). Results tables not recorded.'

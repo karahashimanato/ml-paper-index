@@ -25,6 +25,9 @@ tasks:
   - id: change-point-detection
     description: Offline / retrospective detection of the locations where a sequence's distribution changes.
     parent: drift-detection
+  - id: online-change-point-detection
+    description: "Sequential (online) detection of changes in a data stream's distribution as observations arrive, e.g. Bayesian online changepoint detection."
+    parent: drift-detection
   - id: stream-classification
     description: Supervised learning on data streams that must keep accuracy under drift (adaptation rather than detection).
   - id: time-series-classification
@@ -205,6 +208,8 @@ method_families:
     description: "Sequential model-based optimization with a probabilistic surrogate and an acquisition function (e.g. GP-based BO, TPE, SMAC-style random-forest surrogates, trust-region BO)."
   - id: multi-fidelity-optimization
     description: "Hyperparameter search that evaluates configurations on cheap low-fidelity budgets (fewer epochs, subsets) and promotes promising ones (e.g. successive halving, Hyperband, ASHA, BOHB)."
+  - id: bayesian-changepoint-models
+    description: "Bayesian models of changepoints (run-length or product-partition models, posterior over changepoint locations and number), including online BOCPD and offline posterior sampling."
 paradigms:
   - id: supervised
     description: Supervised learning.

@@ -77,3 +77,7 @@ themes:
     tags: [bayesian-optimization, multi-fidelity-optimization, hyperparameter-optimization, black-box-optimization]
     arxiv_queries:
       - '(abs:"bayesian optimization" OR abs:"hyperparameter optimization" OR abs:"hyperparameter tuning" OR abs:"multi-fidelity") AND (cat:cs.LG OR cat:stat.ML)'
+  - name: ベイズ変化点検知
+    tags: [online-change-point-detection, bayesian-changepoint-models]
+    arxiv_queries:
+      - '(abs:"changepoint" OR abs:"change point" OR abs:"change-point") AND (abs:bayesian OR abs:posterior OR abs:BOCPD) AND (cat:stat.ML OR cat:cs.LG OR cat:stat.ME)'

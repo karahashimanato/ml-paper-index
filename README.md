@@ -77,8 +77,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 不確実性の推定と較正 | 論文カード17本+既存7本(データとモデルの不確実性、MC dropout とアンサンブル、cold posterior、較正の再検証と ECE の測り方、温度スケーリングの先、conformal prediction の保証と分布の変化)、記事 [articles/topics/uncertainty-and-calibration.md](articles/topics/uncertainty-and-calibration.md) |
 | 異常検知(古典 vs 深層) | 論文カード15本+既存8本(設定の違い、大規模ベンチマーク、孤立型、自己教師ありの変換型、1クラス・半教師あり・補助の外れ値、事前学習の特徴を使う画像の手法、閾値と評価の落とし穴)、記事 [articles/topics/anomaly-detection-classical-vs-deep.md](articles/topics/anomaly-detection-classical-vs-deep.md) |
 | ベイズ最適化とハイパーパラメータ最適化 | 論文カード17本+既存6本(代理モデルと獲得関数、GP-UCB の理論の前提、Hyperband・BOHB・ASHA・FABOLAS、規模を上げる工夫とフレームワーク、ランダム探索との比較とベンチマーク、過剰な調整と探索空間の設計)、記事 [articles/methods/bayesian-optimization.md](articles/methods/bayesian-optimization.md) |
+| ベイズ変化点検知 | 論文カード18本(BOCPD とその拡張、ハザードと事前分布、外れ値への頑健化、バンディット・強化学習・障害の原因分析への応用、オフラインの事後分析と信用集合、TCPDBench による評価)、記事 [articles/topics/bayesian-change-point-detection.md](articles/topics/bayesian-change-point-detection.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では434本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では452本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -103,6 +104,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [予測モデルのフォールバックとモデル選択 — 運用でモデルを切り替える仕組み](articles/topics/model-fallback-and-selection.md)
 - [不確実性の推定と較正 — ベイズ近似、較正の測り方、conformal prediction の保証の範囲](articles/topics/uncertainty-and-calibration.md)
 - [異常検知 — 古典的な手法と深層学習、設定の違いと評価の落とし穴](articles/topics/anomaly-detection-classical-vs-deep.md)
+- [ベイズ変化点検知 — BOCPD とその拡張、オフラインの事後分析、評価の作法](articles/topics/bayesian-change-point-detection.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

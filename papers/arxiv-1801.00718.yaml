@@ -1,0 +1,87 @@
+id: arxiv-1801.00718
+title: Selective review of offline change point detection methods
+authors:
+- Charles Truong
+- Laurent Oudre
+- Nicolas Vayatis
+year: 2018
+venue: Signal Processing
+links:
+  arxiv: https://arxiv.org/abs/1801.00718
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 3dfcd67332558632ca81e3a6435959dbf35edded388b5bba89d2375a83354c2a
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - kernel-methods
+  - linear-models
+  paradigms:
+  - unsupervised
+proposes:
+- 'A typology organizing offline multiple change point detection methods by three elements: a cost function, a search method, and a constraint (penalty) on the number of changes'
+- 'ruptures: a Python library implementing the main reviewed methods'
+claims:
+- id: c1
+  statement: 'Framework: offline detection is cast as minimizing a sum of segment costs, with a known number of changes (P1) or with a complexity penalty (P2). Methods are characterized by a cost function
+    (a measure of homogeneity that encodes the type of change detectable), a search method (exact or approximate, trading complexity and accuracy), and a constraint; too small a penalty detects many changes,
+    even noise, while too much penalization detects only the most significant changes or none.'
+  location: Section 2.3
+  page: 6
+  quote: Precisely, detection methods are expressed as the combination of the following three elements.
+- id: c2
+  statement: 'Scope limitation: Bayesian approaches are not covered by the review''s framework, although the authors note they provide state-of-the-art results in several domains such as speech and sound
+    processing.'
+  location: Section 2.4
+  page: 6
+  quote: In particular, Bayesian approaches are not considered in the remainder of this article, even though they provide state-of-the-art results in several domains, such as speech and sound processing.
+- id: c3
+  statement: 'Where Bayesian methods are pointed to: the HMM is named as the most well-known Bayesian algorithm, later extended with Dirichlet processes or product partition models; readers are referred
+    to other reviews for Bayesian approaches. Apart from this paragraph and the BIC/mBIC penalties, no further discussion of Bayesian change point methods was found in the text (searched for Bayes, posterior,
+    prior).'
+  location: Section 2.4
+  page: 7
+  quote: The interested reader can ﬁnd reviews of Bayesian approaches in [4] and [6].
+- id: c4
+  statement: 'Theoretical evaluation: asymptotic consistency is defined on change point fractions (t/T), since the distances between true and estimated change point indexes in general do not converge to
+    0 even for simple models.'
+  location: Section 3.1
+  page: 9
+  quote: As a result, consistency results in the literature only deal with change point fractions.
+- id: c5
+  statement: 'Empirical metrics reviewed: AnnotationError (difference in the number of changes), Hausdorff (worst temporal error), RandIndex, and F1-score with a user-defined margin M; precision and recall
+    are well defined only if M is smaller than the minimum spacing between true change points, and over-segmentation drives precision toward zero and recall toward one.'
+  location: Section 3.2.4
+  page: 11
+  quote: A breakpoint is considered detected up to a user-deﬁned margin of error M > 0; true positives Tp are true change points for which there is an estimated one at less than M samples, i.e.
+- id: c6
+  statement: 'Search costs (assuming O(1) cost evaluation): Opt (dynamic programming for a known K) is of order O(KT^2); Pelt solves the linearly penalized problem exactly with pruning and is of order O(T)
+    under the assumption that regime lengths are randomly drawn from a uniform distribution; binary segmentation (greedy) is of order O(T log T).'
+  location: Section 5.1.2
+  page: 33
+  quote: 'This results in a considerable speed-up: under the assumption that regime lengths are randomly drawn from a uniform distribution, the complexity of Pelt is of the order O(T).'
+- id: c7
+  statement: 'Penalty calibration: the linear (l0) penalty generalizes BIC and AIC; its smoothing parameter can be set by model-selection criteria that assume a model on the data, by heuristics such as
+    cross-validation or the slope heuristics when no model is assumed, or by supervised procedures that minimize an approximation of the segmentation error on an annotated set of signals.'
+  location: Section 6.1
+  page: 41
+  quote: 'In [138, 139], supervised algorithms are proposed: the chosen β is the one that minimizes an approximation of the segmentation error on an annotated set of signals.'
+- id: c8
+  statement: The authors describe their own library ruptures (which implements most reviewed procedures) as the most comprehensive change point detection library.
+  location: Section 9 (Conclusion)
+  page: 49
+  quote: Most detection procedures described above are available within the Python language from the package ruptures [37], which is the most comprehensive change point detection library.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: CMLA, CNRS, ENS Paris Saclay; L2TI, University Paris 13. Venue from the given journal_ref (''Signal Processing, 167:107299,
+    2020'') and the PDF first page (''Accepted to Signal Processing''). Conflict of interest: ruptures is the authors'' own package (reference [37] is by Charles Truong); the review is linked to it. The
+    review is a survey without an empirical benchmark of its own. Other Bayes-related content: the BIC penalty and the modified BIC (mBIC), which ''consists in maximizing the asymptotic posterior probability
+    of the data'' (Section 6.3); mBIC and penLeb are ''complex'' penalties requiring optimal segmentations for K = 1..Kmax. Fused-lasso (l1) relaxation for the L2 cost is O(T log T). Cost functions reviewed:
+    parametric (maximum likelihood, multiple linear / AR, Mahalanobis-type) and non-parametric (empirical cdf, rank-based, kernel-based). Section numbers are confirmed by numbered headings in the PDF.'

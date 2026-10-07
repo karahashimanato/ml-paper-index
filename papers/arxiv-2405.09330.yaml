@@ -1,0 +1,101 @@
+id: arxiv-2405.09330
+title: 'BARO: Robust Root Cause Analysis for Microservices via Multivariate Bayesian Online Change Point Detection'
+authors:
+- Luan Pham
+- Huong Ha
+- Hongyu Zhang
+year: 2024
+venue: FSE 2024
+links:
+  arxiv: https://arxiv.org/abs/2405.09330
+  doi: https://doi.org/10.1145/3660805
+  code: https://github.com/phamquiluan/baro
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: fd97437484a150f0fefdff1c0dcd358f572b7aa54f90e48c1493c56bc463b04b
+tags:
+  tasks:
+  - time-series-anomaly-detection
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - unsupervised
+proposes:
+- 'BARO: an end-to-end anomaly detection and root cause analysis pipeline for microservices that detects the failure time with Multivariate BOCPD (Adams-MacKay BOCPD with the multivariate Gaussian / inverse-Wishart
+  segment likelihood of Xuan & Murphy) on Latency and Errors metrics, then ranks root-cause metrics with RobustScorer'
+- 'RobustScorer: ranks each metric by the maximum post-detection deviation |x - median| / IQR, with median and IQR learned from data before the detected anomaly time'
+claims:
+- id: c1
+  statement: 'Motivation: many metric-based RCA methods assume an accurate anomaly detection module (e.g. CIRCA and RCD require the failure occurrence time) and treat that information as accurately known,
+    so it remains unclear whether they stay effective when combined with imprecise anomaly detectors.'
+  location: Introduction
+  page: 2
+  quote: However, they assume this information is already known accurately.
+- id: c2
+  statement: 'Detector design: Multivariate BOCPD combines BOCPD (Adams & MacKay) with the multivariate change point model of Xuan & Murphy to model dependency among metrics. The authors motivate BOCPD
+    as simple, effective, requiring no user-specified thresholds for univariate series, and citing van den Burg & Williams as among the best CPD methods in many real-world scenarios.'
+  location: Section 3.3
+  page: 7
+  quote: We then propose to use Multivariate BOCPD, a combination of BOCPD [22] and MultivariateCPD [75], to model the dependency and correlation among metrics to detect anomalies effectively.
+- id: c3
+  statement: 'Decision rule: at each step the most probable run length is taken and change points are the steps where it decreases (Algorithm 1: s_t <= s_{t-1}); only Latency and Errors metrics are used
+    for detection, and only the first detected change point is output as the anomaly (failure occurrence time); later change points are attributed to failure propagation.'
+  location: Section 3.3
+  page: 8
+  quote: Finally, note that following the assumptions in Section 3.1, we use Latency and Errors to detect anomalies, and we only output the first detected change point as the detected anomaly.
+- id: c4
+  statement: 'Assumption: based on the failure propagation chain, the first detected anomaly is assumed to correspond to the time the failure first occurs and is used to split normal and abnormal data (not
+    to identify the root cause). The paper also assumes anomalies are visible in Latency/Errors, so Traffic or Saturation surges without abnormal Latency/Errors are treated as normal.'
+  location: Section 3.1.2 (Failure Propagation Chain)
+  page: 6
+  quote: In this work, based on this failure propagation chain, we assume the first anomaly corresponds to the time when the failure first occurs.
+- id: c5
+  statement: 'RobustScorer: median and IQR are learned from data before the detected time and each metric is scored by its maximum robust deviation afterwards; the hypothesis-testing view is used only for
+    ranking, not for accept/reject decisions by p-value. The authors argue median/IQR make the ranking less sensitive than mean/standard-deviation (z-score) methods to early or late detection times.'
+  location: Section 3.4
+  page: 10
+  quote: Note that we do not use the p-value to reject/accept a possible root cause as in standard hypothesis testing.
+- id: c6
+  statement: 'Data: four injected faults (CPU hog, memory leak, network delay, packet loss) into five target services per system, each combination repeated five times, giving 100 failure cases per benchmark
+    system.'
+  location: Section 4 (Benchmark Microservice Systems & Data Collection)
+  page: 12
+  quote: For each combination of fault type and targeted service, we repeat the operation (i.e. fault injection and metrics data collection) five times, resulting in 100 failure cases for each benchmark
+    microservice system.
+- id: c7
+  statement: 'Anomaly detection baselines: N-Sigma, BIRCH, SPOT (dSPOT) and univariate offline Bayesian change point detection (via a third-party implementation), all run with hyperparameter settings from
+    previous works and public code; no description of how BARO''s own BOCPD hazard or prior values were chosen was found in the text (searched hazard, lambda, hyperparameter).'
+  location: Section 4.4 (Baselines)
+  page: 13
+  quote: For all methods, we use the hyperparameter settings as in previous works and in their public source code.
+- id: c8
+  statement: 'RCA comparison caveat: CIRCA uses a PC-algorithm causal graph instead of its required call graph, which the authors say could explain why N-Sigma outperforms CIRCA.'
+  location: 'RQ2: Effectiveness in Root Cause Analysis'
+  page: 16
+  quote: Note that, in this work, as discussed, for CIRCA, we use the causal graphs constructed by the PC algorithm instead of the required call graphs as these graphs are not available for these systems,
+    which could be a cause of this observation.
+- id: c9
+  statement: 'Threats to validity: only four fault types are used; each system uses a single deployment setting and a single data collection strategy, which the authors say potentially limits generality;
+    BARO relies on the Section 3.1 assumptions and extending it to other system types (e.g. distributed databases) is future work.'
+  location: Threats to Validity
+  page: 20
+  quote: In this paper, we employ a single deployment setting for each microservice system and a single data collection strategy, which potentially limits the generality of our work.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: RMIT University; Chongqing University. Venue from the arXiv comment (''accepted to FSE''24'') and the PDF (Proc. ACM Softw.
+    Eng. 1, FSE, Article 98, July 2024; DOI 10.1145/3660805). Section numbers (2.3, 3.1, 3.1.2, 3.3, 3.4, 3.4.2, 4, 4.4) are confirmed by cross-references in the text. The BOCPD variant is standard Adams-MacKay
+    BOCPD with a multivariate Gaussian/inverse-Wishart segment marginal likelihood; it is applied to a fixed T-length window of collected metrics (Algorithm 1), so detection is evaluated retrospectively
+    per case rather than as streaming delay/false-alarm rates. The coarse-grained RCA text says BARO achieves the highest Avg@5 in 10 of 15 (fault type x system) cells while also describing it as consistently
+    top; for fine-grained RCA it ''ranks among the top performers'' rather than best everywhere. RQ4 varies the detection time by ±40 around injection on Online Boutique and Sock Shop and varies baseline
+    hyperparameters (BARO''s BOCPD parameters are not varied). Datasets and code released (Zenodo). Segment model: zero-mean multivariate Gaussian with an inverse-Wishart prior whose scale uses the mean
+    empirical variance pooled across all metrics (data-dependent prior); hazard is geometric, value not stated. Systems: Online Boutique (12 services), Sock Shop (11), Train Ticket (64) on a 5-worker Kubernetes
+    cluster, restarted after each injection; injection-to-symptom gap usually 1-3 s by visual inspection, and the fault injection time is used as a proxy for the true anomaly time. Anomaly detection is
+    scored per case as binary classification (pre-injection data normal, during-injection abnormal; Precision/Recall/F1 averaged over cases). RCA baselines use hyperparameters from their papers; ε-Diagnosis
+    uses a third-party implementation. Table footnotes: CIRCA on Train Ticket from only 15/100 cases (PC failed), BIRCH-based RCA only on cases BIRCH detected. Results tables not recorded.'

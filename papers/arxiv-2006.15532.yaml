@@ -1,0 +1,94 @@
+id: arxiv-2006.15532
+title: Scalable Bayesian Multiple Changepoint Detection via Auxiliary Uniformization
+authors:
+- Lu Shaochuan
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.15532
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 68ab0d17a2bb968daf7a13ba07e48383ca389563e814e26d825140e1e2af14a9
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - unsupervised
+proposes:
+- Attaching auxiliary continuous event times to the observations and modelling changepoints as a left-to-right continuous-time Markov chain on a countably infinite state space with segment-specific exponential
+  run-length rates q_i (Gamma priors), then re-discretising via uniformization (Poisson-randomized blocking) so that a forward-filtering backward-sampling step inside a collapsed Gibbs sampler works on
+  the uniform times rather than on every observation
+- A continuous-time Viterbi algorithm for MAP changepoint locations given the MAP number of changepoints
+claims:
+- id: c1
+  statement: 'Prior on changepoints: the run length of the i-th segment is exponential with its own rate q_i, i.e. a latent left-to-right Markov chain on a countably infinite state space; this lets the
+    recurrence rate vary across segments (avoiding the potential bias of a constant rate) and lets the number of changepoints grow without a fixed or upper bound as data arrive.'
+  location: Section 2
+  page: 7
+  quote: We assume the run length of the i-th segment is exponentially distributed with a rate parameter qi.
+- id: c2
+  statement: 'Motivation: when changepoints are detected event by event (e.g. Fearnhead 2006 recursions), both computational and memory cost are quadratic in the number of observations, which the author
+    calls prohibitive for large N; pruning or particle filtering are often applied to cope.'
+  location: Introduction
+  page: 4
+  quote: In this case, both the computational cost and memory cost are quadratic to the number of observations, which is prohibitive for large N.
+- id: c3
+  statement: 'Cost and exactness: FFBS on the uniform times has computational and memory cost quadratic in the number of uniform times K rather than in n. If the rate matrix Q is known, changepoints can
+    be sampled exactly; otherwise FFBS is embedded in a two-block Gibbs sampler that samples approximately from the posterior, with conjugate Gamma(a, b) priors on q_i whose hyperparameters are often specified
+    manually.'
+  location: Section 3
+  page: 11
+  quote: Firstly, both the computational cost and the memory cost of this version of FFBS algorithm are only quadratic to the number of uniform times K, instead of the number of observations, which is otherwise
+    prohibitive when the ﬁltering probabilities are computed and stored in an event-by-event scale.
+- id: c4
+  statement: 'Limitation of the basic sampler: with a constant uniformization rate the algorithm is suitable only when run lengths are nearly regular, because highly variable q_i make the Poisson rate dominated
+    by the largest one and inflate cost; a piecewise-constant nonhomogeneous rate simulated by thinning is used instead.'
+  location: Section 3
+  page: 12
+  quote: The algorithm is suitable only when the run lengths between consecutive changepoints are nearly regular.
+- id: c5
+  statement: 'Approximation and bias: consecutive closely spaced uniform times are often sampled as separate changepoints (''knots''); they are pruned by repeating the backward-sampling step and keeping
+    the furthest location, which the author says will possibly lead to slightly biased changepoint location estimates, as a price for avoiding inflated memory and computation. A truncation bound on the
+    number of Poisson events is also imposed.'
+  location: Section 3
+  page: 13
+  quote: This straightforward approach to pruning knots among changepoints will possibly lead to slightly biased estimation of the locations of changepoints, see simulation studies in the following sections.
+- id: c6
+  statement: 'Tuning: the resolution parameter k (uniformization rate = k times q_i) trades accuracy for cost: large k gives finer time scale and more accurate estimates but quadratically inflated memory
+    and computation, small k a coarser scale and lower accuracy, so it needs careful selection.'
+  location: Section 3
+  page: 15
+  quote: The tuning parameter needs to be carefully selected for a tradeoﬀbetween the accuracies and eﬃciencies.
+- id: c7
+  statement: 'Simulation (1200 Gaussian observations, 10 mean changepoints, known variance and conjugate mean prior, 6000 Gibbs iterations keeping the last 3000; k = 5, 11, 15 compared): remaining knots
+    make the posterior of the number of changepoints tend to overestimate it, so the author recommends counting bumps in the posterior location histogram instead, and reports that the MAP locations from
+    the continuous-time Viterbi algorithm were closer to the truth than posterior means.'
+  location: Simulation Studies
+  page: 18
+  quote: Generally, the posterior of the number of changepoints summarized from this scheme tends to overestimate the number of changepoints.
+- id: c8
+  statement: 'Robustness issue: in the sparse long-series simulation (n = 10000 exponential observations, 3 changepoints) the algorithm occasionally broke down at low resolution because all filtering probabilities
+    underflow to zero; the author says pilot runs might be necessary to choose the resolution parameter.'
+  location: Simulation Studies
+  page: 20
+  quote: It is noted that the algorithm occasionally break down at low resolution (small k), due to that all the ﬁltering probabilities drop to zeros exponentially fast, causing underﬂow problems, which
+    is diﬃcult to deal with for the moment.
+- id: c9
+  statement: 'Real data: for New Zealand deep earthquakes (674 events, quarterly Poisson counts over 70 years, k = 15) large uncertainties appear in both the number and locations of changepoints; the MAP
+    number is 2 but the author deduces at least two or three changepoints. Well-log data were analysed after manually removing outliers. No comparison with other changepoint methods was found in the paper.'
+  location: Real Numerical Examples
+  page: 21
+  quote: From the ﬁgure, it is observed that large uncertainties appear for the number of changepoints and their locations.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. No venue is stated in the PDF and the arXiv comment (''31 pages, 7 figures'') gives none, so venue is omitted. Single author. Evaluation:
+    two simulations and two real datasets, judged visually (posterior histograms, 95% HPD intervals in figures); no competing method is run and no runtime or convergence diagnostic is reported (searched
+    compar, PELT, converge, diagnos, seconds, CPU). Section numbers 2-5 are confirmed by the outline paragraph; subsections are given by name. Simulated changepoint locations and MAP / posterior-mean estimates
+    are written in the text but are not recorded here.'

@@ -1,0 +1,109 @@
+id: arxiv-1806.02261
+title: Doubly Robust Bayesian Inference for Non-Stationary Streaming Data with β-Divergences
+authors:
+- Jeremias Knoblauch
+- Jack Jewson
+- Theodoros Damoulas
+year: 2018
+venue: NeurIPS 2018
+links:
+  arxiv: https://arxiv.org/abs/1806.02261
+  code: https://github.com/alan-turing-institute/rbocpdms/
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: f37d1925a60aeb5980958bd7419887b040e22468f08596e9ecdeb9e1299a0606
+tags:
+  tasks:
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  - linear-models
+  paradigms:
+  - streaming
+proposes:
+- 'Robust BOCPD (β-BOCD): BOCPD in which both the run-length/model posterior and the parameter posterior are replaced by General Bayesian Inference posteriors based on the β-divergence (β = (β_rlm, β_p)),
+  demonstrated on Bayesian linear regression and (spatially structured) vector autoregressions'
+- A structural variational approximation of the β-divergence posterior within the conjugate family (exact as β → 0), optimized inside BOCPD with a stochastic variance reduced gradient scheme with constant
+  space and linear time
+- A procedure to initialize β_p (maximizing the β-divergence influence at a chosen Mahalanobis distance) and to refine β on-line by SGD on a predictive loss
+claims:
+- id: c1
+  statement: 'Motivation: BOCPD methods declare changepoints when the posterior predictive has low density for the next observation, which the authors say naturally leads to a high false changepoint discovery
+    rate under outliers; because they run on-line, pre-processing (outlier removal) is not an option. Standard Bayes (KLD) is not robust under outliers or misspecification because its influence function
+    is strictly increasing.'
+  location: Introduction
+  page: 1
+  quote: Naturally, this leads to a high false CP discovery rate in the presence of outliers and as they run on-line, pre-processing is not an option.
+- id: c2
+  statement: 'Robust BOCPD: both the run-length/model posterior and the parameter posteriors are replaced by β-divergence posteriors with β = (β_rlm, β_p) > 0. β_rlm prevents abrupt changes of the run-length
+    posterior caused by a small number of observations; for the run-length part one simply replaces the predictive densities in the BOCPD recursion by their β-D counterparts, and the discrete posterior
+    remains easy to normalize. β_p regulates the robustness of the parameter posterior, which is intractable and is handled by structural variational inference.'
+  location: Robust BOCPD
+  page: 4
+  quote: 'This form of robustness is easy to implement and retains the closed forms of BOCPD:'
+- id: c3
+  statement: 'Why heavy tails are not enough: the run-length odds after an outlier compare the predictive density under the current segment with the density under the prior; a Student''s t error model raises
+    both, so changing the tails has only a very limited effect on the ratio. The authors state the perhaps unintuitive consequence that Student''s t error models yield changepoint inference very close to
+    the normal model (numerical examples in the appendix).'
+  location: Section 2.3 (Quantifying robustness)
+  page: 5
+  quote: In fact, the perhaps unintuitive consequence is that Student’s t error models will yield CP inference that very closely resembles that of the corresponding normal model.
+- id: c4
+  statement: 'Theorem 1 (for the Bayesian linear regression model): β_rlm and the hazard can be chosen from a set (defined by an inequality in the appendix) so that the odds never favour a changepoint after
+    any single outlying observation. It requires a lower bound |V|_min > 0 on the determinant of the posterior predictive variance, because the integral term of the β-D loss dominates if |V| is extremely
+    small; the authors say this is not restrictive in practice.'
+  location: Section 2.3 (Quantifying robustness)
+  page: 5
+  quote: Theorem 1 provides very mild conditions for the β-D robustiﬁed BLR model ensuring that the odds never favor a CP after any single outlying observation
+- id: c5
+  statement: 'Computation: sampling-based General Bayesian inference would make the algorithm on-line in name only and add three sources of approximation error per (run length, model) and time step, so
+    the β-D posterior is approximated within the conjugate family by structural variational inference (exact as β → 0). Full optimization of the variational parameters at every step costs O(T) space and
+    O(T^2) time; the proposed SVRG variant (full optimization every m steps for the first W iterations of a run length, then anchored stochastic updates on a window) has constant space and linear time.'
+  location: Stochastic Variance Reduced Gradient (SVRG) for BOCPD
+  page: 7
+  quote: The resulting on-line inference has constant space and linear time complexity like SGD, but produces good estimates for small rt and converges faster
+- id: c6
+  statement: 'Choosing β: the authors note there was no principled framework for selecting β. β_p is initialized by solving for the β_p whose point of maximum influence lies at a chosen Mahalanobis distance
+    under the prior (k-th standard deviation for low dimensions, sqrt(d) for larger d); β_rlm initialization matters less (values in [0, 1] give reasonable results). β is then refined on-line by SGD on
+    a predictive loss (a bounded absolute loss in the experiments), with the gradient for β_p approximated numerically. Because the losses need not be convex in β_p, initial values can matter.'
+  location: Section 4 (Choice of β)
+  page: 7
+  quote: We remedy this by minimizing the expected predictive loss with respect to β on-line.
+- id: c7
+  statement: 'Well-log (univariate benchmark whose outliers are usually removed before running CP detection): the maximum of the standard BOCPD run-length distribution is zero 145 times, so declaring CPs
+    at the run-length maximum gives a false discovery rate > 90%; with MAP segmentation standard BOCPD mislabels 8 outliers as CPs (FDR > 40%), whereas the β-D version mislabels none. The robust version
+    has more computational overhead but needs less than 0.5 seconds per observation (3.1 GHz Intel i7, 16GB RAM).'
+  location: Section 5 (Well-log)
+  page: 8
+  quote: Even using Maximum A Posteriori (MAP) segmentation [11], standard BOCPD mislabels 8 outliers
+- id: c8
+  statement: 'Protocol caveat for the well-log comparison: standard and robust BOCPD were run with different priors. Because of Theorem 1 the robust version can use a much less informative prior; for the
+    standard version a more informative prior (constant hazard 0.01) was used, because with too flat priors it declares far too many changepoints.'
+  location: Appendix I.1 (Well-log data)
+  page: 34
+  quote: If priors are too ﬂat, the standard version declares far too many changepoints.
+- id: c9
+  statement: 'Air pollution (NOX at 29 London stations, spatially structured Bayesian VARs; earlier robust on-line methods cannot be applied because they assume univariate or independent data): robust BOCPD
+    finds one CP corresponding to the congestion charge introduction while standard BOCPD has FDR > 90%. Both find a change in dynamics (models) after the congestion charge, with substantially lower model-posterior
+    variance for the robust algorithm.'
+  location: Section 5.2 (Air Pollution)
+  page: 9
+  quote: As Figure 5 shows, robust BOCPD ﬁnds one CP corresponding to the introduction of the congestion charge, while standard BOCPD produces an FDR >90%.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: The Alan Turing Institute; University of Warwick. Venue from the arXiv journal_ref (NeurIPS 2018); the PDF footer reads
+    ''32nd Conference on Neural Information Processing Systems (NIPS 2018), Montréal, Canada.'' Section numbers 2.3, 3.1, 4, 5 and 5.2 are confirmed by cross-references in the text (''see section 2.3'',
+    ''Section 3.1 overcomes'', ''Section 4 expands on how β can be initialized'', ''see section 5.2''); other locations use heading names. Both experiments also use on-line hyperparameter optimization (Caron
+    et al.) and run-length pruning (50 most likely run lengths kept). The air-pollution baseline results come from the authors'' own earlier work (Knoblauch & Damoulas 2018, ref [25]). Changepoints are
+    declared from the run-length maximum or a MAP segmentation; no annotated ground-truth CPs beyond the congestion-charge date are used, and FDR is judged by outlier mislabelling. Appendix I.3: β_p barely
+    moves on the well-log data, while on air pollution it jumps to ~1e-10 after the first iteration (explained by a numerical-stability lower bound). Sampling-free (Student''s t) comparison and MCMC timing
+    are in the appendix (not recorded). Section 3.1 notes β_p must decrease as d increases (initialized at 0.05 for d = 1 and 0.005 for d = 29 in the experiments). Appendix I: inference reported fairly
+    stable to the β_p initialization as long as it is chosen reasonably (air pollution: same CP within ±5 days for initial β_p 0.005-0.1). Appendix I.2: the non-robust air-pollution baseline uses more than
+    20 models with lags 1, 5, 6, 7 versus lags 1-3 for the robust run (chosen, per the authors, to disadvantage the robust model universe); robust processing mostly takes well under 20 s per observation
+    but sometimes over a minute.'

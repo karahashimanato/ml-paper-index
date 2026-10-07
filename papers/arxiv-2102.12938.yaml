@@ -1,0 +1,94 @@
+id: arxiv-2102.12938
+title: On Posterior consistency of Bayesian Changepoint models
+authors:
+- Nilabja Guha
+- Jyotishka Datta
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2102.12938
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 83267f2a568cbe84ad50f509ffe2c1ccc1089fbb406439ce45f6c2ab901a0bc8
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  - linear-models
+  paradigms:
+  - unsupervised
+proposes:
+- A hierarchical Bayesian changing linear regression model with independent Bernoulli(p_n) changepoint indicators and spike-and-slab priors for per-segment variable selection, with Bayes-factor posterior
+  consistency results for the number and locations of changepoints and for the selected covariates (and for the covariate-free piecewise constant mean model)
+claims:
+- id: c1
+  statement: 'Prior on changepoints: each observation carries an independent Bernoulli(p_n) changepoint indicator with p_n of order c_n / n, so c_n is the prior expected number of changepoints; letting
+    c_n grow allows many changepoints for large n. Segment coefficients get spike-and-slab priors (or global-local shrinkage priors as an alternative).'
+  location: Mathematical/Asymptotic Framework
+  page: 5
+  quote: Here, cn controls the expected numbers of change points apriori, and letting cn increase to inﬁnity provides ﬂexibility to model multiple and potentially large number of change points for large
+    n.
+- id: c2
+  statement: 'Claimed contributions: posterior consistency for model selection and change point recovery via Bayes factors, for both the piecewise constant model and changing high-dimensional linear regression,
+    and attainment of the O(n^-1) minimax localization rate of Frick et al. (2014) by the Bayes estimators.'
+  location: Introduction
+  page: 4
+  quote: We also prove that the minimax rate of O(n−1) (Frick et al., 2014) is attained by the Bayes estimators for change point recovery.
+- id: c3
+  statement: Assumptions for the consistency theorems include uniformly bounded covariates (A1), coefficients bounded above and below (A2), a growth condition on the maximum model size q_n (A3), slab variance
+    O(1) (A4), true change points at fixed fractions strictly inside (0, 1) (A5) and singular-value conditions on segment design matrices (A6); under A1-A6, Theorem 3 states that the Bayes factor of a model
+    with a wrong number of change points against the true model goes to 0 in probability.
+  location: Section 3
+  page: 7
+  quote: (A1) The covariates Xj’s are uniformly bounded.
+- id: c4
+  statement: 'Theorem 4 (locations): for models with the true number of change points but some location off by more than eps_n, the Bayes factor against the true model goes to 0; eps_n of order n^-1 up
+    to log factors is allowed if q_n grows logarithmically. The authors state the results hold under misspecification of the variance parameter, and that the bounded-covariate condition can be relaxed to
+    sub-exponential tails.'
+  location: Section 3
+  page: 8
+  quote: The results hold for misspeciﬁcation of variance parameter.
+- id: c5
+  statement: 'Covariate-free case (piecewise constant mean model): Theorem 4 holds for eps_n going to zero with eps_n at least n^-1 (log n)^2, which the authors describe as equivalent to the frequentist
+    minimax rate up to logarithmic factors.'
+  location: Section 3
+  page: 10
+  quote: which gives us rate equivalent to frequentist minimax rate up to logarithmic factors
+- id: c6
+  statement: 'Unknown variance: Theorems 6-7 replace sigma^2 by a residual-based estimator. Theorems 7, 9, 11 and 12 are stated under assumptions ''A1 - A7'', but only A1-A6 are listed in the text; no definition
+    of A7 was found (searched A7).'
+  location: Section 3
+  page: 9
+  quote: Theorem 7. Under A1 −A7, for (2.1) , for the empirical estimator of σ2,
+- id: c7
+  statement: 'Simulation scope and protocol: the authors state the goal is not to show superiority over existing methods but satisfactory small-sample performance. Example 1 uses the Frick et al. (2014)
+    piecewise constant signal (n = 497, 6 change points), unknown and possibly segment-specific variance, V = 1, I_i ~ Bernoulli(1/n), posterior summaries from 8,000 MCMC samples with the first 4,000 as
+    burn-in, and is compared with PELT and the empirical Bayes method of Martin and Shen (2017) via figures only.'
+  location: Section 4
+  page: 10
+  quote: Our goal here is not to establish superiority of the Bayesian method used here over extant methods
+- id: c8
+  statement: 'Changing linear regression example (n = 250, p = 250, true change points at 0.3 and 0.7, spike-and-slab prior, 8,000 MCMC iterations): the text reports that almost 93% of posterior samples
+    give the correct number of partitions and almost 90% select the right model; the authors say this agrees with their consistency theory.'
+  location: Section 4
+  page: 14
+  quote: In particular, from Fig. 4, almost 93% of the posterior samples give the correct number of partitions (3), and almost 90% of the posterior samples select the right model.
+- id: c9
+  statement: 'Real data (weekly burglary and breaking-and-entering counts in Little Rock, 2017; square-root transformed and standardized): with no ground truth the analysis is described as preliminary and
+    exploratory; detected change points mostly agree with PELT (BIC penalty in the figure) while the empirical Bayes method seems conservative and detects none.'
+  location: Real Data Applications
+  page: 16
+  quote: As it is impossible to know if there should be any “true” change-points in 2017 data in the absence of additional information, this can be regarded as a preliminary exploratory analysis.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. No venue is stated in the PDF and the task gave no arXiv comment or journal_ref, so venue is omitted. Section 3 (theory) and Section 4
+    (simulation; Example 2 is §4.2) are confirmed by ''§3'' and ''§4.2'' cross-references; other locations use section names. The abstract says Gibbs sampling provides an efficient computational strategy,
+    but no sampler details, run times or convergence diagnostics were found in the body (searched Gibbs, mixing, converge). The model builds on Datta et al. (2019), on which co-author Datta is an author
+    (self-citation; not evaluated as a competitor). Results are asymptotic Bayes-factor consistency statements under the listed assumptions; the theory assumes Gaussian errors and independent observations
+    (the AR(1) example is argued to remain covered if (A6) holds).'

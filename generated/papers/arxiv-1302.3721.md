@@ -1,0 +1,25 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Thompson Sampling in Switching Environments with Bayesian Online Change Point Detection
+
+- カード: [`arxiv-1302.3721`](../../papers/arxiv-1302.3721.yaml)
+- 著者: Joseph Mellor, Jonathan Shapiro
+- 年・掲載: 2013
+- 原論文: [PDF](https://arxiv.org/pdf/1302.3721v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: bayesian-changepoint-models, online-change-point-detection, reinforcement-learning
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Environment model: rewards are Bernoulli and switch abruptly according to a hazard function (new means drawn uniformly); two models are considered: Global Switching (all arms change at a change point, constant rate) and Per-Arm Switching (independent change points per arm).([Model of Dynamic Environment, p.2](https://arxiv.org/pdf/1302.3721v1#page=2 "We assume abrupt switching deﬁned by a hazard function, h(t), such that,"))
+- **c2** Switching Thompson sampling: since the arm model depends only on data since the last switch and that time is unknown, the run length is introduced as a latent variable and marginalised; sampling proceeds by drawing a run length from the run-length posterior and then arm parameters given that run length, and pulling the arm that is best under the sample.([Switching Thompson Sampling, p.3](https://arxiv.org/pdf/1302.3721v1#page=3 "Since we do not know the runlength rt we can introduce it as a latent variable and marginalise it out."))
+- **c3** Cost: exact run-length inference has space and time growing linearly in time; instead of Adams-MacKay thresholding (memory known only in expectation) the paper uses Fearnhead and Liu's particle-filter resampling (stratified optimal resampling) to keep at most N run lengths, for a hard memory bound. The hazard is a constant switching rate γ in the basic algorithms.([Bayesian Online Change Detection, p.4](https://arxiv.org/pdf/1302.3721v1#page=4 "As we can only know in expectation how much memory this algorithm will require, an alternative with hard guarantees on memory requirements is desirable."))
+- **c4** Learning the switching rate: a constant switching rate is learned with the method of Wilson et al. (Beta hyperparameters counting switches); the authors note Turner et al.'s gradient-based hazard learning appeared, in initial investigations, not to perform particularly well when adapted every step. Learning the rate makes the number of particles grow quadratically rather than linearly.([Learning the Switching Rate, p.8](https://arxiv.org/pdf/1302.3721v1#page=8 "For the purposes of this paper, a constant switching rate was assumed which was learned using the approach of Wilson et al."))
+- **c5** Evaluation protocol: 6 non-stationary environments (4 synthetic, 2 derived from real-world data). The parameters for all experiments were tuned on the PASCAL challenge (the PASCAL Exploration vs. Exploitation Challenge 2006 is itself one of the evaluation environments).([Experiments, p.10](https://arxiv.org/pdf/1302.3721v1#page=10 "The parameters for all experiments shown were tuned based on the PASCAL challenge."))
+- **c6** In the Per-Arm switching environment the hazard-learning variant NP PA-CTS suffers much more regret than PA-CTS, which the authors say would appear to indicate that the parameters are not learned quickly enough; in the Global environment NP Global-CTS does well, which they say suggests learning the hazard rate for that model may be feasible.([Per-Arm Switching Environment, p.11](https://arxiv.org/pdf/1302.3721v1#page=11 "which would appear to indicate for the particular model the parameters are not being learned quickly enough."))
+- **c7** PASCAL 2006 comparison caveat: the authors could not implement a version of Adapt-EvE (the change-point-based challenge winner) that replicated the reported performance, so Adapt-EvE results are copied from the publication, and Adapt-EvE was not run in the other environments to avoid an unfair comparison.([PASCAL Challenge 2006, p.13](https://arxiv.org/pdf/1302.3721v1#page=13 "so here we are simply replicating the results published."))
+- **c8** Conclusion: the CTS algorithms perform well in the environments they were designed for, but are shown not to perform as well as appropriately tuned competing algorithms in the PASCAL challenge; the results suggest that tracking only changes in the perceived best arm (Global-CTS2, PA-CTS2), similar to Adapt-EvE, works well.([Conclusion, p.16](https://arxiv.org/pdf/1302.3721v1#page=16 "However our results suggest that a strategy that just tracks changes in the perceived best arm (Global-CTS2,PA-CTS2), similar to Adapt-EvE, works well."))
+- **c9** No regret guarantee: the authors state the algorithms are derived from simple models and theoretically motivated, but steps still need to be taken to provide any theoretical justification for their performance.([Conclusion, p.16](https://arxiv.org/pdf/1302.3721v1#page=16 "however steps still need to be taken to provide any theoretic justiﬁcation for their performance."))
+

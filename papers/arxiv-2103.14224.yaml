@@ -1,0 +1,95 @@
+id: arxiv-2103.14224
+title: Active multi-fidelity Bayesian online changepoint detection
+authors:
+- Gregory W. Gundersen
+- Diana Cai
+- Chuteng Zhou
+- Barbara E. Engelhardt
+- Ryan P. Adams
+year: 2021
+venue: UAI 2021
+links:
+  arxiv: https://arxiv.org/abs/2103.14224
+  code: https://github.com/princetonlips/mf-bocd
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 71ed9047526cd3f49b39fa6b53ecaf98b369121681bc8f4bb8631beea86268ef
+tags:
+  tasks:
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - streaming
+proposes:
+- 'MF-BOCD: BOCD with multi-fidelity observations, where each observation''s likelihood is tempered by its fidelity in a multi-fidelity posterior (closed form for exponential families) and the fidelity
+  at each step is chosen to maximize a weighted information rate (information gain about the run length divided by cost)'
+claims:
+- id: c1
+  statement: 'BOCD model used: changepoints arrive as a discrete-time Bernoulli process with constant hazard 1/β (geometric partition lengths with mean β); data within a partition are i.i.d. with partition-specific
+    parameters drawn afresh from a prior at a changepoint.'
+  location: Bayesian Online Changepoint Detection
+  page: 2
+  quote: We model the arrival of changepoints as a discrete time Bernoulli process with hazard rate 1/β
+- id: c2
+  statement: 'Motivation: BOCD can be viewed as a model-based exponentially weighted moving average whose weights are estimated from data; when posterior confidence about changepoints is high there is no
+    need for expensive high-fidelity observations.'
+  location: Introduction
+  page: 2
+  quote: as a model-based version of an exponentially-weighted moving average, estimating the weights from data rather than selecting them a priori.
+- id: c3
+  statement: 'Multi-fidelity posterior: each observation''s likelihood is raised to its fidelity ζ in [0, 1], which down-weights its sufficient statistics; the paper only considers exponential-family models
+    because this often allows efficient online updates (non-conjugate cases would need approximations).'
+  location: Multi-Fidelity Posterior Predictive
+  page: 4
+  quote: In this paper, we only consider models in the exponential family, since this restriction often allows for efﬁcient online updates.
+- id: c4
+  statement: 'Decision rule: choose the fidelity maximizing a weighted information rate w(ζ) U(ζ) / λ(ζ), where U is the expected reduction in run-length entropy and λ a known scalar cost; the weights can
+    be tuned on held-out data to achieve a desired budget.'
+  location: Section 3.4
+  page: 5
+  quote: Note that the weights can be tuned on held-out data to achieve a desired expected budget.
+- id: c5
+  statement: An alternative rule (pick low fidelity when the information gains differ by less than a margin) resulted empirically in frequent switching, because the two gains were often close; the information
+    rate was more stable.
+  location: Section 3.4
+  page: 6
+  quote: However, empirically, this resulted in frequent switching between ﬁdelities since the two information gains were often quite close in value.
+- id: c6
+  statement: 'Cost of deciding: computing the information gain sums over the run-length posterior, so its cost grows linearly with time (32t + 1 flops for the beta-Bernoulli model); with Fearnhead and Liu''s
+    resampling the cost is fixed, e.g. 0.32 million flops with 10,000 particles, compared with 82 million flops for the smallest reported MobileNet.'
+  location: Practical Considerations
+  page: 6
+  quote: The cost grows linearly with time because computing information gain requires summing over the run length posterior
+- id: c7
+  statement: 'Evaluation metrics are relative, not to ground truth: MSE of the predictive mean and L1 distance of the run-length posterior are computed against BOCD using only high-fidelity data; baselines
+    are low-fidelity-only BOCD and random fidelity switching with roughly the same high-fidelity fraction.'
+  location: Experiments
+  page: 6
+  quote: In other words, we compare the evaluated model to the best it could have done in practice.
+- id: c8
+  statement: 'CamVid protocol: pretrained MobileNetV3 large/small segmentation models give a binary ''fence'' signal fitted with the multi-fidelity Bernoulli model; costs are set from flops and the low
+    fidelity from the IoU difference; the decision-rule weights were tuned on cross-validation data to approximately 50% low-fidelity usage, and the random baseline flips a fair coin.'
+  location: Section 4.2
+  page: 7
+  quote: The multi-ﬁdelity model’s decision rule weights were tuned to approximate total computational cost of 50% low-ﬁdelity data using cross-validation data, and the randomized approach ﬂips a fair coin
+    to choose the data ﬁdelity.
+- id: c9
+  statement: 'Negative result on MIMII (synthetic changepoint sequences built by sampling normal/anomalous audio clips, 500 datasets per machine): MF-BOCD is not significantly better than random switching
+    on machine 4, which the authors hypothesize is due to the poor low-fidelity model (AUC < 0.5); they note a randomized approach can sometimes do well.'
+  location: MIMII Audio Data
+  page: 8
+  quote: An interesting negative result is that MF-BOCD does not do signiﬁcantly better than random on machine 4.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: Princeton University; Arm ML Research Lab (Zhou). Venue from the PDF first page (''Accepted for the 37th Conference on Uncertainty
+    in Artificial Intelligence (UAI 2021)'') and the arXiv comment. Conflict of interest: Ryan P. Adams is a co-author of the original BOCPD paper (arXiv-0710.3742) that this work extends; Chuteng Zhou
+    is a co-author of MicroNets (Banbury et al., 2020), used here as the high-fidelity MIMII observation model. Section numbers 3.2-3.4, 4.1, 4.2 confirmed by in-text cross-references. Hazard: 1/β = 1/100
+    in the synthetic experiment; the hazard used for CamVid and MIMII was not found in the main text (searched for hazard, β). MIMII anomaly-score thresholds chosen per machine and model from FPR/FNR curves
+    on cross-validation data (Appendix E). Appendix D ablations: information-based switching ''often useful'' versus random switching. Results tables not recorded.'

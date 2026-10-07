@@ -1,0 +1,96 @@
+id: arxiv-2304.00232
+title: Restarted Bayesian Online Change-point Detection for Non-Stationary Markov Decision Processes
+authors:
+- Reda Alami
+- Mohammed Mahfoud
+- Eric Moulines
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2304.00232
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: cf9a7b1e60f6783603d15680d628e5ed90cb596db13f67d804e6201c4bb3be84
+tags:
+  tasks:
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - reinforcement-learning
+proposes:
+- An extension of Restarted BOCPD (R-BOCPD, Alami et al. 2020) from Bernoulli to multinomial observation streams, with false-alarm and detection-delay guarantees
+- 'R-BOCPD-UCRL2: UCRL2 equipped with one R-BOCPD detector per state-action pair that restarts UCRL2 when a change is detected, with a finite-time regret bound for piecewise-stationary (switching) MDPs'
+claims:
+- id: c1
+  statement: 'Setting and assumptions: a piecewise-stationary discrete-time MDP whose transition distributions and rewards can change arbitrarily at unknown times (no variation budget); state and action
+    sets are finite and constant; transitions are multinomial; rewards are bounded; and change points are exogenous, i.e. do not depend on the algorithm''s behaviour or history.'
+  location: Section 3 (Problem Formulation)
+  page: 4
+  quote: We assume neither the change-points nor the changes in reward distributions and state transition distributions depend on the previous behavior of the algorithm or the ﬁltration of the MDP parameter
+    history
+- id: c2
+  statement: 'R-BOCPD is not the run-length recursion of standard BOCPD: following Alami et al. (2020), it maintains weights of ''forecasters'' (products of Laplace predictors, here extended to multinomial
+    data with a uniform prior) and restarts when some later forecaster''s weight exceeds the weight of the forecaster started at the last restart; the last restart time is the change-point estimate.'
+  location: Change-point detection as remedy to non-stationarity
+  page: 6
+  quote: Recall that in the work of Alami et al. (2020), instead of dealing with a run-length, they deal with the notion of forecaster that is a product of successive Laplace predictors.
+- id: c3
+  statement: 'Guarantees for multinomial R-BOCPD: a lower bound on detection delay for any detector with controlled false-alarm rate (Theorem 4.3); false-alarm control with probability 1 - δ if the hyperparameter
+    η_{r,s,t} is small enough (Theorem 4.6); and finite detection delay if η is large enough (Theorem 4.8). Asymptotically (long time since the last restart, δ → 0) the delay is of order log(1/δ) / KL between
+    pre- and post-change distributions, which the authors call asymptotically order optimal.'
+  location: Change-point detection as remedy to non-stationarity
+  page: 6
+  quote: In this section, we provide sufﬁcient conditions on the parameter ηr,s,t that guarantee the false alarm rate control
+- id: c4
+  statement: 'Hyperparameter: η_{r,s,t} must satisfy both conditions at once; the paper states a choice of η as a function of n_{r:t} that satisfies both (the exact form is lost in the text extraction;
+    it appears to be 1/n_{r:t}). No statement of the η value used in the experiments was found in the text (searched Appendix F for η and hyperparameter).'
+  location: Change-point detection as remedy to non-stationarity (Discussion 4.10)
+  page: 7
+  quote: In order to guarantee the false alarm rate and detection delay, we need to choose an appropriate form of the parameter ηr,s,t that satisﬁes both conditions in Equation (7) and Equation (6).
+- id: c5
+  statement: 'Asymptotic regret bound: the derivation of Corollary 4.13 (from the finite-time bound of Theorem 4.12, a UCRL2-type term plus the sum of R-BOCPD detection delays, using the asymptotic detection
+    delay) holds with probability at least 1 - δ and assumes a false-alarm rate of 0.'
+  location: Appendix E.4
+  page: 29
+  quote: which again holds with probability at least 1 −δ, assuming a false-alarm rate of 0.
+- id: c6
+  statement: 'Empirical claim: on synthetic switching MDPs (results shown only as cumulative-reward curves) R-BOCPD-UCRL2 is described as (nearly) regret-optimal in practice, close to an oracle UCRL2 that
+    restarts exactly at the true change points; baselines are SWUCRL2, SWUCRL2-CW, Restarted-UCRL2 (which assumes the number of changes is known) and vanilla UCRL2.'
+  location: Section 5 (Experiments)
+  page: 9
+  quote: Figure 2 shows that R-BOCPD-UCRL2 is (nearly) regret-optimal in practice, as its performance in the deﬁned general setting is very close to that of the change-point aware (optimal) UCRL2 Oracle.
+- id: c7
+  statement: 'Baseline tuning: SWUCRL2''s window uses the theoretically optimal formula, with the MDP diameter chosen by a hyperparameter search over a large range for each state/action size, keeping the
+    value that maximized cumulative rewards; SWUCRL2-CW''s window and widening factor use the optimal formulas with the variation budgets computed beforehand and the true horizon T supplied.'
+  location: Appendix F.1
+  page: 30
+  quote: The diameter maximizing the cumulative rewards was chosen.
+- id: c8
+  statement: 'No realistic environments: the authors are interested in settings such as RiverSwim, MachineReplacement and GridWorld but say it is unclear how to simulate changes there because the underlying
+    transition distributions and rewards are not accessible.'
+  location: Appendix F.2.1
+  page: 30
+  quote: it is unclear to us at the moment of writing this manuscript how to control the process of changing these variables and relate it to the rather latent changes in the underlying state-transition
+    distributions and rewards.
+- id: c9
+  statement: 'Stated limitations: the multinomial assumption (the authors say the detector and its guarantees extend to exponential-family streams) and a bias towards detecting change points where distributions
+    change radically (large variation); they suggest a threshold to decide when to restart given global/local changes, and model-free extensions, as future work.'
+  location: Discussion & Overall Remarks (Limitations and Future Work)
+  page: 10
+  quote: Next, we highlight that our algorithm is biased towards detecting change-points around which distributions change in a rather radical way, i.e with large enough variation in the sense of a total
+    variation norm for instance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: Technology Innovation Institute (Abu Dhabi); Technical University of Munich; Ecole Polytechnique. First two authors contributed
+    equally. The PDF header says ''Preprint.'' and code is promised ''upon publication''; no venue recorded. R-BOCPD itself comes from Alami, Maillard and Feraud (ICML 2020 per the reference list), the
+    first author''s earlier work. Section 3 and Section 5 are confirmed by cross-references (''as defined in Section 3'', ''in Section 5''); other locations use heading names or theorem/appendix labels.
+    The abstract and conclusion claim the regret bound is the first of order Õ(T^{1/2}) and compare it with sliding-window and restart baselines; the exponents are garbled in the text extraction, so these
+    comparisons are not recorded. Abrupt changes of arbitrary magnitude are allowed, but the bound depends on the minimum KL between successive transition kernels. Note the asymmetric tuning: baselines
+    receive searched/oracle quantities (diameter, variation budgets, T, number of changes) while the paper says R-BOCPD-UCRL2 needs no such inputs. In Algorithm 2 one R-BOCPD runs per state-action pair
+    on the observed state sequence and a detection resets all UCRL2 counts. Synthetic MDPs: 4 sizes (4 states/7 actions to 16 states/20 actions), random change points, horizon T = 50000, 100 realizations.'

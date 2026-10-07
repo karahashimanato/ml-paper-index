@@ -1,0 +1,99 @@
+id: arxiv-2306.05265
+title: Linking Frequentist and Bayesian Change-Point Methods
+authors:
+- David Ardia
+- Arnaud Dufays
+- Carlos Ordas Criado
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2306.05265
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: da9aa811e88d364b33b7d3d71fc3250a5ee9baf1bb37ed4732eef59a2d129d3a
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  - linear-models
+proposes:
+- A calibration of Normal Inverse-Gamma (g-prior type) hyperparameters under which the marginal likelihood of a piecewise-linear Gaussian regression change-point model equals the two-stage MDL criterion
+  (up to a small remainder)
+- 'BSMDL, WBSMDL, GMDL and PGMDL: binary segmentation, wild binary segmentation, the Bai-Perron global method, and a pruned global method adapted to the MDL marginal likelihood; SEL selects among local
+  methods by posterior probability'
+- A full Bayesian model, conditional on the number of breaks found by a CP method, with a truncated binomial prior around the estimated breaks and an optional out-of-sample break prior, for credible intervals
+  and forecasting
+claims:
+- id: c1
+  statement: 'Main result: the MDL criterion corresponds to the marginal likelihood of a Bayesian model with a specific class of prior distributions, so that the marginal likelihood inherits the MDL criterion''s
+    asymptotic properties and can be used to detect CPs, assign posterior probabilities to competing CP methods, and select or combine them.'
+  location: Introduction
+  page: 3
+  quote: Our paper addresses this gap by showing that the MDL criterion corresponds to the marginal likelihood of a Bayesian model with a specific class of prior distributions.
+- id: c2
+  statement: 'Background as framed by the authors: frequentist and Bayesian CP approaches have mostly evolved independently; frequentists mostly use SIC variants, sums of squared residuals or MDL, while
+    Bayesians typically maximize the marginal likelihood; consistency of the estimated number and locations of breaks is rarely investigated in the Bayesian framework (citing Du et al., 2016 as an exception
+    for a piecewise-constant model).'
+  location: Introduction
+  page: 3
+  quote: most criteria used by frequentists consistently estimate the number and locations of the breaks, this is rarely investigated in the Bayesian framework.
+- id: c3
+  statement: 'Model assumptions: a piecewise-linear regression with m breaks, i.i.d. standard normal errors scaled by a segment variance, independent regimes in the marginal likelihood product, nonsingular
+    X_i''X_i, and the number of breaks bounded by M. In a footnote the authors call the normality assumption restrictive while noting that several recent Bayesian and frequentist CP frameworks rely on it.'
+  location: Section 2
+  page: 6
+  quote: several recent theoretical and empirical CP frameworks rely on the normality assumption
+- id: c4
+  statement: 'Proposition 2: with NIG hyperparameters set per segment to the segment''s OLS estimate as prior mean, M_i = X_i''X_i (a g-prior), and shape/scale scaled by sqrt(n_i), the log marginal likelihood
+    equals MDL(m, tau) plus a remainder of order O(min_i(n_i)^-7); the hyperparameters therefore depend on the data of each segment.'
+  location: Section 2.3
+  page: 9
+  quote: Proposition 2 formally establishes the link between a class of Bayesian CP models and the MDL criterion.
+- id: c5
+  statement: 'Consistency transfer: Davis et al. (2013) show MDL consistently estimates the number and locations of CPs, AR order and segment parameters for a broad class of piecewise-linear stationary
+    AR processes; the authors state these properties also apply to the MDL marginal likelihood under Davis et al.''s regularity conditions and the Proposition 2 presets, extending Du et al. (2016) from
+    piecewise-constant to piecewise-linear regression.'
+  location: Section 2.3
+  page: 10
+  quote: These asymptotic properties also apply to the MDL marginal likelihood under the regularity conditions stated in Davis et al. (2013) and under the presets given in Proposition 2.
+- id: c6
+  statement: 'Decision rule: replacing the CUSUM statistic in binary and wild binary segmentation by the log ratio of MDL marginal likelihoods (break vs no break on an interval) gives the threshold a probabilistic
+    meaning; a threshold of 0 means the break model has higher posterior probability, and a threshold of 3 is used (posterior probability in favour of a break greater than 95%).'
+  location: Section 3
+  page: 12
+  quote: When δT > 3, the probability in favor of a break is greater than 95%.
+- id: c7
+  statement: 'Simulation protocol caveat: six AR DGPs from Yau and Zhao (2016), T = 1,024, 1,000 replications, scored by the proportion of correct numbers of breaks and an ''exact frequency'' (correct number
+    and every location within 50); BS and WBS use package defaults. All local methods except BS and WBS are given the true autoregressive lag orders (the MDL-based criteria need segment OLS estimates),
+    whereas BS and WBS do not require a particular DGP.'
+  location: Section 4
+  page: 17
+  quote: Note, however, that all local methods except BS and WBS detect the CPs assuming the true lag orders of the autoregressive processes.
+- id: c8
+  statement: 'Simulation result as stated by the authors: WBSMDL outperforms all methods in Table 2 (including the global GMDL) for both metrics in all DGPs, and the SEL method performs equally well as
+    GMDL in this Monte Carlo exercise; BS and WBS show the worst overall performance.'
+  location: Section 4
+  page: 17
+  quote: Notice that WBSMDL outperforms all methods investigated in Table 2 (including the global method GMDL) for both performance metrics in all investigated DGPs.
+- id: c9
+  statement: 'Computational cost: in the long-series experiment (DGP B, T up to 16,384, 100 replications), the slowest local algorithm takes about twelve minutes for the largest sample size, while the global
+    GMDL takes more than eleven minutes at T = 4,096 and was too demanding for larger samples over 100 replications.'
+  location: Section 4
+  page: 19
+  quote: It takes about twelve minutes on a standard computer for the slowest local algorithm to run for the largest sample size.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: HEC Montreal (GERAD), EDHEC Business School, Laval University. No venue: the PDF states only that preliminary versions were
+    presented at R/Finance 2019, the Econometric Society & Bocconi Virtual World Congress 2020 and the EEA Virtual Congress 2020 (not recorded as venue); no arXiv comment. Section numbers are confirmed
+    by the outline paragraph (''In Section 2 ... Section 7 concludes'') and the cross-reference ''see Section 2.3''. The proposed MDL-based methods (BSMDL, WBSMDL, GMDL, PGMDL, SEL) are the authors'' own
+    adaptations compared against existing BS/WBS (wbsts package defaults) and LRSM; footnote 5 notes their LRSM results are more favorable than Yau and Zhao''s because of estimator differences. Full Bayesian
+    model (Section 5): conditions on the number of breaks from an existing CP method, uses a truncated binomial prior centred at the estimated CPs (an informative, data-derived prior), integrates out segment
+    parameters and samples CPs with D-DREAM (Bauwens, Dufays and De Backer, 2014a, co-authored by A. Dufays); an optional geometric out-of-sample break prior follows Pesaran et al. (2006). The introduction
+    argues Bayesian credible intervals for break locations do not overlap and remain in-sample. Applications: Fama-French five-factor model on daily bank-portfolio returns 1963-2022 (32 factor subsets x
+    11 local methods) and monthly U.S. CPI forecasting (expanding window, 817 out-of-sample points, model confidence set). Results tables not recorded.'

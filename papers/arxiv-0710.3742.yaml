@@ -1,0 +1,92 @@
+id: arxiv-0710.3742
+title: Bayesian Online Changepoint Detection
+authors:
+- Ryan Prescott Adams
+- David J. C. MacKay
+year: 2007
+links:
+  arxiv: https://arxiv.org/abs/0710.3742
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: b88ebb53033d361fe4b1feeca819a1b39a17dfb29f694d6ac2b71ed6a9fcde6f
+tags:
+  tasks:
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - unsupervised
+  - streaming
+proposes:
+- 'Bayesian online changepoint detection (BOCPD): exact online inference of the posterior over the current run length (time since the last changepoint) by a message-passing recursion on a trellis, using
+  a hazard function derived from the prior over the interval between changepoints and a per-run predictive model (conjugate-exponential models with incrementally updated sufficient statistics), with predictions
+  obtained by marginalizing over the run length'
+claims:
+- id: c1
+  statement: 'Model assumptions: the sequence is divided into non-overlapping product partitions whose boundaries are the changepoints; within each partition the data are i.i.d. given partition parameters,
+    the partition parameters are themselves i.i.d., and a discrete prior Pgap(g) is placed on the interval between changepoints.'
+  location: Introduction
+  page: 1
+  quote: We further assume that for each partition ρ, the data within it are i.i.d. from some probability distribution
+- id: c2
+  statement: 'Goal: unlike most Bayesian changepoint work, which is offline and retrospective (segmentation, posterior sampling of changepoint locations), the paper targets online causal predictive filtering,
+    i.e. an accurate distribution of the next datum given only data already observed.'
+  location: Introduction
+  page: 1
+  quote: Rather than retrospective segmentation, we focus on causal predictive ﬁltering; generating an accurate distribution of the next unseen datum in the sequence, given only data already observed.
+- id: c3
+  statement: 'Run-length recursion: the joint distribution over the current run length and the data is computed recursively by message passing, needing only (1) the prior over r_t given r_{t-1} and (2)
+    the predictive distribution of the new datum given the data since the last changepoint; the marginal predictive is obtained by integrating over the run-length posterior.'
+  location: Recursive Run Length Estimation
+  page: 2
+  quote: We can thus generate a recursive message-passing algorithm for the joint distribution over the current run length and the data
+- id: c4
+  statement: 'Hazard function: the conditional changepoint prior has nonzero mass at only two outcomes (run length grows by one, or drops to zero), which gives the algorithm its efficiency; the hazard H(τ)
+    is derived from Pgap, and when Pgap is geometric with timescale λ the process is memoryless and the hazard is constant at 1/λ.'
+  location: The Changepoint Prior
+  page: 2
+  quote: is a discrete exponential (geometric) distribution with timescale λ, the process is memoryless and the hazard function is constant
+- id: c5
+  statement: 'Initialization: two boundary conditions are considered: if a changepoint is known to occur just before the first datum, all initial run-length mass is placed at zero; if only a recent subset
+    of the data is observed, the initial run length prior is the normalized survival function of Pgap.'
+  location: Boundary Conditions
+  page: 3
+  quote: In such cases we place all of the probability mass for the initial run length at zero
+- id: c6
+  statement: 'Predictive model: conjugate-exponential models are convenient because inference needs a finite number of sufficient statistics that can be updated incrementally per run-length hypothesis;
+    only this exact case is addressed, and compact approximations are mentioned for cases where exact predictive distributions are not available.'
+  location: Conjugate-Exponential Models
+  page: 3
+  quote: We will only address the exact case in this paper
+- id: c7
+  statement: 'Cost and pruning: per-time-step space and time complexity are linear in the number of data points observed so far; discarding run-length tail mass below a threshold (e.g. 10^-4) gives constant
+    average complexity per iteration of the order of the expected run length E[r], but the worst case is still linear in the data.'
+  location: Computational Cost
+  page: 4
+  quote: This yields a constant average complexity per iteration on the order of the expected run length E[r], although the worst-case complexity is still linear in the data.
+- id: c8
+  statement: 'Experimental protocol: three real-world datasets (well-log nuclear magnetic response with a Gaussian model, 1972-75 Dow Jones daily returns with zero-mean Gaussian and changing variance, coal
+    mine disasters as a Poisson process), each with a discrete exponential prior on the changepoint interval (λgap = 250, 250 and 1000 respectively) and stated prior parameters. No statement of how these
+    hyperparameters were chosen was found in the text (searched for chose, select, tune).'
+  location: Experimental Results
+  page: 4
+  quote: In each of the three examples, we use a discrete exponential prior over the interval between changepoints.
+- id: c9
+  statement: 'Evaluation is qualitative: results are shown as plots of the run-length posterior, e.g. for the well-log data the drops to zero run length are said to correspond well with abrupt mean changes,
+    and historical events are marked on the Dow Jones and coal mine plots. No detection metric, comparison method, or explicit rule for declaring a changepoint from the posterior was found in the text (searched
+    for threshold, declare, select).'
+  location: Well-Log Data
+  page: 4
+  quote: Notice that the drops to zero run-length correspond well with the abrupt changes in the mean of the data.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliation: Cavendish Laboratory, Cambridge. arXiv comment ''7 pages, 4 figures, latex''; no venue recorded (technical report on arXiv).
+    The extracted headings carry no section numbers, so locations use section names. Algorithm 1 notes that truncating the per-timestep vectors when the run-length tail mass is below a threshold is an optimization
+    not shown. The Discussion emphasizes modularity (changepoint code separated from the model code). Related: Fearnhead and Liu (2007) is cited by later papers as a concurrent exact online method; this
+    paper does not compare against it.'

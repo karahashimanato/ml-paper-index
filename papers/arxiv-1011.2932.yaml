@@ -1,0 +1,93 @@
+id: arxiv-1011.2932
+title: Simulation-based Bayesian analysis for multiple changepoints
+authors:
+- Jason Wyse
+- Nial Friel
+year: 2010
+links:
+  arxiv: https://arxiv.org/abs/1011.2932
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 290f1ad7dc96408739a3b1ad49b39ae058fa66edf5c1bb2eebe6f5061c696177
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - unsupervised
+proposes:
+- 'An MCMC sampler for retrospective multiple changepoint problems with an unknown number of changepoints: segment parameters are integrated out with conjugate priors, so the sampler moves on (k, changepoint
+  positions) only, with add / delete / move (Gibbs or local random walk) steps whose acceptance ratios are Bayes factors, and with hyperpriors on the segment-length parameter p and the segment hyperparameters'
+claims:
+- id: c1
+  statement: 'Model assumptions: a changepoint at t means y_1..y_t and y_{t+1}..y_n are generated differently; conditional on a segmentation the data within each segment are independent, segment parameters
+    are independent across segments, and a prior on the changepoint configuration (hyperparameter xi) and a prior on the number of changepoints k complete a hierarchical model similar to Green (1995).'
+  location: Section 2
+  page: 2
+  quote: Conditional on a segmentation, the data within each segment is assumed independent.
+- id: c2
+  statement: 'Collapsing: with conjugate priors the segment parameters are integrated out, so the posterior over (k, z) is a product of closed-form segment marginal likelihoods and a dimension change needs
+    no bijection (unlike RJMCMC). The first term of the acceptance ratio is the Bayes factor between the k+1 and k changepoint configurations, so sampling is a model search over a large space (the authors
+    note up to 5 changepoints in a series of length 200 gives a space of dimension about 2.5 x 10^9).'
+  location: Section 3
+  page: 4
+  quote: Noting this, it becomes apparent that sampling k and z is equivalent to a model search over large model space.
+- id: c3
+  statement: 'Sampler moves and cost: each sweep adds or deletes a changepoint (acceptance needs at most three marginal likelihoods) and moves a changepoint within its neighbours. The Gibbs position update
+    costs O(tau_{j+1} - tau_{j-1}) and may be expensive for long series with distant changepoints or many changepoints, in which case a local random walk may be preferred; the authors suggest a mixture
+    of the two should improve mixing.'
+  location: Section 4
+  page: 5
+  quote: In this situation a local random walk update may be preferred.
+- id: c4
+  statement: 'Prior sensitivity: with a geometric segment-duration prior, the choice of p may impact the analysis: too small and small changes cannot be detected with high power, too large and spurious
+    changepoints are inferred. A hyperprior on p (e.g. Beta, or non-informative Beta(1,1)) and on the segment hyperparameters gamma is therefore introduced and sampled within the MCMC sweep.'
+  location: Section 5
+  page: 6
+  quote: If too large, then spurious changepoints are inferred.
+- id: c5
+  statement: Exact filtering recursions (Fearnhead 2006) give independent posterior samples and fast sampling, but their main weakness is that samples are conditional on fixed hyperparameters; updating
+    gamma under a hyperprior would require recomputing recursions that are quadratic in n for each new value, which the authors describe as infeasible for any reasonably large posterior sample.
+  location: Section 6
+  page: 7
+  quote: The main weakness of this approach is that the generated samples are dependent on a ﬁxed value of the hyperparameters γ.
+- id: c6
+  statement: 'Validation on the coal-mining disasters data (Poisson model, weekly discretisation, Gamma(1, 200/7) intensity prior, the Fearnhead (2006) order-statistics position prior): 500,000 sweeps after
+    10,000 burn-in, keeping every 50th sample, took 10 seconds on a 2.5GHz processor; the posterior number of changepoints is described as almost identical to long RJMCMC runs and recursion-based methods
+    (comparison shown in a figure).'
+  location: Section 7
+  page: 7
+  quote: This took 10 seconds on a 2.5GHz processor.
+- id: c7
+  statement: 'Streakiness data (Bernoulli segments, Beta(1,1) success prior, geometric segment lengths with a uniform hyperprior on p, 100 sampler runs): the modal number of changepoints from filtering
+    recursions computed over a grid of p is very sensitive to p, whereas the sampler with a hyperprior suggests two changepoints is most likely with relatively strong support for up to five; the authors
+    question whether a fixed-p analysis would be useful to a practitioner.'
+  location: Streakiness in sports
+  page: 9
+  quote: It is clear that the number of changepoints inferred in the ﬁltering recursions analysis is very sensitive to the value of p for this data.
+- id: c8
+  statement: 'Well-log data (outliers removed before analysis; Gaussian piecewise-constant mean with common variance): the modal number of changepoints from filtering recursions is sensitive to both p and
+    sigma over small grids. The Fearnhead (2006) independence-proposal MCMC built from recursions at fixed hyperparameters had a high acceptance rate but a highly degenerate proposal, which the authors
+    say could lead to highly biased sampling on other datasets.'
+  location: Application to Well-log data
+  page: 12
+  quote: Only ten unique changepoint conﬁgurations were sampled in the 50,000 iterations of the MCMC scheme.
+- id: c9
+  statement: 'Conclusion of the comparison with a cost caveat: the proposed sampler explores the posterior with hyperpriors better than the independence proposal, but generating independent samples may
+    be more costly in large datasets with many changepoints; including hyperpriors circumvents the sensitivity of the changepoint posterior to hyperparameter choices, which the authors call the main advantage.'
+  location: Application to Well-log data
+  page: 12
+  quote: Nonetheless, it is clear that the inclusion of hyperpriors circumvents the sensitivity of posterior distribution of the changepoints to speciﬁcation of the hyperparameters.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. No venue is stated in the PDF and the arXiv comment (''17 pages'') gives none, so venue is omitted. Evaluation uses three real datasets
+    only (coal-mining, Tiger Woods streakiness, Well-log); no simulated data with known changepoints or accuracy metric was found in the text (searched simulat, synthetic, true changepoint). Comparisons
+    with filtering recursions are qualitative (figures of modal number of changepoints / densities); no figure values recorded. Section numbers 2-7 are confirmed by the paper''s outline paragraph; the streakiness
+    and Well-log sections are given by name. A C implementation is offered on the first author''s web page.'

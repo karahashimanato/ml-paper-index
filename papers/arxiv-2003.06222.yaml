@@ -1,0 +1,102 @@
+id: arxiv-2003.06222
+title: An Evaluation of Change Point Detection Algorithms
+authors:
+- Gerrit J. J. van den Burg
+- Christopher K. I. Williams
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2003.06222
+  code: https://github.com/alan-turing-institute/TCPDBench
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: e186da82613b48f2364ee7a3acb1c9a7077a3bf02f99a5d9c9e92516ddeb34ac
+tags:
+  tasks:
+  - change-point-detection
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - unsupervised
+proposes:
+- 'TCPD: a data set of 37 real-world time series (plus 5 hidden simulated quality-control series) annotated for change points by five human annotators each, with an annotation tool'
+- 'Evaluation metrics for multiple ground-truth annotations: the segmentation covering metric averaged over annotators, and an F1-score whose precision uses the union of annotations and whose recall is
+  macro-averaged over annotators (margin of error M)'
+- 'TCPDBench: a benchmark of 14 change point methods (including bocpd, bocpdms, rbocpdms and a zero baseline) under a Default and an Oracle (best-over-grid) protocol'
+claims:
+- id: c1
+  statement: 'Data set and annotation: 37 real series (33 univariate, 4 multivariate) from sources such as WorldBank, EuroStat and Wikipedia, plus 5 simulated quality-control series added without the annotators''
+    knowledge (42 in total). Annotators were data scientists and machine learning researchers deliberately chosen without domain background; the tool assigned series randomly, and each series was annotated
+    by five of the eight annotators.'
+  location: Section 4 (Annotation Collection)
+  page: 8
+  quote: In total, eight annotators provided annotations for the 42 time series, with ﬁve annotators assigned to each time series.
+- id: c2
+  statement: 'Metrics: the covering metric (Jaccard-based, averaged over annotators) is used as the clustering metric (Hausdorff is disregarded because it can obscure methods with many false positives);
+    the F1-score treats detections within a margin M of an annotation as true positives without double counting, with precision against the combined set of annotations and recall averaged over annotators.
+    t = 1 is added as a trivial change point to keep precision and recall defined; M = 5 in the experiments.'
+  location: Section 3
+  page: 6
+  quote: In the experiments we use a margin of error of M = 5.
+- id: c3
+  statement: 'Annotator consistency: in one-vs-rest evaluation the median annotator score was approximately 0.8 (covering) and 0.9 (F1); F1 values are generally higher because of the margin of error and
+    because precision uses the union of annotations. The few low-agreement cases are often due to one or two annotators disagreeing with the others.'
+  location: Section 4.4
+  page: 9
+  quote: The ﬁgures show that on average there is a high degree of agreement between annotators, with the median annotator score approximately 0.8 for the covering metric and 0.9 for the F1-score
+- id: c4
+  statement: 'Protocol: two evaluations. Default uses each method''s default settings from the package documentation (a data analyst without prior knowledge of parameter choices); Oracle reports the maximum
+    score over a grid search of hyperparameters per series. The authors emphasize that Oracle is not necessarily a realistic measure because, in unsupervised CPD, users cannot in general tune parameters
+    to match the unknown ground truth. Univariate and multivariate series are analysed separately, series are standardized, and computation time is not reported because implementation languages differ.'
+  location: Section 5 (Experimental Setup)
+  page: 10
+  quote: It should be emphasized that while the Oracle experiment is important from a theoretical point of view, it is not necessarily a realistic measure of practical algorithm performance.
+- id: c5
+  statement: 'Decision rule for Bayesian online methods: BOCPD-type algorithms following Adams and MacKay (2007) compute a full distribution over change point locations and do not return a single segmentation,
+    so the maximum a posteriori (MAP) segmentation is used to compare them with the other methods.'
+  location: Section 5 (Experimental Setup)
+  page: 11
+  quote: To allow for comparisons to the other methods we use the maximum a posteriori (MAP) segmentation of the series (see, e.g., Fearnhead and Liu, 2007).
+- id: c6
+  statement: 'bocpd settings: R package ocp with a Gaussian likelihood and its conjugate prior (described in the text as a ''negative inverse gamma prior''), prior mean 0 (data standardized), no run-length
+    truncation. Default: intensity lambda_gap = 100, alpha0 = beta0 = kappa0 = 1. Grid: intensity in {10, 50, 100, 200} and alpha0, beta0, kappa0 each in {0.01, 0.1, 1, 10, 100}. bocpdms used the same settings
+    but with run-length pruning to the best 100 run lengths during the grid search (for speed); rbocpdms used pruning and timeouts.'
+  location: Appendix A
+  page: 17
+  quote: For the default experiment the intensity (λgap) was set to 100, the prior variables were set to α0 = 1, β0 = 1, and κ0 = 1.
+- id: c7
+  statement: 'Default setting: the zero baseline (always no change points) outperforms many methods, which the authors attribute partly to the small number of change points per series and say also suggests
+    many methods return many false positives; no method performed significantly better than zero in the Default experiment, while this does not hold for Oracle.'
+  location: Section 5
+  page: 13
+  quote: We also see that in our experiments no method performs signiﬁcantly better than the zero method on the Default experiment, while this does not hold for the Oracle experiment.
+- id: c8
+  statement: 'Oracle setting (rank analysis: Friedman test, pairwise Wilcoxon signed-rank tests with Holm correction, critical-difference diagrams): bocpd achieves the highest average rank, and the authors
+    find it noteworthy that bocpd, with a simple Gaussian constant-mean segment model, outperforms methods allowing trend and seasonality (prophet) or autoregressive structure (bocpdms).'
+  location: Section 5
+  page: 13
+  quote: It is noteworthy that even though bocpd assumes a simple Gaussian model with constant mean for each segment, it outperforms methods that allow for more complex time series behavior such as trend
+    and seasonality (prophet), or autoregressive structures (bocpdms).
+- id: c9
+  statement: 'Conclusion: with default parameters binseg performs best on univariate series but is not statistically significantly different from several other methods; with hyperparameter tuning bocpd
+    outperforms all other methods on univariate and multivariate series, but its differences from some algorithms (binseg, segneigh and rfpop, among others) are not statistically significant. Future work
+    could add automated hyperparameter tuning to bridge the Default-Oracle gap (perhaps inspired by Turner et al., 2009 for bocpd).'
+  location: Section 6 (Discussion)
+  page: 14
+  quote: However, the diﬀerences between it and some other algorithms (binseg, segneigh, and rfpop, among others) have been shown to not be statistically signiﬁcantly diﬀerent.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: The University of Edinburgh and The Alan Turing Institute (first author''s work done at the Turing Institute; supported
+    by The Alan Turing Institute under EPSRC grant EP/N510129/1); the code repositories (TCPDBench, AnnotateChange, and the bocpdms/rbocpdms code used) are under the alan-turing-institute GitHub organization.
+    No venue: the PDF states none (it carries an arXiv changelog; v3 expanded the Oracle grid search, switched to critical-difference diagrams and updated results; v2 corrected an F1 computation error).
+    Section numbers 2-6 and 4.4 are confirmed by the outline paragraph and cross-references; subsection names are used otherwise. Motivation: algorithms are typically evaluated on simulated data and a few
+    reused real series with unreliable ground truth. Annotation tool: no dates, values or series names shown; introductory synthetic series with feedback, repeated if the annotator''s F1 is too low. Methods
+    use existing (mostly author-provided) packages; rfpop''s grid has 2,424 configurations, and the authors note the Oracle is not indicative of real-world performance since a data scientist cannot identify
+    the most accurate segmentation among grid results. rbocpdms failed on two univariate series in Default (scored zero); uk_coal_employ (missing values) excluded. Quality-control series excluded from the
+    benchmark. Appendix B simulates chance agreement (Poisson/uniform annotations) and finds agreement significantly above chance for most series. Results tables (Table 2) not recorded.'

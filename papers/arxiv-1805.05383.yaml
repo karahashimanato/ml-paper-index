@@ -1,0 +1,96 @@
+id: arxiv-1805.05383
+title: Spatio-temporal Bayesian On-line Changepoint Detection with Model Selection
+authors:
+- Jeremias Knoblauch
+- Theodoros Damoulas
+year: 2018
+venue: ICML 2018
+links:
+  arxiv: https://arxiv.org/abs/1805.05383
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: cd66da658f1d1c8939e3414cb552d199c8224acf66cf2c1d69a615ba6791cfcb
+tags:
+  tasks:
+  - online-change-point-detection
+  - time-series-forecasting
+  method_families:
+  - bayesian-changepoint-models
+  - linear-models
+  paradigms:
+  - unsupervised
+  - streaming
+proposes:
+- 'BOCPDMS: Bayesian on-line changepoint detection with model selection, unifying Adams & MacKay (2007) and Fearnhead & Liu (2007) so that a finite model universe is tracked online, giving one-step/h-step
+  prediction, model posteriors (Bayes factors) and MAP segmentation of changepoints and models'
+- Spatially structured Bayesian vector autoregressions (SSBVAR) as segment models, sparsified via neighbourhood systems, with a VAR approximation guarantee (Theorem 1) used to choose lag lengths
+claims:
+- id: c1
+  statement: BOCPDMS unifies Adams & MacKay and Fearnhead & Liu, exploiting that both use product partition models, which assume independence of parameters conditional on the changepoints and independence
+    of observations conditional on these parameters.
+  location: Introduction
+  page: 1
+  quote: Our construction exploits that both algorithms use Product Partition Models (Barry & Hartigan, 1992), which assume independence of parameters conditional on the CPS and independence of observations
+    conditional on these parameters.
+- id: c2
+  statement: 'Model switching prior: given a hazard H and model prior q, the model stays the same unless a changepoint occurs, in which case the next model is drawn from q; the AM recursion is the special
+    case of a single model.'
+  location: Section 2.2
+  page: 2
+  quote: Eq. (1b) implies that the model at time t will be equal to the model at time
+- id: c3
+  statement: 'Outputs: the global run-length distribution, obtained directly as in Fearnhead & Liu, is used for on-line MAP segmentation (changepoints and the model of each segment); framing it in the AM
+    run-length framework additionally gives on-line prediction and model selection at the same computational cost.'
+  location: Section 2.2
+  page: 3
+  quote: Eq. (6e) is arrived at directly in FL and used for on-line MAP segmentation.
+- id: c4
+  statement: On-line monitoring of the model posterior (and pairwise Bayes factors) is presented as useful when structural changes are slow and not captured well by changepoints.
+  location: Section 2.3
+  page: 3
+  quote: This is attractive when structural changes in the data happen slowly and are not captured well by CPS.
+- id: c5
+  statement: 'Hyperparameters: type-II ML is done by on-line gradient descent (following Caron et al., 2012) rather than the approach of Saatçi et al. (2010), who use an initial segment as a test set and
+    run BOCPD K times; the authors prefer it because inference and type-II ML run simultaneously, enabling cold starts, without affecting the on-line nature or complexity.'
+  location: Section 4
+  page: 5
+  quote: Firstly, inference and type-II ML are executed simultaneously (rather than sequentially) and thus enable cold-starts of BOCPDMS.
+- id: c6
+  statement: 'Pruning: without pruning, processing y_t costs O(t); keeping run lengths with posterior above 1/Rmax or the Rmax most probable makes it time-constant (citing Adams & MacKay); stratified rejection
+    control was found to perform as well. The experiments keep the Rmax most probable model-specific run lengths for each model.'
+  location: Section 5.1
+  page: 5
+  quote: In our experiments, we prune by keeping the Rmax most probable model-speciﬁc run-lengths
+- id: c7
+  statement: 'Comparison protocol: one-step-ahead predictive MSE and NLL of BOCPDMS are compared with GP-based changepoint models on Nile, snowfall, bee waggle dance and 30 industry portfolios; all GP results
+    are taken from Saatçi et al. (2010) and Turner (2012) rather than rerun. The experiments use uniform model priors, a constant hazard, and gradient-descent hyperparameter optimization; the hazard value
+    was not found in the text (searched for hazard).'
+  location: Section 6.1
+  page: 7
+  quote: All GP results are taken from Saatc¸i et al. (2010) and Turner (2012).
+- id: c8
+  statement: 'Robustness explanation: the GP models treat the noise variance as a hyperparameter optimized (except NSGP) only in a training period, giving overconfident predictions that mislabel outliers
+    as changepoints; BOCPDMS models the variance within the Bayesian hierarchy, so its predictive distributions are wider and it is more robust to outliers (e.g. a single MAP changepoint on the Nile data,
+    versus 18 additional changepoints corresponding to outliers reported by Saatçi et al.).'
+  location: Section 6.1.2
+  page: 7
+  quote: Consequently, our predictive distributions are wider, and the algorithm is less conﬁdent about the next observations, making it more robust to outliers.
+- id: c9
+  statement: 'Trade-off: the higher sensitivity of the GP models can be advantageous; on the bee waggle dance, where variance is homogeneous and changepoints are subtle, the GP-based techniques are better
+    at identifying the true changepoints. Changepoint detection is assessed against labelled events in figures rather than with a detection metric.'
+  location: Section 6.1.2
+  page: 7
+  quote: For instance, in the bee waggle dance, the GP-based techniques are better at identifying the true CPS.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Warwick; The Alan Turing Institute. Venue from the PDF first page (''A version of this paper appeared in the
+    Proceedings of the 35th International Conference on Machine Learning, Stockholm, Sweden, PMLR 80, 2018'') and the arXiv comment. Section numbers are from the extracted headings. Complexity: linear time
+    and constant space claimed; BOCPDMS runs in O(T Rmax) versus O(T Rmax^3) for the GP models of Saatçi et al. (Section 5.3); run-times (Appendix B) use the original code of Turner (2012) for ARGPCP. Lag
+    lengths of BVAR models chosen from Theorem 1 (3) with T1 = 1, T2 = T. Spatio-temporal showcases (European temperatures, London NOx around the congestion charge) are qualitative (model posteriors, Bayes
+    factors). No detection metric (F1, precision, covering) was found in the text. Results tables not recorded.'

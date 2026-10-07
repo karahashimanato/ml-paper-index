@@ -1,0 +1,25 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Spatio-temporal Bayesian On-line Changepoint Detection with Model Selection
+
+- カード: [`arxiv-1805.05383`](../../papers/arxiv-1805.05383.yaml)
+- 著者: Jeremias Knoblauch, Theodoros Damoulas
+- 年・掲載: 2018 ICML 2018
+- 原論文: [PDF](https://arxiv.org/pdf/1805.05383v2)(arXiv v2、カード作成時に読んだ版)
+- タグ: bayesian-changepoint-models, linear-models, online-change-point-detection, streaming, time-series-forecasting, unsupervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** BOCPDMS unifies Adams & MacKay and Fearnhead & Liu, exploiting that both use product partition models, which assume independence of parameters conditional on the changepoints and independence of observations conditional on these parameters.([Introduction, p.1](https://arxiv.org/pdf/1805.05383v2#page=1 "Our construction exploits that both algorithms use Product Partition Models (Barry & Hartigan, 1992), which assume independence of parameters conditional on the CPS and independence of observations conditional on these parameters."))
+- **c2** Model switching prior: given a hazard H and model prior q, the model stays the same unless a changepoint occurs, in which case the next model is drawn from q; the AM recursion is the special case of a single model.([Section 2.2, p.2](https://arxiv.org/pdf/1805.05383v2#page=2 "Eq. (1b) implies that the model at time t will be equal to the model at time"))
+- **c3** Outputs: the global run-length distribution, obtained directly as in Fearnhead & Liu, is used for on-line MAP segmentation (changepoints and the model of each segment); framing it in the AM run-length framework additionally gives on-line prediction and model selection at the same computational cost.([Section 2.2, p.3](https://arxiv.org/pdf/1805.05383v2#page=3 "Eq. (6e) is arrived at directly in FL and used for on-line MAP segmentation."))
+- **c4** On-line monitoring of the model posterior (and pairwise Bayes factors) is presented as useful when structural changes are slow and not captured well by changepoints.([Section 2.3, p.3](https://arxiv.org/pdf/1805.05383v2#page=3 "This is attractive when structural changes in the data happen slowly and are not captured well by CPS."))
+- **c5** Hyperparameters: type-II ML is done by on-line gradient descent (following Caron et al., 2012) rather than the approach of Saatçi et al. (2010), who use an initial segment as a test set and run BOCPD K times; the authors prefer it because inference and type-II ML run simultaneously, enabling cold starts, without affecting the on-line nature or complexity.([Section 4, p.5](https://arxiv.org/pdf/1805.05383v2#page=5 "Firstly, inference and type-II ML are executed simultaneously (rather than sequentially) and thus enable cold-starts of BOCPDMS."))
+- **c6** Pruning: without pruning, processing y_t costs O(t); keeping run lengths with posterior above 1/Rmax or the Rmax most probable makes it time-constant (citing Adams & MacKay); stratified rejection control was found to perform as well. The experiments keep the Rmax most probable model-specific run lengths for each model.([Section 5.1, p.5](https://arxiv.org/pdf/1805.05383v2#page=5 "In our experiments, we prune by keeping the Rmax most probable model-speciﬁc run-lengths"))
+- **c7** Comparison protocol: one-step-ahead predictive MSE and NLL of BOCPDMS are compared with GP-based changepoint models on Nile, snowfall, bee waggle dance and 30 industry portfolios; all GP results are taken from Saatçi et al. (2010) and Turner (2012) rather than rerun. The experiments use uniform model priors, a constant hazard, and gradient-descent hyperparameter optimization; the hazard value was not found in the text (searched for hazard).([Section 6.1, p.7](https://arxiv.org/pdf/1805.05383v2#page=7 "All GP results are taken from Saatc¸i et al. (2010) and Turner (2012)."))
+- **c8** Robustness explanation: the GP models treat the noise variance as a hyperparameter optimized (except NSGP) only in a training period, giving overconfident predictions that mislabel outliers as changepoints; BOCPDMS models the variance within the Bayesian hierarchy, so its predictive distributions are wider and it is more robust to outliers (e.g. a single MAP changepoint on the Nile data, versus 18 additional changepoints corresponding to outliers reported by Saatçi et al.).([Section 6.1.2, p.7](https://arxiv.org/pdf/1805.05383v2#page=7 "Consequently, our predictive distributions are wider, and the algorithm is less conﬁdent about the next observations, making it more robust to outliers."))
+- **c9** Trade-off: the higher sensitivity of the GP models can be advantageous; on the bee waggle dance, where variance is homogeneous and changepoints are subtle, the GP-based techniques are better at identifying the true changepoints. Changepoint detection is assessed against labelled events in figures rather than with a detection metric.([Section 6.1.2, p.7](https://arxiv.org/pdf/1805.05383v2#page=7 "For instance, in the bee waggle dance, the GP-based techniques are better at identifying the true CPS."))
+

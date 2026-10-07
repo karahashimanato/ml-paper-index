@@ -1,0 +1,96 @@
+id: arxiv-2211.14097
+title: Bayesian variance change point detection with credible sets
+authors:
+- Lorenzo Cappello
+- Oscar Hernan Madrid Padilla
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2211.14097
+  code: https://github.com/lorenzocapp/prisca
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: a3dd599972f64b1b04b471e2616091e4f7b90285d8dea600383d5bfaa0e197e2
+tags:
+  tasks:
+  - change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - unsupervised
+proposes:
+- 'PRISCA (PRoduct of Individual SCAle parameters): multiple changes in the variance of a Gaussian sequence modelled as a product of L single-change scale models (multinomial location, Gamma prior on the
+  scale), fitted by a backfitting recursion that is a mean-field variational approximation; each component gives a point estimate and a credible set of time instances'
+- auto-PRISCA (heuristic choice of L) and extensions TF-PRISCA (smooth mean via trend filtering), AR-PRISCA (autoregression), fractional (power-posterior) PRISCA, non-conjugate priors and periodic data
+claims:
+- id: c1
+  statement: 'Credible sets for a single change: the posterior over the change location (vector alpha) gives both the MAP point estimate and a credible set formed by the smallest set of time instances whose
+    posterior probabilities sum above p; the set is not necessarily an interval.'
+  location: Section 2
+  page: 6
+  quote: We highlight that the credible set built through the above is not necessarily an interval.
+- id: c2
+  statement: 'Theory (Theorem 1, single change point only): under alpha-mixing with exponentially decaying coefficients, a 2+delta moment condition (no Gaussianity), the change away from the boundaries
+    (min{t0, T - t0} > cT), a non-negligible variance ratio and proper priors with pi_t of order 1/T, the MAP estimator localizes at rate sqrt(T) log^{1+eps} T, and at sqrt(T log^{1+eps} T) for independent
+    Gaussian data (the Binary Segmentation rate); the authors state it remains unknown whether it is minimax optimal.'
+  location: Section 2.1
+  page: 8
+  quote: However, in the scenario of independent Gaussian data, it remains unknown whether our estimator is minimax optimal as the Wild Binary Segmentation algorithm from Wang et al. (2021b).
+- id: c3
+  statement: 'Model for multiple changes: L (an upper bound, L >= K needed) single-change components are multiplied; unlike product partition models the model enforces no minimum spacing and nothing prevents
+    two components selecting the same instance, choices motivated by the need for a fast algorithm.'
+  location: Section 3
+  page: 10
+  quote: Also note that, as opposed to PPM, model (9) does not enforce any minimum spacing between change points
+- id: c4
+  statement: 'MCMC difficulty (citing Cappello et al. 2023, a paper co-authored by the first author): a Gibbs sampler for PRISCA is available but is expected to mix very slowly because the location vectors
+    are highly dependent, and without a very good initialization MCMC chains in Bayesian change point detection often fail to converge.'
+  location: Section 3.2
+  page: 11
+  quote: The deployment of MCMC in Bayesian change point detection commonly suffers from this problem, and lacking a very good initialization (e.g., the output of another change point detection procedure),
+    chains often fail to converge; see Cappello et al. (2023).
+- id: c5
+  statement: 'Decision rule and cost: a component counts as a detected change only if its credible set has at most T/2 instances (a threshold the authors call somewhat arbitrary but report results to be
+    insensitive to); overlapping sets are removed in post-processing. Each iteration costs O(TL) worst case and few iterations are typically needed.'
+  location: Section 3.2
+  page: 12
+  quote: Thus, for typical datasets Algorithm 1 has an effective overall computational complexity of O(TL).
+- id: c6
+  statement: 'Approximation: Algorithm 1 is shown to be a mean-field VB approximation of the PRISCA posterior (block-wise coordinate ascent on the ELBO), which converges to a stationary point of the ELBO
+    (Proposition 2, assuming 0 < a0, sigma^2 < infinity); the ELBO change is used as the stopping rule. VB is known to underestimate uncertainty.'
+  location: Section 3
+  page: 14
+  quote: Proposition 1 and Corollary 2 establish that Algorithm 1 is a VB approximation to the posterior distribution of PRISCA, where the approximation lies in the fact that we have factorized the L effects
+    using a mean-field approximation.
+- id: c7
+  statement: 'Simulation protocol (inspired by Killick et al. 2012): zero-mean Gaussian sequences, T in {200, 500, 1000}, K = floor(T^{1/2}/4) changes at random locations with minimum spacing min{T^{1/2},
+    30}, segment variances lognormal, 300 data sets per T; compared with PELT, BINSEG and SEGNEI (R package changepoint) and the Bayesian MCP (given the true K); a change is detected if within min{T^{1/2},
+    30}/2. PRISCA uses a0 = .001, L = floor(T/30). Credible sets do not attain the target p but are relatively close, which the authors attribute to VB underestimating uncertainty.'
+  location: Section 5
+  page: 20
+  quote: We can see that PRISCA’s sets do not attain the targeted p level, but they are relatively close.
+- id: c8
+  statement: 'Hedge on the comparison: although PRISCA-based methods had the lowest bias in K and Hausdorff distance in this particular study, the authors explicitly do not claim superiority over state-of-the-art
+    estimators, only comparable point-estimation accuracy plus uncertainty quantification, and orders-of-magnitude faster run time than the competing Bayesian methods tested.'
+  location: Section 5
+  page: 20
+  quote: We do not claim that PRISCA is better than state-of-the-art estimators.
+- id: c9
+  statement: 'Limits of theory: consistency is proved only for the single change point problem; the authors explain that for Bayesian multiple change point estimators one defines a distribution over partitions
+    whose marginal likelihoods are not closed-form, making theory difficult, which may explain the small theoretical literature.'
+  location: Section 7
+  page: 30
+  quote: This challenge can explain the relatively small literature on theoretical results for Bayesian change point methodologies.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. No venue is stated in the PDF (v3, dated March 4, 2025) and the task gave no journal_ref, so venue is omitted. Main text read; supplementary
+    sections only spot-checked (robustness, Fearnhead 2006 comparison). Possible conflict of interest: the MCMC non-convergence argument and the BLOCKS example rely on Cappello et al. (2023), whose author
+    list includes the first author. Competitor settings: no penalty or tuning choice for PELT / BINSEG / SEGNEI was found in the text (searched default, penalt, MBIC, tuned, tuning). The supplementary comparison
+    with Fearnhead (2006) uses a third-party Python implementation with post-processing thresholds 0.5 / 0.3 that the authors acknowledge as subjective and kept out of the main text. Under non-Gaussian
+    noise, coverage of the sets drops substantially (power-posterior variants partially counterbalance it). Robustness checks report insensitivity to a0 and to a Half-Cauchy prior in their setting; exactness
+    of the recursion is checked only for K = 1. Table values not recorded.'

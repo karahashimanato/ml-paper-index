@@ -1,0 +1,101 @@
+id: arxiv-2302.04759
+title: Robust and Scalable Bayesian Online Changepoint Detection
+authors:
+- Matias Altamirano
+- François-Xavier Briol
+- Jeremias Knoblauch
+year: 2023
+venue: ICML 2023
+links:
+  arxiv: https://arxiv.org/abs/2302.04759
+  code: https://github.com/maltamiranomontero/DSM-bocd
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 7ffc9a003b1846d32342006b6e7f35b66d637d7896befe9bec8e55244547c625
+tags:
+  tasks:
+  - online-change-point-detection
+  method_families:
+  - bayesian-changepoint-models
+  paradigms:
+  - streaming
+proposes:
+- 'Dm-BOCD: BOCPD whose segment parameter posterior is a generalised Bayesian posterior based on diffusion score matching with a weighting matrix m; for natural exponential families with a squared exponential
+  prior it is conjugate (a (truncated) normal), updated exactly in O(p^2 + d^2) per run length'
+- A choice of the diffusion matrix m that makes the posterior globally bias-robust, and a choice of the learning rate ω by matching (in KL) the generalised posterior to the standard Bayes posterior on the
+  first t* observations
+claims:
+- id: c1
+  statement: 'Motivation: BOCD inherits from Bayesian inference a lack of robustness to outliers or model misspecification, which can lead to failures where most points inferred to be CPs are simply mild
+    heterogeneities in the data (Figure 1: standard BOCD flags the Twitter flash-crash blip in the DJIA as a CP, Dm-BOCD does not).'
+  location: Introduction
+  page: 1
+  quote: This can lead to failures, where most data points inferred to be CPs are simply mild heterogeneities in the data.
+- id: c2
+  statement: 'Critique of β-BOCD (Knoblauch et al., 2018, which shares the last author): the β-divergence loss contains an integral that is intractable unless available in closed form; β enters as the exponent
+    of a likelihood, which makes the loss extremely sensitive to very small changes in β and hence very difficult to tune; and the posteriors often need variational approximations for every run length at
+    every step, which the authors say often renders it computationally infeasible, especially in high dimensions.'
+  location: Section 2.3
+  page: 3
+  quote: Numerically, this makes the loss extremely sensitive to even very minor changes in β, which makes it very difﬁcult to tune β and counteracts the very robustness one hopes to achieve.
+- id: c3
+  statement: 'Scalability: for natural-form exponential family likelihoods with a squared exponential prior the diffusion-score-matching posterior is a (truncated) normal whose parameters are updated exactly
+    by adding terms per observation; with the Sherman-Morrison formula each update costs O(p^2 + d^2), which the authors say is also the complexity of standard BOCD with a Gaussian likelihood and conjugate
+    prior.'
+  location: Section 3.4
+  page: 6
+  quote: This is also the complexity of standard BOCD with the Gaussian likelihood and conjugate prior (Adams & MacKay, 2007).
+- id: c4
+  statement: 'Robustness guarantee and its conditions: Proposition 3.2 gives a diffusion matrix m (depending on a fixed θ* ≠ 0, not on θ) that makes the posterior globally bias-robust when η(θ) = θ and
+    ∇b = 0 with a squared exponential prior. The authors note this m applies only to models with support R^d unless additional boundary conditions hold (appendix shows it also works for some distributions
+    on subsets, e.g. Gamma and exponential).'
+  location: Section 3.3
+  page: 6
+  quote: Note also that m is only applicable to models with support X = Rd, as the expansion in (3) is otherwise not valid without additional boundary conditions.
+- id: c5
+  statement: 'Choice of θ*: the authors found Dm-BOCD not very sensitive to θ*, likely because tuning ω offsets any sensitivity; in all experiments θ* was set to the maximum likelihood estimate computed
+    on the full data set (i.e. using the whole stream, not only past data).'
+  location: Section 3.4 (Choice of m)
+  page: 6
+  quote: In all experiments, we thus picked θ⋆as the maximum likelihood estimate computed on the full data set.
+- id: c6
+  statement: 'Choice of the learning rate ω: existing methods are computationally expensive and asymptotically motivated, so ω* minimizes the KL divergence between the Dm-posterior and the standard Bayes
+    posterior on the first t* observations (computed with automatic differentiation in jax). The authors say this yields reasonable uncertainty quantification if misspecification is mild at the beginning
+    of the stream.'
+  location: Section 3.4 (Choice of ω)
+  page: 7
+  quote: we match the uncertainty of the generalised posterior to that of its standard counterpart on the ﬁrst t⋆observations of the data stream.
+- id: c7
+  statement: 'Detection latency hedge: the authors note a known issue of robust CP methods is latency in detecting actual CPs, and say this is not something they observe in their experiments with their
+    choice of m and θ*.'
+  location: Section 3.4 (Choice of m)
+  page: 7
+  quote: known issue with robust CP detection method is that they can experience a latency when it comes to detecting actual CPs.
+- id: c8
+  statement: 'Accuracy/delay protocol: synthetic data with 600 samples, 2% outliers and 6 CPs, 10 realisations varying the outlier positions; PPV, TPR and detection delay are reported for Dm-BOCD and standard
+    BOCD only. A detection counts as a true positive if it lies in a small neighbourhood of the true CP; no numeric tolerance was found in the text (searched for neighbourhood, margin, tolerance). No hazard
+    (changepoint prior) value was found in the text (searched for hazard, CP prior).'
+  location: Appendix C.3
+  page: 20
+  quote: We say the method detects a TP changepoint when the changepoint detected for the method is in a small neighbourhood of the true CP.
+- id: c9
+  statement: 'Well-log segmentation figure (appendix): the caption states that Dm-BOCD is more robust to outliers than standard BOCD but more sensitive than β-BOCD.'
+  location: Appendix C (Figure 13 caption)
+  page: 22
+  quote: We observe that our method is more robust to outliers than the standard BOCD, but is more sensitive than β-BOCD.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-07): Bayesian change point detection (online BOCPD and its extensions, offline Bayesian changepoint analysis, evaluation and applications).
+    Carded by a subagent. Results tables not recorded; claims only. Affiliations: University College London; The Alan Turing Institute. Venue from the PDF first page (''Proceedings of the 40th International
+    Conference on Machine Learning, Honolulu, Hawaii, USA. PMLR 202, 2023''); the arXiv record has no comment. Conflict of interest: the last author (Knoblauch) is the first author of β-BOCD (arXiv 1806.02261),
+    the main robust baseline. Section numbers are confirmed by numbered headings in the PDF. Real-data examples (Twitter flash crash DJIA, FTT/Bitcoin crypto crash, well-log, UK 10-year bond yield) are
+    evaluated visually against known events/outliers without numeric metrics; the multivariate synthetic (exponential + Gaussian) and gamma-modelled bond-yield examples are cases where standard Bayes is
+    not conjugate, so no BOCD comparison is made. Appendix C.2: Dm-BOCD with m = identity (unweighted score matching) also labels outliers as CPs; with k = 1 run length kept no CP is detected. Changepoints
+    are reported as MAP segmentations. Run-length pruning keeps the k = 50 most probable run lengths in all experiments. ω* was selected on the first 50 (Twitter flash crash), 200 (well-log) and 100 (UK
+    bond yield) observations; ω was fixed manually for the crypto crash (0.01) and the multivariate synthetic data (0.15). Section 4: on the well-log data the detected changes are almost identical to β-BOCD
+    and Dm-BOCD took about 10 times less time; Appendix C.1: standard BOCD is faster than Dm-BOCD when sampling is needed, while Dm-BOCD is considerably faster than β-BOCD. Table values not recorded.'

@@ -73,3 +73,7 @@ themes:
     tags: [anomaly-detection, classical-outlier-detectors]
     arxiv_queries:
       - '(abs:"anomaly detection" OR abs:"outlier detection" OR abs:"novelty detection") AND (abs:benchmark OR abs:tabular OR abs:"isolation forest" OR abs:industrial) AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'
+  - name: ベイズ最適化とハイパーパラメータ最適化
+    tags: [bayesian-optimization, multi-fidelity-optimization, hyperparameter-optimization, black-box-optimization]
+    arxiv_queries:
+      - '(abs:"bayesian optimization" OR abs:"hyperparameter optimization" OR abs:"hyperparameter tuning" OR abs:"multi-fidelity") AND (cat:cs.LG OR cat:stat.ML)'

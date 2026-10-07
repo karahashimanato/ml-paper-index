@@ -1,0 +1,103 @@
+id: arxiv-1605.07079
+title: Fast Bayesian Optimization of Machine Learning Hyperparameters on Large Datasets
+authors:
+- Aaron Klein
+- Stefan Falkner
+- Simon Bartels
+- Philipp Hennig
+- Frank Hutter
+year: 2016
+venue: AISTATS 2017
+links:
+  arxiv: https://arxiv.org/abs/1605.07079
+  code: https://github.com/automl/RoBO
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 8f96aad6813eb7426a6a9209433fad60cdcdb3b3c9c188e1e44eab5de6379fd1
+tags:
+  tasks:
+  - hyperparameter-optimization
+  - image-classification
+  method_families:
+  - bayesian-optimization
+  - gaussian-processes
+  - multi-fidelity-optimization
+  paradigms:
+  - supervised
+proposes:
+- 'FABOLAS: GP-based Bayesian optimization that treats the relative training-subset size s as an extra continuous input, models loss and (log) cost across s with a Matérn 5/2 kernel times a finite-rank
+  kernel in s, and chooses (x, s) by entropy-search information gain about the optimum at s = 1 per unit cost (including optimizer overhead)'
+claims:
+- id: c1
+  statement: 'Approach: the size of a randomly subsampled training set is treated as an additional input to the black-box function, chosen by the optimizer at each evaluation, motivated by human experts
+    who first study subsets of the data; the subset size is not itself a hyperparameter and the goal remains performance on the full dataset.'
+  location: Introduction
+  page: 1
+  quote: We treat the size of a randomly subsampled dataset Nsub as an additional input to the blackbox function, and allow the optimizer to actively choose it at each function evaluation.
+- id: c2
+  statement: 'Contrast with Multi-Task Bayesian optimization (Swersky et al., 2013) using subset sizes as discrete tasks: the discrete tasks require evaluations on the full dataset to learn the correlations,
+    whereas FABOLAS exploits the regularity of performance across dataset size to generalize to the full dataset without evaluating it directly.'
+  location: Introduction
+  page: 2
+  quote: However, the discrete nature of tasks in that approach requires evaluations on the entire dataset to learn the necessary correlations.
+- id: c3
+  statement: 'Empirical basis for the modelling assumption: on a grid of 400 SVM configurations on MNIST subsets, 1/128 of the data was quite representative for locating a reasonable configuration and there
+    were no deceiving local optima on smaller subsets; from this the authors expect relatively small fractions to be representative and vary s on a log scale.'
+  location: Section 3
+  page: 4
+  quote: Additionally, there are no deceiving local optima on smaller subsets.
+- id: c4
+  statement: 'Kernel assumptions: a factorized kernel (Matérn 5/2 ARD over hyperparameters times a finite-rank covariance in s); for the loss, the basis (1, (1 - s)^2) enforces monotonic predictions with
+    an extremum at s = 1, encoding that loss usually decreases with more training data; for cost, log-cost is modelled with basis (1, s) to fit polynomial complexity.'
+  location: Section 3.1
+  page: 4
+  quote: The loss of a machine learning algorithms usually decreases with more training data.
+- id: c5
+  statement: 'Acquisition: in each iteration FABOLAS fits GPs for loss and cost and chooses the (x, s) predicted to yield the most information (Entropy Search) about the loss-minimizing configuration on
+    the full dataset per unit time spent; unlike MTBO, the cost is augmented by the optimizer''s own overhead, and the incumbent is the evaluated configuration with the lowest predicted loss at s = 1.'
+  location: Introduction
+  page: 2
+  quote: In each iteration, FABOLAS chooses the conﬁguration x and dataset size Nsub predicted to yield most information about the loss-minimizing conﬁguration on the full dataset per unit time spent.
+- id: c6
+  statement: 'Cost of the surrogate: due to cubic GP scaling and approximating the distribution of the minimum, FABOLAS''s overhead is on the order of minutes (GP hyperparameters are marginalized with MCMC);
+    the authors expect the cubic complexity of GPs to become the limiting factor in many practical applications, since the method requires more, cheaper evaluations, and plan to try other models such as
+    Bayesian neural networks.'
+  location: Conclusion
+  page: 8
+  quote: we expect the cubic complexity of Gaussian processes to become the limiting factor in many practical applications.
+- id: c7
+  statement: 'Evaluation protocol: compared with standard BO (EI and ES), MTBO (one auxiliary task at s = 1/4, chosen on the SVM grid), random search and Hyperband (implemented by the authors, eta = 3,
+    same minimum dataset size as FABOLAS). Budgets are wall-clock time including optimizer overhead and the initial design; incumbents are retrained offline on the full dataset and test error is plotted
+    (validation performance for the ResNet); 10 runs per method (30 on the grid), medians with quartiles.'
+  location: Section 4
+  page: 5
+  quote: For each method, we tracked wall clock time (counting both optimization overhead and the cost of function evaluations, including the initial design), storing the incumbent returned after every
+    iteration.
+- id: c8
+  statement: 'Where the advantage shrinks: on CNNs, which scale linearly in the number of data points, FABOLAS''s speedup was smaller than on SVMs, and Hyperband was substantially slower than vanilla BO
+    to make a recommendation, although it found good settings given enough time.'
+  location: Section 4
+  page: 8
+  quote: For the same reason of linear scaling, Hyperband was substantially slower than vanilla Bayesian optimization to make a recommendation, but it did ﬁnd good hyperparameter settings when given enough
+    time.
+- id: c9
+  statement: Hyperband was not run on the ResNet benchmark because a single iteration took longer than a day; the authors note Hyperband's runtime could be improved by adapting its parameters to the benchmark,
+    but kept all methods' parameters fixed throughout the experiments to also show their robustness.
+  location: Section 4.4
+  page: 8
+  quote: We want to emphasize that the runtime could be improved by adapting Hyperband’s parameters to the benchmark, but we decided to keep all methods’ parameters ﬁxed throughout the experiments to also
+    show their robustness.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF first page footer (''Proceedings of the 20th International Conference on Artificial
+    Intelligence and Statistics (AISTATS) 2017, Fort Lauderdale, Florida, USA. JMLR: W&CP volume 54''); year 2016 is the arXiv submission year. Note: BOHB (arXiv 1807.01774) cites this work as Electron.
+    J. Statist. 11(2), 2017, which is not recorded here. Affiliations: University of Freiburg and MPI for Intelligent Systems. The authors implemented all methods themselves in their RoBO package, including
+    the Hyperband baseline. Section 3/3.1/3.3/3.4/4/4.4 numbers are from cross-references in the text (''§3'', ''in 3.1'', ''Section 3.3'', ''Section 3.4'', ''§4'', ''Section 4.4''). In preliminary experiments
+    MTBO with more auxiliary tasks degraded strongly, which the authors suspect is due to the number of task-kernel parameters. A later paper by Hyperband''s authors (ASHA, arXiv 1810.05934, Appendix A.2)
+    reports that Hyperband with per-rung incumbent tracking is competitive with or better than Fabolas. Results figures only; no result numbers recorded.'

@@ -1,0 +1,115 @@
+id: arxiv-2107.05847
+title: 'Hyperparameter Optimization: Foundations, Algorithms, Best Practices and Open Challenges'
+authors:
+- Bernd Bischl
+- Martin Binder
+- Michel Lang
+- Tobias Pielok
+- Jakob Richter
+- Stefan Coors
+- Janek Thomas
+- Theresa Ullmann
+- Marc Becker
+- Anne-Laure Boulesteix
+- Difan Deng
+- Marius Lindauer
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2107.05847
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 8f0e560273f32f6a2928d893a072f1f403ccbe05ac1b0fa3f4d701cbcb7dfcb2
+tags:
+  tasks:
+  - hyperparameter-optimization
+  - model-selection
+  method_families:
+  - bayesian-optimization
+  - multi-fidelity-optimization
+  - gaussian-processes
+  - random-forests
+  paradigms:
+  - supervised
+proposes:
+- A review of HPO for supervised ML (grid/random search, evolution strategies, Bayesian optimization, Hyperband, racing) with practical recommendations on resampling, nested resampling, search spaces, algorithm
+  choice, budgets and parallelization, plus recommended search spaces for common learners (appendix)
+claims:
+- id: c1
+  statement: 'Random vs grid search: citing Bergstra and Bengio (2012b), HPO problems often have low effective dimensionality (few HPs matter), so random search covers the influential HPs better than a
+    grid of the same size and can easily be extended with more samples; this makes RS preferable to GS and a surprisingly strong baseline.'
+  location: Section 4.2.1
+  page: 9
+  quote: Altogether, this makes RS preferable to GS and a surprisingly strong baseline for HPO in many practical settings.
+- id: c2
+  statement: 'BO surrogate costs: GP regression is used most often when the space is purely real-valued, and the choice of surrogate has great influence on BO performance. A basic GP surrogate does not
+    support non-numeric or conditional HPs and tends to deteriorate beyond roughly ten dimensions, and standard GPs have runtime cubic in the number of samples, which can be a significant overhead for large
+    archives.'
+  location: Section 4.2.3
+  page: 12
+  quote: Most importantly, standard GPs have runtime complexity that is cubic in the number of samples, which can result in a signiﬁcant overhead when the archive A becomes large.
+- id: c3
+  statement: 'Multi-fidelity assumptions: a fidelity HP monotonically increases the cost of fitting (e.g. epochs, boosting iterations, training-data subsample fraction); the review assumes that performance
+    changes somewhat smoothly with fidelity so that low-fidelity evaluations at least indicate the true ranking, while noting that overfitting can occur at high fidelity (e.g. many epochs).'
+  location: Section 4.2.4
+  page: 15
+  quote: Furthermore, we assume that the relationship of the ﬁdelity to the prediction performance changes somewhat smoothly.
+- id: c4
+  statement: 'Overtuning: nested resampling (an outer resampling loop around the inner HPO resampling) ensures unbiased outer evaluation but does not help build a better model; after many evaluations, wrong
+    HPCs might be selected due to stochasticity or overfitting to the inner splits. This is called overtuning, meta-overfitting or oversearching; it seems partly related to multiple hypothesis testing,
+    has not been analysed very well, and few countermeasures are known.'
+  location: Section 4.4
+  page: 24
+  quote: This eﬀect has been called either overtuning, meta-overﬁtting or oversearching (Ng, 1997; Quinlan & Cameron-Jones, 1995).
+- id: c5
+  statement: 'Resampling in nested HPO: the outer level is regular ML evaluation, while at the inner level very accurate estimates are not needed, only a correct ranking of HPCs, so repetitions can be scaled
+    down; it might be appropriate to use 10-fold CV outside but only 2 folds or holdout inside. Controlling inner repetitions should probably be automated by the tuner, which few current tuners do (racing
+    being an exception).'
+  location: Section 6.1
+  page: 27
+  quote: Hence, it might be appropriate to use a 10-fold CV on the outside to ensure proper generalization error estimation of the tuned learner, but to use only 2 folds or simple holdout on the inside.
+- id: c6
+  statement: 'Search-space design: encoding categorical HPs as integers is a common mistake that degrades distance-based optimizers such as BO; numeric HPs must typically be bounded to plausibly well-performing
+    values, and HPs bounded only from below should often be tuned on a log scale with a generous upper bound, since the influence of larger values often diminishes.'
+  location: Section 6.2
+  page: 28
+  quote: Encoding categorical values as integers is a common mistake that degrades the performance of optimizers that rely on information about distances between HPCs, such as BO.
+- id: c7
+  statement: 'When simple methods suffice: methods based on BO are often more sample-efficient but have more components that can fail, so when evaluations are cheap and the search space is small it may
+    be beneficial to fall back on simple, robust approaches (RS, Hyperband, or tuners with minimal inference overhead); implementation availability and quality also matter, since porting an algorithm costs
+    evaluations that could have been run.'
+  location: Section 6.3
+  page: 29
+  quote: When performance evaluations are cheap and the search space is small, it may therefore be beneﬁcial to fall back on simple and robust approaches such as RS, Hyperband, or any tuner with minimal
+    inference overhead.
+- id: c8
+  statement: 'Benchmark caveat: no single benchmark covers all relevant scenarios, so results only indicate performance for the selected datasets, budget, parallelization, learners and search spaces, and
+    extensive comparison studies are missing. Citing Eggensperger et al. (2013): GP-based BO was strong for small continuous spaces with few evaluations, RF-based BO for mixed spaces with a few hundred
+    evaluations, and evolution strategies were best for large spaces and many evaluations.'
+  location: Section 6.3
+  page: 29
+  quote: However, no single benchmark exists which includes all relevant scenarios and whose results generalize to all possible applications.
+- id: c9
+  statement: 'Budget: choosing the HPO budget or when to terminate is a difficult, unsolved practical challenge; a runtime fixed in advance is what happens nearly exclusively in practice. A simple rule
+    of thumb is to scale the number of evaluations linearly with search-space dimensionality l (50 x l or 100 x l), but it is nearly impossible to tell whether such a budget is enough.'
+  location: Section 6.5
+  page: 30
+  quote: A simple rule-of-thumb might be scaling the budget of HPC evaluations with search space dimensionality in a linear fashion like 50 × l or 100 × l, which would also deﬁne the number of full budget
+    units in a multi-ﬁdelity setup.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Affiliations: LMU Munich, TU Dortmund, Leibniz University Hannover. No venue recorded: the PDF text
+    does not state one and no comment/journal_ref was given (searched the dump for WIREs/accepted/submitted; WIREs appears only in a reference). Section 6 opens by stating that some recommendations are
+    rules of thumb based solely on experience and others are at least partially confirmed by benchmarks, which are only as good as the selected datasets. Section 6.3 also states that GPs ''scale cubically
+    with the number of dimensions'', which differs from Section 4.2.3 (cubic in the number of samples); only the latter is recorded as a claim. Section 4.4 illustrates the optimistic bias of reporting the
+    tuned resampling error with a learner that ignores the data (true error 0.5), citing Bischl et al. (2012). Section 8 (open challenges) suggests HPO tools should probably increase the number of folds
+    as tuning runs longer, calling the schedule under-explored. Authors include developers of mlr3/mlrMBO and SMAC-related work (Lindauer, Deng), which the review lists among implementations; it does not
+    run a new benchmark. Other Section 6 guidance not recorded as claims: Section 6.1 suggests repeated CV with many repetitions for n < 500, usually 5- or 10-fold CV for 500 <= n <= 50000, and possibly
+    holdout beyond that; Section 6.2 warns that too-wide intervals or inadequate HPs can hurt tuning within the budget and advises tuning as few HPs as possible; Section 6.3 says GS may be useful only with
+    up to about 2-3 HPs, BO with GPs works well for up to around 10 HPs, BO with random forests has been used with hundreds of HPs, and RS/Hyperband work well in very large spaces if the effective dimension
+    is low. Appendix search-space tables not recorded.'

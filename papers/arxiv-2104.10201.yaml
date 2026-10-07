@@ -1,0 +1,103 @@
+id: arxiv-2104.10201
+title: 'Bayesian Optimization is Superior to Random Search for Machine Learning Hyperparameter Tuning: Analysis of the Black-Box Optimization Challenge 2020'
+authors:
+- Ryan Turner
+- David Eriksson
+- Michael McCourt
+- Juha Kiili
+- Eero Laaksonen
+- Zhen Xu
+- Isabelle Guyon
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2104.10201
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: c66ecb04fe2d52fc64385f8f9dcd63d9279fb197ecdd58551811e5f68d6f4965
+tags:
+  tasks:
+  - hyperparameter-optimization
+  method_families:
+  - bayesian-optimization
+  - gaussian-processes
+  paradigms:
+  - supervised
+proposes:
+- 'Analysis of the NeurIPS 2020 black-box optimization (BBO) challenge: open-source optimizers tuned the validation-set performance of scikit-learn-style models on hidden problems (models x datasets x loss
+  functions) with 16 batches of 8 suggestions, scored with Bayesmark''s normalized score relative to random search'
+claims:
+- id: c1
+  statement: 'Problem set: optimization problems are combinations of ML models, datasets and loss functions (validation-set metrics; classification and regression use different losses, so the Cartesian
+    product is violated slightly); keeping many datasets hidden gives test problems unknown to participants, and the search space varies by model and is provided to the optimizer by the benchmark.'
+  location: Section 3.2 (The Optimization Problems)
+  page: 4
+  quote: The search space varied by ML model and was provided to the algorithm by the benchmark.
+- id: c2
+  statement: 'Budget: each problem is optimized for 16 iterations of batches of k = 8 parallel suggestions (128 function evaluations), with 640 seconds of compute for making suggestions (40 seconds per
+    iteration); optimizers exceeding the limit were cut off and their best point so far was used. '
+  location: Section 3.4 (Evaluation Environment)
+  page: 5
+  quote: The optimizers had a total of 640 seconds compute time for making suggestions on each problem (16 iterations with batch size of 8); or 40 seconds per iteration.
+- id: c3
+  statement: 'Repetitions: the feedback leaderboard used M = 60 problems with N = 10 repeated trials, and a separate, randomly split set of M = 60 final problems used N = 30 trials; to ensure the final
+    score was not due to chance the top-20 were re-run with N = 100.'
+  location: Section 3.4 (Evaluation Environment)
+  page: 5
+  quote: To ensure the ﬁnal score was not due to chance, we re-ran the top-20 with N = 100 for the ﬁnal leaderboard ranking.
+- id: c4
+  statement: 'Scoring (Bayesmark): because raw scores are on different scales, performance on each problem is normalized so that a single random-search suggestion averages 1 and the (best known) global
+    optimum is 0, then averaged across problems; the leaderboard score is 100 x (1 - normalized mean performance), described as ranging from 0 (on average about as good as a single random-search guess)
+    to 100 (finds the best known optimum every time).'
+  location: Section 3.3 (Evaluation Metrics)
+  page: 4
+  quote: First, we normalize the performance on each problem so that a single RS suggestion has an average score of 1, and the global optimum has a score of 0.
+- id: c5
+  statement: Baselines were run with default options of each package (TuRBO, pySOT, Scikit-Optimize, Ax, GPyOpt, hyperopt, Nevergrad, pycma, OpenTuner, random search). TuRBO and pySOT (SRBF), both trust-region
+    inspired, performed best out of the box, followed by packages with traditional BO defaults, and both groups beat the three EA-based packages; the authors caution that this compares the packages' default
+    methods rather than showing one package is better.
+  location: Section 4.2 (Performance of the Baselines)
+  page: 6
+  quote: Note that this comparison does not necessarily show that one package is better than another; it rather compares the performance of their default methods.
+- id: c6
+  statement: 'Outcome: of 65 teams on the final leaderboard, 61 beat the random-search baseline and 23 beat TuRBO, the strongest starter-kit baseline; most teams'' gains persisted on the previously unseen
+    final problems, which the authors take to mean submissions did not simply overfit the practice or feedback problems.'
+  location: Section 4 (Learnings and Key Results)
+  page: 5
+  quote: Out of the 65 total teams whose results appeared in the ﬁnal leaderboard in Table 2, 61 beat the baseline random search and 23 beat TuRBO which was the strongest baseline provided in the starter
+    kit.
+- id: c7
+  statement: 'Random-search baseline definition: random search samples uniformly in the warped space of the search configuration (e.g. log vs linear scale), so it already outperforms a naive random search
+    that ignores the warping; nonetheless participants gained orders of magnitude greater search efficiency than random search (Table 2).'
+  location: Section 4.3 (Bayesian Optimization was Consistently Effective)
+  page: 7
+  quote: Note also that the baseline random search samples uniformly in the warped space from the search conﬁguration.
+- id: c8
+  statement: 'Conclusion: the challenge is presented as demonstrating decisively the benefits of BO over random search, with top submissions showing over 100x sample-efficiency gains compared to random
+    search (how this factor is computed is in the notes); all top teams used some form of BO ensemble.'
+  location: Section 6 (Conclusions)
+  page: 11
+  quote: The top submissions showed over 100× sample efﬁciency gains compared to random search.
+- id: c9
+  statement: 'Ensembles: the second-placed submission, a simple ensemble taking 50% of suggestions each from TuRBO and Scikit-Optimize, beat both components used individually by a large margin; the per-model
+    comparison only hints that ensembling may help avoid failures where an individual BO algorithm makes little progress.'
+  location: Section 4.4 (Ensemble Methods)
+  page: 9
+  quote: This analysis hints that ensembling may be useful in avoiding failed models where an individual BO algorithm makes little progress.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Affiliations on the PDF: Twitter, Facebook, SigOpt (an Intel company), Valohai, 4Paradigm, ChaLearn.
+    Venue not recorded: the PDF only thanks the ''NeurIPS 2020 competition track organizers'' and does not state a publication venue, and no comment/journal_ref was given. Conflict of interest: the reference
+    list shows Turner and Eriksson among the authors of TuRBO [15] (the strongest baseline and used by 6 of the top-10 teams), Eriksson among the authors of pySOT [14], and Turner as author of Bayesmark
+    [62], the scoring/execution package; McCourt is at SigOpt, an HPO-as-a-service company mentioned in the text. Section 4.5 says the prevalence of TuRBO ''may indicate'' a non-smooth landscape favouring
+    local models, ''Or, it may indicate'' that TuRBO was simply the best baseline provided. Integer/categorical parameters could be treated as continuous; TPE was not used by any participant. A separate
+    warm-start leaderboard (parameter names revealed; final testing otherwise used anonymized names) is in Section 4.7/Appendix A. Scope limits named in the Discussion: no multi-fidelity, synchronous batches
+    of 8, unconstrained single-objective only. The ''RS efficiency'' factor (Table 2 caption) is the number of random-search evaluations needed to reach the same mean score divided by the 128 evaluations
+    allowed, read off a random-search curve estimated by pooling N = 256 random-search runs per problem (Figure 1 caption). Appendix B: per-problem scores are clipped at the median score of a single random-search
+    evaluation, and the mean rather than the median is used because medians can hide a high percentage of failed runs. Submissions were evaluated only a single time on the final problems to prevent overfitting
+    (Competition Setup). A post-hoc bootstrap (B = 10^4) over the N = 100 reruns gave 90% certainty in the final top-5 (Section 4.1). Scores in Tables 2 and 4 not recorded.'

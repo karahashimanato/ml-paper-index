@@ -1,0 +1,100 @@
+id: arxiv-1206.2944
+title: Practical Bayesian Optimization of Machine Learning Algorithms
+authors:
+- Jasper Snoek
+- Hugo Larochelle
+- Ryan P. Adams
+year: 2012
+links:
+  arxiv: https://arxiv.org/abs/1206.2944
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 9863ea49c983f3fce20baba203f798431e6808f231353a694b7d57c8caa59d68
+tags:
+  tasks:
+  - hyperparameter-optimization
+  - image-classification
+  method_families:
+  - bayesian-optimization
+  - gaussian-processes
+proposes:
+- 'GP-based Bayesian optimization of ML hyperparameters with an ARD Matern 5/2 kernel and a fully Bayesian treatment of the GP hyperparameters: the expected improvement is integrated over GP hyperparameter
+  samples drawn by slice sampling (''GP EI MCMC'')'
+- 'Expected improvement per second: a cost-aware acquisition that models the log duration of an evaluation with a separate GP (assumed independent of the objective)'
+- 'Monte Carlo acquisition for parallel/asynchronous BO: the acquisition is averaged over sampled outcomes (''fantasies'') of pending evaluations'
+claims:
+- id: c1
+  statement: 'Choice of acquisition: the paper focuses on expected improvement because it has been shown to be better-behaved than probability of improvement and, unlike GP-UCB, needs no tuning parameter
+    of its own; the authors add that the regret formalization is more appropriate for many settings.'
+  location: Section 2.2
+  page: 3
+  quote: In this work we will focus on the expected improvement criterion, as it has been shown to be better-behaved than probability of improvement, but unlike the method of GP upper conﬁdence bounds (GP-UCB),
+    it does not require its own tuning parameter.
+- id: c2
+  statement: 'Kernel: the ARD squared exponential kernel, often a default for GP regression, gives sample functions that are unrealistically smooth for practical optimization problems; the authors instead
+    propose the ARD Matern 5/2 kernel, whose samples are twice differentiable.'
+  location: Section 3.1
+  page: 4
+  quote: However, sample functions with this covariance function are unrealistically smooth for practical optimization problems.
+- id: c3
+  statement: 'GP hyperparameters: typically D + 3 of them (D length scales, amplitude, observation noise, constant mean). Instead of the commonly advocated point estimate by maximizing the marginal likelihood,
+    the acquisition is integrated over the GP hyperparameter posterior, estimated by Monte Carlo with slice sampling. The authors argue this is sensible because both optimization and MCMC are dominated
+    by the cubic cost of solving an N-dimensional linear system and function evaluations are assumed to be much more expensive.'
+  location: Section 3.1
+  page: 5
+  quote: As both optimization and Markov chain Monte Carlo are computationally dominated by the cubic cost of solving an N-dimensional linear system
+- id: c4
+  statement: 'Cost-aware acquisition: because wallclock time matters more than the number of evaluations, the authors propose expected improvement per second; the unknown duration function is modelled as
+    ln c(x) with a GP, and it is assumed independent of the objective, although the coupling may be captured with multi-task GP variants.'
+  location: Section 3.2
+  page: 6
+  quote: In this work, we assume that these functions are independent of each other, although their coupling may be usefully captured using GP variants of multi-task learning (e.g., Teh et al. (2005); Bonilla
+    et al. (2008)).
+- id: c5
+  statement: 'Parallel BO: roll-outs of the acquisition policy are generally intractable, so the next point is chosen while other evaluations are pending by computing Monte Carlo estimates of the acquisition
+    over possible outcomes of the pending evaluations (a J-dimensional Gaussian under the GP).'
+  location: Section 3.3
+  page: 6
+  quote: Instead we propose a sequential strategy that takes advantage of the tractable inference properties of the Gaussian process to compute Monte Carlo estimates of the acquisiton function under diﬀerent
+    possible results from pending function evaluations.
+- id: c6
+  statement: 'Evaluation protocol for online LDA (3 parameters; the original authors'' 6 x 6 x 8 grid of 288 configurations, each evaluation taking 5 to 10 hours): the BO strategies were restricted to the
+    exact grid points, each optimization was repeated 100 times with two random initial experiments, and mean and standard error are reported against evaluations and days. The authors state that integrating
+    over GP hyperparameters was superior to a point estimate, and that parallelized GP EI MCMC found the best parameters in significantly less time though single GP EI MCMC was most efficient per evaluation.'
+  location: Section 4.2
+  page: 8
+  quote: That is, the algorithms were restricted to only the exact parameter settings as evaluated by the grid search.
+- id: c7
+  statement: 'Kernel comparison on structured SVM (M3E) motif finding, 100 repetitions per covariance: the authors state that the choice of covariance significantly affects performance, that length-scale
+    estimation is critical, and that the infinite differentiability imposed by the squared exponential is too restrictive for this problem.'
+  location: Section 4.3
+  page: 10
+  quote: The assumption of the inﬁnite diﬀerentiability of the underlying function as imposed by the commonly used squared exponential is too restrictive for this problem.
+- id: c8
+  statement: 'Cost-aware vs per-evaluation efficiency on M3E (grid of 1,400 combinations, each evaluated over 5 random 50-50 train/test splits, BO constrained to grid points, 100 repetitions): GP EI MCMC
+    is better per function evaluation, while GP EI per Second finds better parameters faster in wallclock time because it learns to use a less strict convergence tolerance early on.'
+  location: Section 4.3
+  page: 10
+  quote: In this case, GP EI MCMC is superior to GP EI per Second in terms of function evaluations but GP EI per Second ﬁnds better parameters faster than GP EI MCMC as it learns to use a less strict convergence
+    tolerance early on while exploring the other parameters.
+- id: c9
+  statement: 'CIFAR-10 protocol: nine hyperparameters of a three-layer convolutional network (Krizhevsky''s code; the expert-tuned setting gives 18% test error) are optimized on a withheld validation set;
+    mean validation error and standard error over five randomly initialized runs are reported, and the best hyperparameters found by GP EI MCMC give 14.98% test error, which the authors describe as over
+    3% better than the expert and the state of the art (without data augmentation).'
+  location: Section 4.4
+  page: 11
+  quote: We optimize over the nine parameters for each strategy on a withheld validation set and report the mean validation error and standard error over ﬁve separate randomly initialized runs.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Toronto, Universite de Sherbrooke, Harvard University. No venue is stated
+    in the PDF text (arXiv v2, no journal_ref given), so none is recorded. All experiments ran on identical Amazon EC2 machines (footnote; the work was supported by an Amazon Web Services grant). Section
+    4.1 compares with TPA (Bergstra et al. 2011, hyperopt public code) on Branin-Hoo (100 runs) and MNIST logistic regression with 4 hyperparameters (10 runs); the text states that on Branin-Hoo integrating
+    over GP hyperparameters beats a point estimate and GP EI significantly outperforms TPA. Although Section 2.2 promises a direct comparison with GP-UCB in Section 4.1, GP-UCB appears only as a curve in
+    Fig. 3a and its result is not discussed in the text (figure values not recorded). Fig. 4c compares grid-constrained vs off-grid BO on LDA (figure only). Code release is stated as future (''will be made
+    publicly available'').'

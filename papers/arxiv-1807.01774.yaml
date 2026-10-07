@@ -1,0 +1,107 @@
+id: arxiv-1807.01774
+title: 'BOHB: Robust and Efficient Hyperparameter Optimization at Scale'
+authors:
+- Stefan Falkner
+- Aaron Klein
+- Frank Hutter
+year: 2018
+venue: ICML 2018
+links:
+  arxiv: https://arxiv.org/abs/1807.01774
+  code: https://github.com/automl/HpBandSter
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 4d5825788f6a68918816d5631c2a0ea4dc7ddcb5dda392c1dcad9e48c462dcff
+tags:
+  tasks:
+  - hyperparameter-optimization
+  - image-classification
+  - tabular-classification
+  method_families:
+  - multi-fidelity-optimization
+  - bayesian-optimization
+  paradigms:
+  - supervised
+proposes:
+- 'BOHB: Hyperband''s budget allocation and SuccessiveHalving with the random sampling of configurations replaced by a TPE-like model (a single multivariate kernel density estimator ratio l(x)/g(x)) fitted
+  on the largest budget with enough observations, plus a constant fraction of random configurations; parallelized with a single worker pool shared across SuccessiveHalving runs'
+claims:
+- id: c1
+  statement: 'Motivation: Hyperband typically outperforms random search and full-budget Bayesian optimization for small to medium total budgets, but because it relies on randomly drawn configurations its
+    convergence to the global optimum is limited and its advantage over random search typically diminishes with large budgets.'
+  location: Section 3.2
+  page: 3
+  quote: However, its convergence to the global optimum is limited by its reliance on randomly-drawn conﬁgurations, and with large budgets its advantage over random search typically diminishes.
+- id: c2
+  statement: 'Choice of surrogate: TPE models densities l(x) = p(y < alpha | x, D) and g(x) = p(y > alpha | x, D) with kernel density estimators and maximizes l(x)/g(x) (shown by Bergstra et al. (2011)
+    to be equivalent to maximizing EI); it supports mixed continuous/discrete spaces and model construction scales linearly in the number of data points, in contrast to cubic-time GPs. The authors chose
+    TPE because Hyperband produces many cheap evaluations, for which GP cost (and complex acquisition functions) would become problematic.'
+  location: Section 3.1
+  page: 3
+  quote: Due to the nature of kernel density estimators, TPE easily supports mixed continuous and discrete spaces, and model construction scales linearly in the number of data points (in contrast to the
+    cubic-time Gaussian processes (GPs) predominant in the BO literature).
+- id: c3
+  statement: 'Model details: unlike TPE''s hierarchy of one-dimensional KDEs, BOHB uses a single multidimensional KDE (product of 1-d kernels, statsmodels, Scott''s rule bandwidth) to better handle interactions;
+    a model needs at least N_min = d + 1 points, the best and worst configurations are split by a quantile q, and EI is optimized by sampling N_s points from l(x) with bandwidths multiplied by a factor
+    to encourage exploration.'
+  location: Section 4.1
+  page: 4
+  quote: 'The BO part of BOHB closely resembles TPE, with one major difference: we opted for a single multidimensional KDE compared to the hierarchy of one-dimensional KDEs used in TPE in order to better
+    handle interaction effects in the input space.'
+- id: c4
+  statement: 'Handling of fidelities: observations on all budgets are kept, and BOHB always uses the model for the largest budget that has enough observations, which lets it overcome wrong conclusions drawn
+    on smaller budgets by eventually relying on the highest-fidelity results only. Appendix B calls this choice ''admittedly a heuristic''.'
+  location: Section 4.1
+  page: 4
+  quote: This enables it to overcome wrong conclusions drawn on smaller budgets by eventually relying on results with the highest ﬁdelity only.
+- id: c5
+  statement: 'Worst case with misleading low fidelities: a constant fraction rho of configurations is sampled uniformly at random to keep Hyperband''s guarantees; as a result, when lower fidelities are
+    misleading, BOHB is at most a factor (rho^-1 * (s_max + 1)) slower than random search but still guaranteed to converge eventually (the same argument holds for Hyperband).'
+  location: Section 4.1
+  page: 4
+  quote: This means, that in the worst case (when the lower ﬁdelities are misleading), BOHB is at most this factor times slower than RS, but it is still guaranteed to converge eventually.
+- id: c6
+  statement: 'Assumption on the minimum budget: b_max is often naturally defined, but to get substantial speedups an evaluation at b_min should contain some information about the quality of a configuration
+    at larger budgets (e.g. the smallest data subset must be large enough to fit a meaningful model), which requires knowledge about the benchmark and the algorithm; BOHB is stated to be quite insensitive
+    to eta within a reasonable range.'
+  location: Appendix G
+  page: 14
+  quote: To get substantial speedups, an evaluation with a budget of bmin should contain some information about the quality of a conﬁguration with larger budgets; for example, when subsampling the data,
+    the smallest subset should not be one datum, but rather enough points to ﬁt a meaningful model.
+- id: c7
+  statement: 'Failure case: on the counting-ones toy problem with 64 dimensions, TPE and SMAC started to perform better than BOHB because noise grows and evaluations on smaller budgets do not help build
+    better models for the full budget; Appendix E similarly notes that in late stages, low-fidelity evaluations can cause a constant overhead without gain, so traditional BO can still have an advantage
+    for very large budgets.'
+  location: Section 5.1
+  page: 6
+  quote: However, we note that with as many as 64 dimensions, TPE and SMAC started to perform better than BOHB since the noise grows and evaluating conﬁgurations on a smaller budget does not help to build
+    better models for the full budget.
+- id: c8
+  statement: 'Parallelism: all workers form a single pool that preferentially runs waiting jobs with smaller budgets, with observations shared across SuccessiveHalving runs. On the letter surrogate the
+    speedup was close to linear for two and four workers and sublinear beyond; Appendix F attributes degradation with many workers to more random configurations being evaluated before the first model is
+    built. Parallel runs were simulated by making workers wait for the given budget on the surrogate.'
+  location: Section 4.2
+  page: 5
+  quote: The speedup for two and four workers is close to linear, for more workers it becomes sublinear.
+- id: c9
+  statement: 'Evaluation protocol caveats: most comparisons use surrogate benchmarks (random forests fitted to 10,000 random configurations trained for 50 epochs) with immediate regret of the incumbent;
+    the authors list drawbacks: the surrogate may not reflect the real benchmark, the reported error is on the validation set used during training with no test performance to indicate overfitting, and the
+    deterministic surrogates do not reflect SGD noise and may be easier to optimize. TPE comes from Hyperopt and all GP-BO methods from the RoBO package (by an overlapping author group); eta = 3 for HB
+    and BOHB.'
+  location: Appendix I.1
+  page: 16
+  quote: There is no test performance that could indicate overﬁtting.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF first page (''Proceedings of the 35th International Conference on Machine Learning,
+    Stockholm, Sweden, PMLR 80, 2018'') and the arXiv comment. Affiliation: University of Freiburg. Conflict of interest: the authors (Klein, Hutter, Falkner) also authored Fabolas, RoBO and HB-LCNet (Klein
+    et al. 2017a,b,c), which serve as baselines/implementations; they note BOHB extends their own NIPS 2017 / ICLR 2018 workshop papers. On the 2-d SVM-on-MNIST surrogate (from Klein et al. 2017a) the authors
+    note GP-BO methods are known to work better on low-dimensional continuous problems. Runs: 512 per method on counting ones and the NN surrogates (GP-BO only 50), 50 on Bayesian NNs and PPO. CIFAR-10
+    (Shake-Shake + Cutout ResNet, 5,000 training images held out for validation): 19 workers, budgets 22-600 epochs, 33 GPU days total; the paper compares its test error with other papers'' numbers while
+    noting they are not directly comparable. The paper notes ASHA''s (Li et al., 2018) parallel SH as independent work. Results figures only; no result numbers recorded.'

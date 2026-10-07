@@ -1,0 +1,92 @@
+id: arxiv-1807.02811
+title: A Tutorial on Bayesian Optimization
+authors:
+- Peter I. Frazier
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1807.02811
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 1393ca348578b8203f8d2eb65d1c50da685e5677d7e0b350294c6f83f9689f22
+tags:
+  tasks:
+  - black-box-optimization
+  method_families:
+  - bayesian-optimization
+  - gaussian-processes
+proposes:
+- 'Tutorial: GP regression, expected improvement, knowledge gradient, entropy search and predictive entropy search, and ''exotic'' BO problems (noise, parallel evaluations, constraints, multi-fidelity /
+  multi-information source, environmental conditions, multi-task, derivatives)'
+- An argument that the KGCP acquisition of Scott et al. (2011) is the most natural generalization of expected improvement to noisy evaluations
+claims:
+- id: c1
+  statement: 'Scope of BO: it is best suited to continuous domains of fewer than 20 dimensions and tolerates stochastic noise; the introduction adds that d <= 20 in most successful applications and that
+    the feasible set is typically a hyper-rectangle or simplex.'
+  location: Abstract
+  page: 1
+  quote: It is best-suited for optimization over continuous domains of less than 20 dimensions, and tolerates stochastic noise in function evaluations.
+- id: c2
+  statement: '''Expensive to evaluate'' means the number of evaluations is limited, typically to a few hundred, because each evaluation takes substantial time (typically hours) or has a monetary or opportunity
+    cost; the objective is also treated as a derivative-free black box.'
+  location: Section 1 (Introduction)
+  page: 1
+  quote: f is “expensive to evaluate” in the sense that the number of evaluations that may be performed is limited, typically to a few hundred.
+- id: c3
+  statement: 'Noise assumption: in almost all BO work, noise is assumed independent across evaluations and Gaussian with constant variance (the tutorial itself assumes noise-free observations until Section
+    5).'
+  location: Section 1 (Introduction)
+  page: 1
+  quote: In almost all work on Bayesian optimization, noise is assumed independent across evaluations and Gaussian with constant variance.
+- id: c4
+  statement: GP hyperparameters (kernel and mean parameters) are typically chosen by maximum likelihood, by MAP with a prior on the hyperparameters (useful if MLE sometimes gives unreasonable values), or
+    by a fully Bayesian approach that marginalizes them, approximated by MCMC samples such as slice sampling; MAP can be seen as an approximation to fully Bayesian inference.
+  location: Section 3.2
+  page: 6
+  quote: To choose the hyperparameters, three approaches are typically considered.
+- id: c5
+  statement: Expected improvement is the most commonly used acquisition, performs well and is easy to use; knowledge gradient, entropy search and predictive entropy search are most useful in exotic problems
+    where EI's assumption that the benefit of sampling comes through improvement at the sampled point no longer holds.
+  location: Section 4
+  page: 7
+  quote: These alternate acquisition functions are most useful in exotic problems where an assumption made by expected improvement, that the primary beneﬁt of sampling occurs through an improvement at the
+    point sampled, is no longer true.
+- id: c6
+  statement: Knowledge gradient values improvement of the maximum of the posterior mean over the whole domain; it gives a small benefit in the standard noise-free problem and, citing works that include
+    the author's own, tends to significantly outperform EI when such effects are first-order (noise, multi-fidelity, derivatives, environmental conditions).
+  location: Section 4.2
+  page: 11
+  quote: When such phenomenon are ﬁrst-order, KG tends to signiﬁcantly outperform EI (Wu et al., 2017; Poloczek et al., 2017; Wu and Frazier, 2016; Toscano-Palmerin and Frazier, 2018).
+- id: c7
+  statement: 'Noisy evaluations: noise variance is usually unknown and treated as a common hyperparameter. Direct use of EI is conceptually challenging because improvement is not easily defined, so heuristic
+    substitutes are used; citing works co-authored by the author, KG can outperform EI substantially under substantial noise.'
+  location: Section 5
+  page: 13
+  quote: Because of these approximations, KG can outperform EI substantially in problems with substantial noise (Wu and Frazier, 2016; Frazier et al., 2009).
+- id: c8
+  statement: 'Multi-step lookahead: EI, KG, ES and PES are one-step optimal; exact multi-step optimal acquisition is extremely challenging (curse of dimensionality in dynamic programming), and approximate
+    methods do not yet seem deployable broadly because their error and extra cost often overwhelm the benefit. In specific settings where multi-step optimal algorithms can be computed, existing one-step
+    acquisitions perform almost as well.'
+  location: Section 4.4
+  page: 12
+  quote: These methods do not yet seem to be in a state where they can be deployed broadly for practical problems, because the error and extra cost introduced in solving stochastic dynamic programming problems
+    approximately often overwhelms the beneﬁt that considering multiple steps provides.
+- id: c9
+  statement: 'Open problems: no finite-time bounds explain the near-optimal empirical performance of the acquisitions used in practice and little is known about convergence rates; GPs are used in most BO
+    work but other models may suit some problems better; and BO that works well in high dimensions is of great interest, possibly via structure-exploiting models or new acquisition functions.'
+  location: Section 7
+  page: 16
+  quote: It is also possible that new acquisition functions may provide substantial value in high dimensional problems.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Affiliation not extracted from the PDF text. No venue stated in the PDF (arXiv v1, no journal_ref
+    given). Conflict of interest: the author co-authored the knowledge-gradient method and several of the works cited for KG''s advantages (Frazier et al. 2009; Wu and Frazier 2016; Toscano-Palmerin and
+    Frazier 2018; Wu et al. 2017; Poloczek et al. 2017 - all list Frazier as an author in the references), and Cornell MOE is listed among software; no competing-interest statement was found. Parallel EI
+    (Section 5): the Constant Liar approximation and stochastic-gradient optimization of parallel EI (used for up to q = 128 parallel evaluations). The cross-validation folds case is described as an environmental-conditions
+    problem. No discussion of categorical or conditional (tree-structured) search spaces was found (searched for categor, conditional, discrete; ''discrete'' appears only for KG over a finite domain and
+    discrete-event simulation). No statement on the cubic cost of GP inference was found (searched for cubic, O(n, overhead); it recommends Cholesky solves and a 1e-6 diagonal jitter for numerical stability).'

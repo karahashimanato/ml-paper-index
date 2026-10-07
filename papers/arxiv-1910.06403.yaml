@@ -1,0 +1,94 @@
+id: arxiv-1910.06403
+title: 'BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization'
+authors:
+- Maximilian Balandat
+- Brian Karrer
+- Daniel R. Jiang
+- Samuel Daulton
+- Benjamin Letham
+- Andrew Gordon Wilson
+- Eytan Bakshy
+year: 2019
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/1910.06403
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: f597256792f6fa7bac92f9f17a3c559f56b011c782d17c6d356f5cbfec67e24b
+tags:
+  tasks:
+  - black-box-optimization
+  - hyperparameter-optimization
+  method_families:
+  - bayesian-optimization
+  - gaussian-processes
+  - automl-systems
+proposes:
+- 'BoTorch: a PyTorch-based modular framework for Monte-Carlo (MC) Bayesian optimization (models, posteriors, samplers, MC objectives and acquisition functions), optimizing MC acquisition functions by sample
+  average approximation (fixed base samples, quasi-MC, deterministic L-BFGS-B)'
+- 'One-Shot Knowledge Gradient (OKG): knowledge gradient optimized jointly over the candidates and fantasy points as a single deterministic problem under SAA'
+claims:
+- id: c1
+  statement: 'MC acquisition functions: analytic forms are not available for arbitrary objectives or utilities, non-Gaussian posteriors, or batches of points evaluated in parallel or asynchronously, so
+    the expectation defining the acquisition function is approximated by averaging over posterior samples; randomized quasi-MC can significantly reduce the variance of the estimate and its gradient.'
+  location: Section 3 (Monte-Carlo Acquisition Functions)
+  page: 3
+  quote: Instead, MC integration can be used to approximate the expectation (1) using samples from the posterior.
+- id: c2
+  statement: 'Sample average approximation (SAA): instead of redrawing samples at each evaluation and using stochastic first-order methods, BoTorch draws base samples once and holds them fixed, making the
+    MC estimate deterministic so that deterministic quasi-Newton optimizers (by default multi-start L-BFGS-B) can be used.'
+  location: Section 4 (MC Bayesian Optimization via Sample Average Approximation)
+  page: 3
+  quote: and hold it ﬁxed between evaluations throughout the course of optimization
+- id: c3
+  statement: 'Theory (Theorem 1): assuming a compact feasible set, a GP prior with continuously differentiable mean and covariance, Lipschitz objective and utility, and i.i.d. normal base samples, the SAA
+    optimum converges almost surely, and under additional regularity conditions at an exponential rate in probability. The authors do not characterize theoretical rate improvements of RQMC over MC, but
+    observe empirically that RQMC works remarkably well.'
+  location: Section 4 (MC Bayesian Optimization via Sample Average Approximation)
+  page: 4
+  quote: While at this point we do not characterize improvements in theoretical convergence rates of RQMC over MC for SAA, we observe empirically that RQMC methods work remarkably well in practice
+- id: c4
+  statement: The authors find that in practice the bias from SAA has only a minor effect relative to the analytic ground truth, often improves on stochastic approaches, and avoids tuning optimization hyperparameters
+    such as learning rates.
+  location: Section 4 (MC Bayesian Optimization via Sample Average Approximation)
+  page: 4
+  quote: We ﬁnd that in practice the bias from using SAA only has a minor effect on the performance relative to using the analytic ground truth
+- id: c5
+  statement: 'One-Shot KG: the nested knowledge-gradient problem is solved jointly over candidates and N fantasy points (dimension (q + N)d instead of qd) as a single deterministic problem; its main limitation
+    is the linear growth of the problem dimension in N, though the authors observe good performance for moderate N.'
+  location: Section 4.2 (One-Shot Formulation of the Knowledge Gradient using SAA)
+  page: 5
+  quote: The main limitation of OKG is the linear growth of the dimension of the optimization problem in N
+- id: c6
+  statement: 'Library comparison protocol: BoTorch is compared with GPyOpt, Cornell MOE and Dragonfly, chosen as the most popular libraries with ongoing support (GPFlowOpt could not be installed), with
+    all packages using their default models and settings; the authors report that BoTorch''s algorithms tend to achieve greater sample efficiency.'
+  location: Section 6 (Experiments)
+  page: 9
+  quote: First, we ﬁnd that BOTORCH’s algorithms tend to achieve greater sample efﬁciency compared to those of other packages (all packages use their default models and settings).
+- id: c7
+  statement: 'Synthetic-benchmark protocol: noisy Branin, Rosenbrock, Ackley and Hartmann with q = 4, means and 95% confidence intervals over 100 trials, all algorithms starting from the same 2d + 2 QMC
+    initial points; performance is the true noiseless value at the suggested point, which is out-of-sample for OKG, MOE KG and NEI and in-sample for the others.'
+  location: Appendix C.1
+  page: 17
+  quote: We evaluate based on the true noiseless function value at the “suggested point” (i.e., the point to be chosen if BO were to end at this batch).
+- id: c8
+  statement: 'HPO protocol: for hyperparameter tuning the configuration with the best observed performance is reported rather than a suggested point; e.g. DQN on Cartpole (5 hyperparameters, each evaluation
+    an average of 10 training runs, 15 rounds of q = 4, 100 trials) and an HPOlib2 neural-network surrogate for UCI Adult (200 trials of 75 iterations, q = 1).'
+  location: Appendix C.4
+  page: 18
+  quote: As HPO typically involves long and resource intensive training jobs, it is standard to select the conﬁguration with the best observed performance, rather than to evaluate a “suggested” conﬁguration
+    (we cannot perform noiseless function evaluations).
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Facebook (six authors) and New York University. Venue from the PDF footer (''34th Conference
+    on Neural Information Processing Systems (NeurIPS 2020)'') and the arXiv journal_ref; arXiv first version 2019. Conflict of interest: the authors evaluate their own open-source library (botorch.org)
+    against other libraries run with default settings; the GPU/fast-predictive-distribution results rely on GPyTorch, which BoTorch integrates closely with. BoTorch primitives are stated to work with any
+    model that provides reparameterized posterior samples, but the paper focuses on GPyTorch GPs. Constrained-BO results (Appendix C.3) show only BoTorch algorithms because other packages do not natively
+    support unknown constraints. SWA on CIFAR-10 (VGG-16, 3 hyperparameters tuned with OKG) is reported against the mean accuracy reported by Izmailov et al.; which data split the tuning objective used
+    was not found in the text (searched for validation, held out, test). High-dimensional, multi-fidelity and multi-objective BO are outside the paper''s scope. Figures not recorded.'

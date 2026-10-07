@@ -1,0 +1,92 @@
+id: arxiv-1502.05700
+title: Scalable Bayesian Optimization Using Deep Neural Networks
+authors:
+- Jasper Snoek
+- Oren Rippel
+- Kevin Swersky
+- Ryan Kiros
+- Nadathur Satish
+- Narayanan Sundaram
+- Md. Mostofa Ali Patwary
+- Prabhat
+- Ryan P. Adams
+year: 2015
+venue: ICML 2015
+links:
+  arxiv: https://arxiv.org/abs/1502.05700
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: ab3f314a9a6275fbb2bec113a60c3d48dc903160348db6ef1777ed124c5efa33
+tags:
+  tasks:
+  - hyperparameter-optimization
+  - image-classification
+  method_families:
+  - bayesian-optimization
+  - deep-learning
+proposes:
+- 'Deep Networks for Global Optimization (DNGO): Bayesian optimization whose surrogate is a neural network trained by SGD (MAP point estimate) with a Bayesian linear regressor on the last hidden layer (adaptive
+  basis regression), so cost scales linearly in the number of observations and cubically in the basis dimension; used with (constrained, parallel Monte Carlo) expected improvement'
+claims:
+- id: c1
+  statement: 'Motivation: a major drawback of GP-based Bayesian optimization is that inference time grows cubically in the number of observations because a dense covariance matrix must be inverted; the
+    authors argue this has made it infeasible to combine large-scale parallelism with GP-based BO as search spaces and required evaluations grow.'
+  location: 1. Introduction
+  page: 1
+  quote: inference time grows cubically in the number of observations
+- id: c2
+  statement: 'DNGO surrogate: a Bayesian linear regressor is added to the last hidden layer of a deep neural network, marginalizing only the output weights while using a point estimate for the remaining
+    parameters (a pragmatic alternative to fully Bayesian neural networks, which the authors describe as very computationally expensive at large scale).'
+  location: 3. Adaptive Basis Regression with Deep Neural Networks
+  page: 3
+  quote: we take a pragmatic approach and add a Bayesian linear regressor to the last hidden layer of a deep neural network
+- id: c3
+  statement: 'Cost: the resulting adaptive basis regression scales linearly in the number of observations and cubically in the basis function dimensionality, which allows an explicit trade-off between evaluation
+    time and model capacity; the matrix to invert grows with the output dimensionality D rather than the number of observations N.'
+  location: 3. Adaptive Basis Regression with Deep Neural Networks
+  page: 3
+  quote: scales linearly in the number of observations, and cubically in the basis function dimensionality
+- id: c4
+  statement: 'Design choices matter: the activation function significantly altered BO performance; ReLU units can lead to very poor uncertainty estimates and excessive exploration, so bounded tanh units
+    are used (a ReLU network with tanh only on the last layer is suggested if the smoothness assumption needs relaxing).'
+  location: 3.1.1. Network Architecture
+  page: 4
+  quote: the commonly used rectiﬁed linear (ReLU) function can lead to very poor estimates of uncertainty, which causes the Bayesian optimization routine to explore excessively
+- id: c5
+  statement: The surrogate network's own hyperparameters (learning rate, momentum, layer sizes, l2 penalties, dropout) were tuned with GP-based BO (Spearmint) to minimize the average relative loss on a
+    series of benchmark global optimization problems; the chosen architecture (3 hidden layers of about 50 units, no dropout) is used throughout the evaluation. The text does not state whether these tuning
+    problems overlap the HPOLib problems used later for evaluation.
+  location: 3.1.1. Network Architecture
+  page: 4
+  quote: In order to tune any remaining hyperparameters, such as the width of the hidden layers and the amount of regularization, we used GP-based Bayesian optimization.
+- id: c6
+  statement: 'Parallelism: following Snoek et al. (2012), pending experiments are handled by averaging EI over fantasy outcomes; with a GP the cost of EI per candidate becomes cubic in the size of the augmented
+    dataset, restricting the number of running experiments and fantasy sets, whereas DNGO allows both to be scaled up.'
+  location: 3.3. Parallel Bayesian Optimization
+  page: 6
+  quote: With DNGO it is possible to scale both of these up to accommodate a much higher degree of parallelism.
+- id: c7
+  statement: 'HPOLib benchmark comparison: DNGO is compared with SMAC (random forests), TPE and the input-warped GP method of Snoek et al. (2014) (Spearmint) on continuous HPOLib problems, each method run
+    10 times; the authors report that DNGO significantly outperforms SMAC and TPE and is competitive with the GP approach in the number of evaluations needed.'
+  location: 4.1. HPOLib Benchmarks
+  page: 6
+  quote: DNGO signiﬁcantly outperforms SMAC and TPE, and is competitive with the Gaussian process approach
+- id: c8
+  statement: 'Massively parallel use case (image caption generation with a log-bilinear model, 11 hyperparameters, average 26.6 hours per evaluation): validation BLEU was optimized with 300-800 experiments
+    in parallel, about 2500 experiments in total; test-set results of the best models are compared with LSTM results reported in other papers.'
+  location: 4.2. Image Caption Generation
+  page: 7
+  quote: we proposed and evaluated approximately 2500 experiments—the equivalent of over 2700 CPU days—in less than one week
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Harvard, MIT, University of Toronto, Intel Labs, NERSC/LBNL. Venue from the PDF first
+    page (''Proceedings of the 32nd International Conference on Machine Learning, Lille, France, 2015''). Conflict of interest: the GP baseline (Spearmint with input warping, Snoek et al. 2014) is by overlapping
+    authors, and Spearmint was also used to tune DNGO''s own architecture. CIFAR-10/100 CNN tuning: optimized on a 10,000-example validation split from the training set with 40 parallel jobs (200 epochs
+    per run), then the best configuration retrained for 350 epochs on the full training set; compared to published state-of-the-art numbers from other papers (not same-budget baselines). Also models unknown
+    constraints with a Bayesian logistic-regression output layer (Laplace approximation). Fig. 1 (time per suggestion vs GP) is a figure only; values not recorded.'

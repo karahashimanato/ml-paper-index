@@ -1,0 +1,100 @@
+id: arxiv-2012.03826
+title: HEBO Pushing The Limits of Sample-Efficient Hyperparameter Optimisation
+authors:
+- Alexander I. Cowen-Rivers
+- Wenlong Lyu
+- Rasul Tutunov
+- Zhi Wang
+- Antoine Grosnit
+- Ryan Rhys Griffiths
+- Alexandre Max Maraval
+- Hao Jianye
+- Jun Wang
+- Jan Peters
+- Haitham Bou Ammar
+year: 2020
+venue: JAIR
+links:
+  arxiv: https://arxiv.org/abs/2012.03826
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 8d5ae359edc48646cdea1c9399bc4477a9f48706fbf64ad851f35cb0519d34da
+tags:
+  tasks:
+  - hyperparameter-optimization
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - bayesian-optimization
+  - gaussian-processes
+proposes:
+- 'HEBO (Heteroscedastic and Evolutionary Bayesian Optimisation): a GP-based BO solver with Box-Cox/Yeo-Johnson output transformation and Kumaraswamy input warping, a robust (noise-perturbed) acquisition,
+  and a multi-objective ensemble of EI, PI and UCB solved for a Pareto front with NSGA-II (handling mixed continuous/integer variables)'
+claims:
+- id: c1
+  statement: 'Heteroscedasticity (Section 3.2): applying an output transformation (Box-Cox/Yeo-Johnson) to a vanilla GP gave a more favourable log probability in 70 of 108 Bayesmark tasks, significantly
+    in 58 (two-sided paired t-test); Levene''s and Fligner-Killeen tests rejected homoscedasticity in 72 and 73 of 108 tasks, which the authors read as at least 66% of tasks being heteroscedastic.'
+  location: Section 3.2
+  page: 8
+  quote: In 58/108 tasks, the gain is signiﬁcant at the 95% level of conﬁdence (p-value < 0.025).
+- id: c2
+  statement: 'Non-stationarity (Section 3.1): with Kumaraswamy input warping the stationary GP''s log probability was more favourable in 106 of 108 tasks and significantly so in 79 (described as a one-sided
+    t-test, whereas the output-transform test in Section 3.2 is described as two-sided paired).'
+  location: Section 3.1
+  page: 7
+  quote: In 79/108 tasks, the gain is signiﬁcant at the 95% level of conﬁdence (p-value < 0.025).
+- id: c3
+  statement: 'Modelling fix: Box-Cox (Yeo-Johnson for labels of arbitrary sign) output transformations together with Kumaraswamy input warping are chosen as a balance between simplicity and empirical performance;
+    the output-transform parameter is refit before the GP, and the warping parameters are optimized under the GP marginal likelihood (similar to Balandat et al., 2020).'
+  location: Section 4.1
+  page: 9
+  quote: We observe that the well-known Box-Cox (Box & Cox, 1964) and Yeo-Jonhson (Yeo & Johnson, 2000) output transformations in conjunction with the Kumaraswamy (Kumaraswamy, 1980) input transformation,
+    oﬀer a balance between simplicity of implementation and empirical performance.
+- id: c4
+  statement: 'Robust acquisition: instead of a worst-case max-min formulation (conservative, no known global convergence guarantees in the non-convex non-concave case), HEBO targets the expected acquisition
+    over random perturbations of the GP parameters and approximates it by adding Gaussian noise to the acquisition value; an informal theorem states the approximation holds with high probability for suitable
+    noise scales.'
+  location: Section 4.2.1
+  page: 11
+  quote: Importantly, this problem seeks to ﬁnd new query locations that perform well on average over a distribution of surrogate models in favour of assuming a perfect surrogate.
+- id: c5
+  statement: 'Acquisition ensemble: EI, PI and UCB (which the authors show can conflict in their optima) are optimized jointly as a multi-objective problem for a Pareto front with NSGA-II (pymoo), chosen
+    because evolutionary solvers handle categorical and integer hyperparameters; the authors observed the GP-Hedge alternative to perform poorly compared with individual acquisitions.'
+  location: Section 4.2.2
+  page: 12
+  quote: We however, observed this formulation to perform poorly when compared against individual acquisitions.
+- id: c6
+  statement: 'Evaluation protocol: 108 Bayesmark tasks (nine models, six UCI datasets, two metrics each; objective = cross-validation loss, noise from train-test splits; 2 to 9 hyperparameters), 16 iterations
+    of batch 8 (or 100 iterations of batch 1), 20 random seeds, and a normalised score relative to an estimated optimal loss and the mean loss of random search. The same setup (Section 3) was used for the
+    assumption analysis that motivated HEBO''s design. Baselines include SkOpt, pySOT, HyperOpt, OpenTuner, Nevergrad (1+1), BOHB (modified to batch, TPE without Hyperband fidelities), Dragonfly, TuRBO
+    and TuRBO+ (TuRBO with the authors'' modelling improvements); no statement on how baseline settings were chosen was found (searched for default, tuned).'
+  location: Section 5
+  page: 12
+  quote: Each experiment is repeated for 20 random seeds.
+- id: c7
+  statement: 'Ablation: removing or adding each component one at a time, the observed order of importance is heteroscedasticity (output transform), multi-objective acquisition, non-stationarity (input warping)
+    and robustness.'
+  location: Section 5.3
+  page: 16
+  quote: 'The precedence order observed is: heteroscedasticity, multi-objective acquisition functions, non-stationarity and robustness.'
+- id: c8
+  statement: 'Black-box challenge: the abstract states that HEBO placed first in the NeurIPS 2020 Black-Box Optimisation challenge; the main text describes the challenge only as using the same UCI testbed
+    (citing Turner et al., 2021) and gives no description of the challenge''s evaluation protocol (searched for challenge).'
+  location: Abstract
+  page: 1
+  quote: We demonstrate HEBO’s empirical eﬃcacy on the NeurIPS 2020 Black-Box Optimisation challenge, where HEBO placed ﬁrst.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Huawei Noah''s Ark Lab (all authors; some also TU Darmstadt, University of Cambridge,
+    UCL). Venue from the arXiv comment (''Accepted at JAIR'') and the PDF header (''Journal of Artificial Intelligence Research 70 (2021) 1-15, Submitted 10/2020; published 1/2021''); the volume/page numbers
+    in that header could not be confirmed (the document is 80 pages), so only ''JAIR'' is recorded. Main text carded (Sections 1-7); the appendices (proofs, search spaces, per-task tables) were not carded.
+    Conflict of interest: the authors built HEBO and the TuRBO+ baseline; the asynchronous baselines (Dragonfly-BB, BOHB-BB) are run without their multi-fidelity components, and the authors note this trades
+    sample efficiency for speed. The heteroscedasticity test evaluates k = 50 configurations 10 times each per task. The introduction lists findings with labels (A.I heteroscedasticity, A.II non-stationarity)
+    that are swapped relative to the Section 3.1/3.2 headings. As extracted, the normalised score formula reads 100 x (L - L*)/(L_rand - L*) while the text treats higher scores as better; the orientation
+    could not be confirmed from the extracted text. Section 5 states query computation was under 20 seconds per batch. Figures and tables not recorded.'

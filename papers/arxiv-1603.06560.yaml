@@ -1,0 +1,112 @@
+id: arxiv-1603.06560
+title: 'Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization'
+authors:
+- Lisha Li
+- Kevin Jamieson
+- Giulia DeSalvo
+- Afshin Rostamizadeh
+- Ameet Talwalkar
+year: 2016
+venue: JMLR
+links:
+  arxiv: https://arxiv.org/abs/1603.06560
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 81b7aa7f62d5bdaf0636c938fa726b92b748e24053aca76adb13bd6cc0681c70
+tags:
+  tasks:
+  - hyperparameter-optimization
+  - image-classification
+  method_families:
+  - multi-fidelity-optimization
+  paradigms:
+  - supervised
+proposes:
+- 'Hyperband: hyperparameter optimization as a pure-exploration non-stochastic infinite-armed bandit problem; randomly sampled configurations receive a resource (iterations, data subsamples, features) via
+  SuccessiveHalving, and Hyperband runs several SuccessiveHalving brackets with different numbers of configurations n per budget B to hedge the n versus B/n trade-off'
+claims:
+- id: c1
+  statement: 'Problem formulation: rather than adaptive configuration selection (Bayesian optimization), the paper speeds up random search through adaptive resource allocation and early stopping, framing
+    hyperparameter optimization as a pure-exploration non-stochastic infinite-armed bandit problem in which a predefined resource (iterations, data samples or features) is allocated to randomly sampled
+    configurations.'
+  location: Abstract
+  page: 1
+  quote: We formulate hyperparameter optimization as a pure-exploration non-stochastic inﬁnite-armed bandit problem where a predeﬁned resource like iterations, data samples, or features is allocated to
+    randomly sampled conﬁgurations.
+- id: c2
+  statement: SuccessiveHalving (Jamieson and Talwalkar, 2015) allocates a budget uniformly, discards the worst half and repeats, but needs the number of configurations n as an input; for a fixed budget
+    B it is not clear a priori whether to try many configurations with little training each or few configurations with longer training. Which is better depends on how fast intermediate losses approach terminal
+    losses (the 'envelope' functions) and how close the terminal losses are, both of which are unknown in practice.
+  location: Section 3.1
+  page: 6
+  quote: However, for a ﬁxed B, it is not clear a priori whether we should (a) consider many conﬁgurations (large n) with a small average training time; or (b) consider a small number of conﬁgurations (small
+    n) with longer average training times.
+- id: c3
+  statement: 'Hyperband addresses this ''n versus B/n'' problem by a grid search over n for a fixed B: each bracket is a SuccessiveHalving run with a different minimum resource r, from the most aggressive
+    bracket to s = 0, which simply performs classical random search; this costs approximately s_max + 1 times more work than SuccessiveHalving with a single n. Inputs are the maximum resource R and eta
+    (default 3); configurations are sampled uniformly from a predefined space in this work.'
+  location: Section 3.2
+  page: 8
+  quote: Hence, Hyperband performs a geometric search in the average budget per conﬁguration and removes the need to select n for a ﬁxed budget at the cost of approximately smax + 1 times more work than
+    running SuccessiveHalving for a single value of n.
+- id: c4
+  statement: 'Theoretical setting: the analysis reduces hyperparameter optimization to arms identified only by their index, assuming that each arm''s loss sequence converges to a limit (Assumption 1) and
+    that the limits are bounded i.i.d. random variables (Assumption 2, from sampling configurations i.i.d.); the algorithm does not use, and the analysis makes no assumptions about, any correlation between
+    validation loss and hyperparameter values.'
+  location: Section 5.2
+  page: 23
+  quote: Again, this is not to say that the validation losses do not depend on the settings of the hyperparameters; the validation loss could well be correlated with certain hyperparameters, but this is
+    not used in the algorithm and no assumptions are made regarding the correlation structure.
+- id: c5
+  statement: 'Failure mode: when a hyperparameter''s best setting depends on the resource (e.g. maximum tree depth of random forests with more data), the convergence to the true loss is usually slow because
+    performance on a smaller resource is not indicative of performance on a larger one, so such problems are particularly difficult for Hyperband; the authors recommend removing the dependence (e.g. using
+    minimum samples per leaf, or normalizing the regularization term by training set size).'
+  location: Section 4.4.3
+  page: 21
+  quote: In these situations, the rate of convergence to the true loss is usually slow because the performance on a smaller resource is not indicative of that on a larger resource.
+- id: c6
+  statement: 'Open challenge stated in the conclusion: configurations can have drastically different convergence rates (e.g. learning-rate decay, network depth, or different model families such as deep
+    networks versus decision trees); the core issue arises when configurations that converge much more slowly ultimately give better models, and resources would need to be adjusted for a fair comparison
+    at elimination time.'
+  location: Section 6
+  page: 33
+  quote: The core issue arises when conﬁgurations with drastically slower convergence rates ultimately result in better models.
+- id: c7
+  statement: 'Comparison protocol: Hyperband is compared with SMAC, TPE and Spearmint using their default settings (Spearmint excluded for search spaces with conditional hyperparameters), with SuccessiveHalving
+    (repeating the most exploratory bracket), random search and ''random 2x'' (twice the budget) as baselines. In the deep-learning experiments each searcher gets a total budget of 50R measured in iterations
+    rather than compute time (ignoring configuration-selection overhead of Bayesian methods and initialization/validation overhead of Hyperband, the latter stated to be below 5% on the hardware used), with
+    ten independent trials per searcher.'
+  location: Section 4
+  page: 12
+  quote: For all experiments, we compare Hyperband with three well known Bayesian optimization algorithms—SMAC, TPE, and Spearmint—using their default settings.
+- id: c8
+  statement: On the 117 OpenML data sets (auto-sklearn search space with 110 hyperparameters, meta-learning warm-start removed, one-hour window, 20 trials, data-set subsampling as the resource), Hyperband
+    beat random search in test error rank despite a worse validation error rank, Bayesian methods beat both in test error but showed signs of overfitting to the validation set, and random 2x outperformed
+    all other methods; the authors note that average ranks do not show the (small) magnitude of differences and that Hyperband gave no significant speedup here because many data sets trained in seconds
+    and initialization cost was high relative to training time.
+  location: Section 4.2.1
+  page: 16
+  quote: Bayesian methods outperform Hyperband and random search in test error performance but also exhibit signs of overﬁtting to the validation set, as they outperform Hyperband by a larger margin on
+    the validation error rank.
+- id: c9
+  statement: Except for the LeNet and 117-data-set experiments, the most aggressive SuccessiveHalving bracket outperformed Hyperband in all of the paper's experiments; the authors state they should in hindsight
+    have run only that bracket, but that it was not known a priori which bracket would be best, which is why Hyperband cycles through all of them. In their experience aggressive early stopping is generally
+    safe for neural network tasks.
+  location: Section 4.4.2
+  page: 21
+  quote: In hindsight, we should have just run bracket s = 4, since aggressive early-stopping provides massive speedups on many of these benchmarking tasks.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): Bayesian optimization and hyperparameter optimization (GP-based BO, TPE, multi-fidelity methods, scalable BO, frameworks, benchmarks
+    and comparisons with random search). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF first page (''Journal of Machine Learning Research 18 (2018) 1-52'', published
+    4/18) and the arXiv journal_ref; year 2016 is the arXiv submission year. The PDF states the article is licensed CC-BY 4.0. Affiliations: CMU, University of Washington, Google Research, Determined AI
+    (Talwalkar). Section 3.7 states that Hyperband, without knowledge of the envelope functions or the distribution of terminal losses, needs a budget only log factors larger than SuccessiveHalving (theory
+    in Section 5; finite-horizon theorems not stated in full). Section 3.6: results are said to be not very sensitive to eta; theory suggests eta = e, practice 3 or 4. Experiments report test error of configurations
+    selected by validation loss; figures only for the comparisons (no result numbers recorded). Section 4.1 also reports that SMAC with the Domhan et al. (2015) early-termination criterion outperforms Hyperband
+    on SVHN. The paper defers comparison with Fabolas (Klein et al., 2017a) and Kandasamy et al. (2017) to future work. Section 4.4.1 attributes realized speedups to how training time scales with the resource,
+    per-configuration overhead and problem difficulty (search-space dimension).'

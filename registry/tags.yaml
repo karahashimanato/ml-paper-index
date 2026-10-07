@@ -73,6 +73,10 @@ tasks:
     description: Detecting anomalous or out-of-distribution inputs in non-time-series data (e.g. images, tabular records).
   - id: uncertainty-estimation
     description: Producing predictive distributions or uncertainty estimates (probabilistic prediction, separating data and knowledge uncertainty), beyond point predictions.
+  - id: hyperparameter-optimization
+    description: "Choosing hyperparameters (and configurations) of learning algorithms by black-box search, including benchmarks for HPO methods."
+  - id: black-box-optimization
+    description: "Optimizing an expensive black-box objective without gradients (e.g. Bayesian optimization of engineering, control or synthetic test functions), beyond ML hyperparameters."
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -197,6 +201,10 @@ method_families:
     description: "Recalibrating a trained model's predicted probabilities or intervals (e.g. temperature scaling, Platt / isotonic / Dirichlet calibration, calibrated regression)."
   - id: bayesian-deep-learning
     description: "Approximate Bayesian or ensemble-based uncertainty for neural networks (e.g. MC dropout, deep ensembles, variational and SG-MCMC posteriors)."
+  - id: bayesian-optimization
+    description: "Sequential model-based optimization with a probabilistic surrogate and an acquisition function (e.g. GP-based BO, TPE, SMAC-style random-forest surrogates, trust-region BO)."
+  - id: multi-fidelity-optimization
+    description: "Hyperparameter search that evaluates configurations on cheap low-fidelity budgets (fewer epochs, subsets) and promotes promising ones (e.g. successive halving, Hyperband, ASHA, BOHB)."
 paradigms:
   - id: supervised
     description: Supervised learning.

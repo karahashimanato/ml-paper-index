@@ -77,6 +77,13 @@ claims:
   location: Section 4.2
   page: 10
   quote: The results show that not only the best model using policy gradient is better than the best model using random search, but also the average of top models is also much better.
+- id: c9
+  statement: 'REINFORCE gradient with baseline: the controller gradient is estimated as (1/m) sum_{k=1}^{m} sum_{t=1}^{T} grad_theta_c log P(a_t | a_(t-1):1; theta_c) (R_k - b), over m sampled architectures
+    with T controller actions each, where R_k is the validation accuracy of the k-th child; subtracting a baseline b that does not depend on the current action keeps the estimate unbiased while reducing
+    its variance.'
+  location: Section 3.2
+  page: 4
+  quote: As long as the baseline function b does not depend on the on the current action, then this is still an unbiased gradient estimate.
 results: []
 relations: []
 card:

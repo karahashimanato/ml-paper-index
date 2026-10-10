@@ -84,6 +84,19 @@ claims:
   location: Section 4
   page: 9
   quote: For example, the current method may suffer from discrepancies between the continuous architecture encoding and the derived discrete architecture.
+- id: c10
+  statement: 'Mixed operation (Eq. 2): on edge (i, j), o_bar(x) = sum_{o in O} [exp(alpha_o^(i,j)) / sum_{o'' in O} exp(alpha_o''^(i,j))] o(x), a softmax-weighted sum of all candidate operations; the bilevel
+    problem is min_alpha L_val(w*(alpha), alpha) subject to w*(alpha) = argmin_w L_train(w, alpha).'
+  location: Section 2.2
+  page: 3
+  quote: 'To make the search space continuous, we relax the categorical choice of a particular operation to a softmax over all possible operations:'
+- id: c11
+  statement: 'One-step approximation (Eq. 6-7): the architecture gradient grad_alpha L_val(w*(alpha), alpha) is approximated by grad_alpha L_val(w - xi grad_w L_train(w, alpha), alpha), whose chain-rule
+    expansion grad_alpha L_val(w'', alpha) - xi grad^2_{alpha,w} L_train(w, alpha) grad_w'' L_val(w'', alpha) uses the one-step forward weights w'' = w - xi grad_w L_train(w, alpha); the second-order term
+    is approximated by finite differences.'
+  location: Section 2.3
+  page: 4
+  quote: denotes the weights for a one-step forward model.
 results: []
 relations: []
 card:

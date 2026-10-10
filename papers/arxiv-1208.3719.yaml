@@ -90,6 +90,20 @@ claims:
   page: 9
   quote: First, Auto-WEKA still shows larger improvements in cross-validation performance than on test data, suggesting the investigation of more sophisticated methods for detecting and avoiding overﬁtting
     than our simple correlation-based approach.
+- id: c10
+  statement: 'Hierarchical hyperparameter optimization (Section 2.2): given a structured (tree or DAG) space Lambda of conditional hyperparameters, the problem is lambda* in argmin_{lambda in Lambda} (1/k)
+    sum_{i=1}^{k} L(A_lambda, D_train^(i), D_valid^(i)), the average loss over k cross-validation folds; CASH extends this by adding the choice of algorithm as a root-level hyperparameter.'
+  location: Section 2.2
+  page: 2
+  quote: 'Given such a structured space Λ, the (hierarchical) hyperparameter optimization problem can be written as:'
+- id: c11
+  statement: 'TPE acquisition: citing Bergstra et al., the expected improvement under TPE is proportional to (gamma + g(lambda)/l(lambda) * (1 - gamma))^-1, so TPE generates many candidate configurations
+    at random and picks the one with the smallest g(lambda)/l(lambda), where l models configurations whose loss is below the threshold c* and g the rest.'
+  location: Section 3.2
+  page: 3
+  quote: 'TPE maximizes this expression by generating many candi-
+
+    date hyperparameter conﬁgurations at random and picking'
 results: []
 relations: []
 card:

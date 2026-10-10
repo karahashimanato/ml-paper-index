@@ -88,6 +88,12 @@ claims:
   page: 8
   quote: An important future direction is to design MPNNs that can generalize effectively to larger graphs than those appearing in the training set or at least work with benchmarks designed to expose issues
     with generalization across graph sizes.
+- id: c10
+  statement: 'MPNN equations (Eq. 1-3): messages m_v^{t+1} = sum_{w in N(v)} M_t(h_v^t, h_w^t, e_vw), node updates h_v^{t+1} = U_t(h_v^t, m_v^{t+1}), and readout yhat = R({h_v^T | v in G}), where N(v) are
+    the neighbors of v and e_vw the edge features.'
+  location: Section 2
+  page: 3
+  quote: The readout phase computes a feature vector for the whole graph using some readout function R according to
 results: []
 relations: []
 card:

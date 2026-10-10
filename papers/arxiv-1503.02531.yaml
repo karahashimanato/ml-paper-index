@@ -90,6 +90,13 @@ claims:
   location: Section 8
   page: 8
   quote: We have not yet shown that we can distill the knowledge in the specialists back into the single large net.
+- id: c10
+  statement: 'Gradient of distillation (Eq. 2-4): with distilled-model logits z_i, cumbersome-model logits v_i, soft-target probabilities p_i and transfer at temperature T, dC/dz_i = (1/T)(q_i - p_i); if
+    T is high compared with the logits, exp(x/T) is approximated by 1 + x/T, and if the logits are zero-meaned per transfer case this simplifies to dC/dz_i ~ (1/(N T^2))(z_i - v_i), where N is the number
+    of classes.'
+  location: Section 2.1
+  page: 3
+  quote: 'If the temperature is high compared with the magnitude of the logits, we can approximate:'
 results: []
 relations: []
 card:

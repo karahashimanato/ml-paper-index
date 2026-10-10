@@ -92,6 +92,12 @@ claims:
   page: 8
   quote: More speciﬁcally, we are able to improve upon GCNs by a margin of 1.5% and 1.6% on Cora and Citeseer, respectively, suggesting that assigning different weights to nodes of a same neighborhood may
     be beneﬁcial.
+- id: c10
+  statement: 'Attention-weighted aggregation: the normalized coefficients alpha_ij = softmax_j(e_ij) = exp(LeakyReLU(a^T [W h_i || W h_j])) / sum_{k in N_i} exp(LeakyReLU(a^T [W h_i || W h_k])) are used
+    to compute h''_i = sigma(sum_{j in N_i} alpha_ij W h_j), a linear combination of the transformed neighbor features followed by a nonlinearity.'
+  location: Section 2.1
+  page: 3
+  quote: the normalized attention coefﬁcients are used to compute a linear combination of the features corresponding to them
 results: []
 relations: []
 card:

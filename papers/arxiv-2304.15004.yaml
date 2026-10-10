@@ -14,6 +14,7 @@ source:
 tags:
   tasks:
   - scaling-laws
+  - llm-evaluation
   - image-classification
   method_families:
   - large-language-models

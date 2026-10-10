@@ -85,8 +85,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 因果効果の推定 | 論文カード16本+既存6本(識別の前提と隠れた交絡、高次元での重なり、S/T/X/R/DR-learner と二重機械学習、因果木・因果フォレスト・BCF、表現の釣り合い・TARNet/CFR・Dragonnet・CEVAE、半合成ベンチマークの偏り、競技会、正解のないモデル選択、因果の基盤モデル)、記事 [articles/topics/causal-effect-estimation.md](articles/topics/causal-effect-estimation.md) |
 | AutoML システムとアーキテクチャ探索 | 論文カード16本+既存6本(CASH とパイプライン、Auto-WEKA・TPOT・auto-sklearn・AutoGluon・FLAML・Auto-PyTorch、AMLB の設計と言えないこと、強化学習・進化・重み共有・DARTS、ランダム探索との比較、重み共有の順位、DARTS の失敗、NAS-Bench と再現性)、記事 [articles/methods/automl-systems.md](articles/methods/automl-systems.md) |
 | 混合エキスパートと状態空間モデル | 論文カード16本+既存5本(MoE のゲートと負荷の偏り、容量と補助損失、エキスパートがトークンを選ぶ方式、router z-loss と微調整、総パラメータと活性パラメータ、HiPPO・S4・H3・Mamba・Mamba-2、線形注意・Performer・RWKV、コピーと検索の弱点と混成モデル、LRA と効率の測り方)、記事 [articles/methods/moe-and-state-space-models.md](articles/methods/moe-and-state-space-models.md) |
+| 大規模言語モデルの評価の落とし穴 | 論文カード14本+既存2本(汚染とその検出、新しく作った問題での確認、例の並べ方・書式・選択肢の記号への敏感さ、LLM による採点の偏りと人の好みによる比較、ベンチマークの正解の誤り、創発と指標の選び方、評価の再現性)、記事 [articles/topics/llm-evaluation-pitfalls.md](articles/topics/llm-evaluation-pitfalls.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では566本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では580本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -107,6 +108,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 
 横断記事:
 
+- [大規模言語モデルの評価の落とし穴 — 汚染、プロンプトへの敏感さ、LLM による採点、ベンチマークの誤り、再現性](articles/topics/llm-evaluation-pitfalls.md)
 - [因果効果の推定 — 前提、メタ学習器と二重機械学習、木と森、ニューラルネット、正解のない評価](articles/topics/causal-effect-estimation.md)
 - [モデルと評価方法の弱点、それを改善した研究](articles/topics/weaknesses-and-fixes.md) — 3テーマを横断して「問題点 → 改善策 → 検証 → 独立した確認」を整理
 - [モデルの解釈可能性 — 説明手法は何を前提にし、どう評価されてきたか](articles/topics/model-interpretability.md)

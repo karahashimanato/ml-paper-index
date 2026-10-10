@@ -41,6 +41,7 @@
 - [articles/topics/causal-effect-estimation.md](../articles/topics/causal-effect-estimation.md): なし
 - [articles/topics/compute-and-scaling.md](../articles/topics/compute-and-scaling.md): `arxiv-2006.16236`, `arxiv-2006.16668`, `arxiv-2008.07669`, `arxiv-2009.14794`, `arxiv-2011.04006`, `arxiv-2111.00396`, `arxiv-2112.06905`, `arxiv-2212.14052`, `arxiv-2305.13048`, `arxiv-2401.04088`, `arxiv-2405.21060`, `arxiv-2406.07887`
 - [articles/topics/design-techniques-and-ml.md](../articles/topics/design-techniques-and-ml.md): `arxiv-2003.00982`
+- [articles/topics/llm-evaluation-pitfalls.md](../articles/topics/llm-evaluation-pitfalls.md): なし
 - [articles/topics/model-fallback-and-selection.md](../articles/topics/model-fallback-and-selection.md): `arxiv-1208.3719`, `arxiv-1603.06212`, `arxiv-1612.01474`, `arxiv-1804.05146`, `arxiv-1911.04706`, `arxiv-2003.06505`, `arxiv-2106.07998`, `arxiv-2107.05847`
 - [articles/topics/model-interpretability.md](../articles/topics/model-interpretability.md): `arxiv-1511.05741`, `arxiv-1903.05179`, `arxiv-1909.09223`, `arxiv-2001.04295`, `arxiv-2003.03629`
 - [articles/topics/quantization-effects.md](../articles/topics/quantization-effects.md): `arxiv-1412.6550`, `arxiv-1503.02531`, `arxiv-1506.02626`, `arxiv-1510.00149`, `arxiv-1710.01878`, `arxiv-1803.03635`, `arxiv-1810.02340`, `arxiv-1810.05270`, `arxiv-1910.01108`, `arxiv-1910.01348`, `arxiv-1912.05671`, `arxiv-2003.03033`, `arxiv-2005.07683`, `arxiv-2106.05945`, `arxiv-2301.00774`, `arxiv-2306.11695`

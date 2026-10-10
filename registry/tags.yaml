@@ -48,6 +48,8 @@ tasks:
     description: Measuring and reporting the training / inference cost of models (FLOPs, time, energy, memory).
   - id: language-modeling
     description: Training and evaluating language models.
+  - id: llm-evaluation
+    description: "Methods for evaluating large language models and their pitfalls: benchmark contamination, prompt sensitivity, LLM-as-a-judge, human-preference comparison and reproducibility of evaluation."
   - id: natural-language-understanding
     description: "Sentence- and passage-level language understanding tasks such as GLUE classification and SQuAD question answering."
   - id: image-classification

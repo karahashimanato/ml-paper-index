@@ -1,0 +1,119 @@
+id: arxiv-2309.03882
+title: Large Language Models Are Not Robust Multiple Choice Selectors
+authors:
+- Chujie Zheng
+- Hao Zhou
+- Fandong Meng
+- Jie Zhou
+- Minlie Huang
+year: 2023
+venue: ICLR 2024
+links:
+  arxiv: https://arxiv.org/abs/2309.03882
+  code: https://github.com/chujiezheng/LLM-MCQ-Bias
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 857c0da05b2e64596e2e22bf8c9759b98b1dafd75302b0b29e354b025ae7670f
+tags:
+  tasks:
+  - llm-evaluation
+  - natural-language-understanding
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- Recall standard deviation (RStd) across option IDs as a measure of selection bias in multiple-choice evaluation
+- 'PriDe (Debiasing with Prior estimation): estimate the model''s prior over option IDs from permutation-debiased predictions on a small sample of test items (label-free), average it into a global prior,
+  and divide it out of the observed prediction distribution for the remaining items'
+claims:
+- id: c1
+  statement: 'Answer-moving attack: in 0-shot MMLU, always moving the golden answers to one option position causes large performance fluctuations; e.g. moving them to D lowers gpt-3.5-turbo accuracy by
+    6.3 (67.2 to 60.9), while moving them to A raises llama-30B by 15.2 so that it surpasses gpt-3.5-turbo (68.2 vs 65.3), contrasting with their original 53.1 vs 67.2.'
+  location: Introduction
+  page: 1
+  quote: 'For instance, moving the golden answers
+
+    to position D degrades the accuracy of gpt-3.5-turbo by 6.3 (from 67.2 to 60.9).'
+- id: c2
+  statement: 'Definition and metric: selection bias is the model''s behavioral bias to select specific option IDs as answers; instead of counting predictions (susceptible to label imbalance) it is measured
+    by the standard deviation of the recalls of the option IDs (RStd). This presumes golden answers are randomly placed, which the authors support by showing (Appendix C) that random shuffling of options
+    does not obviously change selection bias.'
+  location: Measurement of selection bias
+  page: 3
+  quote: 'In our study, selection bias is defined as the model’s behavioral bias to select specific option IDs as
+
+    answers.'
+- id: c3
+  statement: 'Protocol: 20 decoder-only LLMs (llama-7/13/30/65B, llama-2(-chat)-7/13/70B, vicuna-v1.3-7/13/33B, vicuna-v1.5-7/13B, falcon(-inst)-7/40B, gpt-3.5-turbo-0613) on MMLU, ARC-Challenge and CommonsenseQA;
+    for open models the prediction is the option-ID token (A-E) with maximal probability, while for the API model gpt-3.5-turbo (no output probabilities) the first generated token at temperature 0 is compared
+    with the golden answer; mainly 0-shot, with 5-shot experiments using development-set examples.'
+  location: Section 2.1
+  page: 3
+  quote: 'For
+
+    gpt-3.5-turbo, we compare the golden answer with the first generated token, with the decoding
+
+    temperature set to 0.'
+- id: c4
+  statement: 'Observations: selection bias is prevalent and varies with model families and sizes without a consistent pattern within a family trained on the same data, so the authors speculate it arises
+    from complex interactions of training data composition and ordering, model capacity and other factors; within a model it shows moderate similarity across domains; in-context examples can reduce but
+    may also alter it.'
+  location: Section 2.3
+  page: 3
+  quote: 'We speculate that selection bias arises as a product of
+
+    complex interactions between training data composition and ordering, model capacity (number of
+
+    parameters), and other factors like hyperparameters.'
+- id: c5
+  statement: 'Cause: to separate token bias (prior mass on specific ID tokens) from position bias (favoring options at specific positions), the authors shuffle option IDs (leaving only token bias) and remove
+    option IDs (scoring length-normalized option likelihoods). Removing IDs notably reduces RStd, in most cases across models, benchmarks and 2-5 options, while shuffling IDs changes it little, and alternative
+    ID symbols (a/b/c/d, 1/2/3/4, (A)) give no remarkable reduction; the remaining position bias is described as somewhat present but quite irregular, depending on models and tasks.'
+  location: Section 2.4
+  page: 4
+  quote: 'These results confirm
+
+    that the model’s token bias is one primary intrinsic cause of selection bias.'
+- id: c6
+  statement: Simple prompting strategies applied to gpt-3.5-turbo, an explicit debiasing instruction in the system message and Chain-of-Thought ('Let's think step by step'), could not mitigate selection
+    bias well; the authors suggest it is an inherent behavioral bias that cannot be addressed by simple prompt engineering. Removing option IDs reduces bias but usually degrades performance, so they also
+    suggest it is not a practical mitigation.
+  location: Section 2.6
+  page: 5
+  quote: 'It suggests that selection bias is an inherent behavioral
+
+    bias of LLMs that cannot be addressed by simple prompt engineering.'
+- id: c7
+  statement: 'PriDe assumptions: the observed distribution over option IDs is decomposed into a prior over IDs (covering both token and position bias) times a debiased distribution over option contents
+    (a conditional independence assumption); the debiased part is assumed invariant to option order and the prior is assumed to depend only on the question. The per-sample prior is obtained label-free from
+    permuted inputs (Eq. 7), averaged over K test samples into a global prior, which is divided out for the remaining samples (Eq. 8), relying on the observed cross-domain similarity of selection bias.'
+  location: Section 3.3
+  page: 6
+  quote: 'Recall our observation in §2.3 that selection bias within the same model displays a moderate cross-
+
+    domain similarity.'
+- id: c8
+  statement: 'Caveats of PriDe: priors estimated on one domain showed reasonable debiasing transfer to others, but there may be a slight performance degradation when the domain gap is large (e.g. STEM/Humanities
+    to ARC); PriDe is not designed to improve performance, and the authors suggest updating the prior with new samples under predictable domain shifts. In the main experiments, gpt-3.5-turbo''s distribution
+    is approximated by 100 sampled answers and PriDe results are averaged over 5 runs.'
+  location: Section 4.2
+  page: 8
+  quote: 'we suggest updating the estimated prior using new
+
+    samples when there are predictable domain shifts in test samples'
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Tsinghua University CoAI group (Zheng, Huang) and WeChat AI, Tencent (Zhou, Meng, Zhou). Venue from the PDF header (''Published as a conference paper at ICLR 2024'') and the arXiv comment (''ICLR 2024
+    Spotlight''); year is the first arXiv version (2023). Section numbers are from cross-references (§2.1, §2.3, §2.4, §2.6, §3.3, §4.1, §4.2); the measurement subsection is not cross-referenced and is
+    given by name. The evaluation protocol is stated to follow mainstream frameworks (HuggingFace LLM Leaderboard, EleutherAI lm-harness, original MMLU implementation, OpenAI Evals). Section 4.1: PriDe
+    is reported to achieve superior debiasing effectiveness and performance improvement to Full/Cyclic Permutation especially in the low-cost scenario (figure-based; numbers not recorded); permutation baselines
+    average predictions over option permutations (citing Wang et al., 2023a; Zheng et al., 2023b). The paper contrasts with Pezeshkpour & Hruschka (2023), which did not ablate option IDs. No conflict of
+    interest with the evaluated models or benchmarks was found; PriDe is the authors'' own method. Evaluated open models are from HuggingFace; gpt-3.5-turbo-0613 via the OpenAI API (Reproducibility Statement).'

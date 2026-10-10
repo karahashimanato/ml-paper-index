@@ -1,0 +1,135 @@
+id: arxiv-2102.09690
+title: 'Calibrate Before Use: Improving Few-Shot Performance of Language Models'
+authors:
+- Tony Z. Zhao
+- Eric Wallace
+- Shi Feng
+- Dan Klein
+- Sameer Singh
+year: 2021
+venue: ICML 2021
+links:
+  arxiv: https://arxiv.org/abs/2102.09690
+  code: https://www.github.com/tonyzhaozh/few-shot-learning
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 479484d5dbd5d6d9bf40e79774efa05f4d349328d8db95d7b23bb87ed64caba2
+tags:
+  tasks:
+  - llm-evaluation
+  - natural-language-understanding
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- 'Contextual calibration: estimate the model''s bias toward each answer from its prediction for a content-free test input (e.g. ''N/A'') placed in the same prompt, then rescale the output probabilities
+  with a diagonal weight matrix W = diag(p_cf)^-1 (b = 0) so that the content-free input would receive uniform scores'
+claims:
+- id: c1
+  statement: 'Instability of few-shot in-context learning: with GPT-3 2.7B on 4-shot SST-2 and a fixed format, varying only the permutation of the training examples changed accuracy from near chance (54.3%)
+    to near state-of-the-art (93.4%); the authors state permutation can be as important as, or more important than, which examples are chosen, and that the variance persists with more examples (up to 16)
+    and larger models.'
+  location: Section 3
+  page: 3
+  quote: 'varying the permutation of the train-
+
+    ing examples can cause accuracy to go from near chance
+
+    (54.3%) to near state-of-the-art (93.4%).'
+- id: c2
+  statement: 'Majority label bias: GPT-3 is biased toward answers that are frequent in the prompt (with unbalanced prompts it heavily predicts the majority class), and the authors attribute the frequently
+    observed drop from 0-shot to 1-shot to the model repeating the class of the single training example; on 4-shot LAMA with GPT-3 2.7B, 50.2% of predictions repeat one of the four training answers versus
+    a correct repeat rate of 24.7%.'
+  location: Section 4
+  page: 4
+  quote: 'On the
+
+    validation set for 4-shot LAMA with GPT-3 2.7B, 50.2%
+
+    of the model predictions are a repeat of one of the four train-
+
+    ing answers (the correct repeat rate is 24.7%).'
+- id: c3
+  statement: 'Recency bias: the model tends to repeat answers that appear toward the end of the prompt, which aggravates the majority label bias and can outweigh it (a ''P P P N'' SST-2 prompt led to nearly
+    90% Negative predictions); the authors say it helps explain why the permutation of training examples matters, and it also affects generation (LAMA answers closer to the end are more likely to be repeated).'
+  location: Section 4
+  page: 4
+  quote: 'The model’s majority label bias is aggravated
+
+    by its recency bias: the tendency to repeat answers that ap-
+
+    pear towards the end of the prompt.'
+- id: c4
+  statement: 'Common token bias: GPT-3 is biased toward tokens common in its pre-training distribution, which is ''likely suboptimal'' for the downstream answer distribution; e.g. on DBPedia (balanced,
+    14-way) it predicts ''book'' 11 times more often than ''artist'', and the frequency of a label name (Google Ngrams) and the rate GPT-3 predicts its class (0-shot, validation set) correlate moderately
+    (r = 0.67). The authors say this helps explain why the choice of label names matters.'
+  location: Section 4
+  page: 5
+  quote: 'In fact, there is a moderate correlation (r = 0.67) between
+
+    the frequency of a DBPedia label name and the rate at which
+
+    GPT-3 predicts its class.'
+- id: c5
+  statement: 'Contextual calibration: the output probabilities (label-name probabilities renormalized to one for classification; first-token probabilities for generation) are transformed by an affine map
+    restricted to a diagonal W (vector scaling); W = diag(p_cf)^-1 and b = 0, where p_cf is the prediction for a content-free input, averaged over ''N/A'', ''[MASK]'' and the empty string. It is applied
+    to probabilities rather than logits because the OpenAI API only returned output probabilities, and only the first output token is calibrated for generation tasks.'
+  location: Section 5
+  page: 5
+  quote: 'The key idea is that the model’s bias towards
+
+    certain answers can be estimated by feeding in a content-
+
+    free input such as the string “N/A”.'
+- id: c6
+  statement: 'Protocol: GPT-3 at 2.7B, 13B and 175B parameters accessed through the OpenAI API, plus GPT-2 1.5B; for the main results a fixed prompt format with five random sets of training examples in
+    arbitrary order, labels not artificially balanced, the same sets for baseline and calibration; 0 to 8 shots because more shots made API queries prohibitively expensive.'
+  location: Section 5.1
+  page: 6
+  quote: 'We
+
+    use labeling budgets of 0–8 examples; using more than 8-
+
+    shots causes the cost of querying the OpenAI API to become
+
+    prohibitively expensive.'
+- id: c7
+  statement: On prompt engineering, the authors state contextual calibration does not eliminate the need to engineer prompts but mitigates it, making the accuracy of the best, average and worst-case prompts
+    more similar (and higher).
+  location: Section 6
+  page: 7
+  quote: 'Contextual
+
+    calibration does not eliminate the need to engineer prompts,
+
+    however, it does mitigate it: contextual calibration makes the
+
+    accuracy of the best, average, and worst-case prompts more
+
+    similar (and higher).'
+- id: c8
+  statement: 'Consequence for probing: since prompt completion is also used to probe LMs'' factual or commonsense knowledge, the authors suggest such probing methods may underestimate model accuracy and
+    recommend that future work take advantage of contextual calibration.'
+  location: Section 7
+  page: 8
+  quote: 'Our results suggest that these probing methods
+
+    may underestimate model accuracy, and we recommend that
+
+    future work take advantage of contextual calibration.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    UC Berkeley (Zhao, Wallace, Klein), University of Maryland (Feng), UC Irvine (Singh). Venue: the arXiv comment says ''ICML 2021''; no venue statement was found in the v2 PDF text (searched for Proceedings,
+    ICML); recorded from the arXiv comment. No dated GPT-3 engine names were found in the text (searched for davinci, curie, babbage); GPT-3 sizes are given only as 2.7B/13B/175B, accessed via the OpenAI
+    API with academic access acknowledged. Footnote 4 states the goal is distinct from statistical calibration (aligning confidence with accuracy). The choice of content-free input matters, ''however, many
+    good choices exist'' (Section 5.2, Appendix A Table 3); contextual calibration is reported to be close to an oracle calibration that fits W on the validation set (AGNews, figure only). Conclusion: small
+    but non-trivial decisions such as calibration ''can greatly influence results'', which ''makes it difficult to correctly develop and compare new methods''. An alternate setting (b = -p_cf, W = I) is
+    reported to give higher accuracy for generation tasks (footnote 7). Results (Table 1, GPT-2 Table 4) not recorded.'

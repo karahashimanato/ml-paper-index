@@ -27,6 +27,7 @@ source:
 tags:
   tasks:
   - scaling-laws
+  - llm-evaluation
   method_families:
   - large-language-models
   paradigms:

@@ -6,7 +6,7 @@
 - 著者: Rylan Schaeffer, Brando Miranda, Sanmi Koyejo
 - 年・掲載: 2023
 - 原論文: [PDF](https://arxiv.org/pdf/2304.15004v2)(arXiv v2、カード作成時に読んだ版)
-- タグ: deep-learning, image-classification, in-context-learning, large-language-models, scaling-laws
+- タグ: deep-learning, image-classification, in-context-learning, large-language-models, llm-evaluation, scaling-laws
 - 人手レビュー: 未
 
 ## 主張

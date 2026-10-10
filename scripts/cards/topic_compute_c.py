@@ -11,7 +11,7 @@ SPECS = [
                  "Oriol Vinyals", "Percy Liang", "Jeff Dean", "William Fedus"],
      "year": 2022, "version": "arXiv v2",
      "links": {"arxiv": "https://arxiv.org/abs/2206.07682"},
-     "tasks": ["scaling-laws"], "fam": ["large-language-models"], "par": ["in-context-learning"],
+     "tasks": ["scaling-laws", "llm-evaluation"], "fam": ["large-language-models"], "par": ["in-context-learning"],
      "proposes": ["definition of 'emergent abilities' of large language models (not present in smaller models, present in larger ones) and a survey of examples from prior work"],
      "claims": [
          ("Definition used by this paper: an ability is emergent if it is not present in smaller models but is present in larger models; the paper says such abilities therefore cannot be predicted simply by extrapolating smaller models' performance.",
@@ -43,7 +43,7 @@ SPECS = [
      "authors": ["Rylan Schaeffer", "Brando Miranda", "Sanmi Koyejo"],
      "year": 2023, "version": "arXiv v2",
      "links": {"arxiv": "https://arxiv.org/abs/2304.15004"},
-     "tasks": ["scaling-laws", "image-classification"], "fam": ["large-language-models", "deep-learning"], "par": ["in-context-learning"],
+     "tasks": ["scaling-laws", "llm-evaluation", "image-classification"], "fam": ["large-language-models", "deep-learning"], "par": ["in-context-learning"],
      "proposes": ["alternative explanation of emergent abilities: nonlinear/discontinuous metrics (and too few test examples) make smooth per-token improvements look sharp and unpredictable"],
      "claims": [
          ("Main claim, presented as an alternative explanation: for a given task and model family, with fixed model outputs, emergent abilities appear due to the researcher's choice of metric rather than fundamental changes in model behavior with scale; nonlinear or discontinuous metrics produce apparent emergence, linear or continuous ones smooth changes. The abstract's conclusion is hedged: emergent abilities 'may not be a fundamental property of scaling AI models'.",

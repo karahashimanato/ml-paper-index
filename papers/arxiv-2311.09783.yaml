@@ -1,0 +1,101 @@
+id: arxiv-2311.09783
+title: Investigating Data Contamination in Modern Benchmarks for Large Language Models
+authors:
+- Chunyuan Deng
+- Yilun Zhao
+- Xiangru Tang
+- Mark Gerstein
+- Arman Cohan
+year: 2023
+venue: NAACL 2024
+links:
+  arxiv: https://arxiv.org/abs/2311.09783
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 49ec26b8a79bbc9de3899bea5d76fe8122d51badd4d8beb732d85e2cda7f4a19
+tags:
+  tasks:
+  - llm-evaluation
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- 'Retrieval-based contamination check: a Pyserini BM25 index over The Pile and C4, queried with question+label of benchmark items, with retrieved top-k documents chunked into 13-grams and scored against
+  the item (BM25, SacreBLEU, Rouge-L, BLEURT, GPTscore)'
+- 'Testset Slot Guessing (TS-Guessing): mask a key word in a question (Question-based) or a wrong option in a multiple-choice item (Question-Multichoice) and ask the model to fill it in; exact reproduction
+  of the masked content is taken as a sign of possible exposure'
+claims:
+- id: c1
+  statement: 'Retrieval system: built with Pyserini using the BM25 index over The Pile and C4 (about 4 TB, reduced to 2 TB with dataset streaming); queries concatenate question and label, top-k documents
+    (k = 1, 5, 10) are retrieved, and with the exception of BM25 the reported metrics are computed after 13-gram chunking, taking the highest score over chunks.'
+  location: Retrieval-based System Setup
+  page: 4
+  quote: Our system employs the BM25 indexing method, widely used for ranking functions in information retrieval and text search systems.
+- id: c2
+  statement: 'Human check of retrieval metrics: 17 volunteers with NLP backgrounds (after 15-minute training) judged on a binary scale whether 100 sampled benchmark items and the retrieved text share identical
+    meaning; 23 of 100 were judged contaminated, Krippendorff''s alpha was 0.8673, and the authors say GPTscore (a ChatGPT 7-point Likert rating) aligns more closely with humans than conventional metrics
+    but is more resource-intensive.'
+  location: IR-based contamination detection (Observations and analysis)
+  page: 6
+  quote: Inter-annotator agreement was calculated using Krippendorff’s alpha, yielding a score of 0.8673, reflecting a high level of consensus among the annotators in this experiment.
+- id: c3
+  statement: 'TS-Guessing Question-Multichoice setting: one wrong option is replaced with [MASK] (the correct option is deliberately not masked), and items with strongly correlated options are filtered
+    out, so that reproducing the exact missing option, sometimes longer than 8 words, raises suspicion that the model''s behavior is influenced by exposure to benchmark data.'
+  location: Testset Slot Guessing Protocol
+  page: 5
+  quote: We intentionally avoid masking the correct option to prevent the model from directly providing the correct answer, instead compelling it to guess an incorrect answer from a vast set of erroneous
+    possibilities.
+- id: c4
+  statement: 'TS-Guessing protocol: models ChatGPT (GPT-3.5-turbo), GPT-4, Claude-instant-1-100k, Claude-2, LLaMa 2-13B and Mistral-7B; development sets used for HellaSwag, WinoGrande and PIQA because test
+    labels are not public; filtering removes yes/no or true/false items, items with math symbols or simple options, and items where the Rouge-L F1 between any two options exceeds 0.65 (a value chosen from
+    initial experiments); TruthfulQA metadata (type, category, URL) are used as hints in the Question-based setting.'
+  location: Section 4.2.1
+  page: 7
+  quote: removing data if the Rouge-L (Lin, 2004) F1 score between any two options exceeds a predefined threshold of 0.65.
+- id: c5
+  statement: On MMLU after filtering, ChatGPT predicted the masked wrong option with a 57% exact match rate; the authors argue that because the candidate list of wrong options could be very large, it is
+    less likely that the model generates the exact wrong option without having seen the example in training.
+  location: TS-Guessing (Observations and Analysis)
+  page: 9
+  quote: The candidate list for possible wrong options could be large and may even be infinite, so it is less likely that the model generates the exact wrong option without having seen this example in training.
+- id: c6
+  statement: TruthfulQA, although released after OpenAI's stated training cutoff (September 2021), sources much of its data from public sources such as Wikipedia; the authors therefore recommend that future
+    benchmarks consider the novelty of their source documents in addition to the release date.
+  location: TS-Guessing (Observations and Analysis)
+  page: 8
+  quote: Therefore, for future benchmark developments, in addition to the release date of the dataset, the novelty of source documents used in the dataset would be another point of consideration.
+- id: c7
+  statement: 'Positive control: after fine-tuning ChatGPT on the MMLU test set (same filtered data), its exact match rate in TS-Guessing nearly reached 100% in both settings, which the authors present as
+    showing the sensitivity of the method.'
+  location: Contamination Probing
+  page: 9
+  quote: Our findings reveal that after fine-tuning ChatGPT with the MMLU test set, it nearly achieved a 100% Exact Match (EM) rate for both question-based and question-multichoice formats.
+- id: c8
+  statement: 'Trade-off stated by the authors: retrieval needs full access to the training corpus and is time-consuming but is deemed generally more reliable (and may be less suitable for reasoning benchmarks);
+    TS-Guessing needs no corpus access and works for closed and open models, but is considered less reliable because it relies on inferred knowledge.'
+  location: Tradeoff between Retrieval and TS-Guessing
+  page: 9
+  quote: TS-Guessing, while suitable for a broad range of benchmarks, including those requiring advanced reasoning, is considered less reliable since it relies on inferred knowledge rather than direct retrieval.
+- id: c9
+  statement: 'Limitations: the retrieval system uses only BM25 and takes about 2-3 minutes per data point; text-generation scores are a superficial way to identify true contamination; TS-Guessing relies
+    on the model following instructions, and most other open-source LLMs tried tended to predict the correct answer regardless of instructions, which the authors say may suggest a form of overfitting in
+    multi-choice tasks.'
+  location: Limitations
+  page: 10
+  quote: Another limitation of the TS-Guessing method is its reliance on LLMs’ ability to comprehend instructions succinctly.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Georgia Institute of Technology, Yale University, Allen Institute for AI. Venue from the arXiv comment (''NAACL 2024 Version''); the PDF text itself does not name the venue. Section numbers 3.1.2 and
+    4.2.1 appear only as cross-references (''Section 3.1.2'', ''§ 4.2.1''); the extracted headings carry no numbers, so other locations use section names. Inconsistency in the PDF: the abstract says ChatGPT
+    and GPT-4 had exact match rates of 52% and 57% on MMLU, while the Introduction, body and Conclusion attribute 57% to ChatGPT. No dated API model versions or decoding settings (temperature) were found
+    in the text (searched for 0613, 0301, temperature, version). The authors also report that GPT-4 showed only about 1% difference from ChatGPT in TS-Guessing, suggesting the protocol ''may not heavily
+    rely on advanced reasoning skills''. Retrieval finding: significant overlap between TruthfulQA and the pre-training corpora, which the authors say may be due to its Wikipedia sourcing; PIQA has overlapping
+    words but no high GPTscore. The fine-tuning positive control has no matching negative control (a clean model is the comparison). Conflict of interest: none identified. Table values not recorded.'

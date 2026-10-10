@@ -1,0 +1,117 @@
+id: arxiv-2310.11324
+title: 'Quantifying Language Models'' Sensitivity to Spurious Features in Prompt Design or: How I learned to start worrying about prompt formatting'
+authors:
+- Melanie Sclar
+- Yejin Choi
+- Yulia Tsvetkov
+- Alane Suhr
+year: 2023
+venue: ICLR 2024
+links:
+  arxiv: https://arxiv.org/abs/2310.11324
+  code: https://github.com/msclar/formatspread
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 997d46a1fdb83e3d09d0146f70e891bb1d8e8c49153404054bab61735db52aae
+tags:
+  tasks:
+  - llm-evaluation
+  - natural-language-understanding
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- 'FormatSpread: a grammar of plausible, semantically equivalent prompt formats (descriptor casing, separators, spacing, item numbering) plus a Thompson-sampling bandit search that estimates the minimum
+  and maximum task performance (the spread) over sampled formats under an evaluation budget, without access to model weights'
+claims:
+- id: c1
+  statement: Several widely used open-source LLMs are reported to be extremely sensitive to subtle, meaning-preserving prompt formatting changes in few-shot settings (up to 76 accuracy points for LLaMA-2-13B),
+    and the sensitivity remains when increasing model size, the number of few-shot examples, or performing instruction tuning.
+  location: Abstract
+  page: 1
+  quote: 'Sensitivity remains
+
+    even when increasing model size, the number of few-shot examples, or perform-
+
+    ing instruction tuning.'
+- id: c2
+  statement: 'Format space and equivalence: the grammar of formats is constructed manually (rather than induced from data) for precision, and was tested by checking it can generate the formatting of 100+
+    Super-NaturalInstructions tasks; only the casing of descriptors is modified, to guarantee semantic equivalence (paraphrasing descriptors is mentioned as a possible extension). Sensitivity is measured
+    only within the space of formats equivalent to a task''s original format.'
+  location: Section 3.1
+  page: 3
+  quote: 'The grammar is manually constructed, as opposed to automatically induced
+
+    from data, to guarantee a higher level of precision when defining the set of equivalent formats.'
+- id: c3
+  statement: 'Metric and search: for formats p_1..p_n, dataset D and metric m, the performance interval is [min_i m(p_i, D), max_i m(p_i, D)] and the spread is its width; estimated task accuracy is the
+    metric used, on classification tasks. The search is cast as a multi-arm bandit with mini-batch rewards: half of an evaluation budget E searches for the best format and half for the worst, with Thompson
+    sampling (Beta priors) in FormatSpread, compared against UCB and naive sampling.'
+  location: Section 3.2
+  page: 4
+  quote: 'Higher spread indicates more sensitivity
+
+    to variance within the space of plausible, semantically-equivalent formats.'
+- id: c4
+  statement: 'Protocol: 53 Super-NaturalInstructions tasks (19 multiple-choice, 34 classification); few-shot examples and their order are fixed per task and number of shots to remove that confounder, and
+    are not used for evaluation; datasets are assumed to be of size 1,000. Models: LLaMA-2-7B/13B/70B, Falcon-7B, Falcon-7B-Instruct and GPT-3.5-Turbo (no dated API version was found in the text). Accuracy
+    is measured by probability ranking unless stated otherwise, or by exact prefix matching after normalization.'
+  location: Experimental Setup
+  page: 5
+  quote: 'To remove this confounder, we
+
+    fix the exact choice and ordering of examples for each task and for a given number of shots n.'
+- id: c5
+  statement: With 10 randomly sampled formats per task, the median spread across model and n-shot choices was 7.5 accuracy points, and 20% of tasks consistently had a spread of at least 15 points for all
+    LLaMA-2 settings; the authors note that, because only 10 formats were sampled, this is a lower bound of the true spreads.
+  location: Section 4.2
+  page: 5
+  quote: 'Because this analysis
+
+    uses only 10 randomly sampled formats, it represents a lower bound of the true spreads for each
+
+    task.'
+- id: c6
+  statement: 'Model comparisons can flip with the format: given M beats M'' by at least d under format p, the probability that M'' beats M by at least d under another format p'' was 0.141 for LLaMA-2-13B
+    vs -70B and 0.140 for LLaMA-2-7B vs Falcon-7B (d = 0.02); often both comparisons were significant under one-sided McNemar tests on 1000 samples. The authors infer that formats may not be inherently
+    good or bad.'
+  location: Section 4.2
+  page: 5
+  quote: Comparison trends between models are often reversed just by choosing different formats.
+- id: c7
+  statement: 'Single atomic changes (e.g. one separator, space or casing) are often associated with large accuracy changes: 24% of atomic changes changed accuracy by at least 5 points with exact prefix
+    matching (11% with probability ranking). In sampled triples of successive atomic changes, 32.4% and 33.6% were monotonic (vs 33.3% under random shuffling), which the authors say suggests local search
+    such as simulated annealing may not be effective.'
+  location: Section 4.3
+  page: 6
+  quote: 'For example, 24% of atomic changes
+
+    have an associated accuracy change of at least 5 points when using exact prefix matching as scoring
+
+    criteria (11% when using probability ranking).'
+- id: c8
+  statement: 'Recommendation: the authors recommend that work evaluating LLMs with prompting-based methods would benefit from reporting a range of performance across plausible formats, because spread may
+    influence conclusions especially when comparing models on benchmarks; they add that single-format evaluation may still be sufficient for many use cases (e.g. a system built on an LLM), and encourage
+    computing FormatSpread when comparing systems to out-of-the-box models.'
+  location: Discussion
+  page: 9
+  quote: 'Thus, we recommend that work evaluating LLMs with prompting-based methods would
+
+    benefit from reporting a range of performance across plausible formats.'
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    University of Washington (Sclar, Choi, Tsvetkov), Allen Institute for AI (Choi), UC Berkeley (Suhr). Venue from the PDF header (''Published as a conference paper at ICLR 2024'') and the arXiv comment
+    (''ICLR 2024 Camera Ready version''); year is the first arXiv version (2023). Section numbers are from cross-references (§3.1, §3.2, §4.2, §4.3, §4.4, §4.5); the experimental-setup subsection is not
+    cross-referenced and is given by name. Section 4.5 (body text): with 320 formats and a budget of 51,200 evaluations Thompson sampling found a spread within 1 accuracy point of the true spread (naive
+    within 4, UCB within 11); with 40,000 evaluations and 320 formats, 1-shot LLaMA-2-70B (4-bit quantized) had median spread 0.171 and GPT-3.5 (exact prefix matching, no full logits) median 0.064. Section
+    4.4: format identity is classifiable from prompt embeddings, and classifier accuracy on the top two principal components correlates moderately with spread. Limitations (Appendix C): some generated formats
+    use unusual spacing/separators, multiple parses can produce odd character combinations (<20% of cases by manual inspection), and tasks were restricted to short instructions and inputs. FormatSpread
+    is the authors'' own tool.'

@@ -1,0 +1,157 @@
+id: arxiv-2211.09110
+title: Holistic Evaluation of Language Models
+authors:
+- Percy Liang
+- Rishi Bommasani
+- Tony Lee
+- Dimitris Tsipras
+- Dilara Soylu
+- Michihiro Yasunaga
+- Yian Zhang
+- Deepak Narayanan
+- Yuhuai Wu
+- Ananya Kumar
+- Benjamin Newman
+- Binhang Yuan
+- Bobby Yan
+- Ce Zhang
+- Christian Cosgrove
+- Christopher D. Manning
+- Christopher Ré
+- Diana Acosta-Navas
+- Drew A. Hudson
+- Eric Zelikman
+- Esin Durmus
+- Faisal Ladhak
+- Frieda Rong
+- Hongyu Ren
+- Huaxiu Yao
+- Jue Wang
+- Keshav Santhanam
+- Laurel Orr
+- Lucia Zheng
+- Mert Yuksekgonul
+- Mirac Suzgun
+- Nathan Kim
+- Neel Guha
+- Niladri Chatterji
+- Omar Khattab
+- Peter Henderson
+- Qian Huang
+- Ryan Chi
+- Sang Michael Xie
+- Shibani Santurkar
+- Surya Ganguli
+- Tatsunori Hashimoto
+- Thomas Icard
+- Tianyi Zhang
+- Vishrav Chaudhary
+- William Wang
+- Xuechen Li
+- Yifan Mai
+- Yuhui Zhang
+- Yuta Koreeda
+year: 2022
+venue: Transactions on Machine Learning Research (08/2023)
+links:
+  arxiv: https://arxiv.org/abs/2211.09110
+  code: https://github.com/stanford-crfm/helm
+  url: https://crfm.stanford.edu/helm/v0.1.0
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 30970bda8958a1a8adf6a0a82feef9728331840288b7d2b49368bac87fd25f18
+tags:
+  tasks:
+  - llm-evaluation
+  - language-modeling
+  - natural-language-understanding
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- 'HELM: a top-down taxonomy of scenarios (task, domain, language) and metrics, with 16 core scenarios each measured on 7 metric categories (accuracy, calibration, robustness, fairness, bias, toxicity,
+  efficiency) plus 7 targeted evaluations over 26 further scenarios'
+- Standardized evaluation of 30 language models with the same scenarios, metrics and 5-shot prompts, releasing all raw prompts and completions and a modular toolkit
+claims:
+- id: c1
+  statement: 'The authors define holistic evaluation by three elements: broad coverage with recognition of incompleteness (a top-down taxonomy that makes missing scenarios and metrics explicit), multi-metric
+    measurement (evaluating every desideratum for each scenario), and standardization (controlling the adaptation strategy and evaluating each LM on the same scenarios as far as possible).'
+  location: Introduction
+  page: 2
+  quote: 'We believe holistic evaluation involves three elements:'
+- id: c2
+  statement: Scenarios are (task, domain, language) triples; the core set spans 6 user-facing tasks, several domains and currently only English (with several English varieties); the 7 metric categories
+    are described as complex and contested social constructs that can be operationalized in many ways; of the 112 possible (core scenario, metric) pairs, 98 (87.5%) are measured.
+  location: Section 1.1
+  page: 3
+  quote: of the 112 possible (core scenario, metric) pairs, we measure 98 (87.5%) as shown in Table 4.
+- id: c3
+  statement: 'Uneven prior evaluation: before HELM, models were on average evaluated on 17.9% of the core scenarios even after compiling evaluations from prior works; HELM raises this to 96.0% and evaluates
+    under standardized conditions (e.g. the same few-shot prompting for all models) to allow direct head-to-head comparisons.'
+  location: Section 1.1
+  page: 5
+  quote: Previously, on average models were evaluated on 17.9% of our core scenarios, even after compiling evaluations dispersed across different prior works.
+- id: c4
+  statement: 'Adaptation protocol: the number of in-context examples (5) follows Brown et al. (2020); the examples are sampled to ensure class coverage and fixed across all evaluation instances (unlike
+    Brown et al., 2020), which the authors note makes performance more sensitive to the random choice of examples, so all experiments are re-run 3 times varying only the in-context sample selection.'
+  location: Section 7
+  page: 46
+  quote: Critically, we choose to fix the in-context examples across all evaluation instances, in contrast to prior work (e.g. Brown et al., 2020), to more accurately perform few-shot evaluation (Perez
+    et al., 2021).
+- id: c5
+  statement: 'Multiple-choice adaptation: comparing joint (all choices in one prompt, predict the letter), separate (score each choice independently) and separate-calibrated (normalize by the choice''s
+    standalone probability), the accuracy-maximizing method is largely determined by the scenario; on HellaSwag all six models follow separate > separate-calibrated > joint, and for OPT (175B) the accuracies
+    are 79.1%, 54.8% and 30.2% respectively.'
+  location: Section 8.2
+  page: 58
+  quote: 'This choice can be very consequential for the model accuracy: for OPT (175B), the accuracies are 79.1%, 54.8%, and 30.2% respectively.'
+- id: c6
+  statement: 'Prompt formatting: using motivated but ''fairly ad hoc/arbitrary'' changes to instructions and input/output prefixes and suffixes, the authors find the best prompt format is not consistent
+    across models (e.g. one variant gives 67.3% for Anthropic-LM v4-s3 (52B) on NaturalQuestions (open-book) while BLOOM (176B) drops from around 60% to 8.5%), and believe some changes may interact poorly
+    with the tokenizer.'
+  location: Section 8.2
+  page: 57
+  quote: The clear finding is that the best prompt formatting is not consistent across models
+- id: c7
+  statement: 'Variance across in-context example draws (3 seeds): the authors observe most models are relatively consistent, with median range across scenarios below 0.03 for 24 of 28 models, but some scenarios
+    show higher variance for all models (NaturalQuestions (open-book) median range 0.1730). For the number of in-context examples (0 to 16), models clearly improve from 0 to 1 shot (except CNN/DailyMail)
+    but larger numbers do not give consistent benefits.'
+  location: Section 8.2
+  page: 56
+  quote: 'We observe that the performance of most models tends to be relatively consistent: the median range (across scenarios) is below 0.03 for 24 out of 28 models (exceptions are YaLM (100B), davinci
+    (175B), curie (6.7B), ada (350M)).'
+- id: c8
+  statement: 'Contamination: without access to or disclosure of training data, the authors cannot verify whether models were trained on the evaluation data, a concern heightened by few-shot evaluation;
+    they flag known contamination disclosed by model creators (compiled in Appendix G, described as still largely limited) and encourage proactive disclosure and the use of canaries.'
+  location: Section 6
+  page: 45
+  quote: We encourage more proactive documentation/disclosure of model contamination, as well as the use of canaries or other methods for minimizing contamination, for future work on language model development
+    to maintain the health of the evaluation ecosystem.
+- id: c9
+  statement: 'Reliability limitation: the authors state they lack uniform evidence for the reliability of their measurement and highlight the importance of significance testing, since running only 3 random
+    seeds (due to cost) for selecting in-context examples and evaluating on 1000 instances instead of the full validation/test sets may render some of their claims statistically insignificant.'
+  location: Limitations and future work
+  page: 82
+  quote: That is, both of these settings for our evaluation may render some of our claims statistically insignificant; we encourage future work to consider how to better address significance given the scale
+    of this evaluation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Authored
+    by the Stanford Center for Research on Foundation Models (CRFM), Stanford HAI. Venue from the PDF page header (''Published in Transactions on Machine Learning Research (08/2023)'') and the arXiv journal_ref;
+    year is the first arXiv version (2022). Section numbers 1.1, 6, 7 and 8.2 are confirmed by cross-references in the PDF (''§1.1: helm'', ''§6: models'', ''§7: prompting'', ''§8.2: prompting-analysis'').
+    Conflict of interest: HELM is the authors'' own benchmark and platform, and the paper argues for its adoption; the acknowledgments state funding from Google (Stanford HAI-Google collaboration) and access,
+    support and/or credits from AI21 Labs, Anthropic, Cohere, Microsoft and OpenAI, whose models are evaluated, plus infrastructure from Together Computer for open models. The prompting ablations exclude
+    all commercial models (monetary cost) and TNLGv2 (wait times) (footnote 66). In the MCQ ablation, the consistent exception is Anthropic-LM v4-s3 (52B), whose preference (joint > separate-calibrated
+    > separate) is the reverse of the other five models for OpenBookQA, TruthfulQA and MMLU. The OPT HellaSwag 79.1% vs 30.2% contrast in the key findings compares a separate 0-shot prompt with a joint
+    5-shot prompt. Total evaluation: 4,939 runs, $38,001 for commercial APIs and about 19,500 GPU hours (Introduction). Other stated limitations (Limitations and future work): results depend on prompting
+    as the adaptation method and may not hold with fine-tuning or optimized prompts; sensitivity to lower-level decisions such as decoding hyperparameters was not investigated; the extent of contamination
+    and its effect on validity ''largely remains unclear''; no universal single-number aggregation is believed to exist. In Section 1.1 the authors also note prior evaluation conditions varied greatly and
+    cite Zhao et al. (2021) for swings of 30% to 80% from few-shot prompt details. Section 7 states prompts are relatively simple and generic and treated as user behavior rather than optimized. The 25 key
+    findings with model-specific numbers are not recorded. arxiv-2406.04127 uses predictions from a later HELM leaderboard (v1.3.0).'

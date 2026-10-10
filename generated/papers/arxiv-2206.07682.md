@@ -6,7 +6,7 @@
 - 著者: Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian Borgeaud, Dani Yogatama, Maarten Bosma, Denny Zhou, Donald Metzler, Ed H. Chi, Tatsunori Hashimoto, Oriol Vinyals, Percy Liang, Jeff Dean, William Fedus
 - 年・掲載: 2022
 - 原論文: [PDF](https://arxiv.org/pdf/2206.07682v2)(arXiv v2、カード作成時に読んだ版)
-- タグ: in-context-learning, large-language-models, scaling-laws
+- タグ: in-context-learning, large-language-models, llm-evaluation, scaling-laws
 - 人手レビュー: 未
 
 ## 主張

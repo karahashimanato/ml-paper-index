@@ -1,0 +1,103 @@
+id: arxiv-2009.03300
+title: Measuring Massive Multitask Language Understanding
+authors:
+- Dan Hendrycks
+- Collin Burns
+- Steven Basart
+- Andy Zou
+- Mantas Mazeika
+- Dawn Song
+- Jacob Steinhardt
+year: 2020
+venue: ICLR 2021
+links:
+  arxiv: https://arxiv.org/abs/2009.03300
+  code: https://github.com/hendrycks/test
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-11'
+  pdf_sha256: d3a7b0f8589f5365ebfd34a3876a9a8b3fde83e0adb9ed19ccf8f0034bb48fc1
+tags:
+  tasks:
+  - llm-evaluation
+  - natural-language-understanding
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- 'MMLU: a 57-task multiple-choice test (humanities, social sciences, STEM, other; elementary to professional level) intended to measure knowledge acquired during pretraining by evaluating models only in
+  zero-shot and few-shot (or transfer) settings'
+- 'A fixed few-shot protocol: a subject-specific instruction line, up to 5 fixed dev-set demonstrations per subject, a prompt ending in ''Answer: '', and the prediction taken as the highest-probability
+  token among A, B, C and D'
+claims:
+- id: c1
+  statement: 'Construction: 57 tasks whose questions were manually collected by graduate and undergraduate students from freely available online sources, including practice questions for tests such as the
+    GRE and the USMLE, questions designed for undergraduate courses and questions for readers of Oxford University Press books; some subjects are split by difficulty level (Elementary, High School, College,
+    Professional).'
+  location: Section 3
+  page: 3
+  quote: The questions in the dataset were manually collected by graduate and undergraduate students from freely available sources online.
+- id: c2
+  statement: 'Splits: 15908 questions in total, split into a few-shot development set (5 questions per subject), a validation set of 1540 questions that may be used for selecting hyperparameters, and a
+    test set of 14079 questions; each subject has at least 100 test examples.'
+  location: Section 3
+  page: 3
+  quote: We collected 15908 questions in total, which we split into a few-shot development set, a validation set, and a test set.
+- id: c3
+  statement: 'Human reference points: unspecialized Amazon Mechanical Turk workers obtain 34.5% accuracy; expert-level accuracy is estimated at approximately 89.8% by taking the 95th-percentile human test-taker
+    accuracy for the source exams and making an educated guess when such information is unavailable (i.e. the expert level is partly an estimate, not a measured baseline).'
+  location: Section 3
+  page: 3
+  quote: If we take the 95th percentile human test-taker accuracy for exams that build up our test, and if we make an educated guess when such information is unavailable, we then estimate that expert-level
+    accuracy is approximately 89.8%.
+- id: c4
+  statement: 'Few-shot protocol for GPT-3: each prompt begins with ''The following are multiple choice questions (with answers) about [subject].''; zero-shot appends the question, few-shot adds up to 5
+    demonstration examples with answers before the question; all prompts end with ''Answer: ''; the model''s probabilities for the tokens A, B, C and D are compared and the highest is the prediction; for
+    consistent evaluation a dev set with 5 fixed few-shot examples per subject is created.'
+  location: Section 4.1
+  page: 6
+  quote: The model then produces probabilities for the tokens “A,” “B,” “C,” and “D,” and we treat the highest probability option as the prediction.
+- id: c5
+  statement: 'Models and scoring differ by model type: GPT-3 is accessed via the OpenAI API in four variants (Ada, Babbage, Curie, Davinci, referred to as 2.7B, 6.7B, 13B and 175B); UnifiedQA (T5 backbone
+    fine-tuned on other QA datasets) is evaluated without further tuning, with the prediction taken as the class with the highest token overlap with its text output; RoBERTa-base, ALBERT-xxlarge and GPT-2
+    are fine-tuned on UnifiedQA training data and the MMLU dev+val set.'
+  location: Section 4.1
+  page: 5
+  quote: UniﬁedQA uses the T5 (Raffel et al., 2019) text-to-text backbone and is ﬁne-tuned on previously proposed question answering datasets (Lai et al., 2017), where the prediction is the class with the
+    highest token overlap with UniﬁedQA’s text output.
+- id: c6
+  statement: 'Calibration: the authors evaluate how well GPT-3''s average confidence estimates its actual accuracy per subject and find it uncalibrated: in the zero-shot setting confidence is only weakly
+    related to accuracy, with the accuracy-confidence gap reaching up to 24% for some subjects (e.g. a zero-shot RMS calibration error of 19.4% for Elementary Mathematics); models are only somewhat more
+    calibrated in the few-shot setting.'
+  location: Section 4.2
+  page: 7
+  quote: In fact, its conﬁdence is only weakly related to its actual accuracy in the zero-shot setting, with the difference between its accuracy and conﬁdence reaching up to 24% for some subjects.
+- id: c7
+  statement: 'Contamination check: reasoning that memorized questions should have low entropy and high accuracy, the authors observe that accuracy and question entropy (average log probability of the question)
+    are not positively correlated across tasks, which they say suggests the exact questions were not memorized; they note models did encounter related text via Wikipedia, that most questions came from PDFs
+    or websites where questions and answers are on separate pages,.'
+  location: Appendix B.2
+  page: 14
+  quote: This suggests that our exact questions were not memorized.
+- id: c8
+  statement: 'Format sensitivity: different question formatting choices often lead to similar GPT-3 accuracies, but UnifiedQA is more sensitive; removing the </s> token from UnifiedQA''s input format lowers
+    accuracy by several percentage points.'
+  location: Appendix A.3
+  page: 12
+  quote: While different question formatting choices often lead to similar GPT-3 accuracies, we ﬁnd that UniﬁedQA is more sensitive.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    UC Berkeley, Columbia, UChicago, UIUC. Venue from the PDF header (''Published as a conference paper at ICLR 2021'') and the arXiv comment; year is the first arXiv version. Section numbers are from numbered
+    headings in the PDF. Conflict of interest: this is the benchmark authors'' own paper; the Moral Scenarios task includes questions from the ETHICS dataset by overlapping authors (Hendrycks et al., 2020),
+    and the authors argue for the benchmark''s value (''likely to be an enduring and informative goalpost''). Andy Zou is also a co-author of arxiv-2405.14782 (lm-eval-harness). Body-text results not recorded
+    as claims: the three smaller GPT-3 models are near random (around 25%) while the 175B model reaches 43.9% few-shot (about 37.7% zero-shot), and the largest UnifiedQA (11B) attains 48.9% (Section 4.2).
+    In the next paragraph the authors cite Brown et al. (2020) as showing contamination ''hardly affects performance'' and say they will provide a list of question sources to reduce the chance that future
+    models encounter exact questions. The memorization check is indirect (correlation of per-task average question log probability with accuracy; Figure 13 caption gives r = -0.43 zero-shot and r = -0.56
+    few-shot) and does not test for the presence of the questions in training data. The few-shot calibration correlations (r = 0.81 vs 0.63) are in a figure caption and not recorded.'

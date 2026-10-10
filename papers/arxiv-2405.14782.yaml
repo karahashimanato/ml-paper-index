@@ -1,0 +1,127 @@
+id: arxiv-2405.14782
+title: Lessons from the Trenches on Reproducible Evaluation of Language Models
+authors:
+- Stella Biderman
+- Hailey Schoelkopf
+- Lintang Sutawika
+- Leo Gao
+- Jonathan Tow
+- Baber Abbasi
+- Alham Fikri Aji
+- Pawan Sasanka Ammanamanchi
+- Sidney Black
+- Jordan Clive
+- Anthony DiPofi
+- Julen Etxaniz
+- Benjamin Fattori
+- Jessica Zosa Forde
+- Charles Foster
+- Jeffrey Hsu
+- Mimansa Jaiswal
+- Wilson Y. Lee
+- Haonan Li
+- Charles Lovering
+- Niklas Muennighoff
+- Ellie Pavlick
+- Jason Phang
+- Aviya Skowron
+- Samson Tan
+- Xiangru Tang
+- Kevin A. Wang
+- Genta Indra Winata
+- François Yvon
+- Andy Zou
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2405.14782
+  code: https://github.com/EleutherAI/lm-evaluation-harness
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 6d6d34212ad7ad1853190b0543f7c0d3bd71d96de1cb12eeb372f2450ebe1d9e
+tags:
+  tasks:
+  - llm-evaluation
+  - language-modeling
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- 'Guidance and best practices for reproducible LM evaluation drawn from developing the Language Model Evaluation Harness (lm-eval): release evaluation code, prompts and model outputs, avoid copying results
+  across implementations, report uncertainty and significance, and do qualitative error analysis'
+- 'lm-eval design choices that operationalize these practices: configuration-file task definitions tied to a library version, bootstrapped standard errors reported by default, sample logging, and a Filter
+  component for answer extraction'
+claims:
+- id: c1
+  statement: The paper draws on three years of experience as developers of lm-eval to document challenges and recommendations; the authors therefore discuss and promote their own library (stated in the
+    abstract).
+  location: Abstract
+  page: 1
+  quote: In this paper we draw on three years of experience in evaluating large language models (LMs) as developers of the popular Language Model Evaluation Harness (lm-eval) (Gao et al., 2023) framework
+    to provide guidance and lessons for the field moving forward.
+- id: c2
+  statement: 'The ''Key Problem'': there can be many semantically equivalent but syntactically different ways of expressing the same idea, and assessing correctness would ideally require automatically detecting
+    semantic equivalence, but the best automated tools for this are the very models being evaluated'
+  location: Section 2.1
+  page: 2
+  quote: However, our best automated tools for determining whether two sentences are semantically equivalent are the very models we are seeking to evaluate.
+- id: c3
+  statement: 'Minor implementation details matter: citing prior work, the exact prompt string down to whitespace and the choice of few-shot examples can significantly change performance; in their Table
+    1 (0-shot, two common prompt styles on ARC-Challenge and MMLU) performance varies dramatically with the prompt (in some cases > 20%) and the best style varies by model, so prompt choice affects model
+    rankings and conclusions.'
+  location: Section 3.1
+  page: 5
+  quote: Thus, the selection of prompt affects the model rankings and research conclusions produced in addition to numeric scores themselves (Alzahrani et al., 2024).
+- id: c4
+  statement: 'Benchmark-specific quirks: MMLU is correctly computed as a micro average over documents (as in the official script) rather than a macro average over the 57 subjects, a choice that affects
+    results by several percentage points and is often unreported; ARC has a single 5-choice question among 4-choice ones; HumanEval has 3 documents lacking example tests.'
+  location: Section 3.1
+  page: 6
+  quote: the choice of which affects results by several percentage points
+- id: c5
+  statement: 'Scoring free-form answers: generated answers are typically extracted with regular expressions or other heuristics and scored by exact match, which the authors call often highly imperfect because
+    models answer in varying formats and extraction can be biased toward models whose format resembles the original task; without the extraction code or model outputs it is difficult to separate format
+    compliance from answer correctness (lm-eval provides a configurable Filter component).'
+  location: Appendix B.4
+  page: 28
+  quote: Without knowledge of the extent to what extraction code is used, how it may be tailored to a model, or without access to model outputs, it is difficult to separate models’ compliance with the evaluation
+    format from their answer correctness.
+- id: c6
+  statement: 'Format failure as a measurement artifact: GPT-NeoX-20B performs approximately randomly on ARC-C and MMLU with MMLU-style evaluation but much better with other formats, which exploratory analysis
+    attributes to failing to follow the task and output format; on ARC-Easy it scores 72.4 ± 1.80% in the cloze setup vs 26.5 ± 1.78% MMLU-style.'
+  location: Section 4.1
+  page: 9
+  quote: 'An even more extreme example is from ARC-Easy: using the “cloze” evaluation setup, GPT-NeoX achieves an accuracy of 72.4 ± 1.80% but using the MMLU-style setup it scores 26.5 ± 1.78%.'
+- id: c7
+  statement: 'Uncertainty reporting: lm-eval reports bootstrapped standard errors by default; the authors note these bootstrap intervals address variation from sampling new questions from the same distribution,
+    which differs from run-to-run variation of a stochastic model, and consider both, as well as variation across prompts and scoring systems, valuable.'
+  location: Section 4.3
+  page: 10
+  quote: We report bootstrapped standard error metrics by default, making reporting of confidence intervals (as we have done in this paper) nearly as simple as copy-pasting an additional number into one’s
+    paper.
+- id: c8
+  statement: 'Checklist recommendations: share exact prompts and full evaluation code, do not optimize prompts for a given model and disclose the amount of prompt engineering, avoid copying results from
+    other papers unless the same code was verifiably used (clearly mark any copied numbers), provide model outputs, do qualitative analyses before scaling up, and perform statistical significance testing
+    (e.g. averaging over multiple seeds or few-shot selections).'
+  location: Appendix D
+  page: 31
+  quote: Results should not be copied or reported from other papers (Marie, 2022) whenever possible, unless one can verify that the same code has been used to run the experiments in those papers.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations
+    include EleutherAI (lead authors), Stability AI, Brown University and others. No venue is stated in the arXiv PDF or the arXiv record; none recorded. Author order follows the arXiv record; the v3 PDF
+    lists the authors in a different order (Biderman, Schoelkopf, Sutawika, Abbasi, Forde, Gao, Tow, then alphabetical). Section numbers are from numbered headings in the PDF. Conflict of interest: EleutherAI
+    authors evaluate and recommend their own library (lm-eval) and use their own models (GPT-NeoX-20B, trained on their Pile) as examples; Andy Zou is a co-author of MMLU (arxiv-2009.03300), whose official
+    format is described as the correct one. Section 2.1 lists three responses to the Key Problem (closed-domain conversion, model-based grading such as BLEU/ROUGE or LLM graders ''known to be flawed'',
+    and human labor) and says the paper focuses on MCQA. Section 3.1 cites Fourrier et al. (2023b): three MMLU implementations (HELM, lm-eval, original code) produce widely different scores and change model
+    rankings. Section 4.1 cites Lukošiūtė (2024) for GPQA single-run estimates vs 95% intervals over 10 runs, and says that had MMLU-style prompting been standard, the authors could plausibly have concluded
+    their (Pile) dataset ''was garbage''. The paper also states that, among defaults, lm-eval prioritizes procedures agreed by model trainers over official implementations and evaluators'' conventions (Section
+    3.3). Section 2.2 argues that model developers effectively ''grade their own homework'' because many APIs do not expose log-probabilities. No discussion of train-test contamination was found in the
+    text (searched for contamina, memoriz, leak, overlap). Appendix F (Limitations) is truncated mid-sentence in the v3 PDF. Table 1 values are not recorded; experiments used lm-eval v0.4.2 on 8x A40 GPUs
+    (Appendix C.1, E).'

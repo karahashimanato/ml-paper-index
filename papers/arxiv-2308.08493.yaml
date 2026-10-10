@@ -1,0 +1,101 @@
+id: arxiv-2308.08493
+title: 'Time Travel in LLMs: Tracing Data Contamination in Large Language Models'
+authors:
+- Shahriar Golchin
+- Mihai Surdeanu
+year: 2023
+venue: ICLR 2024
+links:
+  arxiv: https://arxiv.org/abs/2308.08493
+  code: https://github.com/shahriargolchin/time-travel-in-llms
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 2cd873b88d45adcb01d7f1040ba91063c5bc98b564e0898e58f079f2741c0ad3
+tags:
+  tasks:
+  - llm-evaluation
+  method_families:
+  - large-language-models
+  paradigms:
+  - in-context-learning
+proposes:
+- 'Guided instruction: a prompt with the dataset name, the partition (train/test/validation), the random-length initial segment of a reference instance (and its label when available), asking the LLM to
+  finish the instance; compared against a general instruction that omits dataset and partition name'
+- 'Two rules to go from instance-level to partition-level contamination decisions: (Alg. 1) guided-instruction completions have significantly higher BLEURT/ROUGE-L overlap than general-instruction completions
+  under a bootstrap test; (Alg. 2) a GPT-4 few-shot ICL classifier flags at least one exact match or at least two near-exact matches among 10 sampled instances'
+claims:
+- id: c1
+  statement: 'Instance-level detection: with guided instruction (dataset name, partition type and a random-length initial segment of a reference instance), an instance is flagged as contaminated if the
+    LLM''s output exactly or nearly matches the latter segment of the reference.'
+  location: Abstract
+  page: 1
+  quote: An instance is ﬂagged as contaminated if the LLM’s output either exactly or nearly matches the latter segment of the reference.
+- id: c2
+  statement: 'Stated caveat of the replication idea: because of the probabilistic behavior of LLMs, perfect replicas are not always produced even when contamination is certain, and because many datasets
+    draw from web sources, partial replicas can also arise by happenstance; the authors therefore say consistent and significant signs within a partition must be checked.'
+  location: Approach
+  page: 3
+  quote: Note that, due to the inherent probabilistic behavior of LLMs, achieving perfect replicas is not always possible even when contamination is certain.
+- id: c3
+  statement: Algorithm 1 labels a partition as contaminated if the average BLEURT/ROUGE-L overlap of guided-instruction completions on a sample of ten instances is statistically significantly better than
+    that of general-instruction completions (non-parametric bootstrap); its stated advantage is not needing an arbitrary score threshold, and its stated drawback is that a significant increase in overlap
+    may still come from completions a human would not consider exact or near-exact matches.
+  location: Approach (Detecting Partition-Level Contamination)
+  page: 5
+  quote: However, its drawback is that even a signiﬁcant increase in overlap may still come from generated instances that a human would not consider an exact or near-exact match.
+- id: c4
+  statement: 'Algorithm 2 rule (Idea 2): a partition is likely contaminated if GPT-4 with few-shot ICL prompting detects at least one exact match or at least two near-exact matches (among ten guided-instruction
+    completions); the authors say the number of matches indicating broader contamination can be tailored to research objectives and that they established this criterion intuitively, with an empirical validation
+    in Section 3.3.'
+  location: Approach (Detecting Partition-Level Contamination)
+  page: 5
+  quote: In this paper, we intuitively establish the above-mentioned criterion to extrapolate from the instance-level to the partition-level contamination.
+- id: c5
+  statement: 'Validation (Section 3.3): the GPT-3.5 base model was intentionally contaminated by continued training (OpenAI fine-tuning API, default hyperparameters, 100 label-balanced training instances
+    each from AG News, RTE and XSum, formatted with dataset title and partition name) on partitions human evaluators had marked uncontaminated; the contaminated model generated at least one exact match
+    in each setting. A second check on GPT-4 with the GSM8k train split (reported as contaminated in OpenAI''s technical report) motivated the threshold of two near-exact matches.'
+  location: Section 3.3
+  page: 6
+  quote: The key conclusion of this experiment is that the contaminated LLM generated at least one exact match in each setting.
+- id: c6
+  statement: 'Protocol: seven datasets (IMDB, AG News, Yelp Full Reviews, SAMSum, XSum, WNLI, RTE), train and test splits (validation splits for WNLI and RTE), 10 randomly chosen instances per split; GPT-3.5
+    and GPT-4 snapshots gpt-3.5-turbo-0613 and gpt-4-0613 via the OpenAI API with temperature 0 and at most 500 completion tokens; the compared ChatGPT-Cheat? method (Sainz et al., 2023) was run in the
+    chat UI versions released July 20, 2023.'
+  location: Section 4
+  page: 7
+  quote: To obtain deterministic results, we set the temperature to zero and capped the maximum completion length at 500 tokens.
+- id: c7
+  statement: Ground truth is a human evaluation led by two domain experts who label exact and near-exact matches (completions with considerable overlap and significant semantic and structural similarity)
+    and apply the same partition rule as Algorithm 2; a footnote states the two annotators had almost perfect inter-rater agreement, attributed to the small number of instances and contamination being evident
+    when it occurs. No agreement statistic was found in the text (searched for kappa, agreement).
+  location: Section 4
+  page: 7
+  quote: The two annotators had almost perfect inter-rater agreement across all settings.
+- id: c8
+  statement: Over 28 settings (2 LLMs x 14 partitions), Algorithm 2 (GPT-4 ICL) matched the human labels in 14/14 partitions for GPT-4 and 13/14 for GPT-3.5, higher than Algorithm 1, whose success varied
+    with the metric and was at chance level with ROUGE-L on GPT-3.5 outputs (7/14).
+  location: Section 5
+  page: 8
+  quote: Speciﬁcally, in experiments run on GPT-4 and GPT-3.5, its success rates are 14/14 and 13/14, respectively.
+- id: c9
+  statement: 'Stated limitation: the best method (guided instruction with GPT-4 ICL) does not distinguish between types of contamination (e.g. direct inclusion of instances vs metadata contamination), treating
+    both exact and near-exact replicas as indicators of contamination.'
+  location: 'Conclusion (footnote: Limitations)'
+  page: 9
+  quote: Our best-performing method for detecting contamination (guided instruction with GPT-4 ICL) does not distinguish between different types of contamination,
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    University of Arizona. Venue from the PDF header (''Published as a conference paper at ICLR 2024''); arXiv comment adds ''Spotlight''. Section numbers: 3.3, 4 (''Section 4: Human Evaluation'') and 5
+    (''We evaluate both these algorithms in Section 5'') are from cross-references in the PDF; the extracted headings carry no numbers, so other locations use section names. Human evaluation (Section 5)
+    reports that GPT-4''s train and test/validation splits of AG News and WNLI, train splits of IMDB and RTE, and the XSum test split were contaminated, and for GPT-3.5 only the XSum test split; these are
+    human labels from the authors'' annotators applying the Alg. 2 rule, and the detector accuracies are measured against these same labels. ChatGPT-Cheat? labelled all GPT-4 partitions ''suspicious'',
+    which the authors say is likely due to safety filters against generating copyrighted content. Bootstrap test details (Appendix E): 10,000 resamples, p <= 0.05. Conflict of interest: Acknowledgement
+    states ''Mihai Surdeanu declares a ﬁnancial interest in lum.ai'' (disclosed to the University of Arizona); the evaluated models and the compared method are not by the authors. Table values (BLEURT/ROUGE-L,
+    ticks) not recorded.'

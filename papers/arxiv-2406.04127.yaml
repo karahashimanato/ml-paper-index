@@ -1,0 +1,111 @@
+id: arxiv-2406.04127
+title: Are We Done with MMLU?
+authors:
+- Aryo Pradipta Gema
+- Joshua Ong Jun Leang
+- Giwon Hong
+- Alessio Devoto
+- Alberto Carlo Maria Mancino
+- Rohit Saxena
+- Xuanli He
+- Yu Zhao
+- Xiaotang Du
+- Mohammad Reza Ghasemi Madani
+- Claire Barale
+- Robert McHardy
+- Joshua Harris
+- Jean Kaddour
+- Emile van Krieken
+- Pasquale Minervini
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2406.04127
+  url: https://huggingface.co/datasets/edinburgh-dawg/mmlu-redux-2.0
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-11'
+  pdf_sha256: a45720c5df8c7e7fe243846a849e4799a07fa453d77b4cd55094c6e058b8b8ab
+tags:
+  tasks:
+  - llm-evaluation
+  - natural-language-understanding
+  method_families:
+  - large-language-models
+proposes:
+- 'A hierarchical error annotation protocol for multiple-choice benchmarks: Question Assessment (1a bad question clarity, 1b bad options clarity) followed by Ground Truth Verification (2a no correct answer,
+  2b multiple correct answers, 2c wrong ground truth)'
+- 'MMLU-Redux: 5,700 manually re-annotated MMLU questions (100 per subject) labelled with these error types, used to estimate MMLU''s error rate and to re-rank LLMs on error-free instances'
+claims:
+- id: c1
+  statement: 'Taxonomy: errors are classified hierarchically into two primary groups (subtypes defined in the paragraphs that follow): errors in question clarity (Type 1, Question Assessment: 1a Bad Question
+    Clarity, 1b Bad Options Clarity) and errors in the ground-truth answer (Type 2, Ground Truth Verification: 2a No Correct Answer, 2b Multiple Correct Answers, 2c Wrong Ground Truth). The authors attribute
+    many option-clarity errors to incorrect parsing of options from the original source and note that no-correct-answer errors may arise when options were omitted to reduce five options to four.'
+  location: Section 2.1
+  page: 2
+  quote: 'We categorise errors into two primary groups: samples with errors in the clarity of the questions (Type 1, Question Assessment) and samples with errors in the ground truth answer (Type 2, Ground
+    Truth Verification).'
+- id: c2
+  statement: 'Annotation procedure: 100 questions per MMLU subject were randomly subsampled; annotators first assessed question presentation and then verified the MMLU label, searching for exact matches
+    of the question-options pair from credible sources, otherwise for supporting evidence from trusted sources (e.g. government websites, textbooks, WHO); questions they remained unsure about were labelled
+    ''Expert''.'
+  location: Appendix B
+  page: 14
+  quote: We randomly subsampled 100 questions per MMLU subject to be presented to the annotators.
+- id: c3
+  statement: 'Prevalence: in the annotated sample the authors find more than 9% of examples incorrect, with more than 57% of Virology examples containing errors and more than 20% in Logical Fallacies and
+    College Chemistry; using stratified sampling over subjects they estimate that 6.49% of questions in the complete MMLU dataset contain errors, and argue such error proportions could lead to inaccurate
+    comparisons and invalid rankings.'
+  location: Section 3.1
+  page: 4
+  quote: we estimate that 6.49% of the questions in the complete MMLU dataset contain errors
+- id: c4
+  statement: 'Reliability of the annotations: Cohen''s kappa among three annotators on five subjects (virology, logical fallacies, college chemistry, formal logic, human sexuality) exceeded 0.6 both for
+    matching specific error types and for binary error presence, which the authors read as a generally high level of agreement across most subjects.'
+  location: Section 3.1
+  page: 4
+  quote: The results shown in Table 1 demonstrate a generally high level of agreement across most subjects, with Cohen’s Kappa values exceeding 0.6 for both “All Error Type” (whether the specific error
+    types match) and “Binary Error Type” (whether an error is present or not).
+- id: c5
+  statement: 'Possible memorisation signal: although performance generally declines on erroneous instances, in some subjects (Professional Law, Formal Logic) it was similar or even higher on erroneous instances;
+    since models should not be able to match the original (wrong) MMLU ground truth there, the authors say this may be evidence of memorisation, suggesting these instances were learned during pretraining.'
+  location: Section 3.1
+  page: 4
+  quote: Given that LLMs should be unable to yield answers that are correct with respect to the original MMLU ground truth on these erroneous instances, this may be evidence of memorisation, suggesting
+    that these MMLU instances were learned during the pretraining.
+- id: c6
+  statement: 'Ranking changes: comparing performance on all MMLU-Redux instances with performance on correct instances only, for the five subjects with the most errors, rankings change; e.g. in Virology
+    Llama 3.1 Instruct Turbo (405B) ranked 16th on all instances but first on correct instances, and in Human Sexuality GPT-4 (0613) had exact match 0.91 (5th) on all instances but 0.43 on correct instances,
+    last among the top 10 models.'
+  location: Section 3.2
+  page: 5
+  quote: For example, in the Virology subset, Llama 3.1 Instruct Turbo (405B) ranked 16th when considering all Virology instances, but ranked first when only correct instances were used.
+- id: c7
+  statement: 'Automatic error detection with LLMs: the authors conclude that although Claude 3 Opus seems to produce the most accurate results (41.9% F2 with retrieval augmentation), it is still insufficient
+    to produce a high-quality dataset.'
+  location: Conclusion
+  page: 9
+  quote: although Claude 3 Opus seems to produce the most accurate results on this task (41.9% F2 score when using retrieval-augmented generation), it is still insufficient to produce a high-quality dataset.
+- id: c8
+  statement: 'Stated limitations: the analysis covers 5,700 questions and could be improved by annotating the remaining 8,342 MMLU questions, and the annotation protocol might still be prone to the personal
+    biases of the annotators.'
+  location: Limitations
+  page: 9
+  quote: However, we acknowledge that the annotation protocol we introduced to classify errors might still be prone to the personal biases of the annotators.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    University of Edinburgh, Sapienza, Polytechnic University of Bari, UCL, Trento, AssemblyAI, UK Health Security Agency, Miniml.AI. No venue is stated in the arXiv PDF or the arXiv record; none recorded.
+    Section numbers are from numbered headings in the PDF (Section 3.2 ''Re-Evaluating the State-of-the-Art LLMs''). Internal inconsistencies in the PDF: the introduction and abstract say MMLU-Redux covers
+    5,700 questions across all 57 subjects, while Appendix B says it ''comprises subsampled test splits of the aforementioned thirty MMLU subsets'' and Figure 3 covers ''the 30 most erroneous MMLU subjects'';
+    Section 3.1 gives 30% wrong ground truth and 15% unclear questions for Virology while the Figure 3 caption gives 33% and 14%. The dataset link points to ''mmlu-redux-2.0''. The checklist states no error
+    bars were reported because rerunning ''would have exceeded our funding capabilities''. The annotators'' ''Expert'' label (unsure) is a seventh value in the released data beyond the taxonomy. Error-detection
+    table values (Tables 3 and 4) are not recorded. The introduction states that 14 human experts re-annotated the 5,700 questions; Section 3 states the annotators'' suggested correct answers are not used
+    to replace MMLU labels. The model predictions used for the re-evaluation were taken from the HELM leaderboard v1.3.0 (released May 15th, 2024) rather than re-run (Appendix B), so the prompting protocol
+    is HELM''s. Error detection (Section 4) used zero-shot, few-shot, chain-of-thought and BM25 retrieval-augmented prompting (five paragraphs from Wikipedia or MS MARCO) of GPT-4 Turbo, GPT-4o, Claude
+    3 Opus and Llama3-70B, plus instruction fine-tuning of Llama3 8B-Instruct, with ''not ok'' as the positive class. No conflict of interest found: the authors evaluate third-party models using HELM predictions;
+    MMLU-Redux is their own dataset.'

@@ -1,0 +1,101 @@
+id: arxiv-2310.17623
+title: Proving Test Set Contamination in Black Box Language Models
+authors:
+- Yonatan Oren
+- Nicole Meister
+- Niladri Chatterji
+- Faisal Ladhak
+- Tatsunori B. Hashimoto
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2310.17623
+  code: https://github.com/tatsu-lab/test_set_contamination
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: e2cdde8d5aeadeae140997ecfe7cace02750a465bf860e1f6c0f5efe66cca57c
+tags:
+  tasks:
+  - llm-evaluation
+  - language-modeling
+  method_families:
+  - large-language-models
+proposes:
+- 'Exchangeability-based contamination test: under the null that the model is independent of an exchangeable dataset, the log probability of the canonical ordering has the same distribution as that of a
+  random permutation, so a preference for the canonical order is evidence of contamination'
+- 'Sharded rank comparison test: split the test set into contiguous shards, compare the canonical-order log likelihood of each shard with the mean over random within-shard permutations, and aggregate the
+  per-shard differences with a one-sided t-test'
+claims:
+- id: c1
+  statement: 'Setting: the only access to the model is a log probability query for a sequence (no access to training data or parameters), mirroring API-based providers and open models with secret training
+    data; contamination detection is framed as a hypothesis test of H0 (model independent of dataset X) vs H1 (dependent) with false-positive rate at most alpha.'
+  location: Problem Setting
+  page: 3
+  quote: In our setting, the only method we have to study θ is through a log probability query log pθ(s) for a sequence s (i.e. no access to dataset or parameters).
+- id: c2
+  statement: 'Key assumption: exchangeability of the dataset (every ordering of the examples equally likely), which holds under the standard i.i.d. assumption; under exchangeability and H0 the log probability
+    of the concatenated canonical ordering has the same distribution as that of a random permutation (Proposition 1), which gives the false-positive guarantee.'
+  location: Problem Setting (False positives under H0)
+  page: 3
+  quote: Notably, this assumption would hold under the standard assumption that the dataset is a collection of i.i.d examples.
+- id: c3
+  statement: 'Sharded rank comparison test (Algorithm 1): partition the examples into r shards, for each shard compute the canonical-order log likelihood minus the mean over m random permutations, and run
+    a one-sided t-test on these differences. The authors motivate it by the naive permutation test''s O(m|X|) cost and 1/(m+1) minimum p-value, and its requirement that the canonical order beat nearly all
+    permutations, which can fail if the model prefers certain orderings regardless of training.'
+  location: Methods (Algorithm 1)
+  page: 5
+  quote: Run a one-sided t-test for E[si] > 0, returning the associated p-value of the test as p.
+- id: c4
+  statement: 'The sharded test''s guarantee is weaker than the permutation test''s: it gives asymptotic rather than finite-sample valid p-values (as the number of permutations grows, Theorem 2) and assumes
+    i.i.d. X for the proof; the authors say this could be relaxed with Berry-Esseen bounds or a CLT for exchangeable variables but chose the simpler test.'
+  location: Methods
+  page: 6
+  quote: it provides asymptotic, rather than finite-sample valid p-values and assumes i.i.d X for the proof.
+- id: c5
+  statement: 'Positive-control setup: a 1.4B-parameter GPT-2 model trained from scratch on Wikitext (from RedPajama) plus 10 test sets subsampled to around 1000 examples and randomly shuffled to make them
+    exchangeable, each duplicated between 1 and 100 times; 20.2B tokens in total, 20M of them benchmark tokens. Test parameters were fixed (50 shards, 51 permutations) to avoid the possibility of p-hacking.'
+  location: Section 4.1
+  page: 6
+  quote: The overall pretraining dataset has 20.2B tokens, with 20M tokens associated with some benchmark dataset.
+- id: c6
+  statement: 'Sensitivity to duplication count: the test gives near-zero p-values at duplication rates of 10 or above, cannot detect contamination at a duplication rate of 1, begins to detect some test
+    sets at counts of 2 and 4, with a detection threshold around 4; the authors note prior work found duplication-1 detection extremely difficult and state it is an open question whether any test can reliably
+    detect it.'
+  location: Section 4.1
+  page: 7
+  quote: We find that we cannot reliably detect duplication rates of 1, but that at counts of 2 and 4 we begin to detect some test sets (gray points below the dashed line) and that the detection threshold
+    is around a duplication rate of 4.
+- id: c7
+  statement: 'Open models (LLaMA2-7B, Mistral-7B, Pythia-1.4B, GPT-2 XL; BioMedLM as a negative control) on eight benchmarks, 50 shards and 250 permutations, first 5,000 examples: mostly non-significant
+    results, which the authors say are not direct evidence for the null; Mistral on AI2-ARC gave p = 0.001, which they say would be at the boundary of significance after multiple-testing correction and
+    should be interpreted cautiously. They present the results as first steps toward third-party audits, not proof of contamination of specific models.'
+  location: Evaluating Existing Models for Dataset Contamination
+  page: 9
+  quote: We present these results as showing promising first steps towards third-party audits of test set contamination, rather than a direct proof of contamination of specific models.
+- id: c8
+  statement: 'Limitations: no multiple-test corrections are applied to the reported p-values; for off-the-shelf benchmarks it is difficult to know whether the dataset is truly exchangeable (it cannot be
+    proven without knowing the data-generating process, negative controls only help heuristically), so the authors strongly encourage dataset creators to randomly shuffle their datasets and publicize it.'
+  location: Limitations
+  page: 10
+  quote: We strongly encourage future dataset creators to apply a random shuffle to their datasets (and to publicize this fact), which would allow our tests to be applied.
+- id: c9
+  statement: The test addresses only verbatim contamination (the model ingesting the test set directly); contamination via sources used to build a benchmark (e.g. Wikipedia for SQuAD) or more complex partial
+    contamination cannot be ruled out.
+  location: Limitations
+  page: 11
+  quote: Verbatim memorization of a test set is not the only form of contamination, and our test cannot rule out the possibility of more complex forms of partial contamination.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Stanford University, Columbia University. The arXiv PDF (v2) is marked ''Preprint'' and the arXiv record has no comment or journal_ref; no venue recorded. Section 4.1 is from the cross-reference ''section
+    4.1'' (synthetic canary evaluations); other locations use section names. Notation inconsistency in the PDF: ''the shard count m and the permutation count r'' with m = 50 shards and r = 51 permutations,
+    whereas Algorithm 1 uses r for shards and m for permutations; the text also says the permutation-test baseline used r = 100 permutations. Detection power requires further assumptions: the authors note
+    an adversary could hide an encrypted copy of X in the weights and focus on ''benign'' contamination where test sets slip through filtering. Ablations (stated in text, from figures): about 10-20 shards
+    maximize detection, and returns diminish beyond about 25 permutations. MMLU: 14 test files speculated non-exchangeable were excluded (flagged on BioMedLM or GPT-2 negative controls), remaining 43 aggregated
+    with Fisher''s method; the authors say this omnibus p-value is heuristic evidence only, not proof. The pretrained canary models are released as a benchmark with a leaderboard. Conflict of interest:
+    none identified (the evaluated open models are not by the authors). Table p-values not recorded.'

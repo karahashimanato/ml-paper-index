@@ -1,0 +1,108 @@
+id: arxiv-2403.04132
+title: 'Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference'
+authors:
+- Wei-Lin Chiang
+- Lianmin Zheng
+- Ying Sheng
+- Anastasios Nikolas Angelopoulos
+- Tianle Li
+- Dacheng Li
+- Hao Zhang
+- Banghua Zhu
+- Michael Jordan
+- Joseph E. Gonzalez
+- Ion Stoica
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2403.04132
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 039bccd60a7d49bfda80ce17ea627654736928eee9a7ee75767a38d04a01562f
+tags:
+  tasks:
+  - llm-evaluation
+  method_families:
+  - large-language-models
+proposes:
+- 'Chatbot Arena: a crowdsourced, live platform where users chat with two anonymous models on their own prompts and vote for the preferred response, with identities revealed after voting'
+- Ranking from pairwise votes via inverse-probability-weighted Bradley-Terry maximum likelihood with sandwich (robust) confidence intervals and an approximate ranking with uniform (multiplicity-corrected)
+  coverage
+- An active sampling rule choosing model pairs in proportion to the expected reduction in confidence-interval size
+- Anomalous-user detection using exchangeability-based conformal p-values combined with Fisher's method and a Bonferroni-style correction at 5 random times
+claims:
+- id: c1
+  statement: 'Motivation: static, ground-truth benchmarks are mostly not open-ended, and because their test sets are static they can become contaminated over time (citing Yang et al., 2023), which undermines
+    reliability; for many complex tasks a definitive ground truth is hard or impossible to establish.'
+  location: Introduction
+  page: 1
+  quote: Secondly, the test sets in these benchmarks are static, meaning they can become contaminated over time, which undermines the reliability of the evaluation results (Yang et al., 2023).
+- id: c2
+  statement: 'Interface: because a consistent grading rubric across many users is difficult, users compare two anonymous models'' responses side-by-side and vote for the better one instead of giving absolute
+    scores; no input prompts are preset, users may keep chatting until they can pick a winner, and ''tie'' / ''both are bad'' buttons are offered.'
+  location: Section 3.1
+  page: 3
+  quote: Hence, we adopt a pairwise comparison mechanism where users only need to compare two model responses and vote for the better one, instead of requiring users to provide an absolute score.
+- id: c3
+  statement: 'Data hygiene: to ensure anonymity, conversations containing model identity (model names such as GPT, Claude, or company names such as OpenAI, Anthropic) are filtered by keywords, and OpenAI''s
+    moderation API flags unsafe content (3% of requests).'
+  location: Section 3.2
+  page: 3
+  quote: To ensure anonymity, we use keywords to filter out conversations containing model identity such as model name (e.g., GPT, Claude) or companies (e.g., OpenAI, Anthropic).
+- id: c4
+  statement: 'Score: the target is the vector of Bradley-Terry coefficients minimizing the binary cross-entropy (by default targeting a uniform distribution over model pairs). Although BT assumes a parametric
+    form for win rates, the authors cite Huber et al. (1967) and White (1982) that the MLE is still asymptotically normal under misspecification if the sandwich covariance is used; earlier versions of the
+    leaderboard reported Elo scores, which were replaced because BT coefficients are better for statistical estimation.'
+  location: Section 4
+  page: 4
+  quote: show that maximum likelihood estimators are still asymptotically normal even when these assumptions do not hold, so long as the so-called “sandwich” covariance matrix is used
+- id: c5
+  statement: 'Approximate ranking: given a confidence set with uniform coverage 1 - alpha, model m''s rank is the number of models whose lower bound exceeds m''s upper bound, which implies that with high
+    probability no model''s performance is understated (the opposite guarantee is obtained by interchanging inf and sup); the uniform set is a chi-squared CLT interval using the sandwich variance of the
+    logistic regression.'
+  location: Section 5
+  page: 5
+  quote: i.e., with high probability, no model’s performance is understated.
+- id: c6
+  statement: 'Anomalous users: each new vote gets a p-value comparing it with the historical ratings for the same model pair (valid under exchangeability, proof in Appendix C), combined with Fisher''s test
+    and flagged at 5 randomly chosen vote counts between 1 and 100 (chosen randomly so users cannot strategize). The authors call this a heuristic application that seems to work well in small-scale tests
+    (25 manually identified anomalous users and 25 normal users).'
+  location: Section 5.1
+  page: 5
+  quote: Despite the heuristic application of this procedure, it seems to work well in our small-scale tests reported in Table 5.
+- id: c7
+  statement: 'Prompt diversity: BERTopic-style topic modeling (text-embedding-3-small, UMAP to 5 dimensions, HDBSCAN with minimum cluster size 32, GPT-4-Turbo labels) finds 600 clusters; the largest covers
+    only 1% of prompts, the rest quickly drop below 0.5%, and inter-cluster similarity is small, which the authors read as a long-tail, diverse distribution.'
+  location: Section 6.1
+  page: 6
+  quote: We observe that the largest cluster only accounts for 1% of the entire set and the rest quickly drop to <0.5%, and the similarity between clusters is small, showing a long-tail and diverse distribution.
+- id: c8
+  statement: 'Vote quality: on battles relabeled by experts in two setups, agreement between crowd users and experts was 72% to 83%, versus 79.4% and 89.8% between the two experts. Expert disagreement is
+    attributed mostly to prompts without a ground-truth answer, and the crowd-vs-expert gap (5%-10%) mostly to crowd users making mistakes or overlooking factual errors.'
+  location: Section 6.3
+  page: 7
+  quote: To summarize, we observe high agreement rates (72% to 83%) between Arena crowd-user and experts in both setup.
+- id: c9
+  statement: 'Stated limitations: the user base is anticipated to consist primarily of LLM hobbyists and researchers, which may bias the user distribution; prompts come predominantly from the online chat
+    interface and might not reflect production or specialized-domain usage, potentially skewing the prompt distribution; and the study assesses helpfulness while overlooking safety.'
+  location: Section 8
+  page: 8
+  quote: This source might not accurately reflect the real-world usage of LLMs in production environments or specialized domains, potentially leading to a skewed prompt distribution.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-11): pitfalls in evaluating large language models (benchmark contamination and its detection, prompt and answer-format sensitivity,
+    LLM-as-a-judge biases, human-preference arenas, holistic evaluation, benchmark errors, and reproducibility of evaluation harnesses). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    UC Berkeley, Stanford, UCSD (LMSYS). No venue is stated in the arXiv v1 PDF and the arXiv record has no comment or journal_ref; none recorded. Author names follow the arXiv record; the PDF prints ''Anastasios
+    N. Angelopoulos'' and ''Michael I. Jordan''. Conflict of interest: the authors operate Chatbot Arena and its leaderboard and evaluate it themselves; LMSYS-developed Vicuna models (vicuna-33b, vicuna-13b,
+    vicuna-7b) appear among the ranked models; the ''Arena Bench'' analysis uses the authors'' own LLM-as-a-judge method (Zheng et al., 2023b) with GPT-4-Turbo as judge, two judgments per prompt with positions
+    swapped, against a GPT-3.5-Turbo-0301 baseline (Appendix D.3). Vote-quality setup (Section 6.3): 160 randomly selected battles of GPT-4-Turbo vs. Llama-2-13B and GPT-4-Turbo vs. GPT-3.5-Turbo-0613 relabeled
+    blindly by experts (graduate students at UC Berkeley) with fact-checking. Votes are collected with non-uniform sampling concentrated on pairs with similar performance; BT estimation reweights by inverse
+    pair-sampling probability to target a uniform distribution over pairs (Section 5). Scale as stated: data since April 2023, around 240K votes from over 90K users as of Jan 2024, more than 50 models,
+    77% English and 5% Chinese; on average 8K votes per model. Statistics details (not recorded as claims): sandwich intervals chosen over pivot bootstrap because they are smaller in large samples (simulation
+    in Appendix A); multiplicity correction makes intervals more conservative so both are reported (Figure 5 caption); replay of T = 213,576 votes; for active sampling the random baseline needs 54% (win
+    matrix, precision 0.2) and 5% (score, precision 0.3) more data; anomalous-user detection reached e.g. 90% true positive and 60-70% true negative rate (Section 7.2). Section numbers are from numbered
+    headings in the PDF. Win-rate, agreement and BT-interval figures/tables are not recorded.'

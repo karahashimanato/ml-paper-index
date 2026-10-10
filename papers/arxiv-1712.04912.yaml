@@ -77,6 +77,12 @@ claims:
   location: Section 6.2
   page: 17
   quote: simulation speciﬁcations, essentially match the performance of the oracle (3) in terms of the mean-squared error.
+- id: c9
+  statement: 'R-loss (Eq. 4): tau_hat = argmin_tau { L_n(tau) + Lambda_n(tau) } with L_n(tau) = (1/n) sum_i [ {Y_i - m_hat^(-q(i))(X_i)} - {W_i - e_hat^(-q(i))(X_i)} tau(X_i) ]^2, where the nuisance predictions
+    are made without the fold containing example i; the first step learns an approximation of the oracle objective and the second step optimizes it.'
+  location: Introduction
+  page: 3
+  quote: In other words, the ﬁrst step learns an approximation for the oracle objective, and the second step optimizes it.
 results: []
 relations: []
 card:

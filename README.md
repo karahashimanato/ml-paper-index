@@ -129,6 +129,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [9. 量子化 — アフィン量子化、丸めとクリッピング、STE、GPTQ、SmoothQuant](articles/math/09-quantization.md)
 - [10. 知識蒸留と GNN — 温度と T² の補正、ヒント損失、GCN の導出、注意、GIN と WL、同質性](articles/math/10-distillation-and-gnn.md)
 - [11. 表データの深層学習 — 微分可能な木と entmax、TabNet のマスク、交差層、数値の埋め込み、近傍の重み](articles/math/11-tabular-deep-learning.md)
+- [12. 因果効果の推定 — 潜在的結果、傾向スコアと逆確率重み付け、メタ学習器、R-loss と DML、二重頑健性](articles/math/12-causal-effect-estimation.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

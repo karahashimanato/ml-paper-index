@@ -81,6 +81,13 @@ claims:
   location: Supporting Information, A.3 Confounding
   page: 19
   quote: All of the meta-learners we discuss can handle confounding, as long as the ignorability assumption holds.
+- id: c9
+  statement: 'X-learner stages (Eq. 6-8 and the final combination): estimate mu_0 and mu_1 with any base learners; impute treatment effects D1_i = Y1_i - mu0_hat(X1_i) for treated units and D0_i = mu1_hat(X0_i)
+    - Y0_i for control units (if mu_hat = mu, then tau(x) = E[D1 | X = x] = E[D0 | X = x]); regress the imputed effects on X separately in each group to get tau1_hat and tau0_hat; combine as tau_hat(x)
+    = g(x) tau0_hat(x) + (1 - g(x)) tau1_hat(x) with a weight function g in [0, 1].'
+  location: X-learner
+  page: 4
+  quote: and call these the imputed treatment eﬀects.
 results: []
 relations: []
 card:

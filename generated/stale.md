@@ -16,6 +16,7 @@
 - [articles/math/09-quantization.md](../articles/math/09-quantization.md): `arxiv-1510.00149`, `arxiv-2301.00774`
 - [articles/math/10-distillation-and-gnn.md](../articles/math/10-distillation-and-gnn.md): `arxiv-1706.02216`, `arxiv-1805.04770`, `arxiv-1811.05868`, `arxiv-1905.10947`, `arxiv-1910.01108`, `arxiv-1912.09893`, `arxiv-2003.00982`, `arxiv-2005.00687`, `arxiv-2005.07683`, `arxiv-2006.05205`, `arxiv-2106.05945`, `arxiv-2206.08164`, `arxiv-2302.11640`
 - [articles/math/11-tabular-deep-learning.md](../articles/math/11-tabular-deep-learning.md): `arxiv-2012.06678`, `arxiv-2106.01342`, `arxiv-2106.11189`, `arxiv-2110.01889`, `arxiv-2301.02819`, `arxiv-2305.18446`, `arxiv-2309.17130`, `arxiv-2407.00956`
+- [articles/math/12-causal-effect-estimation.md](../articles/math/12-causal-effect-estimation.md): `arxiv-1504.01132`, `arxiv-1605.03661`, `arxiv-1705.08821`, `arxiv-1706.09523`, `arxiv-1707.02641`, `arxiv-1906.02120`, `arxiv-2011.04216`, `arxiv-2107.13346`
 - [articles/methods/approximate-inference-and-diagnostics.md](../articles/methods/approximate-inference-and-diagnostics.md): なし
 - [articles/methods/autoencoders.md](../articles/methods/autoencoders.md): `arxiv-1505.05770`, `arxiv-1705.08821`, `arxiv-1711.05597`, `arxiv-1906.02694`, `arxiv-2007.02500`, `arxiv-2106.08254`, `arxiv-2107.00630`, `arxiv-2111.06377`, `arxiv-2112.10752`, `arxiv-2208.11970`, `arxiv-2305.00735`
 - [articles/methods/bayesian-optimization.md](../articles/methods/bayesian-optimization.md): なし

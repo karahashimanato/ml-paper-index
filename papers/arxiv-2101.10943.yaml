@@ -92,6 +92,13 @@ claims:
   page: 9
   quote: We demonstrated that while the DR-learner is asymptotically optimal in theory, both the RA-learner and plug-in learners sharing information between nuisance estimation tasks can outperform it in
     ﬁnite samples.
+- id: c10
+  statement: 'Pseudo-outcomes of the two-step learners (Eq. 2-3): the RA-learner regresses W(Y - mu0_hat(X)) + (1 - W)(mu1_hat(X) - Y) on X; the PW-learner uses the Horvitz-Thompson transformation (W /
+    pi_hat(X) - (1 - W)/(1 - pi_hat(X))) Y. The X-learner is described as a variant of the RA-learner that fits two separate regressions combined with a weight g(x); the authors prefer RA-learning because
+    it needs no choice of g.'
+  location: Section 3
+  page: 4
+  quote: We prefer the RA-learning strategy here, as it does not require choice of ‘hyper-parameter’ g(x).
 results: []
 relations: []
 card:

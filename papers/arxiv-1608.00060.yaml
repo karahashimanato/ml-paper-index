@@ -84,6 +84,12 @@ claims:
   location: Section 3.1 (Remark 3.1)
   page: 24
   quote: We have found moderate values of K, such as 4 or 5, to work better than K = 2 in a variety of empirical examples and in simulations.
+- id: c10
+  statement: 'Partially linear regression model (Example 1.1, Eq. 1.1-1.2, following Robinson 1988): Y = D theta_0 + g_0(X) + U with E[U | X, D] = 0, and D = m_0(X) + V with E[V | X] = 0, where Y is the
+    outcome, D the policy/treatment variable of interest, X the other controls, and U and V disturbances; theta_0 is the target parameter.'
+  location: Section 1.1
+  page: 2
+  quote: where Y is the outcome variable, D is the policy/treatment variable of interest, vector
 results: []
 relations: []
 card:

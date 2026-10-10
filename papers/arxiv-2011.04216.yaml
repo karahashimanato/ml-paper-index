@@ -1,0 +1,87 @@
+id: arxiv-2011.04216
+title: 'DoWhy: An End-to-End Library for Causal Inference'
+authors:
+- Amit Sharma
+- Emre Kiciman
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2011.04216
+  code: https://github.com/microsoft/dowhy
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 0afcdbb95056a20f08cf3a05e02b826e901f8ac61150cf7959dd1f74299ac77e
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - causal-meta-learners
+  - linear-models
+proposes:
+- 'DoWhy: an open-source Python library organized around four steps (Model, Identify, Estimate, Refute) that encodes assumptions as a causal graph, identifies estimands with graph criteria and do-calculus,
+  estimates them with potential-outcome estimators (or EconML/CausalML), and runs refutation/robustness checks on the estimate'
+claims:
+- id: c1
+  statement: 'API organization: four steps required for any causal analysis, Model (prior knowledge as a causal graph), Identify (graph-based identification), Estimate (statistical estimation of the identified
+    estimand) and Refute (testing robustness to the model''s assumptions).'
+  location: Introduction
+  page: 1
+  quote: 'Speciﬁcally, DoWhy’s API is organized around the four key steps that are required for any causal analysis: Model, Identify, Estimate, and Refute.'
+- id: c2
+  statement: 'Motivation: unlike supervised models validated on held-out test data, causal tasks often have no ground-truth answer, so checking core assumptions and applying sensitivity tests is described
+    as critical to gaining confidence in results.'
+  location: Introduction
+  page: 1
+  quote: Unlike supervised machine learning models that can be validated using held-out test data, causal tasks often have no ground truth answer available.
+- id: c3
+  statement: 'Positioning: the authors state that covering all four steps is DoWhy''s key differentiator compared with many Python and R libraries that focus only on estimation and leave modeling, identification
+    and robustness checks to the analyst.'
+  location: Introduction
+  page: 2
+  quote: The focus on all the four steps, going from data to the ﬁnal causal estimate (along with a measure of its robustness) is the key differentiator for DoWhy, compared to many existing libraries for
+    causal inference in Python and R that only focus on estimation (the third step).
+- id: c4
+  statement: 'Model and identification: the causal graph need not be complete; an analyst may give a partial graph and DoWhy treats the remaining variables as potential confounders. Supported identification
+    criteria are back-door, front-door, instrumental variables and mediation.'
+  location: DoWhy and the Four Steps of Causal Inference
+  page: 2
+  quote: DoWhy automatically considers the rest of the variables as potential confounders.
+- id: c5
+  statement: 'Estimation: back-door and IV methods (propensity stratification, matching and IPW; linear regression and GLMs; Wald estimator, two-stage least squares, regression discontinuity; two-stage
+    linear regression for front-door/mediation), with non-parametric confidence intervals and a permutation test; CATE estimators from EconML and CausalML can be called directly (the example uses EconML''s
+    double machine learning estimator for high-dimensional confounders).'
+  location: DoWhy and the Four Steps of Causal Inference
+  page: 3
+  quote: All estimators from these libraries can be directly called from DoWhy.
+- id: c6
+  statement: 'Refutation tests and their expected outcomes: add a random common cause (estimate should not change), placebo treatment and dummy outcome (effect should go to zero), simulated outcome from
+    a known DGP closest to the data (should match the DGP''s effect), add an unobserved common cause correlated with treatment and outcome (should not be too sensitive), and data-subset and bootstrap validation
+    (should not change significantly).'
+  location: DoWhy and the Four Steps of Causal Inference
+  page: 3
+  quote: Having access to multiple refutation methods to validate an effect estimate from a causal estimator is a key beneﬁt of using DoWhy.
+- id: c7
+  statement: 'Scope of the refuters: some (e.g. placebo treatment, dummy outcome) aim to refute the full analysis including modeling, identification and estimation, whereas data-subset and bootstrap validation
+    test only the estimation step.'
+  location: DoWhy and the Four Steps of Causal Inference
+  page: 4
+  quote: Many of the above methods aim to refute the full causal analysis, including modeling, identiﬁcation and estimation (as in Placebo Treatment or Dummy Outcome) whereas others refute a speciﬁc step
+    (e.g., Data Subsets and Bootstrap Validation that test only the estimation step).
+- id: c8
+  statement: 'Separation of identification and estimation: the authors state that, given the model, identification is a causal problem and estimation a statistical one, and DoWhy treats them separately
+    so that multiple estimation methods can be used for a single identified estimand and vice versa.'
+  location: An Example Causal Analysis
+  page: 4
+  quote: Given the model, identiﬁcation is a causal problem.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Conflict of interest: both authors are at Microsoft Research and describe their own library (github.com/microsoft/dowhy); the paper also integrates Microsoft''s EconML. The paper reports community figures
+    in the text (over 2300 stars and 31 contributors). No empirical evaluation of the estimators or of the refutation tests'' power or false-positive rate was found in the text (searched for evaluat, experiment,
+    benchmark, simulat, accuracy; the only hits are the ''Simulated Outcome'' refuter and a reference title). No venue: the arXiv comment is only ''5 pages'' and there is no journal_ref. The PDF has no
+    numbered sections; locations use heading names. The refuters'' ''Hint'' expectations are stated as guidance without formal guarantees in the text.'

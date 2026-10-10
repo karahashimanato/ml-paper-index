@@ -1,0 +1,96 @@
+id: arxiv-1706.03461
+title: Meta-learners for Estimating Heterogeneous Treatment Effects using Machine Learning
+authors:
+- Sören R. Künzel
+- Jasjeet S. Sekhon
+- Peter J. Bickel
+- Bin Yu
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1706.03461
+  code: https://github.com/soerenkuenzel/hte
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-10'
+  pdf_sha256: c46362fa1fbb1212460e4e8dd414624d7e84bb8ead6984abfe9550c22713e5c3
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - causal-meta-learners
+  - random-forests
+  - tree-ensembles
+  paradigms:
+  - supervised
+proposes:
+- 'X-learner: estimate the control and treatment response functions with any base learners, impute individual treatment effects for treated units (observed outcome minus predicted control outcome) and for
+  control units (predicted treated outcome minus observed outcome), regress each set of imputed effects on the covariates, and combine the two CATE estimates with a weight function g(x) (an estimated propensity
+  score is suggested)'
+- A unified meta-learner framing of CATE estimation (S-, T- and X-learners) with RF and BART base learners, and minimax-rate comparisons of the T- and X-learners
+claims:
+- id: c1
+  statement: 'Definitions: the T-learner estimates the control and treatment response functions separately (possibly with different base learners) and takes their difference; the S-learner fits a single
+    model on all features plus the treatment indicator, without giving the indicator a special role, and takes the difference of predictions with the indicator set to treatment vs control.'
+  location: Introduction
+  page: 2
+  quote: We refer to this meta-algorithm as the S-learner, since it uses a “single” estimator.
+- id: c2
+  statement: 'Estimand and assumptions: the target is the CATE tau(x) = E[Y(1) - Y(0) | X = x]; the individual treatment effect is not identifiable without strong additional assumptions, but the best CATE
+    estimator is also the best ITE estimator in MSE. The authors assume no hidden confounders (Condition 1) and note that this alone is not sufficient to identify the CATE, adding a propensity score bounded
+    away from 0 and 1 (Condition 2).'
+  location: Framework and Definitions
+  page: 3
+  quote: This assumption is, however, not suﬃcient to identify the CATE.
+- id: c3
+  statement: 'The X-learner is motivated by the observation that individual treatment effects are never observed: it uses the observed outcomes and first-stage response-function estimates to impute the
+    unobserved individual effects, and then estimates the CATE in a second step as if those effects were observed.'
+  location: Introduction
+  page: 2
+  quote: The X-learner uses the observed outcomes to estimate the unobserved individual treatment eﬀects.
+- id: c4
+  statement: 'Choice of the weight function in the X-learner''s final stage: based on their experience, the authors find it good to use an estimated propensity score for g, but say it also makes sense to
+    set g to 1 or 0 when the number of treated units is very large or small relative to the number of controls; with an estimated covariance of the two stage-2 estimates, g could be chosen to minimize variance.'
+  location: X-learner
+  page: 4
+  quote: Based on our experience, we observe that it is good to use an estimate of the propensity score for g,
+- id: c5
+  statement: 'Simulation summary (synthetic data; RF and BART base learners): for each meta-learner there exist cases where it is best. The S-learner can ignore the treatment indicator, which helps when
+    the CATE is often 0 but can bias it toward 0; the T-learner does well when the CATE is very complicated and mu0, mu1 share no trends; the X-learner does particularly well with structural assumptions
+    on the CATE or very unequal group sizes. As a rule of thumb, unless one strongly believes the CATE is mostly 0, the authors suggest the X-learner with BART for small data sets and RF for bigger ones.'
+  location: Simulation Results
+  page: 6
+  quote: These simulation results lead us to the conclusion that unless one has a strong belief that the CATE is mostly 0, then, as a rule of thumb, one should use the X-learner with BART for small data
+    sets and RF for bigger ones.
+- id: c6
+  statement: 'Theorem 2: with m control and n treated units, under bounded-variance independent errors, finite second moments of X, ignorability, a control-response estimator with EMSE <= C0 m^(-a), a CATE
+    that is linear in x, and a well-conditioned sample covariance of the treated covariates, the X-learner with OLS in the second stage and g = 0 has EMSE <= C(m^(-a) + n^(-1)); if there are many controls
+    (m >= c3 n^(1/a)) it attains the parametric rate in n. The T-learner, in contrast, in general cannot be expected to beat O(m^(-a_mu) + n^(-a_mu)) (Theorem 1).'
+  location: Smoothness conditions for the CATE
+  page: 8
+  quote: The following theorem deals carefully with this estimation error when τ is linear, but the response functions can be estimated at any nonparametric rate.
+- id: c7
+  statement: 'Beyond the linear-CATE case (and a Lipschitz case with no CATE assumptions, where T and X attain the same minimax rate), the faster X-learner rates are stated only as a conjecture: the authors
+    say it is mathematically very challenging to state the extra conditions needed, while believing the conjecture holds much more generally.'
+  location: Comparison of Convergence Rates
+  page: 8
+  quote: It turns out to be mathematically very challenging to give a satisfying statement of the extra conditions needed on P.
+- id: c8
+  statement: 'Observational setting: the authors state that all of the meta-learners discussed can handle confounding as long as ignorability holds, and test this in one confounded simulation (propensity
+    depending on an observed covariate, following Wager & Athey); causal forests are excluded there because, as their authors note, they are not designed for observational studies with only conditional
+    unconfoundedness.'
+  location: Supporting Information, A.3 Confounding
+  page: 19
+  quote: All of the meta-learners we discuss can handle confounding, as long as the ignorability assumption holds.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: UC Berkeley. PDF dated April 25, 2019 (arXiv v6). The arXiv record has no journal_ref/comment and the PDF text does not name a venue, so none is recorded. The Simulation Results footnote
+    defines ''confounding'' as an unobserved covariate influencing W and an outcome, whereas the confounded simulation in SI A.3 uses a propensity that depends on an observed covariate; no sensitivity analysis
+    for hidden confounding was found in the text (searched for hidden, unobserved, sensitivity). Conflict of interest: the RF base learner is the authors'' own honest RF in their R package hte, which they
+    also recommend for choosing among CATE estimators (Conclusion). Applications (GOTV mailer, door-to-door canvassing) are randomized experiments; in the canvassing data S-RF shrinks estimates toward zero
+    (Applications). Simulation errors are figure-only; not recorded.'

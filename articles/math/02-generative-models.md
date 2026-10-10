@@ -10,7 +10,7 @@ written_by: claude-opus-5-5 via Claude Code
 # 数式の解説 2 — 生成モデルと表現学習:VAE の ELBO、拡散モデルのノイズ、InfoNCE
 
 <!-- generated:stale -->
-> 未反映のカードはありません。
+> ⚠ この記事の執筆日(2026-10-10)以降に作成された関連カードが 1 件あります(未反映。執筆日と同じ日に作成されたカードを含む): `arxiv-1705.08821`
 <!-- /generated:stale -->
 
 ## この記事の読み方

@@ -1,0 +1,110 @@
+id: arxiv-2101.10943
+title: 'Nonparametric Estimation of Heterogeneous Treatment Effects: From Theory to Learning Algorithms'
+authors:
+- Alicia Curth
+- Mihaela van der Schaar
+year: 2021
+venue: AISTATS 2021
+links:
+  arxiv: https://arxiv.org/abs/2101.10943
+  code: https://github.com/AliciaCurth/CATENets
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 08d3d7ddffd195cacf822f2bfc18450597b1f436d63e54b647337e41fb1e710e
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - causal-meta-learners
+  - treatment-effect-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'A classification of CATE meta-learners following the ATE estimator taxonomy: one-step plug-in learners (S- and T-learners, differencing two outcome regressions) and two-step pseudo-outcome learners based
+  on regression adjustment (RA-learner), propensity weighting (PW-learner) or both (DR-learner)'
+- An analysis of the remainder terms of RA- and PW-learners (with the DR-learner bound from Kennedy, 2020) under smoothness assumptions and two-sample estimation, plus finite-sample considerations (variance
+  of propensity weighting, selection bias, overlap)
+- 'SNet: a neural architecture with five representations (shared, outcome-specific and propensity-related) that contains TNet, TARNet (SNet-1), DragonNet''s architecture (SNet-2) and DR-CFR (SNet-3) as
+  special cases; sklearn-style implementations in the CATENets package'
+claims:
+- id: c1
+  statement: 'Motivation: meta-learners decompose treatment effect estimation into sub-problems solvable with standard supervised learning, but choosing between them in a data-driven way is difficult because
+    it requires counterfactual information; the authors therefore analyze theoretically when some learners can be expected to perform better a priori.'
+  location: Abstract
+  page: 1
+  quote: Choosing between diﬀerent meta-learners in a data-driven manner is diﬃcult, as it requires access to counterfactual information.
+- id: c2
+  statement: 'Estimand and identification: the target is the CATE tau(x) = E[Y(1) - Y(0) | X = x] for a binary treatment, estimated under Assumption 1 (consistency, unconfoundedness with no unobserved confounders,
+    and overlap 0 < pi(x) < 1); no parametric form is assumed for tau or the nuisance functions, giving a nonparametric problem. The authors note that identification hinges on untestable assumptions.'
+  location: Section 2
+  page: 3
+  quote: It is well known that the identiﬁcation of causal eﬀects from observational data hinges on the imposition of untestable assumptions.
+- id: c3
+  statement: 'Taxonomy: two-step learners regress a pseudo-outcome that is unbiased for CATE when the nuisances are known: the RA-learner (of which Künzel et al.''s X-learner is described as a variant that
+    needs a weighting function g(x)), the PW-learner (Horvitz-Thompson transformation) and the DR-learner (Kennedy, 2020; AIPW pseudo-outcome). The R-learner of Nie and Wager (2020) fits none of these categories,
+    requires specific model-fitting procedures (e.g. manipulating a loss function), and is not considered further.'
+  location: Section 3
+  page: 4
+  quote: The R-learner proposed in Nie and Wager (2020) does not fall in any of these categories.
+- id: c4
+  statement: 'Asymptotic comparison (Theorem 1, assuming bounded propensity estimates, smoothness of mu_w, pi and tau, and the two stages fit on separate samples): the RA-learner remainder depends on the
+    outcome-regression errors, the PW-learner remainder on the propensity error, and the DR-learner remainder on their product; by asymptotic properties the DR-learner is preferred among two-step learners,
+    and the PW-learner over the RA-learner if the propensity score is easier to estimate than the outcome regressions. The authors add that it is commonly assumed that tau(x) is simpler than mu_0(x), so
+    RA-learner reaching the oracle rate is unlikely and RA- and plug-in learners are expected to perform similarly asymptotically.'
+  location: Section 4
+  page: 5
+  quote: By asymptotic properties, we thus prefer the DR-learner over the other two-step learners
+- id: c5
+  statement: 'Finite samples cannot rely on convergence rates only: inverse-propensity-weighted estimators have high variance, particularly with extreme propensity scores, and the PW-learner pseudo-outcome
+    has very high variance even with constant, known propensities; for small delta the constants in the PW- and DR-learner error bounds can be large, possibly leading to relatively better performance of
+    the RA-learner in smaller samples.'
+  location: Section 4
+  page: 5
+  quote: the pseudo-outcome associated with the PW-learner has a very high variance even when propensity scores are constant and known
+- id: c6
+  statement: Selection bias (pi(x) != 0.5 for some x) does not matter asymptotically but can be severe in finite samples if the propensity bound omega is small, because fitting each outcome surface on factual
+    data gives too much weight to samples with large pi(x) (a similar conclusion is attributed to Alaa and van der Schaar, 2018b); the degree of overlap is therefore of paramount importance, and second-stage
+    regressions on all data can correct for the sub-optimal first-stage weighting.
+  location: Section 4
+  page: 5
+  quote: It also shows that the degree of overlap, which determines ω, is of paramount importance.
+- id: c7
+  statement: 'Neural architectures: besides TNet (separate networks), SNet-1 is TARNet (Shalit et al., 2017), SNet-2 uses only the architecture of DragonNet (Shi et al., 2019; not its targeted ATE estimation),
+    SNet-3 is DR-CFR (Hassanpour and Greiner, 2020) without propensity re-weighting in the loss, and the proposed SNet learns five representations, allowing features that affect only one potential outcome;
+    the authors expect SNet to perform best on average without knowledge of the problem structure but say it may be more difficult to fit.'
+  location: Section 5
+  page: 7
+  quote: We expect that such a general architecture should perform best on average in absence of knowledge on the underlying problem structure, but may be more diﬃcult to ﬁt than simpler models.
+- id: c8
+  statement: 'Gap between theory and experiments: the theoretical analyses rely on sample splitting for two-step learners, but the authors observed that using all data for both steps can work better in
+    practice (particularly in small samples) and use no sample splitting in the experiments; they suggest cross-fitting when guarantees are desired and data are scarce, and note that hyper-parameters can
+    be tuned using factual hold-out data only.'
+  location: Section 5
+  page: 7
+  quote: While we implement all strategies in our code base, we do not use any form of sample splitting in our experiments.
+- id: c9
+  statement: 'Conclusion: while the DR-learner is asymptotically optimal in theory, the RA-learner and plug-in learners that share information between nuisance tasks can outperform it in finite samples;
+    relative performance depends on the DGP and sample size, so the choice of learner should incorporate an expert''s assessment of the most likely DGP. Only NNs were used as base learners; comparing ML
+    methods (e.g. NNs versus random forests) is left as a next step.'
+  location: Section 7
+  page: 9
+  quote: We demonstrated that while the DR-learner is asymptotically optimal in theory, both the RA-learner and plug-in learners sharing information between nuisance estimation tasks can outperform it in
+    ﬁnite samples.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: University of Cambridge; van der Schaar also UCLA and The Alan Turing Institute. Venue from the PDF footer (''Proceedings of the 24th International Conference on Artificial Intelligence
+    and Statistics (AISTATS) 2021, San Diego, California, USA. PMLR: Volume 130''), consistent with the arXiv comment. Section numbers from numbered headings in the PDF (6.1 Synthetic Experiments, 6.2 IHDP).
+    Conflict of interest: SNet is proposed by the authors, all architectures were re-implemented in the authors'' own code base (CATENets), and the theory builds on the senior author''s earlier work (Alaa
+    and van der Schaar 2018a,b). Experimental setup: d = 25 multivariate normal covariates, three stylized DGPs (no effect with confounding; nonzero effect on 5 additional covariates; disjoint covariate
+    sets for mu_1 and mu_0 without confounders), 500 test observations, averaged across 10 runs; IHDP uses an adapted version of the 100 realizations of Shalit et al. (2017) with responses rescaled because
+    the CATE scale varied by orders of magnitude (footnote 5); n = 747, 90% used for training, 19% treated, partial overlap. Results are in figures and Table 1 and are not recorded. The text also states
+    that the DR-learner is best combined with a nuisance estimator that does not share information between pi(x) and mu_w(x) (Section 6.1). In the experiments, equivalent hyper-parameters (based on Shalit
+    et al., 2017) were fixed across architectures and each learner was used ''off-the-shelf'' (Section 6). Referred to by arxiv-2107.13346 as reference [9].'

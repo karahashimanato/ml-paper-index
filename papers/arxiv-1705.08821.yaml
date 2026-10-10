@@ -1,0 +1,101 @@
+id: arxiv-1705.08821
+title: Causal Effect Inference with Deep Latent-Variable Models
+authors:
+- Christos Louizos
+- Uri Shalit
+- Joris Mooij
+- David Sontag
+- Richard Zemel
+- Max Welling
+year: 2017
+venue: NIPS 2017
+links:
+  arxiv: https://arxiv.org/abs/1705.08821
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: ffb5a582e39030ab0848f3fb412d9c32d3a17fd060fe18c19bba9b92a071e053
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - treatment-effect-networks
+  - variational-autoencoders
+  - deep-learning
+proposes:
+- 'Causal Effect Variational Autoencoder (CEVAE): a latent-variable model p(z) p(x|z) p(t|z) p(y|t, z) with a TARnet-style outcome model, a TARnet-style inference network q(z|x, t, y), and auxiliary networks
+  q(t|x), q(y|x, t) for out-of-sample prediction, trained on the ELBO plus the auxiliary log-likelihoods'
+- 'The Twins benchmark: same-sex US twin pairs born 1989-1991 under 2 kg, treatment = being the heavier twin, outcome = first-year mortality, with simulated hidden confounding through gestation length and
+  noisy one-hot proxies'
+claims:
+- id: c1
+  statement: 'Hidden confounding: if a confounder is hidden or unmeasured, the effect of the intervention on the outcome cannot be estimated in the general case without further assumptions (citing Pearl).'
+  location: Introduction
+  page: 1
+  quote: On the the other hand, if a confounder is hidden or unmeasured, it is impossible in the general case (i.e. without further assumptions) to estimate the effect of the intervention on the outcome
+    [40].
+- id: c2
+  statement: Proxy variables (noisy views X of a hidden confounder Z) are commonly used, but treating them as ordinary confounders is often incorrect and would induce bias (citing prior work; a simple binary
+    example is given in Appendix A).
+  location: Introduction
+  page: 2
+  quote: it’s well known [20, 15, 18, 31, 41] that it is often incorrect to treat the proxies X as if they are ordinary confounders, as this would induce bias.
+- id: c3
+  statement: 'Prior proxy-based methods are guaranteed to recover the true effect only under strong assumptions: a categorical hidden confounder with a known number of categories, or a linear-Gaussian model;
+    the authors argue the nature of Z (continuous, categorical, mixed or high-dimensional) is not known in practice.'
+  location: Introduction
+  page: 2
+  quote: In particular, it is assumed that the hidden confounder is either categorical with known number of categories, or that the model is linear-Gaussian.
+- id: c4
+  statement: 'Key assumption: the causal model of Figure 1 holds and the joint p(Z, X, t, y) can be approximately recovered from (X, t, y) alone; the authors note this is impossible if the hidden confounder
+    has no relation to the observed variables, and list cases where it is possible (e.g. three independent views of Z). They also note (citing [51]) that certain VAEs can recover a large class of latent-variable
+    models, with the caveat that optimization is not guaranteed to reach the true minimum.'
+  location: Identification of causal effect
+  page: 3
+  quote: We further assume that the joint distribution p (Z, X, t, y) of the latent confounders Z and the observed confounders X can be approximately recovered solely from the observations (X, t, y).
+- id: c5
+  statement: 'Estimands and identification: ITE(x) = E[y|X = x, do(t = 1)] - E[y|X = x, do(t = 0)] (also called CATE) and ATE = E[ITE(x)]; Theorem 1 states that recovering p(Z, X, t, y) recovers the ITE
+    under the Figure 1 model, by back-door adjustment over Z.'
+  location: Identification of causal effect
+  page: 3
+  quote: Theorem 1. If we recover p (Z, X, t, y) then we recover the ITE under the causal model in Figure 1.
+- id: c6
+  statement: 'Caveat of the VAE approach: little theory is available on when learning with VAEs identifies the true model, though VAEs make substantially weaker assumptions about the data-generating process
+    and the structure of the hidden confounders than prior proxy methods.'
+  location: Introduction
+  page: 2
+  quote: This has the disadvantage that little theory is currently available to justify when learning with VAEs can identify the true model.
+- id: c7
+  statement: Because the posterior over z depends on x, t and y, predicting for new subjects requires t and y before inferring z; CEVAE therefore adds auxiliary distributions q(t|x) and q(y|x, t) whose
+    log-likelihoods are added to the variational lower bound, and outcomes under do(t) are computed by averaging over 100 samples from the approximate posterior q(Z|X).
+  location: Causal effect variational autoencoder
+  page: 5
+  quote: Notice that for out of sample predictions, i.e. new subjects, we require to know the treatment assignment t along with its outcome y before inferring the distribution over z.
+- id: c8
+  statement: 'Twins benchmark construction: 11984 same-sex twin pairs both under 2 kg, 46 covariates; one twin is hidden to simulate an observational study, treatment assignment is based on GESTAT10 (gestation
+    weeks, ordinal 0-9) plus the 45 other features, and proxies are the one-hot GESTAT10 coding replicated 3 times with each bit flipped independently with probability from 0.05 to 0.5 (0.5 meaning no direct
+    information). The authors note other variables (e.g. incompetent cervix) may still be proxies for the confounder.'
+  location: Binary treatment outcome on Twins
+  page: 7
+  quote: 'In order to simulate the case of hidden confounding with proxies, we based the treatment assignment on a single variable which is highly correlated with the outcome: GESTAT10, the number of gestation
+    weeks prior to birth.'
+- id: c9
+  statement: 'Scope limitation: the method does not currently deal with selection bias, which the authors leave to future work.'
+  location: Introduction
+  page: 3
+  quote: Finally, we note that our method does not currently deal with the related problem of selection bias, and we leave this to future work.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Venue: page 1 footer ''31st Conference on Neural Information Processing Systems (NIPS 2017), Long Beach, CA, USA'' and arXiv comment ''Published as a conference paper at NIPS 2017''. Section headings
+    other than the Introduction are unnumbered in the text dump, so locations use section names. Conflict of interest: Shalit and Sontag co-authored the TARnet/CFR baseline [48] (arxiv-1606.03976) and the
+    BNN baseline [25] (arxiv-1605.03661), and the acknowledgements thank Fredrik D. Johansson for providing the IHDP and Jobs data. Evaluation: IHDP and Jobs are used as existing benchmarks ''where there
+    is no need to model proxies'' (Experiments); a toy mixture-of-Gaussians dataset with binary hidden z, and Twins. Architecture follows TARnet: 3 hidden ELU layers, 20-dimensional z, weight decay 1e-4,
+    Adamax with learning rate 0.01, early stopping on the validation lower bound. Qualitative text statements (from figures, not recorded as results): on Twins CEVAE is described as ''much more robust to
+    increasing proxy noise'', but at low noise levels ''CEVAE does slightly worse than the other methods'' for ATE. The Twins ATE (-2.5%, mortality 18.9% vs 16.4%) is a property of the data. Twins treatment
+    assignment: t ~ Bern(sigmoid(w_o^T x + w_h(z/10 - 0.1))), w_o ~ N(0, 0.1 I), w_h ~ N(5, 0.1).'

@@ -1,0 +1,94 @@
+id: arxiv-1504.01132
+title: Recursive Partitioning for Heterogeneous Causal Effects
+authors:
+- Susan Athey
+- Guido Imbens
+year: 2015
+links:
+  arxiv: https://arxiv.org/abs/1504.01132
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 5618b7bf6a2239d6313d5babb92fa20ef9398b9e424deefa3628170d84880eba
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - decision-trees
+  paradigms:
+  - supervised
+proposes:
+- 'Causal Tree (CT): a CART-style partition of the covariate space whose splitting and cross-validation criteria target the mean-squared error of conditional average treatment effects (CATE) rather than
+  outcomes, using unbiased estimates of that infeasible MSE'
+- 'Honest estimation: one sample builds the partition (including cross-validation) and an independent sample estimates the treatment effect in each leaf, with splitting/cross-validation criteria (EMSE)
+  that anticipate this by penalizing the variance of leaf estimates'
+claims:
+- id: c1
+  statement: 'Definition of honesty: a model is honest if it does not use the same information for selecting the model structure (here the partition of the covariate space) and for estimation given that
+    structure; this is done by splitting the training sample into one part for building the tree (including cross-validation) and another for estimating leaf treatment effects. The authors present this
+    as an alternative to sparsity assumptions that places no restrictions on model complexity.'
+  location: Introduction
+  page: 2
+  quote: We say that a model is “honest” if it does not use the same information for selecting the model structure (in our case, the partition of the covariate space) and for estimation given a model structure.
+- id: c2
+  statement: 'Trade-off of honesty: sample splitting loses precision because each estimation step uses fewer units, but there is a benefit for fit from eliminating bias that offsets at least part of that
+    cost.'
+  location: Introduction
+  page: 3
+  quote: Although there is a loss of precision due to sample splitting (which reduces sample size in each step of estimation), there is a beneﬁt for ﬁt in terms of eliminating bias that oﬀsets at least
+    part of the cost.
+- id: c3
+  statement: 'Evaluation without ground truth: cross-validation normally relies on observed outcomes, but for the MSE of treatment effects the unit-level causal effect is never observed (the ''fundamental
+    problem of causal inference'', citing Holland); the authors address this by constructing unbiased estimates of the mean-squared error of the treatment effect.'
+  location: Introduction
+  page: 3
+  quote: We address this by proposing approaches for constructing unbiased estimates of the mean-squared error of the causal eﬀect of the treatment.
+- id: c4
+  statement: 'Setting and assumptions: potential outcomes with a binary treatment, i.i.d. exchangeable units and no interference (SUTVA, which the authors note may be violated when units are connected through
+    networks), and unconfoundedness throughout; the estimand is the CATE tau(x) = E[Y(1) - Y(0) | X = x], estimated by functions that are constant within partition elements. For exposition the main body
+    assumes complete randomization, and the authors state that the methods can be adapted to the unconfounded case with propensity score weighting.'
+  location: The Problem (Unconfoundedness)
+  page: 4
+  quote: Later we show that by using propensity score weighting [19], we can adapt all of the methods to that case.
+- id: c5
+  statement: 'Honest splitting criterion for causal trees: the estimated EMSE rewards a partition for finding strong heterogeneity in treatment effects and penalizes partitions that create variance in leaf
+    estimates (the variance term uses within-leaf treated and control variances scaled by p and 1-p). Unlike the prediction case, the two terms are not proportional: a split on a covariate that affects
+    mean outcomes but not treatment effects can still reduce the variance of the effect estimate.'
+  location: Honest Inference for Treatment Effects (Modifying the Honest Approach)
+  page: 11
+  quote: The criteria reward a partition for ﬁnding strong heterogeneity in treatment eﬀects, and penalize a partition that creates variance in leaf estimates.
+- id: c6
+  statement: 'Inference: once the tree is built, using a distinct sample reduces the problem to estimating treatment effects in each element of a given partition, so standard confidence intervals are valid
+    for honest estimates with no assumptions about model complexity; for the adaptive methods standard confidence intervals are not generally valid.'
+  location: Inference
+  page: 14
+  quote: For the adaptive methods standard approaches to conﬁdence intervals are not generally valid for the reasons discussed above, and below we document through simulations that this can be important
+    in practice.
+- id: c7
+  statement: 'Simulation (described by the authors as a small study with three designs; K = 2, 10 or 20 normal covariates, p = 0.5, N^tr = N^est of 500 or 1000, test sample of 6000): honest methods achieved
+    nominal coverage of 90% confidence intervals in all designs while adaptive methods were substantially below nominal; honest estimation had a cost in MSE_tau that varied by design and estimator, which
+    the authors summarize as sacrificing some goodness of fit in exchange for valid confidence intervals.'
+  location: A Simulation Study
+  page: 15
+  quote: We achieve nominal coverage rates for honest methods in all designs
+- id: c8
+  statement: 'Observational studies: under unconfoundedness the leaf estimates must be modified to remove bias from simple treated-control comparisons, e.g. by propensity score weighting (renormalizing
+    weights within leaves and treatment groups improves efficiency; citing Crump et al. for trimming extreme propensity scores); additional conditions are required for asymptotic normality with propensity
+    weighting, and these results apply without modification to the estimation phase of honest partitioning.'
+  location: Observational Studies with Unconfoundedness
+  page: 15
+  quote: The proposed methods can be adapted to observational studies under the assumption of unconfoundedness.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: Stanford GSB and NBER; a footnote says part of the research was conducted while the authors were visiting Microsoft Research. No venue is stated in the arXiv v3 PDF (dated December 2015;
+    first draft October 2013) and the arXiv record has no journal_ref; none recorded. The PDF headings are unnumbered, so locations use section names. Besides CT the paper compares transformed outcome trees
+    (TOT, Y* = Y(W - p)/(p(1-p)) style transformed outcome with off-the-shelf CART; described as not efficient because it ignores the treatment indicator beyond the transformation), fit-based trees (F)
+    and squared t-statistic trees (TS, citing Su et al.), each in adaptive and honest versions. Simulation results are in Table 1 and are not recorded. The appendix says the simulation code is an R package
+    based on rpart ''in preparation for public release'', with a minimum of nm = 25 treated and 25 control observations per leaf and covariate bucketing with b = 4; the authors note the bucketing ''can
+    in principle make things worse''. The paper cites Wager & Athey (2015) (causal forests) as related work by an overlapping author.'

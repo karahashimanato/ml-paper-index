@@ -1,0 +1,97 @@
+id: arxiv-2004.14497
+title: Towards optimal doubly robust estimation of heterogeneous causal effects
+authors:
+- Edward H. Kennedy
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2004.14497
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 435e4cdf6dd6620daff98f3c0255c93d45916fffc6da4860ed5c6840170f46dd
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - causal-meta-learners
+  paradigms:
+  - supervised
+proposes:
+- 'DR-Learner analysis: regress the doubly robust (AIPW) pseudo-outcome, built from nuisance estimates on a separate sample, on covariates, with optional cross-fitting; a model-free oracle inequality for
+  regression with estimated pseudo-outcomes under a new stability condition'
+- 'lp-R-Learner: a local-polynomial, double-sample-split adaptation of the R-learner with faster rates outside the oracle regime in Hölder models'
+claims:
+- id: c1
+  statement: 'Setup: the target is tau(x) = mu1(x) - mu0(x); under no unmeasured confounding, consistency and positivity/overlap (assumed throughout) it equals the CATE E(Y^1 - Y^0 | X = x). The author
+    notes the results hold regardless of whether the causal assumptions do (i.e., for the difference in regression functions).'
+  location: Section 2
+  page: 2
+  quote: noting that our results hold regardless of whether the causal assumptions do
+- id: c2
+  statement: 'Motivating illustration: when mu1 and mu0 are individually complex and non-smooth but their difference is zero, and treated/untreated units are unevenly spread over x, separately fit regressions
+    over- and under-smooth in different regions, so the plug-in difference is a poor, overly complex CATE estimate; the author calls this an interesting but likely common phenomenon. Pseudo-outcome regressions
+    (IPW, doubly robust) adapt to the CATE''s smoothness, with the doubly robust versions more efficient.'
+  location: Section 2.2
+  page: 3
+  quote: An interesting but likely common phenomenon occurs in this simple example.
+- id: c3
+  statement: The author states that the meta-learners of Künzel et al. (2019) do not include the DR-Learner and none of them are doubly robust, so in general they would inherit larger error rates from the
+    underlying regression estimators.
+  location: Section 4.1
+  page: 10
+  quote: further, none of their methods are doubly robust, and so in general would inherit larger error rates from the underlying regression estimators.
+- id: c4
+  statement: 'DR-Learner construction (Algorithm 1): estimate the propensity and both outcome regressions on one sample, form the pseudo-outcome (A - pi_hat)/(pi_hat(1 - pi_hat)) (Y - mu_hat_A) + mu_hat_1
+    - mu_hat_0, regress it on X in an independent sample, and optionally cross-fit; the motivation is that this is the uncentered efficient influence function of the ATE, so where the standard doubly robust
+    ATE estimator averages it, the DR-Learner regresses it on covariates.'
+  location: Section 4.2
+  page: 12
+  quote: The DR-Learner approach is motivated by the fact that (2) is the (uncentered) efficient influence function for the ATE [Hahn, 1998, Robins and Rotnitzky, 1995]; this drives many of its favorable
+    properties.
+- id: c5
+  statement: 'Theorem 2: if the second-stage regression is stable (Definition 1) and the estimated pseudo-outcome is consistent, the DR-Learner differs from an oracle that regresses the true pseudo-outcome
+    by a smoothed product of propensity and outcome-regression errors (plus a term of smaller order than the oracle risk), so it is oracle efficient when that product term is small; the author states the
+    result is agnostic about the methods and needs no special tuning or undersmoothing, and contrasts it with Foster & Syrgkanis (2019), whose bounds are second-order but not doubly robust (L4 errors of
+    all nuisances).'
+  location: Section 4.2
+  page: 12
+  quote: Importantly the result is agnostic about the methods used, and requires no special tuning or undersmoothing.
+- id: c6
+  statement: 'Corollary 1 (Hölder-smooth propensity alpha, regressions beta, CATE gamma; minimax-optimal linear smoother second stage): the DR-Learner adapts to CATE smoothness, with a sufficient condition
+    for oracle efficiency that approaches the ATE root-n condition sqrt(alpha beta) >= d/2 as the CATE becomes smoother; the author contrasts this with Nie & Wager and Zimmert & Lechner, which required
+    ATE-like n^(-1/4) nuisance rates.'
+  location: Section 4.3
+  page: 14
+  quote: First, as the CATE smoothness gets larger, the suﬃcient condition (4) for the CATE approaches that for the ATE, as should be expected (intuitively, an inﬁnitely smooth CATE should be nearly as
+    easy to estimate as the ATE).
+- id: c7
+  statement: 'Caveat for the sparse-model analogue of Corollary 1: the author notes that it has not been proved that second-stage estimators attaining the stated sparse rates satisfy the stability condition.'
+  location: Section 4.3
+  page: 14
+  quote: However we note that we have not proved second-stage estimators attaining these rates satisfy the stability condition of Deﬁnition 1.
+- id: c8
+  statement: 'Simulations (plug-in/T-learner, X-learner, DR-Learner, oracle DR-Learner): in the piecewise-polynomial model (n = 2000, 500 simulations, propensity estimates with controlled convergence rate,
+    truncated to [0.01, 0.99]) the DR-Learner''s MSE approaches the oracle''s as the propensity error shrinks, with the X-learner between plug-in and DR; in a high-dimensional sparse logistic model with
+    zero CATE (d = 500, alpha = beta = 50, n = 200 and 2000, 100 simulations, cross-validated lasso, median MSE reported), the DR-Learner is closer to the oracle and its relative performance seems to improve
+    with sample size.'
+  location: Section 4.4
+  page: 15
+  quote: The relative performance of the DR-Learner seems to improve with sample size.
+- id: c9
+  statement: 'Limits: the lp-R-Learner attains oracle efficiency under weaker nuisance-smoothness conditions than the DR-Learner bound in a Hölder model (but is harder to compute and requires undersmoothing,
+    Remark 8); the abstract conjectures that these conditions are minimal in a minimax sense, but the Discussion states that whether the rates of Corollaries 2 and 3 are minimax optimal is one of the deepest
+    open questions.'
+  location: Section 6
+  page: 22
+  quote: One of the deepest open questions is whether the rates given in Corollaries 2 and 3 are minimax optimal or not (in the ﬁxed and random design setups, respectively).
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: Carnegie Mellon University. PDF is arXiv v5 (21 Aug 2023); no venue is stated in the PDF and the arXiv record has no journal_ref, so none is recorded. Single author; the paper cites the
+    author''s own earlier work (Kennedy et al. 2017 dose-response; Kennedy 2022 review) for related phenomena, but no own-software benchmarking. Simulation MSEs are figure-only; not recorded. Section 2.2
+    also reports, across 500 simulations of the illustration, bias and variance ratios between IPW and doubly robust estimators (body text); not recorded as a claim.'

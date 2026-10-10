@@ -82,8 +82,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 知識蒸留と枝刈り | 論文カード17本+既存4本(柔らかい目標と温度、中間層のヒント、同じ大きさへの蒸留、生徒は先生をまねできているか、大きさに基づく枝刈りと段階的な枝刈り、初期化時の枝刈り、宝くじ仮説と巻き戻し、転移学習と大規模言語モデルの枝刈り、評価の問題、圧縮で失われるもの)、記事 [articles/methods/knowledge-distillation-and-pruning.md](articles/methods/knowledge-distillation-and-pruning.md) |
 | グラフニューラルネットワーク | 論文カード16本(GCN・GraphSAGE・GAT・SGC とメッセージパッシング、WL 検定と表現力、過平滑化と過圧縮、異質性、固定分割とモデル選択の落とし穴、OGB などのベンチマーク)、記事 [articles/methods/graph-neural-networks.md](articles/methods/graph-neural-networks.md) |
 | 表データの深層学習モデル | 論文カード15本+既存6本(表データが難しい理由、木をまねるモデル、特徴をトークンにする注意モデル、数値の埋め込み、交差層、MLP の正則化と既定値と暗黙のアンサンブル、近傍の検索、自己教師ありの事前学習、調整の予算とベンチマークの偏り)、記事 [articles/methods/tabular-deep-learning-models.md](articles/methods/tabular-deep-learning-models.md) |
+| 因果効果の推定 | 論文カード16本+既存6本(識別の前提と隠れた交絡、高次元での重なり、S/T/X/R/DR-learner と二重機械学習、因果木・因果フォレスト・BCF、表現の釣り合い・TARNet/CFR・Dragonnet・CEVAE、半合成ベンチマークの偏り、競技会、正解のないモデル選択、因果の基盤モデル)、記事 [articles/topics/causal-effect-estimation.md](articles/topics/causal-effect-estimation.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では518本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では534本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -102,6 +103,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 
 横断記事:
 
+- [因果効果の推定 — 前提、メタ学習器と二重機械学習、木と森、ニューラルネット、正解のない評価](articles/topics/causal-effect-estimation.md)
 - [モデルと評価方法の弱点、それを改善した研究](articles/topics/weaknesses-and-fixes.md) — 3テーマを横断して「問題点 → 改善策 → 検証 → 独立した確認」を整理
 - [モデルの解釈可能性 — 説明手法は何を前提にし、どう評価されてきたか](articles/topics/model-interpretability.md)
 - [量子化による影響 — 何が失われ、何で測ると見えるのか](articles/topics/quantization-effects.md)

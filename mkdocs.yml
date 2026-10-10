@@ -51,6 +51,7 @@ nav:
       - 量子化による影響: articles/topics/quantization-effects.md
       - 時系列基盤モデルと時系列予測: articles/topics/time-series-foundation-models.md
       - 学習モデルと計算量: articles/topics/compute-and-scaling.md
+      - 因果効果の推定: articles/topics/causal-effect-estimation.md
       - 古典アルゴリズムと機械学習: articles/topics/algorithms-and-ml.md
       - アルゴリズム設計技法と機械学習: articles/topics/design-techniques-and-ml.md
       - 予測モデルのフォールバックとモデル選択: articles/topics/model-fallback-and-selection.md

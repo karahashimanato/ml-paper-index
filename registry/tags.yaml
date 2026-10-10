@@ -220,6 +220,10 @@ method_families:
     description: "Markov chain Monte Carlo methods (e.g. Hamiltonian Monte Carlo, NUTS, stochastic-gradient MCMC) and their diagnostics."
   - id: variational-inference
     description: "Approximating posteriors by optimizing over a family of distributions (e.g. mean-field / stochastic / black-box VI, ADVI, normalizing-flow VI)."
+  - id: causal-meta-learners
+    description: "Treatment-effect estimators built by combining arbitrary ML regressions: S/T/X/R/DR-learners and double/debiased machine learning (DML)."
+  - id: treatment-effect-networks
+    description: "Neural networks designed for treatment-effect estimation, e.g. TARNet/CFR, Dragonnet and CEVAE."
 paradigms:
   - id: supervised
     description: Supervised learning.

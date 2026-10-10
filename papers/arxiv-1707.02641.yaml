@@ -1,0 +1,106 @@
+id: arxiv-1707.02641
+title: 'Automated versus do-it-yourself methods for causal inference: Lessons learned from a data analysis competition'
+authors:
+- Vincent Dorie
+- Jennifer Hill
+- Uri Shalit
+- Marc Scott
+- Dan Cervone
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1707.02641
+  code: https://github.com/vdorie/aciccomp/tree/master/2016
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 8a3cf03550d27a1d94c1e07c1f1f1ca58acaad991d393425ada33319cc2616b7
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - tree-ensembles
+  - decision-trees
+  - linear-models
+  paradigms:
+  - supervised
+proposes:
+- 'The 2016 Atlantic Causal Inference Conference competition (''Is Your SATT Where It''s At?''): 77 simulation settings built on real covariates from the Collaborative Perinatal Project (4802 observations,
+  58 covariates) with simulated treatment and outcomes, 100 replications each for the black-box track and 20 data sets for the do-it-yourself track, estimand SATT'
+- Post-competition methods created by the organizers by combining or tweaking top submissions (e.g. BART with IPTW/TMLE, cross-validated priors, multiple chains, propensity score as covariate)
+claims:
+- id: c1
+  statement: 'Motivation: the authors argue that papers proposing new methods have shortcomings as a source of evidence about which method is best; strong performance of a method in a paper written by its
+    inventor is encouraging but should be interpreted cautiously.'
+  location: Section 2.1
+  page: 2
+  quote: Strong performance of a method in a paper written by its inventor is encouraging but should be interpreted cautiously for the reasons discussed in this section.
+- id: c2
+  statement: 'Competition design against unfair comparisons: the researchers creating the simulated testing grounds were distinct from those submitting methods; results are reported for 30 competitors across
+    the black-box and do-it-yourself versions.'
+  location: Abstract
+  page: 1
+  quote: The researchers creating the data testing grounds were distinct from the researchers submitting methods whose eﬃcacy would be evaluated.
+- id: c3
+  statement: 'Organizers'' role: the organizers were not allowed to submit methods; for the black-box competition they included a simple main-effects linear model as a baseline, distinct from the methods
+    they created after the competition.'
+  location: Section 5
+  page: 12
+  quote: The organizers were not allowed to submit methods to the competition; however for the black-box competition we included a simple linear model using main eﬀects to create a baseline for comparison
+    (as distinct from the “created” methods described later).
+- id: c4
+  statement: 'Overlap design choice: since the estimand is the sample average treatment effect on the treated (SATT), overlap is required only for treated units (empirical counterfactuals for all treated),
+    and settings without common support for the inferential group were excluded because changing the estimand would make fair comparison too complicated.'
+  location: Section 4.1
+  page: 7
+  quote: Given our focus on SATT, to satisfy the overlap assumption we only need to ensure that empirical counterfactuals exist for all treated units.
+- id: c5
+  statement: 'Scenario selection: the response surface and assignment mechanism are random generalized additive functions controlled by tunable ''knobs''; all knob combinations yield 216 scenarios, of which
+    the organizers focused on 77 by eliminating trivial or redundant ones (e.g. simple linear models or unconfounded treatment and response).'
+  location: Section 4.3
+  page: 8
+  quote: Concern about the ability to test multiple replications in that many scenarios led us to focus on the most interesting 77 combinations by eliminating cases that were trivial or redundant, such
+    as simple linear models or unconfounded treatment and response.
+- id: c6
+  statement: 'Organizer-created methods: after preliminary results were presented, the organizers created nine additional methods by tweaking and combining submissions (mostly BART variants, plus Super
+    Learner variants); they state that, not surprisingly, the methods created or submitted after the initial deadline all performed particularly well relative to the others, except SL+TMLE Joint (which
+    they say likely failed because many methods in its ensemble library could not fit non-parallel response surfaces).'
+  location: Section 6.2
+  page: 20
+  quote: In particular, and not surprisingly, the methods created or submitted after the initial deadline all performed particularly well relative to the others with the exception of SL+TMLE joint
+- id: c7
+  statement: 'Predicting performance: the authors could not go beyond a general recommendation of flexible nonparametric response-surface modeling; under almost no condition could they predict which black-box
+    method would outperform others beyond its average performance, and they describe relative performance as much less contextual than imagined.'
+  location: Section 7
+  page: 23
+  quote: Overall, we ﬁnd that to a surprising degree we could not go beyond a general recommendation of using ﬂexible non-parametric response surface modeling.
+- id: c8
+  statement: 'What did well: nonlinear response surfaces and treatment effect heterogeneity were two of the three complexities that created the most difficulty for low bias; methods able to flexibly model
+    the response surface routinely distinguished themselves, even methods like BART that modeled only the response surface, and outperformed approaches that only flexibly modeled the assignment mechanism
+    (Balance Boost, Tree Strat, Adj. Tree Strat).'
+  location: Section 8
+  page: 24
+  quote: This held true even for methods like BART that only modeled the response surface and not the assignment mechanism.
+- id: c9
+  statement: 'Caveat: the authors say there are several good options for accurately estimating causal effects (particularly for reducing bias), but this advice applies only to testing grounds where ignorability
+    holds, overlap for the inferential group is satisfied and the data are i.i.d.; these properties may not hold in practice.'
+  location: Section 8
+  page: 25
+  quote: Of course that advice comes with the caveat that our testing grounds have been restricted a range of settings where ignorability holds, overlap for the inferential group is satisﬁed, the data are
+    i.i.d., etc.; these properties may not hold in practice
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations (page 1 footnote): New York University (Dorie, Hill, Scott), Technion (Shalit), Los Angeles Dodgers (Cervone). No venue recorded: the arXiv v5 PDF says only ''Submitted to Statistical Science''
+    and the arXiv record has no journal_ref (arxiv-2107.13346 cites a Statistical Science 2019 version, which is not used as a source here). Conflict of interest: the organizers did not submit methods (Section
+    5, footnote 8), but they created nine post-competition methods after seeing preliminary results, mostly variants of BART; Hill authored the BART-for-causal-inference approach cited for the BART submission
+    (Hill, 2011), and the BART submission came from Douglas Galagate and separately Nicole Bohme Carnegie (Appendix A.6), Carnegie being a co-author with Dorie and Hill of Dorie et al. (2016) in the reference
+    list. The non-oracle alignment metric in Section 7.3 uses BART-estimated unit-level effects. PEHE was available only for the subset of methods that output individual effects (Section 6.2). DIY results
+    rest on 20 data sets and the authors are ''reluctant to draw strong conclusions'' about them (Section 6.1). Bias/RMSE/coverage values are from figures and are not recorded. Section 8 also states that
+    good coverage was difficult for most methods even when bias was low, and Section 4.4 lists issues not addressed (non-binary treatment, non-continuous response, non-IID data, varying data size, covariate
+    measurement error, violations of ignorability/overlap). With non-oracle metrics the R^2 of per-method performance models rarely exceeded 0.10 (Section 7.2). The ACIC2016 benchmark designed here is critiqued
+    in arxiv-2107.13346 (dichotomized count covariates, mostly heterogeneous settings).'

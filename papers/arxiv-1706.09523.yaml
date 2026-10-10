@@ -1,0 +1,107 @@
+id: arxiv-1706.09523
+title: 'Bayesian regression tree models for causal inference: regularization, confounding, and heterogeneous effects'
+authors:
+- P. Richard Hahn
+- Jared S. Murray
+- Carlos Carvalho
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1706.09523
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: cb5cabc5acf0667f568b883e239d072a0548fe71aa41efb9a19394dc8cd781b7
+tags:
+  tasks:
+  - causal-effect-estimation
+  - uncertainty-estimation
+  method_families:
+  - tree-ensembles
+  paradigms:
+  - supervised
+proposes:
+- 'Bayesian causal forest (BCF): E(Y | x, Z = z) = mu(x, pi-hat(x)) + tau(x) z with independent BART priors on the prognostic function mu and the treatment-effect function tau, where pi-hat is an estimated
+  propensity score included as a covariate of mu'
+- Stronger regularization of tau (fewer trees, stronger depth penalty, half-normal scale prior) to shrink toward homogeneous effects, and a parameter-expanded treatment coding (b0, b1) that makes inference
+  invariant to how Z is coded
+claims:
+- id: c1
+  statement: 'Assumptions: SUTVA (no interference, no multiple versions of treatment), strong ignorability (no unmeasured confounders) and overlap 0 < Pr(Z = 1 | x) < 1; under these the CATE tau(x) = E(Y
+    | x, Z = 1) - E(Y | x, Z = 0). The model further restricts to mean-zero additive Gaussian errors.'
+  location: Section 2
+  page: 4
+  quote: The ﬁrst condition assumes we have no unmeasured confounders, and the second condition (overlap) is necessary to estimate treatment eﬀects everywhere in covariate space.
+- id: c2
+  statement: 'Regularization-induced confounding (RIC, from Hahn et al. 2016, an earlier paper by overlapping authors): in a linear model with a ridge prior on control coefficients and a flat prior on tau,
+    the bias of the posterior mean of tau is near zero under completely randomized assignment but, under selection, depends on unknown nuisance parameters; the authors stress that the problem is not bias
+    per se but that its degree is not under the analyst''s control, and that it can occur even with all confounders measured and a correctly specified parametric model.'
+  location: Section 4.1
+  page: 8
+  quote: The use of a naive regularization prior in the presence of counfounding can unwittingly induce extreme bias in estimation of the target parameter, even when all the confounders are measured and
+    the parametric model is correctly speciﬁed.
+- id: c3
+  statement: 'Targeted selection: treatment assigned partly on a prediction of the outcome without treatment, so the propensity score is (approximately) monotone in the prognostic function mu(x) = E(Y(0)
+    | x); the authors suspect this is quite common in practice (e.g. physicians treating patients with worse expected untreated outcomes), and it is the setting in which RIC is easiest to reproduce in nonlinear
+    models.'
+  location: Section 4.2
+  page: 8
+  quote: We suspect this selection process is quite common in practice; for example, in medical contexts where risk factors for adverse outcomes are well-understood physicians are more likely to assign
+    treatment to patients with worse expected outcomes in its absence.
+- id: c4
+  statement: In the 2-d targeted-selection example (200 datasets, n = 250, tau = -1), the authors explain BART's poor performance by tree priors penalizing the many axis-aligned splits needed for the diagonal
+    'shelf' while a single split in Z can stand in for them; they caution that the example is stylized, designed to be difficult for tree-based models, but argue that any informative, sparse or nonparametric
+    prior that imposes meaningful regularization is susceptible to similar effects.
+  location: Section 4 (Targeted selection and RIC in nonlinear models)
+  page: 11
+  quote: Before discussing how we reduce RIC, we note that this example is somewhat stylized in that we designed it speciﬁcally to be diﬃcult to learn for tree-based models.
+- id: c5
+  statement: 'Remedy: include an estimate of the propensity score as a covariate so that representations involving pi(x) are penalized equitably with those involving Z; in the linear model this makes the
+    ridge bias of tau zero, and in the nonlinear example it dramatically mitigates RIC. The authors believe this will be cheap insurance against RIC for other nonparametric priors and machine-learning outcome
+    models (a belief, not shown for those methods).'
+  location: Section 4.3
+  page: 13
+  quote: Finally, we believe that including an estimated propensity score will be cheap insurance against RIC when estimating treatment eﬀects using outcome models under other nonparametric priors and using
+    more general nonparametric/machine learning approaches.
+- id: c6
+  statement: 'Prior specification: mu uses the Chipman et al. (2010) defaults (200 trees, beta = 2, eta = 0.95) with a half-Cauchy prior on the leaf scale; tau is regularized more strongly with 50 trees,
+    beta = 3 and eta = 0.25 (no splits corresponds to homogeneous effects) and a half-normal scale prior with median at the marginal standard deviation of Y. The authors report that inference on tau is
+    typically insensitive to reasonable deviations from the mu settings as long as the prior is not so strong that deconfounding does not take place.'
+  location: Section 5.2
+  page: 15
+  quote: For τ, we prefer stronger regularization.
+- id: c7
+  statement: 'Benchmarking on ACIC 2016 and 2017: since the competition datasets and ground truths are public, the authors evaluate BCF (not entered in either competition) against submitted methods they
+    did not choose, design or implement, and add causal random forests (grf, 4,000 trees, doubly robust SATT as suggested in the package documentation). The ACIC 2017 design, summarized in Hahn et al. (2018),
+    explicitly incorporated targeted selection, unlike 2016.'
+  location: Section 6.2
+  page: 19
+  quote: The datasets and ground truths are publicly available, so while BCF was not entered into either the 2016 or 2017 competitions we can benchmark its performance against a suite of methods that we
+    did not choose, design, or implement.
+- id: c8
+  statement: 'Propensity-score uncertainty: the authors argue the model need not account for uncertainty in pi-hat (by analogy with Zellner''s g-prior), but acknowledge that the adjustments only work if
+    pi-hat accurately approximates pi, and suggest fitting BCF with different propensity estimates as a sensitivity analysis, needed only when candidate propensity models tie in cross-validated accuracy.'
+  location: Section 8
+  page: 27
+  quote: One might consider ﬁtting a series of BCF models with diﬀerent estimates of
+- id: c9
+  statement: 'Not doubly robust and limited theory: the authors do not claim BCF is doubly robust and use the natural Bayesian estimates; they state that theory is only nascent, with none speaking to frequentist
+    coverage of Bayesian credible intervals, and that existing posterior-concentration results for Bayesian trees require modifications to the BART prior that may make them unreliable guides to practice.'
+  location: Section 8
+  page: 27
+  quote: We do not claim our approach is doubly robust, however, and in all of our examples above we use the natural Bayesian estimates of (conditional) average treatment eﬀects
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: Arizona State University (Hahn), UT Austin (Murray, Carvalho). No venue recorded: the arXiv v4 PDF uses the Bayesian Analysis LaTeX template with placeholder issue data (''Bayesian Analysis
+    (0000) 00, Number 0'', ''DOI: 0000''), which is not a publication statement, and the arXiv record has no comment or journal_ref. Section numbers are confirmed by numbered headings in the PDF and cross-references
+    (''Section 4.2'', ''section 5.2'', ''Section 6.1'', ''section 8''). Conflict of interest: the ACIC 2017 competition used as a benchmark is described in Hahn, Dorie and Murray (2018), co-authored by
+    two of the authors, and the authors state their own simulation protocol was ''designed prior to the model''s development, with an eye towards realism''; RIC is from the authors'' earlier work (Hahn
+    et al. 2016); BCF is ''the default implmentation in our software package''. The authors also note that ps-BART in ACIC 2016/2017 was based on an early draft of this paper and that Nie & Wager (2017)
+    used ps-BART in a stacked R-learner. Simulation (Section 6.1): 8 DGPs (homogeneous/heterogeneous effects, linear/nonlinear prognostic function, n = 250/500), 200 replications each, comparing BCF, ps-BART,
+    BART, BART(f0, f1), causal RF (grf default specification) and a linear model with horseshoe prior; results are in Tables 2-5 and Figure 6 and are not recorded. The smoking/medical-expenditure application
+    (NMES, n = 6,798 after excluding individuals younger than 28 on overlap grounds) is not recorded as claims.'

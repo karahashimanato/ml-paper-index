@@ -1,0 +1,102 @@
+id: arxiv-1906.02120
+title: Adapting Neural Networks for the Estimation of Treatment Effects
+authors:
+- Claudia Shi
+- David M. Blei
+- Victor Veitch
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1906.02120
+  code: https://github.com/claudiashi57/dragonnet
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 938e97f334d24a06e278eb66cc3334d54961d943ea143be7524ebf57d71220a9
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - treatment-effect-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Dragonnet: a three-headed network with a shared representation Z(X), two outcome heads Q(0, .) and Q(1, .) and a linear-plus-sigmoid propensity head, trained on squared outcome error plus alpha times
+  treatment cross-entropy, motivated by the sufficiency of the propensity score'
+- 'Targeted regularization: an extra parameter epsilon and a penalty beta * mean (y - Q(t, x) - epsilon * (t/g(x) - (1-t)/(1-g(x))))^2 so that the fitted model satisfies the non-parametric (efficient influence
+  curve) estimating equation, with the plug-in estimator psi_treg'
+claims:
+- id: c1
+  statement: 'Setting: the paper estimates the average effect of a binary treatment from observational data and works throughout in the ''no hidden confounding'' setting, where the effect is identified
+    if the covariates contain all confounding variables.'
+  location: Introduction
+  page: 1
+  quote: We will work in this ‘no hidden confounding’ setting throughout the paper.
+- id: c2
+  statement: 'Motivation from the sufficiency of the propensity score (Theorem 2.1, citing Rosenbaum & Rubin 1983): if adjusting for X identifies the ATE, adjusting for g(X) also suffices, so covariate
+    information relevant to the outcome but not the treatment is noise for adjustment and is expected to hurt finite-sample performance; a footnote cautions that with high-variance outcomes and small samples
+    modeling all covariates may help as variance reduction.'
+  location: Dragonnet
+  page: 3
+  quote: 'In words: it sufﬁces to adjust for only the information in X that is relevant for predicting the treatment.'
+- id: c3
+  statement: 'Architecture: a deep net produces a representation Z(X); two 2-hidden-layer heads predict the outcome under control and treatment, and the propensity head is a simple linear map followed by
+    a sigmoid, chosen so that the representation is tightly coupled to the estimated propensity score; removing the propensity head gives (essentially) TARNET (Shalit et al.).'
+  location: Dragonnet
+  page: 3
+  quote: The simple map forces the representation layer to tightly couple to the estimated propensity scores.
+- id: c4
+  statement: 'Theory recalled (citing Chernozhukov et al. and van der Laan & Rose): if the tuple (Q-hat, g-hat, psi-hat) satisfies the efficient-influence-curve estimating equation, psi-hat is asymptotically
+    robust in the double machine-learning sense and efficient; these guarantees require consistent Q-hat and g-hat. The A-IPTW estimator satisfies the equation but, with g-hat in denominators, can be unstable
+    in finite samples.'
+  location: Targeted Regularization
+  page: 4
+  quote: These asymptotic guarantees hold if (i) ˆQ and ˆg are consistent estimators for the conditional outcome and propensity scores, and (ii) the tuple satisﬁes the non-parametric estimating equation,
+- id: c5
+  statement: 'Targeted regularization: minimizing the objective forces the estimating equation to hold at the optimum of epsilon, so psi_treg has the non-parametric asymptotic properties as long as Q_treg
+    and g-hat are consistent; the authors argue consistency is plausible because the model can set epsilon to 0. Estimators satisfying the equation are also doubly robust (consistent if either the outcome
+    or propensity model is consistent).'
+  location: Targeted Regularization
+  page: 5
+  quote: Consistency is plausible—even with the addition of the targeted regularization term—because the model can choose to set ϵ to 0, which (essentially) recovers the original training objective.
+- id: c6
+  statement: 'Overlap: some ACIC 2018 datasets have overlap violations (P(T = 1|x) very close to 0 or 1 for many x); as a simple heuristic the authors exclude datasets where Dragonnet''s held-out treatment
+    accuracy exceeds 90%, leaving 101 datasets.'
+  location: Experiments
+  page: 7
+  quote: Although overlap violations are an important area of study, this is not our focus and the methods of this paper are not expected to be appropriate in this setting.
+- id: c7
+  statement: 'Evaluation design: since ground truth is rarely available, evaluation relies on semi-synthetic data, which must be faithful to the real world; the paper uses IHDP (1000 NPCI realizations,
+    747 observations, following Shalit et al.) and the IBM ACIC 2018 framework built from linked birth and infant death data (63 data-generating settings; 3 randomly picked datasets of size 5k or 10k per
+    setting).'
+  location: Experiments
+  page: 7
+  quote: For the conclusions to be useful, the semi-synthetic data must have good ﬁdelity to the real world.
+- id: c8
+  statement: On IHDP, the de-facto standard benchmark for neural treatment-effect methods, the authors caution that its small sample size and limited simulation settings make conclusions difficult; they
+    also note that the established 63/27/10 split procedure is not clearly motivated for parameter estimation and additionally report estimates using all data for both training and estimation.
+  location: Experiments
+  page: 8
+  quote: However, the small sample size and limited simulation settings of IHDP make it difﬁcult to draw conclusions about the methods.
+- id: c9
+  statement: The non-parametric guarantees are asymptotic; when datasets are split by the error of the baseline Q-only estimator, the authors report that TMLE and targeted regularization behave similarly
+    when the initial estimate is good, while TMLE significantly degrades estimation when it is poor and targeted regularization does not; they say it appears that adapting the whole learning process avoids
+    some bad finite-sample effects but they lack a theoretical explanation.
+  location: Experiments
+  page: 10
+  quote: We do not have a satisfactory theoretical explanation for this.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    No venue is printed in the arXiv v2 PDF (dated 17 Oct 2019) and the arXiv comment/journal_ref are empty; none recorded. Section numbers are not printed as headings in the text dump, so locations use
+    section names (Dragonnet, Targeted Regularization, Experiments). Hyperparameters alpha and beta set to 1; hidden sizes 200 (shared) and 100 (outcome); SGD with momentum, and the authors note ''the choice
+    of optimizer has a signiﬁcant impact on estimation performance'' for the baseline and their methods. Data points with estimated propensity outside [0.01, 0.99] are excluded for estimation, and Appendix
+    B reports that the trimming level affects results. Footnote 4 says Shalit et al.''s ''setting A'' of NPCI corresponds to setting B in Hill (2011). Table 1 entries for BNN/TARNET/CFR/CEVAE/GANITE are
+    ''as reported in the cited papers'' (not re-run). The A-IPTW estimator ''consistently under-performs'' the naive estimator in their experiments; on ACIC TMLE ''hurts more than it helps on average'';
+    Dragonnet and targeted regularization help ''about half the time'' (text, Experiments). Results tables not recorded. No author-overlap conflict with the compared estimators found; TARNET (Shalit et
+    al., arxiv-1606.03976) is reimplemented as the main baseline.'

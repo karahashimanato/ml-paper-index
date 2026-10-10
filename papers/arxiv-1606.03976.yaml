@@ -1,0 +1,99 @@
+id: arxiv-1606.03976
+title: 'Estimating individual treatment effect: generalization bounds and algorithms'
+authors:
+- Uri Shalit
+- Fredrik D. Johansson
+- David Sontag
+year: 2016
+links:
+  arxiv: https://arxiv.org/abs/1606.03976
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 47f2149d257cbc50214aafe5e567a11acd6ec438081b64486bcd0c167fcf93bb
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - treatment-effect-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'A generalization-error bound for ITE estimation: the expected PEHE of a representation Phi and hypothesis h is bounded by the factual treated and control losses plus B_Phi times an integral probability
+  metric (IPM) between the treated and control distributions induced by Phi'
+- 'CFR (Counterfactual Regression): a shared representation network with two outcome heads h0, h1, trained on a group-size-weighted factual loss plus alpha times an IPM (MMD or Wasserstein) between treated
+  and control representations; TARNet is the variant with alpha = 0'
+claims:
+- id: c1
+  statement: 'Estimand: tau(x) = E[Y1 - Y0 | x] = m1(x) - m0(x), called the Individual Treatment Effect (a footnote says it is sometimes known as CATE); under the Consistency assumption the observed outcome
+    is y = Y0 if t = 0 and y = Y1 if t = 1, so only one potential outcome is seen per unit.'
+  location: Introduction
+  page: 2
+  quote: this is known as the Consistency assumption.
+- id: c2
+  statement: 'Identification: the paper assumes ''no hidden confounders'', formalized as strong ignorability ((Y1, Y0) independent of t given x, and 0 < p(t = 1|x) < 1 for all x), which is sufficient for
+    tau(x) to be identifiable (proof in the supplement); the authors state that its validity cannot be checked from data.'
+  location: Introduction
+  page: 2
+  quote: The validity of strong ignorability cannot be assessed from data, and must be determined by domain knowledge and understanding of the causal relationships between the variables.
+- id: c3
+  statement: 'Theorem 1: under the conditions of Lemma 1 (one-to-one, twice-differentiable representation Phi; a constant B_Phi such that B_Phi times the per-unit expected loss lies in the IPM function
+    family G) and squared loss, PEHE is bounded by twice the sum of the factual treated and control losses plus B_Phi * IPM_G(treated, control distributions over Phi), minus a variance term; the proof bounds
+    PEHE by factual plus counterfactual loss and the unestimable counterfactual-minus-factual gap by an IPM.'
+  location: Section 3.2
+  page: 5
+  quote: We therefore bound the difference ϵCF −ϵF using an IPM.
+- id: c4
+  statement: 'Gap between theory and algorithm: B_Phi can be made explicit only under further assumptions (for Wasserstein: the loss, Lipschitz constants of p(Y_t|x) and h, and the condition number of the
+    Jacobian of Phi; for MMD: RKHS representability and norms); in the algorithm B_Phi is generally not computed but absorbed into alpha, which makes the objective sensitive to the scaling of Phi, so Phi
+    is normalized by projection or batch normalization with fixed scale.'
+  location: Section 4
+  page: 6
+  quote: For most IPMs, we cannot compute the factor Bφ in Equation 2, but treat it as part of the hyperparameter α.
+- id: c5
+  statement: 'Architecture choice: Johansson et al. (2016) fed the concatenation of Phi and t to a single network; the authors argue this risks losing the influence of t when Phi is high-dimensional, so
+    they use two separate heads h1(Phi) and h0(Phi) on a shared representation, and each sample updates only the head of its observed treatment.'
+  location: Section 4
+  page: 6
+  quote: When the dimension of Φ is high, this risks losing the inﬂuence of t on h during training.
+- id: c6
+  statement: 'Objective: minimize the weighted factual loss (weights w_i = t_i/(2u) + (1-t_i)/(2(1-u)) compensating for treatment group sizes, u the treated proportion) + lambda * model complexity + alpha
+    * empirical IPM between control and treated representations, by SGD on mini-batches; with alpha > 0 this is CFR and with alpha = 0 it is named TARNet.'
+  location: Section 4
+  page: 6
+  quote: We refer to the model minimizing (3) with α > 0 as Counterfactual Regression (CFR) and the variant without balance regularization (α = 0) as Treatment-Agnostic Representation Network (TARNet).
+- id: c7
+  statement: 'Evaluation: real data rarely have ground-truth effects, so the paper uses semi-synthetic IHDP (Hill, 2011) and the Jobs data (LaLonde, 1986), which has randomized and non-randomized components;
+    both are used for training, but only the randomized component can be used for evaluation (ATT error and a ''policy risk'' measure, since PEHE cannot be evaluated on Jobs).'
+  location: Section 5
+  page: 6
+  quote: This alleviates, but does not solve, the issue of a completely balanced dataset being unsuited for our method.
+- id: c8
+  statement: 'Hyperparameter selection: because only one potential outcome is observed, the authors use a nearest-neighbour approximation of PEHE (the observed outcome of the nearest unit in the opposite
+    treatment group as a surrogate counterfactual) for hyperparameter selection on IHDP, the validation objective for early stopping, and validation policy risk on Jobs; the same selection procedure is
+    applied to all methods.'
+  location: Appendix C.1
+  page: 19
+  quote: Standard methods for hyperparameter selection, such as cross-validation, are not generally applicable for estimating the PEHE loss since only one potential outcome is observed (unless the outcome
+    is simulated).
+- id: c9
+  statement: 'Relation to the authors'' earlier work (overlapping authors: Johansson, Shalit, Sontag): the paper builds on Johansson et al. (2016), which bounded the relative error of ridge regression under
+    the reversed treatment assignment; the authors say that relative bound is not informative about the absolute quality of the representation, and here give a bound on the absolute quality.'
+  location: Section 2
+  page: 3
+  quote: Unfortunately, the relative error bound is not at all informative regarding the absolute quality of the representation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    No venue is printed in the arXiv v5 PDF (dated 16 May 2017) and the arXiv comment/journal_ref give none; none recorded. Section numbers are from numbered headings in the PDF; the supplement (proofs,
+    Appendix C) is included in the v5 PDF. Conflict of interest: the paper builds on and compares with BLR and BNN from Johansson et al. (2016), by the same three authors (arxiv-1605.03661); overlapping
+    authors (Shalit, Sontag) also on arxiv-1705.08821. In the RCT setting (t independent of x) the IPM term is 0 and the bound reduces to learning two functions (Introduction). The authors note their theory
+    does not immediately apply to log-loss, which they use for binary outcomes (Section 5). Experiments: IHDP NPCI setting ''A'', 1000 realizations, 63/27/10 splits; an imbalance experiment removes controls
+    with probability q by propensity; Jobs uses the LaLonde experimental sample plus PSID comparison group, 10 splits 56/24/20. Results tables/figures not recorded. Open questions in the Conclusion: choosing
+    alpha, confidence intervals, and integrating hidden confounding or instrumental variables. Related work states ''we only deal with the ignorable case''.'

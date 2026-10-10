@@ -97,3 +97,7 @@ themes:
     tags: [tabular-mlp, tabular-attention, differentiable-trees]
     arxiv_queries:
       - '(abs:tabular) AND (abs:"neural network" OR abs:"deep learning" OR abs:transformer OR abs:MLP OR abs:embedding) AND (cat:cs.LG OR cat:stat.ML)'
+  - name: 因果効果の推定
+    tags: [causal-effect-estimation, causal-meta-learners, treatment-effect-networks]
+    arxiv_queries:
+      - '(abs:"treatment effect" OR abs:"causal effect" OR abs:"causal inference" OR abs:"double machine learning" OR abs:uplift) AND (cat:stat.ML OR cat:cs.LG OR cat:econ.EM OR cat:stat.ME)'

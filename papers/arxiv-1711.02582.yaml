@@ -1,0 +1,93 @@
+id: arxiv-1711.02582
+title: Overlap in Observational Studies with High-Dimensional Covariates
+authors:
+- Alexander D'Amour
+- Peng Ding
+- Avi Feller
+- Lihua Lei
+- Jasjeet Sekhon
+year: 2017
+venue: Journal of Econometrics
+links:
+  arxiv: https://arxiv.org/abs/1711.02582
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 1af4c8b9049c8bc028c8d98c0829e75644e443223142739138434dbc552468dd
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - causal-meta-learners
+proposes:
+- 'Information-theoretic analysis of the strict overlap assumption (propensity score in [eta, 1 - eta]): rewritten as a bound on the likelihood ratio between treated and control covariate distributions,
+  it implies p-free bounds on mean discrepancy, classifier accuracy and KL divergence that become more restrictive as the covariate dimension p grows'
+claims:
+- id: c1
+  statement: 'Motivation: adding covariates is often argued to make unconfoundedness more plausible, but the same intuition has the opposite implication for overlap: the richer the covariates, the closer
+    they come to perfectly predicting treatment for at least some subgroups.'
+  location: Section 1
+  page: 2
+  quote: 'This intuition, however, has the opposite implications for overlap: the richer the set of covariates, the closer these covariates come to perfectly predicting treatment assignment for at least
+    some subgroups.'
+- id: c2
+  statement: Machine-learning covariate adjustment (citing reviews by Chernozhukov et al., 2019 and Athey & Imbens, 2019) can achieve parametric rates under very weak nonparametric assumptions, but the
+    authors state that the cost of this flexibility is that these methods are highly sensitive to poor overlap.
+  location: Section 1
+  page: 3
+  quote: On the other hand, the cost of this nonparametric ﬂexibility is that these methods are highly sensitive to poor overlap.
+- id: c3
+  statement: 'Assumptions: the target is the ATE (results extend to ATT) under unconfoundedness given X_{1:p}; population overlap (0 < e(X) < 1) suffices for nonparametric identification but not for efficient
+    semiparametric estimation, so strict overlap (eta <= e(X) <= 1 - eta) is typically invoked. Citing Khan & Tamer (2010), without outcome restrictions strict overlap is necessary for regular uniformly
+    root-n-consistent semiparametric estimators; this necessity may not hold under other conditions on the potential outcomes, and relaxing it involves non-standard asymptotics where uniform inference is
+    difficult.'
+  location: Section 2
+  page: 4
+  quote: Strict overlap is integral across a range of settings.
+- id: c4
+  statement: 'Theorem 1 / Corollary 1: strict overlap bounds the mean difference between treated and control covariates by the covariance operator norm times a p-free constant; consequently, when p is large
+    either the covariates are highly correlated under both groups or the average mean discrepancy per covariate is small (it goes to zero if the smaller operator norm grows slower than p).'
+  location: Section 3.2
+  page: 6
+  quote: In particular, when p is large, strict overlap implies that either the covariates are highly correlated under both P0 and P1, or the average discrepancy in means across covariates is small.
+- id: c5
+  statement: 'Distinguishability: under strict overlap no classifier can predict treatment with accuracy above 1 - eta (Proposition 1), so there is no consistent classifier of treated vs control covariates
+    as p grows; the KL divergence between the two covariate distributions is bounded by a p-free constant (Proposition 2), so the average unique discriminating information per covariate is O(1/p) (Corollary
+    3).'
+  location: Section 3.3
+  page: 8
+  quote: Asymptotically, by Proposition 1, strict overlap implies that there exists no consistent classiﬁer of P0 against P1 in the large-p limit.
+- id: c6
+  statement: 'Weaker overlap under modeling assumptions: if the propensity depends only on a sufficient summary (sparse or latent-variable propensity models) strict overlap has fewer unique implications;
+    with structural assumptions on outcomes (prognostic score, citing Hansen 2008) or a constant treatment effect (partial linear model), the ATE can be identified and estimated under weaker overlap, e.g.
+    strict overlap holding only with positive probability, because the constant effect justifies extrapolation.'
+  location: Section 4.2
+  page: 11
+  quote: The average treatment eﬀect can be identiﬁed and estimated under weaker overlap conditions if one is willing to make structural assumptions about the data generating process.
+- id: c7
+  statement: 'Trimming: the authors suggest trimming may be needed more often when p is large, but by Proposition 4 the share of units with propensity in [eta~, 1 - eta~] is bounded by the Bayes classifier
+    error divided by eta~, so when covariates classify treatment well a trimming procedure must discard a large proportion of the sample (approaching all of it in the large-p limit if the Bayes classifier
+    is consistent).'
+  location: Section 4.3
+  page: 13
+  quote: In this case, a trimming procedure must throw away a large proportion of the sample.
+- id: c8
+  statement: 'Discussion: strict overlap implies that the information distinguishing treated and control covariate distributions stays fixed as dimension grows; regularization does not avoid these restrictions.
+    The authors note strict overlap is testable for a fixed bound (finite-sample exact tests in separate work) and suggest such empirical validation should be standard practice.'
+  location: Section 5
+  page: 13
+  quote: Importantly, techniques such as regularization do not avoid these restrictions, though they are often necessary for estimation with high-dimensional covariates.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliation: UC Berkeley Statistics (D''Amour now at Google Research; Lei now at Stanford, per page-1 footnotes). Venue: the arXiv comment says ''To appear in Journal of Econometrics''; recorded as
+    ''Journal of Econometrics'' with the first arXiv year (2017); the v4 PDF itself does not name the venue. Purely theoretical (no experiments). Section numbers from numbered headings in the PDF. Remark
+    1 (Section 3.1): for Gaussian covariates in one dimension strict overlap implies P0 = P1, so the authors give no Gaussian examples. Section 4.3 also states that trimming in general changes the estimand
+    unless extra structure such as a constant treatment effect is imposed; a footnote mentions overlap weights (Crump et al.; Li et al.) as smooth trimming that the authors ''anticipate'' their argument
+    extends to. Section 5 notes overlap ''appears to play a key role'' in bias amplification when unconfoundedness fails. Tag note: no registered method-family tag fits a theory-of-assumptions paper; causal-meta-learners
+    is used because the stated implications target ML-based adjustment estimators such as DML (Section 1).'

@@ -1,0 +1,96 @@
+id: arxiv-2107.13346
+title: Doing Great at Estimating CATE? On the Neglected Assumptions in Benchmark Comparisons of Treatment Effect Estimators
+authors:
+- Alicia Curth
+- Mihaela van der Schaar
+year: 2021
+venue: NACI workshop at ICML 2021
+links:
+  arxiv: https://arxiv.org/abs/2107.13346
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 01a312f21175b20691658887814ce46d54da7e62e156aa7365a9a93dfecc29c5
+tags:
+  tasks:
+  - causal-effect-estimation
+  method_families:
+  - causal-meta-learners
+  - treatment-effect-networks
+  - random-forests
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- Case studies on the IHDP and ACIC2016 semi-synthetic benchmarks that compare RF- and NN-based, direct and indirect CATE estimators to show how benchmark DGP assumptions favor some estimators
+- A modified IHDP setting with an additive (linear) treatment effect, and an ACIC2016 check that feeds the DGP's dichotomized covariates to the models
+claims:
+- id: c1
+  statement: 'Main claim: even under ignorability, empirical evaluations on semi-synthetic benchmarks can be misleading if the assumptions of the benchmark DGPs and their interplay with baseline algorithms
+    are not discussed; for IHDP and ACIC2016 the inherent characteristics of the datasets favor some algorithms over others, which the authors say is rarely acknowledged.'
+  location: Abstract
+  page: 1
+  quote: We identify problems with their current use and highlight that the inherent characteristics of the benchmark datasets favor some algorithms over others – a fact that is rarely acknowledged but
+    of immense relevance for interpretation of empirical results.
+- id: c2
+  statement: 'Theoretical argument used to predict benchmark outcomes (citing [1, 9, 23, 25]): for indirect estimators (differencing two outcome regressions) the error is driven by the more complex of the
+    two regression surfaces, while some direct estimators can attain the error rate of the effect function f_tau; direct learners thus have a theoretical advantage whenever f_tau is easier to estimate,
+    which diminishes as f_1 and f_0 become less similar.'
+  location: Section 2.2
+  page: 3
+  quote: direct learners thus have a clear theoretical advantage – which diminishes as f1(x) and f0(x) become less similar (making fτ(x) increasingly complex).
+- id: c3
+  statement: 'Protocol: indirect estimators T-learner RF (TRF), S-learner RF (SRF), TNet and TARNet, and direct estimators Causal Forest and an NN-based R-learner (RNet), implemented with the R package
+    grf and the python package catenets; all models were used off-the-shelf (2000 trees for RFs, NN hyperparameters similar to those of Shalit et al. for IHDP).'
+  location: Section 3
+  page: 3
+  quote: We use all models off-the-shelf; for all RFs this entails using 2000 trees, and all NNs have hyperparameter settings similar to those used in [36] for the IHDP experiments.
+- id: c4
+  statement: 'IHDP reporting problem: the IHDP DGP (setup ''B'' of Hill, 2011) fixes the ATT at 4 across runs but lets CATE vary freely, so the within-test-set spread of CATE ranges between 0.04 and 51.51
+    across the 100 simulations; simply averaging RMSE across runs gives algorithms that perform well mainly in the tails a clear advantage, and the authors suggest it might be more appropriate to use alternatives
+    such as normalized RMSE or paired sample test statistics.'
+  location: Section 3.1.1
+  page: 4
+  quote: The common practice to simply report an average RMSE score across all runs gives algorithms that perform well mainly in the tails a clear advantage; thus it might be more appropriate to consider
+    alternative metrics (e.g. normalized RMSE or paired sample test statistics).
+- id: c5
+  statement: 'IHDP conclusion: the advantage of TARNet over Causal Forest has multiple sources; the IHDP DGP favours NNs over RFs and indirect over direct estimators, and Causal Forest does worse on runs
+    with extreme CATE spread, which get much more weight. When the DGP was changed so that the treatment effect is additive and linear, the relative performance reversed.'
+  location: Section 3.1.2
+  page: 5
+  quote: When tweaking the DGP slightly to create a simple and additive treatment effect, the relative performance reverses, highlighting that performance is indeed determined by the interplay between assumptions
+    underlying a learning algorithm and the DGP.
+- id: c6
+  statement: 'ACIC2016 hidden DGP choice: the simulated response surfaces are built not from the raw covariates but after the 27 count variables are dichotomized by the organizers (Dorie et al.); the authors
+    describe this as the most natural pattern for an RF and found that feeding the transformed data improved the NNs substantially while the RFs did not change, concluding that some aspects of the DGP may
+    inherently favor tree-based methods.'
+  location: Section 3.2.1
+  page: 5
+  quote: We found that the simulated response surfaces are not created using the raw data as input, instead the 27 count variables are dichotomized by [12] before they are used in the DGP.
+- id: c7
+  statement: 'Composition of ACIC2016: of its 77 settings, only 2 have no treatment-effect heterogeneity, 32 low and 43 high heterogeneity, so the authors expect that indirect learners will generally be
+    favoured on this benchmark on average.'
+  location: Section 3.2.2
+  page: 6
+  quote: we would expect that – on average – indirect learners will generally be favoured on this benchmark.
+- id: c8
+  statement: 'Implications: because relative performance can change across DGPs/assumptions, assessments based on a single dataset/DGP such as IHDP capture only one setting, which the authors think warrants
+    reconsidering the label ''state-of-the-art''.'
+  location: Section 4
+  page: 6
+  quote: This means that performance assessments based on a single dataset/DGP (e.g. IHDP) capture only one speciﬁc setting of many conﬁgurations of possible drivers of relative performance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the topic article requested by the user (2026-10-10): causal effect estimation with machine learning (identification assumptions, meta-learners and double/debiased ML, causal trees
+    and forests, Bayesian trees, representation-learning networks, overlap, model selection without ground truth, and benchmarking practice). Carded by a subagent. Results tables not recorded; claims only.
+    Affiliations: University of Cambridge; van der Schaar also UCLA and The Alan Turing Institute. Venue: workshop paper, from the PDF page 1 footer (''Workshop on the Neglected Assumptions in Causal Inference
+    (NACI) at the 38th International Conference on Machine Learning, 2021'') and the arXiv comment. Conflict of interest: the NN estimators are run with the authors'' own catenets implementations, and the
+    theoretical argument and the TARNet-as-S/T-hybrid view come from the authors'' own earlier paper (reference [9] = arxiv-2101.10943). Funding: AC acknowledges funding from AstraZeneca. The tree-boundary-bias
+    explanation for IHDP is introduced as speculation (''let us speculate'') and checked with a figure; figure-only results are not recorded. IHDP-100 is evaluated on the pre-determined 10% hold-out with
+    5 seeds per run; the ACIC2016 case study uses settings 2, 26 and 7 (no, low, high heterogeneity) and only the first 10 of 100 runs (Section 3.2). Section 4 also suggests principled baselines that vary
+    one dimension at a time and experimental knobs, and expects generative benchmarks to favor estimators similar to the generating methods. Hyperparameter effects are listed as future research. The authors
+    acknowledge the study covers only two benchmarks. Critiques the benchmark designed in arxiv-1707.02641 (ACIC2016).'

@@ -76,6 +76,17 @@ claims:
   location: Section 6
   page: 19
   quote: Therefore, the group of variables X(1) and X(2) has a larger importance because of their positive correlation.
+- id: c9
+  statement: In regression, the CART-split criterion can be rewritten as the difference in impurity between a cell and its two children, where the impurity is defined as the variance of the output.
+  location: CART construction and empirical MDI
+  page: 5
+  quote: where the impurity is simply deﬁned as the variance of the output in regression
+- id: c10
+  statement: 'Definition of MDI (Eq. 3): the MDI of variable X(j) computed via a tree is the sum, over all cells split along X(j), of the fraction of observations falling into the cell times the value of
+    the CART-split criterion (impurity decrease) of that split, i.e. the weighted decrease in impurity related to splits along X(j).'
+  location: CART construction and empirical MDI
+  page: 6
+  quote: In other words, the MDI of X(j) computes the weighted decrease in impurity related to splits along the variable X(j).
 results: []
 relations: []
 card:

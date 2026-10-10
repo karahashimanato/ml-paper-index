@@ -74,6 +74,12 @@ claims:
   location: Section 5.3
   page: 18
   quote: should be viewed as an approximate hat matrix only.
+- id: c9
+  statement: For the squared error loss rho(y, f) = |y - f|^2 / 2 (L2Boosting), the negative gradient vector in the generic FGD algorithm becomes the residual vector, so L2Boosting amounts to refitting
+    residuals multiple times.
+  location: Section 3.3.1
+  page: 8
+  quote: Note that the negative gradient vector becomes the residual vector.
 results: []
 relations: []
 card:

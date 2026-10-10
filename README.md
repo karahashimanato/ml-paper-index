@@ -108,6 +108,10 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [異常検知 — 古典的な手法と深層学習、設定の違いと評価の落とし穴](articles/topics/anomaly-detection-classical-vs-deep.md)
 - [ベイズ変化点検知 — BOCPD とその拡張、オフラインの事後分析、評価の作法](articles/topics/bayesian-change-point-detection.md)
 
+数式の解説(高校数学Ⅲまでで読めるように、アルゴリズムの式を出典付きで解説するシリーズ):
+- [0. 準備 — 記号、ベクトル、偏微分、確率](articles/math/00-preliminaries.md)
+- [1. 木モデル — 勾配ブースティングの更新、XGBoost の目的関数、不純度と変数重要度](articles/math/01-tree-models.md)
+
 生成物の入口: [generated/index.md](generated/index.md)
 
 ## 新着論文の候補

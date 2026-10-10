@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "article-frontmatter.schema.json",
   "title": "Article front matter",
-  "description": "YAML front matter of articles/tasks/*.md and articles/methods/*.md. depends_on + written_at let the generator flag cards added after the article was written (Q14).",
+  "description": "YAML front matter of articles/*/*.md. depends_on + written_at let the generator flag cards added after the article was written (Q14). kind 'math' marks the formula-explanation series (articles/math/), whose primer may have no tags.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -20,13 +20,13 @@
       "enum": [
         "task",
         "method",
-        "topic"
+        "topic",
+        "math"
       ]
     },
     "tags": {
       "description": "Tags this article covers. A new card sharing any of these tags and not in depends_on counts as 'not yet reflected'.",
       "type": "array",
-      "minItems": 1,
       "items": {
         "type": "string"
       }
@@ -45,5 +45,25 @@
     "written_by": {
       "type": "string"
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "not": {
+              "const": "math"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "tags": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
 }

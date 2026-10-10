@@ -38,6 +38,7 @@ SPECS = [
          ("Limitation of the information-criterion stopping rule: the degrees of freedom df(m) = trace(B_m) used in the corrected AIC neglect the selection effect of the componentwise base procedure, because B_m depends on the response through the selected components.",
           "Section 5.3",
           "should be viewed as an approximate hat matrix only."),
+         ("For the squared error loss rho(y, f) = |y - f|^2 / 2 (L2Boosting), the negative gradient vector in the generic FGD algorithm becomes the residual vector, so L2Boosting amounts to refitting residuals multiple times.", "Section 3.3.1", "Note that the negative gradient vector becomes the residual vector."),
      ],
      "notes": "Affiliations: ETH Zürich (Bühlmann) and LMU München (Hothorn; paper written while at Universität Erlangen-Nürnberg). Venue from the arXiv journal_ref and the PDF header (Statistical Science 2007, Vol. 22, No. 4, 477-505; DOI 10.1214/07-STS242; discussed paper with rejoinder). The arXiv record year (2008) is used as year. Disclosure: the illustrations use the mboost R package, whose authors are the same two authors (reference [43]: Hothorn, T. and Bühlmann, P. Mboost: Model-based boosting); the tree-based illustration compares mboost's blackboost with the gbm package only visually (Figure 4). The paper is a review; it also covers componentwise linear/spline base learners, variable selection, twin boosting and survival analysis, which are not recorded here."},
 

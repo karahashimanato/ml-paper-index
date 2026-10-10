@@ -74,6 +74,18 @@ claims:
   location: Classification
   page: 8
   quote: Both XGBoost and scikit-learn give better performance than R’s GBM, while XGBoost runs more than 10x faster than scikit-learn.
+- id: c9
+  statement: 'For a fixed tree structure q, the second-order objective decomposes over leaves: the optimal weight of leaf j is w_j* = -(sum of g_i over the leaf) / (sum of h_i over the leaf + lambda) (Eq.
+    5), and the resulting optimal objective (Eq. 6) is used as a scoring function for the quality of the tree structure, like an impurity score for decision trees.'
+  location: Gradient Tree Boosting
+  page: 3
+  quote: Eq (6) can be used as a scoring function to measure the quality of a tree structure q.
+- id: c10
+  statement: 'Split gain (Eq. 7): with I_L and I_R the instance sets of the left and right children (I = I_L union I_R), the loss reduction after a split is one half of [G_L^2/(H_L + lambda) + G_R^2/(H_R
+    + lambda) - G^2/(H + lambda)] minus gamma, where G and H denote sums of g_i and h_i over the respective sets; this formula is usually used in practice to evaluate split candidates.'
+  location: Gradient Tree Boosting
+  page: 3
+  quote: This formula is usually used in practice for evaluating the split candidates.
 results: []
 relations: []
 card:

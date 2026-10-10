@@ -57,6 +57,8 @@ nav:
   - 数式の解説:
       - 0. 準備(記号、ベクトル、偏微分、確率): articles/math/00-preliminaries.md
       - 1. 木モデル: articles/math/01-tree-models.md
+      - 2. 生成モデルと表現学習: articles/math/02-generative-models.md
+      - 3. 不確実性と較正: articles/math/03-uncertainty-and-calibration.md
   - 索引と論文ページ:
       - 索引: generated/index.md
       - 未反映カード: generated/stale.md

@@ -71,6 +71,25 @@ claims:
   location: Experiments
   page: 7
   quote: for higher dimensional latent space the estimates became unreliable.
+- id: c10
+  statement: 'Decomposition of the marginal likelihood (Eq. 1-2): for each datapoint, log p_theta(x) equals the KL divergence of the approximate posterior from the true posterior plus L(theta, phi; x);
+    since the KL divergence is non-negative, L is a (variational) lower bound on the marginal log-likelihood.'
+  location: Section 2.2
+  page: 3
+  quote: The ﬁrst RHS term is the KL divergence of the approximate from the true posterior.
+- id: c11
+  statement: 'Reparameterization in the univariate Gaussian case: if z ~ N(mu, sigma^2), a valid reparameterization is z = mu + sigma * epsilon with an auxiliary noise variable epsilon ~ N(0, 1), so expectations
+    over z can be written as expectations over epsilon and estimated by Monte Carlo in a way that is differentiable in the variational parameters.'
+  location: Section 2.4
+  page: 5
+  quote: 'Take, for example, the univariate Gaussian case: let z ∼p(z|x) = N(µ, σ2).'
+- id: c12
+  statement: 'Closed-form KL in the VAE example (Eq. 10): with a standard Gaussian prior p(z) = N(0, I) and a diagonal Gaussian approximate posterior with mean mu and standard deviation sigma output by
+    the encoder, the KL term can be computed and differentiated without estimation, giving the estimator (1/2) sum_j (1 + log sigma_j^2 - mu_j^2 - sigma_j^2) + (1/L) sum_l log p_theta(x | z^(l)) with z^(l)
+    = mu + sigma ⊙ epsilon^(l).'
+  location: 'Example: Variational Auto-Encoder'
+  page: 5
+  quote: where the KL divergence can be computed and differentiated without estimation
 results: []
 relations: []
 card:

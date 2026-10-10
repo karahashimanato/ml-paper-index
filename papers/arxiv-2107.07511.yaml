@@ -78,6 +78,22 @@ claims:
   location: Conformal Prediction Under Covariate Shift
   page: 20
   quote: All previous conformal methods rely on Theorem 1, which assumes that the incoming test points come from the same distribution as the calibration points.
+- id: c10
+  statement: 'Conformal score in the classification example: s_i = 1 - fhat(X_i)_{Y_i}, one minus the softmax output of the true class, which is high when the model is badly wrong.'
+  location: Section 1 (Conformal Prediction)
+  page: 4
+  quote: The score is high when the softmax output of the true class is low, i.e., when the model is badly wrong.
+- id: c11
+  statement: 'Calibration quantile: qhat is the ceil((n+1)(1-alpha))/n empirical quantile of the calibration scores s_1, ..., s_n, i.e. essentially the 1 - alpha quantile with a small correction.'
+  location: Section 1 (Conformal Prediction)
+  page: 4
+  quote: 'Next comes the critical step: deﬁne ˆq to be the ⌈(n+1)(1−α)⌉/n empirical quantile of s1, ..., sn, where ⌈·⌉is the ceiling function (ˆq is essentially the 1 −α quantile, but with a small correction).'
+- id: c12
+  statement: 'Prediction set: C(X_test) = {y : fhat(X_test)_y >= 1 - qhat}, the classes with a high enough softmax output; this procedure is guaranteed to satisfy the coverage property (1) regardless of
+    the model or the (unknown) data distribution.'
+  location: Section 1 (Conformal Prediction)
+  page: 4
+  quote: Remarkably, this algorithm gives prediction sets that are guaranteed to satisfy (1), no matter what (possibly incorrect) model is used or what the (unknown) distribution of the data is.
 results: []
 relations: []
 card:

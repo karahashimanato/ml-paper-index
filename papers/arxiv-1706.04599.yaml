@@ -70,6 +70,40 @@ claims:
   location: Results
   page: 8
   quote: Any calibration model with tens of thousands (or more) parameters will overﬁt to a small validation set, even when applying regularization.
+- id: c8
+  statement: 'Binned estimate of calibration: predictions are grouped into M interval bins of width 1/M by confidence; for bin B_m, acc(B_m) = (1/|B_m|) sum_{i in B_m} 1(yhat_i = y_i) and conf(B_m) = (1/|B_m|)
+    sum_{i in B_m} phat_i, and a perfectly calibrated model has acc(B_m) = conf(B_m) for all m.'
+  location: Definitions
+  page: 2
+  quote: To estimate the expected accuracy from ﬁnite samples, we group predictions into M interval bins (each of size 1/M) and calculate the accuracy of each bin.
+- id: c9
+  statement: 'ECE (Eq. 3) is the weighted average over bins of the accuracy/confidence difference: ECE = sum_{m=1}^{M} (|B_m|/n) |acc(B_m) - conf(B_m)|, where n is the number of samples; the per-bin difference
+    is the calibration gap shown in reliability diagrams.'
+  location: Definitions
+  page: 3
+  quote: The difference between acc and conf for a given bin represents the calibration gap (red bars in reliability diagrams – e.g. Figure 1).
+- id: c10
+  statement: 'Temperature scaling (Eq. 9): given the logit vector z_i, the new confidence is qhat_i = max_k softmax(z_i / T)^(k), with a single scalar T > 0 shared by all classes.'
+  location: Calibration methods
+  page: 6
+  quote: Temperature scaling, the simplest extension of Platt scaling, uses a single scalar parameter T > 0 for all classes.
+- id: c11
+  statement: 'Effect of T: T > 1 softens the softmax (raises output entropy); as T goes to infinity the probability approaches 1/K, T = 1 recovers the original probability, and as T goes to 0 the probability
+    collapses to a point mass.'
+  location: Calibration methods
+  page: 6
+  quote: T is called the temperature, and it “softens” the softmax (i.e. raises the output entropy) with T > 1.
+- id: c12
+  statement: T is fitted by minimizing NLL on the validation set.
+  location: Calibration methods
+  page: 6
+  quote: T is optimized with respect to NLL on the validation set.
+- id: c13
+  statement: 'Multiclass setup: the network outputs a class prediction yhat_i = argmax_k z_i^(k) and a confidence phat_i = max_k softmax(z_i)^(k), where the softmax is softmax(z_i)^(k) = exp(z_i^(k)) /
+    sum_{j=1}^{K} exp(z_i^(j)).'
+  location: Calibration methods
+  page: 5
+  quote: The network outputs a class prediction ˆyi and conﬁdence score ˆpi for each input xi.
 results: []
 relations: []
 card:

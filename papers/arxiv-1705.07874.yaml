@@ -61,6 +61,35 @@ claims:
   location: Explaining Class Differences
   page: 9
   quote: To match [7], we masked 20% of the pixels chosen to switch the predicted class from 8 to 3 according to the feature attribution given by each method.
+- id: c8
+  statement: 'Additive feature attribution (Definition 1, Eq. 1): the explanation model is a linear function of binary simplified inputs, g(z'') = phi_0 + sum_{i=1}^{M} phi_i z''_i with z'' in {0,1}^M;
+    summing the attributions approximates the original model output f(x).'
+  location: Additive Feature Attribution Methods
+  page: 2
+  quote: Methods with explanation models matching Deﬁnition 1 attribute an effect φi to each feature, and summing the effects of all feature attributions approximates the output f(x) of the original model.
+- id: c9
+  statement: 'Shapley regression values (Eq. 4): phi_i = sum over S subset of F minus {i} of |S|!(|F|-|S|-1)!/|F|! [f_{S union {i}}(x_{S union {i}}) - f_S(x_S)], a weighted average over all subsets of the
+    change in prediction from including feature i.'
+  location: Additive Feature Attribution Methods
+  page: 3
+  quote: 'They are a weighted average of all possible differences:'
+- id: c10
+  statement: 'Local accuracy (Property 1, Eq. 5): f(x) = g(x'') = phi_0 + sum_i phi_i x''_i, i.e. the explanation model matches the original model at the input being explained.'
+  location: Simple Properties Uniquely Determine Additive Feature Attributions
+  page: 4
+  quote: The explanation model g(x′) matches the original model f(x) when x = hx(x′).
+- id: c11
+  statement: 'Theorem 1: only one explanation model satisfies Definition 1 together with local accuracy, missingness and consistency, namely phi_i(f, x) = sum over z'' subset of x'' of |z''|!(M - |z''|
+    - 1)!/M! [f_x(z'') - f_x(z'' minus i)] (Eq. 8), the Shapley values from cooperative game theory.'
+  location: Simple Properties Uniquely Determine Additive Feature Attributions
+  page: 4
+  quote: Theorem 1 follows from combined cooperative game theory results, where the values φi are known as Shapley values [6].
+- id: c12
+  statement: SHAP values are Shapley values of a conditional expectation of the model, f_x(z') = E[f(z) | z_S] with S the non-zero indices of z'; they explain how to get from the base value E[f(z)] (no
+    features known) to the output f(x), averaging over all orderings in which features are added.
+  location: SHAP (SHapley Additive exPlanation) Values
+  page: 4
+  quote: These are the Shapley values of a conditional expectation function of the original model; thus, they are the solution to Equation
 results: []
 relations: []
 card:

@@ -65,6 +65,24 @@ claims:
   location: Experimental setup (Models and datasets)
   page: 5
   quote: Note that we focus on the relative performance change before and after quantization but not the absolute value.
+- id: c8
+  statement: 'Smoothing transformation (Eq. 3): Y = (X diag(s)^-1)(diag(s) W) = X_hat W_hat, dividing input activations by a per-channel factor s and scaling the weights in the reverse direction; s can
+    be fused offline into the previous layer''s parameters.'
+  location: Migrate the quantization difficulty from activations to weights
+  page: 4
+  quote: Considering input X is usually produced from previous linear operations (e.g., linear layers, layer norms, etc.), we can easily fuse the smoothing factor into previous layers’ parameters offline,
+    which doe not incur kernel call overhead from an extra scaling.
+- id: c9
+  statement: 'Extremes of the smoothing factor: s_j = max(|X_j|) gives all activation channels the same maximum (easy to quantize) but pushes all difficulty to the weights, and s_j = 1/max(|W_j|) pushes
+    it all to the activations; the authors state both lead to poor accuracy.'
+  location: Migrate the quantization difficulty from activations to weights
+  page: 4
+  quote: This choice ensures that after the division, all the activation channels will have the same maximum value, which is easy to quantize.
+- id: c10
+  statement: 'Migration strength (Eq. 4): s_j = max(|X_j|)^alpha / max(|W_j|)^(1 - alpha), with the hyperparameter alpha controlling how much difficulty is migrated from activations to weights.'
+  location: Migrate the quantization difficulty from activations to weights
+  page: 4
+  quote: 'Here we introduce a hyper-parameter, migration strength α, to control how much difficulty we want to migrate from activation to weights, using the following equation:'
 results: []
 relations: []
 card:

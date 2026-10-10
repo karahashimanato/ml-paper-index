@@ -70,6 +70,10 @@ claims = P.claims([
    "this shift does not harm the classifier's performance"),
   ("Shift detection for online (streaming) data would need to handle correlation between adjacent time steps (future work).", "Conclusions",
    "shift detection for online data, which would require us to account for and exploit the high degree of correlation between adjacent time steps"),
+  ("MMD (Eq. 2-3): MMD(F, p, q) = ||mu_p - mu_q||_F^2 compares the mean embeddings of two distributions in an RKHS; the unbiased estimate of squared MMD averages the kernel over pairs within the first sample (m(m-1) pairs) and within the second sample (n(n-1) pairs) and subtracts twice the average kernel between the samples (mn pairs).", "Section 3.2", "MMD allows us to distinguish between two probability distributions p and q based on the mean embeddings µp and µq of the distributions in a reproducing kernel Hilbert space F, formally"),
+  ("MMD implementation in the paper: squared exponential kernel exp(-||x - x'||^2 / sigma) with sigma set to the median distance between points in the pooled sample; the p-value is obtained by a permutation test on the kernel matrix.", "Section 3.2", "A p-value can then be obtained by carrying out a permutation test on the resulting kernel matrix."),
+  ("KS statistic (Eq. 4): Z = sup_z |F_p(z) - F_q(z)|, the largest difference between the empirical CDFs of source and target data, which under the null hypothesis follows the Kolmogorov distribution; it is applied to each of the K dimensions separately.", "Section 3.2", "Under the null hypothesis, Z follows the Kolmogorov distribution."),
+  ("Bonferroni aggregation: because the dependence among the K per-dimension tests is unknown, the conservative Bonferroni correction is used, rejecting the null hypothesis if the minimum p-value among all tests is less than alpha/K.", "Section 3.2", "As we cannot make strong assumptions about the (in)dependence among the tests, we rely on a conservative aggregation method, notably the Bonferroni correction [4], which rejects the null hypothesis if the minimum p-value among all tests is less than α/K"),
 ])
 
 write_card({

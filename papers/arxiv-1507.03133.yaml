@@ -69,6 +69,31 @@ claims:
   location: The High-Dimensional Regime
   page: 39
   quote: In fact, Lasso seems to perform marginally better than MIO, as a predictive model for small values of SNR.
+- id: c8
+  statement: 'Linear model and best subset problem (Eq. 1): y = X beta + epsilon with X the n x p model matrix; best subset selection with subset size k minimizes (1/2)||y - X beta||_2^2 subject to ||beta||_0
+    <= k, where ||beta||_0 counts the nonzero entries of beta; the cardinality constraint makes the problem NP-hard (citing [41]).'
+  location: Introduction
+  page: 2
+  quote: The cardinality constraint makes Problem (1) NP-hard [41].
+- id: c9
+  statement: 'Lasso (Eq. 2, Lagrangian form) as a convex surrogate: minimize (1/2)||y - X beta||_2^2 + lambda ||beta||_1 with ||beta||_1 = sum_i |beta_i|; the l1 penalty shrinks coefficients towards zero
+    and produces a sparse solution by setting many coefficients exactly to zero.'
+  location: Brief Context and Background
+  page: 3
+  quote: shrinks the coeﬃcients towards zero and naturally produces a sparse solution by setting many coeﬃcients to be exactly zero.
+- id: c10
+  statement: Problem (2) (Lasso) is a convex quadratic optimization problem with several efficient solvers, which the authors give as an important reason for its popularity.
+  location: Brief Context and Background
+  page: 3
+  quote: Problem (2) is a convex quadratic optimization problem and there are several eﬃcient solvers for it, see for example [44, 23, 29].
+- id: c11
+  statement: 'Shortcoming of Lasso stated by the authors: it gives biased coefficient estimates because the l1 norm penalizes large coefficients more severely than smaller ones, whereas best subset selection
+    includes a chosen variable without shrinkage.'
+  location: Brief Context and Background
+  page: 3
+  quote: 'Lasso leads to biased regression coef-
+
+    ﬁcient estimates, since the ℓ1-norm penalizes the large coeﬃcients more severely than the smaller coeﬃcients.'
 results: []
 relations: []
 card:

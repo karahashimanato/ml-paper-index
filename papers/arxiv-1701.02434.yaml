@@ -77,6 +77,33 @@ claims:
   page: 45
   quote: Although these two diagnostics are powerful means of identifying many pathological target distributions, they are only necessary and not suﬃcient conditions for the validity of the Markov chain
     Monte Carlo estimators.
+- id: c10
+  statement: 'Metropolis-Hastings: a proposal Q(q''|q) followed by a correction; the proposal is accepted with probability a(q''|q) = min(1, Q(q|q'') pi(q'') / (Q(q''|q) pi(q))).'
+  location: Section 2.4
+  page: 15
+  quote: 'The Metropolis-Hastings algorithm is comprised of two steps: a proposal and a correction.'
+- id: c11
+  statement: Random Walk Metropolis uses a Gaussian proposal N(q'|q, Sigma); because it is symmetric, the proposal density cancels and the acceptance probability becomes min(1, pi(q')/pi(q)).
+  location: Section 2.4
+  page: 16
+  quote: density cancels in the acceptance probability, leaving the simple form
+- id: c12
+  statement: 'Hamiltonian: pi(q, p) = exp(-H(q, p)), and H(q, p) = -log pi(p|q) - log pi(q) = K(p, q) + V(q), the kinetic energy (density of the auxiliary momentum, specified by the implementation) plus
+    the potential energy (determined by the target distribution); the value of H at a point is called its energy.'
+  location: Section 3.2
+  page: 25
+  quote: Appealing to the physical analogy, the value of the Hamiltonian at any point in phase space is called the energy at that point.
+- id: c13
+  statement: 'Hamilton''s equations: dq/dt = dH/dp = dK/dp and dp/dt = -dH/dq = -dK/dq - dV/dq; the gradient of the log target density enters through the momentum rather than moving the parameters directly.'
+  location: Section 3.2
+  page: 25
+  quote: Recognizing ∂V/∂q as the gradient of the logarithm of the target density, we see that Hamilton’s equations fulﬁll exactly the intuition introduced in Section 3.1.
+- id: c14
+  statement: 'Leapfrog integrator (momentum distribution independent of position): with step size epsilon, repeat p_{n+1/2} = p_n - (epsilon/2) dV/dq(q_n), q_{n+1} = q_n + epsilon p_{n+1/2}, p_{n+1} = p_{n+1/2}
+    - (epsilon/2) dV/dq(q_{n+1}); this interleaving ensures exact volume preservation on phase space.'
+  location: Section 5.1
+  page: 37
+  quote: Given a time discretization, or step size, ϵ, the leapfrog integrator simulates the exact trajectory as
 results: []
 relations: []
 card:

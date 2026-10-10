@@ -66,6 +66,16 @@ claims:
   location: Quantized Inference (footnote)
   page: 2
   quote: The quantization scheme described here is the one adopted in TensorFlow Lite [5] and we will refer to specific parts of its code to illustrate aspects discussed below.
+- id: c8
+  statement: 'Affine quantization scheme (Eq. 1): real values r are represented by integers q through r = S(q - Z), with a positive real scale S and an integer zero-point Z (both are the quantization parameters).'
+  location: Section 2.1
+  page: 3
+  quote: Equation (1) is our quantization scheme and the constants S and Z are our quantization parameters.
+- id: c9
+  statement: The zero-point Z is the quantized value corresponding to real 0, so that r = 0 is exactly representable; the authors motivate this by zero-padding in efficient operator implementations.
+  location: Section 2.1
+  page: 3
+  quote: This allows us to automatically meet the requirement that the real value r = 0 be exactly representable by a quantized value.
 results: []
 relations: []
 card:

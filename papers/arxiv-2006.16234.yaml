@@ -64,6 +64,17 @@ claims:
   location: Conclusion
   page: 6
   quote: Currently, the best case for feature attribution is when the features that being perturbed are independent to start with.
+- id: c8
+  statement: 'Two value functions for Shapley-based local attribution: the observational conditional expectation v(S) = E[f(X) | X_S = x_S] (Eq. 2) and the interventional conditional expectation v(S) =
+    E[f(x) | do(S)] (Eq. 3), which intervenes on the features by breaking the dependence between features in S and the remaining features.'
+  location: Section 1.1 (Choice of value function)
+  page: 1
+  quote: 'There are two ways the model’s output (f : x ∈R|N|×1 →R1) for a particular sample is used to deﬁne v(S):'
+- id: c9
+  statement: 'Shapley value as an average over orderings (Eq. 1): phi_i = (1/M!) sum over permutations R of [v(S_R union {i}) - v(S_R)], where S_R is the set of players joining before player i.'
+  location: Section 1 (Shapley values)
+  page: 1
+  quote: where R is one possible permutation of the order in which the players join the coalition, SR is the set of players joining the coalition before player i
 results: []
 relations: []
 card:

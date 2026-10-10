@@ -36,6 +36,7 @@ claims = P.claims([
    "This paper lists and discusses 10 popular synthetic datasets and 14 publicly available benchmark datasets"),
   ("Research on retraining models with explicit drift detection has slowed; adaptive models and ensembles have become more important.", "Conclusions",
    "research of retraining models with explicit drift detection has slowed;"),
+  ("Decomposition used to classify drift sources: P_t(X, y) = P_t(X) x P_t(y|X); Source I is a change in P_t(X) with P_t(y|X) unchanged (virtual drift), Source II is a change in P_t(y|X) with P_t(X) unchanged (actual drift, moving the decision boundary), and Source III is a mixture of both.", "Concept drift definition", "concept drift can be triggered by three sources:"),
 ])
 
 write_card({

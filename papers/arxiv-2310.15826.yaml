@@ -73,6 +73,25 @@ claims:
   location: Conclusion
   page: 39
   quote: Finally, we found that more research is required, in particular focusing on the localization and explanation tasks.
+- id: c11
+  statement: 'Sample-based definitions of drift (D_i != D_j for some i, j) depend on the sample rather than the process: two samples from the same source over the same period with different sampling frequencies
+    may differ in whether they show drift; the survey therefore models time T with a distribution P_T and data distributions D_t (a drift process).'
+  location: A Formal Model of Concept Drift
+  page: 3
+  quote: In particular, it might happen that if we take two samples from the same data source over the same period of time using different sampling frequencies, one sample will have concept drift and the
+    other will not.
+- id: c12
+  statement: 'Drift as dependence between time and data (Theorem 1): for (T, X) drawn from the holistic distribution, D_t has no drift if and only if T and X are statistically independent; drift exists
+    if P[T in W, X in A] != P[T in W] P[X in A] for some time window W and set A.'
+  location: A Formal Model of Concept Drift
+  page: 4
+  quote: 'One of the key findings however, which allows the development of new methods, is that drift can equivalently be formulated as data X and time T are dependent, i.e., not statistically independent:'
+- id: c13
+  statement: 'Drift detection as a statistical test: the null hypothesis is that D_t = D_s for all time points t and s; a type I error is a false alarm (no drift but detected) and a type II error is a missed
+    drift; since avoiding type II errors for arbitrarily mild drifts is not feasible, the survey focuses on controlling the type I error.'
+  location: Drift Detection
+  page: 7
+  quote: A type I error occurs if there is no drift but we detect one (false alarm), and a type II error occurs if there is drift but we do not detect it.
 results: []
 relations: []
 card:

@@ -82,6 +82,30 @@ claims:
   location: Section 5.4
   page: 26
   quote: A principled analysis of when to use (and combine) variational inference and MCMC would have both theoretical and practical impact in the ﬁeld.
+- id: c10
+  statement: 'KL decomposition (Eq. 11-12): with expectations under q(z), KL(q(z)||p(z|x)) = E[log q(z)] - E[log p(z|x)] = E[log q(z)] - E[log p(z,x)] + log p(x), which reveals the dependence of the KL
+    on the evidence log p(x).'
+  location: Section 2.2
+  page: 6
+  quote: This reveals its dependence on log p(x).
+- id: c11
+  statement: 'ELBO as a lower bound (Eq. 13-14): ELBO(q) = E[log p(z,x)] - E[log q(z)], and log p(x) = KL(q(z)||p(z|x)) + ELBO(q); since the KL divergence is non-negative, log p(x) >= ELBO(q) for any q(z),
+    so maximizing the ELBO is equivalent to minimizing the KL divergence.'
+  location: Section 2.2
+  page: 7
+  quote: The bound then follows from the fact that KL (·) ≥0 (Kullback and Leibler, 1951).
+- id: c12
+  statement: 'The ELBO can be rewritten as E[log p(x|z)] - KL(q(z)||p(z)): an expected likelihood term that favours latent configurations explaining the data, and a negative divergence from the prior that
+    favours densities close to the prior.'
+  location: Section 2.2
+  page: 7
+  quote: Thus the variational objective mirrors the usual balance between likelihood and prior.
+- id: c13
+  statement: 'CAVI coordinate update (Eq. 17-18): holding the other mean-field factors fixed, the optimal q_j(z_j) is proportional to exp(E_{-j}[log p(z_j | z_{-j}, x)]), equivalently proportional to exp(E_{-j}[log
+    p(z_j, z_{-j}, x)]), with the expectation over the fixed factors of the other variables.'
+  location: Section 2.4
+  page: 9
+  quote: The optimal qj(zj) is then proportional to the exponentiated expected log of the complete conditional,
 results: []
 relations: []
 card:

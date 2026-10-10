@@ -203,6 +203,7 @@ SPECS = [
       "Overall Int8 inference is slightly slower but close to the millisecond latency per token compared to 16-bit inference."),
      ("Limitations: only the Int8 data type (no FP8), only models up to 175B, no Int8 for the attention function, and only inference (not training or fine-tuning).", "Discussion and limitations",
       "The main limitation of our work is that our analysis is solely on the Int8 data type, and we do not study 8-bit ﬂoating-point (FP8) data types."),
+         ("Absmax quantization: X_i8 = round(127 X_f16 / max_ij |X_f16,ij|), i.e. scaling into [-127, 127] by 127 divided by the absolute maximum (infinity norm) of the entire tensor.", "Section 2.1", "Absmax quantization scales inputs into the 8-bit range [−127, 127] by multiplying with sxf16 which is 127 divided by the absolute maximum of the entire tensor."),
    ],
    "notes": "PDF states: 36th Conference on Neural Information Processing Systems (NeurIPS 2022). Quantization of weights and hidden-state inputs of linear layers is done on the fly (absmax / vector-wise), with no calibration dataset; the outlier threshold alpha = 6.0 was chosen from perplexity degradation analysis. "
             "Perplexity evaluation on NVIDIA A40 GPUs; matrix-multiplication speed benchmarks compare cuBLASLt Int8 with cuBLAS 16-bit, and the authors note default PyTorch/NVIDIA quantization kernels slow down most matrix multiplications. "

@@ -83,6 +83,12 @@ claims:
   location: Section 3.2.9
   page: 15
   quote: It would be possible to construct also an artificial example where the tail would look thin (low Pareto ˆk) for small S with large probability, while the true tail is thick (high Pareto ˆk).
+- id: c10
+  statement: 'Self-normalized importance sampling (Eq. 1): E_p[h] is estimated by sum_s r_s h(theta_s) / sum_s r_s with importance ratios r_s = p(theta_s)/g(theta_s), using draws from a proposal g; when
+    g poorly approximates the target, the ratios can have a heavy right tail and the estimate can be unstable, sometimes with infinite variance.'
+  location: Introduction
+  page: 2
+  quote: When the proposal distribution is a poor approximation to the target distribution, the distribution of importance ratios can have a heavy right tail.
 results: []
 relations: []
 card:

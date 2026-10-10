@@ -65,6 +65,20 @@ claims:
   page: 8
   quote: While our and other works have made some progress on understanding the relative importance of input features in a deep network, we have not addressed the interactions between the input features
     or the logic employed by the network.
+- id: c8
+  statement: 'Integrated Gradients (Eq. 1): for input x and baseline x'', IntegratedGrads_i(x) = (x_i - x''_i) x integral from alpha = 0 to 1 of dF(x'' + alpha (x - x''))/dx_i d alpha, i.e. the path integral
+    of the gradients along the straight line from the baseline to the input.'
+  location: 'Section 3 (Our Method: Integrated Gradients)'
+  page: 3
+  quote: Speciﬁcally, integrated gradients are deﬁned as the path intergral of the gradients along the straightline path from the baseline x′ to the input x.
+- id: c9
+  statement: 'Completeness (Proposition 1): if F is differentiable almost everywhere, sum_{i=1}^{n} IntegratedGrads_i(x) = F(x) - F(x''), an instance of the fundamental theorem of calculus for path integrals;
+    with a baseline whose prediction is near zero, the attributions distribute the output to the input features.'
+  location: 'Section 3 (Our Method: Integrated Gradients)'
+  page: 3
+  quote: 'This is formalized by the proposition below, which instanti-
+
+    ates the fundamental theorem of calculus for path integrals.'
 results: []
 relations: []
 card:

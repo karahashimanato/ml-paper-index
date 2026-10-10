@@ -66,6 +66,11 @@ claims:
   location: Discussion and limitations
   page: 10
   quote: The main limitation of our work is that our analysis is solely on the Int8 data type, and we do not study 8-bit ﬂoating-point (FP8) data types.
+- id: c8
+  statement: 'Absmax quantization: X_i8 = round(127 X_f16 / max_ij |X_f16,ij|), i.e. scaling into [-127, 127] by 127 divided by the absolute maximum (infinity norm) of the entire tensor.'
+  location: Section 2.1
+  page: 3
+  quote: Absmax quantization scales inputs into the 8-bit range [−127, 127] by multiplying with sxf16 which is 127 divided by the absolute maximum of the entire tensor.
 results: []
 relations: []
 card:

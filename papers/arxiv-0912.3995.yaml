@@ -79,6 +79,18 @@ claims:
   location: Section 6
   page: 8
   quote: In summary, GP-UCB performs at least on par with the existing approaches which are not equipped with regret bounds.
+- id: c9
+  statement: 'GP posterior with noisy observations (Eq. 1-2): for y_t = f(x_t) + eps_t with i.i.d. N(0, sigma^2) noise, the posterior over f is again a GP with mean mu_T(x) = k_T(x)^T (K_T + sigma^2 I)^-1
+    y_T, covariance k_T(x, x'') = k(x, x'') - k_T(x)^T (K_T + sigma^2 I)^-1 k_T(x''), and variance sigma_T^2(x) = k_T(x, x), where k_T(x) = [k(x_1, x) ... k(x_T, x)]^T and K_T is the kernel matrix.'
+  location: Section 2
+  page: 3
+  quote: A major advantage of working with GPs is the existence of simple analytic formulae for mean and covariance of the posterior distribution, which allows easy implementation of algorithms.
+- id: c10
+  statement: 'GP-UCB rule (Eq. 6): x_t = argmax_{x in D} mu_{t-1}(x) + beta_t^{1/2} sigma_{t-1}(x), preferring both uncertain points (large sigma) and points with high expected reward (large mu), which
+    implicitly negotiates the exploration-exploitation tradeoff; beta_t is specified depending on the context.'
+  location: Section 3
+  page: 4
+  quote: it implicitly negotiates the exploration–exploitation tradeoﬀ.
 results: []
 relations: []
 card:

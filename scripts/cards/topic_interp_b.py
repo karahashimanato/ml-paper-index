@@ -255,6 +255,8 @@ SPECS = [
      ("Limitation: the best case for feature attribution is when the perturbed features are independent, in which case observational "
       "and interventional attributions coincide.", "Conclusion",
       "Currently, the best case for feature attribution is when the features that being perturbed are independent to start with."),
+         ("Two value functions for Shapley-based local attribution: the observational conditional expectation v(S) = E[f(X) | X_S = x_S] (Eq. 2) and the interventional conditional expectation v(S) = E[f(x) | do(S)] (Eq. 3), which intervenes on the features by breaking the dependence between features in S and the remaining features.", "Section 1.1 (Choice of value function)", "There are two ways the model’s output (f : x ∈R|N|×1 →R1) for a particular sample is used to deﬁne v(S):"),
+         ("Shapley value as an average over orderings (Eq. 1): phi_i = (1/M!) sum over permutations R of [v(S_R union {i}) - v(S_R)], where S_R is the set of players joining before player i.", "Section 1 (Shapley values)", "where R is one possible permutation of the order in which the players join the coalition, SR is the set of players joining the coalition before player i"),
    ],
    "notes": ("All analysis is on linear models (linear regression, logistic regression, Lasso, Elastic Net). Co-authored by Scott Lundberg "
              "(SHAP author). Explicitly responds to Kumar et al. 2020 (arxiv-2002.11097), arguing the two value functions are each "

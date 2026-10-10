@@ -114,6 +114,11 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [2. 生成モデルと表現学習 — VAE の ELBO、拡散モデルのノイズ、InfoNCE](articles/math/02-generative-models.md)
 - [3. 不確実性と較正 — ソフトマックス、温度スケーリング、ECE、分割共形予測](articles/math/03-uncertainty-and-calibration.md)
 - [4. ベイズ系 — ガウス過程の事後分布、期待改善量、ベイズ的オンライン変化点検知](articles/math/04-bayes.md)
+- [5. 線形モデルとカーネル — 最小二乗、Lasso と最良部分集合、カーネルリッジ回帰、SVM、GP-UCB](articles/math/05-linear-and-kernel.md)
+- [6. 近似推論 — ELBO と CAVI、メトロポリス法と HMC、R-hat、重要度比と SBC](articles/math/06-approximate-inference.md)
+- [7. ドリフト検知と統計的検定 — 分布の変化の定義、KS 検定、Bonferroni 補正、MMD](articles/math/07-drift-and-tests.md)
+- [8. 説明手法 — シャープレイ値と SHAP、LIME、積分勾配](articles/math/08-explanations.md)
+- [9. 量子化 — アフィン量子化、丸めとクリッピング、STE、GPTQ、SmoothQuant](articles/math/09-quantization.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

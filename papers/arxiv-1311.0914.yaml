@@ -68,6 +68,17 @@ claims:
   location: Experimental Results
   page: 10
   quote: We chose the balancing parameter C and kernel parameter γ by 5-fold cross validation on a grid of points
+- id: c8
+  statement: 'Kernel SVM dual (Eq. 1): with labels y_i in {1, -1}, training solves min_alpha f(alpha) = (1/2) alpha^T Q alpha - e^T alpha subject to 0 <= alpha <= C, where Q_ij = y_i y_j K(x_i, x_j), e
+    is the all-ones vector and C balances loss and regularization in the primal; the bias term is ignored.'
+  location: Section 3
+  page: 3
+  quote: 'the main task in training the kernel SVM is to solve the following quadratic optimization problem:'
+- id: c9
+  statement: 'Decision value: with the optimal dual solution alpha*, the decision value for a test point x is sum_{i=1}^{n} alpha*_i y_i K(x, x_i).'
+  location: Section 3
+  page: 3
+  quote: the decision value for a test data x can be computed by
 results: []
 relations: []
 card:

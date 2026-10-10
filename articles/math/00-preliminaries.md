@@ -27,6 +27,11 @@ written_by: claude-opus-5-5 via Claude Code
 | [2. 生成モデルと表現学習](02-generative-models.md) | VAE の ELBO と再パラメータ化、拡散モデルのノイズの式、InfoNCE と NT-Xent | [オートエンコーダ](../methods/autoencoders.md)、[拡散モデル](../methods/diffusion-models.md)、[対照学習・自己教師あり表現学習](../methods/self-supervised-representation-learning.md) |
 | [3. 不確実性と較正](03-uncertainty-and-calibration.md) | ソフトマックス、温度スケーリング、ECE、分割共形予測の分位点と保証 | [不確実性の推定と較正](../topics/uncertainty-and-calibration.md) |
 | [4. ベイズ系](04-bayes.md) | ガウス過程の事後分布、期待改善量(EI)と獲得関数、BOCPD のラン長の再帰式とハザード関数 | [ベイズ最適化とハイパーパラメータ最適化](../methods/bayesian-optimization.md)、[ベイズ変化点検知](../topics/bayesian-change-point-detection.md) |
+| [5. 線形モデルとカーネル](05-linear-and-kernel.md) | 最小二乗、Lasso と最良部分集合選択、カーネルリッジ回帰、SVM の双対問題、ノイズありのガウス過程と GP-UCB | [ベイズ最適化とハイパーパラメータ最適化](../methods/bayesian-optimization.md) |
+| [6. 近似推論](06-approximate-inference.md) | ELBO と CAVI、スコア関数の勾配、メトロポリス・ヘイスティングス法、HMC とリープフロッグ法、R-hat、重要度比、SBC | [近似ベイズ推論とその診断](../methods/approximate-inference-and-diagnostics.md) |
+| [7. ドリフト検知と統計的検定](07-drift-and-tests.md) | ドリフトの定義、時刻とデータの独立、KS 統計量、Bonferroni 補正、MMD | [概念ドリフトとデータシフトの検出](../tasks/drift-detection.md) |
+| [8. 説明手法](08-explanations.md) | シャープレイ値と SHAP、観測的と介入的の価値関数、LIME の目的関数、積分勾配と完全性 | [モデルの解釈可能性](../topics/model-interpretability.md) |
+| [9. 量子化](09-quantization.md) | アフィン量子化、量子化と逆量子化、丸め誤差とクリッピング、absmax、STE、GPTQ の目的、SmoothQuant | [量子化による影響](../topics/quantization-effects.md) |
 
 この記事には論文の主張は含まれない。高校数学で学ぶ内容の確認と、そこから一歩進んだ道具の説明である。
 

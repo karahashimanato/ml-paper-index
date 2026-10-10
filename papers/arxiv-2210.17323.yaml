@@ -63,6 +63,12 @@ claims:
   location: Ethics statement
   page: 10
   quote: We believe a thorough study of the impact of compression upon secondary measures, and in particular bias effects (Bender et al., 2021) is warranted, and may be rendered easier through our work.
+- id: c8
+  statement: 'Layer-wise objective (Eq. 1): for a linear layer with weights W and inputs X from a small set of m data points, find quantized weights W_hat minimizing ||W X - W_hat X||_2^2, the squared error
+    relative to the full-precision layer output; the quantization grid is fixed beforehand.'
+  location: Section 3
+  page: 3
+  quote: by performing quantization layer-by-layer, solving a corresponding reconstruction problem for each layer.
 results: []
 relations: []
 card:

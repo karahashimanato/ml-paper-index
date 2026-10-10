@@ -73,6 +73,23 @@ claims:
   location: Main results and their consequences
   page: 8
   quote: Cross-validation or other types of unbiased risk estimation are natural choices, however, it is at this point unclear how to achieve such behavior in the distributed setting we study
+- id: c8
+  statement: 'KRR estimator (Eq. 2): fhat = argmin over f in H of (1/N) sum_{i=1}^{N} (f(x_i) - y_i)^2 + lambda ||f||_H^2 with lambda > 0, i.e. least-squares loss plus a squared Hilbert-norm penalty; the
+    paper calls it a natural generalization of ordinary ridge regression to the non-parametric setting.'
+  location: Section 2.2
+  page: 4
+  quote: It is a natural generalization of the ordinary ridge regression estimate [13] to the non-parametric setting.
+- id: c9
+  statement: 'Representer theorem: any solution of the KRR program lies in the linear span of the kernel functions K(., x_i), so computing the estimate reduces to an N-dimensional quadratic program involving
+    the N^2 kernel-matrix entries.'
+  location: Section 2.2
+  page: 4
+  quote: By the representer theorem for reproducing kernel Hilbert spaces [31], any solution to the KRR program (2) must belong to the linear span of the kernel functions {K(·, xi), i = 1, . . . , N}.
+- id: c10
+  statement: 'Cost of a standard KRR implementation: the kernel matrix must be inverted, costing O(N^3) time and O(N^2) memory.'
+  location: Introduction
+  page: 1
+  quote: the kernel matrix must be inverted, which requires costs O(N 3) and O(N 2) in time and
 results: []
 relations: []
 card:

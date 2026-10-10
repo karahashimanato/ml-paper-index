@@ -35,6 +35,8 @@ SPECS = [
          ("Affiliation/product disclosure: the authors are at Google, and the described scheme is the one adopted in TensorFlow Lite.",
           "Quantized Inference (footnote)",
           "The quantization scheme described here is the one adopted in TensorFlow Lite [5] and we will refer to specific parts of its code to illustrate aspects discussed below."),
+         ("Affine quantization scheme (Eq. 1): real values r are represented by integers q through r = S(q - Z), with a positive real scale S and an integer zero-point Z (both are the quantization parameters).", "Section 2.1", "Equation (1) is our quantization scheme and the constants S and Z are our quantization parameters."),
+         ("The zero-point Z is the quantized value corresponding to real 0, so that r = 0 is exactly representable; the authors motivate this by zero-padding in efficient operator implementations.", "Section 2.1", "This allows us to automatically meet the requirement that the real value r = 0 be exactly representable by a quantized value."),
      ],
      "notes": "Experiments are on image models (ImageNet classification, COCO detection); no image-task tag exists, so only model-compression is used as task."},
 
@@ -67,6 +69,10 @@ SPECS = [
          ("Failure mode in BERT-base: a few activation tensors have extreme differences in dynamic range; to make PTQ work, these layers were identified with the debugging procedure and kept in 16 bit.",
           "Section 3.6 Experiments",
           "For BERT-base, we observe that a few activation tensors have extreme differences in their dynamic ranges."),
+         ("Uniform affine quantization (Eq. 4-7): with scale s, zero-point z and bit-width b, x_int = clamp(round(x/s) + z; 0, 2^b - 1), de-quantization x_hat = s(x_int - z), so q(x; s, z, b) = s[clamp(round(x/s) + z; 0, 2^b - 1) - z]; clamp(x; a, c) returns a below a, c above c, and x otherwise.", "Section 2.2", "To approximate the real-valued input x we perfrom a de-quantization step:"),
+         ("Clipping vs rounding error: values outside [q_min, q_max] = [-s z, s(2^b - 1 - z)] are clipped; increasing the scale factor expands the range and reduces clipping error but increases rounding error, which lies in [-s/2, s/2].", "Section 2.2", "If we want to reduce the clipping error we can expand the quantization range by increasing the scale factor."),
+         ("Symmetric quantization restricts the zero-point to 0 (x_hat = s x_int), which reduces computational overhead but restricts the mapping, so signed or unsigned integer grids matter.", "Section 2.2.1", "The symmetric quantizer restricts the zero-point to 0."),
+         ("Straight-through estimator (Eq. 36): the gradient of round-to-nearest is zero or undefined everywhere, making gradient-based training impossible, so QAT approximates d round(y)/dy = 1 (citing Bengio et al. 2013).", "Section 4.1", "This poses an issue because the gradient of the round-to-nearest operation in equation (4) is either zero or undeﬁned everywhere, which makes gradient-based training impossible."),
      ],
      "notes": "All authors are at Qualcomm AI Research (an initiative of Qualcomm Technologies, Inc.), a hardware vendor; the paper is a guide with its own pipelines rather than an independent comparison."},
 
@@ -99,6 +105,7 @@ SPECS = [
          ("The authors note that the study focused on standard 'leading accuracy' metrics such as perplexity, and that a thorough study of compression's impact on secondary measures, in particular bias effects, is warranted.",
           "Ethics statement",
           "We believe a thorough study of the impact of compression upon secondary measures, and in particular bias effects (Bender et al., 2021) is warranted, and may be rendered easier through our work."),
+         ("Layer-wise objective (Eq. 1): for a linear layer with weights W and inputs X from a small set of m data points, find quantized weights W_hat minimizing ||W X - W_hat X||_2^2, the squared error relative to the full-precision layer output; the quantization grid is fixed beforehand.", "Section 3", "by performing quantization layer-by-layer, solving a corresponding reconstruction problem for each layer."),
      ],
      "notes": "PDF states: Published as a conference paper at ICLR 2023. Speedups reported in the abstract are measured on NVIDIA A100 and A6000 GPUs with the authors' custom kernels."},
 
@@ -131,6 +138,9 @@ SPECS = [
          ("The authors state that they focus on the relative performance change before and after quantization, not on absolute values.",
           "Experimental setup (Models and datasets)",
           "Note that we focus on the relative performance change before and after quantization but not the absolute value."),
+         ("Smoothing transformation (Eq. 3): Y = (X diag(s)^-1)(diag(s) W) = X_hat W_hat, dividing input activations by a per-channel factor s and scaling the weights in the reverse direction; s can be fused offline into the previous layer's parameters.", "Migrate the quantization difficulty from activations to weights", "Considering input X is usually produced from previous linear operations (e.g., linear layers, layer norms, etc.), we can easily fuse the smoothing factor into previous layers’ parameters offline, which doe not incur kernel call overhead from an extra scaling."),
+         ("Extremes of the smoothing factor: s_j = max(|X_j|) gives all activation channels the same maximum (easy to quantize) but pushes all difficulty to the weights, and s_j = 1/max(|W_j|) pushes it all to the activations; the authors state both lead to poor accuracy.", "Migrate the quantization difficulty from activations to weights", "This choice ensures that after the division, all the activation channels will have the same maximum value, which is easy to quantize."),
+         ("Migration strength (Eq. 4): s_j = max(|X_j|)^alpha / max(|W_j|)^(1 - alpha), with the hyperparameter alpha controlling how much difficulty is migrated from activations to weights.", "Migrate the quantization difficulty from activations to weights", "Here we introduce a hyper-parameter, migration strength α, to control how much difficulty we want to migrate from activation to weights, using the following equation:"),
      ],
      "notes": "PDF states: Proceedings of the 40th International Conference on Machine Learning (PMLR 202, 2023). Three authors are affiliated with NVIDIA; one evaluated backend is NVIDIA's FasterTransformer, and all speed experiments are on NVIDIA A100 80GB GPU servers. GLM-130B was evaluated on a different task set because some benchmarks appear in its training set."},
 

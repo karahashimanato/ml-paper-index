@@ -90,6 +90,13 @@ claims:
   page: 18
   quote: Lastly, while TabR is significantly more efficient than prior retrieval-based tabular DL models, the retrieval module R still causes overhead compared to purely parametric models, so TabR may not
     scale to truly large datasets as-is.
+- id: c10
+  statement: 'Similarity and value modules: the vanilla-attention baseline uses S(x, x_i) = W_Q(x)^T W_K(x_i) d^{-1/2} and V = W_V(x_i) (Eq. 1); Step-2 removes the queries and uses the negative squared
+    L2 distance S(x, x_i) = -||W_K(x) - W_K(x_i)||^2 d^{-1/2} with V = W_Y(y_i) + W_V(x_i) (Eq. 3); the module aggregates the values of the top-m nearest candidates according to S.'
+  location: Section 3.2
+  page: 5
+  quote: 'Empirically, we observed that removing the notion of queries (i.e. removing WQ) and using the L2 distance instead of the dot product significantly improves performance on several datasets in Table
+    2:'
 results: []
 relations: []
 card:

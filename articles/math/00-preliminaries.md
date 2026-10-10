@@ -33,6 +33,7 @@ written_by: claude-opus-5-5 via Claude Code
 | [8. 説明手法](08-explanations.md) | シャープレイ値と SHAP、観測的と介入的の価値関数、LIME の目的関数、積分勾配と完全性 | [モデルの解釈可能性](../topics/model-interpretability.md) |
 | [9. 量子化](09-quantization.md) | アフィン量子化、量子化と逆量子化、丸め誤差とクリッピング、absmax、STE、GPTQ の目的、SmoothQuant | [量子化による影響](../topics/quantization-effects.md) |
 | [10. 知識蒸留と GNN](10-distillation-and-gnn.md) | 温度付きソフトマックスと蒸留の勾配、T² の補正、ヒント損失、GCN の層とその導出、SGC、過平滑化、メッセージパッシング、GAT の注意、GIN と WL 検定、エッジ同質性 | [知識蒸留と枝刈り](../methods/knowledge-distillation-and-pruning.md)、[グラフニューラルネットワーク](../methods/graph-neural-networks.md) |
+| [11. 表データの深層学習](11-tabular-deep-learning.md) | sparsemax と entmax、NODE の微分可能な決定木、TabNet のマスクと事前スケール、DCN V2 の交差層、区分線形の符号化と周期的な埋め込み、TabR の近傍の重み、SCARF の置き換え | [表データの深層学習モデル](../methods/tabular-deep-learning-models.md) |
 
 この記事には論文の主張は含まれない。高校数学で学ぶ内容の確認と、そこから一歩進んだ道具の説明である。
 

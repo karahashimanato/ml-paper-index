@@ -81,6 +81,18 @@ claims:
   location: Section 4.2
   page: 8
   quote: Another observation is that Gumbel-Softmax is unable to learn deep architectures with both constant and annealed temperature schedules.
+- id: c10
+  statement: 'Oblivious decision tree (Eq. 1): a depth-d ODT with splitting features f_1..f_d and thresholds b_1..b_d outputs h(x) = R[1(f_1(x) - b_1), ..., 1(f_d(x) - b_d)], where 1 is the Heaviside function
+    and R is a table of 2^d responses indexed by the binary comparison results.'
+  location: Section 3.1
+  page: 3
+  quote: 'In this notation, the tree output is deﬁned as:'
+- id: c11
+  statement: 'Differentiable relaxation (Eq. 2): the feature choice becomes a weighted sum fhat_i(x) = sum_j x_j entmax_alpha(F_ij) with weights from entmax over a learnable feature-selection matrix F,
+    and the Heaviside comparison becomes c_i(x) = sigma_alpha((f_i(x) - b_i)/tau_i), with sigma_alpha(x) = entmax_alpha([x, 0]) a two-class entmax and learnable thresholds b_i and scales tau_i.'
+  location: Section 3.1
+  page: 4
+  quote: with weights computed as entmax over the learnable feature selection matrix
 results: []
 relations: []
 card:

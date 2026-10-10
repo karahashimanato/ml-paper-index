@@ -126,6 +126,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [8. 説明手法 — シャープレイ値と SHAP、LIME、積分勾配](articles/math/08-explanations.md)
 - [9. 量子化 — アフィン量子化、丸めとクリッピング、STE、GPTQ、SmoothQuant](articles/math/09-quantization.md)
 - [10. 知識蒸留と GNN — 温度と T² の補正、ヒント損失、GCN の導出、注意、GIN と WL、同質性](articles/math/10-distillation-and-gnn.md)
+- [11. 表データの深層学習 — 微分可能な木と entmax、TabNet のマスク、交差層、数値の埋め込み、近傍の重み](articles/math/11-tabular-deep-learning.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

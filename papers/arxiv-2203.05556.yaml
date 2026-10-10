@@ -92,6 +92,14 @@ claims:
   location: Conclusion & Future work
   page: 10
   quote: For example, it is still to be explained how exactly the discussed embedding modules help optimization on the fundamental level.
+- id: c10
+  statement: 'PLE formula (Eq. 1): with bin edges b_0 < ... < b_T, PLE(x) = [e_1, ..., e_T] where e_t = 0 if x < b_{t-1} and t > 1, e_t = 1 if x >= b_t and t < T, and e_t = (x - b_{t-1}) / (b_t - b_{t-1})
+    otherwise.'
+  location: Section 3.2
+  page: 4
+  quote: 'where PLE stands for “peicewise linear
+
+    encoding”.'
 results: []
 relations: []
 card:

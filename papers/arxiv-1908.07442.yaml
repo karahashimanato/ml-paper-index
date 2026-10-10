@@ -89,6 +89,12 @@ claims:
   location: Appendix (Ablation studies)
   page: 10
   quote: On the other hand, increasing these parameters beyond some value causes optimization issues and do not yield performance beneﬁts.
+- id: c10
+  statement: 'Mask and prior scale: M[i] = sparsemax(P[i-1] . h_i(a[i-1])) is applied multiplicatively to the features (M[i] . f), each row of M[i] sums to 1, and the prior scale P[i] = prod_{j=1}^{i} (gamma
+    - M[j]) records how much each feature has been used in previous steps; gamma = 1 enforces a feature to be used at only one step, and larger gamma allows more reuse.'
+  location: TabNet for Tabular Learning
+  page: 3
+  quote: is the prior scale term, denoting how much a particular feature
 results: []
 relations: []
 card:

@@ -85,6 +85,12 @@ claims:
   location: Section 8 (Practical Learnings)
   page: 11
   quote: We observed that using low-rank DCN with rank (input size)/4 consistently preserved the accuracy of a full-rank DCN-V2.
+- id: c10
+  statement: 'Cross layer (Eq. 1): x_{l+1} = x_0 ⊙ (W_l x_l + b_l) + x_l, where x_0 is the base (embedding) layer containing the original features of order 1, x_l and x_{l+1} are the input and output of
+    the (l+1)-th cross layer, W_l is a learned d x d weight matrix and b_l a learned bias vector.'
+  location: Section 3.2
+  page: 3
+  quote: The core of DCN-V2 lies in the cross layers that create explicit feature crosses.
 results: []
 relations: []
 card:

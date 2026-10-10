@@ -26,6 +26,7 @@
 - [articles/methods/gradient-boosted-trees.md](../articles/methods/gradient-boosted-trees.md): `arxiv-1911.04706`, `arxiv-2003.06505`, `arxiv-2106.01342`, `arxiv-2106.11189`, `arxiv-2110.01889`, `arxiv-2203.05556`, `arxiv-2301.02819`, `arxiv-2305.18446`, `arxiv-2307.14338`, `arxiv-2402.01502`, `arxiv-2407.00956`
 - [articles/methods/graph-neural-networks.md](../articles/methods/graph-neural-networks.md): なし
 - [articles/methods/knowledge-distillation-and-pruning.md](../articles/methods/knowledge-distillation-and-pruning.md): なし
+- [articles/methods/moe-and-state-space-models.md](../articles/methods/moe-and-state-space-models.md): なし
 - [articles/methods/random-forests-and-decision-trees.md](../articles/methods/random-forests-and-decision-trees.md): `arxiv-1504.01132`, `arxiv-1505.01866`, `arxiv-1604.04173`, `arxiv-1706.03461`, `arxiv-1707.02641`, `arxiv-1904.06019`, `arxiv-1905.03222`, `arxiv-2107.05847`, `arxiv-2107.13346`, `arxiv-2109.06716`
 - [articles/methods/self-supervised-representation-learning.md](../articles/methods/self-supervised-representation-learning.md): `arxiv-2103.16440`, `arxiv-2106.03844`
 - [articles/methods/tabular-deep-learning-models.md](../articles/methods/tabular-deep-learning-models.md): なし
@@ -37,7 +38,7 @@
 - [articles/topics/anomaly-detection-classical-vs-deep.md](../articles/topics/anomaly-detection-classical-vs-deep.md): なし
 - [articles/topics/bayesian-change-point-detection.md](../articles/topics/bayesian-change-point-detection.md): なし
 - [articles/topics/causal-effect-estimation.md](../articles/topics/causal-effect-estimation.md): なし
-- [articles/topics/compute-and-scaling.md](../articles/topics/compute-and-scaling.md): なし
+- [articles/topics/compute-and-scaling.md](../articles/topics/compute-and-scaling.md): `arxiv-2006.16236`, `arxiv-2006.16668`, `arxiv-2008.07669`, `arxiv-2009.14794`, `arxiv-2011.04006`, `arxiv-2111.00396`, `arxiv-2112.06905`, `arxiv-2212.14052`, `arxiv-2305.13048`, `arxiv-2401.04088`, `arxiv-2405.21060`, `arxiv-2406.07887`
 - [articles/topics/design-techniques-and-ml.md](../articles/topics/design-techniques-and-ml.md): `arxiv-2003.00982`
 - [articles/topics/model-fallback-and-selection.md](../articles/topics/model-fallback-and-selection.md): `arxiv-1208.3719`, `arxiv-1603.06212`, `arxiv-1612.01474`, `arxiv-1804.05146`, `arxiv-1911.04706`, `arxiv-2003.06505`, `arxiv-2106.07998`, `arxiv-2107.05847`
 - [articles/topics/model-interpretability.md](../articles/topics/model-interpretability.md): `arxiv-1511.05741`, `arxiv-1903.05179`, `arxiv-1909.09223`, `arxiv-2001.04295`, `arxiv-2003.03629`

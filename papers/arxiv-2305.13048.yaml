@@ -1,0 +1,136 @@
+id: arxiv-2305.13048
+title: 'RWKV: Reinventing RNNs for the Transformer Era'
+authors:
+- Bo Peng
+- Eric Alcaide
+- Quentin Anthony
+- Alon Albalak
+- Samuel Arcadinho
+- Stella Biderman
+- Huanqi Cao
+- Xin Cheng
+- Michael Chung
+- Xingjian Du
+- Matteo Grella
+- Kranthi Kiran GV
+- Xuzheng He
+- Haowen Hou
+- Jiaju Lin
+- Przemyslaw Kazienko
+- Jan Kocon
+- Jiaming Kong
+- Bartlomiej Koptyra
+- Hayden Lau
+- Krishna Sri Ipsit Mantri
+- Ferdinand Mom
+- Atsushi Saito
+- Guangyu Song
+- Xiangru Tang
+- Bolun Wang
+- Johan S. Wind
+- Stanislaw Wozniak
+- Ruichong Zhang
+- Zhenyuan Zhang
+- Qihang Zhao
+- Peng Zhou
+- Qinghua Zhou
+- Jian Zhu
+- Rui-Jie Zhu
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2305.13048
+  code: https://github.com/BlinkDL/RWKV-LM
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 57d18c40bdbb4bc1ab69c078a304f97e31657b4f543c408d8a5520e672a3fab0
+tags:
+  tasks:
+  - language-modeling
+  - efficiency-evaluation
+  - scaling-laws
+  method_families:
+  - efficient-attention
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'RWKV (Receptance Weighted Key Value): stacked residual blocks of time-mixing and channel-mixing sub-blocks; inputs are token-shifted (linear interpolation between the current and previous timestep),
+  the time-mixing WKV operator is an AFT-like weighted average with channel-wise exponential time decay w and a separate bonus u for the current token, outputs are gated by sigmoid(receptance), and channel
+  mixing uses squared ReLU'
+- 'Two equivalent modes: time-parallel training like a Transformer and time-sequential (RNN) inference with constant computation and memory per token; pretrained models from 169M to 14B parameters trained
+  on the Pile'
+claims:
+- id: c1
+  statement: 'Time decay: inspired by AFT, RWKV replaces pairwise position biases with w_{t,i} = -(t - i)w, a channel-wise vector w (d channels) multiplied by relative position, so the interaction can be
+    turned into an RNN; w is required to be non-negative so that weights decay backwards in time.'
+  location: Section 2.2
+  page: 3
+  quote: and the per-channel weights decay backwards in time.
+- id: c2
+  statement: 'WKV operator: wkv_t = (sum_{i<t} e^{-(t-1-i)w + k_i} v_i + e^{u + k_t} v_t) / (sum_{i<t} e^{-(t-1-i)w + k_i} + e^{u + k_t}); unlike AFT, W is a channel-wise vector modified by relative position
+    rather than a pairwise matrix, and a vector U separately attends to the current token.'
+  location: Section 3.1.2
+  page: 4
+  quote: To circumvent any potential degradation of W, we introduce a vector U that separately attends to the current token.
+- id: c3
+  statement: 'Training cost: in time-parallel mode the per-layer cost for a batch is O(BTd^2), dominated by the projection matrix multiplications, while updating wkv_t is a serial scan of complexity O(BTd)
+    that is parallelized along the batch and channel dimensions (a custom CUDA kernel is used); the authors list a parallel scan reducing this to O(B log(T) d) as future work.'
+  location: Section 3.2
+  page: 4
+  quote: In contrast, updating attention scores wkvt involves a serial scan (see Appendix D for more detail) and has complexity O(BTd).
+- id: c4
+  statement: 'Model sizes and FLOP accounting: six models from 169M to 14B parameters, each trained for one epoch (330B tokens) on the Pile with context length 1024; FLOPs per token are computed analytically
+    as 2(2VD + 13D^2 L) for the forward pass (twice the parameters in linear layers) and 6(2VD + 13D^2 L) including the backward pass, which the authors note matches the standard Transformer formula of
+    Kaplan et al. (2020).'
+  location: Section 4
+  page: 5
+  quote: FLOPs is for a forward pass for one token.
+- id: c5
+  statement: 'Scaling: the authors train 45 RWKV models for various (dataset, parameters) pairs and report that RWKV follows the same general form of scaling law as transformers, with a linear fit to the
+    Pareto-optimal points of r^2 = 0.994 and r^2 = 0.875 when extrapolated an additional order of magnitude; they contrast this with prior claims (citing Kaplan et al., 2020) that LSTMs do not strictly
+    follow log-log linear scaling.'
+  location: Section 4.2
+  page: 6
+  quote: We train 45 RWKV models for a variety of pairs (dataset, parameters) and find that RWKV does follow the same general form of the scaling law that is well established for transformers.
+- id: c6
+  statement: 'Comparison budget with Transformers: RWKV is compared with Pythia, OPT and BLOOM trained for a similar but not identical number of tokens (RWKV: one epoch on the Pile, 330B tokens), so the
+    comparison is made on a FLOP-matched basis; Chinchilla-optimal or overtrained models are deliberately excluded. Twelve zero-shot NLP benchmarks are reported (average in a figure); the abstract states
+    RWKV performs on par with similarly sized Transformers.'
+  location: Section 5.1
+  page: 6
+  quote: Consequently, we compare our models on a FLOP-matched basis.
+- id: c7
+  statement: 'Prompt sensitivity: comparisons with ChatGPT / GPT-4 (Appendix L) revealed that RWKV is very sensitive to prompt engineering; re-ordering prompts from those used for GPT to ones more suitable
+    for RWKV increased F1 even from 44.2% to 74.8%.'
+  location: Section 5.1
+  page: 6
+  quote: They revealed that RWKV is very sensitive to prompt engineering.
+- id: c8
+  statement: 'Inference benchmark conditions: text generation speed and memory are measured on CPU (x86) and GPU (NVIDIA A100 80 GB) using float32 precision and HuggingFace Transformers, counting all parameters
+    including embeddings; quantization is left to future work. Results (cumulative generation time, linear for RWKV) are shown in figures only.'
+  location: Section 6
+  page: 7
+  quote: For all of our inference experiments we use float32 precision and the HuggingFace Transformers (Wolf et al., 2020).
+- id: c9
+  statement: 'Limitation: the linear attention may limit performance on tasks requiring recall of minute details over very long contexts, because information is funneled through a single vector representation
+    over many time steps; the authors also state that prompt engineering is more important than for standard Transformers.'
+  location: Section 9
+  page: 8
+  quote: First, the linear attention of RWKV leads to significant efficiency gains but still, it may also limit the model’s performance on tasks that require recalling minutiae information over very long
+    contexts.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Authors copied
+    from the arXiv record (ASCII spellings). The PDF first page (v2) additionally lists ''Xingjian Du'' (affiliation 1, between Michael Chung and Matteo Grella) and uses diacritics (Przemysław Kazienko,
+    Jan Kocoń, Bartłomiej Koptyra, Stanisław Woźniak); the arXiv author list does not include Xingjian Du; at review he was added to the author list following the PDF (as done for other cards where the
+    PDF lists an author missing from arXiv), while the ASCII spellings of the arXiv record were kept. No venue recorded: the arXiv comment and journal_ref are empty and the PDF text does not state a venue.
+    Section numbers are from numbered headings in the PDF. Table 1 claims O(Td) time and O(d) space for RWKV inference; an LRA comparison (Appendix J.2) is described in the body as ''second only to the
+    S4 model in five datasets''. Extended-context finetuning (1024 -> 2048 -> 4096 -> 8192) is reported to lower Pile test loss (figure only). Conflict of interest: co-authors Stella Biderman and Quentin
+    Anthony are co-authors of the compared Pythia models (Biderman et al., 2023b) and Biderman co-authored the Pile and its datasheet used for training. ''Equal first authorship'' for Peng, Alcaide, Anthony.'

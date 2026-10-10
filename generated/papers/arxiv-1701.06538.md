@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer
+
+- カード: [`arxiv-1701.06538`](../../papers/arxiv-1701.06538.yaml)
+- 著者: Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le, Geoffrey Hinton, Jeff Dean
+- 年・掲載: 2017
+- 原論文: [PDF](https://arxiv.org/pdf/1701.06538v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: deep-learning, language-modeling, mixture-of-experts, self-supervised, supervised
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Definition: the MoE layer has n expert networks E_1..E_n and a gating network G whose output is a sparse n-dimensional vector; the output is y = sum_i G(x)_i E_i(x), and E_i(x) need not be computed wherever G(x)_i = 0. In the experiments there are up to thousands of experts but only a handful are evaluated per example.([Section 2, p.3](https://arxiv.org/pdf/1701.06538v1#page=3 "We save computation based on the sparsity of the output of G(x)."))
+- **c2** Noisy top-k gating: before the softmax, tunable Gaussian noise (scale given by Softplus(x W_noise)) is added to the logits x W_g, and only the top k values are kept (the rest set to -infinity, i.e. gate 0); sparsity saves computation and the noise helps load balancing. The authors note this creates theoretically 'scary' discontinuities in the gating output but have not yet observed this to be a problem in practice.([Section 2.1, p.4](https://arxiv.org/pdf/1701.06538v1#page=4 "While this form of sparsity creates some theoretically scary discontinuities in the output of gating function, we have not yet observed this to be a problem in practice."))
+- **c3** Shrinking batch problem: with k of n experts chosen per example, each expert sees about kb/n examples from a batch of b. Running data-parallel replicas synchronously and keeping one shared copy of each expert, with d devices each processing batch b, each expert receives about kbd/n examples.([Section 3.1, p.4](https://arxiv.org/pdf/1701.06538v1#page=4 "Thus, we achieve a factor of d improvement in expert batch size."))
+- **c4** Failure mode: the gating network tends to converge to always giving large weights to the same few experts, and this imbalance is self-reinforcing. The authors add an importance loss: w_importance times the squared coefficient of variation of the batchwise sum of gate values per expert (w_importance hand-tuned).([Section 4, p.5](https://arxiv.org/pdf/1701.06538v1#page=5 "This imbalance is self-reinforcing, as the favored experts are trained more rapidly and thus are selected even more by the gating network."))
+- **c5** Because equal importance can still leave experts with very different numbers of examples (causing memory and performance problems on distributed hardware), a load loss is added: a smooth estimator Load(X) sums, over the batch, the probability (via the normal CDF, using the gating noise) that each expert's gate is nonzero, and the loss is w_load times its squared coefficient of variation. W_g and W_noise are initialized to zero to start with approximately equal load.([Appendix A, p.13](https://arxiv.org/pdf/1701.06538v1#page=13 "Instead, we deﬁne a smooth estimator Load(X) of the number of examples assigned to each expert for a batch X of inputs."))
+- **c6** In the loss ablation (MoE-256 model, 10 epochs), all combinations containing at least one of the two balancing losses led to very similar model quality, while having no loss was much worse; higher w_load gave lower load on the most overloaded expert.([Appendix A, p.14](https://arxiv.org/pdf/1701.06538v1#page=14 "All the combinations containing at least one the two losses led to very similar model quality, where having no loss was much worse."))
+- **c7** Budget (1 Billion Word benchmark): MoE models with roughly equal computation (about 8 million multiply-and-adds per timestep in the forward pass, excluding softmax; 4 experts active per input, about 1M parameters per expert) were compared across 4 to 4096 experts; the 4-always-active-expert model performed similarly to computationally matched baselines, while the 4096-expert model achieved 24% lower test perplexity.([Section 5.1, p.6](https://arxiv.org/pdf/1701.06538v1#page=6 "the largest of the models (4096 experts) achieved an impressive 24% lower perplexity on the test set."))
+- **c8** Cost measurement: computational efficiency in TFLOPS/GPU is the floating-point operations per training batch divided by observed step time and number of GPUs (16-32 Tesla K40s, TensorFlow), counting the backward pass. Baselines without MoE reached 1.07-1.29 TFLOPS/GPU and low-computation MoE models 0.74-0.90 (except the 4-expert model); the highest-computation MoE model reached 1.56, likely due to larger matrices.([Section 5.1, p.7](https://arxiv.org/pdf/1701.06538v1#page=7 "For our baseline models wtih no MoE, observed computational efﬁciency ranged from 1.07-1.29 TFLOPS/GPU."))
+

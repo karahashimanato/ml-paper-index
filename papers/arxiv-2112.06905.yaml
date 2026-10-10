@@ -1,0 +1,129 @@
+id: arxiv-2112.06905
+title: 'GLaM: Efficient Scaling of Language Models with Mixture-of-Experts'
+authors:
+- Nan Du
+- Yanping Huang
+- Andrew M. Dai
+- Simon Tong
+- Dmitry Lepikhin
+- Yuanzhong Xu
+- Maxim Krikun
+- Yanqi Zhou
+- Adams Wei Yu
+- Orhan Firat
+- Barret Zoph
+- Liam Fedus
+- Maarten Bosma
+- Zongwei Zhou
+- Tao Wang
+- Yu Emma Wang
+- Kellie Webster
+- Marie Pellat
+- Kevin Robinson
+- Kathleen Meier-Hellstern
+- Toju Duke
+- Lucas Dixon
+- Kun Zhang
+- Quoc V Le
+- Yonghui Wu
+- Zhifeng Chen
+- Claire Cui
+year: 2022
+venue: ICML 2022
+links:
+  arxiv: https://arxiv.org/abs/2112.06905
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 7b52d17e09bb59e2afc00237a35e6ee67189b663bc0c6d23f2f280b080a62e47
+tags:
+  tasks:
+  - language-modeling
+  - efficiency-evaluation
+  method_families:
+  - mixture-of-experts
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'GLaM: a family of decoder-only language models in which the feed-forward component of every other Transformer layer is replaced by a mixture-of-experts layer whose softmax gating network routes each
+  token to the top-2 of E experts (largest model: 64 experts, 1.2T total parameters, 96.6B activated per token)'
+- Comparison against dense GLaM models trained on the same data with comparable activated parameters per token (similar per-token FLOPs), and against GPT-3 on 29 of the GPT-3 evaluation tasks in zero/one/few-shot
+  settings, including training energy
+claims:
+- id: c1
+  statement: 'Architecture: following GShard, the feed-forward component of every other Transformer layer is replaced by an MoE layer of independent feed-forward experts; a gating function uses a softmax
+    to model a distribution over experts, and only a subset of size two is activated per token (the learned gating network picks the best two experts per token at inference), with the token representation
+    being the weighted combination of the selected experts'' outputs.'
+  location: Section 4
+  page: 3
+  quote: Similar to the GShard MoE Transformer (Lepikhin et al., 2021), we replace the feed-forward component of every other Transformer layer with an MoE layer, as shown in Figure 2.
+- id: c2
+  statement: 'Load balancing: on top of the cross-entropy loss, the MoE auxiliary loss described in GShard is added with coefficient 0.01 to encourage the gating function to distribute tokens more evenly
+    across experts. All GLaM models use the same learning hyperparameters (Adafactor, max sequence length 1024, up to 1 million tokens per batch, dropout 0); the largest model was trained on 1,024 Cloud
+    TPU-V4 chips.'
+  location: Section 5.2
+  page: 4
+  quote: On top of the standard cross-entropy loss, we add the MoE auxiliary loss as described in GShard (Lepikhin et al., 2021) with a 0.01 coefﬁcient to encourage expert load balancing so that the gating
+    function will distribute tokens more evenly across all experts.
+- id: c3
+  statement: 'Comparison budget: several MoE and dense variants are trained on the same training data, and dense models with comparable numbers of activated parameters per token during inference (and thus
+    similar per-token FLOPs) are included as references; GLaM (Base Dense Size/E) denotes a dense architecture with every other layer replaced by an E-expert MoE layer.'
+  location: Section 5.1
+  page: 4
+  quote: We also include the respective dense models with comparable numbers of activated parameters per-token during inference (and thus similar numbers of per-token FLOPs) as references.
+- id: c4
+  statement: 'Scaling observation (shown in figures, averaged over the generative tasks): performance scales with effective FLOPs per prediction (determined by activated parameters), and GLaM MoE models
+    perform consistently better than GLaM dense models of similar effective FLOPs per token; on understanding tasks the authors observe MoE and dense models perform similarly at smaller scales while MoE
+    models outperform at larger scales.'
+  location: Section 6.3
+  page: 6
+  quote: We also ﬁnd that GLaM MoE models perform consistently better than GLaM dense models for similar effective FLOPs per token.
+- id: c5
+  statement: 'Evaluation protocol versus GPT-3: to allow an apples-to-apples comparison the same task suite as Brown et al. (2020) is used, but 7 synthetic tasks (arithmetic and word unscramble) and 6 machine
+    translation datasets are excluded for simplicity, leaving 29 datasets (8 generative, 21 understanding) in 7 categories; one/few-shot demonstrations are drawn mainly from each task''s training set, and
+    evaluation is mainly on development sets (Section 6.1).'
+  location: Section 5.3
+  page: 5
+  quote: But for simplicity, we exclude 7 synthetic tasks (arithmetic and word unscramble) and 6 machine translation datasets.
+- id: c6
+  statement: 'Energy: GLaM (64B/64E) training after 600B tokens consumes 456 MWh, about 1/3 of the 1287 MWh used by GPT-3; to reach scores similar to (slightly exceeding) GPT-3, training used 1,024 TPU-v4
+    chips for 574 hours with 280B tokens, consuming 213 MWh or 1/6 of the GPT-3 energy cost.'
+  location: Section 6.4
+  page: 7
+  quote: This consumes 213 MWh or 1/6 of the GPT-3 energy cost.
+- id: c7
+  statement: The authors attribute the reduced energy consumption jointly to the MoE architecture and to computation-efficiency optimizations from TPU-v4 hardware and GSPMD software, i.e. not to the architecture
+    alone.
+  location: Section 6.4
+  page: 7
+  quote: The reduced energy consumption of GLaM is due to the MoE architecture and computation efﬁciency optimizations from TPU-v4 hardware and GSPMD software.
+- id: c8
+  statement: 'Training stability: stating that trillion-parameter training leaves little room for hyperparameter tuning, the authors train smaller models to convergence first, skip weight updates for a
+    batch if gradients contain NaNs or Infs, and restart from an earlier healthy checkpoint when encountering rare large fluctuations or NaN/Inf during training.'
+  location: Section 5.2
+  page: 5
+  quote: We restart from an early healthy checkpoint when encountering rare large ﬂuctuations or even NaN/Inf during training.
+- id: c9
+  statement: 'Stated limitation: despite in-context learning and training efficiency advantages, sparsely activated models have more parameters and thus require more devices, which limits resource accessibility
+    and increases serving cost, especially when serving traffic is low.'
+  location: Section 8
+  page: 9
+  quote: This limits the resource accessibility and increases the serving cost especially when the serving trafﬁc is low.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Google (all authors). Venue from the PDF footer (''Proceedings of the 39 th International Conference on Machine Learning, Baltimore, Maryland, USA, PMLR 162, 2022'') and the arXiv comment (''Accepted
+    to ICML 2022''); year 2022 is the venue year printed on the PDF (first arXiv version: 2021). Section numbers from numbered headings in the PDF. Parameter counts (Introduction, Table 2/4): 1.2T total
+    parameters, 64 experts per MoE layer, 96.6B (8% of 1.2T) activated per token. Footnote in Section 4: choosing two experts is a trade-off between predictive performance and training/serving efficiency.
+    The GPT-3 energy number (1287 MWh) and its datacenter PUE (1.10) are taken from Patterson et al. (2021) (Appendix F); GLaM energy uses PUE 1.11 and 326W measured system power per TPU-v4 chip, so the
+    energy comparison mixes hardware generations. GPT-3 was trained on 300B tokens vs 600B (or 280B) for GLaM. Appendix B (1.7B/1E to 1.7B/256E) reports, from a figure, that adding experts at fixed computation
+    per prediction generally helps. Data-filtering study (Section 6.2) and ethics analyses not recorded. Conflict of interest: the comparison baselines and components are the authors'' own Google work (GShard
+    auxiliary loss and architecture by Lepikhin, Xu, Krikun, Chen et al.; Switch Transformer by Fedus and Zoph; GSPMD by Xu et al.), and these people are co-authors here. Results tables (Tables 1, 5, 11-14)
+    not recorded.'

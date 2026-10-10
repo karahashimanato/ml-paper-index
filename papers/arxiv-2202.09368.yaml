@@ -1,0 +1,100 @@
+id: arxiv-2202.09368
+title: Mixture-of-Experts with Expert Choice Routing
+authors:
+- Yanqi Zhou
+- Tao Lei
+- Hanxiao Liu
+- Nan Du
+- Yanping Huang
+- Vincent Zhao
+- Andrew Dai
+- Zhifeng Chen
+- Quoc Le
+- James Laudon
+year: 2022
+venue: NeurIPS 2022
+links:
+  arxiv: https://arxiv.org/abs/2202.09368
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 69c430b35868f91e6cd217e6fccc71f6189fbdf5344ae7a842238681c71b55e7
+tags:
+  tasks:
+  - language-modeling
+  method_families:
+  - mixture-of-experts
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+  - supervised
+proposes:
+- 'Expert choice routing: each expert selects its top-k tokens from the token-to-expert affinity matrix S = Softmax(X W_g), with bucket size k = n c / e (c = capacity factor), giving perfect load balance
+  by design and a variable number of experts per token, without an auxiliary load-balancing loss'
+- 'Capped expert choice: an entropy-regularized linear program (solved with Dykstra''s algorithm) that limits the maximum number of experts per token'
+claims:
+- id: c1
+  statement: 'Method: instead of tokens choosing top-k experts, each expert independently selects its top-k tokens, where k = n c / e (n tokens in the batch, capacity factor c = average number of experts
+    per token, e experts); this achieves perfect load balancing by design and lets tokens be received by a variable number of experts.'
+  location: Section 3.2
+  page: 3
+  quote: Despite its simplicity, expert choice achieves perfect load balancing by design.
+- id: c2
+  statement: 'Pitfall of token-choice routing: the auxiliary balancing loss does not guarantee a balanced load, especially early in training; the authors empirically observe that the over-capacity ratio
+    can reach 20%-40% for some experts, so a significant portion of tokens routed to them will be dropped. Load imbalance can also hurt step latency since it is determined by the most loaded expert.'
+  location: Section 3.1
+  page: 3
+  quote: Indeed, we empirically observe that the over-capacity ratio can reach 20%–40% for some experts in token choice routing, indicating that a signiﬁcant portion of the tokens routed to these experts
+    will be dropped.
+- id: c3
+  statement: 'Setup: MoE replaces the FFN in every other Transformer layer; training follows GLaM (1.6T-token GLaM dataset, sequence length 1024, Adafactor, 256K SentencePiece vocabulary, dropout 0), the
+    largest 8B/64E model on 512 TPU v4 chips, and no auxiliary load-balancing loss is used.'
+  location: Section 4.1
+  page: 6
+  quote: Unlike most related works, we do not impose any auxiliary loss for load balance, such as described in Switch Transformer [10] and GShard [21].
+- id: c4
+  statement: 'Budget-matched comparison: expert choice with capacity factor 2 (EC-CF2) matches the per-token activated size and computation of GShard top-2 gating; run for a fixed number of steps, EC-CF2
+    reaches the same perplexity in less than half the steps, and each GShard top-2 step is 20% slower, which the authors attribute to load imbalance.'
+  location: Section 4.2
+  page: 6
+  quote: More speciﬁcally, EC-CF2 reaches the same perplexity as GShard top-2 in less than half the steps, and with each GShard top-2 step being 20% slower than our method.
+- id: c5
+  statement: 'Perplexity vs downstream: on 11 GLUE/SuperGLUE fine-tuning tasks, the 100M/32E setting worked best for both GShard top-2 and EC-CF2 even though 64 and 128 experts give larger capacity, which
+    the authors take to indicate that good training perplexity does not always translate to better downstream performance.'
+  location: Section 4.4
+  page: 7
+  quote: This result indicates that a good training perplexity does not always translate to better performance of downstream tasks.
+- id: c6
+  statement: 'Heterogeneity ablation: capping each token at 2 experts (EC-CAP2) decreases average fine-tuning accuracy by 0.8 points, while a cap of 3 is on par with uncapped expert choice; the authors
+    conclude that allowing a variable number of experts per token is indeed helpful.'
+  location: Section 4.5
+  page: 8
+  quote: This decreases the ﬁne-tuning accuracy by 0.8 points on average.
+- id: c7
+  statement: 'Limitation: expert choice might not immediately apply to auto-regressive text generation, because the current implementation uses past and future tokens for the top-k selection; it also does
+    not immediately apply when the batch size is very small at serving/inference time. Possible fixes are left to future work.'
+  location: Section 6
+  page: 9
+  quote: The expert choice method might not immediately apply to auto-regressive text generation as our current implementation takes in the past and future tokens to perform the top-k selection.
+- id: c8
+  statement: 'Limitation: MoE keeps a large memory footprint since total parameters grow linearly or sub-linearly with the number of experts and require reserving many devices; dynamic (used) power is saved
+    but static (reserved) power is not.'
+  location: Section 6
+  page: 9
+  quote: Therefore, dynamic (used) power is saved while static (reserved) power is not.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Google, Mountain View (page 1). Venue from the PDF footer (''36th Conference on Neural Information Processing Systems (NeurIPS 2022)''). Section numbers are from numbered headings in the PDF dump. A
+    hash-layer baseline (mod-x token-ID routing, also load balanced) performs worse than expert choice in average score and variance, which the authors take to indicate ''load balancing alone does not generate
+    all the benefits'' (subsection ''Comparison with Hash Layer'', Table 4). Model sizes: 8B/64E has 143B total and 9.8B activated parameters vs 8.7B for the 8B dense model (Table 1); the abstract states
+    the method outperforms the T5 dense model in 7 of 11 tasks ''for a smaller activation cost'', and the text reports +3.4 average over the dense 8B (Table 3) and > 2% average over GShard top-2 at 8B/64E.
+    With capacity factor 1 and 0.5, expert choice still outperforms Switch top-1 in perplexity (figure only). Routing statistics (figure-based text): most tokens go to one or two experts, 23% to three or
+    four, about 3% to more than four. The over-capacity observation and convergence speedups are partly read from figures; only the text statements are recorded. Results tables (Tables 2-4) not recorded.
+    Conflict of interest: the baselines GShard (Huang and Chen are co-authors, arxiv-2006.16668) and GLaM training setup/data (Du and Huang) come from overlapping Google authors.'

@@ -1,0 +1,94 @@
+id: arxiv-2008.07669
+title: 'HiPPO: Recurrent Memory with Optimal Polynomial Projections'
+authors:
+- Albert Gu
+- Tri Dao
+- Stefano Ermon
+- Atri Rudra
+- Christopher Ré
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2008.07669
+  code: https://github.com/HazyResearch/hippo-code
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: c207f881aa09c2b81e32bd7d882185b75b6e0cb206f45e2d10a15813aabd1827
+tags:
+  tasks:
+  - image-classification
+  - efficiency-evaluation
+  method_families:
+  - state-space-models
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'HiPPO (high-order polynomial projection operators): memory as online function approximation, where the history f restricted to [.., t] is projected onto polynomials of degree < N with respect to a time-varying
+  measure mu(t), and the optimal coefficients c(t) follow a linear ODE d/dt c(t) = A(t)c(t) + B(t)f(t) that is discretized into a recurrence'
+- 'HiPPO-LegS (scaled Legendre measure, uniform weight on [0, t]): a memory update without timescale hyperparameters, with timescale equivariance, O(N) per-step updates, and gradient and approximation-error
+  bounds'
+claims:
+- id: c1
+  statement: 'Framework: the coefficient function c(t) = coef_t(proj_t(f)) of the optimal polynomial projection of the input history (with respect to a time-varying measure) has the form of an ODE d/dt
+    c(t) = A(t)c(t) + B(t)f(t), so it can be obtained online by solving an ODE or, after discretization, by a recurrence that maps a sequence of reals to a sequence of N-dimensional vectors.'
+  location: Section 2.2
+  page: 4
+  quote: Thus our results show how to tractably obtain c(t) online by solving an ODE, or more concretely by running a discrete recurrence.
+- id: c2
+  statement: 'Sliding-window measures: the translated Legendre (LegT, uniform weight on [t - theta, t], window-length hyperparameter theta) and translated Laguerre (LagT, exponentially decaying) measures
+    give LTI ODEs; the LegT case reproduces the LMU update. The derivation shows an additional approximation outside the projection: the sliding-window update needs f(t - theta), which is no longer available,
+    and instead assumes the current coefficients model the function well enough to recover it.'
+  location: Section 2.3
+  page: 5
+  quote: Equation (1) proves the LMU update [71, equation (1)].
+- id: c3
+  statement: 'Discretization: the continuous-time ODE is turned into a discrete recurrence with a step size Delta t (Euler is used for illustration; the experiments use the bilinear and ZOH methods), and
+    this process is in general sensitive to the step size hyperparameter; differences between timestamps can serve as an adaptive step size for timestamped data with missing values.'
+  location: Section 2.4
+  page: 5
+  quote: In general, this process is sensitive to the discretization step size hyperparameter ∆t.
+- id: c4
+  statement: 'HiPPO-LegS uses the scaled Legendre measure mu(t) = (1/t) I[0,t] (uniform weight on all history) and is timescale-equivariant (Proposition 3): dilating the input does not change the coefficients,
+    which the authors reflect informally as LegS having no timescale hyperparameters, whereas LegT has a window length theta and LegT/LagT have a step size hyperparameter in discrete time.'
+  location: Section 3
+  page: 6
+  quote: 'Formally, the HiPPO-LegS operator is timescale-equivariant: dilating the input f does not change the approximation coeﬃcients.'
+- id: c5
+  statement: 'Theoretical properties of LegS: under any generalized bilinear transform discretization one recurrence step costs O(N) operations (generically O(N^2) for multiplication by the state matrix);
+    the gradient norm of the output at t1 with respect to the input at t0 is Theta(1/t1) (Proposition 5); and the approximation error is O(tL/sqrt(N)) for L-Lipschitz inputs (Proposition 6).'
+  location: Section 3
+  page: 6
+  quote: Under any generalized bilinear transform discretization (cf. Appendix B.3), each step of the HiPPO-LegS recurrence in equation (4) can be computed in O(N) operations.
+- id: c6
+  statement: 'pMNIST protocol and result as stated in the text: HiPPO variants are an MGU with an extra hippo layer, the memory size N is tied to the hidden dimension so methods have comparable hidden units
+    and parameters, a Rand baseline (random A and B) checks that the derived dynamics matter, and LegT is run with ideal and mis-specified theta. The authors state a test accuracy of 98.3% for HiPPO-LegS;
+    the comparison with non-recurrent models uses reported results from the literature, which the authors describe as against the spirit of the task because those models have a global receptive field.'
+  location: Section 4.1
+  page: 7
+  quote: With a test accuracy of 98.3%, HiPPO-LegS sets a true state-of-the-art accuracy on the permuted MNIST dataset.
+- id: c7
+  statement: 'Timescale shift (Character Trajectories, following Kidger et al.): test-time sampling rates or timestamps are changed relative to training; the authors state that all methods are near-perfect
+    (>= 95%) without distribution shift, but that apart from HiPPO-LegS no method generalizes to unseen timescales.'
+  location: Section 4.2
+  page: 8
+  quote: Though all methods achieve near-perfect accuracy (≥95%) without distribution shift, aside from HiPPO-LegS, no method is able to generalize to unseen timescales.
+- id: c8
+  statement: 'Speed: the fast LegS update, implemented in C++ with a PyTorch binding, performs 470,000 time-step updates per second on a single CPU core, stated as 10x faster than the LSTM and LMU; a footnote
+    notes the LMU is only known to be fast with forward Euler discretization, not with bilinear/ZOH methods that this task requires to reduce numerical error.'
+  location: Section 4.3
+  page: 9
+  quote: We implement the fast update in C++ with Pytorch binding and show in Table 3 that it can perform 470,000 time step updates per second on a single CPU core, 10x faster than the LSTM and LMU.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Stanford (Gu, Dao, Ermon, Ré), University at Buffalo (Rudra); Gu and Dao are equal contribution. No venue is stated in the arXiv v2 PDF and the arXiv record has no comment/journal_ref; none recorded.
+    Section numbers are from numbered headings in the PDF. Section 2.5 shows that with N = 1 and an input/state-dependent step size the discretized LagT update becomes a gated RNN (GRU as a special case).
+    The function approximation experiment (Section 4.3) uses band-limited white noise of length 10^6 with at most 256 memory units; its MSE values and the Table 1/2 accuracies are in tables and not recorded.
+    Copying task results are only in the appendix (figure). This paper''s LegS matrix is the ''HiPPO matrix'' used to initialize S4 (arxiv-2111.00396) by overlapping authors; later SSM papers by Gu and
+    Dao (S4, H3, Mamba, Mamba-2) build on it.'

@@ -1,0 +1,106 @@
+id: arxiv-2009.14794
+title: Rethinking Attention with Performers
+authors:
+- Krzysztof Choromanski
+- Valerii Likhosherstov
+- David Dohan
+- Xingyou Song
+- Andreea Gane
+- Tamas Sarlos
+- Peter Hawkins
+- Jared Davis
+- Afroz Mohiuddin
+- Lukasz Kaiser
+- David Belanger
+- Lucy Colwell
+- Adrian Weller
+year: 2020
+venue: ICLR 2021
+links:
+  arxiv: https://arxiv.org/abs/2009.14794
+  code: https://github.com/google-research/google-research/tree/master/performer
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 2634d0985b5ebc5235d983e388ec012883369eb1c39b351a024c31ee718b2e25
+tags:
+  tasks:
+  - efficiency-evaluation
+  - language-modeling
+  method_families:
+  - efficient-attention
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'FAVOR+ (Fast Attention Via positive Orthogonal Random features): approximate attention as D^-1 (Q''((K'')^T V)) where rows of Q'', K'' are random features phi(q), phi(k) with K(x, y) = E[phi(x)^T phi(y)],
+  giving O(Lrd) time and O(Lr + Ld + rd) space'
+- Positive random features for the softmax kernel, phi(x) = exp(-||x||^2/2)/sqrt(m) (exp(w_1^T x), ..., exp(w_m^T x)) with w ~ N(0, I_d) (and a hyperbolic variant), made exactly orthogonal across samples
+  to reduce variance
+- 'Performer: a Transformer whose attention is replaced by FAVOR+ (all other components unchanged), with periodic redrawing of random features'
+claims:
+- id: c1
+  statement: The paper introduces Performers, Transformer architectures that estimate regular softmax full-rank attention with provable accuracy using linear space and time complexity and no sparsity or
+    low-rank priors, via FAVOR+; the abstract describes the guarantees as unbiased or nearly-unbiased estimation of the attention matrix, uniform convergence and low estimation variance.
+  location: Abstract
+  page: 1
+  quote: We introduce Performers, Transformer architectures which can estimate regular (softmax) full-rank-attention Transformers with provable accuracy, but using only linear (as opposed to quadratic)
+    space and time complexity, without relying on any priors such as sparsity or low-rankness.
+- id: c2
+  statement: 'Generalized kernelizable attention: for A(i, j) = K(q_i, k_j) with K(x, y) = E[phi(x)^T phi(y)] and random feature map phi: R^d -> R^r_+, the attention is approximated as D^-1(Q''((K'')^T
+    V)), with space O(Lr + Ld + rd) and time O(Lrd) instead of O(L^2 + Ld) and O(L^2 d) for regular attention.'
+  location: Section 2.2
+  page: 3
+  quote: It is easy to see that such a mechanism is characterized by space complexity O(Lr + Ld + rd) and time complexity O(Lrd)
+- id: c3
+  statement: 'Why trigonometric random features fail: the unbiased sin/cos random-feature estimator of the softmax kernel can give negative values, and kernel scores close to 0 (many entries of A for low-relevance
+    tokens) are estimated with large variance; this leads to abnormal behaviour such as negative renormalizers D^-1, which either completely prevents training or leads to sub-optimal models.'
+  location: Section 2.3
+  page: 4
+  quote: Applying random feature maps with potentially negative dimension-values (sin / cos) leads to unstable behaviours
+- id: c4
+  statement: 'Lemma 1 (positive random features): SM(x, y) = E_{w~N(0,I_d)}[exp(w^T x - ||x||^2/2) exp(w^T y - ||y||^2/2)], so the softmax kernel admits an unbiased positive random-feature approximation
+    (and a hyperbolic variant with f1 = exp(u), f2 = exp(-u) for further variance reduction).'
+  location: Section 2.3
+  page: 4
+  quote: Consequently, softmax-kernel admits a positive random feature map unbiased approximation with
+- id: c5
+  statement: 'Variance results: by Lemma 2 (independent samples), as SM(x, y) -> 0 the MSE of the trigonometric estimator goes to infinity while that of the positive estimator goes to 0; Theorem 2 states
+    that orthogonal random features (which require m <= d) provably reduce the MSE of the positive estimator for any d > 0, with an explicit gap.'
+  location: Section 3
+  page: 5
+  quote: Our next result shows that orthogonality provably reduces mean squared error of the estimation with positive random features for any dimensionality d > 0 and we explicitly provide the gap.
+- id: c6
+  statement: 'Theorem 4 (uniform convergence) is proved for the trigonometric estimator with ORFs under the assumption that query/key L2-norms are bounded by R: the number of random projections m needed
+    for ||A_hat - A||_inf <= epsilon with constant probability depends on d, R and epsilon but not on the sequence length L.'
+  location: Section 3
+  page: 6
+  quote: but does not depend on input sequence length L
+- id: c7
+  statement: Speed and memory are measured for the backward pass in the bidirectional setting with the default size (8 heads, 6 layers, d_ff 2048, d 512) on a V100 GPU with 16GB, compared against an 'X'
+    line where attention simply returns V (the maximum possible speedup); the Performer reaches nearly linear time and sub-quadratic memory in L.
+  location: Section 4.1
+  page: 7
+  quote: We observed (Fig. 3) that in terms of L, the Performer reaches nearly linear time and sub-quadratic memory consumption
+- id: c8
+  statement: 'Caveat on approximating pretrained softmax models: small attention approximation errors can propagate through multiple layers, so very tight approximations may sometimes be needed; transferring
+    pretrained Transformer weights requires small finetuning, and on PG-19 positive softmax features with redrawing were needed to match regular Transformers, while trigonometric features became highly
+    unstable.'
+  location: Section 4.3
+  page: 7
+  quote: In other words, the model’s Lipschitz constant can easily scale up small attention approximation error, which means that very tight approximations may sometimes be needed.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Google, University of Cambridge, DeepMind, Alan Turing Institute. Venue from the PDF header (''Published as a conference paper at ICLR 2021'') and the arXiv comment; year is the first arXiv version
+    (2020). Section numbers are from numbered headings in the PDF text (2.2, 2.3, 2.4, 3, 4.1, 4.3, ...). Orthogonal random features keep unbiasedness for isotropic distributions via Gram-Schmidt and require
+    m <= d (''this will be the case in all our experiments'', Section 2.4). The unidirectional (causal) case uses prefix sums of outer products (Appendix B.1). Body-text results not recorded as claims:
+    on TrEMBL the softmax approximation achieves the same accuracy as the exact-softmax Transformer and Performer-RELU is highest (Section 4.4); on ImageNet64 Performer/6-layers matches Reformer/12-layers
+    and ''depending on hardware'' can be 2x faster than Reformer (Section 4.5); on concatenated TrEMBL (L = 8192) the regular Transformer baseline had to be shrunk to 1-3 layers. Most results are figures
+    only. Conflict of interest: co-author Lukasz Kaiser is a co-author of the compared Reformer (Kitaev, Kaiser and Levskaya, 2020), and the ORF technique builds on the first author''s earlier work (Choromanski
+    et al., 2017).'

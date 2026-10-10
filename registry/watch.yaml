@@ -105,3 +105,7 @@ themes:
     tags: [automl-systems, neural-architecture-search]
     arxiv_queries:
       - '(abs:AutoML OR abs:"automated machine learning" OR abs:"neural architecture search" OR abs:"architecture search") AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'
+  - name: 混合エキスパートと状態空間モデル
+    tags: [mixture-of-experts, state-space-models, efficient-attention]
+    arxiv_queries:
+      - '(abs:"mixture of experts" OR abs:"mixture-of-experts" OR abs:"state space model" OR abs:Mamba OR abs:"linear attention" OR abs:"efficient attention") AND (cat:cs.LG OR cat:cs.CL)'

@@ -1,0 +1,99 @@
+id: arxiv-2006.16668
+title: 'GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding'
+authors:
+- Dmitry Lepikhin
+- HyoukJoong Lee
+- Yuanzhong Xu
+- Dehao Chen
+- Orhan Firat
+- Yanping Huang
+- Maxim Krikun
+- Noam Shazeer
+- Zhifeng Chen
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.16668
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 4078d81e9ef6db2e3a982e56d3d8816766d8d49f350e02f7410501ca496ad54e
+tags:
+  tasks:
+  - efficiency-evaluation
+  method_families:
+  - mixture-of-experts
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'MoE Transformer: every other Transformer feed-forward layer replaced by a position-wise MoE layer with group-level top-2 gating, expert capacity, local group dispatching, an auxiliary load-balancing
+  loss and random routing of the second expert'
+- 'GShard: lightweight sharding annotation APIs (replicate, split, shard) plus an XLA SPMD partitioner that compiles a single program for all devices'
+claims:
+- id: c1
+  statement: 'Architecture: the Transformer is sparsely scaled by replacing every other feed-forward layer with a position-wise MoE layer (based on Shazeer et al. 2017) using a variant of top-2 gating,
+    in both encoder and decoder; MoE layers are sharded across devices while other layers are replicated.'
+  location: Section 2.1
+  page: 4
+  quote: We sparsely scale Transformer with conditional computation by replacing every other feed-forward layer with a Position-wise Mixture of Experts (MoE) layer [16] with a variant of top-2 gating in
+    both the encoder and the decoder (Figure 3).
+- id: c2
+  statement: 'Expert capacity: the number of tokens processed by one expert is kept below a uniform threshold of O(N/E) (N tokens in the batch, E experts); a token whose selected experts are both over capacity
+    is an overflowed token with an all-zero gate vector, and its representation is passed to the next layer through the residual connection.'
+  location: Section 2.2
+  page: 6
+  quote: Such tokens have their representation xs passed on to the next layer via residual connections.
+- id: c3
+  statement: 'Auxiliary loss: L = l_nll + k * l_aux. The goal is to minimize the mean square of c_e/S (fraction of the group''s tokens routed to expert e), but because c_e comes from the non-differentiable
+    top-2 operation, (c_e/S)^2 is replaced by m_e(c_e/S) with m_e the mean gate value per expert. Tokens are split into G groups that each get a fractional expert capacity 2N/(G E).'
+  location: Section 2.2
+  page: 6
+  quote: But because ce is derived from top-2 operation and is not differentiable, we use the mean gates per expert me as a differentiable approximation and replace (ce/S)2 with me(ce/S), which can now
+    be optimized with gradient descent.
+- id: c4
+  statement: 'Complexity analysis (assuming constant tokens per device, G and E = O(D), capacity C = O(1/D)): per-device softmax cost is O(D) but in practice dominated by other terms, so per-device FLOPs
+    can be considered O(1); cross-device communication is non-constant and grows as O(sqrt(D)).'
+  location: Section 3.1
+  page: 8
+  quote: As a result FLOPS/D could be considered O(1), satisfying sublinear scaling design requirements.
+- id: c5
+  statement: 'Training stability: models were trained with float32 weights and activations to ensure stability; additional MoE(2048E, 60L) runs with bfloat16 activations and 1 trillion weights hit several
+    trainability issues with numerical stability, and their results were not included.'
+  location: Section 4.3
+  page: 16
+  quote: Although trainable by careful and manual diagnostics, with deep 1 trillion model we encountered several trainability issues with numerical stability, hence did not include the results for the sake
+    of reproducibility.
+- id: c6
+  statement: 'Cost comparison with dense scaling (multilingual MT, 100 languages to English, in-house web-mined data): the 600B MoE(2048E, 36L) used 2048 TPU cores for 4 days (22.4 TPU core-years, measured
+    as cores times wall-clock time); with the same number of cores, the dense 96-layer T(96L) appears to take more than ten times as long (235 core-years) while trailing in quality.'
+  location: Section 4.5
+  page: 19
+  quote: Given the same number of TPU cores used by (1), the dense scaling variant, T(96L), appears to be taking more than ten times to train (235 TPU core years), while trailing behind in terms of model
+    quality compared to models trained with GShard.
+- id: c7
+  statement: 'Measured runtime scaling on TPU: compared with a roofline estimate (the authors call it very optimistic), the 128-expert model reaches > 70% of roofline; scaling to 16x larger (2048 experts)
+    increases device time 1.7x and still reaches 48% of roofline. The AllToAll dispatch/combine communication grows about 3.75x and its share of MoE+Transformer time rises from 16% to 36%.'
+  location: Section 5.2
+  page: 21
+  quote: The device time increases by 1.7x when we scale the model to 16x larger (2048 experts), and can still achieve 48% of the rooﬂine performance.
+- id: c8
+  statement: The authors conclude that their results empirically support that mere parameter counting does not always correlate with the effective capacity of models at scale, and that comparisons should
+    account for the nature of the problem (here massively multi-task with heavy data imbalance) and control for capacity bottleneck vs positive transfer.
+  location: Conclusion
+  page: 25
+  quote: Lastly, our experimental results empirically support that, mere parameter counting does not always correlate with the effective capacity of the models at scale [85, 86].
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Google (author emails). Venue: the arXiv v1 PDF says ''Preprint. Under review.'' and the arXiv record has no comment/journal_ref, so no venue is recorded (arxiv-2202.09368 cites it as ICLR 2021; not
+    confirmed here). Section numbers are from numbered headings in the PDF dump. Not made claims: random routing dispatches to the 2nd expert with probability proportional to its weight (Section 2.2, Algorithm
+    1 uses 2*g2 > uniform); naive top-k gating is said, citing Shazeer et al. 2017, to cause load imbalance (Section 2.2); with fixed depth, going from 128 to 512 experts gave +3.3 average BLEU and 512
+    to 2048 only +1.3 (''hints the emergence of diminishing returns'', Section 4.4); the dense deep T(96L) shows a growing advantage over the shallow MoE(128E, 12L) on low-resource languages, and the authors
+    ''conjecture'' depth may increase transfer (Section 4.4); per-device memory stays roughly constant as experts increase (figure). BLEU numbers are in tables/figures and not recorded. Baselines are 100
+    bilingual models and a GPipe dense model by the same group (Google). Conflict of interest: Shazeer co-authored the MoE layer this builds on (arxiv-1701.06538); GShard top-2 is later used as a baseline
+    by overlapping Google authors (arxiv-2202.09368, Huang and Chen).'

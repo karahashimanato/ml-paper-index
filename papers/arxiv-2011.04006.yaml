@@ -1,0 +1,108 @@
+id: arxiv-2011.04006
+title: 'Long Range Arena: A Benchmark for Efficient Transformers'
+authors:
+- Yi Tay
+- Mostafa Dehghani
+- Samira Abnar
+- Yikang Shen
+- Dara Bahri
+- Philip Pham
+- Jinfeng Rao
+- Liu Yang
+- Sebastian Ruder
+- Donald Metzler
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2011.04006
+  code: https://github.com/google-research/long-range-arena
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: a9172c02cb67ad990c420d5428ec7e06a35f9df5dd35fd08a593abf8a5725417
+tags:
+  tasks:
+  - efficiency-evaluation
+  - image-classification
+  method_families:
+  - efficient-attention
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Long Range Arena (LRA): a benchmark of six long-sequence tasks (Long ListOps up to 2K, byte-level IMDb text classification at 4K, byte-level AAN document retrieval at 4K per document in a two-tower setup,
+  CIFAR-10 as grayscale pixel sequences of 1024, Pathfinder at 1024 and Path-X at 16K) without pretraining, with fixed hyperparameters per task'
+- A side-by-side evaluation of a vanilla Transformer, local attention and ten efficient Transformers (Sparse Transformer, Longformer, Linformer, Reformer, Sinkhorn, Synthesizer, BigBird, Linear Transformer,
+  Performer) on accuracy, speed and memory, implemented in JAX/Flax
+- 'Required attention span: the attention-weighted mean query-key distance of a trained vanilla Transformer, used as a proxy for task difficulty'
+claims:
+- id: c1
+  statement: 'Motivation: the authors observe that there is no consensus on an acceptable test bed for efficient Transformers, every model is evaluated on different tasks and datasets, benchmarks are often
+    chosen without considering suitability for long-range modeling, and many papers conflate the effectiveness of the inductive bias with the benefits of pretraining.'
+  location: Introduction
+  page: 1
+  quote: Firstly, there is no unifying consensus on what makes an acceptable test bed for benchmarking efﬁcient Transformers.
+- id: c2
+  statement: 'Desiderata: generality (encoding-only tasks, since not all xformers can decode autoregressively), simplicity (no particular data augmentation, pretraining out of scope), challenging tasks,
+    long inputs, probing diverse capabilities, and being lightweight enough for researchers without industry-grade compute.'
+  location: Section 2.1
+  page: 2
+  quote: For instance, we avoid including any particular data augmentation and consider pretraining to be out of scope of this benchmark.
+- id: c3
+  statement: Required attention span (mean query-to-attended-token distance weighted by attention, from the best vanilla Transformer, averaged over 1K validation samples) is used as a proxy for task difficulty,
+    with the caveat that it only indicates the span and relative task differences based on a reasonably strong model, and a better model might only need to attend to shorter ranges.
+  location: Section 2.3
+  page: 5
+  quote: Note that this metric mainly provides an indication of the required attention span for a task and the relative differences between tasks based on a reasonably strong model; a better model might
+    only need to attend to shorter ranges (Daniluk et al., 2017; Rae & Razavi, 2020).
+- id: c4
+  statement: 'Fairness caveat: a perfectly fair evaluation is described as non-trivial and almost impossible; a fixed set of hyperparameters (layers, heads, embedding dimensions, etc.) is used for all models,
+    the best performance and relative order may change under aggressive tuning, and the results are not meant as a final authoritative ranking. The authors implemented all models to the best of their abilities
+    and often consulted the original developers.'
+  location: Section 3.2
+  page: 6
+  quote: The best performance and relative order of the models may change if we aggressively tune hyperparameters for all models.
+- id: c5
+  statement: On ListOps, roughly half of the xformers exceed 30% while the rest are only slightly above chance; the authors say this may imply some efficiency-inspired inductive biases handle hierarchical
+    data better, and that their results seem to suggest kernel-based models (e.g. Performer, Linear Transformers) are possibly not as effective on hierarchically structured data.
+  location: Section 3.3
+  page: 6
+  quote: For instance, the results from our experiments seem to suggest that kernel-based models (e.g., Performer, Linear Transformers) are possibly not as effective on hierarchically structured data.
+- id: c6
+  statement: 'Path-X: all models failed, achieving at best 50%, although it is essentially the same task as Pathfinder with much longer sequences; Path-X is kept in the suite but excluded from the average
+    score. Per the appendix, neither training from scratch nor evaluating Pathfinder-trained models handled 16K inputs.'
+  location: Section 3.3
+  page: 7
+  quote: All models failed to solve the Path-X task, achieving at best 50%.
+- id: c7
+  statement: 'Efficiency measurement conditions: run time and memory are measured only on byte-level text classification at sequence lengths 1K-4K with batch size 32 on 4x4 TPU V3 chips, and the authors
+    emphasize that results are largely conditioned on hardware and implementation details.'
+  location: Section 3.4
+  page: 7
+  quote: We emphasize that this is again largely conditioned on hardware and implementation details (more details can be found in the appendix).
+- id: c8
+  statement: 'Rules for reuse: new models may copy the LRA table as is only if the model size is unchanged, no pretraining is conducted, and the fundamental setups are not altered (e.g. no switch from char
+    to word level, no spatial information added to the image task).'
+  location: Appendix C
+  page: 16
+  quote: the LRA table in the paper can be copied as it is as long as (1) the model size remains unchanged, (2) no pretraining is conducted, (3) no alterations to the fundamental setups (e.g., changing
+    char level to word level or adding spatial information to the image task).
+- id: c9
+  statement: 'Overall conclusion: the tasks are very challenging even for long-range Transformers and there is no one-size-fits-all model; trade-offs must be made between model quality and speed/memory.'
+  location: Section 5
+  page: 9
+  quote: The overall results show that there is no one-size-ﬁts-all solution and trade-offs have to be made in terms of model quality and speed/memory.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations
+    as printed in the v1 PDF: Google Research (all but Ruder) and Google DeepMind (Ruder). No venue recorded: the PDF header says ''Preprint'' and the arXiv record has no comment/journal_ref. Section numbers
+    from numbered headings in the PDF dump (2.1 Desiderata, 2.2.x tasks, 2.3, 3.2, 3.3, 3.4, 5 Conclusion, Appendix A-C). Task design details (Section 2.2): byte-level retrieval deliberately forbids cross
+    attention; the image task forbids extra modules such as a CNN stem and uses 8-bit grayscale intensities as discrete tokens. Appendix B.2: Sparse Transformer and Longformer are emulated with masks (CUDA
+    kernels avoided on TPU) and therefore not benchmarked for speed; Reformer is implemented differently (vmap over batch and head). Appendix A.2.1: most models overfit the image task (large train-test
+    gap); a CNN stem or 2D relative positions would help but are outside the setup. Hyperparameters differ per task (Appendix A.1). Conflict of interest: per the reference list, two evaluated models are
+    the authors'' own (Synthesizer: Tay, Bahri, Metzler et al.; Sparse Sinkhorn attention: Tay, Bahri, Yang, Metzler et al.), and the survey cited for the area is by Tay, Dehghani, Bahri and Metzler (2020c).
+    Results tables (Tables 1-3) not recorded.'

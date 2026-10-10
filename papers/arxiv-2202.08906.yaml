@@ -1,0 +1,101 @@
+id: arxiv-2202.08906
+title: 'ST-MoE: Designing Stable and Transferable Sparse Expert Models'
+authors:
+- Barret Zoph
+- Irwan Bello
+- Sameer Kumar
+- Nan Du
+- Yanping Huang
+- Jeff Dean
+- Noam Shazeer
+- William Fedus
+year: 2022
+links:
+  arxiv: https://arxiv.org/abs/2202.08906
+  code: https://github.com/tensorflow/mesh/blob/master/mesh_tensorflow/transformer/moe.py
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 185327b54b6b4a3239855bfa3ebdccdc0e4e3a8c4eaa408a916e8f7e5325bd5e
+tags:
+  tasks:
+  - language-modeling
+  method_families:
+  - mixture-of-experts
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+  - supervised
+proposes:
+- 'Router z-loss: an auxiliary loss (1/B) sum_i (log sum_j exp(x_ij))^2 on the router logits that penalizes large logits, added as c_z L_z to the cross-entropy and load-balancing losses'
+- Fine-tuning and design recommendations for sparse models (top-2 routing, capacity factor 1.25, at most one expert per core) and the ST-MoE-32B model (269B parameters, compute comparable to a 32B dense
+  encoder-decoder)
+claims:
+- id: c1
+  statement: 'Router z-loss: L_z(x) = (1/B) sum_i (log sum_j exp(x_ij))^2 over the B tokens and N experts'' router logits; it penalizes large logits into the gating network. The router already computes
+    in float32 (selective precision), which the authors find insufficient at the largest scales.'
+  location: Section 3.3
+  page: 7
+  quote: This penalizes large logits into the gating network and Section 3.4 contains a more detailed explanation of why the z-loss before the router is useful.
+- id: c2
+  statement: 'Stability vs quality: in the stability study (sparse models FLOP-matched to T5-XL, 32 experts, MoE every fourth FFN, mC4, 20k steps; 6 seeds for the baseline and 3 per technique), tightening
+    Adafactor update clipping and the router z-loss both stabilized all 3 runs, but update clipping significantly hurt quality; the z-loss caused no quality degradation (a slight boost in this case). Removing
+    GEGLU or RMS-norm scale parameters, input jitter and dropout also improved stability at a quality cost.'
+  location: Section 3.3
+  page: 8
+  quote: Table 4 shows that both update clipping and the router z-loss stabilize the model in all 3 runs, but the update clipping signiﬁcantly hurts the model quality.
+- id: c3
+  statement: 'Roundoff explanation: the router adds exponential functions that can amplify bfloat16 roundoff errors (affecting second-expert routing and the probability scaling the expert output); the authors
+    conjecture that the higher stability they observed for decoder-only models (not shown) was because those have fewer exponential functions.'
+  location: Section 3.4
+  page: 9
+  quote: Finally, we conjecture that the higher stability we observed for decoder-only models (not shown here) was because they had fewer exponential functions.
+- id: c4
+  statement: 'Overfitting hypothesis: fine-tuning Dense-L and the roughly FLOP-matched ST-MoE-L (both pre-trained on 500B C4 tokens), the sparse model reaches 100% train accuracy faster on both tasks and
+    clearly exceeds the dense model on ReCoRD (over 100,000 examples), but lags it on held-out data for CB (250 training examples). Higher expert dropout only moderately helps at this scale.'
+  location: Section 4.1
+  page: 10
+  quote: However, on the smaller task, CB, the sparse model lags its dense counterpart on held-out data.
+- id: c5
+  statement: 'Fine-tuning protocol: across the tested batch sizes and learning rates the sparse model outperformed the dense one, but sparse models benefit from smaller batch sizes and higher learning rates
+    (dense models nearly the opposite); reusing fine-tuning hyperparameters that worked for the dense model can mask the pre-training improvements of the sparse model.'
+  location: Section 4.3
+  page: 11
+  quote: Sparse models beneﬁt from smaller batch sizes and a higher learning rate.
+- id: c6
+  statement: 'Dropped tokens: varying the capacity factor and turning off the auxiliary loss during fine-tuning, SuperGLUE fine-tuning quality was not materially impacted by dropping up to 10-15% of tokens,
+    and studies on ST-MoE-32B corroborate that high capacity factors do not improve fine-tuning quality; the authors note this is in line with Yang et al. (2021), that unequal load balance may not significantly
+    impact quality.'
+  location: Section 4.4
+  page: 12
+  quote: Studies on ST-MoE-32B corroborate that high capacity factors do not improve ﬁne-tuning quality.
+- id: c7
+  statement: 'Routing and capacity factor (32-expert models FLOP-matched to T5-Large, 100k steps, 1M tokens/batch): increasing train and eval capacity factors improves quality but linearly increases einsum,
+    activation-memory and communication costs; at fixed capacity factor there are small gains of top-(n+1) over top-n routing, which revises an earlier recommendation from Fedus et al. (2021), attributed
+    to the 8x larger training scale here.'
+  location: Section 5.2
+  page: 14
+  quote: This revises an earlier recommendation from Fedus et al. (2021).
+- id: c8
+  statement: 'FLOP-matched comparison with dense T5-Large (both pre-trained 524B tokens on C4, fine-tuned on a task mixture): the sparse model improves dev results across many tasks, but the two smallest
+    tasks CB and WSC are the only ones without gains, which the authors say again suggests improved regularization for sparse models may unleash greater performance.'
+  location: Section 6
+  page: 16
+  quote: we observe two of the smallest tasks CB and WSC (250 and 259 training examples, respectively), are the only ones where the sparse model does not yield gains over its dense counterpart.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Google Brain / Google / Google Research (page 1). Venue: no venue in the arXiv v2 PDF and no comment/journal_ref in the arXiv record (''25 pages main text, 39 pages overall''); none recorded. Section
+    numbers are from numbered headings in the PDF dump. The z-loss coefficient c_z = 0.001 was chosen by a sweep on pre-training quality; the load-balancing loss (Appendix A, alpha = 1e-2) is the Switch-style
+    f.P loss credited to Shazeer et al. (2017). ST-MoE-32B: 269B parameters, approximately FLOP-matched to a 32B dense Transformer, pre-trained 1.5T tokens; the router z-loss is said to have enabled the
+    high-FLOP sparse model that was previously unstable in Fedus et al. (2021). Stated weaknesses: lackluster SQuAD, small tasks CB/WSC fail to improve, closed-book TriviaQA does not beat GPT-3/GLaM (Section
+    6). Discussion (Section 9): multilingual pre-training is more unstable with smaller speed-ups (hypothesis: few sequences per load-balancing group); improvements at small scale often vanish or reverse
+    at larger scale. Fine-tuning only the non-MoE parameters works about as well as all parameters, and only-MoE parameters drastically worse (Section 4.2, figure). Results tables (Tables 2-5, 8, 10, 12)
+    not recorded. Conflict of interest: Fedus, Zoph and Shazeer are the authors of Switch Transformers (arxiv-2101.03961), whose recommendations this paper revises; Shazeer co-authored the original MoE
+    layer (arxiv-1701.06538) and GShard (arxiv-2006.16668); Du and Huang co-authored GLaM (whose data are used).'

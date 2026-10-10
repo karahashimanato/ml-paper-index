@@ -1,0 +1,97 @@
+id: arxiv-2212.14052
+title: 'Hungry Hungry Hippos: Towards Language Modeling with State Space Models'
+authors:
+- Daniel Y. Fu
+- Tri Dao
+- Khaled K. Saab
+- Armin W. Thomas
+- Atri Rudra
+- Christopher Ré
+year: 2022
+venue: ICLR 2023
+links:
+  arxiv: https://arxiv.org/abs/2212.14052
+  code: https://github.com/HazyResearch/H3
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: de923022ffc5e53d430f0af72286cec26f32d03c9e2fd3686938a5d62811eae2
+tags:
+  tasks:
+  - language-modeling
+  - efficiency-evaluation
+  method_families:
+  - state-space-models
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'H3 layer: Q ⊙ SSM_diag(SSM_shift(K) ⊙ V), stacking a shift-matrix SSM and a diagonal SSM (initialized from S4D) with multiplicative interactions, loosely inspired by linear attention, to recall earlier
+  tokens and compare tokens across the sequence'
+- 'FlashConv: a fused block-FFT convolution kernel (using matrix-multiply units, for sequences up to 8K on A100) plus a state-passing algorithm that processes longer sequences in chunks using the SSM recurrence'
+claims:
+- id: c1
+  statement: 'Expressivity gap: on two synthetic tasks (induction head, associative recall), two-layer S4D and Gated State Spaces fail, which the authors say suggests they may not have the expressivity
+    for general language; they argue this points to two missing capabilities, which attention has via the QK^T matrix (comparison) and copying with softmax(QK^T)V (recall).'
+  location: Section 3.1
+  page: 4
+  quote: 'We argue that these failures suggest two missing capabilities: (i) to remember tokens that appear after a particular event (e.g., the special token in the induction head task), and (ii) to compare
+    tokens across the sequence (e.g., comparing keys to decide which value to recall).'
+- id: c2
+  statement: 'H3 definition: the input is projected to Q, K, V; the feature map phi(K) of linear attention is replaced by a shift-matrix SSM and the running sum S_i by a diagonal SSM, giving Q ⊙ SSM_diag(SSM_shift(K)
+    ⊙ V) for head dimension 1; the shift SSM can detect when an event occurs and the diagonal SSM (initialized from S4D''s diagonal HiPPO) can remember a token for the rest of the sequence.'
+  location: Section 3.2
+  page: 5
+  quote: 'H3 is loosely inspired by linear attention (Section 2): we project the input u to get three signals Q, K, V.'
+- id: c3
+  statement: 'OpenWebText (12-layer models of about 125M parameters, same hyperparameters, 50B tokens): pure H3 is stated to come within 0.4 perplexity of Transformers and to be 3 to 3.9 points better than
+    S4D and GSS.'
+  location: Section 3.3
+  page: 6
+  quote: H3 comes within 0.4 perplexity points of Transformers when trained for 50B tokens on OpenWebText
+- id: c4
+  statement: 'Hybrid: a model that keeps two self-attention layers (the second layer and layer 2 + N/2) and uses H3 elsewhere is stated to outperform Transformers on OpenWebText by 1.0 perplexity point
+    (described as surprising) and to outperform the GSS-attention hybrid.'
+  location: Section 3.3
+  page: 6
+  quote: A simple hybrid H3-attention language model surprisingly outperforms Transformers on OpenWebText by 1.0 point.
+- id: c5
+  statement: 'FlashConv cost trade-off: the block FFT writes the FFT as block-diagonal matrix multiplications (Cooley-Tukey) so tensor cores can be used, at O(N r log N / log r) FLOPs, more than a standard
+    FFT; kernel fusion follows FlashAttention to avoid GPU memory reads/writes, and for sequences longer than 8K (which no longer fit in SRAM) a state-passing algorithm computes chunks of FFT convolution
+    connected by the recurrence (Proposition 2: same output as the full SSM).'
+  location: Section 4.1
+  page: 7
+  quote: This incurs more FLOPs than standard FFT (O(N log N)), but can run faster when we using specialized matrix multiplication hardware.
+- id: c6
+  statement: 'Pile evaluation protocol: hybrid H3-attention models at 125M, 355M, 1.3B and 2.7B are trained on the Pile for 400B tokens (GPT-3 hyperparameters) and compared with public checkpoints of similar
+    size (GPT-Neo trained on the Pile, GPT-2 trained on WebText, OPT); the authors note GPT-2 perplexities are not directly comparable because of different training data. On SuperGLUE (rank classification
+    on logits) the hybrids are stated to outperform or match the best Transformer baseline on more than half the tasks.'
+  location: Section 5.1
+  page: 9
+  quote: We report the PPL of GPT-2 models for context, though the performance is not directly comparable since they were trained on diﬀerent data.
+- id: c7
+  statement: 'Inference speed: with the recurrent view, a 1.3B hybrid model is stated to have up to 2.4x higher generation throughput than a Transformer of similar size (A100 80GB, batch 64, prompt lengths
+    512-1536, 128 generated tokens; the caption says the difference is larger for longer sequences).'
+  location: Section 5.1
+  page: 9
+  quote: The hybrid model has up to 2.4× higher throughput.
+- id: c8
+  statement: 'Generation-based evaluation caveat: when SuperGLUE answers are generated rather than rank-classified, few-shot trends match the logit results, but the hybrid and H3 models perform very poorly
+    zero-shot on some tasks, tending to generate long irrelevant responses.'
+  location: Appendix F.7
+  page: 23
+  quote: The trends for few-shot learning match with the logit results, but the hybrid and H3 models perform very poorly in zero-shot performance on some tasks.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Stanford (Fu, Dao, Saab, Thomas, Ré), University at Buffalo (Rudra); Fu and Dao are equal contribution. Venue from the arXiv comment (''ICLR 2023 Camera-Ready (Notable-top-25% / Spotlight)''); year
+    is the first arXiv version (2022). Section numbers are from numbered headings in the PDF. Proposition 1 (paragraph ''Efficiency''): H3 takes O(d^2 N + d N log N) time and O(dN) space with O(1) head
+    dimension. Conflict of interest: the SSM baselines and components (S4, S4D, HiPPO) and FlashAttention (the speed baseline and the inspiration for kernel fusion) are by overlapping authors (Dao, Ré,
+    Rudra). FlashConv speedups on LRA (S4 2x faster, 5.8x over Transformers) are from Table 8 and stated in the text; Figure 2 speedups are figure-based and not recorded. Pure H3 language model results
+    are only in Appendix F. The Conclusion mentions ''results on language models up to 1.3B parameters'' although 2.7B hybrid models are also reported.'

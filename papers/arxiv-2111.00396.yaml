@@ -1,0 +1,105 @@
+id: arxiv-2111.00396
+title: Efficiently Modeling Long Sequences with Structured State Spaces
+authors:
+- Albert Gu
+- Karan Goel
+- Christopher Ré
+year: 2021
+venue: ICLR 2022
+links:
+  arxiv: https://arxiv.org/abs/2111.00396
+  code: https://github.com/HazyResearch/state-spaces
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 872b4ef302312d04ef4d55610613c0e59da32c443a2e38552d7cebb7dc3636fa
+tags:
+  tasks:
+  - image-classification
+  - language-modeling
+  - efficiency-evaluation
+  method_families:
+  - state-space-models
+  - deep-learning
+  paradigms:
+  - supervised
+  - self-supervised
+proposes:
+- 'S4 (Structured State Space sequence model): an SSM x''(t) = Ax(t) + Bu(t), y(t) = Cx(t) (+ Du) with A initialized to the HiPPO matrix, discretized with the bilinear method and computed either as a recurrence
+  (inference) or as a global convolution with kernel K = (CB, CAB, ..., CA^(L-1)B) (training)'
+- Normal plus low-rank (NPLR) parameterization of A, conjugated to diagonal plus low-rank form, with the kernel computed via the truncated generating function at roots of unity, the Woodbury identity and
+  a Cauchy kernel, followed by an inverse FFT
+claims:
+- id: c1
+  statement: 'Discrete and convolutional views: the SSM is discretized with the bilinear method using a step size Delta (A-bar = (I - Delta/2 A)^-1 (I + Delta/2 A), B-bar = (I - Delta/2 A)^-1 Delta B),
+    giving an RNN-like recurrence; because the recurrence is sequential, training instead uses the equivalent convolution y = K * u with K = (CB, CAB, ..., CA^(L-1)B), computable with FFTs once K is known,
+    and computing K is the focus of the technical contributions.'
+  location: Section 2.4
+  page: 4
+  quote: The recurrent SSM (3) is not practical for training on modern hardware due to its sequentiality.
+- id: c2
+  statement: 'Bottleneck of prior work: computing the kernel naively as in the LSSL needs O(N^2 L) operations and O(NL) space; diagonalizing A would reduce it to a Vandermonde product, but the HiPPO matrix
+    is diagonalized by a matrix with entries up to about 2^(4N/3), so naive diagonalization is numerically infeasible, and the authors prove that a faster algorithm proposed in the LSSL paper is also numerically
+    unstable.'
+  location: Section 3.1
+  page: 5
+  quote: Unfortunately, the naive application of diagonalization does not work due to numerical issues.
+- id: c3
+  statement: 'NPLR parameterization: the HiPPO matrix is not normal but is the sum of a normal and a low-rank matrix (rank 1 for equation (2); r = 1 or 2 for HiPPO-LegS, LegT, LagT), and S4 computes the
+    kernel''s spectrum through the truncated generating function at roots of unity, corrects the low-rank term with the Woodbury identity and reduces the diagonal case to a Cauchy kernel; Theorem 3 states
+    O~(N + L) operations and O(N + L) space for the kernel, and Theorem 2 O(N) per recurrent step.'
+  location: Section 3.2
+  page: 5
+  quote: We make the observation that although the HiPPO matrix is not normal, it can be decomposed as the sum of a normal and low-rank matrix.
+- id: c4
+  statement: 'Implementation caveat: the actual implementation uses the naive O(NL) Cauchy algorithm via the pykeops library (which the authors say may not be optimized for these kernels), because the asymptotically
+    faster stable Cauchy algorithms are not implemented for GPUs; the authors believe S4 may have significant room for efficiency improvements. Separately, the paper notes that follow-up work found this
+    version of S4 can sometimes be numerically unstable when A has eigenvalues in the right half-plane, corrected by changing Lambda - PQ* to Lambda - PP*.'
+  location: Appendix A
+  page: 16
+  quote: Our current implementation of S4 actually uses the naive O(NL) algorithm which is easily parallelized on GPUs
+- id: c5
+  statement: 'Efficiency as measured: versus the LSSL, S4 is stated to be up to 30x faster with 400x less memory; versus efficient Transformers (Linear Transformer, Performer) the comparison is parameter-matched
+    and follows the LRA protocol of Tay et al., with S4''s speed and memory described as competitive with the most efficient variants.'
+  location: Introduction
+  page: 2
+  quote: Compared to the LSSL, S4 is up to 30× faster with 400× less memory usage, while exceeding the LSSL’s performance empirically.
+- id: c6
+  statement: 'Long Range Arena as stated in the text: S4 outperforms all baselines (the 11 Transformer variants from Tay et al. plus follow-up work) on all tasks, averaging 80.48% versus less than 60% for
+    every baseline, and solves Path-X (length 16384), on which all previous models were at random guessing.'
+  location: Section 4.2
+  page: 9
+  quote: S4 substantially advances the SoTA, outperforming all baselines on all tasks and averaging 80.48% compared to less than 60% for every baseline.
+- id: c7
+  statement: 'Reproduction caveat: since the first version, several experiments were updated; the LRA results in Table 4 were replaced by results from follow-up papers (S4-LegS, same model) with minor hyperparameter
+    changes, the original numbers are in Table 10, Speech Commands users are asked to cite a different table from a follow-up paper (full 35-class SC), and the WikiText-103 model was retrained with batch
+    size 1 and context 8192.'
+  location: Appendix D.5
+  page: 30
+  quote: Since the ﬁrst version of this paper, several experiments have been updated.
+- id: c8
+  statement: 'Ablation (sequential CIFAR-10, at most 100K parameters, plateau scheduler, no regularization): random NPLR matrices still do not perform well, which the authors take as showing that S4''s
+    effectiveness comes primarily from the HiPPO initialization rather than the NPLR parameterization; with trainable A all initializations reach perfect training accuracy but validation accuracies differ
+    by over 15%.'
+  location: Section 4.4
+  page: 11
+  quote: Fig. 4a shows that random NPLR matrices still do not perform well, which validates that S4’s eﬀectiveness primarily comes from the HiPPO initialization, not the NPLR parameterization.
+- id: c9
+  statement: 'Stated limitation: S4 may not be the most suitable model for all data types; language modeling (WikiText-103, where S4 replaced the attention layers of a Transformer baseline and is stated
+    to be within 0.8 perplexity) still shows a gap to Transformers, and combining S4 with other sequence models is suggested as future work.'
+  location: Appendix A (Limitations and Future Directions)
+  page: 16
+  quote: For example, Table 8 still found a gap compared to Transformers for language modeling.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Stanford. Venue from the arXiv comment (''ICLR 2022 (Outstanding Paper HM)''); year is the first arXiv version (2021). Section numbers are from numbered headings in the PDF; the appendix containing
+    the implementation and limitations paragraphs is headed ''A Discussion''. Conflict of interest: S4 builds on and ablates the authors'' own HiPPO (arxiv-2008.07669) and LSSL (Gu et al., with Goel and
+    Ré), and the paper proves that the LSSL''s proposed fast algorithm is unstable. Citing the LSSL, the paper states that replacing a random A with the HiPPO matrix improved sequential MNIST from 60% to
+    98% (Section 2.2). Other text-stated results (speech SC10 98.3% raw; 96.3% at 0.5x frequency without retraining; ~60x faster generation; sCIFAR 91.12% without augmentation; forecasting better on 40/50
+    settings) are not recorded as claims; tables are not recorded. S4 state size was fixed to N = 64 on LRA; some tasks (Path-X) used an A100 40GB (Appendix D.2).'

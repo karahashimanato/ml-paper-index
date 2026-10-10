@@ -1,0 +1,115 @@
+id: arxiv-2406.07887
+title: An Empirical Study of Mamba-based Language Models
+authors:
+- Roger Waleffe
+- Wonmin Byeon
+- Duncan Riach
+- Brandon Norick
+- Vijay Korthikanti
+- Tri Dao
+- Albert Gu
+- Ali Hatamizadeh
+- Sudhakar Singh
+- Deepak Narayanan
+- Garvit Kulshreshtha
+- Vartika Singh
+- Jared Casper
+- Jan Kautz
+- Mohammad Shoeybi
+- Bryan Catanzaro
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2406.07887
+  code: https://github.com/NVIDIA/Megatron-LM
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: db92bcb9090700728eda598a97bd349ce3b6621be001e26fc93ed7b06aec6267
+tags:
+  tasks:
+  - language-modeling
+  - efficiency-evaluation
+  method_families:
+  - state-space-models
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- A controlled comparison of 8B-parameter Mamba, Mamba-2 and Transformer language models trained on the same 1.1T- and 3.5T-token datasets with the same hyperparameters and evaluation setup
+- 'Mamba-2-Hybrid 8B: 56 layers (24 Mamba-2, 4 self-attention with GQA, 28 MLP; no explicit position embeddings), with 16K, 32K and 128K long-context extensions'
+claims:
+- id: c1
+  statement: 'Design: the stated primary goal is an apples-to-apples comparison of Mamba, Mamba-2, Mamba-2-Hybrid and Transformers at 8B parameters trained on up to 3.5T tokens with the same hyperparameters,
+    the same data and the exact same evaluation setup on 35 downstream tasks; the authors note that earlier controlled comparisons (same data, parameter count) were limited to small scale.'
+  location: Introduction
+  page: 2
+  quote: In particular, our primary goal is to provide a rigorous apples-to-apples comparison between Mamba, Mamba-2, Mamba-2-Hybrid (containing Mamba-2, attention, and MLP layers), and Transformers for
+    8B-parameter models trained on up to 3.5T tokens, with the same hyperparameters.
+- id: c2
+  statement: 'Hyperparameters are shared across architectures because smaller-scale studies found Mamba hyperparameters similar to Transformers'' (1.1T: batch 256, peak LR 1e-4; 3.5T: batch 1024, peak LR
+    3e-4; cosine schedule, BF16).'
+  location: Section 3.2
+  page: 5
+  quote: We performed some studies at smaller scale and found that Mamba network hyperparameters are similar to that of Transformers and as a result we use the same hyperparameters across models to make
+    a rigorous direct comparison.
+- id: c3
+  statement: At 1.1T tokens, pure SSMs average higher than the Transformer on WinoGrande, PIQA, HellaSwag, ARC-Easy and ARC-Challenge but are significantly worse on MMLU (Mamba-2 five-shot 17 points lower);
+    training on 3.5T tokens closes the Mamba-2 MMLU gap to 1.37 points.
+  location: Section 3.3.1
+  page: 6
+  quote: For example Mamba-2 five-shot accuracy is 17 points lower than that of the Transformer in this setting.
+- id: c4
+  statement: 'MMLU formats: pure SSMs struggle with the standard and choice-text-in-targets formulations but exceed the Transformer in the cloze formulation; the authors read this as SSMs containing the
+    same knowledge but requiring substantially more training to understand the multiple-choice format, and hypothesize that pure SSMs cannot directly route each answer''s knowledge into a single answer
+    token.'
+  location: Section 3.3.2
+  page: 6
+  quote: While the pure SSM models struggle with the standard and choice-text-in-targets formulations, they actually exceed the accuracy of the Transformer in the cloze setting.
+- id: c5
+  statement: 'Copying (Phonebook, averaged over 20 random initializations): the 8B Transformer answers with near 100% accuracy up to its 4096 pretraining context, whereas Mamba and Mamba-2 start answering
+    incorrectly beyond roughly 500 tokens, which persists for Mamba-2 at 3.5T tokens; SSMs show ''fuzzy memory'' (similar but not exact numbers), and a reversed prompt helps but accuracy still degrades
+    below 4096; the authors hypothesize fine-tuning on the task would help.'
+  location: Section 3.3.3
+  page: 8
+  quote: In contrast, both Mamba and Mamba-2 models begin to respond incorrectly for input sequence lengths beyond approximately 500 tokens.
+- id: c6
+  statement: 'Hybrid architecture: out of 56 layers, 4 (7.1%) are self-attention (GQA), 24 (42.9%) Mamba-2 and 28 (50%) MLP, with a Mamba-2 layer first, attention and MLP layers evenly distributed, no explicit
+    position embeddings, and the exact same training hyperparameters as the Transformer and pure SSM models; Mamba-2 is chosen over Mamba citing an up to 8x faster scan (Dao and Gu 2024).'
+  location: Section 4.2
+  page: 10
+  quote: Out of 56 total layers, the hybrid model has 4 (7.1%) self-attention layers, 24 (42.9%) Mamba-2 layers, and 28 (50%) MLP layers.
+- id: c7
+  statement: 'Training efficiency is measured as Model FLOP Utilization on 1024 NVIDIA H100 GPUs (tensor-parallel 4, data-parallel 256): the hybrid reaches 29.9% MFU versus 30.7% for a corresponding 8B
+    Transformer in Megatron-LM with the same parallelization.'
+  location: Section 4.2
+  page: 11
+  quote: This can be compared to the 30.7% MFU of a corresponding 8B parameter Transformer implemented in Megatron-LM and trained with the same parallelization configuration.
+- id: c8
+  statement: 'Inference speed is a predicted (not described as measured) per-token generation time ratio at batch size 32: roughly equal for short contexts and nearly 8x faster for the hybrid at long contexts;
+    the authors additionally expect benefits from a smaller key-value cache allowing larger batches.'
+  location: Section 4.2
+  page: 11
+  quote: In Figure 5, we plot the predicted time to generate one token for the 8B Transformer model over the time for the 8B Mamba-2-Hybrid model using a batch size of 32.
+- id: c9
+  statement: 'Long-context weakness: 16K/32K Transformers reach about one point higher average than the hybrids on natural long-context tasks, largely on LongBench multi-document QA; the authors hypothesize
+    SSM states are sometimes confused by irrelevant documents, possibly due to the continued-pretraining recipe packing unrelated sequences, and note hybrids may be more sensitive to prompt formatting (prompts
+    were optimized for Transformers).'
+  location: Section 4.3.2
+  page: 12
+  quote: We hypothesize that the hybrid model reaches lower accuracy than the Transformer on these tasks because the SSM layer states are sometimes confused by documents irrelevant to the question
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    NVIDIA (most authors; Waleffe also University of Wisconsin-Madison, work as NVIDIA intern), Tri Dao (Princeton, Together AI), Albert Gu (CMU, Cartesia AI). Conflict of interest: Dao and Gu are the authors
+    of Mamba and Mamba-2, the SSMs evaluated here; NVIDIA authors evaluate models trained with their own Megatron-LM and release them. The paper calls itself a ''technical report''; no venue recorded (arXiv
+    record has no comment/journal_ref). Section numbers from numbered headings in the PDF dump. On 3.5T tokens only pure Mamba-2 (not Mamba) was trained, because pure Mamba on 1.1T was almost 3x slower
+    than Mamba-2 (Section 3.3.1). Training data: 70% English, 15% non-English, 15% code, predecessors of the Nemotron-4 data; 256K SentencePiece vocabulary. Hybrid ablations (Section 4.1, 130M/840M models):
+    validation loss minimized at roughly 8% attention layers; 30-50% MLP layers without loss increase; hybrids without RoPE did better after long-context extension. No description of how the Figure 5 inference
+    prediction was computed was found (searched for predicted, estimat, simulat, roofline). Hybrid vs Transformer averages (+2.65 on 12 tasks), RULER and Phonebook long-context results are tables/figures
+    and not recorded.'

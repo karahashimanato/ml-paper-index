@@ -1,0 +1,102 @@
+id: arxiv-2402.01032
+title: 'Repeat After Me: Transformers are Better than State Space Models at Copying'
+authors:
+- Samy Jelassi
+- David Brandfonbrener
+- Sham M. Kakade
+- Eran Malach
+year: 2024
+venue: ICML 2024
+links:
+  arxiv: https://arxiv.org/abs/2402.01032
+  code: https://github.com/sjelassi/transformers_ssm_copy
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 1e2fdb93eca16f338264f6a330f1866ebd062523d48ed1f38973f694a20fbaf2
+tags:
+  tasks:
+  - language-modeling
+  method_families:
+  - state-space-models
+  - large-language-models
+  - deep-learning
+proposes:
+- 'Generalized state space models (GSSMs): any sequence model with a fixed-size, input-length-independent latent state (S4, Mamba, RNNs, linear attention, parallel RNNs), formalized by an update rule u:
+  S x D -> S and output r: S -> D'
+- 'Theoretical separation on copying: a depth-2 transformer of dimension O(n log D) with Hard-ALiBi positional bias copies via n-gram hashing, while any GSSM fails unless its state grows linearly with sequence
+  length'
+- Hard-ALiBi positional encoding (attention restricted to the last m tokens per head, m = infinity allowed)
+claims:
+- id: c1
+  statement: 'Definition: a GSSM has a finite state space S with mem(S) = log|S| bits, updated by S_i = u(S_{i-1}, x_i) with output r(S_i). The definition constrains only input-dependent memory (activations)
+    and not parameters or the run-time of state updates; the authors argue this only strengthens their lower bound.'
+  location: Section 2.1
+  page: 3
+  quote: Since our main goal is to show a lower bound on the state space memory, leaving all other considerations unconstrained only strengthens our results.
+- id: c2
+  statement: 'Transformer construction (Theorem 2.3): for all n there is a depth-2 transformer of dimension O(n log D) whose error on any length-L copy distribution (2n <= L <= D^n) is below the probability
+    of repeated n-grams; it hashes n-grams using Hard-ALiBi and copies perfectly as long as no n-gram pattern repeats. Remark 2.6: precision is not limited, but the results hold for finite precision with
+    O(log(log(L))) bits.'
+  location: Section 2.2
+  page: 3
+  quote: The copy algorithm given in Algorithm 1 (and similarly, our transformer construction) can perfectly copy the input sequence, as long as there are no repeated n-gram patterns in the input.
+- id: c3
+  statement: 'GSSM lower bound (Theorem 2.7, Corollary 2.8): any GSSM has error > 1 - |S|/D^L on the uniform copy distribution, so any GSSM with mem(S) < L log(D) - 1 has error > 1/2; the authors call this
+    intuitive, since copying requires storing the input in the state.'
+  location: Section 2.3
+  page: 4
+  quote: 'This is intuitive: to be able to copy the entire input sequence, the model needs to store it in its state space, which requires the memory to grow linearly with the sequence length.'
+- id: c4
+  statement: 'Scope of the theory: it studies representational expressivity, not whether the representations are learned, and in practice a large GSSM may have enough capacity to hold the entire input (e.g.
+    1000 32-bit floats can store at least 2000 tokens from a 50K vocabulary); hence the synthetic and pretrained-model experiments.'
+  location: Introduction
+  page: 1
+  quote: Our theory studies representation expressivity, but not whether these representations will be learned.
+- id: c5
+  statement: 'Synthetic-experiment setup: Mamba and transformers are set to a similar parameter count (about 160M), the LSTM is the largest the authors managed to train (about 40M); per Appendix A.2, Hard-ALiBi''s
+    number of masked heads and Mamba''s state dimension were swept, and the learning rate was swept only for LSTM and Mamba.'
+  location: Section 3.1
+  page: 4
+  quote: In all our experiments, we set the model hyperparameters so that the Mamba and transformers have a similar number of parameters (≈160 million parameters).
+- id: c6
+  statement: 'Data efficiency: training on strings of random length up to 300 and evaluating in-distribution string-level accuracy, the authors observe that transformers need 100x fewer samples than the
+    best GSSMs to learn the copy task; LSTMs did not learn length-300 strings even at the character level.'
+  location: Section 3.2
+  page: 5
+  quote: We observe that the transformers need 100x less samples than the best GSSMs to learn the copy task.
+- id: c7
+  statement: 'Counterexample where GSSMs do well: in the prefix-key n-gram lookup task (key given before the sequence, so the full input need not be stored) GSSMs achieve perfect length generalization and
+    even outperform NoPE and ALiBi transformers (but not Hard-ALiBi); the authors hypothesize this may be due to those positional embeddings, and conclude GSSMs seem memory limited but can be effective
+    when only a summary of the input is needed.'
+  location: Section 3.5
+  page: 6
+  quote: Indeed, GSSMs achieve perfect length-generalization on this variant.
+- id: c8
+  statement: 'Pretrained-model comparison conditions: Pythia transformers (410M-2.8B) are compared with Mamba models of similar sizes, all pretrained on the Pile with the same tokenizer; the Mamba models
+    generally have slightly lower perplexity on the training set for a given size. Evaluation is without finetuning, string-level accuracy (F1 for SQuAD) over 10 batches of 64 (50 questions for QA), greedy
+    decoding.'
+  location: Section 4.1
+  page: 7
+  quote: The Mamba models generally have slightly lower perplexity on the training set for a given size.
+- id: c9
+  statement: 'Discussion: the authors emphasize that state space models have advantages (memory and compute not growing with input length, better tracking of state variables, citing Liu et al., 2023a) and
+    suggest future work on hybrid architectures that give state space models an attention-like mechanism for retrieving text from the input.'
+  location: Section 6
+  page: 9
+  quote: We therefore believe that future work should focus on building hybrid architectures that endow state space models with an attention-like mechanism, allowing them to retrieve relevant pieces of
+    text from their input.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Harvard University (CMSA, Kempner Institute, CS and Statistics). Venue from the PDF footer (''Proceedings of the 41 st International Conference on Machine Learning, Vienna, Austria. PMLR 235, 2024'').
+    Section numbers are from numbered headings in the PDF. GSSMs in the experiments are only LSTM and Mamba; linear attention and RWKV are included in the GSSM class by definition but not evaluated. Body-text
+    results not recorded as claims: in phone-book lookup the smallest transformer (410M) outperforms the largest GSSM (2.8B) when the phone-book has at least 70 entries (Section 4.3); SQuAD uses only the
+    2.8B models because smaller models were ''unable to achieve reasonable and consistent performance'' (footnote 4); a Hard-ALiBi transformer trained on length <= 50 is reported to generalize almost perfectly
+    to length 1000 (Section 3.3), and copying accuracy drops when inputs contain duplicated n-grams of 5 or more tokens (Section 3.4). Training used about 600 RTX8000 GPU hours. No conflict of interest
+    with the evaluated models (Pythia, Mamba) was found in the author list.'

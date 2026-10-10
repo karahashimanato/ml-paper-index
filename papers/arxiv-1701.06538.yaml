@@ -1,0 +1,100 @@
+id: arxiv-1701.06538
+title: 'Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer'
+authors:
+- Noam Shazeer
+- Azalia Mirhoseini
+- Krzysztof Maziarz
+- Andy Davis
+- Quoc Le
+- Geoffrey Hinton
+- Jeff Dean
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1701.06538
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 2567713d198a376b65b92f0c60b9f58c8c5f66755530b92203533a17c4ec4b8e
+tags:
+  tasks:
+  - language-modeling
+  method_families:
+  - mixture-of-experts
+  - deep-learning
+  paradigms:
+  - self-supervised
+  - supervised
+proposes:
+- 'Sparsely-Gated Mixture-of-Experts layer: n feed-forward experts and a trainable gating network whose sparse output G(x) weights the experts (y = sum_i G(x)_i E_i(x)); experts with G(x)_i = 0 are not
+  computed. Applied convolutionally between stacked LSTM layers'
+- 'Noisy top-k gating: add trainable-scale Gaussian noise to the gating logits, keep the top k, softmax over them'
+- 'Soft balancing losses: an importance loss (squared coefficient of variation of per-expert summed gate values) and a load loss (squared CV of a smooth, noise-based estimate of per-expert example counts)'
+- Mixing data and model parallelism so each expert receives a combined batch from all data-parallel replicas (addressing the shrinking batch problem)
+claims:
+- id: c1
+  statement: 'Definition: the MoE layer has n expert networks E_1..E_n and a gating network G whose output is a sparse n-dimensional vector; the output is y = sum_i G(x)_i E_i(x), and E_i(x) need not be
+    computed wherever G(x)_i = 0. In the experiments there are up to thousands of experts but only a handful are evaluated per example.'
+  location: Section 2
+  page: 3
+  quote: We save computation based on the sparsity of the output of G(x).
+- id: c2
+  statement: 'Noisy top-k gating: before the softmax, tunable Gaussian noise (scale given by Softplus(x W_noise)) is added to the logits x W_g, and only the top k values are kept (the rest set to -infinity,
+    i.e. gate 0); sparsity saves computation and the noise helps load balancing. The authors note this creates theoretically ''scary'' discontinuities in the gating output but have not yet observed this
+    to be a problem in practice.'
+  location: Section 2.1
+  page: 4
+  quote: While this form of sparsity creates some theoretically scary discontinuities in the output of gating function, we have not yet observed this to be a problem in practice.
+- id: c3
+  statement: 'Shrinking batch problem: with k of n experts chosen per example, each expert sees about kb/n examples from a batch of b. Running data-parallel replicas synchronously and keeping one shared
+    copy of each expert, with d devices each processing batch b, each expert receives about kbd/n examples.'
+  location: Section 3.1
+  page: 4
+  quote: Thus, we achieve a factor of d improvement in expert batch size.
+- id: c4
+  statement: 'Failure mode: the gating network tends to converge to always giving large weights to the same few experts, and this imbalance is self-reinforcing. The authors add an importance loss: w_importance
+    times the squared coefficient of variation of the batchwise sum of gate values per expert (w_importance hand-tuned).'
+  location: Section 4
+  page: 5
+  quote: This imbalance is self-reinforcing, as the favored experts are trained more rapidly and thus are selected even more by the gating network.
+- id: c5
+  statement: 'Because equal importance can still leave experts with very different numbers of examples (causing memory and performance problems on distributed hardware), a load loss is added: a smooth estimator
+    Load(X) sums, over the batch, the probability (via the normal CDF, using the gating noise) that each expert''s gate is nonzero, and the loss is w_load times its squared coefficient of variation. W_g
+    and W_noise are initialized to zero to start with approximately equal load.'
+  location: Appendix A
+  page: 13
+  quote: Instead, we deﬁne a smooth estimator Load(X) of the number of examples assigned to each expert for a batch X of inputs.
+- id: c6
+  statement: In the loss ablation (MoE-256 model, 10 epochs), all combinations containing at least one of the two balancing losses led to very similar model quality, while having no loss was much worse;
+    higher w_load gave lower load on the most overloaded expert.
+  location: Appendix A
+  page: 14
+  quote: All the combinations containing at least one the two losses led to very similar model quality, where having no loss was much worse.
+- id: c7
+  statement: 'Budget (1 Billion Word benchmark): MoE models with roughly equal computation (about 8 million multiply-and-adds per timestep in the forward pass, excluding softmax; 4 experts active per input,
+    about 1M parameters per expert) were compared across 4 to 4096 experts; the 4-always-active-expert model performed similarly to computationally matched baselines, while the 4096-expert model achieved
+    24% lower test perplexity.'
+  location: Section 5.1
+  page: 6
+  quote: the largest of the models (4096 experts) achieved an impressive 24% lower perplexity on the test set.
+- id: c8
+  statement: 'Cost measurement: computational efficiency in TFLOPS/GPU is the floating-point operations per training batch divided by observed step time and number of GPUs (16-32 Tesla K40s, TensorFlow),
+    counting the backward pass. Baselines without MoE reached 1.07-1.29 TFLOPS/GPU and low-computation MoE models 0.74-0.90 (except the 4-expert model); the highest-computation MoE model reached 1.56, likely
+    due to larger matrices.'
+  location: Section 5.1
+  page: 7
+  quote: For our baseline models wtih no MoE, observed computational efﬁciency ranged from 1.07-1.29 TFLOPS/GPU.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Google Brain and Jagiellonian University (page 1). Venue: the arXiv v1 PDF header says ''Under review as a conference paper at ICLR 2017'' and the arXiv record has no comment/journal_ref, so no venue
+    is recorded (reference lists of other papers cite it as ICLR 2017, but that is not confirmed by this PDF or the arXiv metadata). Section numbers are from numbered headings in the PDF dump and cross-references
+    (''Section 2.1'', ''section 4''). Body-text numbers not made claims: on the 100B-word Google News corpus (internal data) perplexity improves up to 65536 experts (68B parameters, 39% lower than the computationally
+    matched baseline) but degrades at 131072 experts, ''possibly a result of too much sparsity'' (Section 5.2); on 1B Word, added capacity ''seems to produce diminishing returns'' beyond 1B MoE parameters.
+    The single-pair MT experiments use a strictly-balanced gating function (Appendix F) rather than noisy top-k, because of infrastructure peculiarities. MT/multilingual results are in tables and are not
+    recorded; the multilingual MoE is compared with GNMT models by co-authors'' group (Google). Experts specialize by syntax/semantics (Appendix E, Table 9, qualitative). Later Google MoE work (arxiv-2006.16668
+    GShard, arxiv-2101.03961 Switch, arxiv-2202.08906 ST-MoE) shares author Noam Shazeer.'

@@ -1,0 +1,98 @@
+id: arxiv-2405.21060
+title: 'Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality'
+authors:
+- Tri Dao
+- Albert Gu
+year: 2024
+venue: ICML 2024
+links:
+  arxiv: https://arxiv.org/abs/2405.21060
+  code: https://github.com/state-spaces/mamba
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 6fe16414fa471a5ab150cddcba5840d3a94e347e96992c50c12c1fb8b919479f
+tags:
+  tasks:
+  - language-modeling
+  - efficiency-evaluation
+  - scaling-laws
+  method_families:
+  - state-space-models
+  - efficient-attention
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'Structured state space duality (SSD): SSMs are semiseparable matrix transformations; a selective SSM whose A_t is a scalar times identity has a linear recurrent form and a dual quadratic, attention-like
+  form (L ∘ QK^T)V without softmax, where the 1-semiseparable mask L is built from input-dependent scalars in [0, 1]'
+- SSD algorithm (block decomposition of the semiseparable matrix into intra-chunk diagonal blocks and low-rank inter-chunk blocks, mostly matrix multiplications) and the Mamba-2 architecture (parallel A,
+  X, B, C projections, extra normalization, multi-value head pattern, tensor/sequence parallelism)
+claims:
+- id: c1
+  statement: 'SSD versus Mamba''s selective SSM: the A structure is simplified from diagonal to scalar times identity and a larger head dimension (typically P = 64 or 128, versus P = 1 in Mamba) is used;
+    the authors describe this as slightly decreasing expressive power for significant training efficiency gains, enabling matrix multiplication units.'
+  location: Section 2.4
+  page: 5
+  quote: Compared to the original selective SSM, these changes can be viewed as slightly decreasing the expressive power in return for significant training efficiency improvements.
+- id: c2
+  statement: 'Theory: SSMs are equivalent to semiseparable matrices (Section 3); linear attention is generalized to structured masked attention (SMA); 1-semiseparable SMA is a diagonal SSM with scalar-identity
+    A (Corollary 5.1), and any SMA that is an autoregressive process of bounded order must have a semiseparable mask (Theorem 5.2). Remark 7 adds that general semiseparable SMA is strictly more expressive
+    than 1-SS SMA and cannot be described by a standard SSM.'
+  location: Introduction
+  page: 2
+  quote: We also prove that any kernel attention method possessing a fast recurrent form must be an SSM.
+- id: c3
+  statement: 'SSD algorithm cost: with state dimension, head dimension and chunk length all equal to N, the block-decomposition algorithm needs O(TN^2) FLOPs and O(TN) memory and consists mainly of (N,
+    N) matrix multiplications; the comparison table lists training FLOPs T^2 N for attention versus T N^2 for SSM and SSD, inference FLOPs TN versus N^2, and state size T versus N.'
+  location: Section 6.3
+  page: 22
+  quote: The work consists primarily of matrix multiplications on matrices of shape (N, N).
+- id: c4
+  statement: 'Speed as measured (A100 80GB PCIe): the SSD kernel is stated to be 2-8x faster than Mamba''s fused associative scan and faster than FlashAttention-2 from sequence length 2K; however, the authors
+    note the full Mamba-2 model might not be as efficient to train as a Transformer at short sequence lengths (e.g. 2K), since it has L SSD layers where a Transformer of equal parameters has L/2 attention
+    layers.'
+  location: Section 9.3
+  page: 31
+  quote: might not be as efficient to train as Transformer at short sequence length
+- id: c5
+  statement: 'Block design and stability: Mamba-2 produces A, X, B, C with one parallel projection at the start of the block (amenable to Megatron-style tensor parallelism) and adds a normalization layer
+    before the output projection because instabilities tended to arise in larger models in preliminary experiments; the ablation reports the extra normalization slightly improves performance and helps training
+    stability at larger scales.'
+  location: Section 7.1
+  page: 23
+  quote: In preliminary experiments, we found that instabilities were prone to arising in larger models.
+- id: c6
+  statement: 'Language modeling (same setup as Mamba: GPT-3 sizes 125M-2.7B, the Pile, recipe of Brown et al.; Chinchilla scaling with Mamba and Transformer++ baselines; zero-shot comparison with Pythia
+    trained on the same tokenizer, data and 300B tokens): the authors state Mamba-2 2.7B outperforms Mamba-2.8B, Pythia-2.8B and Pythia-6.9B.'
+  location: Introduction
+  page: 3
+  quote: For example, Mamba-2 with 2.7B parameters trained on 300B tokens on the Pile outperforms Mamba-2.8B, Pythia-2.8B and even Pythia-6.9B trained on the same dataset.
+- id: c7
+  statement: 'Recall weakness and MQAR: citing De et al. and Jelassi et al., phonebook look-up tasks are described as challenging for recurrent models such as SSMs due to finite state capacity; on a harder
+    MQAR setting Mamba-1 struggles while Mamba-2 performs well even at equal state size (N = 16), for reasons the authors say they are not sure of, and increasing N to 64 and 256 consistently helps.'
+  location: Section 9.1
+  page: 30
+  quote: (We are not sure which aspect of the architecture is the predominant factor, which remains a question to explore in future work.)
+- id: c8
+  statement: 'Hybrids: around 10% attention layers performed best in a 350M/48-layer, 7B-token experiment, and at 2.7B/300B tokens adding 6 attention layers to 58 SSD layers improved over pure Mamba-2 and
+    Transformer++ (which are around the same quality); the authors hypothesize that attention acts as a retrieval mechanism so the model need not compress all context into the SSM state.'
+  location: Section 9.2.3
+  page: 30
+  quote: We hypothesize that the SSM layers function well as a general sequence-to-sequence mapping, and attention layers act as a retrieval mechanism to quickly refer to previous tokens in the sequence
+    instead of forcing the model to compress all the context to its memory (SSM states).
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): alternatives and extensions to dense Transformers (sparse mixture-of-experts routing and load balancing, state space models
+    from HiPPO/S4 to Mamba-2, linear and kernelized attention, RWKV, and benchmarks/analyses comparing them with Transformers). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Princeton (Dao), CMU (Gu); authors alphabetical. Venue from the arXiv comment (''ICML 2024''); the v1 PDF itself does not state the venue. Section numbers are from numbered headings in the PDF. Conflict
+    of interest: the main baselines Mamba (arxiv-2312.00752) and FlashAttention-2 are the authors'' own work, as are the earlier SSMs discussed (S4, H3). The dual form (Section 2.4) is (L ∘ QK^T)V with
+    input-dependent scalars a_i in [0, 1]; the authors relate dropping the softmax to the ''attention sink'' observation and the mask L to replacing positional embeddings. Kernel-approximation variants
+    from linear attention (cosFormer, RFA, Performer, Based, ReBased) did not seem to improve over simple pointwise activations (Section 9.4.3), which the authors say may be not unexpected since those were
+    derived without the mask L; adding a softmax-like normalization term introduced instabilities in most variants. Mamba-2 headline numbers and scaling curves are from figures/tables and not recorded.
+    Model sizes and Pythia comparisons: Pythia was trained with the same tokenizer, dataset and 300B tokens (Section 9.2.2).'

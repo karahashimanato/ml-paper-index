@@ -210,9 +210,15 @@ def index_page(cards, benchmarks, tags) -> str:
 
 
 def stale_for(article_fm, cards) -> list[str]:
+    """執筆日以降に作成された、記事のタグと重なり depends_on に入っていないカード。
+
+    日付は日単位なので、執筆日と同じ日に作成されたカードも含める(執筆前に作成されたものも含まれうる)。
+    """
     covered = set(article_fm.get("tags") or [])
     deps = set(article_fm.get("depends_on") or [])
-    return [cid for cid, c in cards.items() if cid not in deps and card_tags(c) & covered]
+    written = str(article_fm.get("written_at") or "")
+    return [cid for cid, c in cards.items()
+            if cid not in deps and card_tags(c) & covered and str(c["card"]["created_at"]) >= written]
 
 
 def generate(root: Path) -> dict[Path, str]:
@@ -222,7 +228,7 @@ def generate(root: Path) -> dict[Path, str]:
         out[root / "generated" / "papers" / f"{cid}.md"] = paper_page(card, benchmarks)
     out[root / "generated" / "index.md"] = index_page(cards, benchmarks, tags)
 
-    lines = [HEADER + "# 未反映カード\n", "記事の `depends_on` に入っていない、記事のタグと重なるカード(Q14)。\n"]
+    lines = [HEADER + "# 未反映カード\n", "記事の執筆日(`written_at`)以降に作成され、記事のタグと重なり、`depends_on` に入っていないカード(Q14)。日付は日単位なので、執筆日と同じ日に作成されたカードを含む。\n"]
     for path, text, fm in articles:
         stale = stale_for(fm, cards)
         rel = path.relative_to(root)
@@ -230,7 +236,7 @@ def generate(root: Path) -> dict[Path, str]:
         text = link_citations(text, cards)
         out[path] = text
         if STALE_BLOCK.search(text):
-            note = (f"> ⚠ この記事の執筆後({fm.get('written_at')})に、関連カードが {len(stale)} 件追加されています(未反映): "
+            note = (f"> ⚠ この記事の執筆日({fm.get('written_at')})以降に作成された関連カードが {len(stale)} 件あります(未反映。執筆日と同じ日に作成されたカードを含む): "
                     + ", ".join(f"`{s}`" for s in stale) + "\n") if stale else "> 未反映のカードはありません。\n"
             out[path] = STALE_BLOCK.sub(lambda m: m.group(1) + note + m.group(2), text)
     out[root / "generated" / "stale.md"] = "\n".join(lines) + "\n"

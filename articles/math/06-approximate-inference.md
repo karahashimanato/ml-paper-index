@@ -10,7 +10,7 @@ written_by: claude-opus-5-5 via Claude Code
 # 数式の解説 6 — 近似推論:変分推論の ELBO と CAVI、メトロポリス法と HMC、R-hat、重要度比と診断
 
 <!-- generated:stale -->
-> ⚠ この記事の執筆後(2026-10-10)に、関連カードが 11 件追加されています(未反映): `arxiv-1111.4246`, `arxiv-1206.7051`, `arxiv-1402.4102`, `arxiv-1505.05770`, `arxiv-1603.00788`, `arxiv-1711.05597`, `arxiv-1909.11827`, `arxiv-1910.04102`, `arxiv-2011.01808`, `arxiv-2108.03782`, `arxiv-2211.02383`
+> 未反映のカードはありません。
 <!-- /generated:stale -->
 
 ## この記事の読み方

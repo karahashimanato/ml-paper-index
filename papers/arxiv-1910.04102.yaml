@@ -1,0 +1,100 @@
+id: arxiv-1910.04102
+title: Validated Variational Inference via Practical Posterior Error Bounds
+authors:
+- Jonathan H. Huggins
+- Mikołaj Kasprzak
+- Trevor Campbell
+- Tamara Broderick
+year: 2019
+venue: AISTATS 2020
+links:
+  arxiv: https://arxiv.org/abs/1910.04102
+  code: https://github.com/jhuggins/viabel
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-07'
+  pdf_sha256: fa061bb984ed7285c94830a28a118df1715f43c3684309b2403686407295e775
+tags:
+  tasks:
+  - posterior-inference
+  - uncertainty-estimation
+  method_families:
+  - variational-inference
+proposes:
+- Bounds on errors of posterior means, standard deviations, mean absolute deviations and covariances via the Wasserstein distance, which is bounded using the 2-divergence (or KL) and moment constants of
+  the variational approximation, which in turn are bounded by CUBO and ELBO estimates
+- 'A validated variational inference workflow: heavy-tailed (Student-t mean-field) family, CUBO minimization, a k-hat check, then computed divergence and Wasserstein bounds deciding whether to use the approximation
+  directly, refine it with PSIS, or change the family/parameterization'
+claims:
+- id: c1
+  statement: 'Scope and assumptions: the bounds apply when the approximating and exact posteriors have polynomial moments (tighter bounds when exponential moments exist), and are computed from standard
+    variational objectives, analytic calculations and simple Monte Carlo (not MCMC) estimates.'
+  location: Abstract
+  page: 1
+  quote: Our bounds are widely applicable, as they require only that the approximating and exact posteriors have polynomial moments.
+- id: c2
+  statement: 'Counterexamples: small KL(q | p) does not control posterior summaries; for any t there are one-dimensional unimodal pairs (Weibull distributions; a standard normal approximating a t distribution)
+    with KL below 0.9, 0.3 or 0.12 where the squared mean error or variance ratio exceeds t, and similarly small D2 (below 0.4) can coexist with arbitrarily poor mean and variance.'
+  location: Error bounds via posterior discrepancies
+  page: 3
+  quote: To get a sense of scale for the KL divergence, we note that the KL divergence from a variational approximation to the exact posterior can easily range from 1 to nearly 500.
+- id: c3
+  statement: 'Theorem 3.4: if the 1- or 2-Wasserstein distance is at most epsilon, the mean error is at most epsilon and the MAD error at most 2 epsilon; if W2 <= epsilon, the marginal standard-deviation
+    error is at most epsilon and the covariance error is below 2 epsilon (S + epsilon).'
+  location: Error bounds via posterior discrepancies
+  page: 4
+  quote: Our next result conﬁrms that the Wasserstein distance controls the error in these quantities.
+- id: c4
+  statement: 'Wasserstein bounds: assuming the variational approximation has polynomial (resp. exponential) tails and the posterior is absolutely continuous with respect to it, W_p is bounded via the 2-divergence
+    (resp. KL) times a moment constant of q; the divergence is in turn bounded by H2 = 2(CUBO2(q) - ELBO(eta)) for any distribution eta (Lemma 4.5, Theorem 4.6). Because the divergences are scale-free and
+    Wasserstein is not, the moment constants supply the scale.'
+  location: Computationally efficient error bounds
+  page: 5
+  quote: Assuming the variational approximation ˆπ has polynomial (respectively, exponential) tails, our next result provides a bound on the p-Wasserstein distance using the 2-divergence (respectively,
+    the KL divergence).
+- id: c5
+  statement: 'Workflow cost and steps: use a mean-field Student-t family (40 degrees of freedom, described as somewhat arbitrary) so the 2-divergence is finite, minimize CUBO2, then separately maximize
+    the ELBO to find eta, estimate both by simple Monte Carlo, and compute the bounds; the CUBO objective is usually non-convex, so the global minimum may not be found. Before computing bounds, k-hat <=
+    0.7 is checked because otherwise the CUBO2 estimate, and hence the bounds, are not reliable.'
+  location: A workﬂow for black box variational inference
+  page: 6
+  quote: However, before going to the effort of ﬁnding η, in step 3 we check that ˆk ≤0.7, since otherwise our estimate of CUBO2(ˆπ) is not reliable and thus we should not trust any bounds on the 2-divergence
+    or Wasserstein distance computed using Lemma 4.5 and Theorem 4.6.
+- id: c6
+  statement: 'Decision thresholds (step 8): what counts as small for the W2 bound depends on the desired accuracy and the natural scale of the problem; the 2-divergence bound has a more universal scale,
+    with values below 4.6 treated as moderately small (importance-weight variance below 100, so PSIS should be effective) and values below some delta* << 1 (e.g. 0.01) as very small (use the approximation
+    directly).'
+  location: A workﬂow for black box variational inference
+  page: 6
+  quote: For step 8, what qualiﬁes as a moderately or very small ¯w2 value will depend on the desired accuracy and natural scale of the problem.
+- id: c7
+  statement: 'On prior work: Yao et al. (2018), based on the empirical results and informal arguments of Vehtari et al. (2019), propose k-hat <= 0.5 as a good approximation and k-hat in [0.5, 0.7] as minimally
+    acceptable; the authors call the link between small k-hat and approximation quality only heuristic and report finding poor approximations with small k-hat.'
+  location: Previous work on validating variational approximations
+  page: 3
+  quote: However, the link between a small ˆk value and a high-quality posterior approximation is only heuristic.
+- id: c8
+  statement: 'Eight schools case study (HMC in Stan as ground truth): with the centered parameterization k-hat > 0.7 and the bounds agree that the approximation is poor; with a heavier-tailed mean-field
+    t family (8 degrees of freedom) k-hat was smaller (0.40) than with 40 degrees of freedom (0.55) although accuracy was worse, which the larger bounds reflected; hence the workflow uses k-hat only to
+    validate importance sampling, not the quality of the approximation.'
+  location: 'Case study #1: the eight schools model'
+  page: 8
+  quote: Hence, our workﬂow uses ˆk only to validate the use of importance sampling, but not the quality of ˆπ.
+- id: c9
+  statement: 'Robust regression case study (d = 2, N = 25, correlated covariates): mean-field CHIVI no longer underestimated marginal variances but could not capture the posterior correlation; its large
+    covariance error was reflected in large divergence and Wasserstein bounds but not in its small k-hat (0.34), although its PSIS errors were small, so k-hat and the bounds give complementary information.'
+  location: 'Case study #2: robust regression'
+  page: 8
+  quote: The poor covariance approximation is reﬂected in large ¯d2 and ¯w2 values; however, it is not reﬂected in the small ˆk value (0.34).
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Boston University, University of Luxembourg, University of British Columbia, MIT. Venue from
+    the PDF footer (''Proceedings of the 23rd International Conference on Artificial Intelligence and Statistics (AISTATS) 2020, Palermo, Italy. PMLR: Volume 108''). Locations use paragraph/section names
+    because the extracted headings carry no numbers (theorem numbers like 3.4 and 4.6 are as stated in the PDF). Methods compared (KLVI, CHIVI by Dieng et al. 2017, PSIS by Vehtari et al.) are not by these
+    authors; the workflow is implemented in the authors'' own viabel package. Only two case studies (eight schools; a toy robust regression); table values (bounds, errors) not recorded. Proofs are in Appendix
+    D. Cross-references: critiques the k-hat thresholds of arxiv-1802.02538 / arxiv-1507.02646.'

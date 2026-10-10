@@ -1,0 +1,100 @@
+id: arxiv-1903.08008
+title: 'Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC'
+authors:
+- Aki Vehtari
+- Andrew Gelman
+- Daniel Simpson
+- Bob Carpenter
+- Paul-Christian Bürkner
+year: 2019
+venue: Bayesian Analysis
+links:
+  arxiv: https://arxiv.org/abs/1903.08008
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-07'
+  pdf_sha256: d67a38f7644d7fc77dff8f727c873372f1c43fbb2a507ee146cdc139ae15a24e
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+proposes:
+- Rank-normalized split-R-hat and folded-split-R-hat (computed on absolute deviations from the median), reporting the maximum of the two as a single conservative R-hat
+- Bulk-ESS (ESS of rank-normalized draws) and tail-ESS (minimum ESS of the 5% and 95% quantiles), plus local efficiency measures for quantiles and small intervals and a Monte Carlo error estimate for quantiles
+- Rank plots (per-chain histograms of ranks over all chains) as a replacement for trace plots
+claims:
+- id: c1
+  statement: 'Two problems with the traditional (split-)R-hat identified by the opening example: (1) if chains have different variances but the same mean, traditional R-hat is approximately 1; (2) if chains
+    have infinite variance, traditional R-hat is approximately 1 even if one chain has a different location; this can also cause numerical instability for thick-tailed distributions with technically finite
+    variance, and it is typically hard to assess empirically whether a chain has large but finite or infinite variance.'
+  location: Introduction (Example where traditional R-hat fails)
+  page: 3
+  quote: 'This example identiﬁed two problems with traditional bR:'
+- id: c2
+  statement: A related problem is that R-hat is typically computed only for the posterior mean; this estimates convergence in the bulk of the distribution but says little about convergence in the tails,
+    which matters for posterior interval estimates and inferences about rare events.
+  location: Introduction (Example where traditional R-hat fails)
+  page: 3
+  quote: it says little about the convergence in the tails
+- id: c3
+  statement: 'Recommended threshold: use the sample only if the (rank-normalized, folded) R-hat < 1.01, a threshold much tighter than the one recommended by Gelman and Rubin (1992). The authors state that
+    R-hat cannot in general be interpreted as a potential scale reduction factor, and that in practice and in simulations R-hat can dip below 1.1 well before convergence in some examples, which they found
+    much more rare with the 1.01 threshold.'
+  location: Recommendations for practice
+  page: 4
+  quote: This threshold is much tighter than the one recommended by Gelman and Rubin (1992), reﬂecting lessons learnt over more than 25 years of use, as well as the simulation results in Appendix A.
+- id: c4
+  statement: 'Number of chains: the authors recommend at least four chains by default, because multiple chains are more likely to reveal multimodality and poor adaptation or mixing (they cite seeing such
+    examples for complex, misspecified or non-identifiable models on the Stan discussion forum), and parallel chains add no computation time on most computers. Massive parallelization (e.g. 1000+ chains)
+    is not considered and needs further research.'
+  location: Recommendations for practice
+  page: 4
+  quote: In addition, we recommend running at least four chains by default.
+- id: c5
+  statement: 'ESS threshold: the authors recommend requiring rank-normalized ESS > 400, a number chosen based on practical experience and simulations as typically sufficient to get a stable estimate of
+    the Monte Carlo standard error, to ensure reliable estimates of the variances and autocorrelations needed for R-hat and ESS.'
+  location: Recommendations for practice
+  page: 5
+  quote: we recommend requiring that the rank-normalized ESS is greater than 400
+- id: c6
+  statement: 'R-hat itself requires reliable variance and autocorrelation estimates: the authors only recommend relying on R-hat to judge chain quality if each split chain has an average ESS of at least
+    50; with the minimum recommended setup of four chains, total ESS should be at least 400 before R-hat is expected to be useful.'
+  location: Section 3.2 (The effective sample size)
+  page: 8
+  quote: In particular, we only recommend relying on the bR estimate to make decisions about the quality of the chain if each of the split chains has an average ESS estimate of at least 50.
+- id: c7
+  statement: 'Fixes: R-hat and ESS are computed on rank-normalized draws (pooled ranks mapped through the inverse normal CDF), which is well defined even without finite mean or variance and invariant to
+    monotone transformations; because both original and rank-normalized split-R-hat can be fooled by chains with the same location but different scales (e.g. a chain stuck near the middle), R-hat is also
+    computed on folded draws (absolute deviation from the median), and the maximum of the two is reported. Bulk-ESS is not directly applicable to the Monte Carlo standard error of the posterior mean.'
+  location: Section 4 (Improving convergence diagnostics)
+  page: 9
+  quote: To obtain a single conservative bR estimate, we propose to report the maximum of rank normalized split- bR and rank normalized folded-split- bR for each parameter.
+- id: c8
+  statement: Tail-ESS is defined as the minimum of the effective sample sizes of the 5% and 95% quantiles, to assess sampling efficiency in the tails; it can help diagnose problems due to different scales
+    of the chains. The authors observe that efficiency for tail quantiles is often lower than for the mean or median.
+  location: Section 4.3 (Localizing convergence diagnostics)
+  page: 10
+  quote: To get a better sense of the sampling efﬁciency in the distributions’ tails, we propose to compute the minimum of the effective sample sizes of the 5% and 95% quantiles, which we will call tail
+    effective sample size (tail-ESS or tail-Seﬀ).
+- id: c9
+  statement: 'Hedge on the numerical targets: the R-hat and ESS targets are offered as first-level checks for many quantities; they should be adapted as necessary for the application, and ultimately domain
+    expertise should be used to check that Monte Carlo standard errors for all quantities of interest are small enough.'
+  location: Recommendations for practice
+  page: 4
+  quote: However, these values should be adapted as necessary for the given application, and ultimately domain expertise should be used to check that Monte Carlo standard errors (MCSE) for all quantities
+    of interest are small enough.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Aalto University, Columbia University, University of Toronto, Flatiron Institute. Venue from
+    the PDF first-page footnote (''To appear in Bayesian Analysis'') and the arXiv comment. Conflict of interest: the diagnostics are evaluated and recommended by Stan developers (Stan Development Team
+    is cited for the formulation and the HMC implementation; examples use Stan''s dynamic HMC), i.e. by people who build the software that implements them; the PDF does not state this as a disclosure. The
+    authors also state they do not intend to claim the new R-hat is perfect (''it can be defeated too''). Examples: 4 chains x (1000 warmup + 1000 post-warmup) with Stan dynamic HMC; standard Cauchy (nominal
+    vs scale-mixture parameterization), half-Cauchy, eight schools (centered vs non-centered); divergent transitions are noted as a sufficient indicator of problems in the centered model, while R-hat/ESS
+    apply to all MCMC algorithms. Appendix A simulations relate the 1.01 vs 1.1 thresholds to detectable trend/shift/scale sizes (values not recorded here). Section numbers 3.1, 3.2, 4, 4.3, 4.4, 5.1 are
+    confirmed by in-text cross-references; other locations use section names because the extracted headings carry no numbers. Software caps the ESS estimate at S log10(S).'

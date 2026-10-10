@@ -78,8 +78,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 異常検知(古典 vs 深層) | 論文カード15本+既存8本(設定の違い、大規模ベンチマーク、孤立型、自己教師ありの変換型、1クラス・半教師あり・補助の外れ値、事前学習の特徴を使う画像の手法、閾値と評価の落とし穴)、記事 [articles/topics/anomaly-detection-classical-vs-deep.md](articles/topics/anomaly-detection-classical-vs-deep.md) |
 | ベイズ最適化とハイパーパラメータ最適化 | 論文カード17本+既存6本(代理モデルと獲得関数、GP-UCB の理論の前提、Hyperband・BOHB・ASHA・FABOLAS、規模を上げる工夫とフレームワーク、ランダム探索との比較とベンチマーク、過剰な調整と探索空間の設計)、記事 [articles/methods/bayesian-optimization.md](articles/methods/bayesian-optimization.md) |
 | ベイズ変化点検知 | 論文カード18本(BOCPD とその拡張、ハザードと事前分布、外れ値への頑健化、バンディット・強化学習・障害の原因分析への応用、オフラインの事後分析と信用集合、TCPDBench による評価)、記事 [articles/topics/bayesian-change-point-detection.md](articles/topics/bayesian-change-point-detection.md) |
+| 近似ベイズ推論とその診断 | 論文カード18本+既存3本(HMC と NUTS、確率的勾配 MCMC、変分推論とその弱点、正規化フローと Pathfinder、R-hat の改訂、PSIS の k-hat、VI の誤差の上界、SBC とその検定量、ベイズのワークフロー)、記事 [articles/methods/approximate-inference-and-diagnostics.md](articles/methods/approximate-inference-and-diagnostics.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では452本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では470本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -91,6 +92,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [拡散モデル — 定式化の系譜、サンプリングの高速化、ガイダンス、評価と記憶の問題](articles/methods/diffusion-models.md)
 - [対照学習・自己教師あり表現学習 — 崩壊の避け方、理論の範囲、線形評価の読み方](articles/methods/self-supervised-representation-learning.md)
 - [ベイズ最適化とハイパーパラメータ最適化 — 代理モデル、多忠実度、ランダム探索との比較](articles/methods/bayesian-optimization.md)
+- [近似ベイズ推論とその診断 — MCMC と変分推論、その近似は信用できるか](articles/methods/approximate-inference-and-diagnostics.md)
 
 横断記事:
 

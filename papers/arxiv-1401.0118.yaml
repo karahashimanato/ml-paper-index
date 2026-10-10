@@ -1,0 +1,86 @@
+id: arxiv-1401.0118
+title: Black Box Variational Inference
+authors:
+- Rajesh Ranganath
+- Sean Gerrish
+- David M. Blei
+year: 2013
+links:
+  arxiv: https://arxiv.org/abs/1401.0118
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 56bc0562dd33bcbcd72ab9c0234a059a40b084fe01d2e4b0b9265056cf4d448e
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - variational-inference
+  - mcmc
+  paradigms:
+  - unsupervised
+proposes:
+- 'Black box variational inference (BBVI): stochastic optimization of the ELBO with noisy unbiased gradients from Monte Carlo samples of the variational distribution using the score function, requiring
+  only evaluation of the log joint'
+- 'Model-agnostic variance reduction for the score-function gradient: per-component Rao-Blackwellization over the Markov blanket under a mean-field family, and the score function itself as a control variate;
+  plus AdaGrad step sizes and data subsampling'
+claims:
+- id: c1
+  statement: 'Motivation: for generic models and variational families, closed-form coordinate ascent is unavailable and practitioners resort to model-specific algorithms; the authors describe deriving these
+    model by model as tedious, which hinders rapid model exploration.'
+  location: Section 1 (Introduction)
+  page: 1
+  quote: Deriving these algorithms on a model-by-model basis is tedious work.
+- id: c2
+  statement: 'Score-function gradient: the ELBO gradient is written as E_q[grad log q(z|lambda) (log p(x,z) - log q(z|lambda))] and estimated with S samples from q; the score function and sampling routines
+    depend only on the variational family, and the only model requirement is evaluating the log joint p(x, z).'
+  location: Section 2
+  page: 3
+  quote: We emphasize that the score function and sampling algorithms depend only on the variational distribution, not the underlying model.
+- id: c3
+  statement: 'Failure mode of the basic estimator: its variance can be too large to be useful; high-variance gradients would require very small steps and lead to slow convergence.'
+  location: Section 3
+  page: 3
+  quote: In practice, the high variance gradients would require very small steps which would lead to slow convergence.
+- id: c4
+  statement: 'Rao-Blackwellization under the mean-field family: each gradient component can use only the terms of the joint that depend on that variable''s Markov blanket, giving a lower-variance estimator
+    without model-specific integrals.'
+  location: Section 3.1
+  page: 4
+  quote: This equation says that Rao-Blackwellized estimators can be computed for each component of the gradient without needing to compute model-speciﬁc conditional expectations.
+- id: c5
+  statement: 'Control variate: the score function of the variational approximation is used because it always has expectation zero and depends only on the variational distribution; the scaling a* = Cov(f,
+    h)/Var(h) is estimated from the same Monte Carlo samples.'
+  location: Section 3.2
+  page: 4
+  quote: This equation implies that good control variates have high covariance with the function whose expectation is being computed.
+- id: c6
+  statement: 'Evaluation protocol: longitudinal data of 976 chronic-kidney-disease patients (803 train + 173 test, about 33K visits, 17 labs) with a nonconjugate Gamma-Normal time-series model; fully factorized
+    gamma/normal variational families, AdaGrad and data subsampling, 1,000 samples from q and batch size 25; predictive likelihood on 25% of held-out test data after fitting local parameters on 75%.'
+  location: Section 5
+  page: 6
+  quote: We use 1,000 samples from the variational distribution and set the batch size at 25 in all our experiments.
+- id: c7
+  statement: 'Comparison with sampling (fixed 20-hour budget): standard Metropolis-Hastings is stated to fail on the Gamma-Normal-TS model, so BBVI is compared with Metropolis-Hastings within Gibbs; the
+    authors report BBVI reaches better predictive likelihoods faster (figure). A footnote notes that methods requiring a bit more work, such as HMC, could work in this setting but were not compared.'
+  location: Section 5.3
+  page: 7
+  quote: We ﬁnd that it fails for the Gamma-Normal-TS model.
+- id: c8
+  statement: 'Variance reduction result: Rao-Blackwellization reduced gradient variance by several orders of magnitude and control variates reduced it further; in the time allotted, the algorithm without
+    variance reductions failed to make noticeable progress.'
+  location: Section 5.4
+  page: 7
+  quote: We found that Rao-Blackwellization reduces the variance by several orders of magnitude.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Princeton University. No venue is stated in the v1 PDF; none recorded. Section numbers are from
+    numbered headings in the PDF text. Extensions (Section 4): AdaGrad per-component step sizes (Section 4.1) and doubly stochastic subsampling for hierarchical models following Hoffman et al. (2013) (co-authored
+    by Blei). Stopping rule in the algorithms: ''until change of lambda is less than 0.01''. The MH-within-Gibbs comparator is the authors'' own implementation; results (Figure 1, Figure 2, Table 1) are
+    figure/table-only and not recorded (Table 1 values are not extractable as text). Related work: Kingma and Welling''s reparameterization is described as limited to continuous latent variables. Future
+    work mentions quasi-Monte Carlo and dynamically set sample sizes.'

@@ -1,0 +1,97 @@
+id: arxiv-1802.02538
+title: 'Yes, but Did It Work?: Evaluating Variational Inference'
+authors:
+- Yuling Yao
+- Aki Vehtari
+- Daniel Simpson
+- Andrew Gelman
+year: 2018
+venue: ICML 2018
+links:
+  arxiv: https://arxiv.org/abs/1802.02538
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: e6ff1d1c7f8b9889686daca50d8a4b60157393945a6e858b15f0472a2622cce9
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - variational-inference
+proposes:
+- 'PSIS diagnostic for VI: draw from q, compute importance ratios p(theta, y)/q(theta), fit a generalized Pareto distribution to the largest ratios and use the shape estimate k-hat to judge the joint approximation
+  (and PSIS to adjust estimates)'
+- 'Variational simulation-based calibration (VSBC): simulate parameters from the prior and data from the model, refit VI on each data set, and test the marginal calibration probabilities for symmetry around
+  0.5 to detect bias of point estimates'
+claims:
+- id: c1
+  statement: 'The ELBO alone cannot assess fit: an unknown multiplicative constant in p(theta, y) changes with reparametrization, making ELBO comparisons across approximations meaningless, and its scale
+    is uninterpretable, so it is not clear at what value the approximation can be trusted.'
+  location: Introduction
+  page: 1
+  quote: This makes it next to useless as a method to assess how well the variational inference has ﬁt.
+- id: c2
+  statement: 'PSIS diagnostic: k-hat estimates the smallest k such that the 1/k-th moment of p/q under q is finite; it is invariant to constant multiplication of p or q (so the unnormalized joint can be
+    used) and relates to Rényi divergence: k > 0.5 means infinite chi-square divergence and k > 1 means KL(p, q) is infinite, even though KL(q, p) is minimized in the family.'
+  location: Section 2.2
+  page: 3
+  quote: ˆk is invariant under any constant multiplication of p or q, which explains why we can suppress the marginal likelihood (normalizing constant) p(y) and replace the intractable p(θ|y) with p(θ,
+    y) in (2).
+- id: c3
+  statement: 'Thresholds (set according to the empirical study in Vehtari et al., 2017): k-hat < 0.5 means q is close enough to the true density; 0.5 < k-hat < 0.7 means q is not perfect but still useful
+    (PSIS recommended to shrink errors in both cases); k-hat > 0.7 means PSIS convergence is impractically slow with an even larger error for plain VI, so the VI should be tuned (reparametrization, more
+    iterations, larger minibatch, smaller learning rate, etc.) or exact MCMC used. In finite samples k-hat may exceed 1, indicating even worse performance. Algorithm 1 uses a single cut at 0.7.'
+  location: Section 2.2
+  page: 3
+  quote: If ˆk > 0.7, the PSIS convergence rate becomes impractically slow, leading to a large mean square error, and a even larger error for plain VI estimate.
+- id: c4
+  statement: k-hat is invariant to any reparametrization of the same distribution, but a reparametrization that changes the approximation family changes the result, so comparing k-hat across parametrizations
+    can guide the choice.
+  location: Section 2.3
+  page: 3
+  quote: A nice property of PSIS diagnostics is that the ˆk quantity is invariant under any re-parametrization.
+- id: c5
+  statement: 'Marginal PSIS diagnostics do not work: the true marginal density is typically unknown, and a small marginal k-hat does not guarantee good marginal estimates because VI marginals can under-estimate
+    tail thickness; in the eight-school example marginal k-hats were misleadingly small while the joint k-hat was large.'
+  location: Section 2.4
+  page: 4
+  quote: Secondly, a smaller ˆki does not necessary guarantee a well-performed marginal estimation.
+- id: c6
+  statement: 'VSBC (building on Cook et al., 2006) assesses average calibration over data sets simulated from the model, requiring a VI fit for each of M simulated data sets, and tests symmetry of marginal
+    calibration probabilities (visually or with a KS test, interpreted through a multiple-testing lens). Drawbacks: average behavior need not hold for the observed data, and misspecification is not covered;
+    the authors suggest a conservative reading in which failing implies poor performance but passing does not guarantee it.'
+  location: Section 3.2
+  page: 5
+  quote: 'We suggest interpreting the diagnostic conservatively: if a variational inference scheme fails the diagnostic, then it will not perform well on the model in question.'
+- id: c7
+  statement: 'Limitation: the PSIS diagnostic is local; with a multimodal posterior, draws from q may miss modes and k-hat ignores unseen modes (in a two-mode example Gaussian VI gives k = 0). Any divergence
+    based on draws from q, such as KL(q, p), is local; bimodality can be detected by multiple over-dispersed initializations, whereas VSBC draws parameters from the prior and may detect a missing mode unless
+    the prior is too restrictive.'
+  location: Section 5.1
+  page: 8
+  quote: In this sense, the PSIS diagnostic is a local diagnostic that will not detect unseen modes.
+- id: c8
+  statement: 'Evaluation protocol: both diagnostics are applied to mean-field Gaussian ADVI on Bayesian linear regression (n = 10000, K = 100, VSBC with M = 1000 replications), logistic regression with
+    design-matrix correlation from 0 to 0.99, the eight-school hierarchical model (centered vs non-centered), and a horseshoe logistic regression on leukemia microarray data (D = 7129, n = 72), with NUTS
+    as the reference.'
+  location: Section 4
+  page: 5
+  quote: Without loss of generality, we implement mean-ﬁeld Gaussian automatic differentiation variational inference (ADVI) in this section.
+- id: c9
+  statement: 'ADVI is sensitive to the stopping rule: in the linear-regression example, changing the relative ELBO-change threshold from a conservative 1e-5 to the default 1e-2 raised k-hat from 0.61 to
+    4.4, so k-hat can be used as a convergence check; simulations were repeated 100 times.'
+  location: Section 4.1
+  page: 5
+  quote: However, the performance of ADVI is sensitive to the stopping time, as in any other optimization problems.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF footer (''Proceedings of the 35th International Conference on Machine Learning, Stockholm,
+    Sweden, PMLR 80, 2018''). Conflict of interest: the evaluated ADVI is co-authored by Gelman (reference list: Kucukelbir, Tran, Ranganath, Gelman and Blei, 2017), and the PSIS method and thresholds come
+    from the authors'' own earlier work (cited as Vehtari et al., 2017; the later version is arxiv-1507.02646, which sets the threshold as min(1 - 1/log10(S), 0.7) rather than the fixed 0.5/0.7 bands used
+    here). The PSIS tail size here is written as min(S/5, 3 sqrt(S)). Body-text numbers: eight schools joint k-hat 1.00 (centered) vs 0.64 (non-centered); horseshoe ADVI k-hat 9.8. Sections numbered from
+    PDF headings. arxiv-1910.04102 argues small k-hat is only a heuristic for approximation quality.'

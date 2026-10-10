@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Variational Inference with Normalizing Flows
+
+- カード: [`arxiv-1505.05770`](../../papers/arxiv-1505.05770.yaml)
+- 著者: Danilo Jimenez Rezende, Shakir Mohamed
+- 年・掲載: 2015 ICML 2015
+- 原論文: [PDF](https://arxiv.org/pdf/1505.05770v6)(arXiv v6、カード作成時に読んだ版)
+- タグ: deep-learning, generative-modeling, posterior-inference, unsupervised, variational-autoencoders, variational-inference
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Motivation: the approximating class is often limited (e.g. mean-field), so no solution can resemble the true posterior; the authors describe this as a widely raised objection to variational methods, since unlike MCMC, even asymptotically the true posterior cannot be recovered.([Introduction, p.1](https://arxiv.org/pdf/1505.05770v6#page=1 "even in the asymptotic regime we are unable recover the true posterior distribution"))
+- **c2** Citing Turner & Sahani (2011), the authors list two problems of limited posterior approximations: under-estimation of the posterior variance (which can result in poor predictions and unreliable decisions) and biases in the MAP estimates of model parameters (e.g. in time-series models).([Introduction, p.1](https://arxiv.org/pdf/1505.05770v6#page=1 "The ﬁrst is the widely-observed problem of under-estimation of the variance of the posterior distribution"))
+- **c3** Definition: a normalizing flow transforms a density through a sequence of invertible mappings by repeatedly applying the change-of-variables rule; for a chain of K maps the log density of z_K is ln q0(z0) minus the sum of the log absolute Jacobian determinants, and expectations under q_K can be computed as expectations under q0 without knowing q_K (LOTUS).([Section 3, p.3](https://arxiv.org/pdf/1505.05770v6#page=3 "A normalizing ﬂow describes the transformation of a probability density through a sequence of invertible mappings."))
+- **c4** Planar flows f(z) = z + u h(w^T z + b) allow the log-det-Jacobian to be computed in O(D) time via the matrix determinant lemma; radial flows also allow linear-time determinants. The authors motivate this by noting that general invertible neural networks typically cost O(LD^3) for the Jacobian determinant and its gradients and involve matrix inverses that can be numerically unstable.([Section 4.1, p.5](https://arxiv.org/pdf/1505.05770v6#page=5 "For this mapping we can compute the logdet-Jacobian term in O(D) time (using the matrix determinant lemma):"))
+- **c5** Not every planar or radial map is invertible. For planar flows with h = tanh, a sufficient condition is w^T u >= -1, which is enforced by reparameterizing u; for radial flows it suffices to impose beta >= -alpha, enforced by reparameterizing beta.([Appendix A.1, p.10](https://arxiv.org/pdf/1505.05770v6#page=10 "When using h(x) = tanh(x), a sufﬁcient condition for f(z) to be invertible is that"))
+- **c6** Infinitesimal flows based on Langevin or Hamiltonian dynamics tend to the true posterior as the number of transitions grows, but the authors note a disadvantage: they need one or more evaluations of the likelihood and its gradients (depending on the number of leapfrog steps) per iteration at both training and test time.([Section 5, p.6](https://arxiv.org/pdf/1505.05770v6#page=6 "A disadvantage of using the Langevin or Hamiltonian ﬂow is that they require one or more evaluations of the likelihood and its gradients (depending in the number of leapfrog steps) per iteration during both training and test time."))
+- **c7** Experimental protocol (deep latent Gaussian models): training follows a single-sample Monte Carlo gradient of an annealed free energy with inverse temperature beta_t = min(1, 0.01 + t/10000); minibatches of 100, RMSprop (learning rate 1e-5, momentum 0.9), 500,000 parameter updates, each experiment repeated 100 times; the marginal likelihood is estimated by importance sampling with 200 samples from the inference network. The table compares HVI and DARN numbers taken from other papers; for HVI the authors note the model specification is different, so it only indicates attainable performance.([Section 6, p.7](https://arxiv.org/pdf/1505.05770v6#page=7 "The true marginal likelihood is estimated by importance sampling using 200 samples from the inference network as in (Rezende et al., 2014, App. E)."))
+- **c8** The authors argue that with normalizing flows the space of solutions is, in the asymptotic regime, rich enough to contain the true posterior, and that combined with consistency results for maximum likelihood (citing Wang & Titterington, 2004) this addresses objections to VI; they state that making such statements rigorous is an important line of future research.([Section 7, p.8](https://arxiv.org/pdf/1505.05770v6#page=8 "Making such statements rigorous is an important line of future research."))
+

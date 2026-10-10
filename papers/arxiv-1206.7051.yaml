@@ -1,0 +1,94 @@
+id: arxiv-1206.7051
+title: Stochastic Variational Inference
+authors:
+- Matt Hoffman
+- David M. Blei
+- Chong Wang
+- John Paisley
+year: 2012
+venue: JMLR
+links:
+  arxiv: https://arxiv.org/abs/1206.7051
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 4c835e8885e27bb0293b845666889eb84abd0521be28806d26a6ca9ff700834a
+tags:
+  tasks:
+  - posterior-inference
+  - language-modeling
+  method_families:
+  - variational-inference
+  paradigms:
+  - unsupervised
+proposes:
+- 'Stochastic variational inference (SVI): for models with global and local latent variables whose complete conditionals are in the exponential family, repeatedly subsample data, optimize the local variational
+  parameters, and update the global parameters with a step along a noisy but unbiased natural gradient of the ELBO (Robbins-Monro step sizes)'
+- SVI algorithms for latent Dirichlet allocation and the hierarchical Dirichlet process topic model
+claims:
+- id: c1
+  statement: 'Motivation: neither MCMC nor VI scales easily to massive data; according to the authors, proposed speed-ups of both are usually tailored to specific models or compromise the correctness of
+    the algorithm (or both).'
+  location: Section 1 (Introduction)
+  page: 4
+  quote: Researchers have proposed speed-ups of both approaches, but these usually are tailored to speciﬁc models or compromise the correctness of the algorithm (or both).
+- id: c2
+  statement: 'Inefficiency of batch coordinate-ascent VI: global parameters are initialized randomly, yet every data point must be analyzed with these uninformative values before even one global update
+    is completed.'
+  location: Section 2.2
+  page: 12
+  quote: This is wasteful, especially if we expect that we can learn something about the global variational parameters from only a subset of the data.
+- id: c3
+  statement: 'SVI update: sample a data point, optimize its local variational parameters, compute intermediate global parameters as if that point were replicated N times, and set the new global parameters
+    to a weighted average of the old ones and the intermediate ones; this is a step along a noisy but unbiased natural gradient of the ELBO.'
+  location: Section 2.4
+  page: 17
+  quote: This is a weighted average of the previous estimate of λ and the estimate of λ that we would obtain if the sampled data point was replicated N times.
+- id: c4
+  statement: Step size rho_t = (t + tau)^-kappa with forgetting rate kappa in (0.5, 1] and delay tau >= 0 satisfies the Robbins-Monro conditions; as long as these hold, the algorithm converges to a local
+    optimum of the ELBO (not a global one).
+  location: Section 2.4
+  page: 18
+  quote: As long as the step size conditions in Equation 23 are satisﬁed, this iterative algorithm converges to a local optimum of the ELBO.
+- id: c5
+  statement: 'Minibatches amortize the cost of global updates and may help find better local optima: SVI is guaranteed to converge to a local optimum, but taking large steps based on very few data points
+    may lead to a poor one.'
+  location: Section 2.5
+  page: 19
+  quote: Stochastic variational inference is guaranteed to converge to a local optimum but taking large steps on the basis of very few data points may lead to a poor one.
+- id: c6
+  statement: 'Evaluation protocol: three corpora (Nature 350K documents, New York Times 1.8M, Wikipedia 3.8M), each with a held-out test set of 10,000 documents; model fit is measured by the per-word predictive
+    log likelihood of held-out words given the observed part of each test document, which the authors prefer over held-out perplexity because it avoids comparing bounds.'
+  location: Section 4
+  page: 34
+  quote: Unlike previous methods, like held-out perplexity (Blei et al., 2003), evaluating the predictive distribution avoids comparing bounds or forming approximations of the evaluation metric.
+- id: c7
+  statement: 'Comparison with batch VI for 100-topic LDA: SVI on the full collection vs batch inference on a subset of 100,000 documents (described as the size batch inference can handle); the authors state
+    SVI converges faster and to a better model (shown in a figure).'
+  location: Section 3.2
+  page: 22
+  quote: We see that stochastic variational inference converges faster and to a better model.
+- id: c8
+  statement: 'Sensitivity to learning parameters (HDP, batch size 500): all three fits were sensitive to the forgetting rate kappa, with values close to one converging to a better local optimum; batch sizes
+    that are too small (e.g. ten documents) can affect performance. Grid: kappa in {0.5,...,1.0}, S in {10, 50, 100, 500, 1000}, tau = 1 (the algorithms were reported not sensitive to tau).'
+  location: Section 4
+  page: 37
+  quote: All three ﬁts were sensitive to the forgetting rate; we see that a higher value (i.e., close to one) leads to convergence to a better local optimum.
+- id: c9
+  statement: 'Scope limitation: the algorithm was developed for conjugate exponential-family models with mean-field VI and closed-form coordinate updates; the general algorithm cannot be used for nonconjugate
+    models (e.g. correlated or dynamic topic models). The authors also ask whether the gradient variance can be reduced while keeping unbiasedness.'
+  location: Section 5 (Discussion)
+  page: 38
+  quote: We developed our algorithm with conjugate exponential family models.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Venue: page 1 of the PDF reads ''Journal of Machine Learning Research (2013, in press)''; recorded as ''JMLR''.
+    Year is the first arXiv version (2012). Section numbers are from numbered headings in the PDF text (2.2 mean-field VI, 2.3 natural gradient, 2.4 SVI, 2.5 extensions, 3.2 LDA, 4 empirical study, 5 discussion).
+    The natural gradient of the ELBO w.r.t. global parameters simplifies to (expected complete-conditional natural parameter) - lambda (Section 2.3). All algorithms were implemented in Python/NumPy/SciPy
+    by the authors (footnote 9). The batch-vs-SVI and LDA-vs-HDP comparisons are figure-only; no numbers recorded. Self-reference: the Discussion lists follow-up work by the authors (Gopalan et al. 2012,
+    Mimno et al. 2012, Ranganath et al. 2013). Blei is a co-author of arxiv-1601.00670, arxiv-1401.0118 and arxiv-1603.00788.'

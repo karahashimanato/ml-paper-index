@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# Automatic Differentiation Variational Inference
+
+- カード: [`arxiv-1603.00788`](../../papers/arxiv-1603.00788.yaml)
+- 著者: Alp Kucukelbir, Dustin Tran, Rajesh Ranganath, Andrew Gelman, David M. Blei
+- 年・掲載: 2016
+- 原論文: [PDF](https://arxiv.org/pdf/1603.00788v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: mcmc, posterior-inference, variational-inference
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Model class: differentiable probability models, i.e. continuous latent variables with a gradient of the log joint valid on the support of the prior; no conjugacy assumptions are made. Discrete latent variables must be marginalized out, which the authors note is not tractable for all models (e.g. Ising model, sigmoid belief networks, untruncated Dirichlet process mixtures).([Section 2.1, p.4](https://arxiv.org/pdf/1603.00788v1#page=4 "We make no assumptions about conjugacy, either full (Diaconis et al., 1979) or conditional (Hoffman et al., 2013)."))
+- **c2** Support assumption: minimizing KL(q||p) requires the support of q to lie within that of the posterior; ADVI further assumes the posterior support equals the prior support (holds when the likelihood does not constrain the prior), which the authors call benign.([Section 2.2, p.5](https://arxiv.org/pdf/1603.00788v1#page=5 "This is a benign assumption, which holds for most models considered in machine learning."))
+- **c3** Variational families in the transformed space: a mean-field Gaussian (log standard deviations) or a full-rank Gaussian (Cholesky factor). The full-rank Gaussian captures posterior correlations and is more accurate but has a computational cost; the induced approximation in the original space is non-Gaussian, and its shape depends on the chosen transformation.([Section 2.4, p.7](https://arxiv.org/pdf/1603.00788v1#page=7 "This leads to a more accurate posterior approximation than the mean-ﬁeld Gaussian; however, it comes at a computational cost."))
+- **c4** Known weakness shown on simulated models: on a correlated 2D Gaussian both variants recover the analytic posterior mean, but mean-field ADVI ignores off-diagonal covariance and minimizing KL(q||p) leads to systematic underestimation of marginal variances; on logistic regression (reference: Stan's NUTS) mean-field underestimates marginal variances on most coefficients, and on a stochastic volatility model it struggles even with the posterior mean where full-rank matches sampling.([Section 3.1, p.12](https://arxiv.org/pdf/1603.00788v1#page=12 "ADVI minimizes the KL divergence from the approximation to the exact posterior; this leads to a systemic underestimation of marginal variances (Bishop, 2006)."))
+- **c5** Recommendation: scientists interested in posterior variances and covariances should use full-rank ADVI (though it can be prohibitively slow for large data); those interested in prediction should initially rely on mean-field ADVI, since in practice accurate posterior means dominate predictive accuracy.([Section 3.1, p.13](https://arxiv.org/pdf/1603.00788v1#page=13 "Scientists interested in posterior variances and covariances should use the full-rank approximation."))
+- **c6** Gradient variance: both the ADVI (reparameterization) estimator and the BBVI score-function estimator are unbiased; BBVI is more general (no model gradient needed) but its gradients can suffer from high variance. In the authors' simulations the ADVI gradient had lower variance and a single MC sample sufficed in practice.([Section 3.2, p.14](https://arxiv.org/pdf/1603.00788v1#page=14 "While BBVI is more general—it does not require the gradient of the model and thus applies to more settings—its gradients can suffer from high variance."))
+- **c7** Sensitivity to the transformation T: on Gamma posteriors, T2 = log(exp(theta) - 1) gave lower KL than T1 = log; an optimal transformation (making the Gaussian approximation exact) exists in principle but estimating it requires the posterior CDF, which the authors say is as hard as the original problem. The Discussion lists this sensitivity as an avenue for research.([Section 3.3, p.16](https://arxiv.org/pdf/1603.00788v1#page=16 "this is just as hard as the original goal of estimating the posterior density"))
+- **c8** Evaluation protocol: mean-field ADVI is compared with HMC and NUTS (Stan's default sampler) by held-out predictive likelihood as a function of time on hierarchical regression, matrix factorization, mixture and PPCA models. On the non-negative matrix factorization models HMC produced no useful samples within a one-hour budget and was omitted thereafter; on the GMM the authors attribute NUTS/HMC difficulties likely to label switching.([Section 4.2, p.18](https://arxiv.org/pdf/1603.00788v1#page=18 "In both cases, HMC does not produce any useful samples within a budget of one hour; we omit HMC from here on."))
+

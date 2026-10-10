@@ -1,0 +1,90 @@
+id: arxiv-1505.05770
+title: Variational Inference with Normalizing Flows
+authors:
+- Danilo Jimenez Rezende
+- Shakir Mohamed
+year: 2015
+venue: ICML 2015
+links:
+  arxiv: https://arxiv.org/abs/1505.05770
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 776e07c2b5cf56963a6c3d2d5727146baa8ac096435db17df06d9b2a3a44f70a
+tags:
+  tasks:
+  - posterior-inference
+  - generative-modeling
+  method_families:
+  - variational-inference
+  - variational-autoencoders
+  - deep-learning
+  paradigms:
+  - unsupervised
+proposes:
+- 'Normalizing-flow variational posteriors: a simple initial density (e.g. a diagonal Gaussian) is transformed by a chain of K invertible maps, and the log density of the result is the initial log density
+  minus the sum of the log-det-Jacobian terms'
+- 'Planar and radial flows: invertible transformations whose log-det-Jacobian can be computed in linear time, used inside amortized variational inference (an inference network outputs the initial-density
+  and flow parameters)'
+claims:
+- id: c1
+  statement: 'Motivation: the approximating class is often limited (e.g. mean-field), so no solution can resemble the true posterior; the authors describe this as a widely raised objection to variational
+    methods, since unlike MCMC, even asymptotically the true posterior cannot be recovered.'
+  location: Introduction
+  page: 1
+  quote: even in the asymptotic regime we are unable recover the true posterior distribution
+- id: c2
+  statement: 'Citing Turner & Sahani (2011), the authors list two problems of limited posterior approximations: under-estimation of the posterior variance (which can result in poor predictions and unreliable
+    decisions) and biases in the MAP estimates of model parameters (e.g. in time-series models).'
+  location: Introduction
+  page: 1
+  quote: The ﬁrst is the widely-observed problem of under-estimation of the variance of the posterior distribution
+- id: c3
+  statement: 'Definition: a normalizing flow transforms a density through a sequence of invertible mappings by repeatedly applying the change-of-variables rule; for a chain of K maps the log density of
+    z_K is ln q0(z0) minus the sum of the log absolute Jacobian determinants, and expectations under q_K can be computed as expectations under q0 without knowing q_K (LOTUS).'
+  location: Section 3
+  page: 3
+  quote: A normalizing ﬂow describes the transformation of a probability density through a sequence of invertible mappings.
+- id: c4
+  statement: Planar flows f(z) = z + u h(w^T z + b) allow the log-det-Jacobian to be computed in O(D) time via the matrix determinant lemma; radial flows also allow linear-time determinants. The authors
+    motivate this by noting that general invertible neural networks typically cost O(LD^3) for the Jacobian determinant and its gradients and involve matrix inverses that can be numerically unstable.
+  location: Section 4.1
+  page: 5
+  quote: 'For this mapping we can compute the logdet-Jacobian term in O(D) time (using the matrix determinant lemma):'
+- id: c5
+  statement: Not every planar or radial map is invertible. For planar flows with h = tanh, a sufficient condition is w^T u >= -1, which is enforced by reparameterizing u; for radial flows it suffices to
+    impose beta >= -alpha, enforced by reparameterizing beta.
+  location: Appendix A.1
+  page: 10
+  quote: When using h(x) = tanh(x), a sufﬁcient condition for f(z) to be invertible is that
+- id: c6
+  statement: 'Infinitesimal flows based on Langevin or Hamiltonian dynamics tend to the true posterior as the number of transitions grows, but the authors note a disadvantage: they need one or more evaluations
+    of the likelihood and its gradients (depending on the number of leapfrog steps) per iteration at both training and test time.'
+  location: Section 5
+  page: 6
+  quote: A disadvantage of using the Langevin or Hamiltonian ﬂow is that they require one or more evaluations of the likelihood and its gradients (depending in the number of leapfrog steps) per iteration
+    during both training and test time.
+- id: c7
+  statement: 'Experimental protocol (deep latent Gaussian models): training follows a single-sample Monte Carlo gradient of an annealed free energy with inverse temperature beta_t = min(1, 0.01 + t/10000);
+    minibatches of 100, RMSprop (learning rate 1e-5, momentum 0.9), 500,000 parameter updates, each experiment repeated 100 times; the marginal likelihood is estimated by importance sampling with 200 samples
+    from the inference network. The table compares HVI and DARN numbers taken from other papers; for HVI the authors note the model specification is different, so it only indicates attainable performance.'
+  location: Section 6
+  page: 7
+  quote: The true marginal likelihood is estimated by importance sampling using 200 samples from the inference network as in (Rezende et al., 2014, App. E).
+- id: c8
+  statement: The authors argue that with normalizing flows the space of solutions is, in the asymptotic regime, rich enough to contain the true posterior, and that combined with consistency results for
+    maximum likelihood (citing Wang & Titterington, 2004) this addresses objections to VI; they state that making such statements rigorous is an important line of future research.
+  location: Section 7
+  page: 8
+  quote: Making such statements rigorous is an important line of future research.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Google DeepMind. Venue from the PDF footer (''Proceedings of the 32nd International Conference
+    on Machine Learning, Lille, France, 2015''). Section numbers are from numbered headings in the PDF. The stated complexity of sampling plus log-det-Jacobian terms is O(LN^2) + O(KD) (Section 4.3). On
+    the 2D toy densities the authors found that NICE and planar flows ''may achieve the same asymptotic performance'' as flow length grows but planar flows need far fewer parameters (Section 6.1); MNIST/CIFAR-10
+    results are in a table/figures and are not recorded. No diagnostic of approximation quality other than the bound / KL / importance-sampled marginal likelihood is used.'

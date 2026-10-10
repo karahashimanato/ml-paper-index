@@ -1,0 +1,89 @@
+id: arxiv-1909.11827
+title: Convergence diagnostics for Markov chain Monte Carlo
+authors:
+- Vivekananda Roy
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1909.11827
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 011fddc3812b79eb7bc13e1aaa55f2d33bab639274ff4952f5cf4d8fc85813e6
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+proposes: []
+claims:
+- id: c1
+  statement: 'Scope: the review distinguishes convergence of the chain to stationarity (deciding burn-in) from convergence of Monte Carlo estimators (deciding when to stop); rigorous answers need theoretical
+    analysis (e.g. total-variation bounds or a Markov chain CLT), and otherwise empirical diagnostics are used, which the author says cannot determine convergence with certainty.'
+  location: Introduction
+  page: 3
+  quote: In the absence of such theoretical analysis, often empirical diagnostic tools are used to check convergence of MCMC samplers and estimators, although, as shown through examples in Section 3, these
+    tools cannot determine convergence with certainty.
+- id: c2
+  statement: 'Honest stopping rules: the fixed-width stopping rule stops when the half-width of a confidence interval for the estimate falls below a preset threshold (after a minimum number of iterations);
+    its validity needs a Markov chain CLT and a consistent asymptotic-variance estimator, usually obtained by proving geometric ergodicity (drift and minorization conditions).'
+  location: Section 2.1
+  page: 4
+  quote: Jones and Hobert (2001) refer to this method as the honest way to stop the chain.
+- id: c3
+  statement: 'Gelman-Rubin diagnostic: m chains started from over-dispersed points; the potential scale reduction factor compares a pooled variance estimate with the within-chain variance and simulation
+    stops when it is close to 1, with the cutoff 1.1 generally used (as recommended by Gelman et al., 2014); a multivariate version (MPSRF) exists.'
+  location: Section 2.4
+  page: 7
+  quote: The cutoﬀvalue 1.1 is generally used by MCMC practitioners, as recommended by Gelman et al. (2014).
+- id: c4
+  statement: 'Assumptions: the Geweke and Heidelberger-Welch spectral diagnostics, ESS and the Gelman-Rubin diagnostic all assume the existence of a Markov chain CLT, which the author says emphasizes the
+    need for theoretical analysis.'
+  location: Section 2.5
+  page: 8
+  quote: Finally, we would like to mention that the two spectral density based methods mentioned here, just like the ESS and the GR diagnostic, assume the existence of a Markov chain CLT (2), emphasizing
+    the importance of the theoretical analysis discussed in Section 2.1.
+- id: c5
+  statement: 'Exponential target example (independence Metropolis): with the well-mixing sampler, R-hat over four chains fell below 1.1 within 100 iterations while the estimate of the mean at that point
+    was 1.109 (SE 0.111) against the true value 1, so the author concludes the GR diagnostic leads to premature termination; for the poorly mixing (subgeometric) sampler, the Geweke and Heidelberger-Welch
+    tests were passed in a 1,000-iteration run.'
+  location: Section 3.1
+  page: 12
+  quote: Thus, GR diagnostic leads to premature termination of simulation and the inference drawn from the resulting samples can be unreliable.
+- id: c6
+  statement: 'Multimodal example (six modes, Metropolis-within-Gibbs): when four chains start at the same local mode, the trace and autocorrelation plots, Geweke, Heidelberger-Welch and Raftery-Lewis diagnostics,
+    PSRF and MPSRF (below 1.1) all fail to detect non-convergence, because the diagnostics use only the samples, which all lie around one mode.'
+  location: Section 3.2
+  page: 17
+  quote: Since all four chains are stuck at the same local mode, that is, these are not run long enough to move between the modes, the convergence diagnostics, including PSRF, MPSRF get fooled into thinking
+    that the target distribution is unimodal and hence falsely detect convergence.
+- id: c7
+  statement: The author's own Tool 2 (Dixit and Roy, 2017; the reviewer is a co-author) compares a kernel density estimate of the chain with the unnormalized target density and detected the stuck chains
+    in the multimodal example; the author notes that because it involves numerical integration it cannot be used in high-dimensional examples.
+  location: Section 3.2
+  page: 18
+  quote: Thus, Dixit and Roy (2017)’s Tool 2 is successful in detecting the divergence of the chains.
+- id: c8
+  statement: 'Bayesian logistic regression example (10 parameters, random-walk Metropolis via MCMCpack): after burn-in, all PSRF and the MPSRF were below 1.1 and the KL tool was passed, yet the largest
+    95% confidence-interval half-width was 0.112 against a target of 0.01, so a much longer run was needed for the desired precision.'
+  location: Section 3.3
+  page: 19
+  quote: On the other hand, the maximum half-width among the 10 regression parameters is 0.112, much larger than the cutoﬀ0.01.
+- id: c9
+  statement: 'Recommendations: empirical diagnostics can falsely detect convergence when chains do not move between modes and may stop the simulation prematurely, so the author recommends fixed-width and
+    ESS-based stopping rules, single long runs for final inference, and caution when relying purely on empirical diagnostics, especially if multiple modes are suspected.'
+  location: Section 4 (Conclusions and discussion)
+  page: 22
+  quote: Practitioners should be careful while depending purely on empirical convergence diagnostic tools, especially if the presence of multiple modes is suspected.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Iowa State University. The PDF uses an Annual Reviews template with placeholder metadata (''xxxxxx
+    0000. 00:1-25'', ''Copyright 0000 by Annual Reviews'') and does not name the journal; the arXiv record given to the carder has no comment or journal_ref, so no venue is recorded. Section numbers from
+    numbered headings. Conflict of interest: the KL-divergence diagnostics (Tool 1, Tool 2, tile-plot visualization) are from Dixit and Roy (2017), co-authored by the reviewer, and are the only tools shown
+    succeeding in the multimodal example; several cited CLT results are also the author''s own work. The review covers random-walk/independence Metropolis and Gibbs samplers; HMC-specific diagnostics (divergences,
+    E-BFMI) and the rank-normalized split R-hat are not discussed (searched for Hamiltonian, HMC, split; ''divergence'' appears only for KL divergence and for chains that have not mixed). ESS and mESS cutoffs
+    are derived from the desired relative precision (Vats et al. 2019). Thinning is recommended only when storage or evaluating g is expensive (Section 4).'

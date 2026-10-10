@@ -1,0 +1,98 @@
+id: arxiv-1804.06788
+title: Validating Bayesian Inference Algorithms with Simulation-Based Calibration
+authors:
+- Sean Talts
+- Michael Betancourt
+- Daniel Simpson
+- Aki Vehtari
+- Andrew Gelman
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1804.06788
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 64ed9a85a4467380afb446588d4cb34788cc3a90ab4c95986f230f0372b9fed6
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+  - variational-inference
+proposes:
+- 'Simulation-based calibration (SBC): draw parameters from the prior, simulate data, draw L posterior samples with the algorithm under test, and check that the rank of the prior draw among the posterior
+  draws (for any one-dimensional function) is discrete-uniform on 0..L, using rank histograms'
+- An MCMC variant of SBC that thins chains based on effective sample size to remove autocorrelation artifacts
+claims:
+- id: c1
+  statement: 'Validating against a single ground-truth parameter value is flawed: in their normal-normal example, a correctly coded analysis can appear to fail on a plausible but extreme dataset while an
+    incorrectly coded model (wrong variances) appears to recover the truth; at the very least multiple ground truths are needed, and the prior defines which parameter values are relevant.'
+  location: Section 2
+  page: 2
+  quote: Unfortunately this approach is ﬂawed, as demonstarted in a simple example.
+- id: c2
+  statement: The earlier procedure of Cook, Gelman and Rubin (2006) can run into problems with MCMC because empirical CDF values only asymptotically approach the true values; discretization (L + 1 possible
+    positions) and autocorrelation also distort the test statistics. In the authors' Stan 2.17.1 linear regression demonstration, the histogram of estimated CDF values showed strong deviations from uniformity
+    although Stan is known to be extremely accurate for that analysis.
+  location: Section 3
+  page: 4
+  quote: These issues make it difﬁcult to determine whether a deviation from normality is due to pre-asymptotic behavior or biases in the posterior computations.
+- id: c3
+  statement: SBC requires just one assumption, a generative model for the data; under it, the rank of the prior draw among L exact posterior draws for any one-dimensional function is uniform on the integers
+    0..L (Theorem 1), and the check is similar to checking the coverage of a credible interval under the assumed model.
+  location: Section 4
+  page: 4
+  quote: 'SBC requires just one assumption: that we have a generative model for our data.'
+- id: c4
+  statement: 'Scope: the calibration concerns only the computation; it gives no guarantee that the posterior covers the ground truth for any single observation or that the model is rich enough to capture
+    the truth. Validating the model assumptions requires predictive checks such as posterior predictive checks; the authors view both SBC and PPCs as part of a robust Bayesian workflow.'
+  location: Section 4
+  page: 4
+  quote: Importantly, this calibration is limited exclusively to the computational aspect of our analysis.
+- id: c5
+  statement: 'Interpreting rank histograms: a symmetric ∩ shape indicates computed posteriors overdispersed relative to the true posterior on average, a ∪ shape indicates underdispersion, asymmetry indicates
+    bias (in the opposite direction in the ranks), and spikes at the boundaries indicate non-negligible autocorrelation; these deviations can co-occur but are readily separated if large enough.'
+  location: Section 4.2
+  page: 7
+  quote: Conversely, an algorithm that computes posteriors that are, on average, under-dispersed relative to the true posterior produces a histogram of rank statistics with a characteristic ∪ shape (Figure
+    6).
+- id: c6
+  statement: 'Practical settings: histograms are shown with a gray band covering 99% of the variation expected under uniformity (0.005 to 0.995 quantiles of Binomial(N, 1/(L+1))); when the number of replications
+    N is limited, neighboring ranks can be binned, and the authors'' experiments suggest keeping N/B ≈ 20 (replications per bin, with B bins) as a good trade-off. They note it will be difficult to identify
+    sufficiently small deviations regardless of binning.'
+  location: Section 4.1
+  page: 6
+  quote: Our experiments have shown that keeping N/B ≈20 lead to a good trade-off between the expressiveness of the binned histogram and the necessary variance reduction.
+- id: c7
+  statement: 'Cost: SBC is expensive because N simulated observations must be fit before considering the measured data; the fits are embarrassingly parallel (all of the paper''s examples ran on clusters
+    and took at most a few hours), fewer posterior draws speed it up at the cost of sensitivity, and even a few simulations are useful to catch gross problems.'
+  location: Section 4.3
+  page: 8
+  quote: The downside of using SBC in practice is that it is expensive; instead of ﬁtting a single observation we have to ﬁt N simulated observations before even considering the measured data.
+- id: c8
+  statement: For MCMC, posterior draws are thinned based on effective sample size (Algorithm 2), which in the authors' experience is sufficient to remove autocorrelation artifacts; deviations that cannot
+    be mitigated by thinning provide strong evidence that the MCMC estimators do not follow a central limit theorem and the chains are not adequately exploring the target.
+  location: Section 5.1
+  page: 10
+  quote: Deviations that cannot be mitigated by thinning provide strong evidence that the Markov chain Monte Carlo estimators do not follow a central limit theorem and the Markov chains are not adequately
+    exploring the target parameter space.
+- id: c9
+  statement: 'Stated limitations: reliance on visual interpretation is a limitation with many parameters; global summaries such as a chi-squared goodness-of-fit test did not perform particularly well in
+    their examples because deviations occur in a few systematic ways; and SBC histograms can only assess the calibration of one-dimensional posterior summaries.'
+  location: Section 7
+  page: 15
+  quote: Finally, the SBC histograms are only able to assess the calibration of one-dimensional pos-terior summaries.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Columbia University, Symplectomorphic LLC, University of Toronto, Aalto University. No venue
+    stated in the PDF or the given arXiv comment; none recorded. Conflict of interest: the authors include Stan developers, and the experiments validate Stan''s own algorithms (dynamic HMC/NUTS, ADVI in
+    Stan 2.17.1) as well as R-INLA (co-author Simpson''s work is cited for the INLA model setup). Experiments use L = 100 posterior draws, N = 10,000 replications (Sections 6.1-6.3) and N = 1000 (Section
+    6.4, INLA, limited by cost): misspecified prior (∪ shape), centered eight schools with HMC (bias in tau), ADVI on linear regression (strong bias for the slope), INLA on a spatial HIV-prevalence model
+    (small deviation seen only in the ECDF view, recommended in Section 5.2 for small deviations). Possible inconsistency to check: the Section 6.2 text says HMC samples for tau are ''biased below the prior
+    samples'' (citing Figure 11b) while the Figure 10 caption says ''biased towards larger values of tau''; not resolved here. The paper calls itself ''a corrected implementation'' of Cook, Gelman and Rubin
+    (2006), whose co-author Gelman is also an author here.'

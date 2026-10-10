@@ -1,0 +1,99 @@
+id: arxiv-1601.00670
+title: 'Variational Inference: A Review for Statisticians'
+authors:
+- David M. Blei
+- Alp Kucukelbir
+- Jon D. McAuliffe
+year: 2016
+venue: Journal of the American Statistical Association
+links:
+  arxiv: https://arxiv.org/abs/1601.00670
+source:
+  version: arXiv v9
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 21eea6bd5fb44a04f9c610da504803ceac7ebd24a88e49bde030eccdac3e6b62
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - variational-inference
+  - mcmc
+proposes:
+- 'Review of variational inference (VI) as optimization of KL(q||p) via the ELBO: the mean-field family, coordinate ascent VI (CAVI), VI for conditionally conjugate exponential-family models, and stochastic
+  VI (SVI) for massive data, with a worked Bayesian mixture of Gaussians, a survey of theory and a list of open problems'
+claims:
+- id: c1
+  statement: The KL(q||p) objective cannot be computed because it depends on the evidence log p(x); VI instead maximizes the ELBO = E[log p(z,x)] - E[log q(z)], which equals the negative KL plus log p(x),
+    so maximizing the ELBO is equivalent to minimizing the KL divergence.
+  location: Section 2.2
+  page: 6
+  quote: Because we cannot compute the KL, we optimize an alternative objective that is equivalent to the KL up to an added constant,
+- id: c2
+  statement: 'Using the ELBO as a model-selection criterion (premise: the bound approximates the marginal likelihood) sometimes works in practice, but the authors state that selecting based on a bound is
+    not justified in theory.'
+  location: Section 2.2
+  page: 7
+  quote: Though this sometimes works in practice, selecting based on a bound is not justiﬁed in theory.
+- id: c3
+  statement: 'When to use which: MCMC tends to be more computationally intensive but provides guarantees of (asymptotically) exact samples, while VI has no such guarantee and only finds a density close
+    to the target but tends to be faster. Hence VI suits large data sets and quickly exploring many models; MCMC suits smaller data sets where a heavier computational cost is acceptable for more precise
+    samples.'
+  location: Introduction
+  page: 3
+  quote: Thus, variational inference is suited to large data sets and scenarios where we want to quickly explore many models; MCMC is suited to smaller data sets and scenarios where we happily pay a heavier
+    computational cost for more precise samples.
+- id: c4
+  statement: Data set size is not the only consideration; posterior geometry matters too. For mixture models (multiple modes from label permutations), Gibbs sampling quickly focuses on one of the modes
+    if the model permits it; where Gibbs is not an option, VI may perform better than a more general MCMC technique such as HMC, even for small datasets (citing Kucukelbir et al., 2015).
+  location: Introduction
+  page: 3
+  quote: For mixture models where Gibbs sampling is not an option, variational inference may perform better than a more general MCMC technique (e.g., Hamiltonian Monte Carlo), even for small datasets (Kucukelbir
+    et al., 2015).
+- id: c5
+  statement: The relative accuracy of VI and MCMC is stated to be still unknown; what is known is that VI generally underestimates the posterior variance as a consequence of its objective. Depending on
+    the task this may be acceptable; the authors cite empirical work in which VI does not necessarily suffer in accuracy (e.g. posterior predictive densities) and other work (Giordano et al., 2015) focusing
+    on where it falls short, especially around the posterior variance.
+  location: Introduction
+  page: 3
+  quote: We do know that variational inference generally underestimates the variance of the posterior density; this is a consequence of its objective function.
+- id: c6
+  statement: 'Mean-field family: it can capture any marginal density but not correlation between latent variables. On a correlated 2D Gaussian, the optimal mean-field approximation has the same mean but
+    decoupled covariance and under-represents the marginal variances, a common effect explained by KL(q||p) penalizing mass of q where p has little mass but penalizing the reverse less.'
+  location: Section 2.3
+  page: 9
+  quote: Further, the marginal variances of the approximation under-represent those of the target density.
+- id: c7
+  statement: The ELBO is (generally) non-convex and CAVI only guarantees convergence to a local optimum that can be sensitive to initialization; on the mixture example, random initializations reach different
+    ELBO values, indicating many local optima. For assessing convergence the authors suggest monitoring the average log predictive of a small held-out set as a proxy for the full-data ELBO (which, unlike
+    the ELBO, is not guaranteed to increase monotonically under CAVI).
+  location: Section 2.5
+  page: 11
+  quote: Each initialization reaches a different value, indicating the presence of many local optima in the ELBO.
+- id: c8
+  statement: 'SVI (for conditionally conjugate models): subsample a data point, compute its optimal local parameters, and follow a noisy natural gradient of the global parameters that is unbiased; step
+    sizes must satisfy the Robbins-Monro conditions (e.g. t^-kappa with kappa in (0.5, 1]); stochastic optimization of the ELBO reaches a local optimum. The authors emphasize SVI needs no derivation beyond
+    CAVI.'
+  location: Section 4.3
+  page: 21
+  quote: We emphasize that SVI requires no new derivation beyond what is needed for CAVI.
+- id: c9
+  statement: 'Open problems: the interface between VI and MCMC remains relatively unexplored, and the authors state that a principled analysis of when to use (and combine) VI and MCMC would have both theoretical
+    and practical impact.'
+  location: Section 5.4
+  page: 26
+  quote: A principled analysis of when to use (and combine) variational inference and MCMC would have both theoretical and practical impact in the ﬁeld.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Venue from the arXiv journal_ref (JASA); the v9 PDF itself (dated May 11, 2018) does not state it. Section
+    numbers are from numbered headings in the PDF text (2.2 ELBO, 2.3 mean-field family, 2.5 Practicalities, 4.3 SVI by cross-reference, 5.2 Theory, 5.4 Open problems). The review focuses on KL(q||p)-based
+    VI (footnote 1: expectation propagation, belief propagation, Laplace are mentioned as other ''variational'' methods). Theory (Section 5.2) states results are mostly of the type ''VI posterior means
+    as point estimates have the usual frequentist asymptotics'', each for a single model and variational family, and cites Wang and Titterington (2005) for the asymptotic variational posterior covariance
+    being ''too small''. Open problems (Section 5.4) also list alternative divergences (e.g. alpha-divergences, EP), and say mean-field independence assumptions can exacerbate local optima and underestimation
+    of posterior variances; the final open problem is understanding VI as an estimator. Self-citation: the geometry argument cites Kucukelbir et al. (2015) (ADVI, by two of the authors), and the SVI section
+    summarizes Hoffman et al. (2013) (co-authored by Blei); see arxiv-1603.00788 and arxiv-1206.7051. No experiments beyond illustrative examples (mixture of Gaussians on images, LDA on 1.8M NYT articles
+    reproduced from Hoffman et al.).'

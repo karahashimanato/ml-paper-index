@@ -1,0 +1,99 @@
+id: arxiv-2108.03782
+title: 'Pathfinder: Parallel quasi-Newton variational inference'
+authors:
+- Lu Zhang
+- Bob Carpenter
+- Andrew Gelman
+- Aki Vehtari
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2108.03782
+  code: https://github.com/LuZhangstat/Pathfinder
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-07'
+  pdf_sha256: e27487d5804d9191609975bd027a0b94154617ccea5fba2402778292df17bdc1
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - variational-inference
+  - mcmc
+proposes:
+- 'Pathfinder: run L-BFGS from a random initialization, form a normal approximation at each point of the optimization path (covariance from the L-BFGS low-rank-plus-diagonal inverse Hessian estimate), estimate
+  each ELBO by Monte Carlo in parallel, and return draws from the approximation with the highest ELBO (lowest estimated KL)'
+- 'Multi-path Pathfinder: several independent Pathfinder runs combined by Pareto-smoothed importance resampling (PS-IR), intended among other uses to initialize MCMC'
+claims:
+- id: c1
+  statement: 'Method: starting from a random initialization, Pathfinder locates normal approximations along a quasi-Newton (L-BFGS) optimization path, with local covariance from the optimizer''s inverse
+    Hessian estimates, and returns draws from the approximation with the lowest estimated KL divergence; the Monte Carlo KL estimates are embarrassingly parallel, while L-BFGS itself is the serial bottleneck.'
+  location: Abstract
+  page: 1
+  quote: Pathﬁnder returns draws from the approximation with the lowest estimated Kullback-Leibler (KL) divergence to the true posterior.
+- id: c2
+  statement: 'Failure handling: in some cases the optimization path terminates at the initialization point and in others it fails to produce a positive definite inverse Hessian estimate; in both cases Pathfinder
+    essentially fails, and it then returns the last iterate with infinite approximate log density so that the failed fit gets zero importance weight in multi-path Pathfinder.'
+  location: Section II.1
+  page: 5
+  quote: In both of these settings, Pathﬁnder essentially fails.
+- id: c3
+  statement: Multi-path Pathfinder runs I independent Pathfinder instances and importance-resamples among their draws using Pareto-smoothed importance weights (building on Vehtari et al., 2019), so that
+    paths stuck in minor modes, saddle points or plateaus can be down-weighted; the authors state that, as far as they know, Pareto smoothing had not been applied to importance resampling before.
+  location: Section II.7
+  page: 12
+  quote: As far as we know, Pareto smoothing has not been previously applied to importance resampling, but only to importance sampling.
+- id: c4
+  statement: 'Evaluation protocol: 20 posteriordb models, each with a reference posterior of 10,000 roughly independent draws; 100 repetitions each of single-path Pathfinder (defaults L_max = 1000, relative
+    tolerance 1e-13, history J = 6, K = 5 ELBO draws, M = 100 draws), multi-path Pathfinder (I = 20 runs, R = 100 draws), Stan phase I warmup (NUTS, last of 75 iterations), and dense and mean-field ADVI
+    with Stan default settings, all initialized from uniform(-2, 2); approximations are compared by 1-Wasserstein distance on the unconstrained scale.'
+  location: Section III.1
+  page: 14
+  quote: We evaluate Pathﬁnder using the 20 models and data sets from posteriordb (Magnusson et al., 2021), each of which is supplied with reference posteriors in the form of 10,000 roughly independent
+    draws.
+- id: c5
+  statement: Cost is counted as log density and gradient evaluations (implementation agnostic); since gradients typically take closer to 80% of compute for Stan phase I and ADVI (citing Carpenter et al.,
+    2015), the authors conclude the other methods require around 30 to 50 times more operations than Pathfinder. These counts consider serial execution only; multi-path Pathfinder needs 20 times the evaluations
+    of single-path plus resampling.
+  location: Section III.1
+  page: 16
+  quote: Because gradients are more expensive with automatic differentiation than log density evaluations, the results indicate that other methods require around 30 to 50 times more operations than Pathﬁnder.
+- id: c6
+  statement: 'Failure mode with multiple modes: on the hidden Markov model bball_drive_event_0 (multiple meaningful posterior modes) mean-field ADVI did much better than single-path Pathfinder, which the
+    authors attribute to SGD noise letting ADVI escape minor modes that trap L-BFGS; multi-path Pathfinder removed this problem for that model.'
+  location: Section III.1
+  page: 15
+  quote: The noise inherent in the stochastic gradient descent approach used by ADVI allows it to escape minor modes than can trap the L-BFGS optimizer used by Pathﬁnder.
+- id: c7
+  statement: For posteriors far from normal (e.g. the gp_pois_regr model), Pathfinder's draws concentrate in a small part of the high-probability region; the authors say this is expected because selecting
+    the normal approximation by minimizing KL to the target favors more concentrated approximations, so Pathfinder tends to make a conservative guess.
+  location: Section III.3
+  page: 24
+  quote: Therefore, Pathﬁnder tends to make a conservative guess on the high probability region when the posterior cannot be well approximated by a normal distribution.
+- id: c8
+  statement: 'Limitations shown on challenging posteriors: results are sensitive to the initial distribution (underdispersed draws when started in a high-density region of a funnel); importance resampling
+    cannot recover when all optimization paths are trapped in minor modes; on a 3075-parameter horseshoe logistic regression with many modes, optimization from random inits tends to find the mode at the
+    origin, so in high dimensions Pathfinder can miss other relevant modes; weakly identified posteriors also frustrate it.'
+  location: Section III.3
+  page: 27
+  quote: Thus, even though Pathﬁnder is ﬁnding a single region of high probability, in high dimensions it can fail to ﬁnd other relevant high probability modes.
+- id: c9
+  statement: 'Use for MCMC initialization: the stated motivation is to cheaply generate draws to initialize MCMC; initialization only needs draws inside the high-probability volume, not coverage of the
+    posterior, and the authors say problems with Pathfinder''s distributional approximation can be diagnosed with the Pareto-k statistic (citing Yao et al., 2018). In the birthday Gaussian process example,
+    5 of 20 randomly initialized adaptive HMC chains were trapped in minor modes, and Pathfinder initialization avoided them.'
+  location: Section IV
+  page: 31
+  quote: Initialization to remove most of the transient bias of MCMC can succeed by producing draws within the high probability volume of the posterior without covering that posterior—it only requires draws
+    to look reasonable.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Columbia (Zhang, Gelman), Flatiron Institute (Carpenter), Aalto (Vehtari). No venue is stated
+    in the arXiv PDF (dated May 17, 2022); none recorded. Conflict of interest: the compared ADVI is co-authored by Gelman (reference list: Kucukelbir, Tran, Ranganath, Gelman and Blei, 2017), the posteriordb
+    benchmark is co-authored by Vehtari (Magnusson, Bürkner and Vehtari, 2021), and the compared ADVI/NUTS are Stan''s implementations (''We use Stan''s implementation of ADVI and dynamic HMC''); the PS-IR
+    step builds on the authors'' own PSIS (Vehtari et al.). Sensitivity analyses (L_max/tolerance, K = 30, J = 60, I in {5, 20, 40}) are shown as figures plus a few summary percentages in the text; not
+    recorded. The 1-Wasserstein comparisons are figure-only. Single-path uses K = 5 ELBO draws; the paper reports Pathfinder approximations range from slightly worse to much better than ADVI and are comparable
+    to short dynamic HMC chains (abstract, Introduction).'

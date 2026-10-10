@@ -1,0 +1,103 @@
+id: arxiv-2211.02383
+title: 'Simulation-Based Calibration Checking for Bayesian Computation: The Choice of Test Quantities Shapes Sensitivity'
+authors:
+- Martin Modrák
+- Angie H. Moon
+- Shinyoung Kim
+- Paul Bürkner
+- Niko Huurre
+- Kateřina Faltejsková
+- Andrew Gelman
+- Aki Vehtari
+year: 2022
+venue: Bayesian Analysis
+links:
+  arxiv: https://arxiv.org/abs/2211.02383
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: ffe2c8ebea1ceae0466eb3a16af1f0a8c06a06c13966627efcabc03ac9d8dd77
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+proposes:
+- An SBC variant whose test quantities may depend on both parameters and data, with random tie-breaking of ranks so that discrete parameters and point masses can be handled
+- Using the joint likelihood of the data as a default data-dependent test quantity, alongside the individual parameters
+claims:
+- id: c1
+  statement: Contrary to the common belief that SBC-type checks can never detect, for example, a program that samples from the prior and ignores the data, the authors show that test quantities depending
+    on data make it possible to detect any conceivable mismatch between generator and probabilistic program (in principle; cf. Theorem 6 with the impractical density-ratio test quantity).
+  location: Introduction
+  page: 5
+  quote: We show that using test quantities that depend on data makes it possible to detect any conceivable mismatch between the generator and the probabilistic program.
+- id: c2
+  statement: 'Theorem 7: a posterior that ignores (part of) the data passes SBC for test quantities that use only the retained part of the data; in particular, programs sampling from the prior pass SBC
+    against all test quantities that do not depend on data.'
+  location: Theoretical results
+  page: 9
+  quote: We generalize the result that probabilistic programs sampling from the prior distribution will pass SBC against all test quantities that do not depend on data.
+- id: c3
+  statement: 'SBC is not the same check as the data-averaged posterior (prior equals the data-averaged posterior), contrary to assumptions in some literature: Example 2 constructs posteriors that satisfy
+    the data-averaged-posterior condition but fail SBC, and others that pass SBC but violate it. The authors suspect the extra practical benefit of also checking the data-averaged posterior is small.'
+  location: Theoretical results
+  page: 10
+  quote: 'We show that this is incorrect: Example 2 not only explicitly constructs posterior distributions that will satisfy (1) for some test quantity while not passing SBC, but also posterior distributions
+    that pass SBC while not satisfying (1).'
+- id: c4
+  statement: SBC failure indicates that at least one of the generator, probabilistic program, and posterior approximation algorithm (including tuning parameters) is mismatched to the others, but SBC by
+    itself cannot determine where the problem lies.
+  location: Practical considerations
+  page: 4
+  quote: However, by itself, SBC cannot determine where exactly the problem lies.
+- id: c5
+  statement: SBC, as a simulation method, cannot inform about a discrepancy between the process that generated the real data and the model's assumptions; for reliable inference it must be combined with
+    other workflow elements that detect misspecification, such as posterior predictive checks or residual analysis.
+  location: Practical considerations
+  page: 4
+  quote: Additionally, SBC as a simulation method has no way to inform us about a discrepancy between the process that generated real data and the assumptions of our statistical model.
+- id: c6
+  statement: 'Precision limits in the multivariate normal case studies: if only a small part of the data is ignored, the joint likelihood turns detection into a problem of precision; missing a single data
+    point in a large dataset (e.g. an off-by-one error) may change the posterior only slightly and be undetectable with realistic computational effort. The authors say adding the joint log-likelihood ''seems
+    to be'' a useful default.'
+  location: Numerical case studies
+  page: 13
+  quote: Missing just a single datapoint in a large dataset (e.g., an off-by-one error in the probabilistic program) may change the posterior only slightly and be undetectable with realistic computational
+    effort.
+- id: c7
+  statement: In the real-world ordered-simplex case study (an off-by-one error in a Jacobian), the log likelihood did not reveal the error quickly, showing it is not a panacea, especially when the problem
+    lies with the prior; the log prior density seemed potentially useful there. The authors also describe SBC as useful for testing model components in isolation, akin to unit tests.
+  location: Real-world case study (Remarks)
+  page: 20
+  quote: In this example, the log likelihood did not reveal the error quickly, showing that it is not a panacea, especially in cases where the problem lies with the prior.
+- id: c8
+  statement: 'Recommended default: use the individual model parameters as test quantities as well as the joint likelihood of the data and potentially a small number of other quantities (e.g. quantities
+    tied to inferential goals, log prior, or pairwise products/differences when correlations matter). In all their simulated cases the joint likelihood detected the discrepancies, though for specific problems
+    other quantities were more sensitive.'
+  location: Conclusions
+  page: 21
+  quote: For practical use of SBC in everyday model and algorithm development, we recommend to use by default the individual model parameters as test quantities as well as the joint likelihood of the data
+    and potentially a small number of other quantities.
+- id: c9
+  statement: 'Limitations: for nontrivial models a finite set of test quantities cannot guard against all ways an incorrect posterior can satisfy the SBC identity (though counterexamples become contrived
+    as more are checked), and adding test quantities raises false failures without multiple-comparison correction or lowers power with it.'
+  location: Limitations
+  page: 21
+  quote: For nontrivial models, adding a finite number of test quantities cannot guard against all possible ways the SBC identity may be satisfied by an incorrect posterior.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations include the Czech Academy of Sciences, MIT, Kookmin University, TU Dortmund, Columbia University
+    and Aalto University. Venue: recorded as Bayesian Analysis from the arXiv comment (''upcoming in Bayesian Analysis'') given in the task; at this version (v3, PDF dated 19 Oct 2023) the paper was forthcoming,
+    and the PDF text itself does not state the venue. Conflict of interest: the method is implemented in the authors'' SBC R package, the real-world case study comes from the Stan forums and uses Stan''s
+    HMC, and several authors are Stan/brms developers; SBC was introduced by Talts et al. (arxiv-1804.06788), whose co-authors Gelman and Vehtari are also authors here. Other stated points: ties are resolved
+    by random tie-breaking so discrete parameters can be handled; for MCMC, posterior samples typically need thinning; convergence checking for each fit typically requires the equivalent of at least 100
+    independent posterior draws (citing Vehtari et al. 2021), so reducing posterior draws gives little speedup; for a fixed budget the authors suggest the same order of magnitude of simulated datasets as
+    posterior draws. Uniformity is quantified with the gamma ECDF statistic of Säilynoja et al. (2022) at the 5% level, which they state is typically more sensitive than Kolmogorov-Smirnov or chi-squared
+    tests. Section numbers in the text (2-6, 3.3, 3.5, 3.6) appear only as cross-references; locations use section names. Contrast with arxiv-2011.01808 (Going forward), which states SBC can be satisfied
+    if the posterior stays in the prior.'

@@ -1,0 +1,98 @@
+id: arxiv-1507.02646
+title: Pareto Smoothed Importance Sampling
+authors:
+- Aki Vehtari
+- Daniel Simpson
+- Andrew Gelman
+- Yuling Yao
+- Jonah Gabry
+year: 2015
+venue: JMLR
+links:
+  arxiv: https://arxiv.org/abs/1507.02646
+source:
+  version: arXiv v9
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 48f91b1268970f0c10aafb7f7ce2f48c7581dafb2adc44726d00f3fe0142b444
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+  - variational-inference
+proposes:
+- 'Pareto smoothed importance sampling (PSIS): fit a generalized Pareto distribution to the M largest importance ratios and replace them by the expected order statistics of the fitted distribution'
+- 'Pareto k-hat diagnostic: the estimated shape parameter of the fitted tail, used as a finite-sample convergence-rate diagnostic for importance sampling and any Monte Carlo estimator, with a sample-size-dependent
+  threshold min(1 - 1/log10(S), 0.7)'
+claims:
+- id: c1
+  statement: 'Method: the M largest importance ratios, M = floor(min(0.2S, 3 sqrt(S))), are used to fit a generalized Pareto distribution (k and sigma estimated with the method of Zhang and Stephens (2009)
+    plus an additional weak prior, Appendix G); these ratios are replaced by the inverse CDF evaluated at (z - 1/2)/M, z = 1..M (an approximation of expected order statistics), truncated at the largest
+    raw ratio.'
+  location: Section 2.2
+  page: 4
+  quote: We propose a new method to stabilize the importance weights by replacing the M largest weights above the threshold u by a set of well-spaced values that are consistent with the tails of the importance
+    distribution,
+- id: c2
+  statement: 'Assumption: the method assumes, as a working assumption that usually cannot be verified, that the distribution of the ratios lies in the domain of attraction of an extremal distribution (citing
+    Pickands (1975) that most textbook continuous distributions do); for finite S, k-hat can be read as saying the sample of ratios is not statistically distinguishable from one with tail index k-hat.'
+  location: Section 2.1
+  page: 4
+  quote: Although in most cases we cannot verify that the distribution of rs lies in the domain of attraction for an extremal distribution, we will use this as a working assumption for building our method.
+- id: c3
+  statement: 'Warning rule in the algorithm: if the estimated shape k-hat exceeds min(1 - 1/log10(S), 0.7), PSIS reports that the importance sampling estimates are likely to be unstable or have high bias;
+    for S > 2000 this threshold is 0.7.'
+  location: Section 2.2 (Algorithm 1)
+  page: 5
+  quote: For S > 2000 this threshold is 0.7.
+- id: c4
+  statement: 'Why not 0.5: trusting importance sampling only when k-hat < 0.5 (finite variance, CLT holds) would be simple, but because the theory shows PSIS is valid for any integrable density, the authors
+    consider requiring k-hat < 0.5 unnecessarily stringent; extensive experiments show PSIS is reliable (low bias, low variance) when k-hat < 0.7 for typical moderate sample sizes (approximately S > 2000).'
+  location: Section 3
+  page: 6
+  quote: This suggests that requiring the estimated shape parameter be less than 0.5 would be unnecessarily stringent.
+- id: c5
+  statement: 'Justification of 0.7: by numerical analysis of truncated Pareto means, when k < 0.7 the variance dominates the PSIS RMSE (so the variance-based MCSE works even for k > 0.5); when k > 0.7 bias
+    dominates regardless of S and the variance-based MCSE starts to fail, so accuracy is harder to diagnose even if S is increased.'
+  location: Section 3.2.3
+  page: 10
+  quote: When k > 0.7, independently of S the effect of bias dominates and the variance based MCSE starts to fail (also demonstrated by the examples).
+- id: c6
+  statement: 'Sample-size-specific threshold 1 - 1/log10(S) (rule of thumb for S >= 10): sample sizes 1000, 2000, 4000 and 10 000 give thresholds 0.67, 0.7, 0.72 and 0.75, all approximated by 0.7; S = 100
+    gives 0.5 and S = 100 000 gives 0.8.'
+  location: Section 3.2.4
+  page: 11
+  quote: For a much smaller sample size 100, the threshold would be 0.5, and for a much bigger sample size 100 000 the threshold would be 0.8.
+- id: c7
+  statement: 'Summary recommendations: if k-hat < 1 - 1/log10(S) the PSIS estimate is expected to be accurate; if k-hat < min(1 - 1/log10(S), 0.7) the PSIS MCSE estimate is expected to be reliable; if k-hat
+    > 0.7 it quickly becomes too expensive to get an accurate estimate; if k-hat > 1 the mean is expected not to exist and any estimate of it is invalid.'
+  location: Section 6
+  page: 25
+  quote: If ˆk > 1, it is expected that the mean does not exist and any estimate for the mean is invalid.
+- id: c8
+  statement: 'k-hat is a pre-asymptotic diagnostic: in Example 2 (D-dimensional standard normal target, Student-t proposal with 7 degrees of freedom, S = 10 000, D from 1 to 1024) the ratios are always
+    bounded with finite variance, yet the finite-sample behavior becomes indistinguishable from the infinite-variance case as D grows, and k-hat diagnoses the collapse of effective sample size and convergence
+    rate.'
+  location: Section 3.3
+  page: 15
+  quote: Although the importance ratios are always bounded and the variance is finite, the finite sample behavior is indistinguishable from the infinite variance case when the number of dimensions grows
+    large enough.
+- id: c9
+  statement: 'Known blind spot: one could construct an artificial example (citing a discrete-distribution example of Chatterjee and Diaconis, 2018) in which the tail looks thin (low k-hat) for small S with
+    high probability while the true tail is thick; the authors report not observing this, except for very small S, in their simulations and applications.'
+  location: Section 3.2.9
+  page: 15
+  quote: It would be possible to construct also an artificial example where the tail would look thin (low Pareto ˆk) for small S with large probability, while the true tail is thick (high Pareto ˆk).
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Venue: page 1 of the PDF says ''Accepted for publication in Journal of Machine Learning Research'' and the
+    arXiv journal_ref gives JMLR 25(72); recorded as ''JMLR''. Year is the first arXiv version (2015); the v9 PDF is dated 2024 and licensed CC-BY 4.0 (stated on page 1). Asymptotic theory (Section 4) covers
+    an idealized PSIS with k and sigma known: consistency and vanishing variance under listed conditions (R absolutely continuous, M = O(S^1/2), h in L2(p)); asymptotic normality is left as ''an open question''
+    (Section 4.2). Table 1 gives rules of thumb (minimum sample size 10^(1/(1-k-hat)), approximate ESS) where the constant 10 is described as an ad hoc choice. Section 5.1 and 6.1 list uses of k-hat to
+    diagnose variational approximations (Yao et al. 2018, Dhaka et al., Zhang et al. 2022 (Pathfinder)); these are by overlapping authors. The PSIS-LOO examples (stack loss, protein data) are not recorded.
+    Overlapping authors with arxiv-1802.02538 (which cites an earlier version of this paper as Vehtari et al., 2017) and arxiv-2108.03782.'

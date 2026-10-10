@@ -1,0 +1,92 @@
+id: arxiv-1701.02434
+title: A Conceptual Introduction to Hamiltonian Monte Carlo
+authors:
+- Michael Betancourt
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1701.02434
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: dd201f21a8155c2890ce3dfb7ae844a1318b0814cee37b3ca2bb8a5c4408ad1e
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+proposes: []
+claims:
+- id: c1
+  statement: 'Typical set: in high dimensions the neighbourhood around the mode has large density but little volume and the far tails have large volume but negligible density, so expectations are dominated
+    by an intermediate region called the typical set, which becomes narrower (more singular) as dimension grows; the author presents this as a manifestation of concentration of measure.'
+  location: Section 1.4
+  page: 7
+  quote: The only signiﬁcant contributions come from the neighborhood between these two extremes known as the typical set (Figure 3).
+- id: c2
+  statement: 'Random Walk Metropolis in high dimensions: almost every proposal lands outside the typical set and is rejected, while shrinking the proposal makes moves tiny; the author states that however
+    it is tuned, the chain explores the typical set extremely slowly in all but the lowest dimensional spaces.'
+  location: Section 2.4
+  page: 16
+  quote: Regardless of how we tune the covariance of the Random Walk Metropolis proposal or the particular details of the target distribution, the resulting Markov chain will explore the typical set extremely
+    slowly in all but the lowest dimensional spaces.
+- id: c3
+  statement: 'Why momentum is needed: the gradient of the target density is parameterization-dependent and following it leads towards the mode rather than through the typical set; HMC adds auxiliary momentum
+    with a probabilistic structure that gives conservative (Hamiltonian) dynamics, so trajectories glide along the typical set.'
+  location: Section 3.1
+  page: 19
+  quote: Following the guidance of the gradient pulls us away from the typical set and towards the mode of the target density.
+- id: c4
+  statement: 'Pathologies and split R-hat: a typical set that pinches into a region of high curvature is missed by most Markov transitions, causing biased and oscillating estimators; the sufficient condition
+    for a CLT is geometric ergodicity, which is hard to verify, so empirical diagnostics are used; the author calls split R-hat (across chains started from different points) the most powerful, and says
+    values not near 1 should raise suspicion.'
+  location: Section 2.3
+  page: 15
+  quote: Consequently, when split ˆR is not near the nominal value of 1, we should be suspicious of geometric ergodicity being satisﬁed and hence the practical utility of any resulting estimators.
+- id: c5
+  statement: 'Integration time: integrating too briefly wastes HMC''s coherent exploration and integrating too long gives diminishing returns; the optimal time differs between trajectories (in a one-dimensional
+    family it grows into the tails for heavy-tailed targets), so the author argues for choosing it dynamically, e.g. with the No-U-Turn criterion, which has proven an empirical success though near-optimality
+    is shown only in some simple cases.'
+  location: Section 4.3
+  page: 34
+  quote: 'In general, this optimal integration time will vary strongly depending on which trajectory we are considering: no single integration time will perform well everywhere.'
+- id: c6
+  statement: 'Step size: for the simple static implementation, bounds between cost and average acceptance probability (citing Betancourt, Byrne and Girolami, 2014) underlie an adaptation that tunes the
+    step size during an extended warm-up to an average Metropolis acceptance probability between 0.6 and 0.8; the author notes that more work is needed to formalize the corresponding results for more sophisticated
+    implementations.'
+  location: Section 5.3
+  page: 41
+  quote: These bounds provide the basis for an automated tuning algorithm that adapts the step size during an extended warm-up to achieve an average Metropolis acceptance probability between 0.6 and 0.8
+- id: c7
+  statement: 'Divergences: regions of high curvature (characteristic of many models, in particular hierarchical models, citing Betancourt and Girolami, 2015) make symplectic integrators unstable so that
+    trajectories diverge; any divergent transition should prompt suspicion of the estimators. Mild cases can be fixed by decreasing the step size, but often divergences persist however small the step, indicating
+    significant bias, and the target itself must be regularized (stronger priors or an alternative representation such as switching centered/non-centered parameterizations).'
+  location: Section 6.2
+  page: 45
+  quote: In particular, any divergent transitions encountered in a Hamiltonian Markov chain should prompt suspicion of the validity of any Markov chain Monte Carlo estimators.
+- id: c8
+  statement: 'Heavy tails and the kinetic energy: a poorly chosen kinetic energy can make the marginal energy distribution heavy-tailed so that exploration between energy level sets is incomplete; this
+    is identified by comparing the marginal energy and energy-transition distributions, formalized as the energy Bayesian fraction of missing information (E-BFMI), with values below 0.3 empirically problematic
+    but no formal threshold.'
+  location: Section 6.1
+  page: 44
+  quote: Empirically, values of this energy Bayesian fraction of missing information below 0.3 have proven problematic
+- id: c9
+  statement: 'Limits of the diagnostics: the E-BFMI and divergence diagnostics are only necessary, not sufficient, conditions for valid estimators; without explicit theoretical analysis there is no guarantee
+    that a target will not have subtler pathologies, although the author argues that combined with split R-hat over multiple chains they make HMC uniquely robust.'
+  location: Section 6.3
+  page: 45
+  quote: Although these two diagnostics are powerful means of identifying many pathological target distributions, they are only necessary and not suﬃcient conditions for the validity of the Markov chain
+    Monte Carlo estimators.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Applied Statistics Center, Columbia University (previously Warwick). Review/tutorial; no experiments.
+    No venue is stated in the PDF or the arXiv comment (''60 pages, 42 figures''); none recorded. Section numbers are from numbered headings in the PDF (e.g. ''2.3 Pathological Behavior'', ''6.2 Diagnosing
+    Regions of High Curvature''). Conflict of interest: the author thanks the Stan development team ''with whom the implementations were developed'' and repeatedly presents Stan as the reference implementation;
+    many of the cited diagnostics and results (E-BFMI, step-size bounds, exhaustive termination) are the author''s own earlier work. Other content not carded as claims: metric (mass matrix) adaptation by
+    estimating the posterior covariance in warm-up (Section 4.2.1); Riemannian HMC; Stan replaced NUTS''s slice sampling with multinomial sampling and a generalized No-U-Turn criterion (Appendix A.5). No
+    discussion of multimodality was found in the text (searched for multimodal, multi-modal, metastab, modes).'

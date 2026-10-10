@@ -10,7 +10,7 @@ written_by: claude-opus-5-5 via Claude Code
 # 不確実性の推定と較正 — ベイズ近似、較正の測り方、conformal prediction の保証の範囲
 
 <!-- generated:stale -->
-> 未反映のカードはありません。
+> ⚠ この記事の執筆後(2026-10-06)に、関連カードが 3 件追加されています(未反映): `arxiv-1402.4102`, `arxiv-1711.05597`, `arxiv-1910.04102`
 <!-- /generated:stale -->
 
 ## この記事の読み方

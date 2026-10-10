@@ -1,0 +1,90 @@
+id: arxiv-1603.00788
+title: Automatic Differentiation Variational Inference
+authors:
+- Alp Kucukelbir
+- Dustin Tran
+- Rajesh Ranganath
+- Andrew Gelman
+- David M. Blei
+year: 2016
+links:
+  arxiv: https://arxiv.org/abs/1603.00788
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 4e4fe59f72e7e88b96f8e7bee669ec7124a781914f804333faf1661a6a2bcf3d
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - variational-inference
+  - mcmc
+proposes:
+- 'Automatic differentiation variational inference (ADVI), implemented in Stan: transform constrained latent variables to real coordinate space, posit a mean-field or full-rank Gaussian there, compute ELBO
+  gradients by Monte Carlo after elliptical standardization (reparameterization) with automatic differentiation, and optimize by stochastic gradient ascent with an adaptive step-size sequence'
+claims:
+- id: c1
+  statement: 'Model class: differentiable probability models, i.e. continuous latent variables with a gradient of the log joint valid on the support of the prior; no conjugacy assumptions are made. Discrete
+    latent variables must be marginalized out, which the authors note is not tractable for all models (e.g. Ising model, sigmoid belief networks, untruncated Dirichlet process mixtures).'
+  location: Section 2.1
+  page: 4
+  quote: We make no assumptions about conjugacy, either full (Diaconis et al., 1979) or conditional (Hoffman et al., 2013).
+- id: c2
+  statement: 'Support assumption: minimizing KL(q||p) requires the support of q to lie within that of the posterior; ADVI further assumes the posterior support equals the prior support (holds when the likelihood
+    does not constrain the prior), which the authors call benign.'
+  location: Section 2.2
+  page: 5
+  quote: This is a benign assumption, which holds for most models considered in machine learning.
+- id: c3
+  statement: 'Variational families in the transformed space: a mean-field Gaussian (log standard deviations) or a full-rank Gaussian (Cholesky factor). The full-rank Gaussian captures posterior correlations
+    and is more accurate but has a computational cost; the induced approximation in the original space is non-Gaussian, and its shape depends on the chosen transformation.'
+  location: Section 2.4
+  page: 7
+  quote: This leads to a more accurate posterior approximation than the mean-ﬁeld Gaussian; however, it comes at a computational cost.
+- id: c4
+  statement: 'Known weakness shown on simulated models: on a correlated 2D Gaussian both variants recover the analytic posterior mean, but mean-field ADVI ignores off-diagonal covariance and minimizing
+    KL(q||p) leads to systematic underestimation of marginal variances; on logistic regression (reference: Stan''s NUTS) mean-field underestimates marginal variances on most coefficients, and on a stochastic
+    volatility model it struggles even with the posterior mean where full-rank matches sampling.'
+  location: Section 3.1
+  page: 12
+  quote: ADVI minimizes the KL divergence from the approximation to the exact posterior; this leads to a systemic underestimation of marginal variances (Bishop, 2006).
+- id: c5
+  statement: 'Recommendation: scientists interested in posterior variances and covariances should use full-rank ADVI (though it can be prohibitively slow for large data); those interested in prediction
+    should initially rely on mean-field ADVI, since in practice accurate posterior means dominate predictive accuracy.'
+  location: Section 3.1
+  page: 13
+  quote: Scientists interested in posterior variances and covariances should use the full-rank approximation.
+- id: c6
+  statement: 'Gradient variance: both the ADVI (reparameterization) estimator and the BBVI score-function estimator are unbiased; BBVI is more general (no model gradient needed) but its gradients can suffer
+    from high variance. In the authors'' simulations the ADVI gradient had lower variance and a single MC sample sufficed in practice.'
+  location: Section 3.2
+  page: 14
+  quote: While BBVI is more general—it does not require the gradient of the model and thus applies to more settings—its gradients can suffer from high variance.
+- id: c7
+  statement: 'Sensitivity to the transformation T: on Gamma posteriors, T2 = log(exp(theta) - 1) gave lower KL than T1 = log; an optimal transformation (making the Gaussian approximation exact) exists in
+    principle but estimating it requires the posterior CDF, which the authors say is as hard as the original problem. The Discussion lists this sensitivity as an avenue for research.'
+  location: Section 3.3
+  page: 16
+  quote: this is just as hard as the original goal of estimating the posterior density
+- id: c8
+  statement: 'Evaluation protocol: mean-field ADVI is compared with HMC and NUTS (Stan''s default sampler) by held-out predictive likelihood as a function of time on hierarchical regression, matrix factorization,
+    mixture and PPCA models. On the non-negative matrix factorization models HMC produced no useful samples within a one-hour budget and was omitted thereafter; on the GMM the authors attribute NUTS/HMC
+    difficulties likely to label switching.'
+  location: Section 4.2
+  page: 18
+  quote: In both cases, HMC does not produce any useful samples within a budget of one hour; we omit HMC from here on.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Columbia (Kucukelbir, Tran, Gelman, Blei), Princeton (Ranganath). No venue is stated in the
+    v1 PDF (dated March 3, 2016); none recorded. Section numbers are from numbered headings in the PDF text. Extends Kucukelbir et al. (2015) (footnote 1). Conflict of interest: the authors ''implemented
+    and deployed ADVI as part of Stan'' (Introduction), and the compared NUTS is Stan''s default sampler (footnote 9), i.e. ADVI and its MCMC comparators come from the same system and were run by the authors;
+    the PDF does not itself state Stan team membership of individual authors. Also, and BBVI (compared in Section 3.2) is by co-authors Ranganath and Blei (arxiv-1401.0118). Algorithm details: adaptive
+    step size rho = eta * i^(-1/2+eps) * (tau + sqrt(s_k))^-1 with s_k an exponential moving average of squared gradients (alpha = 0.1, tau = 1, eps = 1e-16); eta is chosen by searching {0.01, 0.1, 1, 10,
+    100} on a subset of the data for fastest convergence (Section 2.6). Per-iteration cost O(NMK), or O(BMK) with minibatch subsampling scaled by N/B. Initialization: standard Gaussian in the real coordinate
+    space; the Discussion names initialization and step-size scaling as the two practical factors affecting convergence and suggests extending to discrete latent variables via the higher-variance BBVI estimator.
+    Predictive accuracy results are figure-only; Table 2 KL values for the transformation study are not recorded. Smaller GMM minibatches (< 500) led to suboptimal solutions (Section 4.3).'

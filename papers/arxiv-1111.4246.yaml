@@ -1,0 +1,95 @@
+id: arxiv-1111.4246
+title: 'The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo'
+authors:
+- Matthew D. Hoffman
+- Andrew Gelman
+year: 2011
+links:
+  arxiv: https://arxiv.org/abs/1111.4246
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 691caf636ed1203cba485a2c12117d8f6ca2ec92b3666b48e15529e51ed98d8a
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+proposes:
+- 'No-U-Turn Sampler (NUTS): an extension of HMC that removes the number-of-steps parameter L by repeatedly doubling a leapfrog trajectory forwards or backwards in time (building a balanced binary tree)
+  until some subtree starts to make a U-turn, then sampling the next state from the visited states in a way that preserves detailed balance'
+- A dual-averaging scheme (adapted from Nesterov's primal-dual algorithm) that adapts the step size during burn-in so that an average acceptance statistic matches a target delta, for both HMC and NUTS
+claims:
+- id: c1
+  statement: 'Motivation (citing Creutz, 1988): the cost of HMC per independent sample from a D-dimensional target is roughly O(D^(5/4)), in contrast with O(D^2) for random-walk Metropolis. The price is
+    that HMC needs the gradient of the log-posterior and the user must set a step size and a number of steps, and a poor choice of either causes a dramatic drop in efficiency.'
+  location: Introduction
+  page: 2
+  quote: which stands in sharp contrast with the O(D2) cost of random-walk Metropolis (Creutz, 1988)
+- id: c2
+  statement: The naive rule of running leapfrog steps until the trajectory starts moving back towards the starting point does not guarantee time reversibility and therefore is not guaranteed to converge
+    to the correct distribution; NUTS instead uses a recursive doubling procedure (reminiscent of Neal's slice-sampling doubling) and must exclude from the candidate set any states that could not have generated
+    the same tree.
+  location: Section 3.1
+  page: 5
+  quote: Unfortunately this algorithm does not guarantee time reversibility, and is therefore not guaranteed to converge to the correct distribution.
+- id: c3
+  statement: Besides the U-turn rule, NUTS stops doubling when the simulation error becomes extremely large (the log joint density of a leaf falls more than Delta_max below the slice variable); the authors
+    note this may happen if the step size is too large or if hard constraints make the log density go to minus infinity in some regions.
+  location: Section 3.1.1
+  page: 9
+  quote: We also want to stop expanding B if the error in the simulation becomes extremely large, indicating that any states discovered by continuing the simulation longer are likely to have astronomically
+    low probability.
+- id: c4
+  statement: 'Step-size adaptation: Robbins-Monro diminishing step sizes give disproportionate weight to early iterations, so the authors adapt dual averaging (with shrinkage target mu, free parameters
+    gamma, t0 and kappa) to drive an acceptance statistic towards a target delta, with x = log(epsilon); for NUTS the statistic is the average HMC acceptance probability of the states explored during the
+    final doubling. In Algorithms 5 and 6 adaptation runs for M_adapt iterations and the step size is then fixed.'
+  location: Section 3.2
+  page: 15
+  quote: However, the diminishing step sizes of Robbins-Monro give disproportionate weight to the early iterations, which is the opposite of what we want.
+- id: c5
+  statement: The dual-averaging parameters (gamma = 0.05, t0 = 10, kappa = 0.75) were chosen by trying a few settings by hand on the stochastic volatility model; the authors say they seem to work consistently
+    well for all models tested but that it is entirely possible they may not work as well for other samplers or other statistics.
+  location: Section 3.2
+  page: 16
+  quote: Better results might be obtained with further tweaking, but these default parameters seem to work consistently well for both NUTS and HMC for all of the models that we tested.
+- id: c6
+  statement: 'Evaluation protocol: four targets (a 250-dimensional correlated multivariate normal, Bayesian logistic regression and hierarchical logistic regression on the German credit data, and a 3001-dimensional
+    stochastic volatility posterior); each run has 2000 iterations with step-size adaptation in the first 1000, HMC with 10 simulation lengths and several delta targets, 10 seeds per setting. Efficiency
+    is ESS per gradient evaluation, taking the minimum over dimensions of the ESS for the mean and the second central moment, with reference mean and variance from a separate 50,000-iteration NUTS run (delta
+    = 0.5).'
+  location: Section 4
+  page: 19
+  quote: We measure the eﬃciency of each algorithm in terms of eﬀective sample size (ESS) normalized by the number of gradient evaluations used by each algorithm.
+- id: c7
+  statement: 'Recommended targets: HMC''s best performance seems to occur around delta = 0.65 and NUTS''s around delta = 0.6, without strong dependence on delta within [0.45, 0.65] for NUTS, so the authors
+    suggest 0.6 as a reasonable default for NUTS.'
+  location: Section 4.4
+  page: 25
+  quote: δ = 0.6 therefore seems like a reasonable default value for NUTS.
+- id: c8
+  statement: 'Comparison with HMC (text statement from Figure 6): on the two logistic regression problems NUTS is about as efficient as HMC, on the multivariate normal and stochastic volatility problems
+    NUTS with delta = 0.6 outperforms HMC''s best ESS by about a factor of three; the best HMC simulation lengths varied by about a factor of 100 across targets, so the authors say the results suggest NUTS
+    is at least as efficient as HMC even ignoring HMC''s tuning runs.'
+  location: Section 4.4
+  page: 25
+  quote: The results in Figure 6 suggest that NUTS can generate samples at least as eﬃciently as HMC, even discounting the cost of any preliminary runs needed to tune HMC’s simulation length.
+- id: c9
+  statement: 'Scope limits: NUTS was compared only with basic HMC (not its extensions) and only with an identity mass matrix; like HMC it can only resample unconstrained continuous variables with respect
+    to which the target is differentiable almost everywhere, so discrete variables must be summed out or handled by other algorithms such as Gibbs sampling.'
+  location: Section 5 (Discussion)
+  page: 27
+  quote: Like HMC, NUTS can only be used to resample unconstrained continuous-valued variables with respect to which the target distribution is diﬀerentiable almost everywhere.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Columbia University. The arXiv comment gives only ''30 pages, 7 figures'' and the v1 PDF does
+    not name a journal; no venue recorded (later versions may have been published elsewhere, not checked). Section numbers are from numbered headings in the PDF. Conflict of interest: the authors state
+    they are developing Stan with NUTS as its core algorithm (Discussion), and the qualitative comparison with random-walk Metropolis and Gibbs (Section 4.5, Figure 7) is informal. The efficient NUTS (Algorithm
+    3) stores O(j) states instead of O(2^j); the U-turn checks cost about as many inner products as leapfrog steps, which the authors say is usually negligible compared with gradient cost. Most trajectory
+    lengths were powers of two (Section 4.3). ESS estimator: autocorrelations truncated when they first dip below 0.05 (Appendix A). Discussion notes that a mass matrix approximating the posterior covariance
+    would help both NUTS and HMC. Results figures not recorded.'

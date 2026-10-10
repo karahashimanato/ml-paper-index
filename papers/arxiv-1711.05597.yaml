@@ -1,0 +1,87 @@
+id: arxiv-1711.05597
+title: Advances in Variational Inference
+authors:
+- Cheng Zhang
+- Judith Butepage
+- Hedvig Kjellstrom
+- Stephan Mandt
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1711.05597
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 7bdebde7d70d7ab3a22d9cb833ab32193268c8ce6185fd98bc6401d91a7d59f3
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - variational-inference
+  - variational-autoencoders
+  - bayesian-deep-learning
+proposes:
+- 'Survey of recent VI research along four directions: scalable VI (stochastic VI, variance reduction, collapsed/sparse/distributed inference), generic VI (score-function/REINFORCE and reparameterization
+  gradients for non-conjugate models), accurate VI (alternative divergences, structured families) and amortized VI (inference networks, VAEs)'
+claims:
+- id: c1
+  statement: 'Positioning VI against MCMC: MCMC is often unbiased by construction and converges to the true posterior in the limit but can be slow to converge; optimization-based methods (VI, loopy BP,
+    EP) are often faster but may suffer from oversimplified posterior approximations (citing Bishop and Wainwright & Jordan).'
+  location: Section 1 (Introduction)
+  page: 1
+  quote: Optimization-based methods, on the other hand, are often faster but may suffer from oversimpliﬁed posterior approximations [14], [205].
+- id: c2
+  statement: 'Limitations of mean-field VI: it explicitly ignores correlations between variables; citing Wainwright & Jordan [205], the more dependencies are broken by the variational distribution, the
+    more non-convex the optimization becomes, while more structure removes certain local optima.'
+  location: Section 5.1
+  page: 10
+  quote: The main limitation of mean ﬁeld approximations is that they explicitly ignore correlations between different variables e.g., between the spins in the Ising model.
+- id: c3
+  statement: 'Shortcomings of KL(q||p) VI listed by the authors with citations: underestimating posterior variances [128], in some cases inability to break symmetry when multiple modes are close [141],
+    and being a comparably loose bound [221]; these motivate alternative divergence measures.'
+  location: Section 5.2
+  page: 10
+  quote: In other cases, it is unable to break symmetry when multiple modes are close [141], and is a comparably loose bound [221].
+- id: c4
+  statement: With Renyi's alpha-divergence, a smaller alpha leads to more mass-covering behaviour and a larger alpha to zero-forcing behaviour (the approximation avoids areas of low posterior probability);
+    alpha -> 1 recovers standard KL-based VI.
+  location: Section 5.2
+  page: 10
+  quote: a smaller α leads to more mass-covering effects, while a larger α results in zero-forcing effects
+- id: c5
+  statement: Black-box VI writes the ELBO gradient as an expectation under q of the score function times (log p(x,z) - log q(z)), estimated by sampling from q, so only the joint needs to be specified. A
+    direct implementation suffers from high gradient variance; the authors attribute much of BBVI's success to Rao-Blackwellization and control variates (citing Ranganath et al. [154]).
+  location: Section 4.2
+  page: 8
+  quote: A direct implementation of stochastic gradient ascent based on Eq. 14 suffers from high variances of the estimated gradients.
+- id: c6
+  statement: Reparameterization gradients are empirically often lower-variance than score-function gradients, but a theoretical analysis (cited) shows this is not guaranteed; the trick does not trivially
+    extend to many distributions, in particular discrete ones, which require further approximations (e.g. Gumbel-softmax relaxations with a temperature).
+  location: Section 4.3
+  page: 9
+  quote: While the variance of this estimator (Eq. 16) is often lower than the variance of the score function gradient (Eq. 14), a theoretical analysis shows that this is not guaranteed, see Chapter 3 in
+    [48].
+- id: c7
+  statement: 'Open question on theory: few authors address theoretical aspects of VI; quantifying the approximation error of replacing the posterior by a variational distribution, and the related predictive
+    error, are named as important directions.'
+  location: Section 7 (Discussion)
+  page: 16
+  quote: Despite progress in modeling and inference, few authors address theoretical aspects of VI [95], [133], [213].
+- id: c8
+  statement: 'Automatic VI in probabilistic programming (Stan, Infer.Net, Edward, etc.) is still not straightforward for non-experts: e.g. Infer.Net requires manually identifying and breaking posterior
+    symmetries, and control variates need model-specific design for best performance; the authors state these problems were not yet addressed in toolboxes at the time of writing.'
+  location: Section 7 (Discussion)
+  page: 17
+  quote: Despite current efforts to make VI more accessible to practitioners, its usage is still not straightforward for non-experts.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations (PDF page 1): Microsoft Research / Disney Research / KTH (Zhang), KTH (Butepage, Kjellstrom),
+    UC Irvine (Mandt). Author names are written with umlauts in the PDF (Bütepage, Kjellström). No venue is stated in the v3 PDF (only ''Member, IEEE'' after names); none recorded. Section numbers are from
+    numbered headings in the PDF text. Scalable VI (Section 3): SVI requires the same convergence conditions as SGD (uniform minibatches, Robbins-Monro step sizes), and SVRG-type control variates are stated
+    not to be applicable to BBVI noise because the full gradient is not a finite sum (Section 4.2). Laplace approximation is described as purely local; the authors state KL minimization typically approximates
+    the posterior covariance more accurately (Section 4.1). Amortized VI and the VAE ''dying units'' problem are covered in Section 6 (not recorded). Survey only; no experiments. The review''s [15] is Blei,
+    Kucukelbir & McAuliffe (arxiv-1601.00670).'

@@ -1,0 +1,86 @@
+id: arxiv-1402.4102
+title: Stochastic Gradient Hamiltonian Monte Carlo
+authors:
+- Tianqi Chen
+- Emily B. Fox
+- Carlos Guestrin
+year: 2014
+venue: ICML 2014
+links:
+  arxiv: https://arxiv.org/abs/1402.4102
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 4d976ef6ccf75969a4f08fba4dd1fbc34438b6d8ae91cf1c8bb79a28d84df7c2
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+  - bayesian-deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Stochastic gradient HMC (SGHMC): HMC with minibatch gradients plus a friction term in the momentum update (second-order Langevin dynamics), with a user-specified friction C >= B_hat and injected noise
+  N(0, 2(C - B_hat) eps), run without a Metropolis-Hastings step'
+claims:
+- id: c1
+  statement: 'Naive stochastic-gradient HMC: approximating the minibatch gradient noise as Gaussian (central limit theorem), replacing the gradient adds diffusion to the momentum, and the target pi(theta,
+    r) is no longer invariant (Corollary 3.1); Theorem 3.1 shows the entropy increases, which the authors say hints that the distribution tends toward a uniform distribution.'
+  location: Section 3.1
+  page: 3
+  quote: Formally, as given by Corollary 3.1 of Theorem 3.1, when B is nonzero, π(θ, r) of Eq. (3) is no longer invariant under the dynamics described by Eq. (7).
+- id: c2
+  statement: 'Correcting naive SG-HMC with Metropolis-Hastings creates a trade-off: an MH step after short simulations needs a full-data computation each time, while long simulations between MH steps lead
+    to very low acceptance rates.'
+  location: Section 3.1
+  page: 4
+  quote: Each of these MH steps requires a costly computation using all of the data, thus defeating the computational gains of considering noisy gradients.
+- id: c3
+  statement: 'Friction: adding a friction term B M^-1 r to the momentum update gives second-order Langevin dynamics for which pi(theta, r) is the unique stationary distribution of the continuous system
+    (Theorem 3.2); the authors relate it to partial momentum refreshment, which had not greatly improved HMC with noise-free gradients (citing Neal, 2010).'
+  location: Section 3.2
+  page: 5
+  quote: The key was to introduce a friction term using second-order Langevin dynamics.
+- id: c4
+  statement: 'Relation to SGLD: SGLD''s first-order Langevin dynamics can be viewed as the limiting case of SGHMC''s dynamics with a large friction term.'
+  location: Section 3.2
+  page: 5
+  quote: In particular, the dynamics of SGLD can be viewed as second-order Langevin dynamics with a large friction term.
+- id: c5
+  statement: In practice the gradient-noise covariance B is unknown; with a user-set friction C dominating an estimate B_hat (e.g. B_hat = 0), exact correctness is obtained only as the step size goes to
+    zero, and decreasing step sizes reduce efficiency, so like SGLD the authors use a small non-zero step size, accepting some bias (a finite-step error analysis is in the supplement).
+  location: Section 3.3
+  page: 6
+  quote: As in (Welling & Teh, 2011; Ahn et al., 2012) for SGLD, we consider using a small, non-zero ϵ leading to some bias.
+- id: c6
+  statement: No Metropolis-Hastings correction is used in SGHMC; the authors note that, as in SGLD, an MH correction is not even possible because the probability of the reverse dynamics cannot be computed.
+  location: Section 3.3 (footnote 1)
+  page: 6
+  quote: We note that, just as in SGLD, an MH correction is not even possible because we cannot compute the probability of the reverse dynamics.
+- id: c7
+  statement: The supplementary error analysis (Theorem F.1, chi-squared divergence decreasing as the noise-estimation error shrinks) assumes a mixing-rate bound; the authors state that such bounds exist
+    for SGLD but are unclear for SGHMC because the process is irreversible, and leave this for future work.
+  location: Appendix F
+  page: 12
+  quote: but the corresponding bounds for SGHMC are unclear due to the irreversibility of the process
+- id: c8
+  statement: 'Experiments: a 1-D simulated target with synthetic gradient noise (naive SG-HMC deviates from the truth unless MH is added, SGHMC without MH is close), a correlated bivariate Gaussian against
+    SGLD, a Bayesian two-layer network on MNIST, and online Bayesian PMF on MovieLens ml-1M; on MovieLens both SGHMC and SGLD beat the optimization baselines and the authors report SGLD and SGHMC results
+    as very similar.'
+  location: Section 4.3
+  page: 8
+  quote: In this experiment, the results for SGLD and SGHMC are very similar.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliation: University of Washington. Venue from the PDF first page (''Proceedings of the 31 st International
+    Conference on Machine Learning, Beijing, China, 2014'') and the arXiv comment. Section numbers from numbered headings. Simulated-experiment conclusions (Figures 1-3) are figure-based; the MNIST result
+    (SGHMC converging to low test error faster than SGLD, sampling methods better than SGD) is shown only as a figure. Hyperparameters for all methods were selected on a held-out validation set (MNIST:
+    10,000 of the training images) or by cross-validation (MovieLens), with small grids listed in Appendix H; momentum term alpha fixed (0.01 MNIST, 0.05 MovieLens) and beta_hat = 0. No gold-standard posterior
+    is used for the real-data experiments; evaluation is predictive (test error, RMSE). Appendix G gives practical settings (minibatch of hundreds, alpha 0.01 or 0.1, eta = gamma/|D|) and the SGD-with-momentum
+    parameterization.'

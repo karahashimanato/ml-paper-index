@@ -1,0 +1,101 @@
+id: arxiv-2011.01808
+title: Bayesian Workflow
+authors:
+- Andrew Gelman
+- Aki Vehtari
+- Daniel Simpson
+- Charles C. Margossian
+- Bob Carpenter
+- Yuling Yao
+- Lauren Kennedy
+- Jonah Gabry
+- Paul-Christian Bürkner
+- Martin Modrák
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2011.01808
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-07'
+  pdf_sha256: 46a31d7b974ae0ecadbc5bfc4a6fbf8896d529c6397dacaf44f281fb7be8f085
+tags:
+  tasks:
+  - posterior-inference
+  method_families:
+  - mcmc
+proposes:
+- A review of Bayesian workflow (model building, inference, model checking/improvement and comparison), including computation checks with fake-data simulation and simulation-based calibration and a strategy
+  for addressing computational problems
+claims:
+- id: c1
+  statement: Prior predictive checks use simulations from the model rather than observed data, so they refine the model without using the data multiple times; in their logistic regression example, independent
+    priors on coefficients imply increasingly extreme predictions as the number of covariates grows, a general phenomenon in regression models.
+  location: Section 2.4 (Prior predictive checking)
+  page: 10
+  quote: This is a general phenomenon in regression models where as the number of predictors increases, we need stronger priors on model coeﬃcients (or enough data) if we want to push the model away from
+    extreme predictions.
+- id: c2
+  statement: Recommended standard practice is to run at least until R-hat is below 1.01 for all parameters and quantities of interest (citing Vehtari et al., 2020) and to also monitor the multivariate R*
+    statistic; earlier stopping can make sense in early stages of modeling, since big issues (especially coding errors) often appear after a few iterations.
+  location: How long to run an iterative algorithm
+  page: 13
+  quote: There are times when earlier stopping can make sense in the early stages of modeling.
+- id: c3
+  statement: 'The first validation step is that fitting finishes in acceptable time with reasonable convergence diagnostics (for HMC: no divergent transitions, R-hat near 1, sufficient ESS for central tendency,
+    tail quantiles and energy), but these diagnostics cannot protect against a program that is computed correctly but encodes a different model than intended; hence models are first fit to simulated data.'
+  location: Using constructed data to find and understand problems
+  page: 16
+  quote: However, those diagnostics cannot protect against a probabilistic program that is computed correctly but encodes a diﬀerent model than the user intended.
+- id: c4
+  statement: 'Fake-data simulation: one cannot run a single fake-data simulation and declare that everything works, though a single run will often reveal blatant errors (e.g. catastrophic failure of parameter
+    recovery from code fitting the wrong model).'
+  location: Section 4.1 (Fake-data simulation)
+  page: 17
+  quote: It is not possible to run a single fake data simulation, compute the associated posterior distribution, and declare that everything works well.
+- id: c5
+  statement: Good inference on fake data generated from the same model gives no guarantee of sensible inference on real data, but failure on such fake data makes reasonable inference on real data hopeless;
+    fake-data simulations provide an upper bound on what can be learned about a latent process.
+  location: Section 4.1 (Fake-data simulation)
+  page: 18
+  quote: Fake-data simulations provide an upper bound of what can be learned about a latent process.
+- id: c6
+  statement: SBC is in many ways superior to benchmarking against a single truth point but requires fitting the model many times, a substantial computational cost especially without extensive parallelization;
+    the authors see SBC and truth-point benchmarking as two ends of a spectrum and state that understanding SBC with a small number of draws is an open research question.
+  location: Simulation-based calibration
+  page: 18
+  quote: While in many ways superior to benchmarking against a truth point, simulation-based calibration requires ﬁtting the model multiple times, which incurs a substantial computational cost, especially
+    if we do not use extensive parallelization.
+- id: c7
+  statement: 'SBC clashes somewhat with modelers'' tendency to specify priors wider than they believe necessary: weakly informative priors can occasionally produce extreme simulated datasets that make an
+    algorithm that works on realistic data fail dramatically, which the authors describe as a problem with the prior rather than the computation.'
+  location: Simulation-based calibration
+  page: 18
+  quote: A serious problem with SBC is that it clashes somewhat with most modelers’ tendency to specify their priors wider than they believe necessary.
+- id: c8
+  statement: 'Folk theorem of statistical computing (citing Yao, Vehtari, and Gelman, 2020): computational problems often indicate a problem with the model. Not always, since some models are legitimately
+    hard to fit, but many cases of poor convergence correspond to parameter regions of no substantive interest or to a nonsensical model; the first instinct should not be more computation (more iterations,
+    smaller HMC step size) but to check for a substantive pathology.'
+  location: Section 5.1 (The folk theorem of statistical computing)
+  page: 22
+  quote: When you have computational problems, often there’s a problem with your model (Yao, Vehtari, and Gelman, 2020).
+- id: c9
+  statement: 'Stated holes in the workflow: in prior and posterior predictive checks a wrong model can pass silently by overfitting; in simulation-based calibration an incorrect computation program can
+    satisfy the diagnostics if the posterior stays in the prior; the authors state all workflows have holes.'
+  location: Section 12.6 (Going forward)
+  page: 67
+  quote: In simulation based calibration, an incorrect computation program can satisfy the diagnostics if the posterior stays in the prior.
+results: []
+relations: []
+card:
+  created_at: '2026-10-07'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-07): approximate Bayesian inference and its diagnostics (HMC/NUTS and SG-MCMC, variational inference, R-hat, PSIS, SBC, VI error
+    bounds, Bayesian workflow). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Columbia University, Aalto University, University of Toronto, Flatiron Institute, Monash University,
+    University of Stuttgart, Czech Academy of Sciences. No venue stated in the PDF (dated 2 Nov 2020) or the given arXiv comment; none recorded. The article is a review: it focuses on HMC as implemented
+    in Stan (''While similar principles should apply also to other software and other algorithms, there will be differences in the details''), and the authors are largely Stan/brms/bayesplot developers,
+    so the computation checks are recommended by the people who build the software. Other computational points: a ''fit fast, fail fast'' goal (Section 3.4), which the planetary-motion example notes current
+    tools violate because they are slower when the fit is bad; debugging by meeting simple and complex models in the middle (Section 5.2); stacking to reweight poorly mixing chains (not necessarily equivalent,
+    even asymptotically, to full Bayesian inference); for SBC with wide priors they suggest using rough real-data-based estimates, widened slightly, as the SBC prior. Much of Sections 10 and 11 is taken
+    from Gelman (2019) and Margossian and Gelman (2020). Section numbers 2.4, 3.4, 4.1, 5.1, 5.2 are confirmed by in-text cross-references; 12.6 by the table of contents. Contrast: arxiv-2211.02383 (later,
+    overlapping authors) shows data-dependent test quantities can detect a posterior that stays in the prior.'

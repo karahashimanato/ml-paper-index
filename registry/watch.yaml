@@ -81,3 +81,7 @@ themes:
     tags: [online-change-point-detection, bayesian-changepoint-models]
     arxiv_queries:
       - '(abs:"changepoint" OR abs:"change point" OR abs:"change-point") AND (abs:bayesian OR abs:posterior OR abs:BOCPD) AND (cat:stat.ML OR cat:cs.LG OR cat:stat.ME)'
+  - name: 近似ベイズ推論とその診断
+    tags: [mcmc, variational-inference, posterior-inference]
+    arxiv_queries:
+      - '(abs:"variational inference" OR abs:"Hamiltonian Monte Carlo" OR abs:"MCMC" OR abs:"simulation-based calibration" OR abs:"convergence diagnostic") AND (cat:stat.ML OR cat:stat.CO OR cat:cs.LG)'

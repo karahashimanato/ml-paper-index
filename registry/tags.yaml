@@ -80,6 +80,8 @@ tasks:
     description: "Choosing hyperparameters (and configurations) of learning algorithms by black-box search, including benchmarks for HPO methods."
   - id: black-box-optimization
     description: "Optimizing an expensive black-box objective without gradients (e.g. Bayesian optimization of engineering, control or synthetic test functions), beyond ML hyperparameters."
+  - id: posterior-inference
+    description: "Computing or approximating Bayesian posterior distributions and checking that the computation is correct (convergence diagnostics, calibration checks, error bounds)."
 method_families:
   - id: tree-ensembles
     description: Ensembles of decision trees.
@@ -210,6 +212,10 @@ method_families:
     description: "Hyperparameter search that evaluates configurations on cheap low-fidelity budgets (fewer epochs, subsets) and promotes promising ones (e.g. successive halving, Hyperband, ASHA, BOHB)."
   - id: bayesian-changepoint-models
     description: "Bayesian models of changepoints (run-length or product-partition models, posterior over changepoint locations and number), including online BOCPD and offline posterior sampling."
+  - id: mcmc
+    description: "Markov chain Monte Carlo methods (e.g. Hamiltonian Monte Carlo, NUTS, stochastic-gradient MCMC) and their diagnostics."
+  - id: variational-inference
+    description: "Approximating posteriors by optimizing over a family of distributions (e.g. mean-field / stochastic / black-box VI, ADVI, normalizing-flow VI)."
 paradigms:
   - id: supervised
     description: Supervised learning.

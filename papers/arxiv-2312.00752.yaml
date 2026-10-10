@@ -72,6 +72,12 @@ claims:
   location: Limitations (Scaling)
   page: 17
   quote: It remains to assess whether Mamba still compares favorably at these larger sizes.
+- id: c8
+  statement: 'Selection mechanism (Section 3.2): the SSM parameters Delta, B and C are made functions of the input, with s_B(x) = Linear_N(x), s_C(x) = Linear_N(x), s_Delta(x) = Broadcast_D(Linear_1(x))
+    and tau_Delta = softplus; because these parameters now have a length dimension, the model changes from time-invariant to time-varying and loses the equivalence to convolutions.'
+  location: Section 3.2
+  page: 5
+  quote: In particular, we highlight that these parameters now have a length dimension 𝐿, meaning that the model has changed from time-invariant to time-varying.
 results: []
 relations: []
 card:

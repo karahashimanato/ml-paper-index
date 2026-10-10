@@ -36,6 +36,7 @@ written_by: claude-opus-5-5 via Claude Code
 | [11. 表データの深層学習](11-tabular-deep-learning.md) | sparsemax と entmax、NODE の微分可能な決定木、TabNet のマスクと事前スケール、DCN V2 の交差層、区分線形の符号化と周期的な埋め込み、TabR の近傍の重み、SCARF の置き換え | [表データの深層学習モデル](../methods/tabular-deep-learning-models.md) |
 | [12. 因果効果の推定](12-causal-effect-estimation.md) | 潜在的結果と CATE、傾向スコアと逆確率重み付け、T/S/X/RA-learner、DR-learner と二重頑健性、Robinson の分解と R-loss、DML の部分線形モデル | [因果効果の推定](../topics/causal-effect-estimation.md) |
 | [13. AutoML とアーキテクチャ探索](13-automl-and-nas.md) | 交差検証によるハイパーパラメータ最適化と CASH、TPE の密度の比、REINFORCE と基準値、年齢による進化、DARTS のソフトマックスによる緩和と1ステップの近似、ケンドールの τ、アンサンブル選択 | [AutoML システムとアーキテクチャ探索](../methods/automl-systems.md) |
+| [14. 混合エキスパートと状態空間モデル](14-moe-and-state-space-models.md) | MoE の出力とノイズ付き top-k、負荷の補助損失と router z-loss、エキスパートがトークンを選ぶ数、状態空間モデルの離散化と畳み込みの核、Mamba の選択、線形注意とその再帰、正のランダム特徴、RWKV の時間減衰 | [混合エキスパートと状態空間モデル](../methods/moe-and-state-space-models.md) |
 
 この記事には論文の主張は含まれない。高校数学で学ぶ内容の確認と、そこから一歩進んだ道具の説明である。
 

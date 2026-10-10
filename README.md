@@ -135,6 +135,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [11. 表データの深層学習 — 微分可能な木と entmax、TabNet のマスク、交差層、数値の埋め込み、近傍の重み](articles/math/11-tabular-deep-learning.md)
 - [12. 因果効果の推定 — 潜在的結果、傾向スコアと逆確率重み付け、メタ学習器、R-loss と DML、二重頑健性](articles/math/12-causal-effect-estimation.md)
 - [13. AutoML とアーキテクチャ探索 — CASH、TPE、REINFORCE と基準値、DARTS の緩和と近似、順位の一致、アンサンブル選択](articles/math/13-automl-and-nas.md)
+- [14. 混合エキスパートと状態空間モデル — ゲートと top-k、負荷の補助損失と z-loss、離散化と畳み込み、選択、線形注意](articles/math/14-moe-and-state-space-models.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

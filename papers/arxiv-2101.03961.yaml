@@ -68,6 +68,13 @@ claims:
   location: Future Work
   page: 26
   quote: This suggests a poorly understood dependence between ﬁne-tuning quality, FLOPS per token and number of parameters.
+- id: c8
+  statement: 'Load-balancing loss (Eq. 4-6): for N experts and a batch of T tokens, loss = alpha * N * sum_{i=1}^{N} f_i * P_i, where f_i is the fraction of tokens dispatched to expert i (by argmax routing)
+    and P_i is the fraction of router probability allocated to expert i; it is minimized under uniform routing, P is differentiable but f is not, and multiplying by N keeps the loss constant as the number
+    of experts varies. It simplifies the separate load and importance losses of Shazeer et al. (2017).'
+  location: Section 2.2
+  page: 7
+  quote: Given N experts indexed by i = 1 to N and a batch B with T tokens, the auxiliary loss is computed as the scaled dot-product between vectors f and P,
 results: []
 relations: []
 card:

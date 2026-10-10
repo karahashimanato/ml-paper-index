@@ -93,3 +93,7 @@ themes:
     tags: [graph-neural-networks, graph-node-prediction, graph-level-prediction]
     arxiv_queries:
       - '(abs:"graph neural network" OR abs:"graph convolutional" OR abs:"message passing" OR abs:"over-smoothing" OR abs:"oversquashing" OR abs:heterophily) AND (cat:cs.LG OR cat:stat.ML OR cat:cs.SI)'
+  - name: 表データの深層学習モデル
+    tags: [tabular-mlp, tabular-attention, differentiable-trees]
+    arxiv_queries:
+      - '(abs:tabular) AND (abs:"neural network" OR abs:"deep learning" OR abs:transformer OR abs:MLP OR abs:embedding) AND (cat:cs.LG OR cat:stat.ML)'

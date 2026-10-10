@@ -1,0 +1,107 @@
+id: arxiv-2305.18446
+title: 'Trompt: Towards a Better Deep Neural Network for Tabular Data'
+authors:
+- Kuan-Yu Chen
+- Ping-Han Chiang
+- Hsin-Rung Chou
+- Ting-Wei Chen
+- Tien-Hao Chang
+year: 2023
+venue: ICML 2023
+links:
+  arxiv: https://arxiv.org/abs/2305.18446
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: f9cd68c3587341d0bbc6009f8c3720ed9fc57810868bcfddb3d82ed4db15471a
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - deep-learning
+  - tabular-attention
+  - gradient-boosted-trees
+  - tree-ensembles
+  paradigms:
+  - supervised
+proposes:
+- 'Trompt (Tabular Prompt): stacked Trompt Cells sharing one Trompt Downstream head; each cell derives sample-specific feature importances as a softmax over columns of (prompt embeddings fused with the
+  previous cell''s output) times (input-independent column embeddings), multiplies them with per-prompt expanded feature embeddings and sums over columns'
+- Training sums the losses of the predictions from every cell; inference averages the cells' predictions
+claims:
+- id: c1
+  statement: 'Motivation (citing Grinsztajn et al., 2022): on a recently published tabular benchmark, deep neural networks still fall behind tree-based models.'
+  location: Abstract
+  page: 1
+  quote: However, based on a recently published tabular benchmark, we can see deep neural networks still fall behind tree-based models on tabular datasets (Grinsztajn et al., 2022).
+- id: c2
+  statement: 'Design hypothesis: the authors argue that column importances in tabular data are not invariant across samples and can be grouped into multiple modalities; Trompt separates learning into intrinsic
+    column information (analogous to a pre-trained model) and sample-specific feature importances (analogous to prompts), and learns separated column importances instead of focusing on interactions among
+    columns as transformer-based models do.'
+  location: Section 2.3
+  page: 3
+  quote: We argue that the column importances of tabular data are not invariant for all samples and can be grouped into multiple modalities.
+- id: c3
+  statement: 'Architecture: column embeddings and prompt embeddings are input independent and trainable; prompt embeddings are fused with the previous cell''s output (a zero tensor for the first cell) and
+    multiplied with the column embeddings, followed by a softmax over the column axis, to obtain feature importances per prompt; categorical features are embedded with an embedding layer and numerical features
+    with a dense layer, as in prior work.'
+  location: Section 3.1.1
+  page: 4
+  quote: Notice that the column embeddings are not connected to the input and the prompt embeddings are fused with the previous cell’s output.
+- id: c4
+  statement: 'Protocol on Grinsztajn45 (45 datasets, medium- and large-sized, numerical-only and heterogeneous): the authors follow its train/test split, preprocessing and metrics, omit MLP and HistGradientBoostingTree
+    because of incomplete results in the benchmark, add LightGBM and CatBoost, and give Trompt a search space of only 40 parameter combinations, smaller than the hundreds explored for the other models,
+    due to limited computing resources.'
+  location: Appendix A.4
+  page: 13
+  quote: Due to limited computing resources, we have chosen a small search space (Table 30) consisting of 40 parameter combinations.
+- id: c5
+  statement: 'Search-curve handling: because the benchmark truncates every model''s random search at the minimum iteration count among compared models, the authors duplicated (oversampled) Trompt''s grid-search
+    results beyond the lowest iteration count so that the other models, whose search results come from Grinsztajn45, keep their original number of search iterations.'
+  location: Appendix A.4
+  page: 13
+  quote: To avoid unfairly truncating random search results of other models, and compromising the low search iterations of Trompt, we duplicated the grid search results of Trompt to exceed the lowest search
+    iteration count among the models provided by Grinsztajn45.
+- id: c6
+  statement: 'Within-paper relation, classification: on medium-sized tasks Trompt''s curve is above the other deep models (SAINT, FT-Transformer, ResNet) and narrows the gap to tree-based models, seeming
+    to join the leading cluster of four tree-based models on heterogeneous features; on large-sized tasks tree-based models remain in the lead but the gap to deep networks is obscure, which the authors
+    say echoes that deep networks require more samples.'
+  location: Section 4.2.1
+  page: 6
+  quote: On the large-sized classification tasks, tree-based models remain the leading positions but the gap to deep neural networks is obscure.
+- id: c7
+  statement: 'Within-paper relation, regression: on medium-sized tasks Trompt is comparable to random forest with numerical features only, and on heterogeneous features it narrows the gap but is below all
+    tree-based models; on large-sized numerical-only tasks it is slightly worse than SAINT and FT-Transformer at the end of the search.'
+  location: Section 4.2.2
+  page: 7
+  quote: On the tasks with heterogeneous features, Trompt narrows the gap but is below all the tree-based models.
+- id: c8
+  statement: 'Interpretability: following TabNet''s setup, feature importances (prompt-weighted Mimportance averaged over cells) are visualized on Syn2/Syn4 (20 randomly picked test samples) and compared
+    with tree models'' top-3 features on the mushroom dataset; the authors conclude Trompt''s important features are consistent with those of tree-based models.'
+  location: Section 4.4
+  page: 8
+  quote: Overall speaking, the important features selected by Trompt are consistent with those by tree-based models, and can therefore be used in various analyses that are familiar in the field of machine
+    learning.
+- id: c9
+  statement: On datasets chosen by FT-Transformer, Trompt was not hyperparameter-searched, FT-Transformer numbers were taken from its original paper, results are averaged over three seeds, and Trompt is
+    generally comparable or slightly inferior to FT-Transformer with default hyperparameters; on SAINT's datasets numbers were likewise copied from SAINT's paper and Trompt's are from a single seed.
+  location: Appendix B.2
+  page: 35
+  quote: It’s important to note that due to limited computing resources, Trompt did not undergo hyperparameter search.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliations: SinoPac Holdings (all authors) and National Cheng Kung University (Chang). Venue from the PDF footer (''Proceedings of the 40th International
+    Conference on Machine Learning, Honolulu, Hawaii, USA. PMLR 202, 2023'') and the arXiv comment ''ICML''23 (poster)''. The arXiv author list gives ''Tien-Hao Chang''; the PDF prints ''Darby Tien-Hao
+    Chang'' - the arXiv form is recorded. No conflict of interest found: none of the baselines (Grinsztajn45 models, LightGBM, CatBoost, FT-Transformer, SAINT) are by these authors. Main comparisons are
+    figure-only (normalized score vs number of search iterations, Figures 1, 5-8); numbers in Appendix B.1 tables are not recorded. The authors note the flat curve ''suggests'' Trompt performs well with
+    default hyperparameters and that its performance after an exhaustive search is left for future exploration (Section 4.2.1). Appendix C: standardization of regression targets gave better Trompt results
+    than the benchmark''s quantile transformation, but Section 4.2 used the Grinsztajn45 configuration. LightGBM search space follows practitioners'' blog posts and CatBoost follows FT-Transformer (Appendix
+    F). The tabular-attention tag reflects the attention-based baselines (FT-Transformer, SAINT) and Trompt''s softmax-over-columns importances; the authors contrast Trompt with self-attention (Section
+    5.1).'

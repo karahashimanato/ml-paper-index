@@ -1,0 +1,25 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# TabTransformer: Tabular Data Modeling Using Contextual Embeddings
+
+- カード: [`arxiv-2012.06678`](../../papers/arxiv-2012.06678.yaml)
+- 著者: Xin Huang, Ashish Khetan, Milan Cvitkovic, Zohar Karnin
+- 年・掲載: 2020
+- 原論文: [PDF](https://arxiv.org/pdf/2012.06678v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: deep-learning, representation-learning, self-supervised, supervised, tabular-attention, tabular-classification
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Architecture: a column embedding layer, a stack of N Transformer layers and an MLP; only categorical features pass through the Transformer, and the resulting contextual embeddings are concatenated with the continuous features before the MLP.([Section 2, p.3](https://arxiv.org/pdf/2012.06678v1#page=3 "The contextual embeddings {h1, · · · , hm} are concatenated along with the continuous features xcont to form a vector of dimension (d × m + c)."))
+- **c2** Column embedding: each categorical column has its own lookup table with an extra embedding for missing values; each embedding concatenates a column-shared unique identifier with a value-specific part, and positional encodings are not used because tabular features have no order.([Section 2, p.3](https://arxiv.org/pdf/2012.06678v1#page=3 "Since, in tabular data, there is no ordering of the features, we do not use positional encodings."))
+- **c3** Pre-training: MLM masks k% of categorical features and predicts them; RTD replaces features with random values of that feature and trains a binary classifier per column (no auxiliary generator, since columns have few classes); k = 30 in the experiments.([Section 2, p.3](https://arxiv.org/pdf/2012.06678v1#page=3 "We explore two different types of pre-training procedures, the masked language modeling (MLM) (Devlin et al. 2019) and the replaced token detection (RTD) (Clark et al. 2020)."))
+- **c4** Pre-training is applied only in the semi-supervised setting; the authors report not finding much benefit from it when all data is labeled, with its benefit evident when there are many unlabeled and few labeled examples.([Section 3, p.4](https://arxiv.org/pdf/2012.06678v1#page=4 "We do not ﬁnd much beneﬁt in using it when the entire data is labeled."))
+- **c5** Evaluation protocol: 15 public binary classification datasets (UCI, AutoML Challenge, Kaggle), five cross-validation splits with 65/15/20% train/validation/test, AUC as metric, 20 HPO rounds per model per split; TabTransformer's embedding dimension, layers and heads are fixed to 32, 6 and 8, chosen by 50 rounds of HPO on 5 datasets. Semi-supervised runs use the first p = 50, 200 or 500 training rows as labeled.([Section 3, p.4](https://arxiv.org/pdf/2012.06678v1#page=4 "For hyperparameter optimization (HPO), each model is given 20 HPO rounds for each cross-validation split."))
+- **c6** Baselines were re-implemented for consistent preprocessing (the authors state their results are close to published ones where available); GBDT is LightGBM tuned over number of leaves, minimum data per leaf, learning rate and number of trees; TabNet was implemented as described but with an added softmax-attention option and without the sparsification term in the loss.([Appendix B.1, p.10](https://arxiv.org/pdf/2012.06678v1#page=10 "For the competing models mentioned in the experiment, we re-implemented all of them for consistency of pre-processing."))
+- **c7** Relation to GBDT and other deep models (supervised): TabTransformer outperforms the baseline MLP (14 of 15 datasets, average 1.0% AUC gain) and performs comparably with GBDT; it is reported significantly better than TabNet and VIB.([Section 3.3, p.6](https://arxiv.org/pdf/2012.06678v1#page=6 "The TabTransformer outperforms the baseline MLP with an average 1.0% gain and perform comparable with the GBDT."))
+- **c8** Robustness and interpretability of contextual embeddings: on 3 datasets, with noise or missing values injected into categorical test features, TabTransformer degrades less than the MLP, which the authors conjecture comes from the contextual property of the embeddings; t-SNE of last-layer embeddings on BankMarketing groups semantically similar classes, and linear probes improve with layer depth.([Section 3.2, p.5](https://arxiv.org/pdf/2012.06678v1#page=5 "We conjecture that the robustness comes from the contextual property of the embeddings."))
+- **c9** Semi-supervised results: with many unlabeled examples TabTransformer-RTD/MLM is reported to outperform the other methods (at least 1.2%, 2.0% and 2.1% mean AUC for 50, 200 and 500 labels); with fewer unlabeled examples the improvement is marginal, and with only 50 labels MLP (ER) and MLP (PL) beat TabTransformer-RTD/MLM, which the authors attribute to the classifier weights not being trained with unlabeled data.([Section 3.4, p.7](https://arxiv.org/pdf/2012.06678v1#page=7 "In Table 4, with only 50 labeled data points, MLP (ER) and MLP (PL) beat our TabTransformer-RTD/MLM."))
+

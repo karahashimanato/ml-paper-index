@@ -1,0 +1,101 @@
+id: arxiv-2309.17130
+title: 'GRANDE: Gradient-Based Decision Tree Ensembles for Tabular Data'
+authors:
+- Sascha Marton
+- Stefan Lüdtke
+- Christian Bartelt
+- Heiner Stuckenschmidt
+year: 2023
+venue: ICLR 2024
+links:
+  arxiv: https://arxiv.org/abs/2309.17130
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 819a8c23270f5b71018d6481782d043a4bf4d8bdd5e1af62776e5c56fdb96f98
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - differentiable-trees
+  - tree-ensembles
+  paradigms:
+  - supervised
+proposes:
+- 'GRANDE: an ensemble of hard, axis-aligned decision trees learned jointly by end-to-end gradient descent using GradTree''s dense representation and a straight-through operator for rounding/hardmax'
+- Scaled softsign as the differentiable split function used in the backward pass
+- 'Instance-wise estimator weights: one learnable weight per leaf, softmax over the weights of the leaves each sample reaches'
+- Per-tree feature and data subsets and estimator dropout as regularization
+claims:
+- id: c1
+  statement: 'Method: GRANDE extends the authors'' earlier GradTree (Marton et al., 2023) from single trees to a jointly optimized weighted tree ensemble with hard, axis-aligned splits, using a dense representation
+    and the straight-through operator; the authors contrast this with NODE''s soft, oblique splits.'
+  location: Introduction
+  page: 2
+  quote: We extend GradTree (Marton et al., 2023) from individual trees to an end-to-end gradient-based tree ensemble, maintaining efficient computation (Section 3.1).
+- id: c2
+  statement: 'Motivation (citing Rahaman et al., 2019 and Grinsztajn et al., 2022): DL methods are typically biased towards smooth solutions while target functions in tabular data are usually not smooth;
+    hard, axis-aligned trees learn piece-wise constant functions and do not show this bias.'
+  location: Introduction
+  page: 2
+  quote: As the target function in tabular datasets is usually not smooth, DL methods struggle to find these irregular functions.
+- id: c3
+  statement: 'Softsign split function: sigmoid gradients decline smoothly and entmoid gradients drop to zero for large differences from the threshold, so a softsign scaled to (0, 1) is proposed to keep
+    responsive gradients for samples far from the threshold; an ablation (Table 4) reports it outperforms sigmoid and entmoid.'
+  location: Section 3.2
+  page: 4
+  quote: 'Therefore, we propose using a softsign function, scaled to (0, 1), as a differentiable split function:'
+- id: c4
+  statement: 'Instance-wise weighting: instead of one weight per estimator (which the authors say forces a homogeneous ensemble), each leaf has a learnable weight, and a softmax over the weights of the
+    leaves a sample reaches gives a per-sample weighted average; the ablation reports this significantly enhances performance compared with a single weight per estimator.'
+  location: Section 3.3
+  page: 4
+  quote: To address this, we propose an advanced weighting scheme that allows calculating instance-wise weights that can be learned within the gradient-based optimization.
+- id: c5
+  statement: 'Benchmark: 19 binary classification datasets selected by the predefined procedure of Bischl et al. (2021) from OpenML benchmark suites, which the authors argue is not biased towards their
+    method (CC18 and the Grinsztajn et al. benchmark were rejected; multi-class tasks were excluded for scope); one-hot/leave-one-out encoding and quantile transformation; mean and std of test macro F1
+    over 5-fold cross-validation.'
+  location: Section 4.1
+  page: 5
+  quote: The selection process was adopted from Bischl et al. (2021) and therefore is not biased towards our method.
+- id: c6
+  statement: 'Tuning protocol: baselines in the main comparison are XGBoost, CatBoost and NODE (SAINT, RandomForest and ExtraTrees in the appendix); all are tuned with Optuna for 250 trials with search
+    spaces and default parameters following Borisov et al. (2022), best parameters chosen by 5x2 cross-validation with each fold''s test data held out, and class weights for imbalance. Default-hyperparameter
+    results are also reported.'
+  location: Section 4.1
+  page: 6
+  quote: We optimized the hyperparameters using Optuna (Akiba et al., 2019) with 250 trials and selected the search space as well as the default parameters for related work in accordance with Borisov et
+    al. (2022).
+- id: c7
+  statement: 'Asymmetry in tuned hyperparameters acknowledged: GRANDE has 11 tuned hyperparameters versus 4 for XGBoost and 3 for CatBoost; in an additional HPO with only 4 GRANDE parameters the authors
+    report GRANDE still achieves SOTA results but benefits from the larger grid. The number of estimators for XGBoost and CatBoost was not tuned (early stopping), checked in an extra HPO; a 30-trial HPO
+    is also reported.'
+  location: Appendix E
+  page: 22
+  quote: In contrast, for XGBoost and CatBoost we only optimized 4 and 3 hyperparameters, respectively.
+- id: c8
+  statement: 'Relation to GBDTs within the paper (tuned): GRANDE has the highest mean reciprocal rank (0.702) and normalized mean (0.776), followed by CatBoost (0.570, 0.671), XGBoost (0.417, 0.483) and
+    NODE (0.395, 0.327); the authors add that this is in line with there being no universal method for tabular data, that differences are substantial on some datasets, and that results are especially good
+    for small datasets.'
+  location: Section 4.2
+  page: 6
+  quote: GRANDE outperformed existing methods and achieved the highest mean reciprocal rank (MRR) of 0.702 and the highest normalized mean of 0.776.
+- id: c9
+  statement: 'Interpretability claim and its evidence: instance-wise weights let one inspect the highest-weighted estimators for a given instance; the evidence is a case study of one PhishingWebsites instance
+    where a single depth-two tree carries 94% of the weight and its rule matches the Anchors explanation, with GRANDE''s anchor simpler than those of the other methods at equal precision.'
+  location: Section 4.3
+  page: 8
+  quote: In contrast, existing ensemble methods require a global interpretation of the model and do not provide simple, local explanations out-of-the-box.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliations: University of Mannheim and University of Rostock (PDF page 1). Venue from the PDF page header ''Published as a conference paper at
+    ICLR 2024''; year is the first arXiv version (2023). Section numbers are from numbered headings. Conflict of interest: GRANDE builds on the first author''s own GradTree (Marton et al., 2023), stated
+    in the paper; GradTree is not a compared baseline in the main table. Runtime (Section 4.2): GRANDE averaged 47 s per dataset (max 107 s) vs about 130 s for NODE, but the authors note GBDT frameworks,
+    especially XGBoost on GPU, have significantly lower runtimes than gradient-based methods; hardware listed in Table 9 caption (NVIDIA RTX A6000). Only binary classification is evaluated. Default-parameter
+    results: highest normalized mean 0.6371 and MRR 0.6404 (Section 4.2). SAINT could not be tuned with 250 trials due to its runtime (Appendix C). Result tables not recorded.'

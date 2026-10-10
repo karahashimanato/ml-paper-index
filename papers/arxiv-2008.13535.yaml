@@ -1,0 +1,102 @@
+id: arxiv-2008.13535
+title: 'DCN V2: Improved Deep & Cross Network and Practical Lessons for Web-scale Learning to Rank Systems'
+authors:
+- Ruoxi Wang
+- Rakesh Shivanna
+- Derek Z. Cheng
+- Sagar Jain
+- Dong Lin
+- Lichan Hong
+- Ed H. Chi
+year: 2020
+venue: WWW 2021
+links:
+  arxiv: https://arxiv.org/abs/2008.13535
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 3611c6b15bc6d948b4f20bc2a58b46f33764fef154ddbdcf531d5e566a64a694
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - deep-learning
+  - tabular-mlp
+  paradigms:
+  - supervised
+proposes:
+- DCN-V2 cross layer x_{l+1} = x0 ⊙ (W_l x_l + b_l) + x_l with a full weight matrix (DCN is the special case W = 1 w^T), combined with a ReLU deep network in a stacked or parallel structure; accepts embeddings
+  of different sizes
+- 'DCN-Mix: a mixture of low-rank cross layers (U V^T experts, optional nonlinearity in the projected space) combined by a gating function, for a better cost/accuracy trade-off'
+claims:
+- id: c1
+  statement: 'Motivation: in models serving web-scale traffic with billions of training examples, the original DCN''s cross network showed limited expressiveness, and many production models still rely on
+    feed-forward networks to learn feature crosses inefficiently.'
+  location: Abstract
+  page: 1
+  quote: Unfortunately, in models that serve web-scale traffic with billions of training examples, DCN showed limited expressiveness in its cross network at learning more predictive feature interactions.
+- id: c2
+  statement: 'Architecture: an embedding layer, a cross network of cross layers modeling explicit bounded-degree crosses, and a deep network for implicit interactions, combined either stacked or in parallel;
+    the authors state that the function class of DCN-V2 is a strict superset of DCN''s, and that which combination works better is data dependent.'
+  location: Section 3
+  page: 2
+  quote: The function class modeled by DCN-V2 is a strict superset of that modeled by DCN.
+- id: c3
+  statement: 'Low-rank motivation: the authors observe that the learned cross-layer matrix from a production model shows much faster singular-value decay than at initialization, and impose a low-rank structure
+    (U V^T) on W, extended to a gated mixture of low-rank experts (DCN-Mix).'
+  location: Section 3 (Cost-Effective Mixture of Low-Rank DCN)
+  page: 4
+  quote: In many settings, we indeed observe that the learned matrix is numerically low-rank in practice.
+- id: c4
+  statement: 'Synthetic study (mean RMSE over 5 runs on polynomial targets with inputs uniform on [-1, 1]): for simple cross patterns both DCN and DCN-V2 are accurate, for more complicated patterns DCN
+    degrades while DCN-V2 remains accurate, and ReLU DNNs remain poor even when wider and deeper; the authors read this as suggesting DNNs are inefficient at modeling monomial patterns.'
+  location: Section 6
+  page: 6
+  quote: This suggests the inefficiency of DNN in modeling monomial patterns.
+- id: c5
+  statement: 'Protocol: all models were implemented identically except for the feature-interaction component; every baseline got a coarse-level then a finer-level grid search over shared hyperparameters
+    (learning rate, training steps, depth/width of hidden layers, L2) and model-specific ones, total parameters were capped at 1024^2 x 5, and the mean and standard deviation over 5 independent runs of
+    the best configuration are reported. Public data: Criteo (first 6 days train, last day split into validation and test) and MovieLens-1M (random 80/10/10).'
+  location: Section 7 (Experiment Setup)
+  page: 7
+  quote: For all the baselines, we conducted a coarse-level (larger-range) grid search over the hyper-parameters, followed by a finer-level (smaller-range) search.
+- id: c6
+  statement: 'Within-paper relation with a tuned DNN: the authors finely tuned the ReLU DNN with larger layers than in prior literature, and found that it performed neck to neck with most feature-interaction
+    baselines and even outperformed some; once integrated with a DNN the gaps among baselines close up, which they say suggests the power of a well-tuned DNN. The baselines'' numbers were also improved
+    over those reported in previous papers.'
+  location: Section 7.3
+  page: 8
+  quote: To our surprise, DNN performed neck to neck with most baselines and even outperformed certain models.
+- id: c7
+  statement: 'Hedged hypothesis: because a cross-layer-only network achieved the best LogLoss under each fixed memory budget on Criteo, the authors suggest cross layers may potentially replace ReLU layers
+    entirely for certain applications, but state that significantly more analysis and experiments are needed to verify this.'
+  location: Section 7.4
+  page: 9
+  quote: Obviously we need significant more analysis and experiments to verify the hypothesis.
+- id: c8
+  statement: 'Production case study (Google-internal data: sampled user logs with hundreds of billions of training examples, sparse vocabularies from 2 to millions, baseline a ReLU MLP): DCN-V2 yielded
+    a 0.6% AUCLoss (1 - AUC) improvement over the production model, where 0.1% is considered significant for that model, and significant online gains on key metrics are reported without numbers.'
+  location: Section 8
+  page: 11
+  quote: When compared with production model, DCN-V2 yielded 0.6% AUCLoss (1 - AUC) improvement.
+- id: c9
+  statement: 'Practical lessons from productionizing: insert cross layers between the input and the hidden layers; gains plateau beyond 2 cross layers; both stacking and concatenating cross layers work
+    well; and low-rank DCN with rank (input size)/4 consistently preserved the accuracy of full-rank DCN-V2.'
+  location: Section 8 (Practical Learnings)
+  page: 11
+  quote: We observed that using low-rank DCN with rank (input size)/4 consistently preserved the accuracy of a full-rank DCN-V2.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliation: Google Inc. (all authors). Venue from the arXiv journal_ref (''In Proceedings of the Web Conference 2021 (WWW ’21)''); the arXiv PDF
+    itself does not name the venue. Year is the first arXiv version (2020). Conflict of interest / data: the first author is the first author of the original DCN (reference [50], Wang, Fu, Fu and Wang,
+    ADKDD''17), which is a baseline; the production results (Section 8, Table 8) are on proprietary Google data and cannot be reproduced; feature names in Figure 6(a) are hidden ''for proprietary reasons''.
+    The paper''s setting is CTR / learning-to-rank on sparse categorical plus dense features (tagged tabular-classification; MovieLens-1M is described as formalized as a regression problem but with binarized
+    ratings and a log loss); GBDTs are not compared. Section numbers come from the PDF headings/cross-references (Sections 3, 4.1, 6, 7.2-7.6, 8; the tuning paragraph is referred to as Section 7.1.3). Interpretability:
+    the authors say the cross-layer weight matrix W ''exactly reveals'' which crosses were learned, with evidence only as visualizations (Figure 6) - not recorded as a claim. Table 5/6/7 numbers (LogLoss,
+    AUC, params, FLOPS) are not recorded. Number-of-experts study: more lower-rank experts did not beat a single higher-rank expert, which the authors say might be caused by naive gating and optimization.'

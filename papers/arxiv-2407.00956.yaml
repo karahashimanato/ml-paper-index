@@ -1,0 +1,111 @@
+id: arxiv-2407.00956
+title: A Closer Look at Deep Learning Methods on Tabular Datasets
+authors:
+- Han-Jia Ye
+- Si-Yang Liu
+- Hao-Run Cai
+- Qi-Le Zhou
+- De-Chuan Zhan
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2407.00956
+  code: https://github.com/LAMDA-Tabular/TALENT
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: e24952bd97fd63aa29d28218ec9a7126c830b3b954ca307fe4ca081dfb19fb43
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - deep-learning
+  - tabular-mlp
+  - tabular-attention
+  - differentiable-trees
+  - gradient-boosted-trees
+  - tree-ensembles
+  paradigms:
+  - supervised
+proposes:
+- 'Talent: a collection of 300 common-size tabular datasets (120 binary, 80 multi-class, 100 regression) from UCI, OpenML and Kaggle, with a 45-dataset core subset (Talent-tiny) and a Talent-extension suite
+  for high-dimensional, many-class and very large-scale settings'
+- A heterogeneity analysis that selects dataset meta-features by how well they help forecast later validation curves of deep tabular models from early training signals, and relates them to the tree-vs-DNN
+  performance gap
+claims:
+- id: c1
+  statement: 'Benchmark composition: datasets from UCI, OpenML and Kaggle, filtered by excluding N < 500 or d < 5, > 20% missing values, trivially easy or majority-dominated classification sets, and duplicates;
+    categorical features are ordinally encoded; 22 mis-specified regression datasets with two unique targets were relabelled as binary classification.'
+  location: Section 4.2
+  page: 11
+  quote: Ultimately, Talent consists of 120 binary-classification, 80 multi-class, and 100 regression datasets, offering both breadth and depth for evaluating tabular learning.
+- id: c2
+  statement: 'Known data-quality issues are deliberately retained in the general benchmark: 13 datasets with potential leakage (kept for comparability with prior work and to assess robustness to imperfect
+    data) and 25 datasets whose features are extracted from images or audio; all datasets with identified leakage are excluded from Talent-tiny.'
+  location: Section 4.2
+  page: 11
+  quote: In our collection, we identify 13 datasets with potential leakage.
+- id: c3
+  statement: 'Protocol: each dataset is randomly split 64%/16%/20% into train/val/test (a single fixed hold-out, following Gorishniy et al.); hyperparameters are chosen on validation with Optuna using a
+    fixed budget of 100 trials per method-dataset pair; the best configuration is retrained with 15 random seeds and the mean is reported. Full K-fold CV is described as computationally prohibitive at this
+    scale.'
+  location: Section 4.3
+  page: 14
+  quote: We use Optuna (Akiba et al., 2019) with a fixed budget of 100 trials per method–dataset pair.
+- id: c4
+  statement: Unlike the tuned models, pretrained tabular (foundation) models are evaluated from their latest public checkpoints with default inference hyperparameters, without per-dataset tuning; all deep
+    methods use AdamW with batch size 1024 unless noted otherwise, and CatBoost receives the feature types for native categorical handling.
+  location: Section 4.3
+  page: 14
+  quote: Pretrained tabular models are evaluated from their latest public checkpoints with default inference hyperparameters (i.e., no per-dataset tuning).
+- id: c5
+  statement: 'Summary observations over 40 methods and 300 datasets: tree-based ensembles (CatBoost, LightGBM, XGBoost) remain strong, reliable and statistically robust baselines, while pretrained foundation
+    models (TabPFN v2, TabICL) deliver state-of-the-art performance across many datasets and significantly narrow, but do not entirely close, the gap between tree-based and DNN-based paradigms.'
+  location: Section 5.1
+  page: 19
+  quote: Tree-based ensembles (CatBoost, LightGBM, XGBoost) remain strong, reliable, and statistically robust baselines.
+- id: c6
+  statement: Foundation models, ensembles and the top DNNs (RealMLP, ModernNCA) often remain statistically tied, which the authors say suggests universal superiority has not yet been achieved; in the same
+    paragraph they note that scalability and computational cost remain open challenges for foundation models.
+  location: Section 5.1
+  page: 19
+  quote: Despite these advances, the Wilcoxon–Holm tests show that foundation models, ensembles, and top DNNs (RealMLP, ModernNCA) often remain statistically tied, suggesting that universal superiority
+    has not yet been achieved.
+- id: c7
+  statement: Tree-mimic networks (NODE, TabNet) generally underperform relative to ensembles, whereas neighborhood-based models such as ModernNCA are often statistically comparable to CatBoost and LightGBM;
+    ensembling within deep methods (TabM over MLP, MNCA-ens over ModernNCA) further improves performance.
+  location: Section 5.1
+  page: 19
+  quote: Tree-mimic networks such as NODE and TabNet generally underperform relative to ensembles.
+- id: c8
+  statement: 'Tree-DNN gap and heterogeneity: the per-dataset rank gap between tree-based methods (RF, XGBoost, LightGBM, CatBoost) and representative DNNs (RealMLP, TabM, ModernNCA, FT-Transformer) correlates
+    most strongly (negatively) with feature-heterogeneity meta-features such as entropy_std (-0.3333), while inst_to_attr (emphasized by McElfresh et al., 2023) correlates more weakly with the gap; the
+    authors say datasets with greater feature heterogeneity tend to favor tree-based methods, likely due to successive partitioning.'
+  location: Section 6.5
+  page: 35
+  quote: These findings suggest that the degree of heterogeneity among dataset features is a more critical determinant driving the relative model superiority.
+- id: c9
+  statement: 'By feature type: raw-feature DNNs such as MLP and RealMLP do worst on datasets with mixed numerical and categorical features and better on purely numerical or purely categorical ones; tree-based
+    methods excel on heterogeneous datasets; FT-Transformer behaves more like the tree-based models, which the authors attribute (''likely'') to its learned embeddings of categorical and numerical features;
+    TabPFN v2 is weakest on purely categorical datasets.'
+  location: Section 6.6
+  page: 36
+  quote: DNN-based methods such as MLP and RealMLP exhibit their worst performance on datasets with mixed feature types (Mixed Data).
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliation: Nanjing University (School of AI / National Key Laboratory for Novel Software Technology). No venue recorded: the arXiv record has
+    no comment/journal_ref, and the v4 PDF (7 Nov 2025) uses a journal template with the placeholder ''Editor: My editor'', which is not a venue. Year is the first arXiv version (2024); this card is based
+    on v4, which includes foundation models (TabPFN v2, TabICL) that earlier versions may not. Conflict of interest (not stated as such in the paper): the benchmark code is the authors'' TALENT repository
+    (LAMDA-Tabular); evaluated methods include the authors'' own ModernNCA (Ye, Yin, Zhan and Chao, ICLR 2025), its BatchEnsemble variant MNCA-ens introduced for this analysis, and BETA (Liu and Ye, ICML
+    2025); ModernNCA is also one of the four DNNs defining the Tree-DNN score (Equation 2) used to choose Talent-tiny datasets and for the gap analysis. PTaRL is by a different author (Hangting Ye et al.),
+    not an overlapping author. The meta-feature selection (Section 6.2) uses validation curves of MLPs trained with default hyperparameters, and the correlation analyses are correlational. Section 7.1 reports
+    on Talent-tiny that CV plus ensembling improves average ranks slightly but leaves the relative order of methods largely unchanged. A hyperparameter-budget study (Table 4, MLP with 50/100/150/200 trials)
+    supports 100 trials as near-saturation for MLP. Section 5.1 also states that the Wilcoxon-Holm analysis shows no significant differences among the gradient boosting methods, that vanilla MLPs are generally
+    weak while tuned MLP-PLR and RealMLP close the gap substantially, and that token-based models (FT-T, ExcelFormer, AutoInt) often cluster with ensembles in the same equivalence group. Per-dataset results
+    and figures (critical-difference diagrams, radar chart, Tree-DNN score distribution) are not recorded.'

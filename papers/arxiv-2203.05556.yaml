@@ -1,0 +1,109 @@
+id: arxiv-2203.05556
+title: On Embeddings for Numerical Features in Tabular Deep Learning
+authors:
+- Yury Gorishniy
+- Ivan Rubachev
+- Artem Babenko
+year: 2022
+venue: NeurIPS 2022
+links:
+  arxiv: https://arxiv.org/abs/2203.05556
+  code: https://github.com/yandex-research/tabular-dl-num-embeddings
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 22b97677fec340fc9f95275c9501a8ad5e2fb01a82c0ed829aeb44d33163a0d8
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - tabular-mlp
+  - tabular-attention
+  - deep-learning
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+proposes:
+- Piecewise linear encoding (PLE) of each numerical feature over bins, with bins from empirical quantiles (PLEq) or from a per-feature decision tree fitted to the target (PLEt), optionally followed by linear/ReLU
+  layers
+- 'Periodic embeddings: concat[sin(2*pi*c*x), cos(2*pi*c*x)] with trainable per-feature frequencies c initialized from N(0, sigma), optionally followed by linear/ReLU layers (e.g. PLR = ReLU(Linear(Periodic)))'
+- Embedding modules for numerical features applied to MLP and ResNet backbones as well as to Transformer (FT-Transformer)
+claims:
+- id: c1
+  statement: 'Framework: an embedding for numerical features is a function f_i mapping the scalar value of the i-th feature to a vector; embeddings for different features are computed independently with
+    the same functional form, and parameters are never shared between features. For MLP-like backbones the embeddings are concatenated into one flat vector; for Transformer backbones they are passed as
+    tokens.'
+  location: Section 3.1
+  page: 3
+  quote: We never share parameters of embedding functions of different features.
+- id: c2
+  statement: 'Piecewise linear encoding (PLE): the feature''s value range is split into T bins and encoded as a T-dimensional vector (components of bins below the value set to 1, the value''s own bin linear,
+    the rest 0); bins come either from empirical quantiles of the training data or from target-aware splits equivalent to growing a one-feature decision tree (in the spirit of C4.5 discretization). PLE
+    is computed once and can be viewed as preprocessing; for attention models a linear layer is added after it.'
+  location: Section 3.2
+  page: 4
+  quote: PLE produces alternative initial representations for the numerical features and can be viewed as a preprocessing strategy.
+- id: c3
+  statement: 'Periodic embeddings: f_i(x) = concat[sin(v), cos(v)] with v = 2*pi*c*x and trainable c initialized from N(0, sigma); unlike some prior work using periodic functions, features are not mixed
+    before the periodic step. The authors observe sigma is an important hyperparameter; sigma and k are tuned on validation sets.'
+  location: Section 3.3
+  page: 5
+  quote: We observe that σ is an important hyperparameter.
+- id: c4
+  statement: 'Benchmark: eleven public datasets mostly from previous tabular DL works and Kaggle competitions; the authors focus on middle and large scale tasks and state that the benchmark is biased towards
+    GBDT-friendly problems. They also say this bias means the observed superiority of tree-based over quantile-based bins may not generalize to more DL-friendly datasets.'
+  location: 'Section 4: Datasets'
+  page: 5
+  quote: Importantly, we focus on the middle and large scale tasks, and our benchmark is biased towards GBDT-friendly problems, since, as of now, closing the gap with GBDT models on such tasks is one of
+    the main challenges for tabular DL.
+- id: c5
+  statement: 'Protocol: the authors mostly follow the tuning, training and evaluation protocols of their own earlier work (Gorishniy et al. [13], FT-Transformer). Every model''s hyperparameters are tuned
+    per dataset on the validation set (test set never used for tuning), mostly with Optuna''s TPE; each tuned configuration is run with 15 random seeds, and ensembles are formed from three disjoint groups
+    of 5 models. The hyperparameter tables list 100 tuning iterations for CatBoost, XGBoost, MLP and ResNet, and 50 (on SA, CO, MI) or 100 (others) for Transformer. Deep models share the same preprocessing
+    (quantile transformation except on Otto).'
+  location: Appendix E
+  page: 16
+  quote: For every dataset, we carefully tune each model’s hyperparameters.
+- id: c6
+  statement: 'Comparison with GBDT (ensembles of DL models vs ensembles of tuned CatBoost/XGBoost, judged on best metric values without considering efficiency): for the vast majority of backbone-dataset
+    pairs, proper embeddings are reported to be the only thing needed to close the gap with GBDT; stated exceptions are the MI dataset and the pairs ResNet & GE, Transformer & FB, Transformer & GE, Transformer
+    & OT. The authors also say that, to the best of their knowledge, this is the first time DL models perform on par with GBDT on California Housing and Adult, and that efficiency can still be an issue
+    compared to GBDT.'
+  location: Comparing DL models and GBDT
+  page: 8
+  quote: However, for the vast majority of the “backbone & dataset” pairs, proper embeddings are the only thing needed to close the gap with GBDT.
+- id: c7
+  statement: 'Backbones: after MLP-like architectures are coupled with numerical-feature embeddings, they perform on par with Transformer-based models; among embeddings, PLR gives the best average performance
+    and LR is a consistent baseline. Models that also attend over objects (e.g. SAINT, NPT) were deliberately not included because that non-parametric component is considered orthogonal to the paper''s
+    topic.'
+  location: Comparing DL models and GBDT
+  page: 8
+  quote: Importantly, after the MLP-like architectures are coupled with embeddings for numerical features, they perform on par with the Transformer-based models.
+- id: c8
+  statement: 'PLE as preprocessing: re-evaluating tuned MLP, MLP-Q and MLP-T under different preprocessing, the vanilla MLP often becomes unusable without preprocessing, while models with PLE are less sensitive
+    to the initial preprocessing; the authors note the observation for MLP-T could be a property of the benchmarks.'
+  location: Section 5.3
+  page: 10
+  quote: Overall, the results indicate that models using PLE are less sensitive to the initial preprocessing compared to the vanilla MLP.
+- id: c9
+  statement: 'Open questions stated by the authors: how exactly the embedding modules help optimization at a fundamental level remains to be explained, and applying the same functional transformation to
+    all features may be suboptimal.'
+  location: Conclusion & Future work
+  page: 10
+  quote: For example, it is still to be explained how exactly the discussed embedding modules help optimization on the fundamental level.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliations: Yandex; HSE (Rubachev). Venue from the PDF footer (''36th Conference on Neural Information Processing Systems (NeurIPS 2022)'') and
+    the arXiv comment (''NeurIPS 2022 camera-ready''). Conflict of interest: the backbones (MLP, ResNet, FT-Transformer as ''Transformer-L'') and the tuning/evaluation protocol are taken from the authors''
+    own earlier paper arxiv-2106.11959; the same group later builds TabR (arxiv-2307.14338) on these embeddings. Other stated results recorded only here: adding fixed-coefficient Periodic features to XGBoost
+    did not provide benefits on CA, HO, HI (Table 10); embedding modules can increase parameter counts substantially (e.g. almost 2000-fold for MLP-LR on CH) but the authors report only a 1.5-fold training-time
+    increase in that case and MLP/ResNet with embeddings remain faster than Transformers (Section ''Comparing model sizes''). On a synthetic GBDT-friendly dataset (Appendix D.1) CatBoost was trained with
+    default hyperparameters. Section numbers 3.1-3.3 and 5.3 are confirmed by in-text cross-references (''subsection 3.1'', ''subsection 3.2'', ''subsection 3.3'', ''subsection 5.3''); other locations use
+    section names.'

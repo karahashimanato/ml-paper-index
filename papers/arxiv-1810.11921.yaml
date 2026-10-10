@@ -1,0 +1,101 @@
+id: arxiv-1810.11921
+title: 'AutoInt: Automatic Feature Interaction Learning via Self-Attentive Neural Networks'
+authors:
+- Weiping Song
+- Chence Shi
+- Zhiping Xiao
+- Zhijian Duan
+- Yewen Xu
+- Ming Zhang
+- Jian Tang
+year: 2018
+venue: CIKM 2019
+links:
+  arxiv: https://arxiv.org/abs/1810.11921
+  code: https://github.com/DeepGraphLearning/RecommenderSystems
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 46e7992b8cbbc598dad791b1d8ffeb9aea2a3331375a26002158521172652685
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - tabular-attention
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'AutoInt: categorical fields (one-hot, or multi-hot averaged) and numerical fields (scalar times a per-field vector) are embedded into the same low-dimensional space; stacked interacting layers (multi-head
+  key-value self-attention over feature fields with residual connections and ReLU) model feature interactions of increasing order; the concatenated outputs go through a sigmoid for click-through-rate prediction'
+- 'AutoInt+: AutoInt jointly trained with a two-layer feed-forward network (implicit interactions)'
+claims:
+- id: c1
+  statement: 'Setting: the paper addresses click-through rate (CTR) prediction, defined as predicting the probability that user u clicks item v from the concatenation x of user and item features, with categorical
+    features one-hot encoded; the authors note that x is very sparse and high-dimensional, so off-the-shelf classifiers such as logistic regression overfit easily.'
+  location: Section 3 (Problem Definition)
+  page: 3
+  quote: The problem of click-through rate prediction aims to predict the probability of user u clicking on item v according to the feature vector x.
+- id: c2
+  statement: 'Motivation: DNN-based CTR models learn high-order interactions with fully-connected layers, which the authors say has two limitations: fully-connected networks have been shown inefficient
+    at learning multiplicative interactions (citing Beutel et al. [4]), and implicit interactions lack a good explanation of which feature combinations are meaningful.'
+  location: Introduction
+  page: 2
+  quote: First, fully-connected neural networks have been shown inefficient in learning multiplicative feature interactions [4].
+- id: c3
+  statement: 'Embedding: each categorical field is embedded with a field-specific embedding matrix (multi-valued fields are the average of the value embeddings), and each numerical field m is embedded as
+    v_m x_m with a learned field vector v_m, so that categorical and numerical features live in the same low-dimensional space and can interact.'
+  location: Section 4 (Embedding Layer)
+  page: 4
+  quote: To allow the interaction between categorical and numerical features, we also represent the numerical features in the same low-dimensional feature space.
+- id: c4
+  statement: 'Interacting layer: attention weights between feature fields are computed per head from inner products of query/key projections (key-value attention over fields, not over samples), heads are
+    concatenated, and a residual projection plus ReLU is added; the authors argue that stacking layers lets the maximum interaction order grow with depth, so a few layers suffice for high-order interactions.'
+  location: Section 4 (Analysis Of AutoInt)
+  page: 5
+  quote: Therefore a few interacting layers will suffice to model high-order feature interactions.
+- id: c5
+  statement: 'Evaluation protocol: four public CTR/recommendation data sets (Criteo, Avazu, KDD12, MovieLens-1M, the last two binarized), infrequent features merged into ''<unknown>'', a random 80% train
+    split with the rest split equally into validation and test, embedding size 16 and batch size 1024 for all methods, grid search of hyperparameters for baselines after fixing their structures, and results
+    averaged over 10 runs; only CTR-style models (LR, FM, AFM, DeepCrossing, NFM, CrossNet, CIN, HOFM) are compared, with no gradient-boosted trees.'
+  location: Section 5 (Experiment Setup)
+  page: 6
+  quote: Third, we randomly select 80% of all samples for training and randomly split the rest into validation and test sets of equal size.
+- id: c6
+  statement: The authors state that a slightly higher AUC or lower Logloss at the 0.001 level is regarded as significant for CTR prediction, as pointed out in existing works.
+  location: Section 5 (Evaluation Metrics)
+  page: 6
+  quote: It is noticeable that a slightly higher AUC or lower Logloss at 0.001-level is regarded significant for CTR prediction task, which has also been pointed out in existing works [8, 11, 38].
+- id: c7
+  statement: 'Within-paper relation: AutoInt achieves the best performance over the baselines on three of four data sets; on Avazu CIN is a little better in AUC while AutoInt has lower Logloss. The authors
+    also note that some deep models (DeepCrossing, NFM) do not guarantee improvement over FM and AFM, which they say may be attributed to learning interactions implicitly.'
+  location: Section 5.2
+  page: 7
+  quote: AutoInt achieves the best performance overall baseline methods on three of four real-world data sets.
+- id: c8
+  statement: 'Explainability evidence is visual: attention-score heat maps on MovieLens-1M for one case and averaged over the data, from which the authors read combinations such as <Gender, Genre> and <Age,
+    Genre> as strongly correlated and call them explainable rules for this domain.'
+  location: Explainable Recommendations (RQ3)
+  page: 9
+  quote: We can see that AutoInt is able to identify the meaningful combinatorial feature <Gender=Male, Age=[18-24), MovieGenre=Action&Triller> (i.e., red dotted rectangle).
+- id: c9
+  statement: 'Limitation and future work: the model is evaluated only on CTR prediction; the authors plan to extend AutoInt to general machine learning tasks such as regression, classification and ranking,
+    and to incorporate contextual information for online recommender systems.'
+  location: Section 6 (Conclusion and Future Work)
+  page: 9
+  quote: Besides, we also plan to extend AutoInt for general machine learning tasks, such as regression, classification and ranking.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliations: Peking University, UCLA, Mila/HEC Montreal. Venue from the PDF (ACM Reference Format: ''Proceedings of the 28th ACM International
+    Conference on Information and Knowledge Management (CIKM ’19)'') and the arXiv comment ''Accepted at CIKM2019''; year is the first arXiv version (2018). Tagged tabular-classification because CTR prediction
+    is binary classification on sparse categorical/numerical fields; the paper''s setting is recommender/advertising data, not general tabular benchmarks, and GBDTs are not among the baselines. Section
+    numbers come from cross-references in the text (Sections 2-6, 5.2, 5.5); subsection names are used otherwise. AutoInt''s dropout was grid-searched only on MovieLens-1M (''we found dropout is not necessary
+    for other three large data sets''); AutoInt''s own architecture (3 layers, d''=32, 2 heads) is described as a default setting, while baselines got grid search once structures were fixed. Significance
+    is an unpaired t-test against the strongest baseline (Table 2 footnote). Run time (Figure 4), parameter counts (Table 3), ablations (Table 4, Figures 5-6) and AutoInt+ results (Table 5) are not recorded.
+    Later reuse: DCN V2 (arxiv-2008.13535) reran AutoInt as a tuned baseline.'

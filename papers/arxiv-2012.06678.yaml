@@ -1,0 +1,99 @@
+id: arxiv-2012.06678
+title: 'TabTransformer: Tabular Data Modeling Using Contextual Embeddings'
+authors:
+- Xin Huang
+- Ashish Khetan
+- Milan Cvitkovic
+- Zohar Karnin
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2012.06678
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: cac9f73e400c2bf724c3b29d5c7c5648df411bdf79d6cb6cc4c01d4a9d1afb1e
+tags:
+  tasks:
+  - tabular-classification
+  - representation-learning
+  method_families:
+  - tabular-attention
+  - deep-learning
+  paradigms:
+  - supervised
+  - self-supervised
+proposes:
+- 'TabTransformer: categorical features are embedded with per-column embeddings (a shared column identifier concatenated with a value-specific embedding, no positional encoding), passed through a stack
+  of Transformer layers to produce contextual embeddings, then concatenated with the raw continuous features and fed to an MLP'
+- 'Two-phase semi-supervised training: pre-training the Transformer layers on unlabeled data with masked language modeling (MLM) or replaced token detection (RTD, with a separate binary classifier per column),
+  then fine-tuning on labeled data'
+claims:
+- id: c1
+  statement: 'Architecture: a column embedding layer, a stack of N Transformer layers and an MLP; only categorical features pass through the Transformer, and the resulting contextual embeddings are concatenated
+    with the continuous features before the MLP.'
+  location: Section 2
+  page: 3
+  quote: The contextual embeddings {h1, · · · , hm} are concatenated along with the continuous features xcont to form a vector of dimension (d × m + c).
+- id: c2
+  statement: 'Column embedding: each categorical column has its own lookup table with an extra embedding for missing values; each embedding concatenates a column-shared unique identifier with a value-specific
+    part, and positional encodings are not used because tabular features have no order.'
+  location: Section 2
+  page: 3
+  quote: Since, in tabular data, there is no ordering of the features, we do not use positional encodings.
+- id: c3
+  statement: 'Pre-training: MLM masks k% of categorical features and predicts them; RTD replaces features with random values of that feature and trains a binary classifier per column (no auxiliary generator,
+    since columns have few classes); k = 30 in the experiments.'
+  location: Section 2
+  page: 3
+  quote: We explore two different types of pre-training procedures, the masked language modeling (MLM) (Devlin et al. 2019) and the replaced token detection (RTD) (Clark et al. 2020).
+- id: c4
+  statement: Pre-training is applied only in the semi-supervised setting; the authors report not finding much benefit from it when all data is labeled, with its benefit evident when there are many unlabeled
+    and few labeled examples.
+  location: Section 3
+  page: 4
+  quote: We do not ﬁnd much beneﬁt in using it when the entire data is labeled.
+- id: c5
+  statement: 'Evaluation protocol: 15 public binary classification datasets (UCI, AutoML Challenge, Kaggle), five cross-validation splits with 65/15/20% train/validation/test, AUC as metric, 20 HPO rounds
+    per model per split; TabTransformer''s embedding dimension, layers and heads are fixed to 32, 6 and 8, chosen by 50 rounds of HPO on 5 datasets. Semi-supervised runs use the first p = 50, 200 or 500
+    training rows as labeled.'
+  location: Section 3
+  page: 4
+  quote: For hyperparameter optimization (HPO), each model is given 20 HPO rounds for each cross-validation split.
+- id: c6
+  statement: Baselines were re-implemented for consistent preprocessing (the authors state their results are close to published ones where available); GBDT is LightGBM tuned over number of leaves, minimum
+    data per leaf, learning rate and number of trees; TabNet was implemented as described but with an added softmax-attention option and without the sparsification term in the loss.
+  location: Appendix B.1
+  page: 10
+  quote: For the competing models mentioned in the experiment, we re-implemented all of them for consistency of pre-processing.
+- id: c7
+  statement: 'Relation to GBDT and other deep models (supervised): TabTransformer outperforms the baseline MLP (14 of 15 datasets, average 1.0% AUC gain) and performs comparably with GBDT; it is reported
+    significantly better than TabNet and VIB.'
+  location: Section 3.3
+  page: 6
+  quote: The TabTransformer outperforms the baseline MLP with an average 1.0% gain and perform comparable with the GBDT.
+- id: c8
+  statement: 'Robustness and interpretability of contextual embeddings: on 3 datasets, with noise or missing values injected into categorical test features, TabTransformer degrades less than the MLP, which
+    the authors conjecture comes from the contextual property of the embeddings; t-SNE of last-layer embeddings on BankMarketing groups semantically similar classes, and linear probes improve with layer
+    depth.'
+  location: Section 3.2
+  page: 5
+  quote: We conjecture that the robustness comes from the contextual property of the embeddings.
+- id: c9
+  statement: 'Semi-supervised results: with many unlabeled examples TabTransformer-RTD/MLM is reported to outperform the other methods (at least 1.2%, 2.0% and 2.1% mean AUC for 50, 200 and 500 labels);
+    with fewer unlabeled examples the improvement is marginal, and with only 50 labels MLP (ER) and MLP (PL) beat TabTransformer-RTD/MLM, which the authors attribute to the classifier weights not being
+    trained with unlabeled data.'
+  location: Section 3.4
+  page: 7
+  quote: In Table 4, with only 50 labeled data points, MLP (ER) and MLP (PL) beat our TabTransformer-RTD/MLM.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliations: Amazon AWS (Huang, Khetan, Karnin) and PostEra (Cvitkovic) (PDF page 1). No venue is stated in the v1 PDF (11 Dec 2020); the arXiv
+    comment is only ''7 pages, 5 figures''; none recorded. All 15 datasets are public (UCI, AutoML Challenge, Kaggle); no company-internal dataset was found. Inconsistency in the PDF: the text of Section
+    3.4 splits the 15 datasets into 6 with more than 30K points and 9 others, while the captions of Table 3 and Table 4 say 8 and 12 datasets. Number of seeds: splits are fixed with one random seed so all
+    models see the same conditions (Appendix B.1); no repeated seeds beyond the 5 CV splits were found. GBDT is represented only by LightGBM. Experiments ran on a single NVIDIA V100. Result tables not recorded.'

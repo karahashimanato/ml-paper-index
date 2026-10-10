@@ -81,8 +81,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | 近似ベイズ推論とその診断 | 論文カード18本+既存3本(HMC と NUTS、確率的勾配 MCMC、変分推論とその弱点、正規化フローと Pathfinder、R-hat の改訂、PSIS の k-hat、VI の誤差の上界、SBC とその検定量、ベイズのワークフロー)、記事 [articles/methods/approximate-inference-and-diagnostics.md](articles/methods/approximate-inference-and-diagnostics.md) |
 | 知識蒸留と枝刈り | 論文カード17本+既存4本(柔らかい目標と温度、中間層のヒント、同じ大きさへの蒸留、生徒は先生をまねできているか、大きさに基づく枝刈りと段階的な枝刈り、初期化時の枝刈り、宝くじ仮説と巻き戻し、転移学習と大規模言語モデルの枝刈り、評価の問題、圧縮で失われるもの)、記事 [articles/methods/knowledge-distillation-and-pruning.md](articles/methods/knowledge-distillation-and-pruning.md) |
 | グラフニューラルネットワーク | 論文カード16本(GCN・GraphSAGE・GAT・SGC とメッセージパッシング、WL 検定と表現力、過平滑化と過圧縮、異質性、固定分割とモデル選択の落とし穴、OGB などのベンチマーク)、記事 [articles/methods/graph-neural-networks.md](articles/methods/graph-neural-networks.md) |
+| 表データの深層学習モデル | 論文カード15本+既存6本(表データが難しい理由、木をまねるモデル、特徴をトークンにする注意モデル、数値の埋め込み、交差層、MLP の正則化と既定値と暗黙のアンサンブル、近傍の検索、自己教師ありの事前学習、調整の予算とベンチマークの偏り)、記事 [articles/methods/tabular-deep-learning-models.md](articles/methods/tabular-deep-learning-models.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では503本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では518本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -97,6 +98,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [近似ベイズ推論とその診断 — MCMC と変分推論、その近似は信用できるか](articles/methods/approximate-inference-and-diagnostics.md)
 - [知識蒸留と枝刈り — 小さなモデルに何を移し、何を削るのか、そして何が失われるのか](articles/methods/knowledge-distillation-and-pruning.md)
 - [グラフニューラルネットワーク — メッセージパッシングの基本、表現力の上限、深さの問題、異質なグラフ、評価の落とし穴](articles/methods/graph-neural-networks.md)
+- [表データの深層学習モデル — 木をまねる、特徴をトークンにする、数値を埋め込む、MLP を鍛える、近傍を引く](articles/methods/tabular-deep-learning-models.md)
 
 横断記事:
 

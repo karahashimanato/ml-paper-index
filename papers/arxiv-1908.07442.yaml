@@ -1,0 +1,108 @@
+id: arxiv-1908.07442
+title: 'TabNet: Attentive Interpretable Tabular Learning'
+authors:
+- Sercan O. Arik
+- Tomas Pfister
+year: 2019
+venue: AAAI 2021
+links:
+  arxiv: https://arxiv.org/abs/1908.07442
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 8310bc2f2c0aad63fb97c8438f051d93c4496b43fc0123dabd6662cc1ea3fb44
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  - representation-learning
+  method_families:
+  - tabular-attention
+  - deep-learning
+  paradigms:
+  - supervised
+  - self-supervised
+proposes:
+- 'TabNet: a sequential multi-step encoder in which, at each decision step, an attentive transformer produces an instance-wise sparse feature mask (sparsemax over prior-scaled features) that multiplies
+  the input features; a feature transformer (shared and step-dependent FC-BN-GLU layers) processes the selected features, and ReLU outputs of all steps are summed into the decision'
+- Aggregate feature-importance masks obtained by weighting each step's mask by that step's decision contribution
+- Self-supervised pre-training by predicting randomly masked feature columns from the others with a TabNet decoder
+claims:
+- id: c1
+  statement: 'Motivation and design: TabNet uses sequential attention to choose which features to reason from at each decision step; the authors state this enables interpretability and more efficient learning
+    because learning capacity is used for the most salient features.'
+  location: Abstract
+  page: 1
+  quote: TabNet uses sequential attention to choose which features to reason from at each decision step, enabling interpretability and more efﬁcient learning as the learning capacity is used for the most
+    salient features.
+- id: c2
+  statement: 'Feature selection mechanism: a learnable multiplicative mask is computed by an attentive transformer from the previous step''s processed features and normalized with sparsemax (citing Martins
+    and Astudillo 2016), which the authors say was observed to be superior in performance and aligned with sparse feature selection for explainability; a prior scale with relaxation parameter gamma controls
+    how often a feature can be reused across steps, and an entropy-form sparsity regularizer is added to the loss.'
+  location: TabNet for Tabular Learning
+  page: 3
+  quote: Sparsemax normalization (Martins and Astudillo 2016) encourages sparsity by mapping the Euclidean projection onto the probabilistic simplex, which is observed to be superior in performance and
+    aligned with the goal of sparse feature selection for explainability.
+- id: c3
+  statement: 'Input handling: raw numerical features are used, categorical features are mapped with trainable embeddings, and no global feature normalization is applied (only batch normalization); in the
+    experiments categorical inputs are mapped to a single-dimensional trainable scalar and numerical columns are input without preprocessing.'
+  location: TabNet for Tabular Learning
+  page: 3
+  quote: We do not consider any global feature normalization, but merely apply batch normalization (BN).
+- id: c4
+  statement: 'Interpretability argument: if a mask entry is 0 the feature should have no contribution at that step; masks are interpretable as feature importance only in an approximate sense, since the
+    coefficient would correspond to feature importance if the step function were linear, while steps are non-linear but their outputs are combined linearly. Step masks are aggregated by weighting each step
+    with its summed ReLU decision output.'
+  location: TabNet for Tabular Learning (Interpretability)
+  page: 5
+  quote: Although each decision step employs non-linear processing, their outputs are combined later in a linear way.
+- id: c5
+  statement: 'Evidence for interpretability: on synthetic data the aggregate masks focus on the relevant features (the visualized models were trained with 10M rather than 10K samples to get sharper masks);
+    on Mushroom, TabNet assigns 43% importance to ''Odor'' while LIME, Integrated Gradients and DeepLift assign less than 30% (the latter figures cited from Ibrahim et al. 2019); on Adult the rankings are
+    described as consistent with well-known methods.'
+  location: Interpretability
+  page: 7
+  quote: TabNet assigns an importance score ratio of 43% for it, while other methods like LIME (Ribeiro, Singh, and Guestrin 2016), Integrated Gradients (Sundararajan, Taly, and Yan 2017) and DeepLift (Shrikumar,
+    Greenside, and Kundaje 2017) assign less than 30% (Ibrahim et al. 2019).
+- id: c6
+  statement: 'Evaluation protocol as stated in the appendix: for all the comparison models a hyperparameter tuning with the same number of search steps is run (per-dataset sources of baseline numbers and
+    settings are listed in notes).'
+  location: Appendix (Experiment hyperparameters)
+  page: 9
+  quote: For all the comparison models, we run a hyperparameter tuning with the same number of search steps.
+- id: c7
+  statement: On the KDD datasets (described as performance-saturated), TabNet achieves very similar or slightly worse performance than XGBoost and CatBoost, which the authors describe as robust because
+    they contain a high amount of ensembles.
+  location: Appendix (Performance on KDD datasets)
+  page: 9
+  quote: Table 8 shows that TabNet achieves very similar or slightly worse performance than XGBoost and CatBoost, that are known to be robust as they contain high amount of ensembles.
+- id: c8
+  statement: Self-supervised pre-training (masked feature-column prediction with a decoder) is reported to significantly improve supervised accuracy on Higgs (TabNet-M, mean and std over 15 runs, 1k/10k/100k
+    labeled samples), especially when the unlabeled dataset is much larger than the labeled one, and to speed convergence.
+  location: Self-supervised learning
+  page: 7
+  quote: Table 7 shows that unsupervised pre-training signiﬁcantly improves performance on the supervised classiﬁcation task, especially in the regime where the unlabeled dataset is much larger than the
+    labeled dataset.
+- id: c9
+  statement: 'Hyperparameter sensitivity: the paper states TabNet is not very sensitive to most hyperparameters, but the Forest Cover ablation reports that high performance needs capacity adjusted to the
+    dataset and that increasing units or decision steps beyond some value causes optimization issues without performance benefit.'
+  location: Appendix (Ablation studies)
+  page: 10
+  quote: On the other hand, increasing these parameters beyond some value causes optimization issues and do not yield performance beneﬁts.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Moved from c6/c7 during review (these come from other paragraphs than the c6/c7 quotes): per-dataset, many baseline numbers or settings are taken
+    from prior work (Forest Cover GBDT hyperparameters from Mitchell et al. 2018; Sarcos baselines follow Tanno et al. 2018; Rossmann baseline performance from the CatBoost benchmark; KDD baselines from
+    Prokhorenkova et al. 2018), while GBDTs are tuned on Poker Hand; the main text reports TabNet outperforming XGBoost/LightGBM/CatBoost on Forest Cover Type, Poker Hand and Rossmann and a single TabNet
+    outperforming Google''s AutoML Tables on Forest Cover Type. Affiliation: Google Cloud AI (PDF page 1). Venue: the PDF page 1 carries ''Copyright © 2021, Association for the Advancement of Artificial
+    Intelligence (www.aaai.org)''; recorded as ''AAAI 2021'' on that basis (the arXiv record has no comment/journal_ref, so this rests on the copyright line only). Year is the first arXiv version (2019);
+    the v5 PDF is dated 9 Dec 2020. Section headings are unnumbered, so locations use heading names. Conflict of interest: AutoML Tables, which TabNet is compared against on Forest Cover Type, is a Google
+    Cloud product (reference ''AutoML Tables – Google Cloud''); the authors are at Google Cloud AI. All evaluation datasets named are public (UCI, Kaggle, KDD Cup, synthetic from Chen et al. 2018); no company-internal
+    dataset was found. Number of random seeds for the supervised real-world tables is not stated (searched for runs, seed, repeat); only Table 7/10 (self-supervised) state 15 runs. The appendix lists TabNet
+    search ranges; GBDT search spaces are not listed. Result tables not recorded.'

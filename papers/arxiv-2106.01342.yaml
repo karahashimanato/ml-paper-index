@@ -1,0 +1,108 @@
+id: arxiv-2106.01342
+title: 'SAINT: Improved Neural Networks for Tabular Data via Row Attention and Contrastive Pre-Training'
+authors:
+- Gowthami Somepalli
+- Micah Goldblum
+- Avi Schwarzschild
+- C. Bayan Bruss
+- Tom Goldstein
+year: 2021
+links:
+  arxiv: https://arxiv.org/abs/2106.01342
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 9069de09bcd867b6b8604460f5d98de678eef5a731fac0e2a4216fa850aad018
+tags:
+  tasks:
+  - tabular-classification
+  - representation-learning
+  method_families:
+  - tabular-attention
+  - deep-learning
+  - gradient-boosted-trees
+  paradigms:
+  - supervised
+  - self-supervised
+proposes:
+- 'SAINT (Self-Attention and Intersample Attention Transformer): every categorical and continuous feature is embedded into a d-dimensional token (a separate one-layer ReLU projection per continuous feature)
+  plus a [CLS] token; L stages each stack a self-attention block over features and an intersample-attention block that attends across the rows of a batch (concatenated feature embeddings of a row act as
+  one token); the [CLS] output goes to an MLP head'
+- 'Contrastive self-supervised pre-training for tabular data: views made by CutMix in input space and mixup in embedding space, InfoNCE contrastive loss on projection-head outputs plus a per-feature denoising
+  (reconstruction) loss, followed by finetuning on the labeled subset'
+claims:
+- id: c1
+  statement: 'Architecture: SAINT projects all features into a combined dense space and passes them as tokens through a transformer encoder with self-attention over the features of a sample and a proposed
+    intersample attention that relates a row to other rows; the authors describe intersample attention as akin to nearest-neighbor classification with a distance metric learned end-to-end, and say it lets
+    SAINT borrow features from similar samples in the batch when a feature is missing or noisy.'
+  location: Introduction
+  page: 2
+  quote: Intersample attention is akin to a nearest-neighbor classiﬁcation, where the distance metric is learned end-to-end rather than ﬁxed.
+- id: c2
+  statement: 'Embedding of continuous features: unlike TabTransformer, which embeds only categorical features (continuous features bypass the transformer, which the authors say loses information about categorical-continuous
+    correlations), SAINT projects each continuous feature with its own single fully-connected layer with ReLU; columns are embedded independently. In a side experiment that keeps TabTransformer''s architecture
+    and training hyperparameters fixed, only embedding its continuous features this way raised its average AUROC from 89.38 to 91.72.'
+  location: 'Self-Attention and Intersample Attention Transformer (SAINT): Encoding the Data'
+  page: 4
+  quote: we use a separate single fully-connected layer with a ReLU nonlinearity for each continuous feature
+- id: c3
+  statement: 'Pre-training: augmented views are generated with CutMix in the raw input space and mixup in the embedding space; the loss is an InfoNCE contrastive loss between projection-head outputs of
+    clean and augmented views plus a denoising loss reconstructing each feature (cross-entropy or MSE) with lambda_pt and temperature described as tuned on validation data. The authors state that, to the
+    best of their knowledge, they are the first to adopt contrastive learning for tabular data.'
+  location: Related Work
+  page: 3
+  quote: In this paper, to the best of our knowledge, we are the ﬁrst to adopt contrastive learning for tabular data.
+- id: c4
+  statement: 'Benchmark: 16 public datasets from UCI or AutoML (14 binary, 2 multi-class: Volkert and MNIST), chosen because they were previously used to evaluate competing methods (TabNet, TabTransformer,
+    VIME); sizes range from 200 to 495,141 samples and 8 to 784 features. AUROC is the main metric for binary tasks and accuracy for the two multi-class datasets.'
+  location: 'Experimental Evaluation: Datasets'
+  page: 6
+  quote: These datasets were chosen because they were previously used to evaluate competing methods [1, 18, 49].
+- id: c5
+  statement: 'Protocol: all models (including pre-training runs) are trained with AdamW (learning rate 0.0001, batch size 256 except for wide datasets); data split as stated into 65%, 15% and 25% for training,
+    validation and test; each reported number is the mean of 5 trials with different seeds. Baseline results (logistic regression, random forest, XGBoost, LightGBM, CatBoost, MLP, VIME, TabNet, TabTransformer)
+    are quoted from the original papers when possible and reproduced otherwise. No description of how the GBDT baselines'' hyperparameters were tuned was found in the text (searched for tun, hyperparam,
+    hyper-param, default, grid).'
+  location: Table 2 caption
+  page: 7
+  quote: Baseline results are quoted from original papers when possible (denoted with *) and reproduced otherwise.
+- id: c6
+  statement: 'Supervised results (within this paper): on 13 of the 16 datasets one of the three SAINT variants (SAINT, SAINT-s with self-attention only, SAINT-i with intersample attention only) outperforms
+    all baselines, including the boosted-tree libraries, and on the remaining 3 it is very close to the best; on average each variant is reported to beat all baselines by a significant margin. Note the
+    count takes the best of three variants per dataset.'
+  location: 'Results: Supervised setting'
+  page: 7
+  quote: In 13 out of 16 datasets, one of the SAINT variants outperforms all baseline models.
+- id: c7
+  statement: 'Semi-supervised results: with 50, 200 and 500 labeled points (rest unlabeled), the pre-trained SAINT model performs best in all cases; when all training samples are labeled, pre-training does
+    not contribute appreciably.'
+  location: 'Results: Semi-supervised setting'
+  page: 8
+  quote: Interestingly, we note that when all the training data samples are labeled, pre-training does not contribute appreciably, hence the results with and without pre-training are fairly close.
+- id: c8
+  statement: 'Interpretability: the authors say attention gives some interpretability (with one transformer stage the maps reveal which features and data points are used); the evidence is visualizations
+    on MNIST treated as tabular data (self-attention focusing on foreground pixels; sparse intersample attention on a few points, which they hypothesize are hard examples) and Volkert, where intersample
+    attention is much denser.'
+  location: Interpreting attention
+  page: 8
+  quote: One advantage of using transformer-based models is that attention comes with some interpretability, in contrast, MLPs are hard to interpret.
+- id: c9
+  statement: 'Stated limitation: real-world datasets may be highly noisy or imbalanced, and SAINT was tuned for the settings in which it was tested, so the authors caution practitioners against assuming
+    that what works on these benchmarks will work in their own setting.'
+  location: Discussion, Limitations, and Impact
+  page: 10
+  quote: Moreover, we have tuned SAINT for the settings in which we test it.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliations: University of Maryland, College Park; C. Bayan Bruss is at Capital One (Center for Machine Learning). No venue recorded: the PDF (arXiv
+    v1) footer says ''Preprint. Under review.'' and the arXiv record has no journal_ref. The split percentages are recorded as written (65/15/25 sums to 105%). SAINT-i is reported to outperform the other
+    variants when the number of features is large (e.g. Arcene, Arrhythmia) and to be faster than SAINT-s; robustness to CutMix-style corruption and missing features and the batch-size study are shown only
+    in figures (values not recorded). Hyperparameter tuning of SAINT itself: lambda_pt=10, tau=0.7, p_cutmix=0.3, alpha=0.2 are stated as fixed for all settings, while the pre-training section says lambda_pt
+    and tau are tuned on validation data. Section numbers in locations are avoided because extracted headings carry no numbers. Cross-reference: TabR (arxiv-2307.14338) later compares against SAINT as a
+    retrieval-like baseline.'

@@ -1,0 +1,103 @@
+id: arxiv-2106.15147
+title: 'SCARF: Self-Supervised Contrastive Learning using Random Feature Corruption'
+authors:
+- Dara Bahri
+- Heinrich Jiang
+- Yi Tay
+- Donald Metzler
+year: 2021
+venue: ICLR 2022
+links:
+  arxiv: https://arxiv.org/abs/2106.15147
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: f26764f0c1992d4e0218d74bb71b5bad4388b5d9a510fd8faa2ae34147d05404
+tags:
+  tasks:
+  - tabular-classification
+  - representation-learning
+  method_families:
+  - tabular-mlp
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'SCARF: contrastive pre-training for tabular data in which the second view of each example is formed by replacing a random subset of its features (a fixed fraction c, default 0.6) with draws from each
+  feature''s empirical marginal distribution; the original and corrupted views pass through an encoder f and an l2-normalizing pre-train head g and are trained with the InfoNCE loss'
+- 'Fine-tuning: g is discarded, a classification head h is attached to the pre-trained encoder f, and both f and h are fine-tuned with cross-entropy; pre-training is early-stopped on the InfoNCE loss of
+  a static validation set of corrupted pairs'
+claims:
+- id: c1
+  statement: 'Corruption procedure: for each example, a fraction of the features is sampled uniformly at random and each of those features is replaced by a random draw from that feature''s empirical marginal
+    distribution, defined as the uniform distribution over the values the feature takes across the training dataset; both views are then passed through the encoder f and the pre-train head g.'
+  location: Section 3
+  page: 4
+  quote: We sample some fraction of the features uniformly at random and replace each of those features by a random draw from that feature’s empirical marginal distribution,
+- id: c2
+  statement: 'Relation to VIME (citing Yoon et al., 2020), which the authors say proposes the same corruption technique: the key differences are that SCARF pre-trains with a contrastive loss, which the
+    authors state they show to be more effective than the denoising auto-encoder loss that partly constitutes VIME, and that after pre-training all weights including the encoder are fine-tuned using task
+    supervision only (VIME fine-tunes only the task head).'
+  location: Section 2
+  page: 3
+  quote: The key differences with our work is that we pre-train using a contrastive loss, which we show to be more effective than the denoising auto-encoder loss that partly constitutes VIME.
+- id: c3
+  statement: 'Datasets and splits: 69 classification datasets from the public OpenML-CC18 benchmark (72 datasets minus MNIST, Fashion-MNIST and CIFAR10); for each dataset 70%/10%/20% train/validation/test
+    splits are formed, a different split for every trial, with all methods using the same splits. Categorical features are one-hot encoded (SCARF''s marginal sampling is done before one-hot encoding).'
+  location: Section 4
+  page: 4
+  quote: For each OpenML dataset, we form 70%/10%/20% train/validation/test splits, where a different split is generated for every trial and all methods use the same splits.
+- id: c4
+  statement: 'Fixed settings across experiments (unless specified otherwise): encoder f is a 4-layer ReLU network with hidden dimension 256, heads g and h are 2-layer ReLU networks; Adam with the default
+    learning rate 0.001; batch size 128; early stopping with patience 3 (classification error as the fine-tuning validation metric); max 200 fine-tune and 1000 pre-train epochs; corruption rate 0.6 and
+    temperature 1 for SCARF-based methods; all runs repeated 30 times with different splits; about one million CPU core hours in total.'
+  location: Section 4
+  page: 4
+  quote: Unless speciﬁed otherwise, we use the following settings across all experiments.
+- id: c5
+  statement: 'Comparison method: results are summarized with a win matrix over the 69 datasets in which a ''win'' or ''loss'' is counted only when the means are not a statistical tie under Welch''s t-test
+    (p-value 0.05); box plots of relative improvement use only datasets where the means differ with p-value 0.20.'
+  location: Section 4
+  page: 5
+  quote: “Beats” and “loses” are only deﬁned when the means are not a statistical tie (using Welch’s t-test with unequal variance and a p-value of 0.05).
+- id: c6
+  statement: 'Fully labeled setting: all five pre-training techniques considered improve over no pre-training (control), SCARF outperforms the other pre-training methods with more statistically significant
+    wins, and SCARF pre-training also boosts mixup, label smoothing, distillation and dropout; the authors say this suggests pre-training complements existing solutions and that a distinct mechanism is
+    at play.'
+  location: Section 4.1
+  page: 7
+  quote: We observe that SCARF generally outperforms the alternatives and adds a 1-2% relative gain across the board.
+- id: c7
+  statement: 'Label-noise setting (30% of training labels replaced by a uniformly drawn class, validation and test uncorrupted): SCARF outperforms the other pre-training methods and boosts all baselines,
+    including label-noise methods such as Deep k-NN and the bi-tempered loss.'
+  location: Section 4.2
+  page: 7
+  quote: Again, we see SCARF outperforms the rest and boosts all baselines by 2-3%.
+- id: c8
+  statement: 'Limited-label setting (only 25% of the training split keeps its labels; autoencoders, SCARF, self-training and tri-training use the unlabeled remainder): SCARF outperforms the other methods.'
+  location: Section 4.3
+  page: 8
+  quote: SCARF outperforms the rest, adding a very impressive 2-4% to all baselines.
+- id: c9
+  statement: 'Ablation on corruption strategies under different feature scalings (z-score and min-max shown in the appendix figure): SCARF marginal sampling generally outperforms the alternatives; the authors
+    note it has no hyperparameters and is invariant to feature scaling, whereas additive noise must be rescaled with the features.'
+  location: Section 4.4
+  page: 9
+  quote: Marginal sampling is neat in that in addition to not having hyperparameters, it is invariant to scaling and preserves the “units” of each feature.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliation: Google Research (all authors). Venue: the PDF header says ''Published as a conference paper at ICLR 2022'' and the arXiv comment is
+    ''ICLR 2022 Spotlight''. Section numbers are from numbered headings in the PDF (the XGBoost baseline is in an unnumbered appendix section ''Absolute performance''). Only deep models are compared in
+    the body: a gradient-boosted tree baseline (XGBoost, Python API version 0.6, default XGBClassifier settings: max depth 3, 100 estimators, learning rate 0.1) appears only in the appendix accuracy tables,
+    with no comparative statement about it in the text (searched for xgboost, boost, tree, gbdt); those tables are not recorded. No per-dataset hyperparameter tuning of the networks or baselines was found
+    in the text (searched for tuned, hyperparameter, default, search): the same architecture and optimizer settings are used throughout, except that the three datasets 4134, 28 and 1468 are left unscaled
+    because no scaling was best for the control network. Reported gains are relative to the control network, not to GBDTs. Sensitivity results (batch size past 128 gave no significant improvement; corruption
+    rate stable in 50%-80%; temperature 1 recommended; InfoNCE alternatives no better; pre-training beats co-training and pure data augmentation) are shown as figures in Section 4.4 / Appendix A.3. Conflict
+    of interest: the Deep k-NN label-noise baseline is the authors'' own earlier method (Bahri, Jiang and Gupta, 2020). The conclusion notes a potential negative side effect: learned representations may
+    reinforce biases in the input data.'

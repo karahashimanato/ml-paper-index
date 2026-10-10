@@ -1,0 +1,96 @@
+id: arxiv-1909.06312
+title: Neural Oblivious Decision Ensembles for Deep Learning on Tabular Data
+authors:
+- Sergei Popov
+- Stanislav Morozov
+- Artem Babenko
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1909.06312
+  code: https://github.com/Qwicen/node
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: daa0d574fed6c3ecd279fc9670052183df6bd60c956fcc214b9437e24a342810
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  method_families:
+  - differentiable-trees
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'NODE layer: an ensemble of m differentiable oblivious decision trees in which the splitting-feature choice is a weighted sum of features with alpha-entmax weights over a learnable selection matrix and
+  the Heaviside comparison is relaxed to a scaled two-class entmax; leaf responses are combined with the outer-product choice tensor'
+- 'Multi-layer NODE: DenseNet-style stacking where each layer takes the concatenation of the input features and all previous layers'' tree outputs, with the prediction averaged over all trees, trained end-to-end'
+claims:
+- id: c1
+  statement: 'Differentiable oblivious trees: instead of REINFORCE or Gumbel-softmax, which the authors say typically require long training time, NODE uses alpha-entmax to learn sparse splitting-feature
+    choices that depend on only a few features, and a scaled two-class entmax to relax the threshold comparison; the relaxation equals a classic oblivious tree when both reach one-hot states.'
+  location: Section 3.1
+  page: 4
+  quote: Instead, we propose to use the α-entmax transformation (Peters et al., 2019) as it is able to learn sparse choices, depending only on a few features, via standard gradient descent.
+- id: c2
+  statement: 'Deep architecture: a sequence of k NODE layers, each taking the concatenation of all previous layers (including the input features) as input, following DenseNet; the final prediction is a
+    simple average of all trees from all layers, and tree outputs can have dimension l > number of classes so that early layers produce features for later ones.'
+  location: Section 3.2
+  page: 5
+  quote: Similar to DenseNet, our architecture is a sequence of k NODE layers (see Section 3.1), where each layer uses a concatenation of all previous layers as its input.
+- id: c3
+  statement: 'Training protocol: each feature is quantile-transformed to a normal distribution (observed to be important for stable training and faster convergence), data-aware initialization is used, training
+    uses Quasi-Hyperbolic Adam with parameters from the original paper, parameters are averaged over 5 consecutive checkpoints, and the stopping point is chosen on a hold-out validation set.'
+  location: Section 3.3
+  page: 5
+  quote: In experiments, we observed that this step was important for stable training and faster convergence.
+- id: c4
+  statement: 'Evaluation protocol: six open-source datasets (Epsilon, YearPrediction, Higgs, Microsoft, Yahoo, Click) with provided train/test splits and 20% of the train set as validation, fixed splits
+    for all methods (the appendix says Yahoo uses the split provided by its authors); baselines are CatBoost, XGBoost and a fully connected network (FCNN); mean and standard deviation over ten runs with
+    different random seeds are reported. Ranking datasets are treated as regression with MSE.'
+  location: Section 4.1
+  page: 6
+  quote: For all methods, we report mean performance and standard deviations computed over ten runs with different random seeds.
+- id: c5
+  statement: 'Tuning budget: CatBoost, XGBoost and FCNN are tuned with 50 steps of TPE (Hyperopt), with the number of trees (max 2048) set on validation at each step; NODE is tuned by grid search over number
+    of layers {2, 4, 8}, total tree count {1024, 2048} and tree output dimension {2, 3} with learning rate fixed at 1e-3, so the budgets differ in form between NODE and the baselines.'
+  location: Appendix (Optimization of hyperparameters)
+  page: 11
+  quote: For each method, we perform 50 steps of Tree-structured Parzen Estimator (TPE) optimization algorithm.
+- id: c6
+  statement: 'Default-hyperparameter regime: GBDTs use package defaults with only the number of trees (up to 2048) set on validation, NODE uses a single layer of 2048 trees of depth six (inherited from
+    CatBoost defaults), and FCNN is not compared because it typically requires much tuning and no setting suitable for all datasets was found.'
+  location: Section 4.1
+  page: 6
+  quote: We do not compare with FCNN in this regime, as it typically requires much tuning, and we did not ﬁnd the set of parameters, appropriate for all datasets.
+- id: c7
+  statement: 'Relation to GBDTs within the paper: with default hyperparameters NODE is reported to outperform CatBoost and XGBoost on all six datasets; with tuned hyperparameters it outperforms them on
+    most tasks, the exceptions being Yahoo and Microsoft where tuned XGBoost is best, which the authors speculate means oblivious trees are an inappropriate inductive bias for Yahoo.'
+  location: Section 4.1
+  page: 7
+  quote: Given the large advantage of XGBoost over CatBoost on Yahoo, we speculate that the usage of oblivious decision trees is an inappropriate inductive bias for this dataset.
+- id: c8
+  statement: 'Critique of prior work: the authors state that earlier tabular DNN architectures mostly did not compare with properly tuned GBDT implementations, and that a preprint reporting marginal gains
+    over default-parameter GBDT faced much stronger baselines in their experiments.'
+  location: Section 2
+  page: 3
+  quote: The recent preprint (Ke et al., 2018) reports the marginal improvement over GBDT with default parameters, but in our experiments, the baseline performance is much higher.
+- id: c9
+  statement: 'Ablation of choice functions (YearPrediction and Epsilon): entmax with alpha = 1.5 is reported to outperform softmax, sparsemax and Gumbel-softmax across the experiments; sparsemax and softmax
+    are not universal (each wins on one dataset), and Gumbel-softmax could not learn deep architectures, probably because its stochasticity makes early-layer responses too noisy.'
+  location: Section 4.2
+  page: 8
+  quote: Another observation is that Gumbel-Softmax is unable to learn deep architectures with both constant and annealed temperature schedules.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): deep learning architectures for tabular data (TabNet, NODE and differentiable trees, TabTransformer/FT-Transformer-style attention,
+    SAINT, embeddings for numerical features, retrieval (TabR), regularized MLPs, CTR-style interaction models, self-supervised pretraining, and surveys/benchmarks comparing them with GBDTs). Carded by
+    a subagent. Results tables not recorded; claims only. Affiliations: Yandex (all authors), plus Lomonosov Moscow State University and HSE (PDF page 1). No venue is stated in the v2 PDF (dated 19 Sep
+    2019) and the arXiv record has no comment/journal_ref; none recorded. Section numbers are from numbered headings in the PDF. Comparison with mGBDT and DeepForest was partial (OOM on many datasets; DeepForest
+    classification-only), with tuned GBDTs reported better than both. Runtime (Section 4.2, Table 4): 1024 trees of depth six on YearPrediction, single 1080Ti GPU vs 28-core Xeon; NODE inference is described
+    as on par with GBDT libraries. The Click subset was built by sampling 500,000 objects per class, categorical features via leave-one-out encoding. Babenko is a co-author of later tabular DL benchmarks
+    that evaluate NODE; this paper itself does not state a conflict of interest. Result tables not recorded.'

@@ -1,0 +1,94 @@
+id: arxiv-1910.01108
+title: 'DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter'
+authors:
+- Victor Sanh
+- Lysandre Debut
+- Julien Chaumond
+- Thomas Wolf
+year: 2019
+venue: EMC^2 Workshop at NeurIPS 2019
+links:
+  arxiv: https://arxiv.org/abs/1910.01108
+  code: https://github.com/huggingface/transformers
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: a70c78e2b4db85bfee7696e19829571a3b05f69c616db5c039f6f4eb33b1a0b6
+tags:
+  tasks:
+  - model-compression
+  - natural-language-understanding
+  method_families:
+  - knowledge-distillation
+  - deep-learning
+  paradigms:
+  - self-supervised
+proposes:
+- 'DistilBERT: a 6-layer BERT student (token-type embeddings and pooler removed) initialized from every other teacher layer and distilled during pre-training rather than for a specific task'
+- 'Triple pre-training loss: distillation cross-entropy over the teacher''s temperature-softened MLM distribution, the masked language modeling loss, and a cosine embedding loss aligning student and teacher
+  hidden states'
+claims:
+- id: c1
+  statement: 'Training loss: the student is trained with L_ce = sum_i t_i log(s_i) over the teacher''s soft probabilities, using a softmax temperature (following Hinton et al., 2015) applied to both student
+    and teacher during training and set to 1 at inference; the final objective is a linear combination of L_ce with the masked language modeling loss L_mlm, plus a cosine embedding loss L_cos aligning hidden-state
+    directions. The temperature value and the combination weights were not found in the text (searched for temperature, weight, alpha).'
+  location: Section 2
+  page: 2
+  quote: We found it beneﬁcial to add a cosine embedding loss (Lcos) which will tend to align the directions of the student and teacher hidden states vectors.
+- id: c2
+  statement: 'Student architecture: same general architecture as BERT with the token-type embeddings and pooler removed and the number of layers reduced by a factor of 2; the authors justify reducing depth
+    rather than hidden size by their investigations that changes in the hidden size have a smaller impact on computational efficiency (for a fixed parameter budget) than other factors like the number of
+    layers.'
+  location: Section 3
+  page: 2
+  quote: Thus we focus on reducing the number of layers.
+- id: c3
+  statement: 'Student initialization, described as an important element for the sub-network to converge: exploiting the common dimensionality, the student is initialized from the teacher by taking one layer
+    out of two.'
+  location: Section 3
+  page: 2
+  quote: we initialize the student from the teacher by taking one layer out of two.
+- id: c4
+  statement: 'Distillation setup: following RoBERTa best practices, very large batches (up to 4K examples with gradient accumulation), dynamic masking and no next-sentence-prediction objective; same corpus
+    as BERT (English Wikipedia and Toronto Book Corpus); trained on 8 16GB V100 GPUs for approximately 90 hours, compared with RoBERTa''s 1 day on 1024 32GB V100s.'
+  location: Section 3
+  page: 3
+  quote: DistilBERT was trained on 8 16GB V100 GPUs for approximately 90 hours.
+- id: c5
+  statement: 'GLUE evaluation: scores are reported on the development sets of the 9 GLUE tasks, fine-tuning without ensembling or multi-tasking, against the GLUE authors'' ELMo + two BiLSTMs baseline; BERT
+    and DistilBERT results are medians of 5 runs with different seeds (Table 1 caption). The authors state DistilBERT retains 97% of BERT''s performance with 40% fewer parameters.'
+  location: Section 4
+  page: 3
+  quote: DistilBERT also compares surprisingly well to BERT, retaining 97% of the performance with 40% fewer parameters.
+- id: c6
+  statement: 'Size and speed: measured as the time for a full pass over the STS-B development set on CPU (Intel Xeon E5-2690 v3) with batch size 1, DistilBERT has 40% fewer parameters and is 60% faster
+    than BERT; in an iPhone 7 Plus question-answering app it is 71% faster than BERT excluding tokenization, and the model weighs 207 MB.'
+  location: Section 4.1
+  page: 4
+  quote: DistilBERT has 40% fewer parameters than BERT and is 60% faster than BERT.
+- id: c7
+  statement: 'Ablation on GLUE macro-score: removing the masked language modeling loss has little impact while the two distillation losses account for a large portion of the performance; in Related work
+    the authors add that, as shown by the ablation, leveraging the teacher''s knowledge with initialization and additional losses leads to substantial gains.'
+  location: Section 4.2
+  page: 4
+  quote: 'Table 4 presents the deltas with the full triple loss: removing the Masked Language Modeling loss has little impact while the two distillation losses account for a large portion of the performance.'
+- id: c8
+  statement: 'Conflict of interest: the authors (Hugging Face) release the trained weights and training code in the Transformers library from Hugging Face (Wolf et al., 2019, on which all four authors are
+    co-authors).'
+  location: Section 1
+  page: 2
+  quote: We have made the trained weights available along with the training code in the Transformers2
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Hugging
+    Face (all authors). Venue from the PDF footer (''EMC^2: 5th Edition Co-located with NeurIPS''19'') and the arXiv comment (''Accepted at the 5th Workshop on Energy Efficient Machine Learning and Cognitive
+    Computing - NeurIPS 2019''). Version v4 (March 2020); the arXiv comment says this revision fixed a bug in evaluation metrics. Inconsistencies in the v4 PDF: Section 4.1 text says the two-step distillation
+    on SQuAD reached ''79.8 F1 and 70.4 EM, i.e. within 3 points of the full model'' while Table 2 lists DistilBERT (D) as 79.1/86.9 EM/F1 (the text appears not updated); Table 1 caption says ELMo results
+    are ''as reported by the authors'' while footnote 4 says jiant was used to compute the baseline; Table 3 caption calls STS-B ''sentiment analysis''. GLUE numbers are dev-set, not test-server. Other
+    body-text statements: IMDb 0.6 point behind BERT, SQuAD within 3.9 points (Section 4.1). Conflict of interest: the evaluated model and the library it is distributed in are the authors'' own; BERT baseline
+    numbers are medians over 5 seeds but no variance is reported. Section numbers are from numbered headings in the PDF.'

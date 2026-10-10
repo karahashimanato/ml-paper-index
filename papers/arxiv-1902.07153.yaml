@@ -1,0 +1,104 @@
+id: arxiv-1902.07153
+title: Simplifying Graph Convolutional Networks
+authors:
+- Felix Wu
+- Tianyi Zhang
+- Amauri Holanda de Souza
+- Christopher Fifty
+- Tao Yu
+- Kilian Q. Weinberger
+year: 2019
+venue: ICML 2019
+links:
+  arxiv: https://arxiv.org/abs/1902.07153
+  code: https://github.com/Tiiiger/SGC
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 1151ecd729ecbc9fe51e09d0a5ece2ae2f326bb03cd64f6a2158ec43c083af2e
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  - linear-models
+  paradigms:
+  - semi-supervised
+proposes:
+- 'Simple Graph Convolution (SGC): remove the nonlinearities between GCN layers and collapse the weight matrices, giving Y = softmax(S^K X Theta) with S = D~^-1/2 A~ D~^-1/2 (A~ = A + I)'
+- Interpretation of SGC as a fixed, parameter-free feature smoothing S^K X (a precomputable pre-processing step) followed by multi-class logistic regression, and as a low-pass-type filter on a spectrum
+  shrunk by self-loops
+claims:
+- id: c1
+  statement: 'Linearization: the authors hypothesize that the nonlinearity between GCN layers is not critical and that most of the benefit comes from local averaging; they remove the nonlinear transitions,
+    keep only the final softmax, and collapse the repeated multiplications into S^K and the weights into one matrix, giving Y_SGC = softmax(S^K X Theta), which keeps the receptive field of a K-layer GCN.'
+  location: Section 2.2
+  page: 3
+  quote: We hypothesize that the nonlinearity between GCN layers is not critical - but that the majority of the beneﬁt arises from the local averaging.
+- id: c2
+  statement: SGC splits into a fixed, parameter-free feature extraction/smoothing step X_bar = S^K X followed by a linear logistic regression classifier; since X_bar needs no weights it is essentially a
+    feature pre-processing step, and training reduces to multi-class logistic regression on the pre-processed features.
+  location: Section 2.2
+  page: 3
+  quote: SGC consists of a ﬁxed (i.e., parameter-free) feature extraction/smoothing component
+- id: c3
+  statement: 'Spectral view: the first-order Chebyshev propagation matrix S_1-order = I + D^-1/2 A D^-1/2 = 2I - Delta_sym implies filter coefficients (2 - lambda_i)^K, which explode for high powers and
+    over-amplify signals at frequencies below 1; with the renormalization trick (augmented normalized adjacency) the filter becomes (1 - lambda~_i)^K. Theorem 1 (for an undirected, weighted, simple graph
+    without isolated nodes and A~ = A + gamma I with gamma > 0) states 0 = lambda_1 = lambda~_1 < lambda~_n < lambda_n, i.e. adding self-loops shrinks the largest eigenvalue of the normalized Laplacian.'
+  location: Section 3.2
+  page: 4
+  quote: Theorem 1 shows that the largest eigenvalue of the normalized graph Laplacian becomes smaller after adding self-loops γ > 0 (see supplementary materials for the proof).
+- id: c4
+  statement: 'Low-pass interpretation: with the normalized adjacency (no self-loops) the filters (1 - lambda_i)^K act on [0, 2], so odd powers give negative coefficients at frequencies above 1; on Cora,
+    adding self-loops shrinks the largest eigenvalue from 2 to approximately 1.5, eliminating the effect of negative coefficients and letting powers K > 1 act as low-pass-type filters.'
+  location: Section 3.2
+  page: 5
+  quote: the largest eigenvalue shrinks from 2 to approximately 1.5 and then eliminates the effect of negative coefﬁcients
+- id: c5
+  statement: 'Protocol: on the citation networks SGC is trained transductively for 100 epochs with Adam (learning rate 0.2), with weight decay tuned per dataset by hyperopt for 60 iterations on the public-split
+    validation set; on Reddit it is trained inductively (training-node subgraph, tested on the full graph, following Chen et al., 2018) with L-BFGS and no regularization; the number of epochs is tuned on
+    convergence behavior and validation accuracy. Baselines use public implementations; GIN was implemented by the authors with 60 hyperopt iterations and hand-tuned hidden size.'
+  location: Section 5.1
+  page: 6
+  quote: In addition, we use weight decay and tune this hyperparameter on each dataset using hyperopt (Bergstra et al., 2015) for 60 iterations on the public split validation set.
+- id: c6
+  statement: On Citeseer SGC is about 1% better than GCN, which the authors reason is because SGC has fewer parameters and overfits less; they also state that GIN performs slightly worse because of overfitting
+    and that LNet and AdaLNet are unstable on citation networks (their Table 2 statistics remove outlier runs).
+  location: Section 5.1
+  page: 7
+  quote: In particular on Citeseer, SGC is about 1% better than GCN, and we reason this performance boost is caused by SGC having fewer parameters and therefore suffering less from overﬁtting.
+- id: c7
+  statement: 'Limitation in graph classification: replacing the GCN in DCGCN with SGC gave 71.0% (NCI1) and 76.2% (COLLAB), on par with a GCN counterpart but far behind GIN; on QM8, AdaLNet and LNet (0.01
+    MAE) outperform SGC (0.03 MAE) by a large margin.'
+  location: Section 5.2
+  page: 8
+  quote: We replace the GCN in DCGCN (Zhang et al., 2018b) with an SGC and get 71.0% and 76.2% on NCI1 and COLLAB datasets (Yanardag & Vishwanathan, 2015) respectively, which is on par with an GCN counterpart,
+    but far behind GIN.
+- id: c8
+  statement: 'Propagation-matrix ablation (validation accuracy, K in 2..10): augmented propagation matrices (with self-loops) attain higher accuracy and more stable performance across propagation depths;
+    S_1-order tends to deteriorate as K increases, and odd K causes a significant drop for the un-augmented normalized and random-walk adjacency, which the authors attribute to negative filter coefficients
+    on high frequencies.'
+  location: Appendix C
+  page: 14
+  quote: We see that augmented propagation matrices (i.e. those with self-loops) attain higher accuracy and more stable performance across various propagation depths.
+- id: c9
+  statement: 'Conclusion (hedged): the authors consider it likely that the expressive power of GCNs originates primarily from repeated graph propagation (which SGC preserves) rather than from nonlinear
+    feature extraction, and argue SGC should serve as a first model to try, a simple baseline, and a starting point for future research.'
+  location: Section 6
+  page: 8
+  quote: It is likely that the expressive power of GCNs originates primarily from the repeated graph propagation (which SGC preserves) rather than the nonlinear feature extraction (which it doesn’t.)
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Cornell University; Federal Institute of Ceara (Brazil) for de Souza.
+    The author name is taken from the arXiv record (''Amauri Holanda de Souza''); the PDF prints ''Amauri Holanda de Souza Jr.''. Venue from the PDF page-1 footer (''Proceedings of the 36th International
+    Conference on Machine Learning, Long Beach, California, PMLR 97, 2019'') and the arXiv comment. Section numbers are from numbered headings. Citation-network results are averaged over 10 runs; Reddit
+    numbers for other models are cited from their original papers (Table 3 caption), and FastGCN''s early stopping window was reduced to 10 for the timing benchmark (Appendix B). Appendix C adds 10 random
+    splits of the training set with fixed validation/test sets, noting the citation networks are ''known to be unstable'' possibly due to their limited size. The K used for the citation benchmarks was not
+    found in the main text (searched ''K =''); K = 2 is stated for text classification and relation extraction, K = 3 for geolocation, K = 6 for zero-shot. The paper does not use the term oversmoothing
+    (searched ''smooth''); it describes the propagation as producing locally smooth features. Downstream-task results (text classification, geolocation, relation extraction, zero-shot) and the timing figure
+    are not recorded. No conflict of interest noted.'

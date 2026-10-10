@@ -1,0 +1,108 @@
+id: arxiv-2006.11468
+title: 'Beyond Homophily in Graph Neural Networks: Current Limitations and Effective Designs'
+authors:
+- Jiong Zhu
+- Yujun Yan
+- Lingxiao Zhao
+- Mark Heimann
+- Leman Akoglu
+- Danai Koutra
+year: 2020
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/2006.11468
+  code: https://github.com/GemsLab/H2GCN
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: fe708a4529447a900ff2a40b15904268ab36587e2ef4ebaa1572ee7eb0171af3
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - semi-supervised
+proposes:
+- 'Edge homophily ratio h: the fraction of edges connecting nodes with the same class label, used to characterize homophily (h -> 1) versus heterophily (h -> 0)'
+- 'Three designs for heterophily: (D1) ego- and neighbor-embedding separation, (D2) higher-order neighborhoods, (D3) combination of intermediate representations'
+- 'H2GCN: graph-agnostic feature embedding, K rounds of aggregation over 1-hop and 2-hop neighborhoods excluding the ego (concatenated, degree-normalized, without per-round nonlinearity), and concatenation
+  of all rounds for classification'
+claims:
+- id: c1
+  statement: 'Definition 1: the edge homophily ratio h is the fraction of edges connecting nodes with the same class label (intra-class edges); graphs with strong homophily have h -> 1 and strong heterophily
+    h -> 0. The authors stress that heterophily is distinct from heterogeneity (multiple node/edge types), and that homophily may vary across class pairs (captured by a class compatibility matrix in App.
+    B).'
+  location: Section 2
+  page: 2
+  quote: is the fraction of edges in a graph which connect nodes that have the same class label (i.e., intra-class edges).
+- id: c2
+  statement: 'Motivating failure: on the synthetic syn-cora benchmark with h = 0.1, all existing GNNs tested fail to beat an MLP with 1 hidden layer that ignores the graph, and GCN and GAT are up to 42%
+    worse than MLP, suggesting that methods that work well under high homophily may not be appropriate under low/medium homophily.'
+  location: Section 3
+  page: 3
+  quote: Especially, GCN [17] and GAT [36] show up to 42% worse performance than MLP, highlighting that methods that work well under high homophily (h = 0.7) may not be appropriate for networks with low/medium
+    homophily.
+- id: c3
+  statement: 'D1 and Theorem 1: under specific conditions (no self-loops, one-hot label features, equal class counts in training, all training nodes of degree d with a proportion h of same-class neighbors
+    and the rest uniform over other classes, and h below a threshold depending on |Y| and d), a GCN layer (A + I)XW that co-embeds ego and neighbor features misclassifies under smaller train/test deviations
+    than an AXW layer that separates them; the authors note the theorem applies to specific conditions and support more general cases empirically.'
+  location: Section 3.1
+  page: 4
+  quote: We prove theoretically that, under some conditions, a GCN layer that co-embeds ego- and neighbor-features is less capable of generalizing to heterophily than a layer that embeds them separately.
+- id: c4
+  statement: 'D2 and Theorem 2: under heterophily the immediate neighborhood may be heterophily-dominant while higher-order neighborhoods may be homophily-dominant; assuming neighbors'' labels are conditionally
+    independent given y_v with P(y_u = y_v) = h and the rest uniform, the 2-hop neighborhood is always homophily-dominant in expectation.'
+  location: Section 3.1
+  page: 4
+  quote: In the case of heterophily, we have seen empirically that although the immediate neighborhoods may be heterophily-dominant, the higher-order neighborhoods may be homophily-dominant and thus provide
+    more relevant context.
+- id: c5
+  statement: 'D3 and Theorem 3: assuming GCN-style propagation acts as a low-pass filter (citing [37], the SGC paper), earlier rounds keep more high-frequency components; for label signals with edge homophily
+    h_s < h_t, s has more energy in the high-frequency components of the unnormalized Laplacian spectrum, so combining intermediate representations (as in jumping knowledge networks) captures both low-
+    and high-frequency information.'
+  location: Section 3.1
+  page: 5
+  quote: In other words, in heterophily settings, the label distribution contains more information at higher than lower frequencies (see proof in App. C.3).
+- id: c6
+  statement: 'H2GCN: (S1) a graph-agnostic dense embedding r_v^(0) = sigma(x_v W_e); (S2) K rounds where r_v^(k) concatenates aggregations over the 1-hop and 2-hop neighborhoods excluding v, each a degree-normalized
+    sum with weights d_{v,i}^(-1/2) d_{u,i}^(-1/2), without per-round nonlinear transformations as in SGC (found to work better); (S3) softmax classification of the concatenation of r^(0)..r^(K). Aggregation
+    costs O(2^K (|E| + |E2|) p) plus O(|E| d_max) to derive 2-hop neighborhoods.'
+  location: Section 3.2
+  page: 6
+  quote: We found that removing the usual nonlinear transformations per round, as in SGC [37], works better (App. D.2), in which case we only need to include the ego-embedding in the ﬁnal representation.
+- id: c7
+  statement: 'Evaluation protocol and a split discrepancy: synthetic graphs (syn-cora, syn-products, 3 graphs per h) use 25%/25%/50% per-class splits; real benchmarks (except Cora-Full) use the features,
+    labels and 10 random splits provided by Geom-GCN [26], which the authors report as 48%/32%/20%, noting that [26] claims 60%/20%/20%, different from the splits shared on GitHub; Cora-Full uses 3 random
+    25%/25%/50% splits. All models are tuned on the same train/validation splits (App. F).'
+  location: Section 5.2
+  page: 8
+  quote: claims that the ratios are 60%/20%/20%, which is different from the actual data splits shared on GitHub.
+- id: c8
+  statement: On real benchmarks, MLP is a competitive baseline under heterophily (average rank 6.2), which the authors read as many existing models not using graph information effectively or the graph being
+    misleading; all models perform poorly on Squirrel and Actor 'likely due to' low-quality node features, and Squirrel and Chameleon are dense with many nodes sharing the same neighbors. GEOM-GCN ranks
+    are taken from its paper rather than re-run.
+  location: Section 5.2
+  page: 9
+  quote: We note that MLP is a competitive baseline under heterophily (ranked 6.2), indicating that many existing models do not use the graph information effectively, or the latter is misleading in such
+    cases.
+- id: c9
+  statement: 'Data limitations: Cora, Pubmed and Citeseer all have h >= 0.7, which the authors say masked the limitations of the homophily assumption, and the OGB datasets they examined have h > 0.5; the
+    heterophily benchmarks used also have limitations - small sizes (WebKB), artificial classes (Squirrel and Chameleon labels from page-traffic ranking) and unusual dense structure.'
+  location: Appendix H
+  page: 30
+  quote: As a result, the wide adaptation of these benchmarks have masked the limitations of the homophily assumption in many existing GNN models.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Michigan, Carnegie Mellon University. Venue from the
+    PDF page-1 footer (''34th Conference on Neural Information Processing Systems (NeurIPS 2020), Vancouver, Canada'') and the arXiv comment (''Accepted to NeurIPS 2020; version with full appendix''). Section
+    numbers confirmed by cross-references in the PDF (§ 2, § 3, § 3.1, § 3.2, § 5.1, § 5.2, App. H). Conflict of interest: the authors propose and evaluate their own model H2GCN against baselines; the paper
+    states that all methods including H2GCN were tuned per benchmark ''To avoid bias'' (App. F.2). Numbers in the body such as ablation gains (up to 40% on synthetic graphs, up to 27% on real heterophily
+    graphs, low- vs high-degree gap 13%/10% vs <3%) are not recorded as results; tables (Table 1, Table 4 ranks, Table 5 accuracies) and Figures 2-3 are not recorded. Datasets: Texas, Wisconsin, Cornell
+    (WebKB), Squirrel, Chameleon, Actor, Cora Full, Citeseer, Pubmed, Cora; heterophily benchmarks defined as h <= 0.3, homophily as h >= 0.7.'

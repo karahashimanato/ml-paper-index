@@ -1,0 +1,95 @@
+id: arxiv-1811.05868
+title: Pitfalls of Graph Neural Network Evaluation
+authors:
+- Oleksandr Shchur
+- Maximilian Mumme
+- Aleksandar Bojchevski
+- Stephan Günnemann
+year: 2018
+venue: Relational Representation Learning Workshop (R2L 2018), NeurIPS 2018
+links:
+  arxiv: https://arxiv.org/abs/1811.05868
+  code: https://www.kdd.in.tum.de/gnn-benchmark
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 8d00386dbfd8ccb4cedd80bb3aefb7bab9d98e018af3c8c3914aabb7d62a0b17
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  - linear-models
+  paradigms:
+  - semi-supervised
+proposes:
+- 'A standardized evaluation of GCN, MoNet, GAT and GraphSAGE variants for transductive semi-supervised node classification: same training procedure, same hyperparameter-selection strategy, 100 random train/validation/test
+  splits with 20 random initializations each'
+- 'Four new node-classification datasets: Coauthor CS, Coauthor Physics, Amazon Computers and Amazon Photo'
+claims:
+- id: c1
+  statement: 'Critique of common practice: many proposed models were tested only on the same train/validation/test splits of CORA, CiteSeer and PubMed from Yang et al. (2016), which the authors say favors
+    the model that overfits the most; second, new models are often trained with a procedure different from the baselines'', making it hard to tell whether gains come from the architecture or from better-tuned
+    training/hyperparameters (citing Lipton and Steinhardt, 2018).'
+  location: Section 1
+  page: 1
+  quote: Such experimental setup favors the model that overﬁts the most and defeats the main purpose of using a train/validation/test split — ﬁnding the model with the best generalization properties [Friedman
+    et al., 2001].
+- id: c2
+  statement: 'Training procedure: model architectures are kept as in the original papers (2 layers; 8 attention heads for GAT, 2 Gaussian kernels for MoNet), but all models use the same optimizer (Adam
+    with default parameters), Glorot initialization with zero biases, no learning-rate decay, the same maximum epochs, early-stopping criterion, patience and validation frequency, and full-batch training.
+    Appendix A documents that the original procedures differed (e.g. GraphSAGE used mini-batches of 512 and no early stopping).'
+  location: Section 3
+  page: 2
+  quote: For a more balanced comparison, however, we use the same training procedure for all the models.
+- id: c3
+  statement: 'Split protocol: for every dataset, 20 labeled nodes per class for training, 30 per class for validation and the rest for test, with 100 random splits and 20 random weight initializations per
+    split; graphs are treated as undirected and restricted to the largest connected component.'
+  location: Section 3
+  page: 3
+  quote: In all cases, we use 20 labeled nodes per class as the training set, 30 nodes per class as the validation set, and the rest as the test set.
+- id: c4
+  statement: 'Hyperparameter selection: the same grid search (learning rate, hidden size, L2 strength, dropout) for every model, restricted so that every model has at most the same number of trainable parameters;
+    the configuration with the best average accuracy on Cora and CiteSeer (over 100 splits x 20 initializations) is then used for all datasets, so the other six datasets are not tuned individually.'
+  location: Section 3
+  page: 3
+  quote: For every model, we picked the hyperparameter conﬁguration that achieved the best average accuracy on Cora and CiteSeer datasets (averaged over 100 train/validation/test splits and 20 random initializations
+    for each).
+- id: c5
+  statement: 'Baselines and overall result: the GNNs (GCN, MoNet, GAT, GraphSAGE) significantly outperform all baselines - attribute-only MLP and logistic regression, and structure-only label propagation
+    (plain and normalized-Laplacian) - on all 8 datasets, but among the GNNs there is no clear winner across datasets; for 5 of 8 datasets the 2nd and 3rd best are within 1% of the best average.'
+  location: Section 3
+  page: 3
+  quote: Among the GNN approaches, there is no clear winner that dominates across all the datasets.
+- id: c6
+  statement: Averaged over datasets and splits (relative accuracy and average rank), GCN achieves the best performance; the authors relate this to findings in other fields that simpler models often outperform
+    more sophisticated ones if hyperparameter tuning is performed equally carefully (citing Melis et al., 2018 and Lucic et al., 2017).
+  location: Section 3
+  page: 4
+  quote: We observe that GCN is able to achieve the best performance across all models.
+- id: c7
+  statement: 'Effect of the split: on the Planetoid split of Yang et al. (2016), GAT scores best on CORA and CiteSeer and GCN on PubMed, but on a different random split with the same set sizes GCN is first
+    on CORA and CiteSeer and MoNet wins on PubMed; the authors conclude that results from a single split are fragile and misleading and that multiple-split evaluation is needed.'
+  location: Section 3
+  page: 4
+  quote: This shows how fragile and misleading results obtained on a single split can be.
+- id: c8
+  statement: 'GAT''s lower average and high variance on Amazon Computers and Amazon Photo comes from rare outliers: median scores of all GNNs are very close, but GAT produces extremely low scores (below
+    40%) for some weight initializations, in 138 of 2000 runs on Amazon Photo.'
+  location: Section 3
+  page: 4
+  quote: While these outliers occur rarely (for 138 out of 2000 runs), they signiﬁcantly lower the average score of GAT.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Technical University of Munich. Venue from the PDF page-1 footer (''Relational
+    Representation Learning Workshop (R2L 2018), NeurIPS 2018, Montréal, Canada''); the arXiv record has no comment or journal_ref. Section numbers are from numbered headings (1 Introduction, 2 Models,
+    3 Evaluation, 4 Conclusion). The text says ''extensive grid search'' and then ''We restricted the random search space''; the Appendix C grid lists hidden size [8,16,32,64], 5 learning rates, 7 dropout
+    values and 7 L2 strengths, a unified early-stopping rule (stop when total validation loss does not improve for 50 epochs, restore the best weights) and at most 100k epochs. A footnote warns that standard
+    deviations are not the best representation of variance because scores are not normally distributed. Table 1/2 values are not recorded. Possible conflict of interest: CORA-Full comes from Bojchevski
+    and Günnemann (2018), co-authors of this paper; no model by the authors is among the compared GNNs.'

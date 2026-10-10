@@ -1,0 +1,108 @@
+id: arxiv-2003.03033
+title: What is the State of Neural Network Pruning?
+authors:
+- Davis Blalock
+- Jose Javier Gonzalez Ortiz
+- Jonathan Frankle
+- John Guttag
+year: 2020
+venue: MLSys 2020
+links:
+  arxiv: https://arxiv.org/abs/2003.03033
+  code: https://github.com/jjgo/shrinkbench
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: ebd44b6c55c225b1b98c52427de6a3076e7b9cc6b76bcd957f11ff806a66188d
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  method_families:
+  - pruning
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- A meta-analysis of 81 pruning papers documenting missing comparisons, dataset/architecture and metric fragmentation, and confounding variables
+- A list of best practices for reporting pruning results (compression ratio and theoretical speedup, tradeoff curves with at least 5 operating points, means and standard deviations, identical code for compared
+  methods)
+- 'ShrinkBench: an open-source PyTorch library for standardized pruning evaluation, with global/layerwise magnitude, gradient-magnitude and random pruning baselines'
+claims:
+- id: c1
+  statement: After aggregating results across 81 papers and pruning hundreds of models in controlled conditions, the authors' clearest finding is that the community lacks standardized benchmarks and metrics,
+    to the extent that it is hard to compare pruning techniques or determine how much progress the field has made over three decades.
+  location: Abstract
+  page: 1
+  quote: our clearest ﬁnding is that the community suffers from a lack of standardized benchmarks and metrics.
+- id: c2
+  statement: 'Missing comparisons in the corpus: a quarter of papers compare to no other pruning method, half compare to at most one other method, and dozens of methods have never been compared to by any
+    subsequent work.'
+  location: Section 1
+  page: 1
+  quote: For example, a quarter of papers compare to no other pruning method, half of papers compare to at most one other method, and dozens of methods have never been compared to by any subsequent work.
+- id: c3
+  statement: 'Dataset/architecture fragmentation: among the 81 papers there are results on 49 datasets, 132 architectures and 195 (dataset, architecture) combinations; even the most common combination (VGG-16
+    on ImageNet) is used in only 22 of 81 papers, and three of the top six most common combinations involve MNIST, whose results the authors say may be particularly unlikely to generalize.'
+  location: Section 4.2
+  page: 4
+  quote: Among 81 papers, we found results using 49 datasets, 132 architectures, and 195 (dataset, architecture) combinations.
+- id: c4
+  statement: 'Among findings the authors call consistent in the literature: when holding the number of fine-tuning iterations constant, many methods produce pruned models that outperform retraining from
+    scratch with the same sparsity pattern (citing Zhang et al. 2015, Yu et al. 2018, Louizos et al. 2017, He et al. 2017, Luo et al. 2017, Frankle & Carbin 2019), at least with a large enough amount of
+    pruning (citing Suau et al. 2018). The same paragraph lists that many methods outperform random pruning at least for large amounts of pruning, and that uniform layer-wise pruning tends to be worse than
+    allocating parameters across layers or pruning globally.'
+  location: Section 3.2
+  page: 3
+  quote: Lastly, when holding the number of ﬁne-tuning iterations constant, many methods produce pruned models that outperform retraining from scratch with the same sparsity pattern
+- id: c5
+  statement: From reported ImageNet accuracies and compression/speedup levels plotted against unpruned architecture families, the authors conclude that pruning can improve the time or space vs accuracy
+    tradeoff of a given architecture, but that it suggests pruning generally does not help as much as switching to a better architecture, and that pruning is more effective for architectures that are less
+    efficient to begin with.
+  location: Section 3.3
+  page: 4
+  quote: Second, it suggests that pruning generally does not help as much as switching to a better architecture.
+- id: c6
+  statement: 'Metrics ambiguity: ''Pruned%'' sometimes means the fraction remaining and sometimes the fraction removed; ''compression ratio'' and ''speedup'' are defined inconsistently; FLOPs are measured
+    differently and the formula is most often omitted. The authors found up to a factor of four variation in reported FLOPs for the same architecture and dataset (AlexNet on ImageNet reported as 371, 724
+    and 1500 MFLOPs by Yang et al. 2017, Choi et al. 2019 and Han et al. 2015).'
+  location: Section 5.2
+  page: 8
+  quote: We found up to a factor of four variation in the reported FLOPs of different papers for the same architecture and dataset
+- id: c7
+  statement: 'Recommended practices: report the exact architectures, datasets and metrics; use at least three (dataset, architecture) pairs including modern large-scale ones (MNIST and toy models do not
+    count); report both compression ratio (original size / new size) and theoretical speedup (original multiply-adds / new multiply-adds); report Top-1 and Top-5 on ImageNet; report the same metrics for
+    an appropriate control; plot tradeoff curves with at least 5 operating points (e.g. ratios {2, 4, 8, 16, 32}); report means and sample standard deviations; use identical libraries, data loading and
+    code for all compared methods. They also recommend that reviewers demand more rigor.'
+  location: Section 6
+  page: 8
+  quote: Compression ratio is deﬁned as the original size divided by the new size.
+- id: c8
+  statement: 'ShrinkBench baselines: Global Magnitude, Layerwise Magnitude, Global Gradient Magnitude and Layerwise Gradient Magnitude pruning (lowest |weight x gradient| on a batch of inputs), and Random
+    Pruning; the authors note these baselines are not reproductions of the cited methods, only inspired by their heuristics. Using them on over 800 pruned networks, they report that parameter-count and
+    FLOP reductions are correlated differently for each method, so reporting one metric is not sufficient, and that relative method rankings change across models, datasets and compression ratios.'
+  location: Section 7.2
+  page: 9
+  quote: Note that these baselines are not reproductions of any of these methods, but merely inspired by their pruning heuristics.
+- id: c9
+  statement: 'Initial model as confounder: with two ResNet-56 models trained with Adam at learning rates 1e-3 and 1e-4, Global vs Layerwise Magnitude pruning appear better on different models, and reporting
+    change in accuracy does not correct for this: one method can artificially appear better than another by starting from a different model.'
+  location: Section 7.3
+  page: 10
+  quote: Even when reporting changes, one pruning method can artiﬁcially appear better than another by virtue of beginning with a different model.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliation: MIT
+    CSAIL (all authors). Venue: PDF page 1 footer ''Proceedings of the 3rd MLSys Conference, Austin, TX, USA, 2020'' and arXiv comment ''Published in Proceedings of Machine Learning and Systems 2020 (MLSys
+    2020)''. Section numbers are from numbered headings and cross-references (Section 4.5, Section 7). Corpus: 79 pruning papers since 2010 plus LeCun et al. 1990 and Hassibi et al. 1993. Conflict of interest:
+    co-author Jonathan Frankle is first author of arxiv-1803.03635 (Frankle & Carbin, 2019) and Frankle et al. 2019, which are cited among the ''consistent findings'' (global pruning, pruned models vs retraining
+    from scratch, magnitude baselines being competitive) and appear as data points (e.g. ''Frankle 2019, ResetToEpoch'') in the meta-analysis figures; ShrinkBench is the authors'' own library and is evaluated
+    here by them; Blalock et al. 2018 is cited in the compression-ratio discussion. The paper also notes that Liu et al. (2019) and Frankle & Carbin (2019) have circular references to each other that cannot
+    be resolved because of simultaneous revisions (Section 5.1), and names Gale et al. (2019) and Liu et al. (2019) as arguably the only papers that control for confounders by using the same code and averaging
+    enough runs (Section 4.5). A seed effect is quoted in body text: for Global Gradient at compression 16, different seeds gave 0.88 vs 0.61 accuracy (Section 7.3). ShrinkBench accuracy curves are figure-only
+    and not recorded.'

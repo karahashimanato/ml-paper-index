@@ -1,0 +1,97 @@
+id: arxiv-1912.09893
+title: A Fair Comparison of Graph Neural Networks for Graph Classification
+authors:
+- Federico Errica
+- Marco Podda
+- Davide Bacciu
+- Alessio Micheli
+year: 2019
+venue: ICLR 2020
+links:
+  arxiv: https://arxiv.org/abs/1912.09893
+  code: https://github.com/diningphil/gnn-comparison
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 3ec0637152b40396814e24dad040cab2b731f50272ae1cfa21cfd8e3a303daff
+tags:
+  tasks:
+  - graph-level-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'A standardized evaluation protocol for graph classification: 10-fold stratified CV for model assessment with an inner 90%/10% holdout for model selection, three final training runs per fold, pre-computed
+  shared splits and identical node features'
+- Structure-agnostic baselines (a Molecular Fingerprint sum-pooling + MLP for chemical data, and a DeepSets-style MLP-sum-MLP for social data and ENZYMES) to test whether GNNs exploit graph structure
+claims:
+- id: c1
+  statement: 'Risk assessment (model assessment): k-fold CV uses k training/test splits, and for each split an internal model selection picks hyperparameters using the training data only, so test data is
+    never used for model selection; because each split may select a different configuration, the estimate refers to the performance of a class of models.'
+  location: Section 3
+  page: 3
+  quote: This way, test data is never used for model selection.
+- id: c2
+  statement: Model selection (hyperparameter tuning on a validation set or inner split) gives biased, generally over-optimistic estimates of generalization (citing Cawley & Talbot, 2010); the authors state
+    that clearly separating model selection and model assessment estimates is their main contribution and is lacking or ambiguous in the reviewed literature.
+  location: Section 3.2
+  page: 3
+  quote: Consequently, model selection results are generally over-optimistic; this issue is thoroughly documented in Cawley & Talbot (2010).
+- id: c3
+  statement: 'Review of DGCNN, DiffPool, ECC and GIN (based solely on the papers and available code at submission time): model-selection code is not provided for any of them; GIN, as stated in its paper
+    and review discussion, reports validation accuracy of 10-fold CV; for DiffPool it is unclear whether results are on a test set, and its splits are random without a seed; ECC reports no standard deviations;
+    DGCNN tunes learning rate and epochs on one fold only.'
+  location: Section 4
+  page: 4
+  quote: In other words, reported results refer to model selection and not to model evaluation.
+- id: c4
+  statement: 'Experimental setting: 10-fold CV for assessment, an inner 90%/10% holdout for selection, then three training runs on the whole training fold (each holding out a random 10% for early stopping)
+    averaged to smooth unfavorable initializations; all splits are pre-computed and stratified. Grid search over 32 to 72 configurations per model (always including those used by the original authors),
+    more than 47000 training runs in total, with a 72-hour limit per training.'
+  location: Experiments
+  page: 6
+  quote: Our experimental approach is to use a 10-fold CV for model assessment and an inner holdout technique with a 90%/10% training/validation split for model selection.
+- id: c5
+  statement: 'Features: all models get the same node features - one-hot atom types for chemical datasets (plus 18 available features on ENZYMES) and, for social datasets without features, either an uninformative
+    constant feature or the node degree. The authors note that GIN''s one-hot degree features trade improved performance for inability to generalize to graphs with arbitrary node degree.'
+  location: Experiments
+  page: 5
+  quote: In general, good experimental practices suggest that all models should be consistently compared to the same input representations.
+- id: c6
+  statement: 'Baselines that ignore topology: if a GNN performs close to a structure-agnostic baseline, either the task does not need topology or the GNN is not exploiting structure adequately; the latter
+    is harder to assess (training data size, inductive bias, hyperparameters), while significant improvements over the baseline are a strong indicator that topology has been exploited.'
+  location: Experiments
+  page: 5
+  quote: 'As a matter of fact, if GNN performances are close to the ones of a structure-agnostic baseline, one can draw two possible conclusions: the task does not need topological information to be effectively
+    solved, or the GNN is not exploiting graph structure adequately.'
+- id: c7
+  statement: 'Results: on D&D, PROTEINS and ENZYMES none of the five GNNs improves over the structure-agnostic baseline, while on NCI1 the baseline is clearly outperformed; an over-parameterized baseline
+    (10000 hidden units, no regularization) reaches around 67% training accuracy on NCI1 whereas GIN can easily overfit (≈100%). The authors suggest that small gains on these datasets are likely caused
+    by other factors such as random initialization rather than exploiting structure.'
+  location: Results and Discussion
+  page: 7
+  quote: Importantly, we discover that on D&D, PROTEINS and ENZYMES none of the GNNs are able to improve over the baseline.
+- id: c8
+  statement: 'Node degree on social datasets: adding degrees as features is almost always beneficial, enough for the baseline to improve by ≈15% and achieve the best result on IMDB-BINARY, and it drastically
+    changes the model ranking; it matters less for most GNNs except DGCNN; across folds the median number of layers drops by ≈1 (GraphSAGE excepted), which the authors say ''may be due to'' architectures
+    computing the degree in the first layer.'
+  location: Results and Discussion
+  page: 7
+  quote: Based on our results, using node degrees as input features is almost always beneﬁcial to increase performances on social datasets, sometimes by a large amount.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Affiliation: University of Pisa. Venue from the PDF header (''Published as a conference
+    paper at ICLR 2020'') and the arXiv comment (''Extended version of the paper published at ICLR 2020. Additional results are shown in the appendix''); the v3 PDF is dated 17 Feb 2022; year is the first
+    arXiv version (2019). Section numbers 3, 3.2 and 4 are confirmed by cross-references (''described in Section 3'', ''discussed in Section 3.2'', ''we saw in Section 4''); the Experiments and Results
+    sections are named only. Also stated: test accuracies ''are in most cases different from what reported in the literature'' and average validation accuracies are always higher than or equal to test results,
+    ''as expected'' (Comparison with published results; from Figure 1, values not recorded). Tables 3-4 and the appendix results are not recorded. GraphSAGE was adapted to graph classification with max-pooling
+    readout and no neighbor sampling. Datasets: D&D, PROTEINS, NCI1, ENZYMES (chemical), IMDB-BINARY, IMDB-MULTI, REDDIT-BINARY, REDDIT-5K, COLLAB (social). No conflict of interest found: the compared models
+    are not by the authors (the authors'' own earlier work, e.g. Bacciu, Errica and Micheli 2018 CGMM, is cited but not evaluated). This framework is later re-used by arxiv-2006.05205 for its NCI1/ENZYMES
+    experiments.'

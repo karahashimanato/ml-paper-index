@@ -1,0 +1,101 @@
+id: arxiv-1905.10947
+title: Graph Neural Networks Exponentially Lose Expressive Power for Node Classification
+authors:
+- Kenta Oono
+- Taiji Suzuki
+year: 2019
+venue: ICLR 2020
+links:
+  arxiv: https://arxiv.org/abs/1905.10947
+  code: https://github.com/delta2323/gnn-asymptotics
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 2448b3525b81d87a65c6c28c775241358ebedb0c6ad555f1ef0a443b3885faf7
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+proposes:
+- Analysis of deep GCNs as a dynamical system X^(l+1) = MLP_l(P X^(l)) with ReLU, showing exponential approach to an invariant subspace M that carries only connected-component and degree information when
+  s*lambda < 1
+- 'A weight-scaling guideline: keep the maximum singular value s of the weights away from the region s < lambda^-1 determined by the spectrum of the augmented normalized Laplacian'
+claims:
+- id: c1
+  statement: 'Setting: GCN layers are formulated as f_l(X) = sigma(P X W_l) with ReLU sigma and P = I - Delta~, where Delta~ is the augmented normalized Laplacian (citing Wu et al., 2019a) built from A~
+    = A + I and D~ = D + I; following Kipf & Welling one-layer MLPs are used, but the authors state the result holds for the multi-layer case. The GCN is considered without readout operations and the interest
+    is the output as the number of layers L -> infinity.'
+  location: Section 4
+  page: 5
+  quote: GCNs iteratively update signals on V using the connection information and weights.
+- id: c2
+  statement: 'Theorem 1 and its assumptions: for a symmetric P and an M-dimensional subspace U with (Assumption 1) an orthonormal basis of non-negative vectors and (Assumption 2) invariance under P, d_M(f_l(X))
+    <= s_l lambda d_M(X), where s_l is the product of maximum singular values of the layer''s weights and lambda is the operator norm of P restricted to the orthogonal complement of U; the proof hinges
+    on ReLU not increasing the distance to M, using the non-negativity of the basis vectors.'
+  location: Section 3.3
+  page: 4
+  quote: We use the non-negativity of em to prove this claim.
+- id: c3
+  statement: 'Theorem 2 (GCN case): d_M(X^(l)) <= (s lambda)^l d_M(X^(0)), so it converges exponentially to 0 when s lambda < 1; within M, nodes in the same connected component with identical degrees have
+    identical representations, so the authors interpret this as exponential information loss with depth; even with s >= 1 the loss can occur when s < lambda^-1, and the rate depends on the spectrum of the
+    augmented normalized Laplacian.'
+  location: Section 4
+  page: 5
+  quote: In this sense, M only has information about connected components and node degrees and we can interpret this theorem as the exponential information loss of GCNs in terms of the layer size.
+- id: c4
+  statement: 'The non-negativity assumption matters: in a 2-node synthetic one-step-transition experiment, choosing an eigenvector whose entries have different signs (violating Assumption 1) makes M not
+    invariant and the transition does not uniformly decrease the distance to M.'
+  location: Section 6.1
+  page: 7
+  quote: Therefore, we cannot remove the non-negativity assumption from Theorem 1.
+- id: c5
+  statement: 'Theorem 3 (Erdős-Rényi graphs G_{N,p} with log N/(Np) = o(1)): for any eps > 0, if the supremum s of maximum singular values is below a threshold s0 that grows with N and p, then for sufficiently
+    large N the GCN satisfies the condition of Theorem 2 with probability at least 1 - eps; the authors stress the graph must not be extremely sparse, and conclude that for sufficiently large and not extremely
+    sparse graphs most GCNs suffer the information loss.'
+  location: Section 5
+  page: 6
+  quote: Theorem 3 requires that an underlying graph is not extremely sparse.
+- id: c6
+  statement: 'Applicability limit: the authors acknowledge that real-world graphs are often not dense, so Theorem 2 applies to very limited GCNs; citing Coja-Oghlan (2007), with bounded expected average
+    degree the smallest positive normalized-Laplacian eigenvalue of G_{N,p} is o(1) with high probability, and the behavior on sparse graphs is left for future research.'
+  location: Section 7
+  page: 8
+  quote: However, real-world graphs are not often dense, which means that Theorem 2 is applicable to very limited GCNs.
+- id: c7
+  statement: 'Real-data experiment design: the citation networks are too sparse for the theory to say anything non-trivial (for Cora only when 1 <= s < lambda^-1 ~ 1 + 3.62e-3), so the authors make ''noisy''
+    versions by randomly adding edges, raising lambda^-1 to 1.11; they report that GCNs with s outside the region s < lambda^-1 outperform those inside it in almost all configurations, and conclude the
+    results are consistent with the theorems.'
+  location: Section 6.3
+  page: 8
+  quote: To circumvent this, we make noisy versions of citation networks by randomly adding edges to graphs.
+- id: c8
+  statement: 'Scope limitations: the analysis covers only ReLU activations (it uses ReLU as a projection onto the non-negative cone), so extending to sigmoid or Leaky ReLU is ''far from trivial''; it considers
+    update operations only, not readout.'
+  location: Section 7
+  page: 9
+  quote: In particular, we cannot directly apply our theory to graph classiﬁcation tasks in which each sample is a graph.
+- id: c9
+  statement: 'Residual connections: by the Markov-process analogy (residual links correspond to a lazy process) the authors imagine residual links might not help against over-smoothing, but citing Li et
+    al. (2019), who reported graph NNs with as many as 56 layers performing well with residual connections, they say the situation could be more complicated than their intuitions and leave it for future
+    research.'
+  location: Section 7
+  page: 9
+  quote: However, Li et al. (2019) reported that graph NNs with as many as 56 layers performed well if they added residual connections.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Venue from the arXiv comment (''Accepted in International Conference on Learning
+    Representations (ICLR) 2020'') and the PDF header (''Published as a conference paper at ICLR 2020''). Year is the first arXiv version (2019). Section numbers from numbered headings and cross-references
+    in the PDF (''See Sections 3.3 (general case) and 4 (GCN case)'', ''The discussion in Section 5'', ''see Section 6.3''). The paper frames itself as extending over-smoothing explanations for linear GNNs
+    (citing Li et al. 2018, i.e. arxiv-1801.07606, and others) to non-linear GNNs; Remark 2 gives a counterexample (Appendix C) to a theorem in an old preprint of Luan et al. (2019). The upper bound l*log(s*lambda)
+    is reported to approximate actual distances when s*lambda is small but to be loose for large s*lambda (Section 6.2). Appendix H.3: noisy Cora/CiteSeer/PubMed built by uniformly adding 2500/5000, 5000
+    and 25000 edges; Kipf & Welling data split (''a transductive learning ... setting''); hyperparameters chosen by TPE via Optuna from 3 training runs per configuration, test accuracy averaged over 3 runs;
+    weights rescaled at initialization so their maximum singular value equals s in {0.5, s1, 3, 10}. Discussion also conjectures that too-large weights may hurt generalization (a ''sweet spot'' trade-off),
+    stated as a conjecture. Affiliation/COI: the first author lists Preferred Networks, and the implementation uses Chainer Chemistry (footnote URL under github.com/pfnet-research) and Optuna; the paper
+    does not benchmark these tools, so no direct conflict for the reported comparisons. Accuracies are figure-only (Figures 3, 4) and not recorded.'

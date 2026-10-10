@@ -1,0 +1,99 @@
+id: arxiv-2006.05205
+title: On the Bottleneck of Graph Neural Networks and its Practical Implications
+authors:
+- Uri Alon
+- Eran Yahav
+year: 2020
+venue: ICLR 2021
+links:
+  arxiv: https://arxiv.org/abs/2006.05205
+  code: https://github.com/tech-srl/bottleneck/
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 073bdbe671168ff18256e0e64611ec672c8dfc22e103f4a36f7bc0c15622cef6
+tags:
+  tasks:
+  - graph-node-prediction
+  - graph-level-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Over-squashing: an explanation for GNNs'' difficulty with long-range interactions, in which information from a receptive field that grows exponentially with the number of layers is compressed into fixed-length
+  node vectors'
+- 'Fully-adjacent (FA) last layer: in the K-th layer only, every pair of nodes is connected (N_v := V), used as a diagnostic to show that breaking the bottleneck helps existing tuned models'
+- 'Tree-NeighborsMatch: a synthetic problem with controllable problem radius r used to observe over-squashing in training accuracy'
+claims:
+- id: c1
+  statement: 'Bottleneck argument: with problem radius r, a GNN needs K >= r layers (otherwise distant nodes cannot interact, which the authors later call under-reaching), but the receptive field grows
+    exponentially with K (citing Chen et al., 2018), so an exponentially growing amount of information is squashed into a fixed-length vector; the model then learns only short-range signals and ''might
+    generalize poorly at test time''.'
+  location: Section 3
+  page: 3
+  quote: When a prediction problem relies on long-range interaction between nodes, the GNN must have as many layers K as the estimated range of these interactions, or otherwise, these distant nodes would
+    not be able to interact.
+- id: c2
+  statement: 'Layer definitions used in the analysis: a GNN layer is h_v^(k) = f_k(h_v^(k-1), {h_u^(k-1) | u in N_v}; theta_k); GCN sums c_uv W^(k) h_u^(k-1) over N_v together with v itself, with normalization
+    c_uv often set to sqrt(|N_v||N_u|) or |N_v| (citing Hamilton et al., 2017), followed by a nonlinearity; GIN applies an MLP to (1 + eps) h_v plus the sum of neighbor states. For graph prediction a permutation-invariant
+    readout (sum, average or weighted sum) aggregates the final-layer nodes.'
+  location: Preliminaries
+  page: 3
+  quote: The design of the function f is what mostly distinguishes one type of GNN from the other.
+- id: c3
+  statement: 'On Tree-NeighborsMatch (binary trees, r = depth, r+1 layers, training accuracy measured), GCN and GIN perfectly fit r = 3 at most, while GGNN and GAT also reach 100% at r = 4, and at r = 5
+    no GNN fits the data perfectly. The authors explain this by aggregation: GCN and GIN aggregate all neighbors before combining with the target node, whereas GAT''s attention lets the target ignore the
+    irrelevant incoming edge at the last layer; they hypothesize (following Levy et al., 2018) that the GRU in GGNN filters edges similarly.'
+  location: Section 4.1
+  page: 5
+  quote: GCN and GIN managed to perfectly ﬁt r=3 at most, while GGNN and GAT also reached 100% accuracy at r=4.
+- id: c4
+  statement: 'FA-layer protocol: the K-th layer of an existing, extensively tuned model is turned into a fully-adjacent layer (no change of layer type, no added weights), and models are re-trained with
+    the original authors'' code without additional tuning, to rule out hyperparameter tuning as the source of improvement. The authors stress that the FA layer is merely a simple demonstration, not their
+    main contribution.'
+  location: Section 4.2
+  page: 5
+  quote: A fully-adjacent layer is a GNN layer in which every pair of nodes is connected by an edge.
+- id: c5
+  statement: 'Over-squashing vs. under-reaching on QM9 (models and 500-configuration tuning from Brockschmidt, 2020; 5 runs per property): the average graph diameter is 6.35±0.91 (maximum 10, 90th percentile
+    8) while most models use K = 8; models with 10 layers did not improve over the base, models with doubled hidden size improved by only 5.5% versus 42% for the FA layer, and making all K layers fully
+    adjacent gave 1500% higher error. The authors conclude the gain comes from reduced over-squashing, not increased reachability.'
+  location: Section 4.2
+  page: 7
+  quote: We conclude that the source of improvement was clearly not the increased reachability, but instead, the reduction in over-squashing.
+- id: c6
+  statement: 'Biological benchmarks: using the implementation, 10 folds and splits of Errica et al. (2020) (30 test runs = 10 folds x 3 seeds), converting the last layer to FA gave GIN+FA an improvement
+    of 1.5% over GIN on NCI1, and on ENZYMES (where Errica et al. found the structure-agnostic baseline better than all GNNs) GIN+FA improved by 8.1% over GIN and by 2.5% over the No Struct baseline; on
+    average FA reduced the error rate by 12% on ENZYMES and 4.8% on NCI1.'
+  location: Biological benchmarks
+  page: 7
+  quote: We used the same 10-folds and split as Errica et al. (2020).
+- id: c7
+  statement: 'Combinatorial lower bound (analysis stated to hold for GCN and GIN): a d-dimensional vector of f-bit floats must distinguish all (m^r)!/(m!)^(m^r - 1) label assignments of the tree leaves,
+    so with d = 32 the maximal radius is r = 7. Empirically the required d is higher because gradient descent need not find a solution; even d = 512 fits r = 7 at most. Attention-based aggregation like
+    GAT compresses only half of the leaves, raising the bound on r by up to 1.'
+  location: Section 5
+  page: 9
+  quote: That is, a model with d=32 cannot obtain 100% accuracy for r>7.
+- id: c8
+  statement: 'Relation to over-smoothing: the authors hypothesize that in long-range problems the degraded performance is explained by over-squashing rather than over-smoothing, which was mostly demonstrated
+    on short-range tasks; in Appendix E they argue the two are disparate (a 3-node triangle graph with r = 1 can over-smooth without over-squashing, while Tree-NeighborsMatch can over-squash without over-smoothing).'
+  location: Section 6
+  page: 9
+  quote: We hypothesize that in long-range problems, the explanation for the degraded performance is over-squashing rather than over-smoothing.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Affiliation: Technion. Venue from the PDF header (''Published as a conference paper
+    at ICLR 2021'') and the arXiv comment (''Accepted to ICLR''2021''); year is the first arXiv version (2020). Section numbers: Section 3, 4, 4.1, 4.2, 4.4, 5, 6 and Appendix E are confirmed by cross-references
+    in the PDF; the ''Preliminaries'' and ''Biological benchmarks'' sections are named only (their numbers are not stated). VarMisuse (Section 4.4, implementation of Brockschmidt, 2020 with 30 configurations
+    per GNN, 6-10 layers best): the paper says the FA layer improves all GNNs on SeenProjTest and some/most on UnseenProjTest; table values not recorded. Tables 1-3 (QM9, NCI1/ENZYMES, VarMisuse) are not
+    recorded. The base numbers are re-used from Brockschmidt (2020) and Errica et al. (2020) (''previously reported ... and reproduced by us'' for QM9); the acknowledgments thank Errica and Brockschmidt
+    for help with their frameworks. Appendix A states that to rule out tuning as the cause of degraded Tree-NeighborsMatch performance, activations, normalization, residuals, batch sizes and weight unrolling
+    were varied, and a chain-shaped control (long distance with r=2-level squashing) was fitted close to 100%. No conflict of interest found: the authors do not evaluate their own earlier GNN models.'

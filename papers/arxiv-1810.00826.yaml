@@ -1,0 +1,103 @@
+id: arxiv-1810.00826
+title: How Powerful are Graph Neural Networks?
+authors:
+- Keyulu Xu
+- Weihua Hu
+- Jure Leskovec
+- Stefanie Jegelka
+year: 2018
+venue: ICLR 2019
+links:
+  arxiv: https://arxiv.org/abs/1810.00826
+  code: https://github.com/weihua916/powerful-gnns
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: a6ebf80c2790b8bac1fa378902993eae26020cc6d0d95e3964eea42b0c66a974
+tags:
+  tasks:
+  - graph-level-prediction
+  - representation-learning
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- A framework that abstracts neighbor aggregation as a function over the multiset of neighbor features and relates GNN discriminative power to the Weisfeiler-Lehman (WL) graph isomorphism test
+- 'Graph Isomorphism Network (GIN): h_v^(k) = MLP^(k)((1 + eps^(k)) * h_v^(k-1) + sum_{u in N(v)} h_u^(k-1)), with eps learnable (GIN-eps) or fixed to 0 (GIN-0), and a graph readout that concatenates sum
+  (or other) readouts over all iterations'
+claims:
+- id: c1
+  statement: 'Upper bound (Lemma 2): if a GNN maps two non-isomorphic graphs to different embeddings, the WL test also decides they are not isomorphic; hence any aggregation-based GNN is at most as powerful
+    as the WL test in distinguishing graphs. The WL test is described as a heuristic that works well in general with a few exceptions, e.g. regular graphs.'
+  location: Section 4
+  page: 4
+  quote: Hence, any aggregation-based GNN is at most as powerful as the WL test in distinguishing different graphs.
+- id: c2
+  statement: 'Theorem 3: with a sufficient number of layers, a GNN maps any two graphs that the WL test decides are non-isomorphic to different embeddings if (a) it updates node features as h_v^(k) = phi(h_v^(k-1),
+    f({h_u^(k-1) : u in N(v)})) with f (on multisets) and phi injective, and (b) its graph-level readout over the multiset of node features is injective.'
+  location: Section 4
+  page: 4
+  quote: if the neighbor aggregation and graph-level readout functions are injective, then the resulting GNN is as powerful as the WL test.
+- id: c3
+  statement: 'Assumption of the analysis: input node features are taken from a countable set; the authors state that uncountable (continuous) node features need further considerations, which they leave
+    for future work.'
+  location: Section 4
+  page: 4
+  quote: Uncountable sets, where node features are continuous, need some further considerations.
+- id: c4
+  statement: 'GIN layer: Lemma 5 (extending Zaheer et al. (2017) from sets to multisets) states that sum aggregators can represent injective, indeed universal, multiset functions for countable inputs, whereas
+    the mean aggregator, although an injective set function, is not an injective multiset function. Corollary 6 gives (1 + eps) f(c) + sum_{x in X} f(x) as injective for infinitely many eps (including all
+    irrational numbers); f and phi are modeled with MLPs, giving h_v^(k) = MLP^(k)((1 + eps^(k)) h_v^(k-1) + sum_{u in N(v)} h_u^(k-1)) with eps learnable or fixed.'
+  location: Section 4.1
+  page: 5
+  quote: Our next lemma states that sum aggregators can represent injective, in fact, universal functions over multisets.
+- id: c5
+  statement: 'Graph readout of GIN: because features from earlier iterations may sometimes generalize better, the graph representation concatenates READOUT over all iterations k = 0..K (similar to Jumping
+    Knowledge Networks); with sum readout, GIN is stated to provably generalize the WL test and the WL subtree kernel.'
+  location: Section 4.2
+  page: 5
+  quote: To consider all structural information, we use information from all depths/iterations of the model.
+- id: c6
+  statement: '1-layer perceptrons are not sufficient: Lemma 7 shows there exist different finite multisets whose sums of ReLU(Wx) coincide for any linear map W (the proof relies on the missing bias term);
+    the authors note that with a bias and large output dimension 1-layer perceptrons might distinguish multisets, but they are not universal approximators of multiset functions.'
+  location: Section 5.1
+  page: 6
+  quote: Lemma 7 suggests that there are indeed network neighborhoods (multisets) that models with 1-layer perceptrons can never distinguish.
+- id: c7
+  statement: 'Mean and max-pooling aggregators (as in GCN and GraphSAGE) are permutation invariant but not injective: with identical node features, mean and max yield the same representation everywhere
+    and capture no structural information, while sum distinguishes them; mean captures the distribution (proportions) of a multiset (Corollary 8) and max only the underlying set (Corollary 9), giving the
+    ranking sum > mean > max.'
+  location: Section 5.2
+  page: 7
+  quote: Mean and max-pooling aggregators are still well-deﬁned multiset functions because they are permutation invariant.
+- id: c8
+  statement: The authors suggest that the mean aggregator may perform well when distributional information matters more than exact structure, and that when node features are diverse and rarely repeat it
+    is as powerful as sum; they say this may explain why mean-aggregation GNNs are effective for node classification tasks with rich node features.
+  location: Section 5.3
+  page: 7
+  quote: Moreover, when node features are diverse and rarely repeat, the mean aggregator is as powerful as the sum aggregator.
+- id: c9
+  statement: 'Evaluation protocol: 9 graph classification benchmarks (MUTAG, PTC, NCI1, PROTEINS, COLLAB, IMDB-BINARY, IMDB-MULTI, REDDIT-BINARY, REDDIT-MULTI5K), 10-fold cross-validation following Yanardag
+    & Vishwanathan (2015) and Niepert et al. (2016); reported numbers are the mean and standard deviation of validation accuracies across the 10 folds, with hyperparameters (hidden units, batch size, dropout)
+    and the single epoch with the best cross-validation accuracy averaged over folds selected per dataset; a separate validation set was avoided as ''extremely unstable'' (MUTAG''s would have only 18 data
+    points).'
+  location: Section 7
+  page: 9
+  quote: We report the average and standard deviation of validation accuracies across the 10 folds within the cross-validation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF header on every page (''Published as a conference paper at ICLR
+    2019''); no arXiv comment/journal_ref. Section numbers confirmed by numbered headings in the PDF text (3, 4, 4.1, 4.2, 5, 5.1-5.5, 6, 7, 8). Other protocol details (Section 7): social network graphs
+    have no node features, so REDDIT nodes get identical features and the other social graphs use one-hot degrees; 5 GNN layers, 2-layer MLPs, batch norm, Adam lr 0.01 halved every 50 epochs; sum readout
+    on bioinformatics and mean readout on social datasets ''due to better test performance''; max-pooling not run on REDDIT-BINARY, REDDIT-MULTI5K and COLLAB due to GPU memory; deep-learning baselines and
+    AWL accuracies are copied from their original papers; mean-1-layer and max-1-layer are said to correspond to GCN and GraphSAGE ''up to minor architecture modifications''. The paper reports that training
+    accuracies of the GNNs never exceed those of the WL subtree kernel on their datasets (Section 7), and that GIN-0 slightly but consistently outperforms GIN-eps in test accuracy, which ''may be explained
+    by its simplicity''. Conflict of interest: Leskovec is a co-author of GraphSAGE (Hamilton, Ying and Leskovec, 2017a), one of the variants shown to be less powerful, and the readout design follows the
+    first author''s Jumping Knowledge Networks (Xu et al., 2018); the authors evaluate their own proposed GIN. Test results are in Table 1 and training curves in Figure 4; not recorded.'

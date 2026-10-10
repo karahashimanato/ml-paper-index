@@ -1,0 +1,99 @@
+id: arxiv-2306.11695
+title: A Simple and Effective Pruning Approach for Large Language Models
+authors:
+- Mingjie Sun
+- Zhuang Liu
+- Anna Bair
+- J. Zico Kolter
+year: 2023
+venue: ICLR 2024
+links:
+  arxiv: https://arxiv.org/abs/2306.11695
+  code: https://github.com/locuslab/wanda
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: f64206d0698bb09ae36e906065205af135bb1c34a7a65ab9a94aee989edb7aa4
+tags:
+  tasks:
+  - model-compression
+  - language-modeling
+  - image-classification
+  method_families:
+  - pruning
+  - large-language-models
+proposes:
+- 'Wanda (Pruning by Weights and activations): score S_ij = |W_ij| * ||X_j||_2 with the input-feature norm estimated on calibration data, removing the lowest-scoring weights per output row, layer by layer
+  in one forward pass and with no weight update'
+- Extension of the same score to N:M structured sparsity (compare every M consecutive weights per output)
+claims:
+- id: c1
+  statement: 'Metric: for a linear layer, each weight''s importance is |W_ij| times the l2 norm of the j-th input feature aggregated over all N x L tokens of the calibration data; the authors found l2 tended
+    to work better than l1 and l-infinity norms, ''possibly'' because it is smoother. Motivation is the emergent large-magnitude features in LLMs (citing Dettmers et al., 2022).'
+  location: Section 3
+  page: 3
+  quote: For each individual weight, we propose to evaluate its importance by the product of its magnitude and the corresponding input feature norm.
+- id: c2
+  statement: 'Comparison group: weights are compared per output (s% removed from each output row) rather than per layer; the authors find this consistently better for LLMs, also for the magnitude metric,
+    but not for image classifiers, suggesting the per-output observation might be unique to LLMs.'
+  location: Section 3
+  page: 4
+  quote: However, we do not observe similar trend in image classification models, suggesting that our observations regarding pruning per output might be unique to LLMs.
+- id: c3
+  statement: 'Relation to SparseGPT: SparseGPT''s metric |W|^2 / diag((X^T X + lambda I)^-1) reduces, with lambda = 0 and only the Hessian diagonal kept, to the square of the Wanda metric, which removes
+    matrix inverses; the authors describe Wanda as analogous to OBD applied per neuron with a local output-reconstruction objective.'
+  location: Section 3
+  page: 4
+  quote: The resulting metric in Equation 4 is the square of our proposed metric.
+- id: c4
+  statement: 'Setup: LLaMA 7B-65B and LLaMA-2 7B-70B; baselines are magnitude pruning and SparseGPT; to control the calibration-data factor Wanda uses exactly SparseGPT''s calibration set (128 sequences
+    from the C4 training set); all linear layers except the first embedding and final head are pruned with uniform sparsity; magnitude pruning is extended to N:M in the same way as Wanda.'
+  location: Experiments
+  page: 5
+  quote: To control this variable factor, we use the exact same set of calibration data as SparseGPT, which consists of 128 sequences with context length size sampled from C4 training set (Raffel et al.,
+    2020).
+- id: c5
+  statement: 'Language modeling: without weight update Wanda outperforms magnitude pruning by a large margin and is on par with SparseGPT at unstructured 50% sparsity; for structured sparsity the comparison
+    is mixed (SparseGPT better at 2:4 on smaller models such as 7B; Wanda more favorable on some larger models).'
+  location: Section 4.2
+  page: 6
+  quote: The comparison between Wanda and SparseGPT is mixed for structured sparsity.
+- id: c6
+  statement: 'Large-sparse vs small-dense (zero-shot): for unstructured sparsity large sparse LLMs are often better than small dense ones of similar parameter count (e.g. 50% sparse LLaMA-65B 66.67% vs
+    dense LLaMA-30B 65.38%), but for structured sparsity the trend is reversed without fine-tuning.'
+  location: Experiments (Zero-shot tasks)
+  page: 6
+  quote: 'For structured sparsity, the trend is reversed: without any fine-tuning, large sparse LLMs have worse zero-shot performance than small dense LLMs in general.'
+- id: c7
+  statement: 'Speed: computing the pruning metric is much faster than SparseGPT''s (the text says it ''can be 300 times faster''); 2:4 inference speedup is a simulation of linear-layer matrix multiplication
+    with CUTLASS on A6000 GPUs (around 1.6x on LLaMA-65B layers; end-to-end 1.24x on LLaMA-7B, 251ms vs 312ms), and the authors stress that this speedup comes from sparsity itself, not from their method.'
+  location: Experiments (Speedup)
+  page: 7
+  quote: Last, we emphasize that the inference speedup is not unique to our pruning method but is delivered by the inherent power of sparsity for speeding up computation.
+- id: c8
+  statement: 'Weight update and extreme sparsity (LLaMA-7B): applying SparseGPT-style weight updates greatly improves magnitude pruning but brings no improvement to Wanda at unstructured 50% and 4:8 and
+    a marginal one at 2:4; at 70% sparsity it improves Wanda''s perplexity from 84.50 to 29.65, which still lags far behind the dense model (5.68).'
+  location: Analysis (Weight Update)
+  page: 9
+  quote: However, the best pruned model (29.65) lags far behind the dense LLaMA-7B (5.68).
+- id: c9
+  statement: 'Stated limit on older LLM families: there are cases where Wanda slightly underperforms SparseGPT, especially on OPT, suggesting a possible trade-off between pruning speed and accuracy for
+    OPT, with the gap tending to shrink as model size grows; magnitude pruning fails catastrophically on OPT-13B and Pythia-12B even at 20% sparsity.'
+  location: Appendix B
+  page: 16
+  quote: There are cases where Wanda slightly underperforms SparseGPT, especially for OPT models (see Table 10), suggesting that for OPT, there may be a tradeoff between pruning speed and pruning accuracy.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Carnegie
+    Mellon (Sun, Bair, Kolter), Meta AI Research (Liu), Bosch Center for AI (Kolter); Sun and Bair funded by Bosch. Venue from the PDF header (''Published as a conference paper at ICLR 2024'') and arXiv
+    comment; year is the first arXiv version (2023). Section 3 and Section 4.2 are confirmed by cross-references in the PDF (''as discussed in Section 3'', ''our results in Section 4.2''); other locations
+    use section/paragraph names. Conflict of interest: Zhuang Liu and Mingjie Sun co-authored ''Rethinking the value of network pruning'' (Liu et al., 2019), cited here as an example of methods that retrain
+    pruned networks; no evaluation of it is made. Whether SparseGPT was run with its official code is not stated (searched for ''official'', ''implementation'', ''codebase''). Appendix D.2 reports 5 calibration
+    seeds with variance often lower for Wanda. Fine-tuning (LoRA within 1 GPU/12 hours; full fine-tuning within 4 GPUs/3 days) partly closes the gap to dense on LLaMA-7B. Appendix A: on ConvNeXt-B and DeiT-B
+    (ImageNet-1K, one-shot, no retraining) per-layer comparison was slightly better than per-output; Wanda''s metric beat magnitude especially at high sparsity (figure only). Perplexity/accuracy tables
+    not recorded.'

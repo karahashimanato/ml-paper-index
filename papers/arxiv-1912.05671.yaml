@@ -1,0 +1,100 @@
+id: arxiv-1912.05671
+title: Linear Mode Connectivity and the Lottery Ticket Hypothesis
+authors:
+- Jonathan Frankle
+- Gintare Karolina Dziugaite
+- Daniel M. Roy
+- Michael Carbin
+year: 2019
+venue: ICML 2020
+links:
+  arxiv: https://arxiv.org/abs/1912.05671
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 571122004882d47a2e01c4955eb66a8b07856dcc636a225a028899ee3ef5fd90
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  method_families:
+  - pruning
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Instability analysis: train two copies of a network (from initialization or from step k) with different SGD noise and measure the error barrier height along the linear path between the results; the network
+  is stable to SGD noise when the copies are linearly mode connected'
+- 'IMP with rewinding: iterative magnitude pruning that rewinds surviving weights to their values at an early iteration k instead of initialization'
+claims:
+- id: c1
+  statement: 'Definition: the linear interpolation instability of a network to SGD noise is the error barrier height on the linear path between the two trained copies, sup over alpha of E(alpha W1 + (1
+    - alpha) W2) minus the mean of E(W1) and E(W2). A network is considered stable when instability < 2%, a margin that accounts for noise and matches error increases along paths in Draxler et al. (2018)
+    and Garipov et al. (2018); 30 evenly spaced alpha values are used and instability is averaged over three initializations x three runs.'
+  location: Section 2
+  page: 3
+  quote: Empirically, we con-sider instability < 2% to be stable; this margin accounts for noise and matches increases in error along paths found by Draxler et al. (2018, Table B.1) and Garipov et al. (2018,
+    Table 2).
+- id: c2
+  statement: 'Unpruned networks: all but the smallest MNIST network (LeNet) are unstable to SGD noise at initialization, but all become stable early in training (3% for ResNet-20 on CIFAR-10 and 20% for
+    ResNet-50 on ImageNet); from then on the outcome of optimization is determined to a linearly connected minimum. For ResNet-50 and Inception-v3, train-set instability is slightly higher, and train-set
+    stability does not occur within the analyzed range for Inception-v3 (Section 3).'
+  location: Section 1
+  page: 2
+  quote: However, by a point early in training (3% for ResNet-20 on CIFAR-10 and 20% for ResNet-50 on ImageNet), all networks become stable to SGD noise.
+- id: c3
+  statement: 'Control for training time: because starting instability analysis at step k also shortens the copies'' training to T - k steps, the authors retrain the copies for T steps with the learning
+    rate schedule reset to 0 for ResNet-20 and VGG-16 on CIFAR-10; instability is indistinguishable, indicating that the different numbers of training steps did not play a role.'
+  location: Section 3
+  page: 4
+  quote: Instability is indistinguishable in both cases, indicating that the different numbers of training steps did not play a role in the earlier results.
+- id: c4
+  statement: 'IMP with rewinding: IMP trains to completion, prunes the lowest-magnitude weights globally and rewinds surviving weights to their values at iteration k, run iteratively (pruning 20% per round,
+    as in Frankle & Carbin 2019) or in one shot (used for ImageNet networks for efficiency). Frankle & Carbin only reset to initialization (k = 0); generalizing to any k is a stated contribution, and subnetworks
+    reaching full-network accuracy with k > 0 are called ''matching'' rather than winning tickets because they are no longer randomly initialized.'
+  location: Section 4.2
+  page: 5
+  quote: IMP trains a network to completion, prunes weights with the lowest magnitudes globally, and rewinds the remaining weights back to their values at iteration k (Algorithm 2).
+- id: c5
+  statement: 'Failure of the original lottery ticket procedure at scale: rewinding to step 0, IMP subnetworks of LeNet and of ResNet-20/VGG-16 with lower learning rates or warmup (changes Frankle & Carbin
+    proposed so IMP could find matching subnetworks) are matching, but those of standard ResNet-20, standard VGG-16, ResNet-50 and Inception-v3 are not, and are no more accurate than randomly pruned or
+    reinitialized subnetworks, suggesting neither the structure nor the initialization found by IMP gives an advantage there.'
+  location: Section 4.3
+  page: 5
+  quote: However, IMP subnetworks of standard ResNet-20, standard VGG-16, ResNet-50, and Inception-v3 are not matching.
+- id: c6
+  statement: 'Main finding at the extreme sparsities studied: IMP subnetworks are matching only when they are stable to SGD noise. Subnetworks unstable at k = 0 become stable when rewound later (ResNet-20
+    and VGG-16 at iterations 500 and 1000; ResNet-50 and Inception-v3 at epochs 5 and 6), and the rewinding points where they become matching closely coincide with those where they become stable. Randomly
+    pruned and reinitialized subnetworks are unstable and non-matching at all rewinding points (LeNet excepted).'
+  location: Section 4.3
+  page: 7
+  quote: In summary, at these extreme sparsities, IMP subnetworks are matching when they are stable.
+- id: c7
+  statement: 'Other sparsities (ResNet-20 and VGG-16 only, due to computational cost; matching = accuracy drop < 0.2%, stable = instability < 2%): above 80.0% / 16.8% weights remaining even random pruning
+    is matching (trivial sparsities); between 80.0%-13.4% / 16.8%-1.2% only IMP subnetworks are matching; below 13.4% / 1.2% IMP subnetworks are not matching at any rewinding iteration considered, though
+    their error still decreases when they become stable, which the authors say potentially suggests a broader relationship.'
+  location: Section 4.4
+  page: 8
+  quote: This range occurs when fewer than 13.4% and 1.2% of weights remain for ResNet-20 and VGG-16.
+- id: c8
+  statement: 'Implication for pruning (hedged): since in larger-scale settings IMP subnetworks only become stable and matching after some training, the authors suggest that pruning at initialization (citing
+    Lee et al. 2019; Wang et al. 2020) may not be the best time and that there is an unexploited opportunity to prune much earlier than methods that sparsify late in or after training. They also state that
+    matching subnetworks are found in larger settings only ''from early in training rather than initialization''.'
+  location: Section 5
+  page: 9
+  quote: Recent proposals attempt to prune networks at initialization (Lee et al., 2019; Wang et al., 2020), but our results suggest that the best time to do so may be after some training.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: MIT
+    CSAIL (Frankle, Carbin), Element AI (Dziugaite), University of Toronto / Vector Institute (Roy). Venue: PDF footer ''Proceedings of the 37th International Conference on Machine Learning, Vienna, Austria,
+    PMLR 119, 2020'' and arXiv comment ''Published in ICML 2020'' (the submission subsumes arXiv:1903.01611); year is the first arXiv version (2019). Section numbers are from numbered headings (2 Preliminaries
+    and Methodology, 3 unpruned networks, 4.1-4.4 lottery tickets, 5 Discussion, 6 Conclusions). Conflict of interest: the first and last authors are the authors of arxiv-1803.03635, whose IMP procedure
+    and lottery ticket hypothesis are re-evaluated and extended here; the ''low'' and ''warmup'' hyperparameters are adapted from Frankle & Carbin (2019). Table 1 notes that ''Frankle & Carbin mistakenly
+    refer to ResNet-20 as "ResNet-18"''. Hyperparameters for VGG-16 standard come from Liu et al. (2019) (arxiv-1810.05270). The Discussion cites follow-ups that use rewinding (Morcos et al. 2019 transfer;
+    Renda et al. 2020 claiming state-of-the-art sparsities), Renda et al. 2020 is co-authored by Frankle and Carbin (reference list: Renda, A., Frankle, J., and Carbin, M.). Instability/error curves are
+    figures and Table 2 accuracies are not recorded as results.'

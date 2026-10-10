@@ -1,0 +1,88 @@
+id: arxiv-1510.00149
+title: 'Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding'
+authors:
+- Song Han
+- Huizi Mao
+- William J. Dally
+year: 2015
+venue: ICLR 2016
+links:
+  arxiv: https://arxiv.org/abs/1510.00149
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 248044bef68e27e22384583a39d0bee743fd614d00e88a8dda6b331b5fd218d3
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  method_families:
+  - pruning
+  - quantization
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Deep Compression: a three-stage pipeline of magnitude pruning with retraining, trained quantization by per-layer k-means weight sharing with fine-tuned centroids, and Huffman coding of weights and sparse
+  indices'
+claims:
+- id: c1
+  statement: 'Abstract: pruning, trained quantization and Huffman coding together reduce the storage of neural networks by 35x to 49x without affecting accuracy; AlexNet goes from 240MB to 6.9MB (35x) and
+    VGG-16 from 552MB to 11.3MB (49x); pruning cuts connections by 9x to 13x and quantization reduces bits per connection from 32 to 5.'
+  location: Abstract
+  page: 1
+  quote: On the ImageNet dataset, our method reduced the storage required by AlexNet by 35×, from 240MB to 6.9MB, without loss of accuracy.
+- id: c2
+  statement: 'The pruning stage builds on Han et al. (2015) (the authors'' own earlier work, arxiv-1506.02626): train, remove connections with weights below a threshold, and retrain; the sparse structure
+    is stored in CSR/CSC with index differences encoded in 8 bits for conv layers and 5 bits for fc layers.'
+  location: Section 2
+  page: 2
+  quote: We build on top of that approach.
+- id: c3
+  statement: 'Weight sharing: per layer (not across layers), k-means clustering on the trained weights minimizes the within-cluster sum of squares, so each connection stores only a log2(k)-bit index into
+    a codebook; unlike HashedNets, sharing is determined after the network is fully trained.'
+  location: Section 3.1
+  page: 4
+  quote: We use k-means clustering to identify the shared weights for each layer of a trained network, so that all the weights that fall into the same cluster will share the same weight.
+- id: c4
+  statement: 'Trained quantization: the shared weights (centroids) are fine-tuned, with the gradient of each centroid being the sum of the gradients of the weights assigned to it.'
+  location: Section 3.3
+  page: 5
+  quote: During back-propagation, the gradient for each shared weight is calculated and used to update the shared weight.
+- id: c5
+  statement: Among Forgy (random), density-based and linear centroid initialization, linear initialization gives better accuracy in all cases except at 3 bits; the authors explain this by linear initialization
+    keeping large centroids, citing their earlier pruning work for the claim that large weights matter more.
+  location: Section 6.2
+  page: 8
+  quote: Linear initialization outperforms the density initialization and random initialization in all cases except at 3 bits.
+- id: c6
+  statement: Huffman coding the biased distributions of quantized weights and sparse index differences saves 20% to 30% of network storage; it requires no training and is applied offline after fine-tuning.
+  location: Section 4
+  page: 5
+  quote: Experiments show that Huffman coding these non-uniformly distributed values saves 20%
+- id: c7
+  statement: Individually, pruned or quantized AlexNet loses accuracy significantly when compressed below 8% of its original size, but combined the network can be compressed to 3% with no loss of accuracy;
+    the authors explain that quantization works well on the pruned network because fewer weights (6.7 million vs 60 million) are quantized with the same number of centroids.
+  location: Section 6.1
+  page: 7
+  quote: But when combined, as shown in the red line, the network can be compressed to 3% of original size with no loss of accuracy.
+- id: c8
+  statement: Speed/energy benchmarks cover only the FC layers of the pruned (not quantized) model at batch size 1, because current BLAS libraries do not support indirect look-up and relative indexing; pruned
+    layers give 3x to 4x speedup over dense on average, but with batching (matrix-matrix multiplication) the pruned network no longer shows its advantage.
+  location: Section 6.3
+  page: 10
+  quote: In this scenario, pruned network no longer shows its advantage.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Stanford
+    University (Han, Dally), Tsinghua University (Mao), NVIDIA (Dally). Venue from the PDF header (''Published as a conference paper at ICLR 2016'') and the arXiv comment (ICLR 2016 oral); year is the first
+    arXiv version (2015). Section numbers are from numbered headings in the PDF. Conflict of interest: the pruning stage and the ''Pruning (Han et al., 2015)'' row of the AlexNet comparison (Table 7) are
+    the authors'' own earlier method (arxiv-1506.02626, Han and Dally); the EIE accelerator mentioned in the Introduction is also by overlapping authors; speed/energy benchmarks run on NVIDIA hardware while
+    Dally is affiliated with NVIDIA. The paper does not state these as a conflict. Compression rates include codebook and sparse-index overhead (Section 5.1, Section 6.4). Table 6: 8/5-bit quantization
+    has no loss; 8/4-bit 0.01% loss; 4/2-bit 1.99% and 2.60% loss (caption). Future work (Section 8): the quantized network with weight sharing has not been benchmarked on hardware, so ''the full advantage
+    of Deep Compression ... is not fully unveiled''. Energy: pruned layers use 3x to 7x less energy at batch size 1 (Section 6.3).'

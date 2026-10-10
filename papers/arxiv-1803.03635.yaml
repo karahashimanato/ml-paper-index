@@ -1,0 +1,99 @@
+id: arxiv-1803.03635
+title: 'The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks'
+authors:
+- Jonathan Frankle
+- Michael Carbin
+year: 2018
+venue: ICLR 2019
+links:
+  arxiv: https://arxiv.org/abs/1803.03635
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: e5fe9482538b6573b59382f058c6eaefd933a9941cf7c06baf5c7577c62f68ec
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  method_families:
+  - pruning
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'The lottery ticket hypothesis: a randomly-initialized dense network contains a subnetwork (a ''winning ticket'') that, trained in isolation from its original initialization, matches the original network''s
+  test accuracy in at most the same number of iterations'
+- 'Identifying winning tickets by (iterative) magnitude pruning with reset: train, prune the smallest-magnitude weights, reset the surviving weights to their values at initialization theta_0, and repeat
+  over n rounds'
+claims:
+- id: c1
+  statement: 'The lottery ticket hypothesis is stated as: a randomly-initialized dense network contains a subnetwork, initialized such that, trained in isolation it can match the original network''s test
+    accuracy after at most the same number of iterations. Formally, with a mask m on the parameters and initialization m ⊙ theta_0, it predicts a mask exists with j'' <= j (commensurate training time, measured
+    as the iteration of minimum validation loss), a'' >= a (commensurate accuracy) and ||m||_0 << |theta| (fewer parameters).'
+  location: Section 1
+  page: 2
+  quote: A randomly-initialized, dense neural network contains a subnet-work that is initialized such that—when trained in isolation—it can match the test accuracy of the original network after training
+    for at most the same number of iterations.
+- id: c2
+  statement: 'Procedure for identifying winning tickets: randomly initialize f(x; theta_0), train for j iterations, prune p% of the parameters (smallest magnitudes) to create a mask m, and reset the remaining
+    parameters to their values in theta_0. The authors describe the reset to the original initialization as unique to their work. This is one-shot; the paper focuses on iterative pruning, which repeats
+    train-prune-reset over n rounds, each round pruning p^(1/n)% of the surviving weights.'
+  location: Section 1
+  page: 2
+  quote: Unique to our work, each unpruned connection’s value is then reset to its initialization from original network before it was trained.
+- id: c3
+  statement: Iterative pruning finds winning tickets that match the original network's accuracy at smaller sizes than one-shot pruning does; in the Lenet experiments the authors add that iteratively pruned
+    tickets are costly to find because of repeated training, whereas one-shot pruning also finds winning tickets without it, and they focus on iterative pruning because their goal is the smallest possible
+    tickets.
+  location: Section 1
+  page: 2
+  quote: Our results show that iterative pruning ﬁnds winning tickets that match the accuracy of the original network at smaller sizes than does one-shot pruning.
+- id: c4
+  statement: 'Random reinitialization control: keeping the winning ticket''s mask but sampling a new initialization theta''_0 ~ D_theta makes the subnetworks perform far worse, which the authors take to
+    mean that structure alone cannot explain a winning ticket''s success.'
+  location: Section 1
+  page: 3
+  quote: When randomly reinitialized, winning tickets perform far worse, meaning structure alone cannot explain a winning ticket’s success.
+- id: c5
+  statement: 'Learning-rate sensitivity on deeper networks: for Resnet-18 and VGG-19 on CIFAR10, iterative pruning finds winning tickets only when training uses learning rate warmup (at the original learning
+    rate 0.1 without warmup, iterative pruning did not find winning tickets and performed no better than random reinitialization, Section 4); the authors list explaining why warmup is necessary as future
+    work.'
+  location: Section 6
+  page: 10
+  quote: On deeper networks (Resnet-18 and VGG-19), iterative pruning is unable to ﬁnd winning tickets unless we train the networks with learning rate warmup.
+- id: c6
+  statement: 'Relation to Liu et al. (2019), who find pruned networks trainable when randomly reinitialized: the authors say their VGG-19 experiments confirm this at that level of sparsity (pruned by up
+    to 80%), but that after further pruning initialization matters; they hypothesize that up to a certain sparsity highly overparameterized networks can be pruned, reinitialized and retrained successfully,
+    while beyond it extremely pruned networks only maintain accuracy with fortuitous initialization.'
+  location: Section 5
+  page: 9
+  quote: We hypothesize that—up to a certain level of sparsity—highly overparameterized networks can be pruned, reinitialized, and retrained successfully; however, beyond this point, extremely pruned, less
+    severely overparamterized networks only maintain accuracy with fortuitous initialization.
+- id: c7
+  statement: 'Scale limitation: only vision classification on smaller datasets (MNIST, CIFAR10) is considered; larger datasets such as Imagenet are not investigated because iterative pruning is computationally
+    intensive, requiring training a network 15 or more times consecutively for multiple trials.'
+  location: Section 6
+  page: 9
+  quote: We only consider vision-centric classiﬁcation tasks on smaller datasets (MNIST, CIFAR10).
+- id: c8
+  statement: 'Hardware limitation: sparse (unstructured magnitude) pruning is the only method used to find winning tickets; although parameter counts fall, the resulting architectures are not optimized
+    for modern libraries or hardware, and structured pruning (which would produce hardware-friendly networks) and non-magnitude pruning are left for future work.'
+  location: Section 6
+  page: 9
+  quote: Although we reduce parameter-counts, the resulting architectures are not optimized for modern libraries or hardware.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliation: MIT
+    CSAIL. Venue: PDF header ''Published as a conference paper at ICLR 2019'' and arXiv journal_ref ''ICLR 2019''; year is the first arXiv version (2018). Section numbers are from numbered headings in the
+    PDF (1 Introduction, 2 fully-connected, 3 convolutional, 4 VGG and Resnet, 5 Discussion, 6 Limitations, 7 Related work). Pruning heuristic: layer-wise removal of the lowest-magnitude weights (as in
+    Han et al., 2015), output connections pruned at half the rate (Section 2); Resnet-18 and VGG-19 are pruned globally across all convolutional layers (Section 4). Per-architecture pruning rates, optimizers
+    and iterations are in Figure 2. The ''lottery ticket conjecture'' (SGD seeks out and trains a subset of well-initialized weights) is explicitly described as untested. The paper refers to the CIFAR10
+    residual network as ''Resnet-18''; the later arxiv-1912.05671 (same first and last author) states this was a mistaken name for ResNet-20. Accuracy/early-stopping results are figures (some percentages
+    are in body text) and are not recorded as results. The authors are the originators of the hypothesis evaluated here; follow-up work by the same first author: arxiv-1912.05671, arxiv-2003.03033. Section
+    3 adds that for Conv-2 and Conv-4 the test accuracy of randomly reinitialized networks at early stopping initially remains steady or improves, which the authors read as structure alone possibly helping
+    at moderate pruning (moved here from c4 because it comes from a different paragraph than the c4 quote).'

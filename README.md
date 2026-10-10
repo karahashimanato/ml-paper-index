@@ -79,8 +79,10 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | ベイズ最適化とハイパーパラメータ最適化 | 論文カード17本+既存6本(代理モデルと獲得関数、GP-UCB の理論の前提、Hyperband・BOHB・ASHA・FABOLAS、規模を上げる工夫とフレームワーク、ランダム探索との比較とベンチマーク、過剰な調整と探索空間の設計)、記事 [articles/methods/bayesian-optimization.md](articles/methods/bayesian-optimization.md) |
 | ベイズ変化点検知 | 論文カード18本(BOCPD とその拡張、ハザードと事前分布、外れ値への頑健化、バンディット・強化学習・障害の原因分析への応用、オフラインの事後分析と信用集合、TCPDBench による評価)、記事 [articles/topics/bayesian-change-point-detection.md](articles/topics/bayesian-change-point-detection.md) |
 | 近似ベイズ推論とその診断 | 論文カード18本+既存3本(HMC と NUTS、確率的勾配 MCMC、変分推論とその弱点、正規化フローと Pathfinder、R-hat の改訂、PSIS の k-hat、VI の誤差の上界、SBC とその検定量、ベイズのワークフロー)、記事 [articles/methods/approximate-inference-and-diagnostics.md](articles/methods/approximate-inference-and-diagnostics.md) |
+| 知識蒸留と枝刈り | 論文カード17本+既存4本(柔らかい目標と温度、中間層のヒント、同じ大きさへの蒸留、生徒は先生をまねできているか、大きさに基づく枝刈りと段階的な枝刈り、初期化時の枝刈り、宝くじ仮説と巻き戻し、転移学習と大規模言語モデルの枝刈り、評価の問題、圧縮で失われるもの)、記事 [articles/methods/knowledge-distillation-and-pruning.md](articles/methods/knowledge-distillation-and-pruning.md) |
+| グラフニューラルネットワーク | 論文カード16本(GCN・GraphSAGE・GAT・SGC とメッセージパッシング、WL 検定と表現力、過平滑化と過圧縮、異質性、固定分割とモデル選択の落とし穴、OGB などのベンチマーク)、記事 [articles/methods/graph-neural-networks.md](articles/methods/graph-neural-networks.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では470本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では503本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -93,6 +95,8 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [対照学習・自己教師あり表現学習 — 崩壊の避け方、理論の範囲、線形評価の読み方](articles/methods/self-supervised-representation-learning.md)
 - [ベイズ最適化とハイパーパラメータ最適化 — 代理モデル、多忠実度、ランダム探索との比較](articles/methods/bayesian-optimization.md)
 - [近似ベイズ推論とその診断 — MCMC と変分推論、その近似は信用できるか](articles/methods/approximate-inference-and-diagnostics.md)
+- [知識蒸留と枝刈り — 小さなモデルに何を移し、何を削るのか、そして何が失われるのか](articles/methods/knowledge-distillation-and-pruning.md)
+- [グラフニューラルネットワーク — メッセージパッシングの基本、表現力の上限、深さの問題、異質なグラフ、評価の落とし穴](articles/methods/graph-neural-networks.md)
 
 横断記事:
 

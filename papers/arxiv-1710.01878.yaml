@@ -1,0 +1,103 @@
+id: arxiv-1710.01878
+title: 'To prune, or not to prune: exploring the efficacy of pruning for model compression'
+authors:
+- Michael Zhu
+- Suyog Gupta
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1710.01878
+  code: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/model_pruning
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: a0e6eb4f42fcc86638f127e43827ddfbfb4515028f91db9f4aaa77059a5280c0
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  - language-modeling
+  method_families:
+  - pruning
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Automated gradual pruning: binary masks per pruned layer, the smallest-magnitude weights are masked to reach a sparsity s_t that rises from s_i to s_f over n pruning steps every Delta-t training steps
+  along a cubic schedule s_t = s_f + (s_i - s_f)(1 - (t - t0)/(n Delta-t))^3, applied during training'
+- A comparison of large-sparse (large model pruned) against small-dense (smaller dense model) at a comparable number of nonzero parameters / memory footprint on InceptionV3, MobileNets, PTB LSTM language
+  models and GNMT-style seq2seq models
+claims:
+- id: c1
+  statement: 'Research question: compare large models pruned to few nonzero parameters (large-sparse) with smaller dense models (small-dense) of identical memory footprint, motivated by the possibility
+    that baseline models in earlier pruning reports are severely over-parameterized so that simply shrinking hidden units might give a similar size/accuracy trade-off.'
+  location: Abstract
+  page: 1
+  quote: We compare the accuracy of large, but pruned models (large-sparse) and their smaller, but dense (small-dense) counterparts with identical memory footprint.
+- id: c2
+  statement: 'Method: for each pruned layer a binary mask of the weight''s shape is added; weights are sorted by absolute value and the smallest-magnitude weights are masked to zero until sparsity s is
+    reached; weights masked in the forward pass are not updated in back-propagation. Sparsity rises from s_i (usually 0) to s_f over n pruning steps starting at step t0 with frequency Delta-t following
+    a cubic function, and masks stop changing once s_f is reached.'
+  location: Methods
+  page: 3
+  quote: We introduce a new automated gradual pruning algorithm in which the sparsity is increased from an initial sparsity value si (usually 0) to a ﬁnal sparsity value sf over a span of n pruning steps,
+- id: c3
+  statement: 'Schedule tuning: the authors report that varying the pruning frequency between 100 and 1000 steps had a negligible impact in their experience; pruning with an exceedingly small learning rate
+    made recovery difficult, while pruning with too high a learning rate may prune weights before they converge, so the pruning schedule should be chosen closely with the learning-rate schedule. Pruning
+    starts after a few epochs of training or from a pre-trained model.'
+  location: Methods
+  page: 4
+  quote: so it is important to choose the pruning schedule closely with the learning rate schedule.
+- id: c4
+  statement: 'MobileNets on ImageNet: sparse MobileNets pruned from the dense width-1.0 model are compared with dense models of width multipliers 0.75, 0.5 and 0.25; the authors report that at a given number
+    of nonzero parameters the sparse models outperform the dense ones (e.g. the 75% sparse model with 1.09 million parameters at 67.7% top-1 vs the dense 0.5 MobileNet with 1.32 million parameters at 63.7%).
+    The standard convolution and depthwise layers (1.1% of parameters) are not pruned.'
+  location: Comparing large-sparse and small-dense models (MobileNets)
+  page: 5
+  quote: We see that for a given number of non-zero parameters, sparse MobileNets are able to outperform dense MobileNets.
+- id: c5
+  statement: 'Training budget for the comparison (PTB LSTM language models): sparse models were pruned from the medium and large models to 80-97.5% sparsity using the same hyperparameters as the dense model
+    of that size; the authors report the 90% sparse large model (6.6 million parameters, perplexity 80.24) outperforms the dense medium model (19.8 million parameters, perplexity 83.37). For MobileNet,
+    pruning used the dense learning-rate schedule with a 10 times smaller initial learning rate.'
+  location: Comparing large-sparse and small-dense models (Penn Tree Bank language model)
+  page: 6
+  quote: When pruning a model of a certain size, we use the same hyperparameters that were used for training the dense model of that size.
+- id: c6
+  statement: 'Limit of pruning: on PTB, pruning to 95% sparsity (20x) significantly degraded performance relative to 90% (10x); the authors suggest there is an optimal compression range and that one should
+    train a dense model 5x-10x larger and prune it, rather than prune the largest model by 20x or more, assuming the two dense baselines do not differ much. They note slightly better results at 95%+ sparsity
+    may be possible with more hyperparameter tuning, since they reused the dense configuration.'
+  location: Comparing large-sparse and small-dense models (Penn Tree Bank language model)
+  page: 7
+  quote: Together, these results suggest that there is an optimal compression range when pruning.
+- id: c7
+  statement: 'NMT: because NMT training had high variance, three pruning schemes were tested (standard gradual pruning, ''layerwise constant'' sparsity increased one layer at a time, and global magnitude
+    pruning), and the scheme that performed best on average (layerwise constant) is the one reported; error bars are the standard deviation of BLEU over 10 randomly initialized, independently trained models.'
+  location: Comparing large-sparse and small-dense models (Google Neural Machine Translation)
+  page: 8
+  quote: Overall, the layerwise constant pruning scheme performed best on average, so we report the results with the layerwise constant pruning scheme in Figure 4 and Table 4.
+- id: c8
+  statement: 'Storage overhead: the net memory footprint of a sparse model includes indexing structures (bit-mask: 1 bit per element; CSR(C): a 4-5 bit count per nonzero), which diminishes the achievable
+    compression ratio; despite this the authors say large-sparse models appear to be more accurate at comparable footprint. All results use 32-bit floats; with reduced precision (e.g. 8-bit) the sparse-storage
+    overhead would be a bigger fraction, and the interplay with quantization is deferred to future work.'
+  location: Discussion
+  page: 9
+  quote: In spite of this overhead, large-sparse models appear to achieve higher accuracy than small-dense models with comparable memory footprint.
+- id: c9
+  statement: 'Hardware caveat: pruned models have sparse connection matrices, so efficient inference requires purpose-built hardware that can load sparse matrices and/or perform sparse matrix-vector operations,
+    and the sparse representation adds storage overhead; the pruning is unstructured (no specific structure in the sparse weight tensors).'
+  location: Introduction
+  page: 2
+  quote: The resulting pruned model typically has sparse connection matrices, so efﬁcient inference using these sparse models requires purpose-built hardware capable of loading sparse matrices and/or performing
+    sparse matrix-vector operations
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Stanford
+    (Zhu, work done as a Google intern) and Google (Gupta). No venue is stated in the arXiv PDF or metadata; none recorded (other papers cite it as ''Zhu and Gupta [2018]'', but no venue is confirmed here).
+    Section numbers are not recorded; section names are used. Accuracy/perplexity/BLEU tables are not recorded; the numbers in claims are those written in the body text. NMT body text: the 90% sparse 1024-unit
+    model is ''comparable to or outperforms'' the dense 512-unit model (26.19 vs 26.05 EN-DE, 28.81 vs 28.88 DE-EN) with 23M vs 81M nonzero parameters. Hyperparameter search per scheme is not described
+    beyond the statements recorded. Note the masking description: this paper states masked weights ''do not get updated in the back-propagation step'', whereas arxiv-2005.07683 describes automated gradual
+    pruning as allowing masked weights to be updated.'

@@ -1,0 +1,98 @@
+id: arxiv-2106.05945
+title: Does Knowledge Distillation Really Work?
+authors:
+- Samuel Stanton
+- Pavel Izmailov
+- Polina Kirichenko
+- Alexander A. Alemi
+- Andrew Gordon Wilson
+year: 2021
+venue: NeurIPS 2021
+links:
+  arxiv: https://arxiv.org/abs/2106.05945
+  code: https://github.com/samuelstanton/gnosis
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 7d5107382bfcba9a22fae389fb1df55f09569b4bca4d9198d4138332ec857bde
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  method_families:
+  - knowledge-distillation
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Separating distillation fidelity (agreement with the teacher: top-1 agreement, predictive KL) from student generalization (accuracy, NLL, ECE), with an independent-teacher student as a control'
+- An analysis attributing low fidelity mainly to optimization difficulty rather than to identifiability of the distillation data
+claims:
+- id: c1
+  statement: The authors show that while KD can improve student generalization, there often remains a surprisingly large discrepancy between teacher and student predictive distributions, even when the student
+    has the capacity to match the teacher perfectly; they identify difficulties in optimization as a key reason, and report that matching the teacher more closely paradoxically does not always improve generalization.
+  location: Abstract
+  page: 1
+  quote: there often remains a surprisingly large discrepancy between the predictive distributions of the teacher and the student, even in cases when the student has the capacity to perfectly match the
+    teacher.
+- id: c2
+  statement: 'Objective (Hinton et al.): L_s = alpha * L_NLL + (1 - alpha) * L_KD with L_KD = -tau^2 * sum_j sigma_j(z_t / tau) log sigma_j(z_s / tau); as tau -> infinity the gradient approaches z_t - z_s
+    (equal weight to every logit). Because the study focuses on fidelity, alpha = 0 is used for all main-text experiments (only a limited alpha ablation in the appendix).'
+  location: Section 3.1
+  page: 3
+  quote: Since we focus on distillation ﬁdelity, we choose α = 0 for all experiments in the main text to avoid any confounding from true labels
+- id: c3
+  statement: 'Metrics: generalization is measured by top-1 accuracy, NLL and ECE; fidelity by average top-1 agreement and average predictive KL from teacher to student. Because agreement can be confounded
+    by accuracy, they also distill a second student through an identical procedure from an independent teacher, so that a generic gain in generalization can be distinguished from a gain in fidelity.'
+  location: Section 3.2
+  page: 3
+  quote: To account for such confounding when evaluating the distillation of a student s from a teacher t, we also evaluate another student s′ distilled through an identical procedure from an independent
+    teacher.
+- id: c4
+  statement: In self-distillation (ResNet-56 on CIFAR-100) the student can exceed the teacher, which the authors note is only possible because distillation fails; for a 3-ResNet-56 ensemble teacher, fidelity
+    becomes positively correlated with generalization but a significant fidelity gap remains.
+  location: Section 4.2
+  page: 4
+  quote: 'This result is only possible by virtue of failing at the distillation procedure: if the student matched the teacher perfectly then the student could not outperform the teacher.'
+- id: c5
+  statement: 'Distilling a 5-ResNet-56 ensemble into a ResNet-56 on CIFAR-100, the augmentations best for generalization (MixUp, GAN) are not the best for fidelity, and even the best-fidelity policy reaches
+    only 86% test agreement (baseline with tau = 4: 84.5%); since the gain from augmentation is small compared with logit tempering, the authors judge it very unlikely that an insufficient quantity of teacher
+    labels is the primary obstacle to high fidelity.'
+  location: Section 5.1
+  page: 7
+  quote: even the best augmentation policy, Mixup (τ = 4), only achieves a modest 86% test agreement.
+- id: c6
+  statement: Distilling on held-out data the teacher did not see (D1) gives higher fidelity but lower test accuracy than distilling on the teacher's own training data (D0); distilling on both combines their
+    best attributes. The best agreement is still only around 85%, and the authors conclude the evidence does not support blaming poor fidelity on the wrong choice of distillation data.
+  location: Section 5.2
+  page: 7
+  quote: In fact, the best teacher-student agreement is only around 85%, no improvement when compared to the results from extensive data augmentation in the last section.
+- id: c7
+  statement: 'On the distillation data itself, the student often fails to match the teacher: enlarging the data with GAN samples or heavier augmentation lowers train agreement (to 60% for combined augmentations
+    in self-distillation), and the authors write that the results suggest the optimizer cannot reach high fidelity even on the distillation dataset in these settings.'
+  location: Section 6.1
+  page: 8
+  quote: However, the results presented in this section suggest that in practice the optimization method is unable to achieve high ﬁdelity even on the distillation dataset when extensive data augmentation
+    or synthetic data is used.
+- id: c8
+  statement: In ResNet-20 (LayerNorm) self-distillation on CIFAR-100, training longer or switching to Adam does not substantially improve fidelity; initializing the student as a convex combination of teacher
+    and random weights shows that students initialized far from the teacher converge to a distinct sub-optimal basin, while sharing only the teacher's initial weights gives no observable functional change.
+    The authors conclude the sub-optimal convergence appears to be a consequence of optimization dynamics, not simply initialization bias.
+  location: Section 6.2
+  page: 10
+  quote: Furthermore, the suboptimal convergence of knowledge distillation appears to be a consequence of the optimization dynamics speciﬁcally, and not simply initialization bias.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: NYU
+    (Stanton, Izmailov, Kirichenko, Wilson) and Google Research (Alemi). Venue from the PDF footer (''35th Conference on Neural Information Processing Systems (NeurIPS 2021)''); also the arXiv comment.
+    Section numbers are from numbered headings in the PDF. Most results are figures (not recorded). Body-text numbers in Section 6.2: with SGD, 83.3% train agreement after 5k epochs vs 78.95% after 300
+    epochs; Adam only reduced fidelity; a sudden change at lambda = 0.375 gives nearly 100% agreement. Discussion findings: good student accuracy does not imply good fidelity; the highest-fidelity student
+    is always the best calibrated when distilling ensembles; enlarging distillation data helps identifiability but makes optimization harder. Appendix results (VGG, ImageNet, IMDB text classification, larger
+    students, alpha ablation) are mentioned in Section 4.4 but not carded. Section 4.1: LeNet-5 self-distillation on MNIST with extra EMNIST distillation data reaches over 99% test agreement, while ResNet-56
+    on CIFAR-100 with GAN data improves fidelity only modestly. Ensemble teacher logits are the log of the averaged component probabilities (Section 3). Cites arxiv-1910.01348 (Cho & Hariharan). No evaluation
+    of the authors'' own earlier methods was found.'

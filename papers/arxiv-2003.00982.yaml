@@ -1,0 +1,103 @@
+id: arxiv-2003.00982
+title: Benchmarking Graph Neural Networks
+authors:
+- Vijay Prakash Dwivedi
+- Chaitanya K. Joshi
+- Anh Tuan Luu
+- Thomas Laurent
+- Yoshua Bengio
+- Xavier Bresson
+year: 2020
+venue: JMLR
+links:
+  arxiv: https://arxiv.org/abs/2003.00982
+  code: https://github.com/graphdeeplearning/benchmarking-gnns
+source:
+  version: arXiv v5
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 6a200aa2af706831477d3806492fd25b9309332f4aab8271ad9a1e9edec140c5
+tags:
+  tasks:
+  - graph-node-prediction
+  - graph-level-prediction
+  - combinatorial-optimization
+  method_families:
+  - graph-neural-networks
+  paradigms:
+  - supervised
+proposes:
+- An open-source modular GNN benchmarking framework (DGL/PyTorch) with 12 medium-scale datasets (ZINC, AQSOL, OGBL-COLLAB, WikiCS, MNIST, CIFAR10, PATTERN, CLUSTER, TSP, CSL, CYCLES, GraphTheoryProp)
+- Comparison of GNNs under fixed parameter budgets (100k and 500k)
+- Laplacian eigenvectors as graph positional encodings for message-passing GCNs, with random sign flipping during training
+claims:
+- id: c1
+  statement: 'Motivation: without a community-standard benchmark, models evaluated on traditionally used datasets with inconsistent experimental comparisons make it difficult to differentiate complex, simple
+    and graph-agnostic architectures (citing Hoang and Maehara, 2019; Chen et al., 2019a; Errica et al., 2019).'
+  location: Introduction
+  page: 2
+  quote: However, tracking progress is often challenging in the absence of a community-standard benchmark as models that are evaluated on traditionally-used datasets with inconsistent experimental comparisons
+    make it diﬃcult to diﬀerentiate complex, simple and graph-agnostic architectures
+- id: c2
+  statement: 'Fixed parameter budgets: the goal is not to find optimal hyperparameters per model but to compare models and building blocks within a parameter budget, 100k for every GNN on all datasets and
+    500k where scaling to more parameters and deeper layers is studied; layers and hidden dimensions are chosen to match the budgets. The authors argue that without this it is difficult to tell whether
+    a gain comes from the architecture or from extra capacity.'
+  location: Section 2
+  page: 3
+  quote: In the absence of such design choice, it is comparatively diﬃcult to conclude whether a better performing model’s gain arises from its architectural design or extra learning capacity brought by
+    additional model parameters.
+- id: c3
+  statement: 'Training protocol shared by all models: Adam with the same learning-rate decay (initial rate from {1e-2, 1e-3, 1e-4}, halved when validation loss stops improving for 5-25 epochs), no maximum
+    number of epochs (training stops when the rate reaches 1e-6 or after 12 hours), and each experiment is run with 4 seeds.'
+  location: Appendix C
+  page: 17
+  quote: We run each experiment with 4 diﬀerent seeds and report the statistics of the 4 results.
+- id: c4
+  statement: The authors state the parameter budgeting means the framework may not be ideal for optimizing a model to state-of-the-art by tuning hyperparameters or increasing model size; it is designed
+    to identify performance trends and first principles.
+  location: Appendix H
+  page: 40
+  quote: The parameter budgeting also tells that the proposed framework may not be ideal to optimize a model to achieve SOTA by tuning hyperparameters, increasing model size to as much parameters as a server
+    can ﬁt, etc.
+- id: c5
+  statement: A graph-agnostic MLP baseline (each node updated independently) presents consistently low scores across all datasets, which the authors take as showing that graph structure is needed for these
+    tasks and that the datasets can statistically separate GNN performance.
+  location: Appendix D
+  page: 29
+  quote: MLP presents consistently low scores across all datasets (Tables 3-10), which shows the necessity to use graph structure for these tasks.
+- id: c6
+  statement: Although provably more powerful in terms of isomorphism tests, 3WL-GNNs and RingGNNs did not outperform message-passing GCNs on these medium-scale datasets; they have O(n^2)/O(n^3) space/time
+    complexity, face loss divergence and/or out-of-memory errors when made deeper, and show relatively high standard deviation across seeds, which the authors attribute to the lack of batching and batch
+    normalization for dense tensors.
+  location: Appendix D
+  page: 29
+  quote: These new models are limited in terms of space/time complexities, with O(n2)/O(n3) respectively, not allowing them to scale to larger datasets.
+- id: c7
+  statement: Among GCN-class models, anisotropic models (GCN with symmetric normalization, GAT, MoNet, GatedGCN) are consistently better than isotropic ones (vanilla GCN, GraphSage) at the 100K budget on
+    several datasets, with stated exceptions; the authors suggest that understanding the expressive power of attention-based aggregation is a meaningful research avenue.
+  location: Appendix D
+  page: 29
+  quote: Overall, our results suggest that understanding the expressive power of attention-based neighborhood aggregation functions is a meaningful avenue of research.
+- id: c8
+  statement: 'Laplacian positional encoding: the k smallest non-trivial eigenvectors of the normalized Laplacian I - D^{-1/2} A D^{-1/2} are added to node features (x_i = x_i + p_i); since eigenvectors
+    are defined only up to sign, their sign is randomly flipped during training. The motivation is that MP-GCNs are limited by their equivalence to the 1-WL test when nodes are anonymous.'
+  location: Appendix E.1.2
+  page: 31
+  quote: The eigenvectors are deﬁned up to the factor ±1 (after being normalized to unit length), so the sign of eigenvectors will be randomly ﬂipped during training.
+- id: c9
+  statement: On three small TU datasets (ENZYMES, DD, PROTEINS) with 10-fold stratified splits, all networks have statistically similar test performance because the standard deviation is large; a second
+    run with a different seed changes the model ranking, and for DD and PROTEINS the graph-agnostic MLP performs as well as GNNs.
+  location: Appendix F
+  page: 38
+  quote: We observe all NNs have similar statistical test performance as the standard deviation is quite large.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Venue from the arXiv journal_ref (''Journal of Machine Learning Research (JMLR),
+    2022''); the v5 PDF itself shows ''©2022'' and a CC-BY 4.0 license on page 1 but no journal name, so ''JMLR'' rests on the arXiv metadata. Year 2020 is the first arXiv version (the framework was released
+    in March 2020). Section/appendix labels from numbered headings in the PDF. Conflict of interest: GatedGCN (Bresson and Laurent, 2017) is by two of the authors and is among the best-performing models
+    highlighted (Appendix D); the Laplacian positional encoding evaluated is the authors'' own proposal; GraphNorm (Appendix G) is described by the authors as having no concrete theoretical basis. The benchmark
+    includes OGBL-COLLAB from OGB. Task tags: TSP edge classification is tagged combinatorial-optimization; link prediction has no matching tag. Results tables (Tables 3-16) are not recorded.'

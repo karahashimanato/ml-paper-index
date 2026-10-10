@@ -1,0 +1,94 @@
+id: arxiv-2005.07683
+title: 'Movement Pruning: Adaptive Sparsity by Fine-Tuning'
+authors:
+- Victor Sanh
+- Thomas Wolf
+- Alexander M. Rush
+year: 2020
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/2005.07683
+  code: https://huggingface.co/mvp
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 048004d9c1f20d0e2ea33bbeea61f9ca5e24cd84e1d7875cd21e715531074357
+tags:
+  tasks:
+  - model-compression
+  - natural-language-understanding
+  method_families:
+  - pruning
+  - knowledge-distillation
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Movement pruning: learn importance scores S alongside the weights during fine-tuning, with masks Top_v(S) and a straight-through estimator so that dL/dS_ij = (dL/da_i) W_ij x_j; S accumulates -sum_t
+  (dL/dW_ij) W_ij, i.e. it rewards weights moving away from zero'
+- 'Soft movement pruning: a threshold mask M = (S > tau) with a regularizer lambda * sum sigma(S_ij) that controls sparsity'
+claims:
+- id: c1
+  statement: 'Motivation: magnitude pruning is described as highly effective in standard supervised learning but inherently less useful under transfer learning, because fine-tuned weights are mostly predetermined
+    by the pretrained model, so magnitude selection cannot learn to prune based on the fine-tuning step.'
+  location: Introduction
+  page: 1
+  quote: In transfer learning, weight values are mostly predetermined by the original model and are only ﬁne-tuned on the end task.
+- id: c2
+  statement: 'Definition: magnitude pruning uses zeroth-order information (|W|); movement pruning uses first-order information, retaining connections that move away from zero during training. Masks are
+    Top_v(S) over learned scores S, the gradient through Top_v is approximated straight-through, so scores of masked weights are still updated; after T updates S_ij = -alpha_S sum_t (dL/dW_ij)^(t) W_ij^(t).'
+  location: Movement Pruning
+  page: 3
+  quote: Intuitively, instead of selecting weights that are far from zero, we retain connections that are moving away from zero during the training process.
+- id: c3
+  statement: Soft movement pruning replaces the top-v% selection with a fixed global threshold tau and adds a regularizer lambda_mvp * sum sigma(S_ij) that pushes scores down, so lambda_mvp controls the
+    penalty intensity and thus the sparsity level (rather than setting it directly); an L1 penalty on S was reported as harder to tune with similar results.
+  location: Movement Pruning
+  page: 3
+  quote: Here we replace hyperparameter v with a ﬁxed global threshold value τ that controls the binary mask.
+- id: c4
+  statement: 'Budget: task-specific pruning of BERT-base-uncased (about 84M parameters, embeddings frozen) on SQuAD v1.1, MNLI and QQP; for each task all pruning methods are fine-tuned for the same number
+    of updates (6-10 epochs), with the cubic sparsity schedule of Zhu and Gupta plus a few cool-down steps for magnitude, movement and soft movement pruning; sparsity percentages are relative to BERT-base.
+    A footnote says preliminary experiments suggested more pruning steps tended to improve end performance.'
+  location: Experimental Setup
+  page: 5
+  quote: we ﬁne-tune the pre-trained model for the same number of updates (between 6 and 10 epochs) across pruning methods
+- id: c5
+  statement: 'Baselines: Reweighted Proximal Pruning (RPP) and LayerDrop numbers are taken from their authors rather than rerun; for structured L0 regularization (McCarley, 2019) no implementation was found,
+    so an unstructured L0 regularization baseline was used instead; mini-BERT models (Turc et al., 2019) are also compared.'
+  location: Experimental Setup
+  page: 5
+  quote: For RPP and LayerDrop, we report results from authors.
+- id: c6
+  statement: 'Sparsity-dependent ranking: at low sparsity (more than 70% of weights remaining) magnitude pruning outperforms all methods with little or no loss versus the dense model, while movement pruning
+    methods degrade quickly even at low sparsity; magnitude pruning performs poorly at high sparsity, and first-order methods are strong with less than 15% of weights remaining.'
+  location: Results
+  page: 6
+  quote: magnitude pruning outperforms all methods with little or no loss with respect to the dense model whereas the performance of movement pruning methods quickly decreases even for low sparsity levels
+- id: c7
+  statement: 'Hardware caveat: although movement pruning also beats fine-tuned mini-BERT models of the same size, the authors note that current hardware does not support optimized inference for sparse models,
+    so for inference speed a small dense model such as mini-BERT might often be preferable; Appendix A.3 adds that their sparse models gave no significant inference speedup with standard PyTorch.'
+  location: Results
+  page: 6
+  quote: 'We do note though that current hardware does not support optimized inference for sparse models: from an inference speed perspective, it might often desirable to use a small dense model such as
+    mini-BERT over a sparse alternative of the same size.'
+- id: c8
+  statement: 'Distillation combination: using the fine-tuned BERT-base model as teacher, the training objective is a convex combination of the training loss and a distillation loss on output distributions;
+    the authors report that the relative ranking of pruning methods is unchanged while all performances increase.'
+  location: Results (Distillation further boosts performance)
+  page: 7
+  quote: Overall, we observe that the relative comparisons of the pruning methods remain unchanged while the performances are strictly increased.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Hugging
+    Face (Sanh, Wolf) and Cornell (Rush). Venue from the PDF footer (''34th Conference on Neural Information Processing Systems (NeurIPS 2020)'') and the arXiv comment. Conflict of interest: the acknowledgments
+    state ''This work is conducted as part the authors’ employment at Hugging Face''; code is released through the Hugging Face Transformers library (Wolf et al., 2019, co-authored by Sanh and Wolf), and
+    the distillation discussion cites the authors'' own DistilBERT (Sanh et al., 2019). Section numbers are not recorded; section names are used. No mention of random seeds or run-to-run variance was found
+    in the text (searched for ''seed''). Table 2/3 scores are not recorded. The paper describes automated gradual pruning (Zhu and Gupta) as ''allowing masked weights to be updated'', whereas arxiv-1710.01878
+    itself states masked weights are not updated in back-propagation. Local vs global Top_v selection performed similarly except at high sparsity (body text: 2.3 F1 points with 3% remaining weights for
+    movement pruning). A convergence argument for movement pruning is given in Appendix A.1.'

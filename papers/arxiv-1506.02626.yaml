@@ -1,0 +1,90 @@
+id: arxiv-1506.02626
+title: Learning both Weights and Connections for Efficient Neural Networks
+authors:
+- Song Han
+- Jeff Pool
+- John Tran
+- William J. Dally
+year: 2015
+venue: NIPS 2015
+links:
+  arxiv: https://arxiv.org/abs/1506.02626
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: f098da6a7573c9ae620a724d7c14281bb408ad7a18b7c3ac186c5828cba9340f
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  method_families:
+  - pruning
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Three-step pruning: train the dense network, remove all connections whose weight magnitude is below a per-layer threshold, and retrain the remaining sparse connections (keeping the surviving weights)'
+- 'Iterative pruning: repeat pruning and retraining to reach higher compression without accuracy loss'
+claims:
+- id: c1
+  statement: 'Abstract: a train / prune / retrain method reduces the parameters of AlexNet on ImageNet by 9x (61 million to 6.7 million) without accuracy loss, and of VGG-16 by 13x (138 million to 10.3
+    million) with no loss of accuracy.'
+  location: Abstract
+  page: 1
+  quote: On the ImageNet dataset, our method reduced the number of parameters of AlexNet by a factor of 9×, from 61 million to 6.7 million, without incurring accuracy loss.
+- id: c2
+  statement: 'Method: connectivity is first learned by normal training, then all connections with weights below a threshold are removed (dense to sparse), and the network is retrained to learn the final
+    weights of the remaining connections. The authors call retraining critical: without it, accuracy is significantly impacted.'
+  location: Section 3
+  page: 3
+  quote: If the pruned network is used without retraining, accuracy is signiﬁcantly impacted.
+- id: c3
+  statement: 'Regularization: L1 regularization pushes more parameters near zero and gives better accuracy after pruning but before retraining, whereas L2 gives higher accuracy after retraining; overall
+    L2 gives the best pruning results.'
+  location: Section 3.1
+  page: 3
+  quote: Overall, L2 regularization gives the best pruning results.
+- id: c4
+  statement: During retraining, the surviving weights from the initial training should be kept rather than re-initializing pruned layers (citing fragile co-adapted features); to limit vanishing-gradient
+    effects, CONV parameters are fixed while FC layers are retrained after pruning FC layers, and vice versa.
+  location: Section 3.3
+  page: 3
+  quote: So when we retrain the pruned layers, we should keep the surviving parameters instead of re-initializing them.
+- id: c5
+  statement: Iterative pruning (pruning followed by retraining, repeated) increases the pruning rate on AlexNet from 5x to 9x without loss of accuracy compared with single-step aggressive pruning; probabilistic
+    pruning based on absolute value gave worse results.
+  location: Section 3.4
+  page: 4
+  quote: Without loss of accuracy, this method can boost pruning rate from 5× to 9× on AlexNet compared with single-step aggressive pruning.
+- id: c6
+  statement: 'Criterion and implementation: pruning is implemented in Caffe with a mask per weight tensor, and the per-layer threshold is a quality parameter multiplied by the standard deviation of that
+    layer''s weights.'
+  location: Section 4
+  page: 4
+  quote: The pruning threshold is chosen as a quality parameter multiplied by the standard deviation of a layer’s weights.
+- id: c7
+  statement: 'Cost: the original AlexNet took 75 hours to train on an NVIDIA Titan X, and retraining the pruned AlexNet (at 1/100 of the original initial learning rate) took 173 hours; the authors argue
+    this is less of a concern because pruning is used for model reduction when the model is ready for deployment.'
+  location: Section 4.2
+  page: 5
+  quote: It took 173 hours to retrain the pruned AlexNet.
+- id: c8
+  statement: 'Hardware caveat: the authors target fixed-function hardware specialized for sparse DNNs, citing the limitation of general-purpose hardware on sparse computation; they note that after pruning
+    AlexNet and VGGNet are small enough to store all weights on chip.'
+  location: Section 5
+  page: 8
+  quote: We are targeting our pruning method for ﬁxed-function hardware specialized for sparse DNN, given the limitation of general purpose hardware on sparse computation.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Stanford
+    University (Han, Dally) and NVIDIA (Pool, Tran, Dally). Venue from the arXiv comment (''Published as a conference paper at NIPS 2015''); the arXiv v3 PDF itself has no venue line. Section numbers are
+    from numbered headings in the PDF. Retraining dropout ratio is set to D_r = D_o * sqrt(C_ir / C_io) (Section 3.2). Discussion (Section 5): without retraining accuracy starts dropping at 1/3 of the original
+    connections vs 1/10 with retraining (read from the trade-off curve and stated in text); CONV layers are more sensitive than FC layers, the first conv layer most; two pruned points were slightly better
+    than the original, which the authors ''believe'' is due to reduced overfitting; sparse storage overhead 15.6%; L1-then-L2 did not beat L2 for both phases; layer sensitivity is used to set each layer''s
+    threshold. Table 6 baselines (data-free pruning, Fastfood, Collins & Kohli, naive cut, SVD) are numbers from other papers'' methods and not recorded. Reference [14] is the authors'' own Deep Compression
+    (arxiv-1510.00149), cited as orthogonal quantization.'

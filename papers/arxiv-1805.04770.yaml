@@ -1,0 +1,103 @@
+id: arxiv-1805.04770
+title: Born Again Neural Networks
+authors:
+- Tommaso Furlanello
+- Zachary C. Lipton
+- Michael Tschannen
+- Laurent Itti
+- Anima Anandkumar
+year: 2018
+venue: ICML 2018
+links:
+  arxiv: https://arxiv.org/abs/1805.04770
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 0fd15e913ed8b0a6b263f916dd4f248ead69f194901caf5b0290f56a8ec97cd4
+tags:
+  tasks:
+  - image-classification
+  - language-modeling
+  method_families:
+  - knowledge-distillation
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Born-Again Networks (BANs): after a teacher converges, a student with identical architecture (new random seed) is trained by KD from the teacher''s outputs; repeated over several generations and averaged
+  into Born-Again Network Ensembles (BANE)'
+- 'Two treatments to dissect KD: Confidence-Weighted by Teacher Max (CWTM), label loss weighted by the teacher''s max output, and Dark Knowledge with Permuted Predictions (DKPP), teacher outputs with non-argmax
+  dimensions permuted'
+claims:
+- id: c1
+  statement: 'Setup: instead of compressing, the student is parameterized identically to the teacher; after the teacher converges a new student is trained to predict the correct labels and match the teacher''s
+    output distribution. The authors report that applied to DenseNets, ResNets and LSTM-based sequence models, BANs consistently have lower validation errors than their teachers (the result tables report
+    test error).'
+  location: Introduction
+  page: 1
+  quote: We call these students Born-Again Networks (BANs) and show that applied to DenseNets, ResNets and LSTM-based sequence models, BANs consistently have lower validation errors than their teachers.
+- id: c2
+  statement: 'Training protocol: BAN re-training is done after convergence with the same training schedule originally used for the teacher. Other forms of transfer were tried (progressively constraining
+    students to be similar to teachers, sharing first and last layers, L2 losses on activations), but these systematically performed slightly worse than simple KD via cross-entropy.'
+  location: Section 4.1
+  page: 5
+  quote: However, we found these variations to systematically perform slightly worse than the simple KD via cross entropy.
+- id: c3
+  statement: 'Gradient analysis: the KD gradient splits into a dark-knowledge term from the wrong outputs and a term for the correct class that equals the ground-truth gradient rescaled by the teacher''s
+    confidence p_*, which resembles importance weighting of samples (citing Hinton et al., 2015 for the dark-knowledge explanation). The authors ask whether KD''s success is due to the non-argmax outputs
+    or simply to importance weighting.'
+  location: Section 3.2
+  page: 4
+  quote: Or is dark knowledge simply performing a kind of importance weighting?
+- id: c4
+  statement: 'Dissecting dark knowledge on CIFAR-100: CWTM (label loss weighted by the teacher''s max output, no wrong-class information) gave weak improvements over the teacher in all but the largest DenseNet;
+    DKPP (non-argmax teacher outputs permuted) gave a comparable but systematic improvement. The authors conclude KD does not simply contribute information on each specific non-correct output, and that
+    CWTM''s result suggests pre-trained models can be used to rebalance the training set.'
+  location: Section 5.2
+  page: 7
+  quote: These results demonstrate that KD does not simply contribute information on each speciﬁc non-correct output.
+- id: c5
+  statement: 'Multiple generations: the k-th model is trained from the (k-1)-th, and Born-Again Network Ensembles average the predictions of several generations; the authors find the improvements of the
+    sequence saturate but report significant gains through ensembling.'
+  location: Section 3.1
+  page: 4
+  quote: We ﬁnd the improvements of the sequence to saturate, but we are able to produce signiﬁcant gains through ensembling.
+- id: c6
+  statement: 'Weak teachers: DenseNet students trained from Wide-ResNet teachers and ResNet students trained from a DenseNet teacher of comparable complexity were used to argue that weak masters can still
+    improve students and that KD need not be used with strong masters.'
+  location: Introduction
+  page: 2
+  quote: Thus, we demonstrate that weak masters can still improve performance of students, and KD need not be used with strong masters.
+- id: c7
+  statement: 'Exceptions stated in the text: on CIFAR-100 all but one Wide-ResNet student improved over its identical teacher; for BAN-Wide-ResNets with a DenseNet teacher, limiting the number of blocks
+    to 1 per stage led to inferior performance compared to the teacher (Section 5.2).'
+  location: Section 5.2
+  page: 6
+  quote: In Table 3 all but one Wide-ResNnet student improve over their identical teacher.
+- id: c8
+  statement: 'Penn Tree Bank language models (single-layer 1500-unit LSTM and a CNN-LSTM; KD applied between softmax outputs of unrolled teacher and student): test perplexity decreased from 80.05 to 76.97
+    (CNN-LSTM) and from 71.87 to 68.56 (LSTM), without the state-of-the-art bag of tricks or sequence-level KD. Unlike the CIFAR CNNs, the LSTMs worked only with teacher outputs plus label loss (BAN+L);
+    a potential explanation offered is that teachers generally reach 100% training accuracy on CIFAR while PTB training perplexity is far from minimized.'
+  location: Section 5.3
+  page: 8
+  quote: Unlike the CNNs trained for CIFAR classiﬁcation, we ﬁnd that LSTM models work only when trained with a combination of teacher outputs and label loss (BAN+L).
+- id: c9
+  statement: The authors state that their work is, to their knowledge, the first to show that dark knowledge applied for self-distillation, even without softening the logits, gives significant boosts in
+    performance; they contrast it with Yim et al. (2017), whose identical-architecture transfer loss they say is not demonstrated to outperform more standard KD.
+  location: Section 2.1
+  page: 3
+  quote: Our work is the ﬁrst, to our knowledge, to demonstrate that dark knowledge, applied for self-distillation, even without softening the logits re-sults in signiﬁcant boosts in performance.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: USC,
+    CMU, ETH Zürich, Caltech, Amazon AI. Venue from the PDF footer (''Proceedings of the 35th International Conference on Machine Learning, Stockholm, Sweden, PMLR 80, 2018'') and the arXiv comment. Section
+    numbers are from numbered headings in the PDF. The abstract and Introduction speak of validation error while Tables 1-5 are captioned as test error; the CIFAR-100 single best model (BAN-3-DenseNet-80-80,
+    15.5% error, 22M parameters) is called ''SOTA non-ensemble model without shake-shake regularization'' (Section 5.2). No temperature value is given; the text says the logits were not softened. CIFAR-100
+    training follows the Wide-ResNet setting except Mean-Std normalization, with weight decay (and dropout for Wide-ResNet) as the only regularization besides KD (Section 4). Each table cell is a single
+    number; no repetitions, seeds per cell, or standard deviations were found in the text (searched for seed, standard deviation, repeat, runs). Table 2: BAN = teacher loss only, BAN+L = label + teacher
+    loss; the text states removing label supervision gives a systematic improvement on CIFAR-100. Not a compression method (students are the same size), so model-compression is not tagged.'

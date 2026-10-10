@@ -1,0 +1,98 @@
+id: arxiv-2301.00774
+title: 'SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot'
+authors:
+- Elias Frantar
+- Dan Alistarh
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2301.00774
+  code: https://github.com/IST-DASLab/sparsegpt
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 1ae9e436a5ff2279cf89e1a642c89139ef411e01d21dfd67da2aec40af895f03
+tags:
+  tasks:
+  - model-compression
+  - language-modeling
+  method_families:
+  - pruning
+  - quantization
+  - large-language-models
+proposes:
+- 'SparseGPT: one-shot post-training pruning that solves the layer-wise reconstruction problem approximately, sharing a sequence of inverse Hessians (H_Uj)^-1 across rows with OBS-style partial updates
+  so that the cost is O(d_hidden^3) per Transformer layer'
+- Adaptive mask selection by iterative blocking (mask chosen every B_s = 128 columns by OBS error w^2/[H^-1]^2), extension to n:m semi-structured sparsity, and joint sparsification and quantization in the
+  GPTQ column-wise framework
+claims:
+- id: c1
+  statement: 'Problem: post-training pruning splits the model into layer-wise subproblems that minimize the l2 error between the dense layer output W X and the pruned output (M * W_hat) X on calibration
+    inputs; optimizing the mask and the remaining weights jointly is NP-hard, so existing methods approximate it, typically by selecting a mask (e.g. by magnitude) and then reconstructing the remaining
+    weights.'
+  location: Section 2
+  page: 2
+  quote: Thus, exactly solving it for larger layers is unrealistic, leading all existing methods to resort to approximations.
+- id: c2
+  statement: 'Algorithmic idea: exact reconstruction needs a separate O(d_col^3) Hessian inversion per row because row masks differ, giving runtime scaling with the 4th power of the hidden dimension; SparseGPT
+    reuses one sequence of inverse Hessians for all rows by only updating weights not yet processed (optimal partial OBS updates), giving O(d_col^3 + d_row d_col^2) in total.'
+  location: Section 3.1
+  page: 3
+  quote: The key towards designing an approximation algorithm that is both accurate and efﬁcient lies in enabling the reuse of Hessians between rows with distinct pruning masks.
+- id: c3
+  statement: 'Mask selection: choosing p% per column would impose unnecessary structure, which the authors call problematic given a small number of highly sensitive outlier features in LLMs; instead the
+    mask is chosen for B_s = 128 columns at a time by the OBS reconstruction error using the Hessian-sequence diagonals, taking previous weight updates into account (for a single column the criterion reduces
+    to magnitude).'
+  location: Section 3.2
+  page: 5
+  quote: We remove this disadvantage via iterative blocking.
+- id: c4
+  statement: 'Setup: all experiments are one-shot without fine-tuning; layers are sparsified sequentially on a single 80GB A100 (about 4 hours for the 175B models); calibration data are 128 random 2048-token
+    segments from the first shard of C4, following GPTQ, so no task-specific data is seen. All linear layers except embeddings and head are pruned uniformly.'
+  location: Section 4
+  page: 6
+  quote: All our experiments are performed in one-shot, without ﬁnetuning, in a similar setup to recent work on post-training quantization of GPT-scale models (Frantar et al., 2022a; Yao et al., 2022; Dettmers
+    et al., 2022).
+- id: c5
+  statement: 'Evaluation practice: the stated focus is accuracy relative to the dense baseline rather than absolute numbers (preprocessing may change absolute values); perplexity follows the HuggingFace
+    procedure, zero-shot tasks use GPTQ''s implementation based on the EleutherAI harness, and dense and sparse results are computed with the same code.'
+  location: Section 4
+  page: 6
+  quote: All dense and sparse results were computed with exactly the same code, available as supplementary material, to ensure a fair comparison.
+- id: c6
+  statement: 'Baselines: layer-wise magnitude pruning (Zhu & Gupta) at all scales, and AdaPrune only for models up to 1B parameters, using the authors'' own memory-optimized reimplementation (Frantar &
+    Alistarh, 2022) with hyperparameters further tuned from those of the AdaPrune authors (about 3x faster without loss of solution quality, by their account).'
+  location: Section 4
+  page: 6
+  quote: On models up to 1B parameters, we compare also against AdaPrune (Hubara et al., 2021a), the most efﬁcient among existing accurate post-training pruning methods.
+- id: c7
+  statement: 'Scale trend: magnitude-pruned models collapse across all scales (larger variants generally dropping faster), unlike smaller vision models; SparseGPT''s perplexity loss shrinks with model size,
+    and the slight improvement over dense at the largest scale ''seems to be dataset specific''. The authors speculate the trend of larger models being easier to sparsify is due to overparametrization and
+    leave a detailed investigation to future work.'
+  location: Section 4.1
+  page: 7
+  quote: In general, there is a clear trend of larger models being easier to sparsify, which we speculate is due to overparametrization.
+- id: c8
+  statement: 'Zero-shot evaluation caveat: zero-shot tasks are described as relatively noisy but more interpretable; e.g. 2:4 pruning appears noticeably more accurate than the dense model on Lambada despite
+    being the most constrained pattern, and the authors say such effects average out over many tasks.'
+  location: Section 4.1
+  page: 7
+  quote: These evaluations are known to be relatively noisy (Dettmers et al., 2022), but more interpretable.
+- id: c9
+  statement: 'Speedups are preliminary: unstructured sparsity speedups are measured end-to-end only on OPT-2.7B on CPU with the DeepSparse engine; for GPUs, 2:4 sparsity is benchmarked per layer with CUTLASS
+    against cuBLAS on OPT-175B matrix shapes (batch of 2048 tokens), and the authors say end-to-end speedups will likely be slightly lower due to overheads such as attention.'
+  location: Appendix E
+  page: 14
+  quote: end-to-end speedups will likely be slightly lower due to some extra overheads from e.g. attention
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: IST
+    Austria (both) and Neural Magic (Alistarh). No venue is stated in the arXiv PDF or metadata (no comment/journal_ref); none recorded. Conflict of interest: Frantar and Alistarh are authors of GPTQ (arxiv-2210.17323,
+    carded), OBC (Frantar et al., 2022b) and the AdaPrune reimplementation used as baseline (Frantar & Alistarh, 2022); SparseGPT inherits GPTQ''s Cholesky and lazy-batch techniques, zero-shot evaluation
+    uses GPTQ''s implementation, and joint 50% + 4-bit is compared with GPTQ 3-bit. The CPU speedup study uses DeepSparse (NeuralMagic, 2022), the company of the second author''s affiliation. Section numbers
+    are from numbered headings. Ablations (Appendix A, OPT-2.7B): 5 calibration seeds gave 13.52 +- 0.075 perplexity; Hessian dampening 0.01 and blocksize 128 chosen; reconstruction error about 20% worse
+    than exact reconstruction on average. Perplexity tables are not recorded.'

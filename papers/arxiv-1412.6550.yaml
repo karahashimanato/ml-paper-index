@@ -1,0 +1,100 @@
+id: arxiv-1412.6550
+title: 'FitNets: Hints for Thin Deep Nets'
+authors:
+- Adriana Romero
+- Nicolas Ballas
+- Samira Ebrahimi Kahou
+- Antoine Chassang
+- Carlo Gatta
+- Yoshua Bengio
+year: 2015
+venue: ICLR 2015
+links:
+  arxiv: https://arxiv.org/abs/1412.6550
+  code: https://github.com/adri-romsor/FitNets
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 584ff258c88dd5b992b1df7977d856189840cdf89b0ff93331a69054f5f5f9c7
+tags:
+  tasks:
+  - model-compression
+  - image-classification
+  method_families:
+  - knowledge-distillation
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'FitNets: thinner and deeper student networks trained from a wider, shallower teacher'
+- 'Hint-based training: a guided student layer (plus a convolutional regressor) is first trained to predict a teacher hidden layer (the hint) with an L2 loss, then the whole student is trained with the
+  KD loss, with the KD weight lambda annealed linearly'
+claims:
+- id: c1
+  statement: 'KD objective as used here (reviewing Hinton & Dean, 2014): L_KD(W_S) = H(y_true, P_S) + lambda H(P_T^tau, P_S^tau), where P^tau = softmax(a/tau) with a relaxation tau > 1 applied to both teacher
+    and student pre-softmax outputs, H is the cross-entropy and lambda balances the two terms.'
+  location: Section 2.1
+  page: 3
+  quote: where H refers to the cross-entropy and λ is a tunable parameter to balance both cross-entropies.
+- id: c2
+  statement: 'Hint definition: a hint is the output of a teacher hidden layer used to guide a chosen student (guided) layer, which should predict it. Hints act as a regularizer, so the pair must be chosen
+    to avoid over-regularization: the deeper the guided layer, the less flexibility and the more likely over-regularization. The authors state they choose the middle layers of teacher and student.'
+  location: Section 2.2
+  page: 3
+  quote: The deeper we set the guided layer, the less ﬂexibility we give to the network and, therefore, FitNets are more likely to suffer from over-regularization.
+- id: c3
+  statement: 'Hint loss: L_HT(W_Guided, W_r) = 1/2 ||u_h(x; W_Hint) - r(v_g(x; W_Guided); W_r)||^2, where a regressor r on top of the guided layer maps the (usually narrower) student layer to the size of
+    the teacher hint, and u_h and r must have the same non-linearity. Because a fully connected regressor between convolutional layers increases parameters and memory dramatically, a convolutional regressor
+    is used instead.'
+  location: Section 2.2
+  page: 3
+  quote: To mitigate this limitation, we use a convolutional regressor instead.
+- id: c4
+  statement: 'Training is stage-wise: first the student up to the guided layer (and the regressor) is trained with the hint loss from a random initialization, then the whole student is trained with the
+    KD loss while lambda is annealed linearly, so that examples on which the teacher is confident first have a stronger effect and their importance then decreases; the authors present this as a generic
+    form of curriculum learning where prior information is deduced from the teacher.'
+  location: Section 2.4
+  page: 5
+  quote: In order to promote the learning of more complex examples (examples with lower teacher conﬁdence), we gradually anneal λ during the training with a linear decay.
+- id: c5
+  statement: 'Hyper-parameters (CIFAR-10/100): RMSProp with initial learning rate 0.005, mini-batch 128, parameters initialized in U(-0.005, 0.005); lambda initialized to 4 and decayed linearly over 500
+    epochs to 1; tau = 3. On CIFAR-10 each stage stopped after 100 epochs without validation improvement (maximum 500 epochs), and the FitNet was then retrained on the full 50K training set; on CIFAR-100
+    the number of epochs was taken from the CIFAR-10 stopping criterion.'
+  location: Appendix A.1.2
+  page: 11
+  quote: Parameter λ in Eq. (2) was initialized to 4 and decayed linearly during 500 epochs reaching λ = 1.
+- id: c6
+  statement: 'CIFAR-10: a FitNet with 17 maxout convolutional layers and roughly 1/3 of the parameters of the maxout teacher (student layer 11 guided by teacher layer 2) outperforms the teacher, which the
+    authors say suggests depth is crucial; the text states 91.61% accuracy versus 85.8% for the top-performing compression method of Ba & Caruana (2014), with roughly 28 times fewer parameters.'
+  location: Section 3.1
+  page: 5
+  quote: Our student model outperforms the teacher model, while requiring notably fewer parameters, suggesting that depth is crucial to achieve better representations.
+- id: c7
+  statement: 'Hinting with classification targets instead of the teacher: stage-wise training with label-supervised first halves (with or without KD in stage 2) and joint optimization with supervised hints
+    failed to learn; a 19-layer network trained as Deeply-Supervised Networks reached 88.2% versus 91.61% with hint-based training, which the authors say suggests a very discriminative intermediate hint
+    might be too aggressive and a smoother teacher hint offers better generalization.'
+  location: Section 3.1
+  page: 6
+  quote: Such result suggests that using a very discriminative hint w.r.t. classiﬁcation at intermediate layers might be too aggressive; using a smoother hint (such as the guidance from a teacher network)
+    offers better generalization.
+- id: c8
+  statement: 'Fixed-budget comparison on CIFAR-10 (about 30M and 107M multiplications; networks of 3 to 11 layers; test accuracy with early stopping on the validation set, no retraining): with 30M multiplications
+    standard backprop could not train networks with more than 5 layers, KD trained up to 7 layers and reached its limits there, and hint-based training trained 13-layer networks. The authors attribute the
+    difference to the starting point only (random vs. hint-pretrained) and state the results suggest HT is a stronger regularizer than KD.'
+  location: Section 4.1
+  page: 8
+  quote: HT tends to ease these optimization issues and is able to train 13-layer networks of 30M multiplications.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): knowledge distillation and pruning (soft targets and temperature, hint-based and self distillation, teacher-student gaps and
+    fidelity; magnitude, gradual, single-shot, movement and LLM pruning, lottery tickets, and how pruning is evaluated). Carded by a subagent. Results tables not recorded; claims only. Affiliations: Universitat
+    de Barcelona, Université de Montréal, École Polytechnique de Montréal, Centre de Visió per Computador. Venue from the PDF header (''Published as a conference paper at ICLR 2015''); year recorded as
+    2015 (the venue year) although the first arXiv version is from 2014. Section numbers are from numbered headings in the PDF. The paper cites KD as ''Hinton & Dean, 2014'' (the workshop version of arxiv-1503.02531).
+    Eq. (2) as written has no tau^2 factor on the soft-target term. Although Section 2.2 says the middle layers are chosen, the experiments use e.g. student layer 11 <- teacher layer 2 (CIFAR-10) and 4
+    <- 2 (MNIST); Table 6 lists the hint pairs for the depth experiment. Other body-text numbers not recorded as claims: MNIST FitNet errors 1.9% (backprop), 0.65% (KD), 0.51% (hints) (Section 3.3); AFLW
+    FitNet 1 4.58% (KD) vs 2.55% (HT) and FitNet 2 1.95% vs 1.85% (Section 3.4); FitNet 1 with 36x less capacity is about 10x faster with a 1.3% decrease (Section 4.2). Teachers are the maxout networks
+    of Goodfellow et al. (2013b), on which Bengio is a co-author. Single runs; no variance reported.'

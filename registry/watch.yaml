@@ -85,3 +85,11 @@ themes:
     tags: [mcmc, variational-inference, posterior-inference]
     arxiv_queries:
       - '(abs:"variational inference" OR abs:"Hamiltonian Monte Carlo" OR abs:"MCMC" OR abs:"simulation-based calibration" OR abs:"convergence diagnostic") AND (cat:stat.ML OR cat:stat.CO OR cat:cs.LG)'
+  - name: 知識蒸留と枝刈り
+    tags: [knowledge-distillation, pruning]
+    arxiv_queries:
+      - '(abs:"knowledge distillation" OR abs:"network pruning" OR abs:"lottery ticket" OR abs:"sparsity" OR abs:"pruning") AND (abs:neural OR abs:model) AND (cat:cs.LG OR cat:cs.CV OR cat:cs.CL)'
+  - name: グラフニューラルネットワーク
+    tags: [graph-neural-networks, graph-node-prediction, graph-level-prediction]
+    arxiv_queries:
+      - '(abs:"graph neural network" OR abs:"graph convolutional" OR abs:"message passing" OR abs:"over-smoothing" OR abs:"oversquashing" OR abs:heterophily) AND (cat:cs.LG OR cat:stat.ML OR cat:cs.SI)'

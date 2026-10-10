@@ -11,6 +11,8 @@ tasks:
     description: Estimating causal / treatment effects from data.
   - id: graph-node-prediction
     description: Node-level classification or regression on graphs.
+  - id: graph-level-prediction
+    description: "Graph-level classification or regression, where each whole graph is one example (e.g. molecules)."
   - id: drift-detection
     description: Detecting that the data distribution or the input-output relationship has changed over time (MLOps monitoring).
   - id: concept-drift-detection
@@ -46,6 +48,8 @@ tasks:
     description: Measuring and reporting the training / inference cost of models (FLOPs, time, energy, memory).
   - id: language-modeling
     description: Training and evaluating language models.
+  - id: natural-language-understanding
+    description: "Sentence- and passage-level language understanding tasks such as GLUE classification and SQuAD question answering."
   - id: image-classification
     description: Image classification.
   - id: learned-indexes

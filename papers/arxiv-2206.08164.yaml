@@ -1,0 +1,104 @@
+id: arxiv-2206.08164
+title: Long Range Graph Benchmark
+authors:
+- Vijay Prakash Dwivedi
+- Ladislav Rampášek
+- Mikhail Galkin
+- Ali Parviz
+- Guy Wolf
+- Anh Tuan Luu
+- Dominique Beaini
+year: 2022
+venue: NeurIPS 2022 Datasets and Benchmarks Track
+links:
+  arxiv: https://arxiv.org/abs/2206.08164
+  code: https://github.com/vijaydwivedi75/lrgb
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 5fc8db69fdeeccc9f3072da47c0acf288adc5d1516dccc6691b78fa6afd86002
+tags:
+  tasks:
+  - graph-node-prediction
+  - graph-level-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Long Range Graph Benchmark (LRGB): five datasets (PascalVOC-SP, COCO-SP, PCQM-Contact, Peptides-func, Peptides-struct) argued to require long-range interaction (LRI) reasoning'
+- 'Characterizing factors for LRI datasets: graph size, nature of the task, and contribution of global graph structure'
+- Baselines of local MP-GNNs (GCN, GCNII, GINE, GatedGCN) and fully connected Transformers (Transformer+LapPE, SAN) at a 500k parameter budget
+claims:
+- id: c1
+  statement: 'Motivation: an L-layer message-passing GNN aggregates information from up to L hops, but the L-hop neighborhood grows exponentially, leading to ''information oversquashing'' (citing Alon and
+    Yahav [2]), so such GNNs fail to capture long-range dependencies as distant information may get lost.'
+  location: Introduction
+  page: 2
+  quote: Consequently, such GNNs fail at capturing long-range dependencies as a significant amount of distant information may get lost due to the squashing.
+- id: c2
+  statement: 'Critique of existing benchmarks: Graph Transformers are often evaluated on datasets (e.g. ZINC, ogbg-molpcba, ogbg-molhiv) whose tasks primarily rely on local structural information, and the
+    leaderboards of these benchmarks are topped by local MP-GNN based models augmented with higher-order structural information.'
+  location: Introduction
+  page: 2
+  quote: However, it is often the case that these models are evaluated on datasets where the corresponding tasks primarily rely on local structural information rather than the distant information propagation
+    between nodes.
+- id: c3
+  statement: 'Graph size as a factor: with small graphs such as ogbg-mol* or ZINC (average 23-26 nodes), the problem radius is effectively small, so local MP-GNNs would succeed largely without being influenced
+    by the bottleneck; the authors conclude LRI benchmarks need sufficiently large graphs, but note size alone may not be enough since the problem radius can be small even in large graphs.'
+  location: Section 2
+  page: 3
+  quote: Therefore, a direct conclusion of this condition is that for a LRI benchmark, the graph sizes should be sufficiently large in order to separate the local MP-GNNs’ performance from those models
+    which model LRIs.
+- id: c4
+  statement: The authors state they do not aim at 'provable LRI' benchmarks (which would often be toy datasets) but at real-world datasets whose characterizing factors suggest that the tasks would depend
+    on long-range signal propagation.
+  location: Introduction
+  page: 2
+  quote: Note that our characterization henceforth is not directed at proposing ‘provable LRI’ benchmarks, which would often lead to toy datasets (that are useful for quick prototyping of ideas) such as
+    the shortest path prediction task [55] or the color connectivity dataset [50] which rely on LRI.
+- id: c5
+  statement: 'PCQM-Contact task: predict pairs of atoms more than 5 hops apart in the molecular graph that are in 3D contact (distance below 3.5 Å), framed as inductive link prediction with filtered ranking
+    metrics (Hits@1, Hits@3, MRR); the dataset is split randomly 90/5/5.'
+  location: Section 3.3
+  page: 6
+  quote: The task is to predict pairs of distant nodes (more than 5 hops away from each other in a molecule graph) that will be contacting with each other in the 3D space, i.e., the 3D distance between
+    atoms will be smaller than 3.5Å.
+- id: c6
+  statement: 'Experimental setup: hyperparameters of all baselines are chosen to stay within a budget of approximately 500k learnable parameters (4-8 layers, hidden size adjusted), each experiment is run
+    4 times with different seeds, Adam with default settings and a starting learning rate between 0.0003 and 0.001 depending on model and dataset, and training is limited to 60h (SAN did not converge on
+    COCO-SP within that limit).'
+  location: Appendix C
+  page: 22
+  quote: We run each experiment 4 times with different random seeds and report the mean and standard deviation of the respective performance metrics.
+- id: c7
+  statement: 'Findings: simple local MP-GNNs (GCN, GINE) perform poorly on all datasets except Peptides-func, consistent with Alon and Yahav''s finding that GCN and GIN suffer more from over-squashing than
+    GAT; shallow MP-GNNs (L = 2) significantly underfit compared with deeper ones, unlike classical benchmarks such as Cora or Citeseer where shallow GCNs fared better.'
+  location: Section 4.2
+  page: 9
+  quote: This is consistent with the empirical findings in [2] where GCN and GIN suffer from over-squashing to a greater extent than GAT, an attention based MP-GNN [60].
+- id: c8
+  statement: Transformers on the fully connected graph rank among the best baselines except GatedGCN vs. Transformer on PascalVOC-SP/COCO-SP, with the gap seeming most distinct on the Peptides datasets;
+    positional encoding alone (GatedGCN with LapPE or RWSE) contributes little or no gain; and O(N^2) Transformers may be computationally inefficient to scale.
+  location: Section 4.2
+  page: 10
+  quote: First, the use of positional encoding alone contributes to little or no gain in performance on the proposed datasets.
+- id: c9
+  statement: The v4 PDF adds a footnote directing readers to Tönshoff et al. (2023) for a reassessment of the original baselines on all the datasets, and to a community leaderboard.
+  location: Section 4.1
+  page: 8
+  quote: For a reassessment of the original baselines on all the datasets as well as extensions of PCQM-Contact’s metric, we refer to the paper [58] by Tönshoff et al., 2023.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF footer on page 1 (''36th Conference on Neural Information Processing
+    Systems (NeurIPS 2022) Track on Datasets and Benchmarks'') and the arXiv comment; year 2022 is the first arXiv version (v4 dated 28 Nov 2023). Section numbers from numbered headings in the PDF (2, 3.3,
+    3.4, 4.1, 4.2). Conflict of interest: the evaluated Transformer+LapPE uses the Laplacian PE of Dwivedi et al. [14] and the graph Transformer of Dwivedi and Bresson [13], RWSE is from Dwivedi et al.
+    [15], SAN [34] is co-authored by Beaini, and the implementation uses GraphGPS [51] co-authored by Rampášek, Galkin, Dwivedi, Luu, Wolf and Beaini; the LRGB authors thus evaluate their own models and
+    software. The stated conclusion that ''Transformers significantly outperform message passing'' was later reassessed by Tönshoff et al. (2023), which the authors cite in v4 (footnote in Section 4.1);
+    the reassessment itself is not carded here. Link prediction (PCQM-Contact) has no matching task tag. All result tables are not recorded.'

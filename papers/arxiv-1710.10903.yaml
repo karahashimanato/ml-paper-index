@@ -1,0 +1,108 @@
+id: arxiv-1710.10903
+title: Graph Attention Networks
+authors:
+- Petar Veličković
+- Guillem Cucurull
+- Arantxa Casanova
+- Adriana Romero
+- Pietro Liò
+- Yoshua Bengio
+year: 2017
+venue: ICLR 2018
+links:
+  arxiv: https://arxiv.org/abs/1710.10903
+  code: https://github.com/PetarV-/GAT
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: a7d811a44e1c65bf27da3a01859f23a8edbe33b8f96114b4b5066aedb078f284
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - semi-supervised
+  - supervised
+proposes:
+- 'Graph attentional layer: shared linear map W, attention logits e_ij = LeakyReLU(a^T [W h_i || W h_j]) computed only for j in the first-order neighborhood of i (including i), normalized by a softmax over
+  the neighborhood, output h''_i = sigma(sum_j alpha_ij W h_j)'
+- 'Multi-head attention: K independent heads concatenated in hidden layers and averaged in the final prediction layer'
+claims:
+- id: c1
+  statement: 'Attention coefficients: a shared linear transformation W is applied to every node and a shared attention mechanism computes e_ij = a(W h_i, W h_j); graph structure is injected by masked attention,
+    computing e_ij only for j in the neighborhood N_i (in all experiments the first-order neighbors of i, including i), normalized with a softmax over j. In the experiments a is a single-layer feedforward
+    network with weight vector a in R^(2F'') and LeakyReLU (negative slope 0.2) applied to the concatenation [W h_i || W h_j].'
+  location: Section 2.1
+  page: 3
+  quote: We inject the graph structure into the mechanism by performing masked attention—we only compute eij for nodes j ∈Ni, where Ni is some neighborhood of node i in the graph.
+- id: c2
+  statement: 'Multi-head attention: K independent attention mechanisms are applied and their outputs concatenated (K F'' features per node); on the final prediction layer concatenation is replaced by averaging,
+    with the final nonlinearity (softmax or logistic sigmoid) applied afterwards. The authors found multi-head attention beneficial for stabilizing the learning process, similarly to Vaswani et al. (2017).'
+  location: Section 2.1
+  page: 4
+  quote: To stabilize the learning process of self-attention, we have found extending our mechanism to employ multi-head attention to be beneﬁcial, similarly to Vaswani et al. (2017).
+- id: c3
+  statement: 'Cost: the attention can be parallelized across edges and output features across nodes, with no eigendecompositions or similar costly matrix operations; one head computing F'' features costs
+    O(|V| F F'' + |E| F''), stated to be on par with GCN; multi-head attention multiplies storage and parameter requirements by K.'
+  location: Section 2.2
+  page: 5
+  quote: No eigendecompositions or similar costly matrix operations are required.
+- id: c4
+  statement: 'Inductive applicability: because the attention is shared across all edges, it does not depend on upfront access to the global graph structure or all nodes'' features; the graph need not be
+    undirected, and the technique is directly applicable to inductive learning, including evaluation on graphs completely unseen during training.'
+  location: Section 2.2
+  page: 5
+  quote: The attention mechanism is applied in a shared manner to all edges in the graph, and therefore it does not depend on upfront access to the global graph structure or (features of) all of its nodes
+    (a limitation of many prior techniques).
+- id: c5
+  statement: 'Contrast with GraphSAGE (Hamilton et al., 2017): GraphSAGE samples a fixed-size neighborhood and so does not access the entire neighborhood at inference, and its LSTM aggregator assumes a
+    sequential ordering (handled by random orderings); GAT works with the entire neighborhood, at the expense of a variable computational footprint, and assumes no ordering.'
+  location: Section 2.2
+  page: 5
+  quote: Our technique does not suffer from either of these issues—it works with the entirety of the neighborhood (at the expense of a variable computational footprint, which is still on-par with methods
+    like the GCN), and does not assume any ordering within it.
+- id: c6
+  statement: 'Stated limitations: the sparse version is limited in batching because the framework only supports sparse multiplication for rank-2 tensors; GPUs may not offer major benefits over CPUs in sparse
+    settings; the receptive field is upper-bounded by network depth (as for GCN), though skip connections could be applied; and parallelizing over edges may involve much redundant computation because neighborhoods
+    often overlap.'
+  location: Section 2.2
+  page: 5
+  quote: It should also be noted that the size of the “receptive ﬁeld” of our model is upper-bounded by the depth of the network (similarly as for GCN and similar models).
+- id: c7
+  statement: 'Transductive protocol: Cora, Citeseer and Pubmed following Yang et al. (2016), with 20 nodes per class for training (all feature vectors visible), 1000 test nodes and 500 validation nodes
+    (the same as Kipf & Welling, 2017). Architectural hyperparameters were optimized on Cora and reused for Citeseer, with changes for Pubmed (8 output heads, stronger L2). Inductive protocol: PPI with
+    20 training, 2 validation and 2 completely unobserved test graphs.'
+  location: Section 3.1
+  page: 6
+  quote: The predictive power of the trained models is evaluated on 1000 test nodes, and we use 500 additional nodes for validation purposes (the same ones as used by Kipf & Welling (2017)).
+- id: c8
+  statement: 'Reporting: transductive results are the mean accuracy (with standard deviation) over 100 runs for GAT, while baseline numbers are reused from Kipf & Welling (2017) and Monti et al. (2016);
+    to assess attention fairly, a 64-hidden-feature GCN (GCN-64*, best of ReLU/ELU over 100 runs) is also evaluated. Inductive results are micro-F1 averaged over 10 runs, with GraphSAGE numbers reused from
+    Hamilton et al. (2017), plus a best re-tuned GraphSAGE* and a constant-attention Const-GAT with the same architecture.'
+  location: Section 3.4
+  page: 7
+  quote: For the transductive tasks, we report the mean classiﬁcation accuracy (with standard deviation) on the test nodes of our method after 100 runs, and reuse the metrics already reported in Kipf &
+    Welling (2017) and Monti et al. (2016) for state-of-the-art techniques.
+- id: c9
+  statement: The authors report improving on GCNs by margins of 1.5% (Cora) and 1.6% (Citeseer), 'suggesting' that assigning different weights to nodes of a neighborhood may be beneficial; on PPI, GAT improves
+    by 20.5% over the best GraphSAGE result they obtained and by 3.9% over Const-GAT.
+  location: Section 3.4
+  page: 8
+  quote: More speciﬁcally, we are able to improve upon GCNs by a margin of 1.5% and 1.6% on Cora and Citeseer, respectively, suggesting that assigning different weights to nodes of a same neighborhood may
+    be beneﬁcial.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Affiliations: University of Cambridge, Centre de Visió per Computador (UAB), Montréal
+    Institute for Learning Algorithms. Venue from the PDF page header (''Published as a conference paper at ICLR 2018'') and the arXiv comment; year is the first arXiv version (2017). Section numbers are
+    from numbered headings (2, 2.1, 2.2, 3, 3.1-3.4, 4). Transductive model: two layers, first with K = 8 heads of F'' = 8 features and ELU, dropout p = 0.6 on inputs and on normalized attention coefficients,
+    L2 lambda = 0.0005; inductive model: three layers (4 heads x 256 features, final 6 averaged heads), skip connections, no L2/dropout; early stopping with patience 100 on validation loss and accuracy/micro-F1.
+    Interpreting attention coefficients is left to future work (Section 3.4); graph classification and edge features are listed as future work (Section 4). GAT can be reformulated as a particular instance
+    of MoNet (Section 2.2). Results tables and the t-SNE figure are not recorded; the percentage margins in the claims are quoted from body text. No conflict of interest noted (baselines are other groups''
+    methods).'

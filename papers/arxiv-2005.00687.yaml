@@ -1,0 +1,105 @@
+id: arxiv-2005.00687
+title: 'Open Graph Benchmark: Datasets for Machine Learning on Graphs'
+authors:
+- Weihua Hu
+- Matthias Fey
+- Marinka Zitnik
+- Yuxiao Dong
+- Hongyu Ren
+- Bowen Liu
+- Michele Catasta
+- Jure Leskovec
+year: 2020
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/2005.00687
+  code: https://github.com/snap-stanford/ogb
+  url: https://ogb.stanford.edu
+source:
+  version: arXiv v7
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 6fd0295c67e835a2c1d7cf131de1dec708dbf4fae33967b4d6319349349b20de
+tags:
+  tasks:
+  - graph-node-prediction
+  - graph-level-prediction
+  method_families:
+  - graph-neural-networks
+  paradigms:
+  - supervised
+proposes:
+- 'Open Graph Benchmark (OGB): 15 datasets for node (ogbn-), link (ogbl-) and graph (ogbg-) property prediction at small/medium/large scale from diverse domains'
+- Domain-specific data splits (sales rank, species, time, scaffold, project, protein target) instead of random splits
+- A Python package with standardized data loaders (PyTorch Geometric / DGL compatible), dataset-specific Evaluators and public leaderboards
+claims:
+- id: c1
+  statement: 'Critique of existing benchmarks: most frequently used graph datasets are extremely small compared with real applications (e.g. Cora, CiteSeer, PubMed have 2,700 to 20,000 nodes; TU graph classification
+    datasets 200 to 5,000 graphs), and GNN performance on them is often unstable and nearly statistically identical (citing Dwivedi et al., 2020 and Hu et al., 2020a).'
+  location: Introduction
+  page: 2
+  quote: Most of the frequently-used graph datasets are extremely small compared to graphs found in real applications (with more than 1 million nodes or 100 thousand graphs)
+- id: c2
+  statement: There is no unified experimental protocol (studies adopt their own splits, metrics and cross-validation), and the convention of random train/test splits is, according to the authors, not realistic
+    for real-world applications and generally leads to overly optimistic performance results (citing Lohr, 2009).
+  location: Introduction
+  page: 3
+  quote: Furthermore, there is no uniﬁed and commonly-followed experimental protocol.
+- id: c3
+  statement: 'Citing Zou et al. (2020), the authors report data quality issues in standard node classification datasets: in Cora 42% of nodes leak information between features and labels and 1% are duplicated;
+    CiteSeer has leakage rates of 62% and duplication rates of 5%. Existing larger datasets (PPI, Reddit, Amazon2M) use 83%, 65% and 90% of nodes for training, giving an artificially small distribution
+    shift.'
+  location: Section 2
+  page: 5
+  quote: For example, in CORA, 42% of the nodes leak information between their features and labels, and 1% of the nodes are duplicated.
+- id: c4
+  statement: 'Scale definition: even the ''small'' OGB graphs have more than 100 thousand nodes or more than 1 million edges (but fit in a single GPU), ''medium'' means more than 1 million nodes or 10 million
+    edges, and ''large'' is on the order of 100 million nodes or 1 billion edges; ogbn-papers100M is a citation graph of 111 million papers.'
+  location: Introduction
+  page: 3
+  quote: Even the “small” OGB graphs have more than 100 thousand nodes or more than 1 million edges, but are small enough to ﬁt into the memory of a single GPU, making them suitable for testing computationally
+    intensive algorithms.
+- id: c5
+  statement: 'Realistic splits: e.g. ogbn-products is split by sales ranking (top 8% train, next 2% validation, rest test) instead of random 90/10, ogbn-arxiv trains on papers until 2017, validates on 2018
+    and tests on papers since 2019, and molecular datasets use the most challenging version of the scaffold split, in which test molecules are maximally diverse.'
+  location: Section 4.3
+  page: 11
+  quote: Speciﬁcally, we propose to train on papers published until 2017, validate on those published in 2018, and test on those published since 2019.
+- id: c6
+  statement: 'Baseline protocol: each experiment is repeated 10 times with different random seeds, reporting mean and unbiased standard deviation of training and test results corresponding to the best validation
+    results; node-level models use a fixed hidden dimensionality of 256, two or three layers and a tuned dropout in {0.0, 0.5}.'
+  location: Section 3
+  page: 6
+  quote: We repeat each experiment 10 times using different random seeds, and report the mean and unbiased standard deviation of all training and test results corresponding to the best validation results.
+- id: c7
+  statement: 'Random vs realistic splits: with the same split ratio, random splits are consistently easier. Examples stated in the body text: GraphSAGE reaches 88.20±0.08% test accuracy on a random 8/2/90
+    split of ogbn-products with about 1 percentage point generalization gap; on random splits of ogbg-molhiv and ogbg-molpcba the best GIN achieves 82.73±2.02% ROC-AUC (5.66 points higher than scaffold)
+    and 34.40±0.90% AP (7.37 points higher).'
+  location: Section 6.1
+  page: 22
+  quote: We ﬁnd the random split to be much easier than scaffold split.
+- id: c8
+  statement: On ogbn-proteins, simple MLPs (whose input features are averaged incoming edge features) perform better than node2vec and GCN, and only GraphSAGE outperforms the MLP, which the authors read
+    as indicating that central node information (not explicitly modeled in GCN's message passing) already contains much crucial information.
+  location: Section 4.2
+  page: 10
+  quote: Surprisingly, simple MLPs10 perform better than more sophisticated approaches like NODE2VEC and GCN.
+- id: c9
+  statement: 'Standardized evaluation: the ogb.*.Evaluator class takes dataset-specific inputs (e.g. y_true and y_pred matrices for ogbg-molpcba) and returns the metric appropriate for the dataset (e.g.
+    Average Precision for ogbg-molpcba); AP averaged over tasks is used because only 1.4% of molpcba data is positive.'
+  location: Section 7.2
+  page: 25
+  quote: OGB also enables standardized and reliable evaluation with the ogb.*.Evaluator class.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF footer on page 1 (''34th Conference on Neural Information Processing
+    Systems (NeurIPS 2020), Vancouver, Canada''); year 2020 is the first arXiv version (v7 dated 25 Feb 2021). Section numbers from the table of contents and numbered headings. Conflict of interest: GIN
+    (Xu, Hu, Leskovec and Jegelka, 2019) is co-authored by Hu and Leskovec and is evaluated (with virtual nodes) as a graph-level baseline, where it gives the best results on ogbg-mol* and ogbg-ppa; GraphSAGE
+    (Hamilton et al., 2017) is co-authored by Leskovec; the molecular edge-feature handling and the scaffold split follow Hu et al. (2020a, ''Strategies for pre-training graph neural networks'', by Hu,
+    Zitnik, Leskovec and others); OGB is designed to be compatible with PyTorch Geometric (Fey & Lenssen, 2019), co-authored by Fey. Link prediction / KG completion datasets (ogbl-*) have no matching task
+    tag; graph-node-prediction and graph-level-prediction were used. The paper also states (Section 2) that Dwivedi et al. (2020) mainly benchmarks GNN building blocks and that five of its six datasets
+    are synthetic (statement about the early version of arxiv-2003.00982). All result tables are not recorded.'

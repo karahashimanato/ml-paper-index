@@ -1,0 +1,103 @@
+id: arxiv-1704.01212
+title: Neural Message Passing for Quantum Chemistry
+authors:
+- Justin Gilmer
+- Samuel S. Schoenholz
+- Patrick F. Riley
+- Oriol Vinyals
+- George E. Dahl
+year: 2017
+venue: ICML 2017
+links:
+  arxiv: https://arxiv.org/abs/1704.01212
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 37dc4ad74bf3da3ee000474cc85cabfad9bc9daa47f1aced6e8b8eea71467741
+tags:
+  tasks:
+  - graph-level-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'Message Passing Neural Networks (MPNNs): a common framework with message functions M_t, vertex update functions U_t (T message-passing steps, m_v^{t+1} = sum_{w in N(v)} M_t(h_v^t, h_w^t, e_vw), h_v^{t+1}
+  = U_t(h_v^t, m_v^{t+1})) and a permutation-invariant readout R'
+- 'MPNN variants for QM9: edge network message function A(e_vw) h_w, GRU update with weight tying, set2set readout, virtual edges / master node for long-range interactions, and ''towers'' that split node
+  embeddings into k copies to reduce cost'
+claims:
+- id: c1
+  statement: 'Framework: the forward pass has a message passing phase of T steps (messages summed over neighbors via message functions M_t, node states updated by vertex update functions U_t) and a readout
+    phase computing a graph-level feature vector with a readout function R; M_t, U_t and R are learned differentiable functions, and R must be invariant to permutations of node states for the MPNN to be
+    invariant to graph isomorphism.'
+  location: Section 2
+  page: 3
+  quote: R operates on the set of node states and must be invariant to permutations of the node states in order for the MPNN to be invariant to graph isomorphism.
+- id: c2
+  statement: The authors reformulate at least eight existing models as MPNNs (including Duvenaud et al. 2015, GG-NN, Interaction Networks, Kearnes et al. 2016, DTNN, and Laplacian-based methods); for Kipf
+    & Welling the message is c_vw h_w with c_vw = (deg(v) deg(w))^(-1/2) A_vw and the update is ReLU(W^t m_v^{t+1}).
+  location: Section 2
+  page: 2
+  quote: There are at least eight notable examples of models from the literature that we can describe using our Message Passing Neural Networks (MPNN) framework.
+- id: c3
+  statement: 'Critique of an existing MPNN: in Duvenaud et al. (2015) the message vector separately sums over connected nodes and connected edges, so the authors conclude that this message passing cannot
+    identify correlations between edge states and node states.'
+  location: Section 2
+  page: 3
+  quote: It follows that the message passing implemented in Duvenaud et al. (2015) is unable to identify correlations between edge states and node states.
+- id: c4
+  statement: 'Best variant: an edge network message function (a neural network maps the edge vector e_vw to a d x d matrix A(e_vw) applied to h_w), a set2set readout, and explicit hydrogen atoms as nodes;
+    the authors found including the complete edge feature vector (bond type, spatial distance) and explicit hydrogens very important for a number of targets, and further improved test performance by ensembling
+    the five models with lowest validation error.'
+  location: Section 8
+  page: 7
+  quote: Our best MPNN variant used the edge network message function, set2set output, and operated on graphs with explicit hydrogens.
+- id: c5
+  statement: 'Long-range interactions: virtual edges between unconnected pairs and a latent master node connected to every node are introduced so information can travel long distances during propagation;
+    without spatial information, the authors find that augmenting the MPNN with some means of capturing long-range interactions greatly improves performance, and they conclude that allowing long-range interactions
+    via the master node or set2set output is important.'
+  location: Section 9
+  page: 8
+  quote: Moreover, our results also reveal the importance of allowing long range interactions between nodes in the graph with either the master node or the set2set output.
+- id: c6
+  statement: 'Caveat on the no-spatial-information and towers experiments (Tables 3 and 4): they were run with a partial charge node feature that is an output of the DFT calculation and so could not be
+    used in an applied setting; the state-of-the-art numbers in Table 2 do not use this feature.'
+  location: Section 8
+  page: 7
+  quote: This feature is an output of the DFT calculation and thus could not be used in an applied setting.
+- id: c7
+  statement: 'Protocol: QM9 (130462 molecules, 13 regression targets); 10000 random molecules for validation, 10000 for test, the rest for training; each model/target combination tuned by uniform random
+    hyperparameter search with 50 trials; the validation set is used for early stopping and model selection; targets normalized to mean 0 and variance 1, MSE minimized but MAE evaluated, and results reported
+    as the ratio of MAE to the chemical-accuracy estimate of each target (from Faber et al. 2017). Unless stated otherwise, one model is trained per target.'
+  location: Section 7
+  page: 7
+  quote: We use the validation set to do early stopping and model selection and we report scores on the test set.
+- id: c8
+  statement: 'Comparability caveat: the authors use the same train/validation/test split as the baseline study of Faber et al. (2017), but the DTNN numbers are taken as reported in Schütt et al. (2017),
+    whose model was trained on a different split with 100k training samples versus 110k in this paper.'
+  location: Section 8
+  page: 8
+  quote: The model was trained on a different train/test split with 100k training samples vs 110k used in our experiments.
+- id: c9
+  statement: 'Limitation and future work: the towers variant improves scalability but further improvements are needed for much larger graphs; the authors name generalization to graphs larger than those
+    in training as an important direction, which ''seems particularly challenging'' with spatial information because pairwise distance distributions and the number of incoming messages in fully connected
+    graphs depend on the number of atoms.'
+  location: Section 9
+  page: 8
+  quote: An important future direction is to design MPNNs that can generalize effectively to larger graphs than those appearing in the training set or at least work with benchmarks designed to expose issues
+    with generalization across graph sizes.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Venue from the PDF first-page footer (''Proceedings of the 34th International Conference
+    on Machine Learning, Sydney, Australia, PMLR 70, 2017''); arXiv comment only says ''14 pages''. Affiliations: Google Brain, Google, Google DeepMind. Section numbers from numbered headings in the PDF.
+    Other findings stated in the text: training one model per target consistently outperformed joint training on all 13 targets (''In some cases the improvement was up to 40%''); a dense-graph message passing
+    step costs O(n^2 d^2) and towers reduce it to O(n^2 d^2/k) with a reported 2x inference speedup for k = 8, n = 9, d = 200; the pair message function performed worse than the edge network (average error
+    ratio 1.53 vs 3.98 when trained jointly). Conflict of interest: Riley is a co-author of the Kearnes et al. (2016) GC baseline, and Vinyals is first author of set2set (Vinyals et al., 2015) used in the
+    readout. Results (Tables 2-4) are not recorded.'

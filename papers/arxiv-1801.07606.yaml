@@ -1,0 +1,101 @@
+id: arxiv-1801.07606
+title: Deeper Insights into Graph Convolutional Networks for Semi-Supervised Learning
+authors:
+- Qimai Li
+- Zhichao Han
+- Xiao-Ming Wu
+year: 2018
+venue: AAAI 2018
+links:
+  arxiv: https://arxiv.org/abs/1801.07606
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 6d97a1bd314c44e60ec3948e4e725475447bd91ba7268c7505224143b0ceae06
+tags:
+  tasks:
+  - graph-node-prediction
+  method_families:
+  - graph-neural-networks
+  - deep-learning
+  paradigms:
+  - semi-supervised
+proposes:
+- Interpretation of the GCN graph convolution as symmetric Laplacian smoothing, and a convergence theorem showing that repeated Laplacian smoothing makes features within each connected component converge
+  (over-smoothing)
+- Co-training a GCN with a partially absorbing random walk (ParWalks) model, GCN self-training, and their Union / Intersection combinations, which expand the label set and train without an extra validation
+  set
+claims:
+- id: c1
+  statement: 'GCN layer as described (citing Kipf & Welling 2017): the K-localized ChebNet filter is simplified by limiting K = 1 and approximating the largest eigenvalue of L_sym by 2, then the renormalization
+    trick I + D^(-1/2) A D^(-1/2) -> D~^(-1/2) A~ D~^(-1/2) with A~ = A + I is applied, giving H^(l+1) = sigma(D~^(-1/2) A~ D~^(-1/2) H^(l) Theta^(l)); the semi-supervised model is a two-layer GCN with
+    softmax output and cross-entropy over labeled vertices.'
+  location: Section 2
+  page: 3
+  quote: In (Kipf and Welling 2017), Kipf and Welling simpliﬁed this model by limiting K = 1 and approximating the largest eigenvalue λmax of Lsym by 2.
+- id: c2
+  statement: 'Laplacian smoothing view: Laplacian smoothing (citing Taubin 1995) is y_i = (1 - gamma) x_i + gamma sum_j (a~_ij / d_i) x_j; with gamma = 1 and the symmetrically normalized Laplacian in place
+    of D~^(-1) L~, it becomes exactly the GCN graph convolution D~^(-1/2) A~ D~^(-1/2) X, which the authors call symmetric Laplacian smoothing (still including the vertex''s own features through the self-loop).'
+  location: Section 3
+  page: 4
+  quote: We thus call the graph convolution a special form of Laplacian smoothing – symmetric Laplacian smoothing.
+- id: c3
+  statement: 'Why GCNs work: on Cora with 20 labels per class, the only difference between a GCN and a fully connected network is the graph convolution matrix, and even a one-layer GCN outperformed a one-layer
+    FCN by a very large margin; the authors explain this by smoothing making features of densely connected same-cluster vertices similar, and attribute the further gain of a 2-layer GCN to applying smoothing
+    again.'
+  location: Section 3
+  page: 3
+  quote: Surprisingly, even a one-layer GCN outperformed a one-layer FCN by a very large margin.
+- id: c4
+  statement: 'When GCNs fail: more layers are ''certainly not the more the better'' since a many-layer GCN is difficult to train and repeated Laplacian smoothing may mix features from different clusters;
+    this is illustrated with untrained, randomly initialized GCNs of 1-5 layers on Zachary''s karate club (34 vertices, 78 edges), where points become mixed after repeated smoothing (the authors note mixing
+    happens quickly on this small dataset with many inter-class connections).'
+  location: Section 3
+  page: 4
+  quote: On the other hand, repeatedly applying Laplacian smoothing may mix the features of vertices from different clusters and make them indistinguishable.
+- id: c5
+  statement: 'Theorem 1 (over-smoothing) and its assumptions: if a graph has no bipartite components, then for any w and alpha in (0, 1], (I - alpha L_rw)^m w and (I - alpha L_sym)^m w converge as m ->
+    infinity to linear combinations of the connected-component indicator vectors and of D^(-1/2) times them, respectively; since the self-loops remove bipartite components, the authors conclude over-smoothing
+    will make features indistinguishable and hurt accuracy. The theorem is stated for repeated application of the linear smoothing operator.'
+  location: Section 3
+  page: 5
+  quote: Based on the above theorem, over-smoothing will make the features indistinguishable and hurt the classiﬁcation accuracy.
+- id: c6
+  statement: 'Shallow GCNs have the opposite limit: because the graph convolution is a localized filter, a shallow GCN cannot sufficiently propagate label information to the whole graph with few labels;
+    in Fig. 1 GCN accuracy drops quickly as the training size shrinks and faster than label propagation, which the authors read as an inability to explore global graph structure.'
+  location: Section 3
+  page: 5
+  quote: However, since the graph convolution is a localized ﬁlter – a linear combination of the feature vectors of adjacent neighbors, a shallow GCN cannot sufﬁciently propagate the label information to
+    the entire graph with only a few labels.
+- id: c7
+  statement: 'Evaluation critique: the GCN of Kipf & Welling (2017) uses an additional 500 labeled vertices for early stopping, i.e. validation-set model selection, which is more than the total training
+    labels; optimizing without validation causes a significant drop, and the authors argue this defeats the purpose of semi-supervised learning and makes comparisons with methods like label propagation
+    unfair.'
+  location: Section 3
+  page: 5
+  quote: Furthermore, it makes the comparison of GCNs with other methods unfair as other methods such as label propagation may not need the validation data at all.
+- id: c8
+  statement: 'Protocol: CiteSeer, Cora and PubMed (data from Yang et al. 2016 and Kipf & Welling 2017); GCN hyperparameters copied from Kipf & Welling (learning rate 0.01, 200 max epochs, dropout 0.5, L2
+    5e-4, 2 layers, 16 hidden units, validated on Cora by Kipf and Welling); each run randomly splits labels into a small training set and 1000 test samples; label rates 0.5-5% on Cora/CiteSeer and 0.03-0.3%
+    on PubMed; mean accuracy of 50 runs except PubMed results from Yang et al., averaged over 10 runs. In the 20-labels-per-class comparison, other baselines'' results are copied from Kipf & Welling.'
+  location: Section 5
+  page: 6
+  quote: For each run, we randomly split labels into a small set for training, and a set with 1000 samples for testing.
+- id: c9
+  statement: 'Depth in the experiments: following Kipf and Welling, 2 convolutional layers were used, 2-layer GCNs performed best, and accuracy decreased drastically as layers grew, which the authors attribute
+    (with ''probably'') to overfitting rather than to over-smoothing.'
+  location: Section 5
+  page: 7
+  quote: When the number of convolutional layers grows, the classiﬁcation accuracy decreases drastically, which is probably due to overﬁtting.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): graph neural networks (GCN, GraphSAGE, GAT, SGC, message passing, expressive power and the WL test, oversmoothing, oversquashing,
+    heterophily, and evaluation pitfalls and benchmarks). Carded by a subagent. Results tables not recorded; claims only. Venue from the arXiv comment (''AAAI-2018 Oral Presentation''); the PDF itself has
+    no venue header. Section numbers from numbered headings and the outline paragraph in the Introduction (''Section 2 introduces the preliminaries ... In Section 3, we analyze ...''). The proposed methods
+    optimize on the expanded label set without any validation data and estimate a lower bound on the number of labels by solving (d^)^tau * eta ~ n (Section 4; 3*eta used, 2/3/4*eta reported to perform
+    similarly). Conflict of interest: the co-training uses ParWalks (Wu et al. 2012) and its analysis (Wu, Li, and Chang 2013), prior work of the last author Xiao-Ming Wu; the LP baseline is also ParWalks-based.
+    Results (Tables 1, 3-6, Fig. 1) are not recorded; improvement percentages in the text are not recorded either.'

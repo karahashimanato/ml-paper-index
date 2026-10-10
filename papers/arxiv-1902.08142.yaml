@@ -1,0 +1,97 @@
+id: arxiv-1902.08142
+title: Evaluating the Search Phase of Neural Architecture Search
+authors:
+- Kaicheng Yu
+- Christian Sciuto
+- Martin Jaggi
+- Claudiu Musat
+- Mathieu Salzmann
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1902.08142
+  code: https://github.com/kcyu2014/eval-nas
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 20096a90db58f7ec273b2a117b0005a4815f77c8eb8fa6aa4f3a8e0d429bcda4
+tags:
+  tasks:
+  - neural-architecture-search
+  - image-classification
+  - language-modeling
+  method_families:
+  - deep-learning
+proposes:
+- 'An evaluation framework for the NAS search phase: compare the architecture found by a NAS policy with a uniformly randomly sampled architecture from the same search space, both trained from scratch with
+  the same hyperparameters, repeated over multiple random seeds'
+- Use of reduced search spaces with ground-truth performance (a 32-architecture 2-node RNN space and NASBench-101) to measure search quality and the rank correlation (Kendall tau) between weight-sharing
+  and stand-alone rankings
+claims:
+- id: c1
+  statement: 'Main finding: on average the evaluated state-of-the-art NAS algorithms perform similarly to the random policy, and weight sharing degrades the ranking of NAS candidates to the point of not
+    reflecting their true performance, reducing the effectiveness of the search.'
+  location: Abstract
+  page: 1
+  quote: On average, the state-of-the-art NAS algorithms perform similarly to the random policy;
+- id: c2
+  statement: 'Protocol: the random policy uniformly samples an architecture from the same search space as the NAS algorithms and trains it with the same hyperparameters as the NAS solutions; to reduce randomness,
+    the search with each policy is repeated with different random seeds.'
+  location: Introduction
+  page: 2
+  quote: To reduce randomness, the search using each policy, i.e., random and NAS ones, is repeated several times, with different random seeds.
+- id: c3
+  statement: 'Standard-space setup: DARTS, NAO, ENAS and BayesNAS were compared with random sampling in the DARTS RNN (12-node) and CNN (7-node) spaces, 10 runs each with different initializations, using
+    the authors-provided hyperparameters and code in the search phase; the chosen architectures were trained from scratch for 1000 epochs (RNN) and 600 (CNN).'
+  location: Section 4.1
+  page: 5
+  quote: During the search phase, we used the authors-provided hyper-parameters and code for each policy.
+- id: c4
+  statement: 'Earlier comparisons to random search are described as not giving the random policy a fair chance: Pham et al. (2018) reported a single random architecture, and Liu et al. (2018b) one selected
+    among 8 random architectures after only 300 epochs of training.'
+  location: Section 2
+  page: 3
+  quote: While some works have provided partial comparisons to random search, these comparisons unfortunately did not give a fair chance to the random policy.
+- id: c5
+  statement: 'Interpretation caveat: not significantly outperforming random sampling does not necessarily mean the algorithms perform poorly; rather the search space has been sufficiently constrained that
+    even a random architecture performs well. The authors therefore also test reduced spaces that can be evaluated exhaustively.'
+  location: Introduction
+  page: 2
+  quote: Note that this does not necessarily mean that these algorithms perform poorly, but rather that the search space has been sufﬁciently constrained so that even a random architecture in this space
+    provides good results.
+- id: c6
+  statement: In the NASBench-101 7-node space (10 runs per method), the best test accuracy found by DARTS, NAO or ENAS is 93.33 (NAO), much lower than the ground-truth best of 95.06; ENAS and DARTS are
+    stated to have only 7% and 24% chance to surpass the random policy.
+  location: Section 4.2
+  page: 7
+  quote: The best test accuracy found by these methods is 93.33, by NAO, which remains much lower than the ground-truth best of 95.06.
+- id: c7
+  statement: 'Weight-sharing ranking: in the reduced spaces, the architecture rankings obtained with and without weight sharing are uncorrelated in the RNN space (Kendall tau -0.004 over 10 runs) and have
+    little correlation in the CNN space (0.195 over 10 runs); since such rankings serve as training data for the NAS sampler, this further explains the small margin over random search.'
+  location: Introduction
+  page: 2
+  quote: the architecture rankings obtained with and without weight sharing are entirely uncorrelated in RNN space
+- id: c8
+  statement: 'Scope of the weight-sharing analysis: weight-sharing rankings were obtained with uniform per-minibatch architecture sampling (described as equivalent to Single Path One Shot), and DARTS was
+    not included because it has no discrete solutions during the search, so solution ranking does not apply.'
+  location: Section 4.3
+  page: 7
+  quote: As DARTS does not have discrete representations of the solutions during the search, the idea of solution ranking does not apply.
+- id: c9
+  statement: When NAO and ENAS are trained without weight sharing in NASBench, performance is on average 1% higher than with it, and the probability to surpass random search increases from 0.62 to 0.92
+    for NAO and from 0.07 to 0.90 for ENAS.
+  location: Section 4.3
+  page: 8
+  quote: Furthermore, the probability to surpass random search increases from 0.62 to 0.92 for NAO and from 0.07 to 0.90 for ENAS.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. No venue recorded:
+    the PDF (arXiv v3) has no venue header and the arXiv record has no journal_ref or venue comment. Section numbers from numbered headings in the text dump (2 Related Work, 3.1, 4.1-4.3) and cross-references.
+    Affiliations: EPFL, Swisscom Digital Lab, Daskell; the evaluated NAS methods are not the authors'' own. The authors distinguish their result from Bender et al. (2018), who found strong correlation with
+    and without weight sharing, by a different (random path dropping) training scheme and by their exhaustive reduced space rather than a sampled subset (Section 2). In the reduced space NAO''s final architecture
+    was always from its uniformly sampled initial pool, so ''in practice, in a reduced space, NAO is similar to random search'' (Section 4.2). The Kendall tau values for CNN spaces ''from 3 to 7 nodes''
+    are listed as four numbers (0.441, 0.314, 0.214, 0.195) in Section 4.3; the mapping to node counts is not explicit. Standard-space mean/std results are in tables and not recorded.'

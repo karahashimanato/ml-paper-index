@@ -1,0 +1,110 @@
+id: arxiv-1902.09635
+title: 'NAS-Bench-101: Towards Reproducible Neural Architecture Search'
+authors:
+- Chris Ying
+- Aaron Klein
+- Esteban Real
+- Eric Christiansen
+- Kevin Murphy
+- Frank Hutter
+year: 2019
+venue: ICML 2019
+links:
+  arxiv: https://arxiv.org/abs/1902.09635
+  code: https://github.com/google-research/nasbench
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: c95649315c35034b53e60fbf898f18db653f33242b61562dab2a76fccb21a220
+tags:
+  tasks:
+  - neural-architecture-search
+  - hyperparameter-optimization
+  - image-classification
+  method_families:
+  - deep-learning
+  - bayesian-optimization
+  - multi-fidelity-optimization
+  paradigms:
+  - supervised
+proposes:
+- 'NAS-Bench-101: a tabular NAS benchmark in which every architecture of a cell-based CIFAR-10 search space (about 423k unique cells) was trained 3 times at 4 epoch budgets with one fixed training pipeline,
+  so that NAS experiments become table look-ups'
+- 'A recommended benchmarking protocol: query (architecture, epoch budget) pairs with a random trial index, pick the incumbent by validation accuracy, stop at a simulated training-time limit, and score
+  by immediate test regret over many independent runs'
+claims:
+- id: c1
+  statement: 'Motivation: citing Li & Talwalkar (2019) and Sciuto et al. (2019), NAS research is described as notoriously hard to reproduce: some methods need months of compute, and different methods are
+    not comparable because of different training procedures and search spaces, which makes it difficult to attribute success to the search algorithm itself.'
+  location: Introduction
+  page: 1
+  quote: different methods are not compa-rable to each other due to different training procedures and different search spaces, which make it difﬁcult to attribute the success of each method to the search
+    algorithm itself.
+- id: c2
+  statement: 'Search space: cells stacked into a fixed skeleton (stem, 3 stacks of 3 cells with downsampling); cells are DAGs with at most 7 vertices and 9 edges and only 3 operations (3x3 conv, 1x1 conv,
+    3x3 max-pool), constraints chosen so the space still contains ResNet-like and Inception-like cells; the general encoding has about 510M models, of which many are invalid or isomorphic, leaving about
+    423k unique graphs after de-duplication.'
+  location: Section 2.2
+  page: 3
+  quote: After de-duplication, there are approximately 423k unique graphs in the search space.
+- id: c3
+  statement: 'Training: all models use a single fixed set of hyperparameters, chosen by a coarse grid search maximizing the average accuracy of 50 randomly sampled architectures (described as similar to
+    standard practice and further justified in Section 5.1).'
+  location: Section 2.4
+  page: 3
+  quote: We utilize a single, ﬁxed set of hyperparameters for all NAS-Bench-101 models.
+- id: c4
+  statement: Every architecture was trained and evaluated 3 times to measure variance, and at four epoch budgets (4, 12, 36, 108 epochs, each with the learning rate annealed to 0) to support multi-fidelity
+    methods such as Hyperband, giving about 5M trained models.
+  location: Section 2.4
+  page: 3
+  quote: We repeat the train-ing and evaluation of all architectures 3 times to ob-tain a measure of variance.
+- id: c5
+  statement: 'Protocol rule: only training and validation metrics should be used to search, and test accuracy only for offline evaluation.'
+  location: Section 2.5
+  page: 3
+  quote: Only metrics on the training and validation set should be used to search models within a single NAS algorithm, and testing accuracy should only be used for an ofﬂine evaluation.
+- id: c6
+  statement: Validation and test accuracy are extremely highly correlated (r = 0.999) at 108 epochs, which the authors say suggests that strong optimizers are unlikely to overfit on the validation error
+    within this benchmark.
+  location: Section 3.1
+  page: 4
+  quote: We observed that the correlation between validation and test accuracy is extremely high (r = 0.999) at 108 epochs which suggests that strong optimizers are unlikely to overﬁt on the validation
+    error.
+- id: c7
+  statement: 'Coverage limits of the comparison: weight-sharing and network-morphism NAS algorithms cannot be directly evaluated on the dataset and were not included; GP-based HPO (e.g. Spearmint) was also
+    excluded (citing problems in high-dimensional discrete tasks), and BNN-based BO was excluded as too expensive; each optimizer''s own main meta-parameters were tuned (except TPE) with the best settings
+    reported.'
+  location: Section 4.1
+  page: 6
+  quote: NAS algorithms based on weight sharing (Pham et al., 2018; Liu et al., 2018b) or network morphisms (Cai et al., 2018; Elsken et al., 2018) cannot be directly evaluated on the dataset, so we did
+    not include them.
+- id: c8
+  statement: 'Multi-fidelity observation: Hyperband and BOHB did not yield the speedups frequently observed compared to random search or Bayesian optimization, which the authors attribute to the relatively
+    low rank correlation between performance at different budgets.'
+  location: Section 4.1
+  page: 6
+  quote: The multi-ﬁdelity optimization algorithms HB and BO-HB do not yield the speedups frequently observed compared to RS or Bayesian optimization.
+- id: c9
+  statement: 'Stated limitation: to keep the benchmark computable, the evaluated models do not reach state-of-the-art CIFAR-10 performance, because the search space is constrained in size and operations
+    (no NASNet-like complex architectures), the expensive ''augmentation trick'' is not applied, and advanced regularization (Cutout, ScheduledDropPath, decoupled weight decay) is not used.'
+  location: Section 5.2
+  page: 8
+  quote: Unfortunately, this means that the models we evaluate do not reach current state-of-the-art performance on CIFAR-10.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. Venue from
+    the PDF first-page footnote (''Proceedings of the 36th International Conference on Machine Learning, Long Beach, California, PMLR 97, 2019'') and the arXiv comment. Section numbers from numbered headings
+    in the PDF. Affiliations: Google Brain (Ying, Real, Christiansen, Murphy) and University of Freiburg (Klein, Hutter). Conflict-of-interest note: the benchmarked algorithms include regularized evolution
+    (Real et al.; Real is a co-author), SMAC and BOHB (Hutter''s group; BOHB by Falkner, Klein, Hutter), and the authors'' own RL implementation; the paper does not state this as a conflict of interest,
+    and says the intention of Section 4.1 ''is not to answer the question “Which methods work best on this benchmark?”, but rather to demonstrate the utility of a reproducible baseline''. Other body-text
+    statements not recorded as claims: RE, BOHB and SMAC performed best over 500 runs per method and TPE fell back to random search (Section 4.1); locality analysis suggests a basin of attraction of width
+    about 6 (Section 3.3); a NAS-Bench-Mini (<=6 vertices) bootstrap kept the ranking RS < NRE < RE, which ''suggests'' conclusions may generalize to larger spaces (Section 4.2); on NAS-HPO-Bench datasets
+    the fixed-hyperparameter accuracy and the per-architecture tuned accuracy had Spearman rank correlation 0.9155 (Section 5.1). Benchmark is a single dataset (CIFAR-10) and a single training pipeline.
+    Training details (Section 2.4): CIFAR-10 split 40k/10k/10k with standard augmentation, cosine decay, RMSProp, TPU v2; the introduction states over 100 TPU years of computation. RL in Section 4.1 is
+    the authors'' own implementation (a categorical distribution per parameter optimized with REINFORCE, as an LSTM controller performed worse).'

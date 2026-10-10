@@ -1,0 +1,104 @@
+id: arxiv-1909.09656
+title: Understanding and Robustifying Differentiable Architecture Search
+authors:
+- Arber Zela
+- Thomas Elsken
+- Tonmoy Saikia
+- Yassine Marrakchi
+- Thomas Brox
+- Frank Hutter
+year: 2020
+venue: ICLR 2020
+links:
+  arxiv: https://arxiv.org/abs/1909.09656
+  code: https://github.com/automl/RobustDARTS
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 9289807f8db01d34893089ebce7b4b3b1e85616bf55aefdd42179507a8614a21
+tags:
+  tasks:
+  - neural-architecture-search
+  - image-classification
+  - language-modeling
+  method_families:
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- Using the dominant eigenvalue of the Hessian of the validation loss w.r.t. the architectural parameters as an indicator of poor generalization of DARTS solutions
+- 'DARTS-ES: early stopping of the DARTS search when the smoothed dominant eigenvalue increases too much'
+- 'DARTS-ADA (increase regularization when the eigenvalue criterion fires) and RobustDARTS (R-DARTS: four DARTS runs with different regularization strengths, selected by validation) using stronger L2 or
+  ScheduledDropPath regularization of the inner (training) objective during search'
+claims:
+- id: c1
+  statement: 'Failure mode: the authors identify 12 NAS benchmarks based on four search spaces in which standard DARTS yields degenerate architectures with poor test performance across several datasets.'
+  location: Introduction
+  page: 1
+  quote: We identify 12 NAS benchmarks based on four search spaces in which standard DARTS yields degenerate architectures with poor test performance across several datasets (Section 3).
+- id: c2
+  statement: Running DARTS on S1-S4 with exactly the same setup as Liu et al. (2019), in the found CIFAR-10 cells parameter-less skip connections dominate almost all edges for S1-S3, and in S4 the deliberately
+    harmful Noise operation was selected for five of eight operations.
+  location: Section 3
+  page: 4
+  quote: the parameter-less skip connections dominate in almost all the edges for spaces S1-S3, and for S4 even the harmful Noise operation was selected for ﬁve out of eight operations.
+- id: c3
+  statement: The authors stress that S1-S3 are natural strict subspaces of the original DARTS space that should be easier to search and were not constructed adversarially; only S4 was constructed specifically
+    to show-case the failure mode.
+  location: Section 3
+  page: 4
+  quote: We emphasize that search spaces S1-S3 are very natural, and, as strict subspaces of the original space, should merely be easier to search than that.
+- id: c4
+  statement: On S5 (81 architectures, all evaluated a priori), DARTS finds an architecture close to the global minimum but test performance deteriorates around epoch 40 while the search model validation
+    error keeps converging, indicating overfitting of the architectural parameters to the validation set; random search with weight sharing (RS-ws) stays relatively constant and, evaluating only the final
+    architecture, outperformed DARTS.
+  location: Section 3
+  page: 4
+  quote: indicating that the archi-tectural parameters are overﬁtting to the vali-dation set.
+- id: c5
+  statement: The dominant eigenvalue of the Hessian of the validation loss w.r.t. the architectural parameters (full Hessian on a randomly sampled mini-batch, used as a sharpness proxy) increases during
+    standard DARTS along with test error; across 24 architectures on S1/CIFAR-10 it strongly correlates with test error (Pearson coefficient 0.867).
+  location: Section 4.1
+  page: 5
+  quote: indeed strongly correlates with test error (with a Pearson correlation coefﬁcient of 0.867).
+- id: c6
+  statement: 'Early stopping (DARTS-ES): since NAS directly optimizes validation performance, stopping on validation performance does not apply; instead the smoothed dominant eigenvalue (over k = 5 epochs)
+    is tracked and the search stops when it increases too much (ratio below 0.75), returning the architecture from k epochs earlier. The authors describe this as a simple heuristic that worked off-the-shelf
+    without any tuning, and state the test data is never used for early stopping.'
+  location: Section 4.3
+  page: 6
+  quote: To implement this idea, we use a simple heuristic that worked off-the-shelf without any tuning.
+- id: c7
+  statement: 'Regularization of the inner objective: hypothesizing that changing the landscape of the training loss could redirect the architectural parameters to flatter regions, the authors study data
+    augmentation (Cutout and ScheduledDropPath) and stronger L2 regularization during the search phase only; the final training and evaluation phase regularization is not altered.'
+  location: Section 5
+  page: 7
+  quote: We emphasize that we do not alter the regularization of the ﬁnal training and evaluation phase, but solely that of the search phase.
+- id: c8
+  statement: 'Comparison with random search: each method was searched four times with different seeds and selected by a validation run (as proposed in the DARTS paper); in accordance with Li & Talwalkar
+    (2019), RS-ws often outperformed the original DARTS, but with the proposed robustifications DARTS typically performed substantially better than RS-ws. The authors recommend RobustDARTS for practice
+    as it performed best and is easier to implement than DARTS-ES and DARTS-ADA.'
+  location: Section 5.3
+  page: 9
+  quote: As the table shows, in accordance with Li & Talwalkar (2019), RS-ws often outperformed the original DARTS; however, with our robustiﬁcations, DARTS typically performs substantially better than
+    RS-ws.
+- id: c9
+  statement: On the full original DARTS search spaces, RobustDARTS performed similarly to DARTS on the two original benchmarks (PTB and CIFAR-10), on which DARTS was developed and is well tuned, but significantly
+    better when only the dataset was changed to CIFAR-100 or SVHN, which the authors take as underlining its robustness.
+  location: Section 5.3
+  page: 9
+  quote: RobustDARTS performed similarly to DARTS for the two original benchmarks from the DARTS paper (PTB and CIFAR-10), on which DARTS was developed and is well tuned;
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. Venue from
+    the PDF page header (''Published as a conference paper at ICLR 2020'') and the arXiv comment; the first arXiv version is from 2019, but year is set to 2020 because the recorded ICLR version is 2020.
+    Section numbers from numbered headings in the PDF (2.1-2.4, 3, 4.1-4.3, 5, 5.1-5.3, 6). Affiliations: University of Freiburg and Bosch Center for AI; funding acknowledged from Robert Bosch GmbH. The
+    proposed methods are the authors'' own; baselines are standard DARTS (Liu et al.) and RS-ws (Li & Talwalkar); no conflict of interest is stated. Other body-text statements: ''Early stopping signiﬁcantly
+    improved DARTS for all settings without ever harming it'' (Section 4.3); low curvature never led to large accuracy drops after discretization (Section 4.2, offered as a possible reason, ''might be'');
+    findings also reported for disparity estimation (S6) and PTB language modelling (Appendix F). Table 4 caption: PTB could only be afforded 1 repetition (5 for the others). Adding the Zero operation did
+    not reduce the importance weight of skip connections in their experiments (Section 3). Test errors are in tables/figures and are not recorded.'

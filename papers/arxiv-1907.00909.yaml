@@ -1,0 +1,95 @@
+id: arxiv-1907.00909
+title: An Open Source AutoML Benchmark
+authors:
+- Pieter Gijsbers
+- Erin LeDell
+- Janek Thomas
+- Sébastien Poirier
+- Bernd Bischl
+- Joaquin Vanschoren
+year: 2019
+venue: ICML 2019 AutoML Workshop
+links:
+  arxiv: https://arxiv.org/abs/1907.00909
+  code: https://github.com/openml/automlbenchmark
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 8686f7caf5949452327973ce0a1c88abf7e8158b6985ba44dfcbbdfec9be6706
+tags:
+  tasks:
+  - tabular-classification
+  method_families:
+  - automl-systems
+  paradigms:
+  - supervised
+proposes:
+- An open, extensible and ongoing AutoML benchmark framework (open-source tool, OpenML-hosted datasets, website with up-to-date results) for comparing AutoML systems under fixed resources
+- A first comparison of 4 AutoML systems (Auto-WEKA, auto-sklearn, TPOT, H2O AutoML) against constant-predictor and (tuned) Random Forest baselines on 39 classification datasets
+claims:
+- id: c1
+  statement: 'Motivation: the authors argue that many AutoML comparisons use too few, mostly small and old datasets (risking overfitting to a specific dataset set and bias toward older datasets), that authors
+    may knowingly or unknowingly pick datasets on which current systems do well, and that rival methods may not be run correctly, e.g. misunderstood memory management or insufficient compute (citing Balaji
+    and Allen, 2018).'
+  location: Introduction
+  page: 1
+  quote: Authors may even knowingly or unknowingly select datasets on which current systems perform well.
+- id: c2
+  statement: 'Datasets: 39 classification datasets were selected from previous AutoML papers, competitions and ML benchmarks according to predefined criteria, varying in samples and features by orders of
+    magnitude; datasets too easily solved by AutoML or not representing typical AutoML scenarios (e.g. artificial ones) were excluded, some datasets were set aside for future inclusion, and regression datasets
+    were omitted because of computational constraints.'
+  location: Section 3 (Datasets)
+  page: 3
+  quote: We excluded datasets which were too easily solved with AutoML or did not represent typical AutoML scenario’s (e.g. artiﬁcial datasets).
+- id: c3
+  statement: 'Metrics: AUROC for binary and log loss for multi-class problems (chosen as insightful, commonly used and supported by most tools; the authors state AutoML systems must optimize the same metric
+    they are evaluated on), estimated with ten-fold cross-validation.'
+  location: Section 3 (Performance metrics)
+  page: 3
+  quote: The measures are estimated with ten-fold cross-validation.
+- id: c4
+  statement: 'Framework configuration: all AutoML tools were run with their default hyperparameter values and search spaces (except resource settings fixed to a number of cores, memory and total runtime),
+    because most users use them this way and homogenizing search spaces is practically impossible. Baselines are a constant (class-prior) predictor, an untuned Random Forest and a Random Forest tuned over
+    up to eleven max_features values with cross-validation.'
+  location: Section 3 (Frameworks and their configuration)
+  page: 4
+  quote: The AutoML tools were all used with their default hyperparameter values and search spaces, since most users will use them in this way.
+- id: c5
+  statement: 'Interpretation limit: because no two tools share the same search space or optimization method, the authors state that no conclusions about search spaces or optimization methods can be drawn
+    from the benchmark.'
+  location: Section 3 (Frameworks and their configuration)
+  page: 4
+  quote: It is important to realize that no two tools share the exact same search space or optimization method, so from this benchmark no conclusions can be drawn about those.
+- id: c6
+  statement: 'Meta-learning leakage: a framework whose meta-learning used benchmark datasets has an unfair advantage on them; the authors did not resolve this (left as future work); among the compared frameworks
+    only auto-sklearn uses meta-learning, and affected datasets are marked in the results.'
+  location: Section 3 (Meta-learning)
+  page: 4
+  quote: An AutoML framework which used datasets of the benchmark in its meta-learning process will have an unfair advantage on them.
+- id: c7
+  statement: 'Findings stated in the text (1 h and 4 h budgets per fold, about 8000 hours of computation): no AutoML system consistently outperforms all others; on some datasets the systems are only marginally
+    better than a Random Forest and per-fold score variance can be quite large; the 4 h results are very similar to the 1 h ones (slight improvements, especially for TPOT); Auto-WEKA shows signs of overfitting
+    when running longer, especially on multi-class problems.'
+  location: Section 4
+  page: 4
+  quote: There is no AutoML system which consistently outperforms all others.
+- id: c8
+  statement: On dionis and helena all frameworks performed worse than a Random Forest; both have more than 100 quite unbalanced classes, which the authors say seems to be a weak spot for current AutoML
+    techniques, at least under log loss.
+  location: Section 4
+  page: 4
+  quote: Both have more more than 100, quite unbalanced classes, which seems to be a weak spot for current AutoML techniques, at least under log loss.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. Venue from
+    the arXiv comment (''Accepted paper at the AutoML Workshop at ICML 2019'') and the PDF header (''6th ICML Workshop on Automated Machine Learning (2019)''). The first four authors contributed equally.
+    Affiliations: TU Eindhoven (Gijsbers, Vanschoren), H2O.ai (LeDell, Poirier), LMU Munich (Thomas, Bischl). Conflict of interest: LeDell and Poirier are at H2O.ai and H2O AutoML is one of the 4 evaluated
+    systems; autoxgboost (Thomas et al., 2018, co-authored by Thomas) is listed among omissions planned for the next version. The paper says the framework was built ''in dialogue with the AutoML framework
+    developers''. No conflict-of-interest statement was found in the text (searched for conflict, competing, disclos). Table 2 (scores scaled between constant predictor = 0 and tuned Random Forest = 1)
+    and Figure 1 are not recorded. Hardware: AWS m5.2xlarge (32 GB memory, 8 vCPUs) (Section 3). The authors say they cannot yet draw clear conclusions about which data properties explain per-dataset differences
+    (Section 4). Superseded by the extended version arxiv-2207.12560.'

@@ -1,0 +1,104 @@
+id: arxiv-2003.06505
+title: 'AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data'
+authors:
+- Nick Erickson
+- Jonas Mueller
+- Alexander Shirkov
+- Hang Zhang
+- Pedro Larroy
+- Mu Li
+- Alexander Smola
+year: 2020
+links:
+  arxiv: https://arxiv.org/abs/2003.06505
+  code: https://github.com/awslabs/autogluon
+source:
+  version: arXiv v1
+  retrieved_at: '2026-10-10'
+  pdf_sha256: dc6e99575b5edf760c5f70adb5dbb3b4514bc37d06ae7615428aa88969a378fa
+tags:
+  tasks:
+  - tabular-classification
+  - tabular-regression
+  - model-selection
+  method_families:
+  - automl-systems
+  - heterogeneous-ensembles
+  - gradient-boosted-trees
+  - deep-learning
+  paradigms:
+  - supervised
+proposes:
+- 'AutoGluon-Tabular: an AutoML framework that, instead of CASH, trains a fixed, ordered set of models (neural network, LightGBM, CatBoost, random forest, extra trees, k-NN) with predefined hyperparameters
+  and combines them by multi-layer stack ensembling'
+- Multi-layer stacking in which every base model type is reused as a stacker, stackers also receive the original features (skip connection), and the last layer is ensemble selection; all layers are trained
+  on out-of-fold predictions from (n-repeated) k-fold bagging
+- A tabular neural network with per-categorical-feature embeddings and a linear skip connection to the output
+claims:
+- id: c1
+  statement: The authors argue that prior work focused almost exclusively on CASH and that, since this search is typically intractable (nonconvex/nonsmooth), CASH algorithms are expensive, spending significant
+    compute on poor configurations.
+  location: Section 1
+  page: 1
+  quote: Their brute-force search expends signiﬁcant compute evaluating poor model/hyperparameter conﬁgurations that no reasonable data scientist would consider.
+- id: c2
+  statement: 'Stacking design: whereas traditional stacking uses simpler stacker models to avoid another CASH problem, AutoGluon reuses all base-layer model types with the same hyperparameter values as
+    stackers; the stackers take the original features concatenated with lower-layer predictions, and the final layer aggregates stackers with ensemble selection (citing Caruana et al., 2004).'
+  location: Section 2.5
+  page: 4
+  quote: AutoGluon instead simply reuses all of its base layer model types (with the same hyperparameter values) as stackers.
+- id: c3
+  statement: 'Caveat of k-fold bagging: higher layers must be trained only on out-of-fold (OOF) predictions, but OOF predictions can still be slightly overfit because training of some models is influenced
+    by OOF data (e.g. through the early-stopping criterion), and a stacker trained on overfit lower-layer predictions may amplify this through the layers; repeated k-fold bagging on n random partitions
+    is proposed to mitigate it.'
+  location: Section 2.6
+  page: 4
+  quote: While k-fold bagging efﬁciently reuses training data, it remains susceptible to a subtle form of over-ﬁtting.
+- id: c4
+  statement: In the benchmark, AutoGluon's hyperparameter_tune option was not used (auto_stack=True, 2-layer stacking with repeated bagging within the time limit); the authors state this demonstrates for
+    the first time that high-accuracy AutoML is achievable entirely without CASH.
+  location: Section 4.1
+  page: 7
+  quote: This demonstrates for the ﬁrst time that high-accuracy AutoML is achievable entirely without CASH.
+- id: c5
+  statement: The default hyperparameter values of AutoGluon's models were chosen a priori and not tuned on the datasets used for benchmarking in the paper (they are in the AutoGluon source code); the neural
+    network's layer sizes are scaled adaptively to the data in a fixed manner rather than by hyperparameter optimization.
+  location: Appendix A
+  page: 11
+  quote: These default hyperparameter values were chosen a priori and not tuned based on the particular datasets used for benchmarking in this paper.
+- id: c6
+  statement: 'Benchmark protocol: 39 OpenML AutoML Benchmark datasets (Gijsbers et al., 2019), each with the original 10 train/test splits (390 problems), 1h and 4h limits, loss 1-AUC (binary) or log-loss
+    (multi-class), scored with the original benchmark code on an AWS m5.2xlarge (8 vCPU, 32 GiB) as in the original benchmark; plus 11 Kaggle competitions scored by Kaggle''s server on hidden labels (4h
+    and 8h, m5.24xlarge with 96 vCPU, 384 GiB). Averages and counts are taken only over datasets where all frameworks ran without error.'
+  location: Section 4.1
+  page: 6
+  quote: Each AutoML framework is extensively evaluated in this benchmark through replicate runs on 10 different training/test splits for each dataset, making 390 prediction problems in total (splits provided
+    by original benchmark, and reported numbers are averaged over them).
+- id: c7
+  statement: 'Baseline configuration: Auto-WEKA, auto-sklearn, TPOT, H2O AutoML and GCP-Tables were run with default settings except where package authors suggested improvements in private communication;
+    Auto-WEKA, TPOT and auto-sklearn were given data preprocessed by AutoGluon''s own pipeline (Appendix C), and all frameworks ran on the same EC2 instance type with identical time limits except GCP-Tables
+    (92 Google Cloud servers by default); actual training times are reported because some frameworks only loosely respected the limits.'
+  location: Section 4.1
+  page: 6
+  quote: Each was run with default settings except where the package authors suggested an improved setting in private communication.
+- id: c8
+  statement: Because running GCP-Tables on all 390 AutoML Benchmark problems was economically infeasible (4h runs would exceed $30k), it was run only on the first fold of each of the 39 datasets, and comparisons
+    with AutoGluon use only that fold.
+  location: Appendix C
+  page: 13
+  quote: Because running GCP-Tables on all 390 prediction problems of the AutoML benchmark was economically infeasible (4h runs would total over $30k), we only ran this AutoML tool on the ﬁrst fold of each
+    of the 39 datasets.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Amazon (all authors; AutoGluon is an awslabs project). No venue is stated in the arXiv v1 PDF or arXiv metadata; none recorded. Conflict of interest: the authors benchmark their own system against competitors;
+    the paper does not state this as a conflict of interest. Mitigations stated in the paper: competitors'' settings confirmed with the original package authors (Appendix C), and Table S3 compares the authors''
+    runs of H2O, auto-sklearn, TPOT and Auto-WEKA with the original AutoML Benchmark results (counts above/below original are roughly balanced). Software versions: TPOT 0.11.1, Auto-WEKA 2.6, H2O 3.28.0.1,
+    auto-sklearn 0.5.2 (0.6.0 was not used because of a dependency conflict with AutoGluon). Sagemaker AutoPilot was only included in the raw-accuracy comparison (Table S8) because it does not output class
+    probabilities. AutoGluon itself failed on Dionis in the 4h runs (Appendix E.1.1). Win/loss tables, ablations (NoRepeat, NoMultiStack, NoBag, NoNetwork) and Kaggle placements are not recorded as results.
+    Section numbers are from numbered headings in the PDF.'

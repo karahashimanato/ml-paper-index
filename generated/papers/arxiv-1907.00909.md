@@ -1,0 +1,24 @@
+<!-- このファイルは scripts/generate.py が生成する。手で編集しない。 -->
+
+# An Open Source AutoML Benchmark
+
+- カード: [`arxiv-1907.00909`](../../papers/arxiv-1907.00909.yaml)
+- 著者: Pieter Gijsbers, Erin LeDell, Janek Thomas, Sébastien Poirier, Bernd Bischl, Joaquin Vanschoren
+- 年・掲載: 2019 ICML 2019 AutoML Workshop
+- 原論文: [PDF](https://arxiv.org/pdf/1907.00909v1)(arXiv v1、カード作成時に読んだ版)
+- タグ: automl-systems, supervised, tabular-classification
+- 人手レビュー: 未
+
+## 主張
+
+出典のリンクは原論文PDFの該当ページを開く。リンクにカーソルを合わせると原文の引用が表示される。
+
+- **c1** Motivation: the authors argue that many AutoML comparisons use too few, mostly small and old datasets (risking overfitting to a specific dataset set and bias toward older datasets), that authors may knowingly or unknowingly pick datasets on which current systems do well, and that rival methods may not be run correctly, e.g. misunderstood memory management or insufficient compute (citing Balaji and Allen, 2018).([Introduction, p.1](https://arxiv.org/pdf/1907.00909v1#page=1 "Authors may even knowingly or unknowingly select datasets on which current systems perform well."))
+- **c2** Datasets: 39 classification datasets were selected from previous AutoML papers, competitions and ML benchmarks according to predefined criteria, varying in samples and features by orders of magnitude; datasets too easily solved by AutoML or not representing typical AutoML scenarios (e.g. artificial ones) were excluded, some datasets were set aside for future inclusion, and regression datasets were omitted because of computational constraints.([Section 3 (Datasets), p.3](https://arxiv.org/pdf/1907.00909v1#page=3 "We excluded datasets which were too easily solved with AutoML or did not represent typical AutoML scenario’s (e.g. artiﬁcial datasets)."))
+- **c3** Metrics: AUROC for binary and log loss for multi-class problems (chosen as insightful, commonly used and supported by most tools; the authors state AutoML systems must optimize the same metric they are evaluated on), estimated with ten-fold cross-validation.([Section 3 (Performance metrics), p.3](https://arxiv.org/pdf/1907.00909v1#page=3 "The measures are estimated with ten-fold cross-validation."))
+- **c4** Framework configuration: all AutoML tools were run with their default hyperparameter values and search spaces (except resource settings fixed to a number of cores, memory and total runtime), because most users use them this way and homogenizing search spaces is practically impossible. Baselines are a constant (class-prior) predictor, an untuned Random Forest and a Random Forest tuned over up to eleven max_features values with cross-validation.([Section 3 (Frameworks and their configuration), p.4](https://arxiv.org/pdf/1907.00909v1#page=4 "The AutoML tools were all used with their default hyperparameter values and search spaces, since most users will use them in this way."))
+- **c5** Interpretation limit: because no two tools share the same search space or optimization method, the authors state that no conclusions about search spaces or optimization methods can be drawn from the benchmark.([Section 3 (Frameworks and their configuration), p.4](https://arxiv.org/pdf/1907.00909v1#page=4 "It is important to realize that no two tools share the exact same search space or optimization method, so from this benchmark no conclusions can be drawn about those."))
+- **c6** Meta-learning leakage: a framework whose meta-learning used benchmark datasets has an unfair advantage on them; the authors did not resolve this (left as future work); among the compared frameworks only auto-sklearn uses meta-learning, and affected datasets are marked in the results.([Section 3 (Meta-learning), p.4](https://arxiv.org/pdf/1907.00909v1#page=4 "An AutoML framework which used datasets of the benchmark in its meta-learning process will have an unfair advantage on them."))
+- **c7** Findings stated in the text (1 h and 4 h budgets per fold, about 8000 hours of computation): no AutoML system consistently outperforms all others; on some datasets the systems are only marginally better than a Random Forest and per-fold score variance can be quite large; the 4 h results are very similar to the 1 h ones (slight improvements, especially for TPOT); Auto-WEKA shows signs of overfitting when running longer, especially on multi-class problems.([Section 4, p.4](https://arxiv.org/pdf/1907.00909v1#page=4 "There is no AutoML system which consistently outperforms all others."))
+- **c8** On dionis and helena all frameworks performed worse than a Random Forest; both have more than 100 quite unbalanced classes, which the authors say seems to be a weak spot for current AutoML techniques, at least under log loss.([Section 4, p.4](https://arxiv.org/pdf/1907.00909v1#page=4 "Both have more more than 100, quite unbalanced classes, which seems to be a weak spot for current AutoML techniques, at least under log loss."))
+

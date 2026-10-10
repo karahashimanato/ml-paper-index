@@ -1,0 +1,97 @@
+id: arxiv-1908.00709
+title: 'AutoML: A Survey of the State-of-the-Art'
+authors:
+- Xin He
+- Kaiyong Zhao
+- Xiaowen Chu
+year: 2019
+venue: Knowledge-Based Systems
+links:
+  arxiv: https://arxiv.org/abs/1908.00709
+source:
+  version: arXiv v6
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 874e6fefdc349f528bf6ff0c830d864b28064a0d2ff48df94fd4841d3a785290
+tags:
+  tasks:
+  - neural-architecture-search
+  - hyperparameter-optimization
+  - image-classification
+  method_families:
+  - automl-systems
+  - bayesian-optimization
+  - multi-fidelity-optimization
+  - deep-learning
+  paradigms:
+  - supervised
+  - reinforcement-learning
+proposes:
+- A survey organizing AutoML along the pipeline data preparation -> feature engineering -> model generation (search space; HPO and architecture optimization) -> model evaluation, with a focus on NAS
+- Taxonomies of NAS search spaces (entire-structured, cell-based, hierarchical, morphism-based) and architecture optimization methods (RL, evolution, gradient descent, surrogate-model-based, grid/random
+  search, hybrids), plus a list of open problems
+claims:
+- id: c1
+  statement: 'Pipeline taxonomy: the AutoML pipeline consists of data preparation, feature engineering, model generation and model evaluation; model generation is split into the search space (traditional
+    ML models vs neural architectures) and optimization methods, the latter classified into hyperparameter optimization (training-related parameters) and architecture optimization (model-related parameters).'
+  location: Introduction
+  page: 1
+  quote: 'As Figure 1 shows, the AutoML pipeline consists of several processes: data preparation, feature engineering, model generation, and model evaluation.'
+- id: c2
+  statement: 'NAS taxonomy: commonly used search spaces are classified into entire-structured, cell-based, hierarchical and morphism-based; architecture optimization methods into reinforcement learning,
+    evolution-based algorithms, gradient descent, surrogate model-based optimization and hybrid methods. The authors state their goal is breadth rather than a thorough investigation of every sub-topic.'
+  location: Introduction
+  page: 2
+  quote: By reviewing NAS methods, we classify the commonly used search space into entire-structured [12, 13, 14], cell-based [13, 15, 16, 17, 18], hierarchical [19] and morphism-based [20, 21, 22] search
+    space.
+- id: c3
+  statement: 'Gradient-based NAS failure mode (citing DARTS+ [159] and P-DARTS [128]): the skip-connect operation dominates at a later search stage in DARTS, making the network shallower and markedly degrading
+    performance; DARTS+ adds an early-stop criterion and P-DARTS uses operation-level dropout to control skip-connects.'
+  location: Section 4.2.3
+  page: 13
+  quote: For example, several studies [159, 128] have found that skip-connect operation domi-nates at a later search stage in DARTS, which causes the network to be shallower and leads to a marked deterioration
+    in performance.
+- id: c4
+  statement: 'Comparability caveat: the CIFAR-10/ImageNet comparison tables collect results obtained under different settings such as training hyperparameters and data augmentation, so the authors say the
+    comparison is not quite fair; they present NAS-Bench-101/201 and NAS-Bench-NLP as improving reproducibility.'
+  location: Section 6.1.2
+  page: 20
+  quote: In other words, the comparison is not quite fair.
+- id: c5
+  statement: 'Search-evaluation gap: noting that random search is comparable to more sophisticated methods (e.g. DARTS and ENAS), the authors describe a usually large gap between the search stage and the
+    evaluation stage, motivating the use of Kendall''s tau between the two stages'' rankings in several NAS studies.'
+  location: Section 6.1.1
+  page: 20
+  quote: In other words, the architecture that achieves the best result in the training set is not necessarily the best one for the validation set.
+- id: c6
+  statement: 'Weight-sharing ranking problem (citing Yu et al. [11]): weight sharing degrades individual architectures'' performance and negatively impacts the true performance ranking of candidates; to
+    reduce weight coupling, many one-shot methods adopt random sampling of single architectures from the supernet.'
+  location: Section 6.3
+  page: 22
+  quote: Yu et al. [11] experimentally showed that the weight-sharing strat-egy degrades the individual architecture’s performance and negatively impacts the real performance ranking of the candidate architectures.
+- id: c7
+  statement: 'Joint hyperparameter and architecture optimization: most NAS methods fix training hyperparameters during search and tune them afterwards, which the authors say may give suboptimal results
+    because different architectures tend to fit different hyperparameters, making the ranking unfair (citing [233]); joint HAO is presented as a promising solution.'
+  location: Section 6.4
+  page: 22
+  quote: However, this paradigm may result in suboptimal results as diﬀerent architectures tend to ﬁt diﬀerent hyperparameters, making the model ranking unfair [233].
+- id: c8
+  statement: 'Open problem, reproducibility: many NAS algorithms have manually set implementation-level parameters that the original papers do not describe in detail; citing Yang et al. [123], the seed
+    plays an important role in NAS experiments but most studies do not report it; resource consumption is another obstacle, which NAS-Bench datasets aim to reduce.'
+  location: Section 7.4
+  page: 24
+  quote: For instance, Yang et al. [123] experimentally demonstrated that the seed plays an important role in NAS experiments; however, most NAS studies do not mention the seed set in the experiments.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. Affiliation:
+    Hong Kong Baptist University. Venue from the arXiv journal_ref (''Knowledge-Based Systems, Volume 212, 5 January 2021, 106622'') and comment; the v6 PDF footer reads ''Preprint submitted to Knowledge-Based
+    Systems, April 19, 2021''. Year is the first arXiv version (2019); the PDF does not state the journal publication year (the journal_ref gives 2021). Other open problems listed in Section 7: flexible
+    search spaces free of human bias (7.1), exploring more areas beyond image classification (7.2), interpretability (7.3), robustness to noisy/adversarial data (7.5), a complete AutoML pipeline (7.7; TPOT,
+    Auto-WEKA and Auto-sklearn are described as searching only traditional ML models), and lifelong learning (7.8). The survey describes Zela et al. [34] as showing a weak correlation between performance
+    after short and long training (Section 5.1); this is the survey''s characterization, not checked against that paper. The CIFAR-10/ImageNet performance tables (Tables 3 and 4) are compilations of numbers
+    reported in other papers and are not recorded. Section 6.3 also describes coupled one-shot optimization as introducing bias in architecture distribution and supernet weights (citing [197, 229]) and
+    multimodel forgetting (citing [230]); Section 7.6 repeats joint HAO as an open problem. No experiments of its own; no conflict of interest identified.'

@@ -1,0 +1,7 @@
+"""AutoML システムの手法記事(2026-10-10)のカード生成スクリプトで共有する注記。"""
+
+BASE_NOTE = ("Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search "
+             "(CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware search, AutoML benchmarks, NAS with RL/"
+             "evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). "
+             "Carded by a subagent. Results tables not recorded; claims only.")
+CREATED = {"created_at": "2026-10-10", "created_by": "claude-opus-5-5 via Claude Code (subagent)"}

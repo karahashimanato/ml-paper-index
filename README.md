@@ -83,8 +83,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | グラフニューラルネットワーク | 論文カード16本(GCN・GraphSAGE・GAT・SGC とメッセージパッシング、WL 検定と表現力、過平滑化と過圧縮、異質性、固定分割とモデル選択の落とし穴、OGB などのベンチマーク)、記事 [articles/methods/graph-neural-networks.md](articles/methods/graph-neural-networks.md) |
 | 表データの深層学習モデル | 論文カード15本+既存6本(表データが難しい理由、木をまねるモデル、特徴をトークンにする注意モデル、数値の埋め込み、交差層、MLP の正則化と既定値と暗黙のアンサンブル、近傍の検索、自己教師ありの事前学習、調整の予算とベンチマークの偏り)、記事 [articles/methods/tabular-deep-learning-models.md](articles/methods/tabular-deep-learning-models.md) |
 | 因果効果の推定 | 論文カード16本+既存6本(識別の前提と隠れた交絡、高次元での重なり、S/T/X/R/DR-learner と二重機械学習、因果木・因果フォレスト・BCF、表現の釣り合い・TARNet/CFR・Dragonnet・CEVAE、半合成ベンチマークの偏り、競技会、正解のないモデル選択、因果の基盤モデル)、記事 [articles/topics/causal-effect-estimation.md](articles/topics/causal-effect-estimation.md) |
+| AutoML システムとアーキテクチャ探索 | 論文カード16本+既存6本(CASH とパイプライン、Auto-WEKA・TPOT・auto-sklearn・AutoGluon・FLAML・Auto-PyTorch、AMLB の設計と言えないこと、強化学習・進化・重み共有・DARTS、ランダム探索との比較、重み共有の順位、DARTS の失敗、NAS-Bench と再現性)、記事 [articles/methods/automl-systems.md](articles/methods/automl-systems.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では534本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では550本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -100,6 +101,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [知識蒸留と枝刈り — 小さなモデルに何を移し、何を削るのか、そして何が失われるのか](articles/methods/knowledge-distillation-and-pruning.md)
 - [グラフニューラルネットワーク — メッセージパッシングの基本、表現力の上限、深さの問題、異質なグラフ、評価の落とし穴](articles/methods/graph-neural-networks.md)
 - [表データの深層学習モデル — 木をまねる、特徴をトークンにする、数値を埋め込む、MLP を鍛える、近傍を引く](articles/methods/tabular-deep-learning-models.md)
+- [AutoML システムとアーキテクチャ探索 — 何を探し、どう探し、どう比べるのか](articles/methods/automl-systems.md)
 
 横断記事:
 

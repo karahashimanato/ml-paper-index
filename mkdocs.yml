@@ -45,6 +45,7 @@ nav:
       - 知識蒸留と枝刈り: articles/methods/knowledge-distillation-and-pruning.md
       - グラフニューラルネットワーク: articles/methods/graph-neural-networks.md
       - 表データの深層学習モデル: articles/methods/tabular-deep-learning-models.md
+      - AutoML システムとアーキテクチャ探索: articles/methods/automl-systems.md
   - 横断記事:
       - モデルと評価方法の弱点と改善: articles/topics/weaknesses-and-fixes.md
       - モデルの解釈可能性: articles/topics/model-interpretability.md

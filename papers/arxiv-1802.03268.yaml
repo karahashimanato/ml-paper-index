@@ -1,0 +1,103 @@
+id: arxiv-1802.03268
+title: Efficient Neural Architecture Search via Parameter Sharing
+authors:
+- Hieu Pham
+- Melody Y. Guan
+- Barret Zoph
+- Quoc V. Le
+- Jeff Dean
+year: 2018
+links:
+  arxiv: https://arxiv.org/abs/1802.03268
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: ebacd86004cb503d4edebb1e15c9903d16ac4364e5b4b3f9a8a02a2a5c9dd856
+tags:
+  tasks:
+  - neural-architecture-search
+  - image-classification
+  - language-modeling
+  method_families:
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'ENAS: represent the NAS search space as one large DAG whose subgraphs are child models; all child models share the parameters of the DAG, and an LSTM controller trained with REINFORCE selects subgraphs'
+- Alternating training of the shared weights (SGD on cross-entropy of sampled child models, M = 1 sample) and of the controller (reward on validation minibatches, moving-average baseline)
+- Recurrent-cell, macro (whole convolutional network) and micro (convolutional/reduction cell) search spaces
+claims:
+- id: c1
+  statement: 'Motivation: citing Zoph et al. (2018), NAS is described as computationally expensive (450 GPUs for 3-4 days); the authors identify the bottleneck as training each child model to convergence
+    only to measure its accuracy and then discarding the trained weights, and propose forcing all child models to share weights.'
+  location: Introduction
+  page: 1
+  quote: We observe that the computational bottleneck of NAS is the training of each child model to convergence, only to measure its accuracy whilst throwing away all the trained weights.
+- id: c2
+  statement: 'Cost claim: in all experiments a single Nvidia GTX 1080Ti GPU was used and the architecture search took less than 16 hours, which the authors describe as a reduction of GPU-hours by more than
+    1000x compared to NAS.'
+  location: Introduction
+  page: 1
+  quote: Compared to NAS, this is a reduction of GPU-hours by more than 1000x.
+- id: c3
+  statement: 'Shared-weight training: with the controller policy fixed, the shared weights are updated by SGD using a Monte Carlo gradient over M sampled child models; this estimate is unbiased but has
+    higher variance than standard SGD with a fixed model, and the authors find, describing it as perhaps surprising, that M = 1 works just fine. The controller is then trained with REINFORCE and a moving-average
+    baseline, with the reward computed on the validation set (a minibatch of validation data).'
+  location: Section 2.2
+  page: 3
+  quote: Nevertheless – and this is perhaps surprising – we ﬁnd that M = 1 works just ﬁne, i.e. we can update ω using the gradient from any single model m sampled from π(m; θ).
+- id: c4
+  statement: 'Deriving the final architecture: several models are sampled from the trained policy, each is scored on a single validation minibatch using the shared weights, and only the highest-reward model
+    is retrained from scratch; the authors acknowledge results could be improved by training all sampled models from scratch and selecting on a separate validation set as other works do, but say their method
+    yields similar performance while being much more economical.'
+  location: Section 2.2
+  page: 3
+  quote: We then take only the model with the highest reward to re-train from scratch.
+- id: c5
+  statement: 'Penn Treebank protocol: no post-training techniques (neural cache, dynamic evaluation), cell size limited to 24M parameters, no extensive hyperparameter tuning (unlike Melis et al., 2017)
+    and no training of multiple architectures with selection by validation perplexity (unlike Zoph & Le, 2017); on this basis the authors argue ENAS is not at an advantage and that its improved performance
+    is only due to the cell''s architecture.'
+  location: Section 3.1
+  page: 5
+  quote: Therefore, ENAS is not at any advantage, compared to Zoph & Le (2017); Yang et al. (2018); Melis et al. (2017), and its improved performance is only due to the cell’s architecture.
+- id: c6
+  statement: 'Explanation of the remaining CIFAR-10 gap to NAS: perturbing the found models (e.g. randomly changing connections in the micro-space cells) increased test error, which the authors read as
+    the models being local minima; they believe the ENAS controller is as good as the NAS controller and attribute the gap to not sampling, training and selecting among multiple architectures on validation
+    data.'
+  location: Section 3.2
+  page: 7
+  quote: the performance gap between NAS and ENAS is due to the fact that we do not sample multiple architectures from our trained controller, train them, and then select the best architecture on the validation
+    data.
+- id: c7
+  statement: 'Random-architecture comparison (''Guided Random Search''), addressing whether the search space design rather than ENAS explains performance: a uniformly sampled recurrent cell, entire convolutional
+    network and pair of convolutional/reduction cells were trained to convergence with the same settings; the random recurrent cell reached test perplexity 81.2 versus ENAS''s 55.8, and the random convolutional
+    network and random cells reached 5.86% and 6.77% test error versus ENAS''s 4.23% and 3.54%. The text describes one sampled architecture per search space.'
+  location: Section 3.3
+  page: 8
+  quote: Our random recurrent cell achieves the test perplexity of 81.2 on Penn Treebank, which is far worse than ENAS’s perplexity of 55.8.
+- id: c8
+  statement: 'Disabling the search: training only the shared weights with an untrained random controller in the macro space gave 8.92% error at convergence, and an ensemble of 250 Monte Carlo configurations
+    of this model reached 5.49% test error; the authors conclude that appropriate training of the controller is crucial.'
+  location: Section 3.3
+  page: 8
+  quote: We therefore conclude that the appropriate training of the ENAS controller is crucial for good performance.
+- id: c9
+  statement: 'Stability caveat: for CIFAR-10 the authors use 1x1 convolutions (with batch normalization and ReLU) after concatenating skip-connection inputs and global average pooling, stating these tricks
+    are extremely important because gradient updates of the shared weights have very high variance, and that without them ENAS training is very unstable.'
+  location: Appendix B
+  page: 11
+  quote: In fact, we ﬁnd that without these two tricks, the training of ENAS is very unstable.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    Google Brain, CMU, Stanford. No venue is stated in the arXiv v2 PDF (''Copyright 2018 by the authors'') and the arXiv record has no comment or journal_ref; none recorded. Conflict of interest: Zoph
+    and Le are authors of the main baseline NAS (arxiv-1611.01578) and of NASNet (Zoph et al., 2018), and NAS numbers in the comparison tables are taken from those papers rather than re-run. The ''more
+    than 50,000x'' GPU-hour reduction for the macro search space (Section 3.2) is relative to NAS''s reported cost. Reported search times: about 10 hours for the PTB cell, about 7 hours for the macro CIFAR-10
+    network, 11.5 hours for the micro cells (single GTX 1080Ti). No repetition over seeds of the search or of final training is described (searched for seed, repeat, runs). The weight-sharing ranking correlation
+    between shared-weight rewards and stand-alone accuracy is not evaluated in the text (searched for correlation, rank). Controller tricks: tanh constant 2.5, temperature 5.0, entropy bonus; macro space
+    adds a KL penalty toward skip-connection probability 0.4. Results tables (PTB perplexity, CIFAR-10 errors) are not recorded as results.'

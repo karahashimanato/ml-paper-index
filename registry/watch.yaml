@@ -101,3 +101,7 @@ themes:
     tags: [causal-effect-estimation, causal-meta-learners, treatment-effect-networks]
     arxiv_queries:
       - '(abs:"treatment effect" OR abs:"causal effect" OR abs:"causal inference" OR abs:"double machine learning" OR abs:uplift) AND (cat:stat.ML OR cat:cs.LG OR cat:econ.EM OR cat:stat.ME)'
+  - name: AutoML システムとアーキテクチャ探索
+    tags: [automl-systems, neural-architecture-search]
+    arxiv_queries:
+      - '(abs:AutoML OR abs:"automated machine learning" OR abs:"neural architecture search" OR abs:"architecture search") AND (cat:cs.LG OR cat:stat.ML OR cat:cs.CV)'

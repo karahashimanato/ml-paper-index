@@ -1,0 +1,100 @@
+id: arxiv-1806.09055
+title: 'DARTS: Differentiable Architecture Search'
+authors:
+- Hanxiao Liu
+- Karen Simonyan
+- Yiming Yang
+year: 2018
+venue: ICLR 2019
+links:
+  arxiv: https://arxiv.org/abs/1806.09055
+  code: https://github.com/quark0/darts
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-10'
+  pdf_sha256: 81a65f80be6c954280a0eea679f6202eaf28d3d520d027c4857a770b8c12fdcf
+tags:
+  tasks:
+  - neural-architecture-search
+  - image-classification
+  - language-modeling
+  method_families:
+  - deep-learning
+proposes:
+- 'Continuous relaxation of a cell search space: each edge of the cell DAG computes a softmax-weighted mixture of candidate operations parameterized by architecture variables alpha'
+- Bilevel formulation (alpha minimizes validation loss, weights minimize training loss) solved approximately by alternating gradient steps, with a one-step unrolled (second-order) or first-order architecture
+  gradient and a finite-difference Hessian-vector approximation
+- Discretization by keeping the top-k strongest non-zero operations per node (k = 2 for convolutional, k = 1 for recurrent cells)
+claims:
+- id: c1
+  statement: 'Continuous relaxation: the categorical choice of an operation on each edge is replaced by a softmax over all candidate operations, weighted by architecture parameters alpha; at the end of
+    search a discrete architecture is obtained by replacing each mixed operation with its most likely operation.'
+  location: Section 2.2
+  page: 3
+  quote: 'To make the search space continuous, we relax the categorical choice of a particular operation to a softmax over all possible operations:'
+- id: c2
+  statement: 'Bilevel formulation: the architecture alpha (upper level) minimizes the validation loss of weights w*(alpha) that minimize the training loss (lower level); the authors relate this to gradient-based
+    hyperparameter optimization, noting alpha can be viewed as a special type of hyperparameter of substantially higher dimension and harder to optimize.'
+  location: Section 2.2
+  page: 3
+  quote: 'This implies a bilevel optimization problem (Anandalingam & Friesz, 1992; Colson et al., 2007) with α as the upper-level variable and w as the lower-level variable:'
+- id: c3
+  statement: 'Approximation: because the exact architecture gradient requires the expensive inner optimization, w*(alpha) is approximated by a single training step; the authors state they are not aware
+    of convergence guarantees for the resulting algorithm but that in practice it reaches a fixed point with a suitable choice of the inner step size. The second-order term is approximated by finite differences,
+    reducing complexity from O(|alpha||w|) to O(|alpha| + |w|).'
+  location: Section 2.3
+  page: 4
+  quote: While we are not currently aware of the convergence guarantees for our optimization algorithm, in practice it is able to reach a ﬁxed point with a suitable choice of
+- id: c4
+  statement: 'First-order variant: with the inner step size set to 0, the architecture gradient is simply the validation-loss gradient at the current weights (treating w as w*(alpha)), which the authors
+    report gives some speed-up but empirically worse performance in their CIFAR-10 and PTB experiments.'
+  location: Section 2.3
+  page: 4
+  quote: This leads to some speed-up but empirically worse performance, according to our experimental results in Table 1 and Table 2.
+- id: c5
+  statement: 'Selection and evaluation protocol: DARTS is run four times with different random seeds and the best cell is chosen by validation performance after a short training from scratch (100 epochs
+    on CIFAR-10, 300 on PTB), which the authors say is particularly important for recurrent cells because outcomes can be initialization-sensitive; the selected architecture is re-initialized and trained
+    from scratch, and the test set is never used for search or selection. The table captions state that reported DARTS search costs exclude the selection cost and the final evaluation cost.'
+  location: Section 3.2
+  page: 7
+  quote: We note the test set is never used for architecture search or architecture selection.
+- id: c6
+  statement: 'CIFAR-10 setup: half of the CIFAR-10 training data is held out as the validation set for search; an 8-cell network is searched for 50 epochs (one day on a single GPU; all experiments on GTX
+    1080Ti); the evaluation network has 20 cells trained for 600 epochs with cutout, path dropout and auxiliary towers. Because CIFAR results have high variance even with the same setup (citing Liu et al.,
+    2018b), the mean and standard deviation of 10 independent runs are reported for the full model, and the NASNet-A and AmoebaNet-A cells were retrained in the authors'' framework under the same settings.'
+  location: Appendix A.2.1
+  page: 12
+  quote: Since the CIFAR results are subject to high variance even with exactly the same setup (Liu et al., 2018b), we report the mean and standard deviation of 10 independent runs for our full model.
+- id: c7
+  statement: 'Random search baseline: the authors note random search is competitive for both convolutional and recurrent models, which they say reflects the importance of search space design; DARTS improves
+    on it with comparable or less search cost (2.76 +/- 0.09 vs 3.29 +/- 0.15 test error on CIFAR-10; 55.7 vs 59.4 perplexity on PTB). Per the table footnotes, the random baseline is the best of 24 (CIFAR-10)
+    or 8 (PTB) sampled architectures selected by short-training validation error.'
+  location: Section 3.3
+  page: 8
+  quote: It is also interesting to note that random search is competitive for both convolutional and recurrent models, which reﬂects the importance of the search space design.
+- id: c8
+  statement: 'Ablation of the bilevel formulation: jointly optimizing alpha and w over the union of training and validation sets by coordinate descent gave a best cell (of 4 runs) with 4.16 +/- 0.16% test
+    error, worse than random search, and simultaneous SGD on alpha and w over all data gave 3.56 +/- 0.10%; the authors hypothesize these heuristics make alpha overfit the training data.'
+  location: Section 3.3
+  page: 8
+  quote: We hypothesize that these heuristics would cause α (analogous to hyperparameters) to overﬁt the training data, leading to poor generalization.
+- id: c9
+  statement: 'Stated limitation: the method may suffer from discrepancies between the continuous architecture encoding and the derived discrete architecture, which the authors suggest could be alleviated,
+    e.g., by annealing the softmax temperature to enforce one-hot selection.'
+  location: Section 4
+  page: 9
+  quote: For example, the current method may suffer from discrepancies between the continuous architecture encoding and the derived discrete architecture.
+results: []
+relations: []
+card:
+  created_at: '2026-10-10'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-10): AutoML systems and neural architecture search (CASH, pipeline search, ensembling/stacking, meta-learning warm starts, cost-aware
+    search, AutoML benchmarks, NAS with RL/evolution/weight sharing/differentiable search, and NAS evaluation/reproducibility). Carded by a subagent. Results tables not recorded; claims only. Affiliations:
+    CMU (Liu, Yang; Liu''s current affiliation Google Brain) and DeepMind (Simonyan). Venue: PDF header ''Published as a conference paper at ICLR 2019'' and arXiv comment ''Published at ICLR 2019''; year
+    is the first arXiv version (2018). Relatedness: Liu and Simonyan co-authored Hierarchical evolution (Liu et al., 2018b), one of the compared methods (numbers taken from that paper). ENAS was re-run
+    8 times with the authors'' released code for the CIFAR-10 table and re-trained under the DARTS setup for PTB/WT2. Zero operations are excluded when deriving the discrete cell because their strength
+    is underdetermined under batch normalization (Section 2.4). The PTB cell was weaker when transferred to WikiText-2, which the authors attribute possibly to the small size of PTB (Section 3.3). The paper
+    itself does not discuss a collapse of the searched cells to skip connections or parameter-free operations (searched for collapse, skip, parameter-free); the learned cells are shown only as figures.
+    Results in tables (CIFAR-10, PTB, ImageNet mobile, WT2) are not recorded as results; the random-search comparison numbers above are from the body text.'

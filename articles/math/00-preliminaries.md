@@ -26,6 +26,7 @@ written_by: claude-opus-5-5 via Claude Code
 | [1. 木モデル](01-tree-models.md) | 勾配ブースティングの更新、XGBoost の目的関数と分割の利得、不純度と変数重要度 | [勾配ブースティング木](../methods/gradient-boosted-trees.md)、[ランダムフォレストと決定木](../methods/random-forests-and-decision-trees.md) |
 | [2. 生成モデルと表現学習](02-generative-models.md) | VAE の ELBO と再パラメータ化、拡散モデルのノイズの式、InfoNCE と NT-Xent | [オートエンコーダ](../methods/autoencoders.md)、[拡散モデル](../methods/diffusion-models.md)、[対照学習・自己教師あり表現学習](../methods/self-supervised-representation-learning.md) |
 | [3. 不確実性と較正](03-uncertainty-and-calibration.md) | ソフトマックス、温度スケーリング、ECE、分割共形予測の分位点と保証 | [不確実性の推定と較正](../topics/uncertainty-and-calibration.md) |
+| [4. ベイズ系](04-bayes.md) | ガウス過程の事後分布、期待改善量(EI)と獲得関数、BOCPD のラン長の再帰式とハザード関数 | [ベイズ最適化とハイパーパラメータ最適化](../methods/bayesian-optimization.md)、[ベイズ変化点検知](../topics/bayesian-change-point-detection.md) |
 
 この記事には論文の主張は含まれない。高校数学で学ぶ内容の確認と、そこから一歩進んだ道具の説明である。
 

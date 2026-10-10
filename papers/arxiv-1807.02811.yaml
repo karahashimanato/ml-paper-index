@@ -77,6 +77,47 @@ claims:
   location: Section 7
   page: 16
   quote: It is also possible that new acquisition functions may provide substantial value in high dimensional problems.
+- id: c10
+  statement: 'GP prior (Eq. 2): the values f(x_1:k) at a finite set of points are jointly Normal with mean vector mu_0(x_1:k) from a mean function and covariance matrix Sigma_0(x_1:k, x_1:k) from a kernel;
+    the kernel is chosen so that closer points have larger positive correlation, and it must give a positive semi-definite covariance matrix.'
+  location: Section 3
+  page: 4
+  quote: The kernel is chosen so that points xi, xj that are closer in the input space have a large positive correlation, encoding the belief that they should have more similar function values than points
+    that are far apart.
+- id: c11
+  statement: 'GP posterior mean (Eq. 3): given noise-free observations f(x_1:n), f(x) is Normal with mean mu_n(x) = Sigma_0(x, x_1:n) Sigma_0(x_1:n, x_1:n)^-1 (f(x_1:n) - mu_0(x_1:n)) + mu_0(x), which the
+    tutorial describes as a weighted average between the prior mu_0(x) and an estimate based on the data, with a weight that depends on the kernel.'
+  location: Section 3
+  page: 5
+  quote: The posterior mean µn(x) is a weighted average between the prior µ0(x) and an estimate based on the data f(x1:n), with a weight that depends on the kernel.
+- id: c12
+  statement: 'GP posterior variance (Eq. 3): sigma_n^2(x) = Sigma_0(x, x) - Sigma_0(x, x_1:n) Sigma_0(x_1:n, x_1:n)^-1 Sigma_0(x_1:n, x), i.e. the prior variance less a term corresponding to the variance
+    removed by observing f(x_1:n).'
+  location: Section 3
+  page: 5
+  quote: is equal to the prior covariance Σ0(x, x) less a term that corresponds to the variance removed by observing f(x1:n).
+- id: c13
+  statement: 'EI definition (Eq. 7, maximization, noise-free): with f*_n = max_{m<=n} f(x_m) the best value observed so far, the improvement from evaluating x is [f(x) - f*_n]^+ (positive part), and EI_n(x)
+    = E_n[[f(x) - f*_n]^+], the expectation under the GP posterior given the n evaluations.'
+  location: Section 4.1
+  page: 7
+  quote: What we can do, however, is to take the expected value of this improvement and choose x to maximize it.
+- id: c14
+  statement: 'EI closed form (Eq. 8, transcribed as printed in the PDF): EI_n(x) = [Delta_n(x)]^+ + sigma_n(x) phi(Delta_n(x)/sigma_n(x)) - |Delta_n(x)| Phi(Delta_n(x)/sigma_n(x)), with Delta_n(x) = mu_n(x)
+    - f*_n; it is obtained by integration by parts (citing Jones et al. 1998 and Clark 1961), and the next point is x_{n+1} = argmax EI_n(x) (Eq. 9).'
+  location: Section 4.1
+  page: 7
+  quote: The expected improvement can be evaluated in closed form using integration by parts, as described in Jones et al. (1998) or Clark (1961).
+- id: c15
+  statement: 'EI trade-off: EI_n(x) is increasing in both Delta_n(x) and sigma_n(x), balancing high expected quality against high uncertainty (exploration vs. exploitation).'
+  location: Section 4.1
+  page: 7
+  quote: EIn(x) is increasing in both ∆n(x) and σn(x).
+- id: c16
+  statement: EI is smallest (0) at previously evaluated points, where the posterior standard deviation is 0 and the posterior mean is no larger than the best previously evaluated value.
+  location: Section 4.1
+  page: 8
+  quote: The smallest expected improvement is 0, at points where we have previously evaluated.
 results: []
 relations: []
 card:

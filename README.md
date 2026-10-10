@@ -113,6 +113,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [1. 木モデル — 勾配ブースティングの更新、XGBoost の目的関数、不純度と変数重要度](articles/math/01-tree-models.md)
 - [2. 生成モデルと表現学習 — VAE の ELBO、拡散モデルのノイズ、InfoNCE](articles/math/02-generative-models.md)
 - [3. 不確実性と較正 — ソフトマックス、温度スケーリング、ECE、分割共形予測](articles/math/03-uncertainty-and-calibration.md)
+- [4. ベイズ系 — ガウス過程の事後分布、期待改善量、ベイズ的オンライン変化点検知](articles/math/04-bayes.md)
 
 生成物の入口: [generated/index.md](generated/index.md)
 

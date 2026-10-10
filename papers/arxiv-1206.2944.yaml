@@ -85,6 +85,28 @@ claims:
   location: Section 4.4
   page: 11
   quote: We optimize over the nine parameters for each strategy on a withheld validation set and report the mean validation error and standard error over ﬁve separate randomly initialized runs.
+- id: c10
+  statement: 'Notation in Section 2.2 (minimization): x_best = argmin_{x_n} f(x_n), Phi is the standard normal CDF and phi the standard normal density; acquisition functions depend on the GP only through
+    the predictive mean mu(x) and predictive variance sigma^2(x).'
+  location: Section 2.2
+  page: 3
+  quote: In the proceeding, we will denote the best current value as xbest = argminxn f(xn), Φ(·) will denote the cumulative distribution function of the standard normal, and φ(·) will denote the standard
+    normal density function.
+- id: c11
+  statement: 'Probability of improvement (Eq. 1): a_PI(x) = Phi(gamma(x)) with gamma(x) = (f(x_best) - mu(x)) / sigma(x).'
+  location: Section 2.2
+  page: 3
+  quote: One intuitive strategy is to maximize the probability of improving over the best current value (Kushner, 1964).
+- id: c12
+  statement: 'Expected improvement in closed form under the GP (Eq. 2): a_EI(x) = sigma(x) (gamma(x) Phi(gamma(x)) + N(gamma(x); 0, 1)).'
+  location: Section 2.2
+  page: 3
+  quote: 'This also has closed form under the Gaussian process:'
+- id: c13
+  statement: 'GP lower confidence bound (Eq. 3; upper when maximizing): a_LCB(x) = mu(x) - kappa sigma(x), with a tunable kappa to balance exploitation against exploration.'
+  location: Section 2.2
+  page: 3
+  quote: with a tunable κ to balance exploitation against exploration.
 results: []
 relations: []
 card:

@@ -79,6 +79,29 @@ claims:
   location: Well-Log Data
   page: 4
   quote: Notice that the drops to zero run-length correspond well with the abrupt changes in the mean of the data.
+- id: c10
+  statement: 'Marginal predictive (Eq. 1): P(x_{t+1} | x_1:t) = sum over r_t of P(x_{t+1} | r_t, x_t^(r)) P(r_t | x_1:t), where x_t^(r) is the data associated with run r_t.'
+  location: Recursive Run Length Estimation
+  page: 2
+  quote: 'We then integrate over the posterior distribution on the current run length to ﬁnd the marginal predictive distribution:'
+- id: c11
+  statement: 'Run-length posterior and recursion (Eq. 2-3): P(r_t | x_1:t) = P(r_t, x_1:t) / P(x_1:t), and P(r_t, x_1:t) = sum over r_{t-1} of P(r_t | r_{t-1}) P(x_t | r_{t-1}, x_t^(r)) P(r_{t-1}, x_1:t-1).'
+  location: Recursive Run Length Estimation
+  page: 2
+  quote: we write the joint distribution over run length and observed data recursively.
+- id: c12
+  statement: 'Changepoint prior and hazard (Eq. 4-5): P(r_t | r_{t-1}) = H(r_{t-1}+1) if r_t = 0, 1 - H(r_{t-1}+1) if r_t = r_{t-1} + 1, and 0 otherwise; the hazard is H(tau) = P_gap(g = tau) / sum_{t=tau}^{inf}
+    P_gap(g = t).'
+  location: The Changepoint Prior
+  page: 2
+  quote: The function H(τ) is the hazard function.
+- id: c13
+  statement: 'Algorithm 1 steps: evaluate the predictive probability pi_t^(r) of the new datum under each run length; growth probabilities P(r_t = r_{t-1}+1, x_1:t) = P(r_{t-1}, x_1:t-1) pi_t^(r) (1 - H(r_{t-1}));
+    changepoint probability P(r_t = 0, x_1:t) = sum over r_{t-1} of P(r_{t-1}, x_1:t-1) pi_t^(r) H(r_{t-1}); evidence P(x_1:t) is the sum over r_t; the run-length distribution is the joint divided by the
+    evidence.'
+  location: Algorithm 1
+  page: 3
+  quote: 'Algorithm 1: The online changepoint algorithm with'
 results: []
 relations: []
 card:

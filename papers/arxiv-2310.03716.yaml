@@ -1,0 +1,97 @@
+id: arxiv-2310.03716
+title: 'A Long Way to Go: Investigating Length Correlations in RLHF'
+authors:
+- Prasann Singhal
+- Tanya Goyal
+- Jiacheng Xu
+- Greg Durrett
+year: 2023
+venue: COLM 2024
+links:
+  arxiv: https://arxiv.org/abs/2310.03716
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 66994c5521e3257e94807136a77e6eca11a8dd7ec22b4a7bd6a0012972748ca9
+tags:
+  tasks:
+  - llm-alignment
+  method_families:
+  - preference-optimization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'Non-length reward gain (NRG): stratify outputs into 20-token length buckets and average the within-bucket reward gain (weighted by bucket size), to estimate the share of PPO reward improvement not explained
+  by shifting to longer outputs'
+- 'Length-only PPO (LPPO) control: PPO with the reward R*(y) = 1 - |len(y)/L - 1| for a target length L, used to test how much downstream improvement a purely length-based reward reproduces'
+- A set of anti-length interventions on PPO (high KL coefficient, omitting long outputs, length penalty, reward scaling) and on reward modeling (length-balanced data, confidence-based truncation, random-pairing
+  data augmentation)
+claims:
+- id: c1
+  statement: 'Setup: three ''helpfulness'' preference datasets - WebGPT (question answering, human labels, 19.6K examples), Stack (StackExchange, labels derived from upvotes, 100K pairs) and RLCD (multi-turn
+    dialogue, synthetic preferences, 40K helpfulness pairs); reward models use the Bradley-Terry likelihood; PPO maximizes R(x, y) - lambda KL(pi_RL || pi_SFT) with lambda = 0.04, implemented with Hugging
+    Face TRL on Llama-7B with LoRA (rank 16), starting from public SFT models.'
+  location: Section 2.1
+  page: 3
+  quote: We use Llama-7B models (Touvron et al., 2023a) as our base for all experiments
+- id: c2
+  statement: 'Evaluation: besides intrinsic reward, downstream quality is measured with AlpacaFarm simulated preferences, which query 12 OpenAI API-based ''annotators'' and report pairwise win rates on
+    500 held-out datapoints per task; the authors qualify this metric by noting it may itself have length biases, which is why they focus more on other metrics.'
+  location: Section 2.1
+  page: 3
+  quote: While useful for additional context, we qualify this metric by noting that it itself may have length biases,
+- id: c3
+  statement: 'Length-stratified analysis: across settings PPO significantly increases output length, and although all settings show overall reward gains, non-length reward gains (NRG) are substantially
+    lower; for WebGPT and RLCD 70%-90% of the improvement can be explained by length shifts, and on WebGPT NRG contributes only 2% of the overall gain with standard PPO. Stack shows a higher NRG share,
+    which the authors say is likely because Stack SFT outputs are already near the length limit (and it may rely more on non-length features).'
+  location: Section 3
+  page: 5
+  quote: Particularly, NRG is almost negligible for WebGPT and contributes only 2% to overall reward gain in the standard PPO setting.
+- id: c4
+  statement: 'Length-only reward: replacing the learned reward with a purely length-based heuristic score in the PPO pipeline gives simulated-preference performance close to standard PPO (stated in the
+    text as 56% vs 58% win-rate of standard PPO on WebGPT and 64% vs 63% on RLCD). The authors read this as showing that current reward models fail to convincingly outperform simple heuristics and as questioning
+    reported ''progress'' with popular metrics.'
+  location: Introduction
+  page: 2
+  quote: We find that PPO performance with this length-only reward is close to standard PPO (56% vs 58% win-rate of standard PPO on WebGPT and 64% vs 63% win-rate of standard PPO on RLCD).
+- id: c5
+  statement: Length-only PPO also beats a longest-of-8 SFT sampling baseline and length-only PPO without KL penalty; the authors hypothesize that the KL term is an important constraint that lets length-only
+    PPO learn good features (pathological outputs would likely have higher KL), and argue that win-rate evaluation alone is not sufficient to tell whether RLHF behaves as expected.
+  location: Section 3 (Can a length-only reward improve performance?)
+  page: 5
+  quote: Our hypothesis is that the KL term is an important constraint on the optimization for allowing length-only PPO to learn good features.
+- id: c6
+  statement: 'PPO interventions (KL coefficient raised from 0.04 to 0.12, omitting long outputs, an explicit length penalty, reward scaling): length often decreases substantially compared with standard
+    PPO, but length still always increases relative to SFT and reward model score is always worse than standard PPO; omitting long outputs and penalizing length often cause convergence failure.'
+  location: Section 4.1
+  page: 7
+  quote: However, length still always increases relative to SFT, and reward model score is always worse than standard PPO.
+- id: c7
+  statement: 'Reward-model interventions: all three preference datasets are slightly imbalanced towards longer outputs; interventions such as length balancing reduce the length-reward correlation, but all
+    except random-pairing data augmentation hurt evaluation accuracy. On RLCD strong correlations remain despite balancing, while on Stack balancing lowers correlation with above-random accuracy and leads
+    to shorter-than-SFT outputs with higher downstream preference.'
+  location: Section 4.2
+  page: 8
+  quote: Interestingly, on RLCD strong correlations remain despite balancing, suggesting the bias may be more challenging to eliminate.
+- id: c8
+  statement: 'Training dynamics: most training examples get near-zero reward-model confidence across epochs, and the few strong predictions (including confidently wrong ones) follow the length heuristic;
+    the authors conclude reward models likely struggle to learn deeper features from preferences and, even with balancing, are vulnerable to being dominated by easy features like length.'
+  location: Section 5
+  page: 9
+  quote: Thus reward models likely struggle to learn deeper features from preferences, and even with balancing are vulnerable to being dominated by “easiy” features like length.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. Venue: ''Published as a conference paper at COLM 2024'' in the PDF header, matching the arXiv comment ''Accepted to COLM 2024''. Affiliations: UT Austin, Princeton, Salesforce AI; acknowledgments
+    list support including a gift from Salesforce and a gift from Amazon. No conflict of interest from evaluating the authors'' own models was found. Section numbers: 2.1, 3, 4.1, 4.2 and 5 are confirmed
+    by cross-references in the text and appendix; the subsections of Section 3 are given by name. Appendix C.1 reports that DPO ''still consistently leads to large length increases'' with reward accuracy
+    similar or worse than an explicit RM, ''suggesting that DPO likely suffers from similar issues''. Appendix C.2 notes most experiments are at 7B scale with LLaMA and ''may not necessarily represent other
+    models or scales'' (a LLaMA-2 13B RM check showed only small accuracy changes). Appendix C.3: a harmlessness RM showed no length correlation. Doubt: the per-dataset RM accuracies in Table 7 and Table
+    8 appear inconsistent with each other (the RLCD and WGPT columns look swapped); table values are not recorded.'

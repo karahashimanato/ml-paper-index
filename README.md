@@ -86,8 +86,9 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 | AutoML システムとアーキテクチャ探索 | 論文カード16本+既存6本(CASH とパイプライン、Auto-WEKA・TPOT・auto-sklearn・AutoGluon・FLAML・Auto-PyTorch、AMLB の設計と言えないこと、強化学習・進化・重み共有・DARTS、ランダム探索との比較、重み共有の順位、DARTS の失敗、NAS-Bench と再現性)、記事 [articles/methods/automl-systems.md](articles/methods/automl-systems.md) |
 | 混合エキスパートと状態空間モデル | 論文カード16本+既存5本(MoE のゲートと負荷の偏り、容量と補助損失、エキスパートがトークンを選ぶ方式、router z-loss と微調整、総パラメータと活性パラメータ、HiPPO・S4・H3・Mamba・Mamba-2、線形注意・Performer・RWKV、コピーと検索の弱点と混成モデル、LRA と効率の測り方)、記事 [articles/methods/moe-and-state-space-models.md](articles/methods/moe-and-state-space-models.md) |
 | 大規模言語モデルの評価の落とし穴 | 論文カード14本+既存2本(汚染とその検出、新しく作った問題での確認、例の並べ方・書式・選択肢の記号への敏感さ、LLM による採点の偏りと人の好みによる比較、ベンチマークの正解の誤り、創発と指標の選び方、評価の再現性)、記事 [articles/topics/llm-evaluation-pitfalls.md](articles/topics/llm-evaluation-pitfalls.md) |
+| 人の好みによる言語モデルの調整 | 論文カード16本(比較から報酬を学ぶ、報酬モデルと PPO と KL の罰則、アライメント税、有用性と無害性、AI のフィードバック、DPO・IPO・KTO、DPO と PPO の比較、報酬の過最適化、長さの偏り、報酬モデルの評価、RLHF の根本的な限界)、記事 [articles/methods/rlhf-and-preference-optimization.md](articles/methods/rlhf-and-preference-optimization.md) |
 
-件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では580本。
+件数はタスクタグで数えたもので、複数のテーマに数えられるカードがある。全体では596本。
 自動取得できず未カード化の承認済み論文: [notes/unavailable-pdfs-2026-10.md](notes/unavailable-pdfs-2026-10.md)
 
 手法の記事:
@@ -105,6 +106,7 @@ uv run python scripts/generate.py        # generated/ と記事の未反映ブ�
 - [表データの深層学習モデル — 木をまねる、特徴をトークンにする、数値を埋め込む、MLP を鍛える、近傍を引く](articles/methods/tabular-deep-learning-models.md)
 - [AutoML システムとアーキテクチャ探索 — 何を探し、どう探し、どう比べるのか](articles/methods/automl-systems.md)
 - [混合エキスパートと状態空間モデル — Transformer の計算をどこで減らし、何を失うのか](articles/methods/moe-and-state-space-models.md)
+- [人の好みによる言語モデルの調整 — 報酬モデルと RLHF、AI のフィードバック、DPO とその仲間、過最適化と長さの偏り](articles/methods/rlhf-and-preference-optimization.md)
 
 横断記事:
 

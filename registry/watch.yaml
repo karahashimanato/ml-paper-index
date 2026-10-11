@@ -113,3 +113,7 @@ themes:
     tags: [llm-evaluation]
     arxiv_queries:
       - '(abs:"data contamination" OR abs:"benchmark contamination" OR abs:"LLM-as-a-judge" OR abs:"prompt sensitivity" OR abs:"evaluation of large language models") AND (cat:cs.CL OR cat:cs.LG)'
+  - name: 人の好みによる言語モデルの調整
+    tags: [preference-optimization, llm-alignment]
+    arxiv_queries:
+      - '(abs:RLHF OR abs:"human feedback" OR abs:"preference optimization" OR abs:"reward model" OR abs:DPO) AND (abs:"language model") AND (cat:cs.CL OR cat:cs.LG)'

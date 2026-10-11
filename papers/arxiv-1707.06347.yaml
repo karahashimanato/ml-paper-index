@@ -1,0 +1,97 @@
+id: arxiv-1707.06347
+title: Proximal Policy Optimization Algorithms
+authors:
+- John Schulman
+- Filip Wolski
+- Prafulla Dhariwal
+- Alec Radford
+- Oleg Klimov
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1707.06347
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b
+tags:
+  tasks:
+  - llm-alignment
+  method_families:
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'Proximal policy optimization (PPO): alternate between collecting data with the current policy and running several epochs of minibatch optimization of the clipped surrogate objective E[min(r_t A_t, clip(r_t,
+  1-eps, 1+eps) A_t)], where r_t is the probability ratio between new and old policies'
+- An adaptive-KL-penalty variant that doubles or halves the penalty coefficient to track a target KL per update, reported as performing worse than clipping
+claims:
+- id: c1
+  statement: 'Motivation: performing multiple optimization steps on the standard policy-gradient loss with the same trajectory is not well justified and empirically often leads to destructively large policy
+    updates (the authors say results were not shown but were similar to or worse than the no-clipping-or-penalty setting).'
+  location: Section 2.1
+  page: 2
+  quote: doing so is not well-justiﬁed, and empirically it often leads to destructively large policy updates
+- id: c2
+  statement: TRPO maximizes a surrogate objective subject to a mean-KL constraint; the theory suggests a KL penalty instead, but TRPO uses a hard constraint because a single penalty coefficient beta is
+    hard to choose across problems or even within one problem. The authors state that experiments show a fixed beta optimized with SGD is not sufficient to emulate TRPO's monotonic improvement; additional
+    modifications are needed.
+  location: Section 2.2
+  page: 2
+  quote: TRPO uses a hard constraint rather than a penalty because it is hard to choose a single value of β that performs well across diﬀerent problems—or even within a single problem, where the the characteristics
+    change over the course of learning.
+- id: c3
+  statement: 'Clipped surrogate objective: with r_t(theta) = pi_theta(a_t|s_t)/pi_theta_old(a_t|s_t), L^CLIP = E_t[min(r_t A_t, clip(r_t, 1-eps, 1+eps) A_t)], with eps a hyperparameter (e.g. 0.2). Clipping
+    removes the incentive to move r_t outside [1-eps, 1+eps], and taking the minimum makes the objective a pessimistic lower bound on the unclipped objective, ignoring ratio changes only when they would
+    improve the objective; it equals the unclipped objective to first order around theta_old.'
+  location: Section 3
+  page: 3
+  quote: Finally, we take the minimum of the clipped and unclipped objective, so the ﬁnal objective is a lower bound (i.e., a pessimistic bound) on the unclipped objective.
+- id: c4
+  statement: 'Adaptive KL penalty alternative: optimize the KL-penalized surrogate for several epochs, then halve beta if the measured KL is below d_targ/1.5 and double it if above d_targ x 1.5. The constants
+    are chosen heuristically and the authors state the algorithm is not very sensitive to them; in their experiments the KL penalty performed worse than the clipped objective but is kept as an important
+    baseline.'
+  location: Section 4
+  page: 4
+  quote: In our experiments, we found that the KL penalty performed worse than the clipped surrogate objective, however, we’ve included it here because it’s an important baseline.
+- id: c5
+  statement: 'Algorithm: with shared policy/value parameters the loss combines the clipped surrogate, a squared-error value loss (coefficient c1) and an entropy bonus (coefficient c2); advantages use truncated
+    generalized advantage estimation over fixed-length segments. Each iteration N parallel actors collect T timesteps, and the surrogate is optimized on the NT samples with minibatch SGD (usually Adam)
+    for K epochs.'
+  location: Section 5
+  page: 5
+  quote: Then we construct the surrogate loss on these NT timesteps of data, and optimize it with minibatch SGD (or usually for better performance, Adam [KB14]), for K epochs.
+- id: c6
+  statement: 'Surrogate-objective comparison protocol: because hyperparameters (eps, beta, d_targ) are searched for each variant, a computationally cheap benchmark of 7 MuJoCo tasks in OpenAI Gym is used,
+    with one million timesteps, 3 seeds per environment, and each run scored by the average total reward of the last 100 episodes; scores are shifted and scaled per environment so the random policy scores
+    0 and the best result 1, then averaged over 21 runs. No parameter sharing and no entropy bonus are used.'
+  location: Section 6.1
+  page: 6
+  quote: We shifted and scaled the scores for each environment so that the random policy gave a score of 0 and the best result was set to 1, and averaged over 21 runs to produce a single scalar for each
+    algorithm setting.
+- id: c7
+  statement: 'Continuous-control comparison: PPO (eps = 0.2, other hyperparameters from Section 6.1) is compared with tuned implementations of TRPO, CEM, vanilla policy gradient with adaptive step size,
+    A2C and A2C with trust region; the authors state PPO outperforms the previous methods on almost all the continuous control environments.'
+  location: Section 6.2
+  page: 7
+  quote: We see that PPO outperforms the previous methods on almost all the continuous control environments.
+- id: c8
+  statement: 'Atari protocol: PPO is compared with well-tuned A2C and ACER on 49 games using the same policy network; the baselines use hyperparameters tuned to maximize performance on this benchmark, PPO''s
+    are given in Table 5. Two metrics are used (average episode reward over all of training, favoring fast learning, and over the last 100 episodes, favoring final performance), and the winner per game
+    is decided by averaging over three trials.'
+  location: Section 6.4
+  page: 8
+  quote: For the other two algorithms, we used hyperparameters that were tuned to maximize performance on this benchmark.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. All authors at OpenAI. No venue is stated in the arXiv PDF and the arXiv record has no comment/journal_ref; none recorded. Tag note: no registered task tag covers RL control benchmarks; ''llm-alignment''
+    is used as the nearest registered task because PPO is the RL optimizer of the RLHF papers in this topic (e.g. arxiv-1909.08593, arxiv-2009.01325), and the paper itself involves no language models. Conflict
+    of interest: the main baseline TRPO and the GAE advantage estimator are the first author''s own earlier methods ([Sch+15b], [Sch+15a]). Reviewer observation (not stated by the authors): eps = 0.2 was
+    selected on the same 7 MuJoCo environments and 1M-timestep budget (Section 6.1) that are used for the comparison with other algorithms in Section 6.2. How PPO''s Atari hyperparameters (Table 5) were
+    chosen was not found in the text (searched for tuned, search, chose, select). The Introduction states PPO is significantly better than A2C in sample complexity on Atari and similar to ACER though much
+    simpler. Win counts (Table 2), Table 1 normalized scores and learning curves are not recorded. Section 6.3 shows Roboschool humanoid learning curves only.'

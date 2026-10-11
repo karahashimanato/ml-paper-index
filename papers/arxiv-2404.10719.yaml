@@ -1,0 +1,107 @@
+id: arxiv-2404.10719
+title: Is DPO Superior to PPO for LLM Alignment? A Comprehensive Study
+authors:
+- Shusheng Xu
+- Wei Fu
+- Jiaxuan Gao
+- Wenjie Ye
+- Weilin Liu
+- Zhiyu Mei
+- Guangju Wang
+- Chao Yu
+- Yi Wu
+year: 2024
+venue: ICML 2024
+links:
+  arxiv: https://arxiv.org/abs/2404.10719
+  code: https://github.com/openpsi-project/ReaLHF
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-11'
+  pdf_sha256: a524d61ffa384ec9e78b06c0c65000c6c37c25f07aa1beacb2ba83eeb6685576
+tags:
+  tasks:
+  - llm-alignment
+  method_families:
+  - preference-optimization
+  - large-language-models
+  paradigms:
+  - reinforcement-learning
+proposes:
+- A theoretical and empirical analysis of DPO's limitations (policies found by PPO are a proper subset of DPO minimizers; DPO can favour out-of-distribution responses)
+- An ablation of PPO for RLHF identifying advantage normalization, large batch size and an exponential-moving-average reference model as key factors
+claims:
+- id: c1
+  statement: 'Theorem 4.1: with Pi_PPO the policies obtained by fitting a reward model on D and running PPO, and Pi_DPO the minimizers of the DPO loss, Pi_PPO is a proper subset of Pi_DPO; hence any PPO
+    solution that exploits the reward model can also be found by DPO, and DPO may additionally find solutions exploiting out-of-distribution data.'
+  location: Section 4.1
+  page: 4
+  quote: 'We have the following conclusion: ΠPPO is a proper subset of ΠDPO.'
+- id: c2
+  statement: 'Counter-example and interpretation: with three actions and a preference dataset containing only y1 > y2, the DPO loss is minimized whenever the probability of y2 is 0, so DPO can put most
+    mass on the unseen y3, which PPO cannot because pi_ref assigns y3 zero probability. The authors attribute reward misspecification to narrow preference-data coverage and argue that DPO suffers from it
+    on OOD samples in a different manner, while PPO can use prompt-only data and the KL term regularizes generated samples.'
+  location: Section 4.1
+  page: 4
+  quote: Specifically, DPO can develop a biased distribution favoring unseen responses, directly impacting quality of the learned policy.
+- id: c3
+  statement: 'Synthetic check (8 prompts x 8 responses, MLP policy and reward model, optimal responses on the diagonal, limited preference coverage): both DPO and the learned reward model assigned high
+    values to responses outside the preference data; DPO''s final model may assign them higher probability than the reference model, e.g. from 0.11 to 0.23 in the red-circled case, whereas PPO alleviated
+    this with explicit KL regularization.'
+  location: Section 4.2
+  page: 5
+  quote: For example, in the red circles, DPO increases the probability from 0.11 to 0.23.
+- id: c4
+  statement: 'Real data (SafeRLHF, Llama-2-7B, a combined safety-first preference): with SFT on Alpaca as base/reference, DPO gave only a 55.4% safety rate and low helpfulness, which the authors hypothesize
+    is caused by distribution shift; using a reference further fine-tuned on safe SafeRLHF responses increased the safety rate by 16.4% and the helpfulness reward from -4.19 to -1.62. Helpfulness and harmfulness
+    were measured with the official evaluation models, not used in training.'
+  location: Section 4.3
+  page: 5
+  quote: As shown in Table 2, resolving the distribution shift issue essentially increases the safety rate by 16.4% and the helpfulness reward from −4.19 to −1.62.
+- id: c5
+  statement: 'Data sensitivity: filtering dual-unsafe and dual-safe pairs raised DPO''s safety rate but filtering dual-safe pairs largely hurt helpfulness; iterative DPO (new responses from the model labeled
+    by a learned reward model) reached a safety rate comparable to PPO but a much lower helpfulness reward. The authors suggest DPO may benefit from removing noise or controversies, but excessive discarding
+    of high-quality data could hurt.'
+  location: Section 4.3
+  page: 5
+  quote: These results suggest that while DPO may derive advantages from eliminating noise or controversies in the training data, excessively discarding high-quality data could be detrimental to DPO performance.
+- id: c6
+  statement: 'PPO key factors (ablation on HH-RLHF with Llama2-7B and APPS/CodeContest with CodeLlama-34B; implementation based on DeepSpeed-Chat with a scalar response-level reward and no auxiliary SFT
+    loss): advantage normalization stabilized and improved PPO, a large batch size gave the most significant benefit especially on code generation, and an exponential-moving-average update of the reference
+    model brought additional benefits. Baseline PPO with batch size 64 degraded performance on APPS relative to the SFT model.'
+  location: Section 5
+  page: 6
+  quote: The most significant benefit is brought by using a large batch size, especially on code generation tasks.
+- id: c7
+  statement: 'Evaluation protocol on HH-RLHF: the OpenAssistant reward model (not used in training) plus GPT-4 pairwise comparisons with the DPO paper''s prompt on 100 randomly sampled test queries; to
+    reduce position bias, each pair is judged twice with positions swapped and inconsistent results are counted as a tie. A human evaluation with 4 persons per pair agreed with GPT-4 at rates of 60% and
+    61% (Appendix C.4).'
+  location: Appendix B
+  page: 14
+  quote: If the results of the two evaluations are inconsistent, we set the final result as a “Tie”.
+- id: c8
+  statement: 'Code generation: PPO used a reward of 10 if generated code passed all training test cases and 0 otherwise, while DPO used iterative DPO (APPS) or correct/incorrect dataset solutions (CodeContest).
+    On APPS, DPO-Iter failed to improve the SFT model at all model sizes despite nearly perfect test-case feedback; on CodeContest, after one epoch DPO reached a pass rate of 0 and output many meaningless
+    code snippets, while PPO with CodeLlama-34B surpassed AlphaCode-41B (10@1k from 16.4% to 22.4%, stated in the Introduction).'
+  location: Section 6
+  page: 8
+  quote: After one epoch of training, the code written by the DPO model has achieved a pass rate of 0, we observe that the DPO model outputs many meaningless code snippets.
+- id: c9
+  statement: 'Stated limitations: the reward model is significant for both PPO and DPO-Iter, but the paper does not study how to train a robust reward model; for the code competition tasks the ground-truth
+    (test-case) reward is used for PPO training and for labeling DPO-Iter data, which the authors say does not affect their conclusions.'
+  location: Section 7
+  page: 9
+  quote: For the code competition task, we utilize the ground-truth reward for PPO training and the labeling of DPO-Iter.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. Affiliations: Tsinghua University, OpenPsi Inc., Shanghai Qi Zhi Institute. Venue from the arXiv journal_ref ''ICML 2024'' (the arXiv PDF itself has no venue footer). Conflict of interest: the
+    PPO implementation and released code (ReaLHF, openpsi-project) are the authors'' own and two authors are affiliated with OpenPsi Inc.; the tuning effort is asymmetric: DPO uses beta = 0.1, lr 1e-6 with
+    a batch-size sweep (Appendix A.1), whereas PPO receives the ablation-derived techniques plus checkpoint selection by validation reward/pass@k (Appendix A.2: actor lr 1e-5, critic lr 5e-6, global batch
+    512, KL coefficient 0.1, GAE lambda = gamma = 1, reward clipping 20). Appendix C.2 says too large beta may harm both methods and beta = 0.1 performs well. The ''Analysis'' paragraph of Section 5 refers
+    to ''Section 4.3'' where Table 3 seems meant (apparent typo in the PDF). HH-RLHF 170k comparisons; SafeRLHF ''over 30k entries of expert comparison data''. Table values not recorded.'

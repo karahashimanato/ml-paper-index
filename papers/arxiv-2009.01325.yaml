@@ -1,0 +1,106 @@
+id: arxiv-2009.01325
+title: Learning to summarize from human feedback
+authors:
+- Nisan Stiennon
+- Long Ouyang
+- Jeff Wu
+- Daniel M. Ziegler
+- Ryan Lowe
+- Chelsea Voss
+- Alec Radford
+- Dario Amodei
+- Paul Christiano
+year: 2020
+venue: NeurIPS 2020
+links:
+  arxiv: https://arxiv.org/abs/2009.01325
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 6bb15be37338385cae1d910bcb46bb2cc99e599918a0625c9c1d0a57f90e5224
+tags:
+  tasks:
+  - llm-alignment
+  - llm-evaluation
+  method_families:
+  - preference-optimization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+  - supervised
+proposes:
+- 'Batched RLHF for summarization: collect pairwise human comparisons of summaries from several policies, train a reward model (initialized from the supervised baseline) with a pairwise logistic loss, and
+  optimize a policy against it with PPO using a KL penalty to the supervised (SFT) policy, repeating the cycle'
+- A released dataset of 64,832 TL;DR summary comparisons, plus analyses of reward-model overoptimization, reward-model scaling, and automatic metrics as predictors of human preference
+claims:
+- id: c1
+  statement: 'Reward-model objective: starting from the supervised baseline with a randomly initialized scalar head, the reward model is trained on pairs to minimize -E[log sigma(r(x, y_i) - r(x, y_{1-i}))],
+    where y_i is the human-preferred summary; after training its outputs are normalized so that the dataset''s reference summaries have mean score 0.'
+  location: Section 3.4
+  page: 6
+  quote: At the end of training, we normalize the reward model outputs such that the reference summaries from our dataset achieve a mean score of 0.
+- id: c2
+  statement: 'RL objective: the reward-model output is used as a reward for the whole summary, maximized with PPO (each time step a BPE token), with a KL penalty to the supervised policy as previously done
+    in [25]: R(x, y) = r(x, y) - beta log[pi_RL(y|x)/pi_SFT(y|x)]. The stated purposes are an entropy bonus that deters collapse to a single mode, and keeping outputs close to what the reward model saw
+    during training. The PPO value function is a separate Transformer initialized from the reward model.'
+  location: Section 3.4
+  page: 6
+  quote: Second, it ensures the policy doesn’t learn to produce outputs that are too different from those that the reward model has seen during training.
+- id: c3
+  statement: 'PPO settings: separate policy and value networks, gamma = 1 and lambda = 0.95, 4 epochs per batch of rollouts, linear learning-rate decay with initial rates chosen from small experiments and
+    rough model-size extrapolation, 1 million episodes, and a KL coefficient of 0.05 for both main runs (except where it is explicitly varied in the reward-model optimization experiments).'
+  location: Appendix B
+  page: 18
+  quote: We used a KL coefﬁcient of 0.05 for both of the main runs we report results for (except when we explicitly vary this value in the reward model optimization graphs).
+- id: c4
+  statement: 'Labelers and agreement: in response to the labeler-researcher mismatch reported by [73], the authors moved to the offline (batched) setting and kept a hands-on relationship with labelers (detailed
+    instructions, a shared chat room, regular feedback), training them to agree with the researchers'' judgments; labelers were recruited from Upwork, Scale and Lionbridge (footnote). On a subset of comparisons,
+    labeler-researcher agreement was 77% ± 2% and researcher-researcher agreement 73% ± 4%.'
+  location: Section 3.3
+  page: 5
+  quote: 'As a result of our procedure, we obtained high labeler-researcher agreement: on a subset of compari-son tasks, labelers agree with researchers 77% ± 2% of the time, while researchers agree with
+    each other 73% ± 4% of the time.'
+- id: c5
+  statement: 'Main evaluation metric: the percentage of a policy''s summaries that humans prefer over the TL;DR reference summaries; the authors report that their 1.3B human feedback model significantly
+    outperformed a supervised model 10 times its size (61% versus 43% raw preference against references), and that both human feedback models were judged superior to the reference summaries.'
+  location: Section 4.1
+  page: 6
+  quote: Our policies trained with human feedback signiﬁcantly outperform our supervised baselines on this metric, with our 1.3B human feedback model signiﬁcantly outperforming a supervised model 10× its
+    size (61% versus 43% raw preference score against reference summaries).
+- id: c6
+  statement: 'Length confound: since the human feedback models learned to produce longer summaries, length could explain much of the improvement; after controlling for length the preference against references
+    drops by about 5%, with the 6.7B model still preferred about 65% of the time. (The dataset was also filtered to reference summaries of 24-48 tokens to limit length effects.)'
+  location: Section 4.1
+  page: 6
+  quote: We ﬁnd that after controlling for length (Appendix F), the preference of our human feedback models vs. reference summaries drops by ~5%; even so, our 6.7B model summaries are still preferred to
+    the reference summaries ~65% of the time.
+- id: c7
+  statement: 'Reward-model overoptimization: optimizing policies against an earlier reward model with a range of KL coefficients, light optimization improves summaries according to labelers, but with further
+    optimization true preferences fall off relative to the reward model''s prediction and the reward model eventually becomes anti-correlated with human preferences. The authors note the same over-optimization
+    happens with ROUGE and that similar behavior has been observed with learned rewards in robotics.'
+  location: Section 4.3
+  page: 8
+  quote: However, as we optimize further, true preferences fall off compared to the prediction, and eventually the reward model becomes anti-correlated with human preferences.
+- id: c8
+  statement: 'Reward-model length bias: although the reward models are sensitive to small semantically important edits, they are biased towards longer summaries; the 6.7B reward model prefers improving
+    edits that shorten the summary only 62.6% of the time versus 76.4% for humans.'
+  location: Section 4.3
+  page: 8
+  quote: 'However, our RMs are biased towards longer summaries: our 6.7B RM prefers improving edits that make the summary shorter only 62.6% of the time (vs. 76.4% for humans).'
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. All authors at OpenAI. Venue from the PDF page 1 footer (''34th Conference on Neural Information Processing Systems (NeurIPS 2020), Vancouver, Canada'') and the arXiv comment ''NeurIPS 2020''.
+    Conflict of interest: the models are OpenAI''s own GPT-3-style pretrained models (1.3B and 6.7B), the paper is a follow-up to [73] = Ziegler et al. (arxiv-1909.08593) with overlapping authors, and labelers
+    were trained to agree with the researchers, so ''human preference'' here largely reflects the authors'' notion of summary quality (the task is defined as ''as good as possible, according to our judgments'',
+    Section 3.2). Further body-text numbers not made into claims: 6.7B PPO summaries get 7/7 overall 45% of the time vs 20% (supervised) and 23% (references) (Section 4.1); RM agreement with labelers on
+    CNN/DM 62.4%/66.5% vs inter-labeler 66.9%; doubling data gives ~1.1% and doubling model size ~1.8% RM accuracy (Section 4.3); ROUGE agreement with labelers drops from ~57% to ~50% on human feedback
+    samples (Section 4.4). Limitations (Section 5): RL fine-tuning of the 6.7B model took about 320 GPU-days, data took thousands of labeler hours, and an equal-cost high-quality demonstration baseline
+    was not collected. Broader impacts discuss misuse (persuasion, toxic content) and that researcher labels may not be an appropriate gold standard for contested tasks. Final evaluations sample at T=0.
+    The overoptimization curve, model-size curves and CNN/DM transfer are figure-only; not recorded.'

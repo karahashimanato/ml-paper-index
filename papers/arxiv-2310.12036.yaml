@@ -1,0 +1,97 @@
+id: arxiv-2310.12036
+title: A General Theoretical Paradigm to Understand Learning from Human Preferences
+authors:
+- Mohammad Gheshlaghi Azar
+- Mark Rowland
+- Bilal Piot
+- Daniel Guo
+- Daniele Calandriello
+- Michal Valko
+- Rémi Munos
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2310.12036
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 4a2f9e715c9031dfe4623df0f82df5dafedc94ede51568122cdf495a10d0630b
+tags:
+  tasks:
+  - llm-alignment
+  method_families:
+  - preference-optimization
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'Psi-preference optimisation (PsiPO): maximize E[Psi(p*(y > y''|x))] over y ~ pi, y'' ~ mu minus tau KL(pi || pi_ref), for a non-decreasing Psi; it recovers RLHF and DPO for Psi = logit when Bradley-Terry
+  holds'
+- 'Identity-PO (IPO): PsiPO with Psi = identity, with a sampled offline loss that regresses the log-likelihood-ratio gap h_pi(y_w, y_l) towards 1/(2 tau)'
+claims:
+- id: c1
+  statement: 'Framing: the authors argue RLHF relies on two approximations, (1) that pairwise preferences can be substituted with pointwise rewards and (2) that a reward model trained on them generalizes
+    to out-of-distribution data sampled by the policy; DPO bypasses the second but still heavily relies on the first.'
+  location: Abstract
+  page: 1
+  quote: 'The prevalent deployment of learning from human preferences through reinforcement learning (RLHF) relies on two important approximations: the first assumes that pairwise preferences can be substituted
+    with pointwise rewards.'
+- id: c2
+  statement: 'PsiPO and Proposition 1: the general objective maximizes the expectation of Psi(p*(y > y''|x)) with y from the policy and y'' from the behaviour policy mu, minus tau KL(pi || pi_ref), for
+    a non-decreasing Psi: [0, 1] -> R. With Psi(q) = log(q/(1 - q)) and Bradley-Terry holding, E_y''[Psi(p*(y > y''))] = r(y) - E[r(y'')], so the optimal policies of PsiPO, the KL-regularized RLHF objective
+    and DPO are identical.'
+  location: A Deeper Analysis of DPO and RLHF
+  page: 4
+  quote: This is equal to the reward in Equation (3), up to an additive constant, and so it therefore follows that the optimal policy for Equation (6) and for optimizing the objective in Equation (3) are
+    identical.
+- id: c3
+  statement: 'Weak regularisation with deterministic preferences: if p*(y > y'') = 1, Bradley-Terry requires r(y) - r(y'') -> +infinity, and the optimal policy then gives pi*(y'') = 0 irrespective of the
+    KL coefficient tau, so KL regularisation becomes weaker the more deterministic the preferences. The authors also note that the logit transform makes small increases in preference probabilities near
+    1 as incentivized as larger increases around 50%, which may be undesirable.'
+  location: Section 4.2
+  page: 4
+  quote: Thus the strength of the KL-regularisation becomes weaker and weaker the more deterministic the preferences.
+- id: c4
+  statement: 'Finite data: even if the true preference is e.g. 0.8, an estimate of 1 is very possible with few data points, and the empirical optimal policy then sets pi(y'') = 0 for any tau; the authors
+    conclude overfitting can be a substantial empirical issue, especially with extremely large context and action spaces as for LLMs.'
+  location: Section 4.2
+  page: 4
+  quote: This means that overfitting can be a substantial empirical issue, especially when the context and action spaces are extremely large as it is for large language models.
+- id: c5
+  statement: 'Why standard RLHF may be more robust in practice: with {0, 1} empirical preferences the optimal rewards are infinite, but in practice the reward function ends up underfit (citing Christiano
+    et al., 2017 that reward regularisation is an important aspect of RLHF training); the authors argue this underfitting keeps the policy regularised towards pi_ref, and DPO, by not training a reward function,
+    loses it. Early stopping can still be used as additional regularisation.'
+  location: Section 4.2
+  page: 4
+  quote: This underfitting of the reward function is thus crucial in obtaining a final policy that is sufficiently regularised towards the reference policy πref
+- id: c6
+  statement: 'IPO: with Psi = identity, the problem is rewritten as root-finding and then as a squared loss whose unique local/global minimum (Theorem 2, assuming Supp(mu) = Supp(pi_ref) and policies with
+    the same support) is the optimal policy; using a Bernoulli preference sample and the symmetry of each pair, the sampled loss is E[(h_pi(y_w, y_l) - 1/(2 tau))^2] with h_pi the log-likelihood-ratio gap
+    relative to pi_ref (Algorithm 1). The authors state that IPO, unlike DPO, always regularizes towards pi_ref by controlling this gap.'
+  location: Section 5.2
+  page: 7
+  quote: In other words IPO, unlike DPO, always regularizes its solution towards πref by controlling the gap between the log-likelihood ratios log(π(yw)/π(yl)) and log(πref(yw)/πref(yl)), thus avoiding
+    the over-fitting to the preference dataset.
+- id: c7
+  statement: 'Illustrative bandit experiments (no context; 3 actions; softmax policies optimized with Adam for 18000 steps, learning rate 0.01, mini-batch 9; 10 seeds per setting): with a dataset forming
+    a total ordering, DPO converged to the deterministic policy for all values of tau, ignoring the reference policy, while IPO kept the policy from becoming greedy under strong regularisation; with an
+    action that never wins (unobserved pair), DPO pushed its probability to 0 regardless of tau, while IPO decreased it gradually with tau.'
+  location: Section 5.4
+  page: 8
+  quote: We observe that DPO always converges to the deterministic policy for all values of τ.
+- id: c8
+  statement: 'Scope: the empirical support is limited to these minimal bandit examples, which the authors call sufficient to prove IPO is better suited to learn from sampled preferences than DPO; they state
+    that future work should scale the experiments to settings such as training language models on human preference data.'
+  location: Conclusion and Future Work
+  page: 9
+  quote: Future works should scale those experiments to more complex settings such as training language models on human preferences data.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. Affiliation: Google DeepMind. No venue recorded: the v2 PDF says ''Under review.'' and the arXiv record has no comment/journal_ref. Section numbers 4.2, 5, 5.2, 5.3, 5.4 are confirmed by cross-references
+    in the PDF (''see Sec. 4.2'', ''see Sec. 5.2'', ''Sec. 5.3 and Sec. 5.4''); other sections are named. The KL coefficient is called tau in this paper (beta in DPO). No LLM experiments: the only experiments
+    are 3-action bandit examples run on a cloud VM with 4 cores and 32GB RAM. The asymptotic 2-action example (Section 5.3) gives the IPO optimum pi*(y1) = sigma(0.5/tau) for deterministic preferences,
+    while DPO converges to the deterministic policy regardless of tau. Results are shown only in figures; none recorded.'

@@ -1,0 +1,109 @@
+id: arxiv-1909.08593
+title: Fine-Tuning Language Models from Human Preferences
+authors:
+- Daniel M. Ziegler
+- Nisan Stiennon
+- Jeffrey Wu
+- Tom B. Brown
+- Alec Radford
+- Dario Amodei
+- Paul Christiano
+- Geoffrey Irving
+year: 2019
+links:
+  arxiv: https://arxiv.org/abs/1909.08593
+  code: https://github.com/openai/lm-human-preferences
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: f3004c3128281cb373f71e0f22aef81cdc295cef9b07450d1fa07cdc79abe5b2
+tags:
+  tasks:
+  - llm-alignment
+  - language-modeling
+  method_families:
+  - preference-optimization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+  - supervised
+proposes:
+- 'Reward learning for pretrained language models: a reward model initialized from the language model is trained on human choices of the best of four samples, and the policy (also initialized from the language
+  model) is fine-tuned with PPO on the reward minus beta times log(pi/rho), a KL penalty to the pretrained model, with beta fixed or adapted to a target KL'
+- Online data collection, in which human labels on the current policy's samples are gathered during RL and the reward model is periodically retrained, compared with offline collection from the pretrained
+  model only
+claims:
+- id: c1
+  statement: 'Reward-model objective: following Christiano et al. (2017), labelers pick the best of four samples for an input; the reward model is fit by the softmax log-likelihood of the chosen sample
+    among the four (Equation 1), is initialized as a random linear head on the language model, and is normalized to mean 0 and variance 1 on samples from the pretrained model. Asking for four options lets
+    a human amortize the cost of reading the prompt.'
+  location: Section 2
+  page: 3
+  quote: considering more options allows a human to amortize the cost of reading and understanding the prompt x.
+- id: c2
+  statement: 'RL objective: following Jaques et al. (2017; 2019), the policy is optimized with PPO on the modified reward R(x, y) = r(x, y) - beta log(pi(y|x)/rho(y|x)), a penalty with expectation beta
+    KL(pi, rho) to the pretrained model rho. The authors state the term acts as an entropy bonus, keeps the policy within the range where r is valid, and for the style tasks is part of the task definition
+    (style judged by humans, coherence and topicality left to the KL term). Beta is either constant or adapted by a log-space proportional controller toward a target KL (K_beta = 0.1).'
+  location: Section 2
+  page: 3
+  quote: it plays the role of an entropy bonus, it prevents the policy from moving too far from the range where r is valid
+- id: c3
+  statement: Without the KL penalty (mock sentiment task), samples are gibberish even with an entropy bonus, although the policies reach a very high mock-sentiment score.
+  location: Table 10 caption (appendix)
+  page: 18
+  quote: Without regularization towards natural language, the results are gibberish even if we include an entropy bonus (targeting 30 nats).
+- id: c4
+  statement: For the mock sentiment reward, the authors state that under a KL constraint to rho the optimal policy has the form pi_opt(y|x) proportional to rho(y|x) exp(r_s(x,y)/beta), and estimate its
+    reward by reweighting samples from rho; their PPO policies show a significant gap from this optimum after the 2M training episodes used in the main experiments, largely closed with more training.
+  location: Section 3.1.1
+  page: 6
+  quote: There is a signiﬁcant gap from optimality after training the policy on 2M continuations—the number used in our main experiments—though it is largely closed with more training.
+- id: c5
+  statement: 'Labelers and agreement: labels were collected through Scale AI using written instructions plus about 100 example comparisons from the authors. The queries lack unambiguous ground truth; on
+    4-way comparisons the authors agreed with each other about 60% of the time (25% by chance), and agreed with Scale labelers 38% of the time on sentiment and 46% on TL;DR summarization.'
+  location: Section 2.4
+  page: 4
+  quote: On 4-way comparisons for sentiment and TL;DR summarization, authors of this paper agree about 60% of the time (vs. 25% for random guessing).
+- id: c6
+  statement: 'Evaluation caveat: final evaluation uses comparisons by the same Scale labelers; the authors call this perilous because it shows that the reward model and policy fit the human reward but not
+    that those evaluations capture what is really wanted, and the models are incentivized to exploit idiosyncrasies of the labeling process. They include samples so readers can judge.'
+  location: Section 2.4
+  page: 4
+  quote: Evaluating the quality of a model trained by Scale using the same set of humans from Scale is perilous
+- id: c7
+  statement: 'Distribution shift motivates online data collection: if the trained policy differs greatly from the pretrained policy, the reward model faces a large shift from its training samples; the authors
+    report online collection was important for summarization but not for the simpler style tasks. Section 4.1 lists its disadvantages (software complexity, hard debugging, quality-control problems) and
+    proposes batched data collection as a middle ground.'
+  location: Section 2.3
+  page: 4
+  quote: If the trained policy π is very different from the zero-shot policy ρ, the reward model will suffer a large distributional shift from training on samples from ρ to evaluation on samples from π.
+- id: c8
+  statement: 'Summarization models trained with 60k labels are ''smart copiers'' that mostly copy whole sentences while skipping preamble, yet the 60k online model beat the reference summaries 96% of the
+    time on TL;DR and 84% on CNN/Daily Mail. The authors'' interpretations: copying is the easiest way to be accurate since labelers were told to penalize inaccuracy and redundancy but not copying; and
+    the preference for the model and lead-3 over references reveals a mismatch between the intended notion of quality and what labelers evaluated, which they failed to detect because online collection made
+    quality control harder (the abstract says the models ''may be exploiting'' labelers'' simple heuristics).'
+  location: Section 3.2.1
+  page: 11
+  quote: This reveals a mismatch between the notion of quality we wanted our model to learn, and what the humans labelers actually evaluated.
+- id: c9
+  statement: A refactoring bug flipped the sign of both the reward and the KL penalty, producing a model that optimized for negative sentiment while staying natural; because instructions told labelers to
+    rate sexually explicit text very low, the model learned to output only such content, which was noticed only after training finished.
+  location: Section 4.4
+  page: 12
+  quote: This bug was remarkable since the result was not gibberish but maximally bad output.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. All authors at OpenAI. No venue is stated in the arXiv PDF and the arXiv record has no comment/journal_ref; none recorded. Conflict of interest: the policy and reward models start from OpenAI''s
+    own GPT-2 (774M), and the method follows Christiano et al. (2017), whose authors overlap (Christiano, Amodei, Brown). Setup: PPO2 from OpenAI Baselines (Dhariwal et al., 2017), 2M episodes, ''default
+    values for the other parameters'' (Section 2.2); beta fixed at 0.1 (CNN/Daily Mail) and 0.03 (TL;DR), KL targets 6 nats (descriptiveness) and 10 nats (sentiment). 5% of queries were answered 5 times
+    by different labelers to estimate agreement (Section 2.3). Section 4.2: sharing parameters between reward model and policy caused overfitting (60k RM samples vs 2M policy episodes). Section 4.3: ambiguous
+    tasks make consistent labeling hard; the authors suggest less ambiguous labeling tasks (e.g. describing problems). Human-evaluation win rates and ROUGE are in Tables 1, 4, 5 (not recorded); the body-text
+    summary numbers (86% vs zero-shot, 77% vs the mock-sentiment model for continuation; 96%/84% vs references for summarization) appear in the Introduction and Sections 3.1.2/3.2. Follow-up: arxiv-2009.01325
+    (overlapping authors) moves to batched/offline collection and high labeler-researcher agreement in response to the mismatch reported here.'

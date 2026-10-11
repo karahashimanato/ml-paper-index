@@ -1,0 +1,125 @@
+id: arxiv-2307.15217
+title: Open Problems and Fundamental Limitations of Reinforcement Learning from Human Feedback
+authors:
+- Stephen Casper
+- Xander Davies
+- Claudia Shi
+- Thomas Krendl Gilbert
+- Jérémy Scheurer
+- Javier Rando
+- Rachel Freedman
+- Tomasz Korbak
+- David Lindner
+- Pedro Freire
+- Tony Wang
+- Samuel Marks
+- Charbel-Raphaël Segerie
+- Micah Carroll
+- Andi Peng
+- Phillip Christoffersen
+- Mehul Damani
+- Stewart Slocum
+- Usman Anwar
+- Anand Siththaranjan
+- Max Nadeau
+- Eric J. Michaud
+- Jacob Pfau
+- Dmitrii Krasheninnikov
+- Xin Chen
+- Lauro Langosco
+- Peter Hase
+- Erdem Bıyık
+- Anca Dragan
+- David Krueger
+- Dorsa Sadigh
+- Dylan Hadfield-Menell
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2307.15217
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 96be3bd769c980f656d7d0615a74496c9e9b7138b5ff48e5510be6073afb3805
+tags:
+  tasks:
+  - llm-alignment
+  method_families:
+  - preference-optimization
+  - large-language-models
+  paradigms:
+  - reinforcement-learning
+proposes:
+- A taxonomy of RLHF challenges in three groups (human feedback, reward model, policy) plus joint reward-model/policy training, with each challenge labeled as tractable (addressable within RLHF with better
+  methodology) or fundamental (requiring a method that is no longer RLHF)
+- A list of RLHF details (human feedback, reward model, policy, systemic safety) whose disclosure to the public and/or auditors is proposed for transparency and auditing
+claims:
+- id: c1
+  statement: 'Definition: RLHF is used to mean methods combining feedback collection, reward modeling (supervised learning of a reward model that imitates human evaluations) and policy optimization; formally
+    the reward model minimizes a sum of losses l(r_phi(x_i), y_i) plus a regularizer lambda_r r(phi), and the policy maximizes E[r_phi(x) + lambda_p(theta, theta_new, x)], where lambda_p is a regularizer
+    such as a divergence penalty. The authors note this framework fails to reflect reality in several ways (Section 3 and Appendix A).'
+  location: Introduction
+  page: 2
+  quote: 'We use RLHF to refer to methods that combine three interconnected processes: feedback collection, re- ward modeling, and policy optimization.'
+- id: c2
+  statement: 'Tractable vs fundamental: tractable challenges could be addressed within the RLHF framework with improved methodology, whereas fundamental challenges are substantial enough that overcoming
+    them would require a method that is no longer RLHF; the authors call this distinction soft, with some categories marginal, and say fundamental problems should be avoided or compensated for by other
+    safety measures.'
+  location: Section 3
+  page: 5
+  quote: are substantial enough that overcoming them would require a method that is no longer a form of RLHF.
+- id: c3
+  statement: 'Human feedback (fundamental): because the reward model is trained on human approval rather than ground-truth desirability, models can exploit the gap between what is good and what is evaluated
+    positively; citing prior work, RLHF-trained models can sound confident when wrong, which can lead to more positive feedback, and misleading behavior is actively incentivized when humans can be tricked.
+    A separate fundamental item is that humans cannot evaluate performance on difficult tasks well even with perfect information and time.'
+  location: Section 3.1.2
+  page: 7
+  quote: 'Fundamental: Humans can be misled, so their evaluations can be gamed.'
+- id: c4
+  statement: 'Reward model (fundamental): a single reward function cannot represent a diverse society of humans. Citing Stiennon et al. (2020), Ouyang et al. (2022) and Bai et al. (2022a), annotator-annotator
+    and annotator-researcher agreement rates range from 63% to 77%; current techniques model evaluator differences as noise, so when preferences differ the majority wins, potentially disadvantaging under-represented
+    groups.'
+  location: Section 3.2.1
+  page: 9
+  quote: 'Fundamental: A single reward function cannot represent a diverse society of humans.'
+- id: c5
+  statement: 'Reward hacking (fundamental): optimizing strong pressure against an imperfect proxy tends to hurt the underlying goal (citing Hoskin, Manheim & Garrabrant, Gao et al., 2022); citing Ziegler
+    et al. (2019) and Stiennon et al. (2020), without a KL penalty between base and finetuned model LLMs under RL often learn to output nonsensical text; reward models can also misgeneralize even from correctly
+    labeled data.'
+  location: Section 3.2.2
+  page: 9
+  quote: 'Fundamental: Optimizing for an imperfect reward proxy leads to reward hacking.'
+- id: c6
+  statement: 'Evaluating reward models (tractable but difficult and expensive): since the true reward is usually unknown, reward models are typically evaluated indirectly by optimizing a policy and evaluating
+    its generations, which makes the evaluation depend on an expensive, noisy policy optimization with many ad-hoc choices; moreover the evaluation signal is the same as the training signal (human approval),
+    so training and evaluation failures will be correlated.'
+  location: Section 3.2.3
+  page: 10
+  quote: Another issue with indirect evaluation is that the evaluation signal for the reward model is the same as the training signal – human approval.
+- id: c7
+  statement: 'Joint training (tractable): if the reward model is trained offline it is likely to misgeneralize, while gathering feedback from policy samples invites auto-induced distributional shift; when
+    steps are done serially, the reward model is typically inaccurate off-distribution, exactly where the policy goes. Without a labeled validation set in the regions the policy explores, reward over-optimization
+    is hard to detect during training; the authors suggest measuring KL-shift (citing Gao et al., 2022) or ensemble disagreement as possibly helpful.'
+  location: Section 3.4
+  page: 12
+  quote: Without a labeled validation set in the regions the policy is exploring, it is difficult to detect reward over-optimization during training.
+- id: c8
+  statement: 'Transparency recommendations: the authors propose that organizations disclose details such as the pretraining process, how human evaluators were selected and trained, how examples were selected
+    for feedback, the feedback types, quality-assurance and inter-rater consistency measures, the reward-model loss and how disagreement was modeled, reward-model and policy evaluations (including red teaming),
+    audits, expected risks, and monitoring plans; detailing safety measures will often not require implementable details, and otherwise private disclosure to second-party auditors is offered as a solution.'
+  location: Section 5
+  page: 17
+  quote: Companies using RLHF to train models for high-stakes or safety-critical applications should maintain transparency with the public and/or auditors about key details of their approach.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. No venue: neither the PDF (arXiv v2, 11 Sep 2023) nor the arXiv metadata states one; none recorded. This is a survey/position paper with no experiments. Affiliations are academic and non-profit
+    (MIT CSAIL, Harvard, UC Berkeley, ETH Zurich, Cambridge, etc.); no evaluation of the authors'' own products. Several cited supporting works are by the authors themselves (e.g. Casper et al. 2023b, Zhuang
+    and Hadfield-Menell 2020, Korbak et al. 2022b, Krueger et al. 2020, Carroll et al.). Section numbers come from Figure 1 (subsections 3.1.1-3.4) and text cross-references (Sections 3, 4, 5, 6); ''Background
+    and Notation'' is not numbered by a cross-reference. Section 3.3.3 notes RL contributes to mode collapse (citing OpenAI (2023) that RLHF harmed GPT-4''s calibration) and that the base model is typically
+    both the policy initialization and the KL reference. Section 4 argues for defense in depth since RLHF ''does not solve the fundamental challenges of developing human-aligned AI''. Doubt: page 5 says
+    fundamental problems ''could be fully addressed with RLHF'', which seems to contradict the Discussion (''cannot be fully solved by RLHF''); likely a missing ''not'', so it is not quoted.'

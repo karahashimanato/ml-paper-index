@@ -50,6 +50,8 @@ tasks:
     description: Training and evaluating language models.
   - id: llm-evaluation
     description: "Methods for evaluating large language models and their pitfalls: benchmark contamination, prompt sensitivity, LLM-as-a-judge, human-preference comparison and reproducibility of evaluation."
+  - id: llm-alignment
+    description: "Adjusting language models to follow human intent and preferences (instruction following, helpfulness and harmlessness)."
   - id: natural-language-understanding
     description: "Sentence- and passage-level language understanding tasks such as GLUE classification and SQuAD question answering."
   - id: image-classification
@@ -226,6 +228,8 @@ method_families:
     description: "Treatment-effect estimators built by combining arbitrary ML regressions: S/T/X/R/DR-learners and double/debiased machine learning (DML)."
   - id: treatment-effect-networks
     description: "Neural networks designed for treatment-effect estimation, e.g. TARNet/CFR, Dragonnet and CEVAE."
+  - id: preference-optimization
+    description: "Learning from preference data: reward models with RLHF, and direct methods such as DPO, IPO and KTO."
 paradigms:
   - id: supervised
     description: Supervised learning.

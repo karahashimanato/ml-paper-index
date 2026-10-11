@@ -1,0 +1,109 @@
+id: arxiv-2305.18290
+title: 'Direct Preference Optimization: Your Language Model is Secretly a Reward Model'
+authors:
+- Rafael Rafailov
+- Archit Sharma
+- Eric Mitchell
+- Stefano Ermon
+- Christopher D. Manning
+- Chelsea Finn
+year: 2023
+venue: NeurIPS 2023
+links:
+  arxiv: https://arxiv.org/abs/2305.18290
+source:
+  version: arXiv v3
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 92cb3a2b71362acda98a789b03d88688fd33cf5fcf13f81d2b1de30ee7d3b67a
+tags:
+  tasks:
+  - llm-alignment
+  - llm-evaluation
+  method_families:
+  - preference-optimization
+  - large-language-models
+  paradigms:
+  - reinforcement-learning
+proposes:
+- 'Direct Preference Optimization (DPO): using the closed-form optimum of the KL-constrained reward maximization problem, the reward is reparameterized as beta log(pi/pi_ref) (plus a prompt-only term that
+  cancels under Bradley-Terry), so the policy is trained directly on preference pairs with a binary cross-entropy loss, without an explicit reward model or RL sampling loop'
+claims:
+- id: c1
+  statement: 'RLHF objective reviewed by the authors: maximize the expected learned reward r_phi(x, y) minus beta times the KL divergence between the policy and the reference policy pi_ref (the initial
+    SFT model), with beta controlling the deviation. The authors state the constraint is important because it keeps the model near the distribution on which the reward model is accurate, maintains generation
+    diversity and prevents mode collapse to single high-reward answers; the objective is not differentiable and is typically optimized with PPO using the reward r_phi - beta(log pi_theta - log pi_ref).'
+  location: Section 3
+  page: 4
+  quote: The added constraint is important, as it prevents the model from deviating too far from the distribution on which the reward model is accurate, as well as maintaining the generation diversity and
+    preventing mode-collapse to single high-reward answers.
+- id: c2
+  statement: 'Derivation: preferences are assumed to come from a latent reward r* via the Bradley-Terry model p*(y1 > y2 | x) = sigma(r*(x, y1) - r*(x, y2)) (a reward model would be fit with the loss -E[log
+    sigma(r_phi(x, y_w) - r_phi(x, y_l))]). Following prior work, the optimum of the KL-constrained objective is pi_r(y|x) = (1/Z(x)) pi_ref(y|x) exp(r(x, y)/beta); Z(x) is expensive to estimate, but rearranging
+    gives r(x, y) = beta log(pi_r/pi_ref) + beta log Z(x), and because Bradley-Terry depends only on reward differences, substituting this for r* makes the partition function cancel, so the preference probability
+    is expressed with the optimal and reference policies only (derivations in Appendix A.1-A.2).'
+  location: Section 4
+  page: 4
+  quote: Fortunately, the Bradley-Terry model depends only on the difference of rewards between two completions
+- id: c3
+  statement: 'DPO loss: L_DPO = -E_(x, y_w, y_l)[log sigma(beta log(pi_theta(y_w|x)/pi_ref(y_w|x)) - beta log(pi_theta(y_l|x)/pi_ref(y_l|x)))]; this fits an implicit reward whose optimal policy is pi_theta,
+    and since it is equivalent to fitting a reparametrized Bradley-Terry model it enjoys properties such as consistency under suitable assumptions on the preference data distribution (citing [4]).'
+  location: Section 4
+  page: 4
+  quote: This way, we fit an implicit reward using an alternative parameterization, whose optimal policy is simply πθ.
+- id: c4
+  statement: 'The DPO gradient raises the likelihood of y_w and lowers that of y_l, with each example weighted by sigma(r_hat(x, y_l) - r_hat(x, y_w)), where r_hat = beta log(pi_theta/pi_ref) is the implicit
+    reward, i.e. by how wrongly the implicit reward orders the pair. The authors'' experiments suggest this weighting matters: a naive version without it can make the language model degenerate (Appendix
+    Table 3).'
+  location: Section 4
+  page: 5
+  quote: Our experiments suggest the importance of this weighting, as a naïve version of this method without the weighting coefficient can cause the language model to degenerate (Appendix Table 3).
+- id: c5
+  statement: 'Pipeline and reference model: completions are ideally sampled from pi_ref and labeled, but in practice public preference datasets are reused; pi_ref = pi_SFT when available, otherwise pi_ref
+    is obtained by maximizing the likelihood of the preferred completions, which the authors say helps mitigate the distribution shift between the unavailable true reference distribution and the pi_ref
+    used by DPO.'
+  location: Section 4
+  page: 5
+  quote: This procedure helps mitigate the distribution shift between the true reference distribution which is unavailable, and πref used by DPO.
+- id: c6
+  statement: 'Theory: rewards differing by a function of x only are equivalent (same Plackett-Luce/Bradley-Terry preferences and same constrained-RL optimal policy); Theorem 1 states that, under mild assumptions,
+    every reward class consistent with Plackett-Luce/Bradley-Terry can be represented as beta log(pi(y|x)/pi_ref(y|x)), so the reparameterization loses no generality. The authors also interpret the normalization
+    term as the soft value function of pi_ref and argue that without it the policy gradient of the PPO-style objective could have high variance, whereas the DPO reparameterization needs no baseline.'
+  location: Section 5
+  page: 6
+  quote: Under mild assumptions, all reward classes consistent with the Plackett-Luce
+- id: c7
+  statement: 'TL;DR summarization (GPT-4 judged win rate against the test-set reference summaries, all methods fine-tuning the same GPT-J SFT model): DPO had a win rate of approximately 61% at temperature
+    0.0 versus 57% for PPO at its best temperature 0.0. In the same paragraph the authors note they did not meaningfully tune DPO''s beta, so the results may underestimate DPO''s potential, and that DPO
+    was much more robust to sampling temperature than PPO.'
+  location: Section 6.2
+  page: 9
+  quote: We find that DPO has a win rate of approximately 61% at a temperature of 0.0, exceeding the performance of PPO at 57% at its optimal sampling temperature of 0.0.
+- id: c8
+  statement: 'GPT-4 as judge: the authors use GPT-4 as a proxy for human evaluation and validate it with a human study on TL;DR. They found that GPT-4 with the simple prompt (S) prefers longer, more repetitive
+    summaries than humans, so they added a concise prompt (C), which gave win rates more representative of humans and is used for the main results; with both prompts GPT-4 agreed with humans about as often
+    as humans agreed with each other. Raters were 25 volunteers (Stanford students, recent graduates or visitors, mainly CS; Appendix D.3).'
+  location: Section 6.4
+  page: 10
+  quote: we evaluate this prompt because we find that GPT-4 prefers longer, more repetitive summaries than humans do with the GPT-4 (S) prompt.
+- id: c9
+  statement: 'Stated limitations: how DPO policies generalize out of distribution compared with learning from an explicit reward needs more comprehensive study; how reward over-optimization manifests in
+    DPO is open (possibly the slight decrease in Figure 3-right); models were evaluated only up to 6B parameters; and GPT-4-computed win rates are impacted by the prompt.'
+  location: Discussion (Limitations & Future Work)
+  page: 10
+  quote: Regarding evaluations, we find that the win rates computed by GPT-4 are impacted by the prompt; future work may study the best way to elicit high-quality judgments from automated systems.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. Affiliations: Stanford University, CZ Biohub. Venue from the PDF footer (''37th Conference on Neural Information Processing Systems (NeurIPS 2023)''); the arXiv record has no comment/journal_ref.
+    Section numbers come from cross-references in the PDF (Section 3, Section 4, Section 5, Section 6.2, Sec. 6.4); the Discussion section number is not confirmed, so its name is used. Tasks: IMDb controlled
+    sentiment generation (GPT-2-large SFT; preference pairs generated with a pre-trained sentiment classifier, which also serves as ground-truth reward; 22 runs sweeping target KL for PPO, beta in {0.05,
+    0.1, 1, 5}, alpha for unlikelihood), Reddit TL;DR summarization with the human preferences gathered by Stiennon et al. (GPT-J SFT from CarperAI), and single-turn dialogue on Anthropic HH (170k dialogues;
+    Pythia-2.8B with Preferred-FT as reference). Hyperparameters (Appendix B): beta = 0.1, batch size 64, RMSprop, lr 1e-6 with 150 warmup steps by default; beta = 0.5 for TL;DR. The main text says ''we
+    did not meaningfully tune DPO''s beta'' and ''with almost no tuning of hyperparameters''. The PPO baseline for HH was an existing model from a third-party source (CarperAI trlx / reciprocate/ppo_hh_pythia-6B)
+    that the authors could not get to beat the base Pythia-2.8B, so Best of 128 was treated as ''a rough proxy for PPO-level performance''. Human study (Appendix D.3): 25 volunteer raters each comparing
+    25 summaries; ties (~1%) ignored. No figure values and no table values recorded; reward-KL frontier and HH win rates are figure-only.'

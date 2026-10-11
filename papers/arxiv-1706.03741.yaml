@@ -1,0 +1,102 @@
+id: arxiv-1706.03741
+title: Deep reinforcement learning from human preferences
+authors:
+- Paul Christiano
+- Jan Leike
+- Tom B. Brown
+- Miljan Martic
+- Shane Legg
+- Dario Amodei
+year: 2017
+links:
+  arxiv: https://arxiv.org/abs/1706.03741
+source:
+  version: arXiv v4
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 4c2b5a0ff6f9cd6696d3e9c8263efbbe701123d4fa09f22bf28d6ef861b73a2a
+tags:
+  tasks:
+  - llm-alignment
+  method_families:
+  - preference-optimization
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+  - supervised
+proposes:
+- 'Deep RL from human preferences: a reward predictor is fit to human comparisons of short trajectory-segment clips (Bradley-Terry / softmax over summed predicted rewards) while a policy is trained by standard
+  RL (A2C for Atari, TRPO for MuJoCo) on the predicted reward, with the two processes running asynchronously and queries collected online'
+- 'Practical modifications: an ensemble of bootstrapped reward predictors, adaptive l2 regularization keyed to validation loss, an assumed 10% chance of uniformly random human responses, and query selection
+  by ensemble disagreement'
+claims:
+- id: c1
+  statement: 'Setting: the environment supplies no reward; instead a human overseer expresses preferences between trajectory segments (short sequences of observations and actions), and the agent should
+    produce trajectories the human prefers while making as few queries as possible.'
+  location: Section 2.1
+  page: 3
+  quote: Instead of assuming that the environment produces a reward signal, we assume that there is a human overseer who can express preferences between trajectory segments.
+- id: c2
+  statement: 'Policy optimization: the policy is trained by a standard RL algorithm to maximize the predicted reward; because the learned reward may be non-stationary the authors prefer policy gradient
+    methods, using A2C for Atari and TRPO for the simulated robotics tasks with parameter settings found to work well for traditional RL. The only adjusted hyperparameter was the TRPO entropy bonus, since
+    the trust region can give inadequate exploration when the reward function is changing; predicted rewards are normalized to zero mean and constant standard deviation.'
+  location: Section 2.2.1
+  page: 5
+  quote: The only hyperparameter which we adjusted was the entropy bonus for TRPO.
+- id: c3
+  statement: 'Reward-model objective: the probability that the human prefers segment 1 is modeled as exp(sum of predicted rewards over segment 1) divided by the sum of this quantity for both segments, and
+    the reward estimate is chosen to minimize the cross-entropy between these predictions and the human labels (the label distribution is all on the chosen segment, uniform for ''equally good'', and incomparable
+    pairs are dropped). The authors state this follows the Bradley-Terry model and is analogous to Elo ratings; a footnote notes that the model uses no discounting.'
+  location: Section 2.2.3
+  page: 5
+  quote: This follows the Bradley-Terry model (Bradley and Terry, 1952) for estimating score functions from pairwise preferences, and is the specialization of the Luce-Shephard choice rule (Luce, 2005;
+    Shepard, 1957) to preferences over trajectory segments.
+- id: c4
+  statement: 'Modifications found helpful in early experiments: an ensemble of predictors each trained on a bootstrap resample of the comparisons (normalized and averaged); 1/e of the data held out per
+    predictor, with the l2 coefficient adjusted to keep validation loss between 1.1 and 1.5 times training loss (plus dropout in some domains); and an assumed 10% chance that the human answers uniformly
+    at random, because raters have a constant error probability that does not vanish for extreme reward differences.'
+  location: Section 2.2.3
+  page: 5
+  quote: Rather than applying a softmax directly as described in Equation 1, we assume there is a 10% chance that the human responds uniformly at random.
+- id: c5
+  statement: Query selection picks segment pairs with the highest variance of predicted preference across ensemble members; the authors call this a crude approximation that, according to their ablations,
+    actually impairs performance in some tasks, and leave value-of-information-based querying to future work.
+  location: Section 2.2.4
+  page: 6
+  quote: This is a crude approximation and the ablation experiments in Section 3 show that in some tasks it actually impairs performance.
+- id: c6
+  statement: 'Who gave feedback: contractors received a 1-2 sentence task description (exact instructions in Appendix B) and compared several hundred to several thousand pairs of 1-2 second clips per task;
+    average response time was 3-5 seconds, i.e. 30 minutes to 5 hours of human time per experiment. A synthetic oracle preferring the segment with higher true reward is used for comparison; the stated aim
+    is to do nearly as well as RL with the true reward, not to outperform it.'
+  location: Section 3.1
+  page: 6
+  quote: Contractors responded to the average query in 3-5 seconds, and so the experiments involving real human feedback required between 30 minutes and 5 hours of human time.
+- id: c7
+  statement: On Atari, real human feedback mostly performs similar to or slightly worse than synthetic feedback with the same number of labels; the authors suggest this may be due to human labeling errors,
+    inconsistency between contractors labeling the same run, or uneven labeling rates concentrating labels in narrow parts of state space. They also note humans can shape the reward (e.g. rewarding any
+    progress towards passing cars in Enduro).
+  location: Section 3.1.2
+  page: 8
+  quote: This may be due to human error in labeling, inconsistency between different contractors labeling the same run, or the uneven rate of labeling by contractors, which can cause labels to be overly
+    concentrated in narrow parts of state space.
+- id: c8
+  statement: 'Reward-model exploitation without online feedback: in the ablation where queries are gathered only at the start of training, the authors find that, due to the nonstationarity of the occupancy
+    distribution, the predictor captures only part of the true reward and maximizing it can lead to bizarre behavior undesirable under the true reward (citing Amodei et al., 2016); e.g. on Pong offline
+    training sometimes leads the agent to avoid losing points without scoring, producing endlessly repeated volleys. They conclude human feedback needs to be intertwined with RL rather than provided statically.'
+  location: Section 3.3
+  page: 10
+  quote: This type of behavior demonstrates that in general human feedback needs to be intertwined with RL learning rather than provided statically.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. Affiliations: OpenAI (Christiano, Amodei), DeepMind (Leike, Martic, Legg); Brown has no listed affiliation. No venue is stated in the arXiv PDF and the arXiv record has no comment/journal_ref;
+    none recorded. Tag note: no registered task tag covers RL control from preferences (Atari/MuJoCo); ''llm-alignment'' is used as the nearest registered task, and the paper involves no language models.
+    Feedback for Reacher and Cheetah was provided by an author due to time constraints and the novel behaviors (backflip, one-leg cheetah, Enduro keeping pace) were trained with feedback from the authors
+    (Figure 2 caption, Section 3.2). Section 3.3 also reports that predicting comparisons worked much better than regressing on scores for continuous control, and that longer clips were more helpful per
+    clip but less per frame. Footnote 6 gives a rough cost comparison (about $25 compute vs about $36 of minimum-wage labor for 5k labels on Atari). The Discussion claims interaction complexity is reduced
+    by roughly 3 orders of magnitude. All quantitative comparisons with RL are figure-only; not recorded. The Atari scores were hidden by blacking out the score area (Appendix A.2). Later papers in this
+    topic (arxiv-1909.08593, arxiv-2009.01325) are by overlapping authors (Christiano, Amodei, Brown) and build on this method.'

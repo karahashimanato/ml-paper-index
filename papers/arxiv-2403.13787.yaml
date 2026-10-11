@@ -1,0 +1,100 @@
+id: arxiv-2403.13787
+title: 'RewardBench: Evaluating Reward Models for Language Modeling'
+authors:
+- Nathan Lambert
+- Valentina Pyatkin
+- Jacob Morrison
+- LJ Miranda
+- Bill Yuchen Lin
+- Khyathi Chandu
+- Nouha Dziri
+- Sachin Kumar
+- Tom Zick
+- Yejin Choi
+- Noah A. Smith
+- Hannaneh Hajishirzi
+year: 2024
+links:
+  arxiv: https://arxiv.org/abs/2403.13787
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: 1fd2c5532ac0b5511bdebea15d270853a36c9a48dfb6d8bed4bf8cd8665a7728
+tags:
+  tasks:
+  - llm-evaluation
+  - llm-alignment
+  method_families:
+  - preference-optimization
+  - large-language-models
+proposes:
+- 'RewardBench: a benchmark dataset and code base of prompt-chosen-rejected trios (Chat, Chat Hard, Safety, Reasoning, plus Prior Sets from existing preference test sets) scored by whether a reward model
+  assigns the chosen completion a higher score than the rejected one'
+- Evaluation of DPO-trained models as implicit reward models by comparing log-ratios log pi(y|x)/pi_ref(y|x) of the two completions
+claims:
+- id: c1
+  statement: 'Motivation: existing RM evaluations use validation sets from earlier RLHF data such as Anthropic Helpful and Harmless or OpenAI Learning to Summarize, which (citing Wang et al., 2024) are
+    known to have accuracy ceilings between 60 and 70% due to inter-annotator disagreement; newer preference datasets such as UltraFeedback, UltraInteract and Nectar have no test sets.'
+  location: Introduction
+  page: 2
+  quote: which are known to have ceilings on accuracy between 60 and 70% due to inter-annotator disagreement (Wang et al., 2024).
+- id: c2
+  statement: 'Background: classifier RMs are trained with the Bradley-Terry maximum-likelihood loss on prompt-chosen-rejected trios; DPO models are treated as implicit reward models with r(x, y) = beta
+    log pi(y|x)/pi_ref(y|x) + beta log Z(x), so two completions are compared through their log-ratios against the reference model.'
+  location: Section 3
+  page: 4
+  quote: Direct Preference Optimization solves the RLHF problem with- out needing to learn a separate reward model.
+- id: c3
+  statement: 'Scoring: for each trio the RM scores prompt-chosen and prompt-rejected and a win is counted if the chosen score is higher; subset scores are accuracies, so a random model gets 50%. Section
+    scores are per-prompt weighted averages over subsets, except that Reasoning upweights the PRM-Math subset so code and math count equally and Prior Sets uses an unweighted average; the final score weights
+    Prior Sets at 0.5 because of noise and lack of clearly defined tasks.'
+  location: RewardBench Scoring
+  page: 5
+  quote: Given the binary classification task, a random model achieves a result of 50%.
+- id: c4
+  statement: 'Data: Chat (AlpacaEval and MT Bench pairs), Chat Hard (MT Bench pairs with similar ratings and LLMBar adversarial data), Safety (custom XSTest, Do-Not-Answer and an in-development AI2 refusals
+    dataset), Reasoning (HumanEvalPack correct vs buggy code, PRM800k reference vs incorrect answers) and Prior Sets; all subsets are either manually verified or curated from previous evaluation datasets
+    with manual verification, and the core dataset has 2958 prompts, all single-turn. The dataset is released under ODC-BY and the code under Apache 2.0.'
+  location: Appendix F
+  page: 29
+  quote: In total there are 2958 prompts in REWARDBENCH.
+- id: c5
+  statement: 'Length control: citing Singhal et al. (2023) on length bias, the benchmark was designed so that chosen responses are of similar length or shorter than rejected ones; the AlpacaEval Length
+    subset pairs models of notably different capability with the same average length. The authors say more detailed statistical tests are needed to fully understand this.'
+  location: Appendix B
+  page: 16
+  quote: we designed REWARDBENCH so that the chosen responses are either a similar length or shorter than the rejected responses.
+- id: c6
+  statement: 'DPO evaluation caveats: some released DPO models do not clearly document which reference model was used, which can make benchmarking unclear; a reference-free comparison is possible but, without
+    normalization, carries a length penalty; and using a ''wrong'' (similar but different) reference model reduced DPO reward-model performance to about the random baseline. The authors also note DPO models
+    are KL-regularized while classifier RMs are not, and are usually trained for more than one epoch.'
+  location: Appendix B
+  page: 16
+  quote: We also experimentedwith using the “wrong” reference model, i.e. a similar but different base model, and found that this reduced the DPO trained RM performance to similar levels as the random baseline.
+- id: c7
+  statement: 'Prior test sets: some models scoring strongly on Prior Sets were trained on the training splits of Anthropic HH, SHP and Learning to Summarize while other top classifiers were not; combined
+    with the very low average score of DPO models on these sets, the authors say substantial research is needed to understand the full limitations of these datasets.'
+  location: Section 5.3
+  page: 9
+  quote: Combining this with the very low average score of DPO models on these test sets indicates that substantial research is needed to understand the full limitations of these previous datasets.
+- id: c8
+  statement: 'Stated limitations: no human preference data is collected (except for specific subsets chosen-rejected pairs are obtained semi-automatically and then manually validated); formats in some domains
+    such as reasoning might include spurious correlations; whether and how benchmark results correlate with downstream training is unresolved; and data contamination is possible if models were trained on
+    AlpacaEval or MT-Bench data. The conclusion likewise calls correlating RewardBench performance with RLHF usefulness a crucial next step.'
+  location: Appendix A
+  page: 16
+  quote: Another unresolved question is whether and how the benchmark results correlate with downstream training.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. No venue: the PDF says ''Preprint. Under review.'' and the arXiv metadata has no journal_ref; none recorded. Conflict of interest: the authors are mainly at the Allen Institute for AI (AI2); evaluated
+    models include AI2''s own Tulu 2 DPO models (tulu-2-dpo-7b/13b/70b) and OLMo-7B-Instruct, the AlpacaEval Hard subset uses Tulu 2 DPO 70B completions as chosen, and Safety uses examples from ''an in-development
+    refusals dataset at AI2''. The leaderboard and scores are maintained by the authors. Scores of RMs from private LM providers are on the public leaderboard but excluded from the paper as not reproducible
+    (Conclusion). Re-running the suite is estimated at about 1000 A100 hours (Appendix C). Section numbers: Sec. 3 (DPO reward computation), Sec. 4.1 (dataset) and Sections 5.2/5.3 are confirmed by cross-references;
+    the scoring subsection is given by name. The Safety analysis describes three behavior modes (correct refusals, refusing everything, complying with everything) (Section 5.2 text). Leaderboard numbers
+    in tables and text are not recorded.'

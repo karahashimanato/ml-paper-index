@@ -1,0 +1,127 @@
+id: arxiv-2307.04964
+title: 'Secrets of RLHF in Large Language Models Part I: PPO'
+authors:
+- Rui Zheng
+- Shihan Dou
+- Songyang Gao
+- Yuan Hua
+- Wei Shen
+- Binghai Wang
+- Yan Liu
+- Senjie Jin
+- Qin Liu
+- Yuhao Zhou
+- Limao Xiong
+- Lu Chen
+- Zhiheng Xi
+- Nuo Xu
+- Wenbin Lai
+- Minghao Zhu
+- Cheng Chang
+- Zhangyue Yin
+- Rongxiang Weng
+- Wensen Cheng
+- Haoran Huang
+- Tianxiang Sun
+- Hang Yan
+- Tao Gui
+- Qi Zhang
+- Xipeng Qiu
+- Xuanjing Huang
+year: 2023
+links:
+  arxiv: https://arxiv.org/abs/2307.04964
+  code: https://github.com/OpenLMLab/MOSS-RLHF
+source:
+  version: arXiv v2
+  retrieved_at: '2026-10-11'
+  pdf_sha256: bf512a93b1dc1595c97f08563b5eba0fc95a868d47ec8686525614e43d9acc67
+tags:
+  tasks:
+  - llm-alignment
+  method_families:
+  - preference-optimization
+  - large-language-models
+  - deep-learning
+  paradigms:
+  - reinforcement-learning
+proposes:
+- Monitoring PPO-based RLHF with policy-side metrics (perplexity, response length, KL divergence to the SFT/reference model) instead of reward and loss values
+- 'PPO-max: a combination of PPO implementation choices (reward normalization and clipping, token-level KL penalty, critic initialized from the RM and pre-trained before PPO, global gradient clipping, small
+  experience buffer, pretraining LM loss, value-loss clipping) chosen for stable long training'
+claims:
+- id: c1
+  statement: 'Reward model: a pretrained LM with a scalar head trained on pairwise comparisons with the log-sigmoid of the reward difference, plus (following Askell et al. 2021) an autoregressive LM loss
+    on the preferred response weighted by beta_rm (set to 1). The RL reward is r(x, y) - eta * KL(pi_RL(y|x), pi_SFT(y|x)), which the authors say acts as an entropy bonus and keeps outputs close to what
+    the RM saw in training.'
+  location: Section 3, Reward Modeling
+  page: 4
+  quote: Additionally, we follow [27] to use imitation learning, which introduces the autoregressive LM loss on the preferred response of each pair, allowing the model to imitate the preferred response
+    in each sentence pair.
+- id: c2
+  statement: 'RM data and failure cases: the English RM (LLaMA-7B) is trained on 160k HH-RLHF pairs (118k helpful, 42k harmless); the Chinese RM (OpenChineseLLaMA) on pairs labeled by hired professional
+    annotators (39k in total). Inspecting the largest disagreements, the authors found that for Chinese data the RM preferred notably longer responses that fabricated facts, and for English data it gave
+    low scores to honest responses acknowledging lack of information.'
+  location: Section 4, HH Evaluation Results
+  page: 9
+  quote: For the Chinses test data, we observed that for each pair the response that RM gave a higher reward was notably longer compared to the other which is preferred by human, although more or less involving
+    fabricating facts and making false claims.
+- id: c3
+  statement: 'RM accuracy is not enough: accuracy improvement slows markedly after about 200 steps (about 0.2 epochs) with accuracy comparable to a full epoch, but using the 200-step RM to initialize PPO
+    gave unsatisfactory performance.'
+  location: Section 4, Training Performance
+  page: 9
+  quote: Thus, accuracy alone is insufficient as a criterion for the RM.
+- id: c4
+  statement: 'Pattern collapse in vanilla PPO: the policy learns to cheat the RM through specific patterns; training loss converges stably and reward rises, but higher reward does not reflect better behaviour
+    by human and GPT-4 evaluation. The authors propose monitoring perplexity, KL divergence to the reference model and response length (collapsed models give longer responses with lower perplexity), and
+    report that the approximately linear root-KL vs PM-score relation proposed by Bai et al. (2022) appeared weak for smaller models.'
+  location: Section 5.2
+  page: 12
+  quote: This means that the reward scores and training losses do not indicate whether the PPO is optimizing correctly.
+- id: c5
+  statement: 'Token-level KL penalty: whereas Anthropic (Bai et al. 2022) used a small weight (0.001) and found no significant effect, the authors find the KL penalty critical to PPO stability and to scaling
+    up training steps (results shown with the coefficient set to 0.05), and report that RLHF can significantly improve response quality with almost zero KL divergence from the original policy. Entropy bonus
+    was very sensitive to parameter choice and implementation, and they recommend the KL penalty instead.'
+  location: Section 5.3.2
+  page: 15
+  quote: Instead, we find this constraint critical to the stability of PPO and allow further scaling up on the training step.
+- id: c6
+  statement: 'Initialization: critic initialization (from the RM or the SFT model) did not significantly affect convergence, and pre-training the critic before PPO improved stability, which they recommend
+    in place of learning-rate warmup; a policy initialized without SFT was clearly incapable in PPO training (severe loss of language modeling ability), indicating that a supervised policy is indispensable.'
+  location: Section 5.3.3
+  page: 15
+  quote: In contrast, a policy model initialized without SFT training is clearly incapable in PPO training, which indicates that the construction of a supervised policy model is indispensable in RLHF.
+- id: c7
+  statement: 'PPO-max recipe: rewards are normalized and clipped using historical mean and variance, a KL penalty constrains the policy, the critic is initialized from the RM and pre-trained before PPO,
+    global gradient clipping and a small experience buffer are used, and a pretraining LM loss (as in InstructGPT) plus value-loss clipping are added to reduce alignment tax.'
+  location: PPO-max Setup
+  page: 16
+  quote: We normalize and clip the current group of rewards based on historical mean and variance records, and subsequently add a KL-penalty term to constrain the policy optimization.
+- id: c8
+  statement: 'Evaluation: RLHF (PPO-max) models are compared with their SFT models by human annotators and by GPT-4 as a judge (the authors note GPT-4 may not be a perfect evaluator), and against ChatGPT
+    (gpt-3.5-turbo-0613) on harmless prompts with GPT-4 judging; the models still lag ChatGPT, but the English RLHF model reduced the defeat rate against ChatGPT from 45% (SFT) to 24%, and the Chinese one
+    from 37% to 29%.'
+  location: Evaluations and Discussions
+  page: 19
+  quote: Specifically, the RLHF model trained on English text managed to decrease the defeat rate from 45% to 24%.
+- id: c9
+  statement: 'Limitations: the study mainly uses a 7B model and does not investigate model or data scale; the RM data may be insufficient in quality and quantity; evaluation relies on manual and GPT-4 judgments
+    rather than many benchmarks; the PPO work targets stability rather than final performance, and the reward score cannot reliably predict RLHF performance during training.'
+  location: Limitations
+  page: 20
+  quote: Additionally, the reward score cannot reliably serve as an indicator for predicting RLHF performance during the training phase.
+results: []
+relations: []
+card:
+  created_at: '2026-10-11'
+  created_by: claude-opus-5-5 via Claude Code (subagent)
+  reviewed: false
+  notes: 'Selected for the method article requested by the user (2026-10-11): aligning language models with human preferences (preference comparisons and reward models, PPO-based RLHF with a KL penalty,
+    AI feedback, direct preference optimization and its variants, reward overoptimization, length bias, reward-model evaluation, and open problems). Carded by a subagent. Results tables not recorded; claims
+    only. Affiliation: Fudan NLP Group (some authors ByteDance Inc). No conflict of interest with evaluated commercial models was found, but GPT-4 (OpenAI) serves as judge for comparisons including OpenAI''s
+    ChatGPT. No venue recorded: the arXiv v2 PDF calls it a technical report and the arXiv record has no comment/journal_ref. Section numbers from cross-references in the PDF (Sec. 3, Sec. 4.1, sec 5.2,
+    §5.3.1-5.3.3); others by name. The first displayed RM loss in Section 3 is printed as L(psi) = log sigma(r(x, y_w) - r(x, y_l)) without a minus sign; the combined loss below it has the minus sign. PPO
+    exploration experiments are mainly on a random subset of the authors'' Chinese data and ''will not be trained to optimal results''. Human annotators for the final evaluation are not described beyond
+    ''our annotators'' (searched for annotator, held-out). Human-evaluation figures in the text: on English harmless prompts RLHF rated 62% vs 5% for SFT, on English helpful 44% vs 30% (Section ''Preference
+    Comparison''); C-Eval shows an NLU decrease after PPO that PPO-ptx alleviates (figure only).'
